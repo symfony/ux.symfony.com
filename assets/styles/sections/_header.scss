@@ -88,9 +88,14 @@ body.locked {
 
 @media (min-width: 860px) {
   .AppHeader_logo {
-    --height: 2.5rem;
+    --height: 2rem;
   }
   .AppHeader_toggler {
     display: none !important;
+  }
+}
+@media (min-width: 1020px) {
+    .AppHeader_logo {
+    --height: 2.5rem;
   }
 }

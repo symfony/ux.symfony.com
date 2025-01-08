@@ -1,10 +1,10 @@
 name: app
 
-type: php:8.3
+type: php:8.4
 
 dependencies:
     php:
-        composer/composer: "^2"
+        composer/composer: "^2.8"
 
 build:
     flavor: none

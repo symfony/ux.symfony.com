@@ -20,7 +20,7 @@ use League\CommonMark\Renderer\NodeRendererInterface;
 use Symfony\Component\HttpFoundation\UriSigner;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-final readonly class ToolkitPreviewRenderer implements NodeRendererInterface
+final class ToolkitPreviewRenderer implements NodeRendererInterface
 {
     public function __construct(
         private UriSigner $uriSigner,
@@ -35,7 +35,7 @@ final readonly class ToolkitPreviewRenderer implements NodeRendererInterface
         }
 
         $options = $node->getOptions();
-        $height = $options['height'] ?? '150px';
+        $height = $options['height'] ?? '200px';
 
         $previewUrl = $this->uriSigner->sign(
             $this->urlGenerator->generate(

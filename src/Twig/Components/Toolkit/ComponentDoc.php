@@ -38,7 +38,6 @@ class ComponentDoc
     {
         $kit = $this->toolkitService->getKit($this->kitId);
         $pool = $this->toolkitService->resolveRecipePool($kit, $this->component);
-        $examples = $this->toolkitService->extractRecipeExamples($this->component);
         $apiReference = $this->toolkitService->extractRecipeApiReference($this->component);
 
         $files = [];
@@ -53,49 +52,16 @@ class ComponentDoc
             }
         }
 
-        return $this->twig->render('toolkit/_component.md.twig', [
+        $templateName = \sprintf('toolkit/docs/%s/%s.md.twig', $this->kitId->value, $this->component->name);
+
+        return $this->twig->render($templateName, [
             'kit_id' => $this->kitId,
             'component' => $this->component,
             'files' => $files,
             'php_package_dependencies' => $pool->getPhpPackageDependencies(),
             'npm_package_dependencies' => $pool->getNpmPackageDependencies(),
             'importmap_package_dependencies' => $pool->getImportmapPackageDependencies(),
-            'usage' => current($examples),
-            'examples' => $this->formatExamples($examples),
             'api_reference' => $apiReference,
         ]);
-    }
-
-    /**
-     * @param array<string, string> $examples
-     *
-     * @return array<string, string>
-     */
-    private function formatExamples(array $examples): array
-    {
-        foreach ($examples as $title => $example) {
-            $examples[$title] = preg_replace_callback(self::RE_CODE_BLOCK, function (array $matches) {
-                $language = $matches['language'];
-                $options = json_validate($matches['options'] ?? '') ? json_decode($matches['options'], true) : [];
-                $preview = $options['preview'] ?? false;
-                $code = trim($matches['code']);
-
-                if ($preview) {
-                    return $this->twig->render('toolkit/recipe/_previewable_code_block.md.twig', [
-                        'code' => $code,
-                        'language' => $language,
-                        'options' => $options + ['kit' => $this->kitId->value],
-                    ]);
-                }
-
-                return $this->twig->render('toolkit/recipe/_code_block.md.twig', [
-                    'code' => $code,
-                    'language' => $language,
-                    'options' => $options,
-                ]);
-            }, $example);
-        }
-
-        return $examples;
     }
 }

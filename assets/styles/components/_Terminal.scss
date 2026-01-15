@@ -5,8 +5,12 @@
     background-color: var(--bg-color);
     border-radius: .75rem;
     position: relative;
-    font-size: 12px;
+    font-size: 14px;
     display: grid; // Ensure the Terminal overflow its parent if "pre" contains a very-long-line of the same highlighted element (e.g.: a long string)
+
+    ::selection {
+        background-color: #424c57;
+    }
 }
 
 .Terminal_light {
@@ -103,8 +107,8 @@
 .Terminal_body {
     height: 100%;
     font-family: var(--font-family-code);
-    font-size: 14px;
-    line-height: 160%;
+    font-size: 16px;
+    line-height: 165%;
     color: #FFF;
     border-radius: .75rem;
     border: 1px solid var(--bs-body-color);

@@ -2,7 +2,7 @@
 
 {{ component.manifest.description }}
 
-{{ examples|first|raw }}
+{{ block('demo')|trim|raw }}
 
 ## Installation
 
@@ -10,14 +10,8 @@
 
 :: tab Automatic
 
-Ensure the Symfony UX Toolkit is installed in your Symfony app:
 ```shell
-composer require --dev symfony/ux-toolkit
-```
-
-Then, install the recipe and its dependencies by running:
-```shell
-bin/console ux:install {{ component.manifest.name }} --kit {{ kit_id.value }}
+bin/console ux:install {{ component.name }} --kit {{ kit_id.value }}
 ```
 
 That's it!
@@ -55,7 +49,7 @@ php bin/console importmap:require {{ importmap_package_dependencies|join(' ') }}
 Copy the following file(s) into your Symfony app:
 
 {% for file in files %}
-```{{ file.language }} {{ {filename: file.path_name, height: '100px'}|json_encode|raw }}
+```{{ file.language }} {{ {filename: file.path_name}|json_encode|raw }}
 {{ file.content|trim|raw }}
 ```
 {% endfor %}
@@ -64,19 +58,26 @@ Happy coding!
 
 :::
 
+{% if block('usage') is defined %}
 ## Usage
 
-{{ usage|raw }}
+{{ block('usage') }}
 
+{% endif %}
+
+{% if block('accessibility') is defined %}
+## Accessibility
+
+{{ block('accessibility') }}
+
+{% endif %}
+
+{% if block('examples') is defined %}
 ## Examples
 
-{% for example_title, example_code in examples %}
+{{ block('examples') }}
 
-### {{ example_title }}
-
-{{ example_code|raw }}
-
-{% endfor %}
+{% endif %}
 
 {% if api_reference is not empty %}
 ## API Reference

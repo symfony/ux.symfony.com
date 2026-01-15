@@ -1,0 +1,24 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block examples %}
+### Outline
+{{ toolkit_code_example(kit_id.value, component.name, 'Outline', { height: '300px' }) }}
+
+### Background
+{{ toolkit_code_example(kit_id.value, component.name, 'Background', { height: '300px' }) }}
+
+### Avatar
+{{ toolkit_code_example(kit_id.value, component.name, 'Avatar', { height: '300px' }) }}
+
+### Avatar group
+{{ toolkit_code_example(kit_id.value, component.name, 'Avatar group', { height: '300px' }) }}
+
+{% endblock %}

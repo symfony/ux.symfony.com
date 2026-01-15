@@ -46,7 +46,7 @@ class ComponentsController extends AbstractController
 
         return $this->render('toolkit/component.html.twig', [
             'package' => $package,
-            'components' => $this->toolkitService->getDocumentableComponents($kit),
+            'components' => $kit->getRecipes(RecipeType::Component),
             'kit' => $kit,
             'kit_id' => $kitId,
             'component' => $component,
@@ -94,7 +94,7 @@ class ComponentsController extends AbstractController
                     </script>
                     {{ importmap('toolkit-{$kitId->value}') }}
                 </head>
-                <body class="flex min-h-[{$height}] w-full justify-center p-5 items-center">{$code}</body>
+                <body class="flex min-h-[{$height}] w-full justify-center p-5 items-center text-neutral-800 dark:text-neutral-300">{$code}</body>
             </html>
             HTML);
 

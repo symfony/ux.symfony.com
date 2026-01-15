@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\UX\Toolkit\Recipe\RecipeType;
 
 final class SitemapController extends AbstractController
 {
@@ -69,7 +70,7 @@ final class SitemapController extends AbstractController
         foreach ($this->toolkitService->getKits() as $kitId => $kit) {
             yield $this->generateAbsoluteUrl('app_toolkit_kit', ['kitId' => $kitId]);
 
-            foreach ($this->toolkitService->getDocumentableComponents($kit) as $component) {
+            foreach ($kit->getRecipes(RecipeType::Component) as $component) {
                 yield $this->generateAbsoluteUrl('app_toolkit_component', ['kitId' => $kitId, 'componentName' => $component->manifest->name]);
             }
         }

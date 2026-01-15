@@ -1,0 +1,36 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block accessibility %}
+- The `ButtonGroup` component has the `role` attribute set to `group`.
+- Use `Tab` to navigate between the buttons in the group.
+- Use `aria-label` or `aria-labelledby` to label the button group.
+{% endblock %}
+
+{% block examples %}
+### Orientation
+{{ toolkit_code_example(kit_id.value, component.name, 'Orientation', { height: '200px' }) }}
+
+### Size
+{{ toolkit_code_example(kit_id.value, component.name, 'Size', { height: '420px' }) }}
+
+### Input
+{{ toolkit_code_example(kit_id.value, component.name, 'Input', { height: '200px' }) }}
+
+### Nested
+{{ toolkit_code_example(kit_id.value, component.name, 'Nested', { height: '240px' }) }}
+
+### Separator
+{{ toolkit_code_example(kit_id.value, component.name, 'Separator', { height: '200px' }) }}
+
+### Split
+{{ toolkit_code_example(kit_id.value, component.name, 'Split', { height: '200px' }) }}
+
+{% endblock %}

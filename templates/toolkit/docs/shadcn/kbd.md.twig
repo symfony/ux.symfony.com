@@ -1,0 +1,17 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block examples %}
+### Group
+{{ toolkit_code_example(kit_id.value, component.name, 'Group') }}
+
+### Button
+{{ toolkit_code_example(kit_id.value, component.name, 'Button') }}
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block examples %}
+
+### Default
+{{ toolkit_code_example(kit_id.value, component.name, 'Default') }}
+
+### File
+{{ toolkit_code_example(kit_id.value, component.name, 'File') }}
+
+### Disabled
+{{ toolkit_code_example(kit_id.value, component.name, 'Disabled') }}
+
+### With Label
+{{ toolkit_code_example(kit_id.value, component.name, 'With Label') }}
+
+### With Button
+{{ toolkit_code_example(kit_id.value, component.name, 'With Button') }}
+
+{% endblock %}

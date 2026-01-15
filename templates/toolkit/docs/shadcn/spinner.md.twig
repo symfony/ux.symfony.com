@@ -1,0 +1,24 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block examples %}
+### Size
+
+Use the `size-` utility class to change the size of the spinner.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Size') }}
+
+### Color
+
+Use the `text-` utility class to change the color of the spinner.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Color') }}
+
+{% endblock %}

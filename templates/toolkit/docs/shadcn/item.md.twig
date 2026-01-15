@@ -1,0 +1,27 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block examples %}
+### Variants
+{{ toolkit_code_example(kit_id.value, component.name, 'Variants', { height: '400px' }) }}
+
+### Size
+{{ toolkit_code_example(kit_id.value, component.name, 'Size', { height: '400px' }) }}
+
+### Icon
+{{ toolkit_code_example(kit_id.value, component.name, 'Icon') }}
+
+### Avatar
+{{ toolkit_code_example(kit_id.value, component.name, 'Avatar', { height: '400px' }) }}
+
+### Link
+{{ toolkit_code_example(kit_id.value, component.name, 'Link', { height: '400px' }) }}
+
+{% endblock %}

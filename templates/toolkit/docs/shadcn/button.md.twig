@@ -1,0 +1,60 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block examples %}
+### Default
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Default') }}
+
+### Outline
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Outline') }}
+
+### Secondary
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Secondary') }}
+
+### Ghost
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Ghost') }}
+
+### Destructive
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Destructive') }}
+
+### Link
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Link') }}
+
+### Icon
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Icon') }}
+
+### With Icon
+
+{{ toolkit_code_example(kit_id.value, component.name, 'With Icon') }}
+
+### Rounded
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Rounded') }}
+
+### Loading
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Loading') }}
+
+### Different sizes
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Different sizes') }}
+
+### As link
+
+{{ toolkit_code_example(kit_id.value, component.name, 'As link') }}
+
+{% endblock %}

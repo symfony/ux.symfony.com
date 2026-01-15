@@ -17,6 +17,7 @@ use App\Service\UxPackageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\UX\Toolkit\Recipe\RecipeType;
 
 class KitsController extends AbstractController
 {
@@ -36,7 +37,7 @@ class KitsController extends AbstractController
             'package' => $package,
             'kit' => $kit,
             'kit_id' => $kitId,
-            'components' => $toolkitService->getDocumentableComponents($kit),
+            'components' => $kit->getRecipes(RecipeType::Component),
         ]);
     }
 }

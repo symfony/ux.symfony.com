@@ -1,0 +1,34 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name, { height: '850px' }) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block examples %}
+
+### Input
+{{ toolkit_code_example(kit_id.value, component.name, 'Input', { height: '500px' }) }}
+
+### Textarea
+{{ toolkit_code_example(kit_id.value, component.name, 'Textarea', { height: '400px' }) }}
+
+### Select
+{{ toolkit_code_example(kit_id.value, component.name, 'Select', { height: '360px' }) }}
+
+### Field set
+{{ toolkit_code_example(kit_id.value, component.name, 'Field set', { height: '400px' }) }}
+
+### Checkbox
+{{ toolkit_code_example(kit_id.value, component.name, 'Checkbox', { height: '520px' }) }}
+
+### Switch
+{{ toolkit_code_example(kit_id.value, component.name, 'Switch', { height: '240px' }) }}
+
+### Field group
+{{ toolkit_code_example(kit_id.value, component.name, 'Field group', { height: '520px' }) }}
+
+{% endblock %}

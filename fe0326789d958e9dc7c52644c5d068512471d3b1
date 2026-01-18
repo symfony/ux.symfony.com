@@ -1,0 +1,36 @@
+---------------------------------------------------------------------------
+
+by Kocal at 2026-01-18T11:59:21Z
+
+I remember we already had this issue raised many times on UX repo, what happens if you navigate to `/chartjs`?
+
+---------------------------------------------------------------------------
+
+by MrYamous at 2026-01-18T12:19:29Z
+
+> I remember we already had this issue raised many times on UX repo
+
+I take a look on UX repo and find [this PR](https://github.com/symfony/ux/pull/2686) about same topic
+This variable is used for website IIUC, and, locally the page `/chartjs` is broken with my changes.
+
+---------------------------------------------------------------------------
+
+by MrYamous at 2026-01-18T12:46:16Z
+
+I dug a bit more, and it looks like Map example resolved this issue with this piece of code
+https://github.com/symfony/ux.symfony.com/blob/2b9dc458011b6a3905237167b0663dc31cb570e6/templates/ux_packages/map.html.twig#L3
+
+And I found the same issue with few other packages like Cropper and Notify
+
+With the same TwigFilter applied on chartjs example, I can remove the repository call and the doc still works
+<img width="2880" height="1800" alt="image" src="https://github.com/user-attachments/assets/64d4d035-09d5-4007-a80f-c0e623d14565" />
+
+I'm updating the PR with updated template
+
+---------------------------------------------------------------------------
+
+by Kocal at 2026-01-18T17:34:42Z
+
+Cool, it's working https://pr-4-afnwgxy-vtdrjppvvksao.eu-5.platformsh.site/chartjs
+
+Thanks!

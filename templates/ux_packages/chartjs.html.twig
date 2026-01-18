@@ -1,5 +1,7 @@
 {% extends 'ux_packages/package.html.twig' %}
 
+{% set package = 'chartjs'|ux_package %}
+
 {% block package_header %}
     {% component PackageHeader with {
         package: 'chartjs',

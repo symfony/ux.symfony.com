@@ -1,0 +1,20 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block examples %}
+### Side
+{{ toolkit_code_example(kit_id.value, component.name, 'Side') }}
+
+### With Keyboard Shortcut
+{{ toolkit_code_example(kit_id.value, component.name, 'With Keyboard Shortcut') }}
+
+### Disabled Button
+{{ toolkit_code_example(kit_id.value, component.name, 'Disabled Button') }}
+{% endblock %}

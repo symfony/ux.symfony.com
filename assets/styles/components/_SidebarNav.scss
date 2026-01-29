@@ -1,6 +1,10 @@
 .SidebarNav {
     position: sticky;
-    top: 0px
+    top: 0px;
+    max-height: 100dvh;
+    overflow-y: auto;
+    scrollbar-color: var(--bs-body-color) var(--bs-secondary-bg);
+    scrollbar-width: thin;
 }
 
 .SidebarNav_Heading {
@@ -20,7 +24,6 @@
 .SidebarNav_Item:hover {
     background-color: var(--bs-secondary-bg);
 }
-
 
 .SidebarNav_Link {
     display: block;

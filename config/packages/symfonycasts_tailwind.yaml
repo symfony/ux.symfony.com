@@ -7,3 +7,4 @@ symfonycasts_tailwind:
 
     input_css:
         - assets/styles/toolkit-shadcn.css
+        - assets/styles/toolkit-flowbite-4.css

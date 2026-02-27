@@ -36,6 +36,10 @@ return [
         'path' => './assets/toolkit-shadcn.js',
         'entrypoint' => true,
     ],
+    'toolkit-flowbite-4' => [
+        'path' => './assets/toolkit-flowbite-4.js',
+        'entrypoint' => true,
+    ],
     '@symfony/stimulus-bundle' => [
         'path' => '@symfony/stimulus-bundle/loader.js',
     ],

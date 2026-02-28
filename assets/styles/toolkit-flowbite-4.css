@@ -1,11 +1,9 @@
 @import "tailwindcss";
-/*@plugin "flowbite/plugin";*/
-/*@import "flowbite/src/themes/default";*/
-@source "../../node_modules/flowbite";
+@source "../../vendor/symfony/ux-toolkit/kits/flowbite-4";
 
 @custom-variant dark (&:is(.dark *));
 
-@theme {
+@theme inline {
     /* main text color */
     --color-body: var(--color-stone-600);
     --color-body-subtle: var(--color-stone-500);

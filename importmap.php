@@ -223,6 +223,9 @@ return [
     '@symfony/ux-toolkit/kits/flowbite-4/modal/assets/controllers/modal_controller.js' => [
         'path' => './vendor/symfony/ux-toolkit/kits/flowbite-4/modal/assets/controllers/modal_controller.js',
     ],
+    '@symfony/ux-toolkit/kits/flowbite-4/tabs/assets/controllers/tabs_controller.js' => [
+        'path' => './vendor/symfony/ux-toolkit/kits/flowbite-4/tabs/assets/controllers/tabs_controller.js',
+    ],
     'el-transition' => [
         'version' => '0.0.7',
     ],

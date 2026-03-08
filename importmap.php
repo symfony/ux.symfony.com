@@ -234,4 +234,14 @@ return [
     'react-dom/client' => [
         'version' => '18.3.1',
     ],
+    'flowbite' => [
+        'version' => '4.0.1',
+    ],
+    'flowbite-datepicker' => [
+        'version' => '2.0.0',
+    ],
+    'flowbite/dist/flowbite.min.css' => [
+        'version' => '4.0.1',
+        'type' => 'css',
+    ],
 ];

@@ -94,4 +94,9 @@ final class ToolkitRuntime implements RuntimeExtensionInterface
     {
         return $this->codeExample($kitId, $recipeName, 'Usage', $options, preview: false);
     }
+
+    public function kitColor(string $kitId): string
+    {
+        return ToolkitKitId::getMainColor(ToolkitKitId::from($kitId));
+    }
 }

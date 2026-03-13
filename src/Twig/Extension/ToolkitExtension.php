@@ -23,5 +23,6 @@ final class ToolkitExtension extends AbstractExtension
         yield new TwigFunction('toolkit_code_example', [ToolkitRuntime::class, 'codeExample'], ['is_safe' => ['html']]);
         yield new TwigFunction('toolkit_code_demo', [ToolkitRuntime::class, 'codeDemo'], ['is_safe' => ['html']]);
         yield new TwigFunction('toolkit_code_usage', [ToolkitRuntime::class, 'codeUsage'], ['is_safe' => ['html']]);
+        yield new TwigFunction('toolkit_main_color', [ToolkitRuntime::class, 'kitColor'], ['is_safe' => ['html']]);
     }
 }

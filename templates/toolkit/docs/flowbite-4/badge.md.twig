@@ -1,0 +1,30 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block examples %}
+### Bordered badges
+This example can be used to add a border accent to the badge component.
+{{ toolkit_code_example(kit_id.value, component.name, 'Bordered') }}
+
+### Large badges
+{{ toolkit_code_example(kit_id.value, component.name, 'Large') }}
+
+### Pill badges
+Use this example to make the corners even more rounded like pills for the badge component.
+{{ toolkit_code_example(kit_id.value, component.name, 'Pill') }}
+
+### Badges as link
+You can also use badges as anchor elements to link to another page.
+{{ toolkit_code_example(kit_id.value, component.name, 'As link') }}
+
+### Badges with icon
+You can also use [SVG icons](https://ux.symfony.com/icons) inside the badge elements.
+{{ toolkit_code_example(kit_id.value, component.name, 'Icon') }}
+{% endblock %}

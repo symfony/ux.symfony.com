@@ -1,0 +1,34 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block examples %}
+### Button pills
+The button pills can be used as an alternative style by using fully rounded edges.
+{{ toolkit_code_example(kit_id.value, component.name, 'Pill') }}
+
+### Outline buttons
+Use the following button styles to show the colors only for the border of the element.
+{{ toolkit_code_example(kit_id.value, component.name, 'Outline') }}
+
+### Button sizes
+Use these examples if you want to use smaller or larger buttons.
+{{ toolkit_code_example(kit_id.value, component.name, 'Size') }}
+
+### Button with icon
+Use the following examples to add a [SVG icons](https://ux.symfony.com/icons) inside the button either on the left or right side.
+{{ toolkit_code_example(kit_id.value, component.name, 'With icon') }}
+
+### Icon buttons
+Sometimes you need a button to indicate an action using only an icon.
+{{ toolkit_code_example(kit_id.value, component.name, 'Icon') }}
+
+### Loader button
+{{ toolkit_code_example(kit_id.value, component.name, 'Loader') }}
+{% endblock %}

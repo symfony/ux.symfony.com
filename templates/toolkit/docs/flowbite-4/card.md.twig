@@ -1,0 +1,19 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block examples %}
+### Default
+Use the following simple card component with a title, description and action.
+{{ toolkit_code_example(kit_id.value, component.name, 'Default', { height: '300px' }) }}
+
+### With image
+Use this alternative styled card with an image for features, blog posts, and more.
+{{ toolkit_code_example(kit_id.value, component.name, 'With image', { height: '550px' }) }}
+{% endblock %}

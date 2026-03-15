@@ -1,0 +1,18 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block examples %}
+### Highlight striped
+Use this example to increase the readability of the data sets by alternating the background color of every second table row.
+{{ toolkit_code_example(kit_id.value, component.name, 'Highlight striped', { height: '500px' }) }}
+### Without border
+Use this example of a table component without any border between the table cells.
+{{ toolkit_code_example(kit_id.value, component.name, 'Without border', { height: '500px' }) }}
+{% endblock %}

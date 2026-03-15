@@ -21,4 +21,14 @@ namespace App\Enum;
 enum ToolkitKitId: string
 {
     case Shadcn = 'shadcn';
+    case Flowbite4 = 'flowbite-4';
+
+    public static function getMainColor(ToolkitKitId $kitId): string
+    {
+        return match ($kitId) {
+            self::Shadcn => 'hsl(0,0%,0%)',
+            self::Flowbite4 => 'hsl(221,79%,48%)',
+            default => throw new \InvalidArgumentException('Unknown kit'),
+        };
+    }
 }

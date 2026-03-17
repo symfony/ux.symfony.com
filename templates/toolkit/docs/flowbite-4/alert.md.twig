@@ -9,16 +9,29 @@
 {% endblock %}
 
 {% block examples %}
-### Variant
-{{ toolkit_code_example(kit_id.value, component.name, 'Variant', { height: '600px' }) }}
-
-### Action
-
-Use `Alert:Action` to add a button or other action element to the alert.
-
-{{ toolkit_code_example(kit_id.value, component.name, 'Action') }}
+### Alerts with icon
+You can also include a descriptive icon to complement the message inside the alert component with the following example.
+{{ toolkit_code_example(kit_id.value, component.name, 'With Icon', { height: '600px' }) }}
 
 ### Borders
+Use this example to add a border accent to the alert component instead of just a plain background.
+{{ toolkit_code_example(kit_id.value, component.name, 'Border', { height: '600px' }) }}
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Border') }}
+### With List
+Use this example to show a list and a description inside an alert component.
+{{ toolkit_code_example(kit_id.value, component.name, 'With List', { height: '600px' }) }}
+
+### Dismissing
+**Requires Flowbite JS**<br>
+Use the following alert elements that are also dismissible.
+{{ toolkit_code_example(kit_id.value, component.name, 'Dismissing', { height: '600px' }) }}
+
+### Action
+Use `Alert:Action` to add a button or other action element to the alert.
+{{ toolkit_code_example(kit_id.value, component.name, 'Action') }}
+
+### Border Accent
+Use this example to add a border accent on top of the alert component for further visual distinction.
+{{ toolkit_code_example(kit_id.value, component.name, 'Accent', { height: '600px' }) }}
+
 {% endblock %}

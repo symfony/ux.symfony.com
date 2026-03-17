@@ -1,7 +1,7 @@
 {% extends 'toolkit/docs/_base_component.md.twig' %}
 
 {% block demo %}
-{{ toolkit_code_demo(kit_id.value, component.name) }}
+{{ toolkit_code_demo(kit_id.value, component.name, { height: '600px' }) }}
 {% endblock %}
 
 {% block usage %}
@@ -10,20 +10,17 @@
 
 {% block examples %}
 
-### Default
-{{ toolkit_code_example(kit_id.value, component.name, 'Default') }}
-
-### File
-{{ toolkit_code_example(kit_id.value, component.name, 'File') }}
-
 ### Disabled
+Get started with this example if you want to apply the disabled state to an input field.
 {{ toolkit_code_example(kit_id.value, component.name, 'Disabled') }}
 
 ### Invalid
+Use the following example to apply validation styles for error messages.
 {{ toolkit_code_example(kit_id.value, component.name, 'Invalid') }}
 
-### With Label
-{{ toolkit_code_example(kit_id.value, component.name, 'With Label') }}
+### File
+et started with a simple file input component to let users upload one single file.
+{{ toolkit_code_example(kit_id.value, component.name, 'File') }}
 
 ### With Button
 {{ toolkit_code_example(kit_id.value, component.name, 'With Button') }}

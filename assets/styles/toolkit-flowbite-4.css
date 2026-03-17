@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "../vendor/flowbite/dist/flowbite.min.css";
 @source "../vendor/flowbite";
 @source "../../vendor/symfony/ux-toolkit/kits/flowbite-4";
 

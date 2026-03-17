@@ -9,11 +9,15 @@
 {% endblock %}
 
 {% block examples %}
-### Default
-Use the following simple card component with a title, description and action.
-{{ toolkit_code_example(kit_id.value, component.name, 'Default', { height: '300px' }) }}
+### Card with button
+Use the following example of a card element if you also want to have an action button.
+{{ toolkit_code_example(kit_id.value, component.name, 'With Button', { height: '300px' }) }}
 
-### With image
+### Card with image
 Use this alternative styled card with an image for features, blog posts, and more.
 {{ toolkit_code_example(kit_id.value, component.name, 'With image', { height: '550px' }) }}
+
+### Card with form inputs
+Use this card example where you can add form input elements that can be used for authentication actions or any other context where you need to receive information from your users.
+{{ toolkit_code_example(kit_id.value, component.name, 'Form', { height: '550px' }) }}
 {% endblock %}

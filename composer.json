@@ -43,6 +43,7 @@
         "symfony/ux-leaflet-map": "2.x-dev",
         "symfony/ux-live-component": "2.x-dev",
         "symfony/ux-map": "2.x-dev",
+        "symfony/ux-native": "2.x-dev",
         "symfony/ux-notify": "2.x-dev",
         "symfony/ux-react": "2.x-dev",
         "symfony/ux-svelte": "2.x-dev",

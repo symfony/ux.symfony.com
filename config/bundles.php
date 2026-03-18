@@ -35,4 +35,5 @@ return [
     Symfony\UX\Toolkit\UXToolkitBundle::class => ['all' => true],
     TalesFromADev\Twig\Extra\Tailwind\Bridge\Symfony\Bundle\TalesFromADevTwigExtraTailwindBundle::class => ['all' => true],
     Symfonycasts\TailwindBundle\SymfonycastsTailwindBundle::class => ['all' => true],
+    Symfony\UX\Native\UXNativeBundle::class => ['all' => true],
 ];

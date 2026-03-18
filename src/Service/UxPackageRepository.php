@@ -250,6 +250,19 @@ class UxPackageRepository
             ),
 
             (new UxPackage(
+                'native',
+                'UX Native',
+                'app_native',
+                '#c18bf4',
+                'linear-gradient(135deg, #c18bf4 -5%, #8b5cf6 105%)',
+                'Hotwire Native for Symfony',
+                'Build native mobile apps that wrap your Symfony web application',
+                'I need to wrap my Symfony app in a native mobile shell',
+                'native.svg',
+            ))
+                ->setDocsLink('https://native.hotwired.dev/', 'Hotwire Native documentation.'),
+
+            (new UxPackage(
                 'typed',
                 'Typed',
                 'app_typed',

@@ -1,0 +1,129 @@
+{% extends 'ux_packages/package.html.twig' %}
+
+{% block package_header %}
+    {% component PackageHeader with {
+        package: 'native',
+        eyebrowText: 'Hotwire Native Integration',
+    } %}
+        {% block title_header %}
+            Go <em>Native</em> with your Symfony app
+        {% endblock %}
+
+        {% block sub_content %}
+            Wrap your Symfony web application in a native mobile shell with
+            <a class="font-white text-underline" href="https://native.hotwired.dev/" rel="external noopener noreferrer">Hotwire Native</a>.
+            Detect native requests, conditionally render content, and generate JSON configurations for your mobile clients.
+        {% endblock %}
+    {% endcomponent %}
+{% endblock %}
+
+{% block package_content %}
+    <section class="container-fluid container-xxl px-4 pt-4 px-md-5 pt-md-5">
+        <div class="arrow mb-3 d-none d-md-block"></div>
+
+        <div class="row mb-5">
+            <div class="col-12 col-md-6 text-center">
+                <p class="fw-bold mb-3" style="font-size: 1.15rem;">Without UX Native</p>
+                <img
+                    src="{{ asset('images/taskflow-without-native.webp') }}"
+                    alt="A Symfony + Bootstrap todo-list app displayed inside a mobile browser, with the browser navigation bar and the web navbar visible."
+                    style="width: 540px; max-width: 100%"
+                    loading="lazy"
+                />
+                <p class="text-body-secondary mt-2" style="font-size: 0.9rem;">
+                    Browser navigation bar, web navbar &mdash; it feels like a website.
+                </p>
+            </div>
+            <div class="col-12 col-md-6 text-center mt-4 mt-md-0">
+                <p class="fw-bold mb-3" style="font-size: 1.15rem;">With UX Native</p>
+                <img
+                    src="{{ asset('images/taskflow-with-native.webp') }}"
+                    alt="The same Symfony + Bootstrap todo-list app but with Hotwire Native: native title bar, no browser chrome, clean native experience."
+                    style="width: 540px; max-width: 100%"
+                    loading="lazy"
+                />
+                <p class="text-body-secondary mt-2" style="font-size: 0.9rem;">
+                    Native title bar, no browser chrome &mdash; it feels like an app.
+                </p>
+            </div>
+        </div>
+
+        {% block package_code_blocks %}
+            <div class="row mb-5">
+                <div class="col-12 col-md-6">
+                    {% block code_block_left %}
+                        {% apply markdown_to_html %}
+                        ```twig {"filename":"templates/base.html.twig"}
+                        {% verbatim -%}
+                        {# Navbar only visible in the web browser #}
+                        {% if not ux_is_native() %}
+                            <nav class="navbar">
+                                <a href="/">TaskFlow</a>
+                            </nav>
+                        {% endif %}
+
+                        <h1>My Tasks</h1>
+                        <!-- ... -->
+                        {%- endverbatim %}
+                        ```
+                        {% endapply %}
+                    {% endblock %}
+                </div>
+                <div class="col-12 col-md-6">
+                    <h2 class="ubuntu mt-5">One codebase, two experiences</h2>
+                    <p>No need to duplicate templates. The <code>ux_is_native()</code> Twig function lets you adapt your existing Twig templates for native clients: hide the navbar, remove the footer, or show mobile-specific content, all from the same code.</p>
+                </div>
+            </div>
+            <div class="row mb-5 mt-3 mt-md-0">
+                <div class="col-12 col-md-5">
+                    <h2 class="ubuntu mt-5">JSON configurations, the Symfony way</h2>
+                    <p>Use PHP attributes to declare your native configurations: path rules, settings, per-platform overrides.</p>
+                    <p>UX Native serves them dynamically during development and can dump them as static JSON files for production deployment.</p>
+                </div>
+                <div class="col-12 col-md-7">
+                    {% block code_block_right %}
+                        {% apply markdown_to_html %}
+                        ```php {"filename":"src/Native/AppNativeConfiguration.php"}
+                        {% verbatim -%}
+                        namespace App\Native;
+
+                        use Symfony\UX\Native\Attribute\AsNativeConfiguration;
+                        use Symfony\UX\Native\Attribute\AsNativeConfigurationProvider;
+                        use Symfony\UX\Native\Configuration\Configuration;
+                        use Symfony\UX\Native\Configuration\Rule;
+
+                        #[AsNativeConfigurationProvider]
+                        final class AppNativeConfiguration
+                        {
+                            #[AsNativeConfiguration('/config/ios_v1.json')]
+                            public function iosV1(): Configuration
+                            {
+                                return new Configuration(
+                                    rules: [
+                                        new Rule(
+                                            patterns: ['.*'],
+                                            properties: [
+                                                'context' => 'default',
+                                                'pull_to_refresh_enabled' => true,
+                                            ],
+                                        ),
+                                        new Rule(
+                                            patterns: ['^/tasks/new$'],
+                                            properties: [
+                                                'context' => 'modal',
+                                                'pull_to_refresh_enabled' => false,
+                                            ],
+                                        ),
+                                    ],
+                                );
+                            }
+                        }
+                        {%- endverbatim %}
+                            ```
+                        {% endapply %}
+                    {% endblock %}
+                </div>
+            </div>
+        {% endblock %}
+    </section>
+{% endblock %}

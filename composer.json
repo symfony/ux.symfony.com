@@ -136,17 +136,22 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "@tailwind:build"
         ],
         "post-update-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "@tailwind:build"
         ],
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd",
-            "importmap:install": "symfony-cmd",
-            "tailwind:build assets/styles/app-tailwind.css": "symfony-cmd",
-            "tailwind:build assets/styles/toolkit-shadcn.css": "symfony-cmd"
-        }
+            "importmap:install": "symfony-cmd"
+        },
+        "tailwind:build": [
+            "@php bin/console tailwind:build assets/styles/app-tailwind.css",
+            "@php bin/console tailwind:build assets/styles/toolkit-shadcn.css",
+            "@php bin/console tailwind:build assets/styles/toolkit-flowbite-4.css"
+        ]
     }
 }

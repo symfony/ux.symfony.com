@@ -9,9 +9,19 @@
 {% endblock %}
 
 {% block examples %}
-### Variant line
+### Tabs with underline
+Use this alternative tabs component style with an underline instead of a background when hovering and being active on a certain page.
 {{ toolkit_code_example(kit_id.value, component.name, 'Variant Line') }}
 
+### Tabs with icons
+This is an example of the tabs component where you can also use a SVG powered icon to complement the text within the navigational tabs.
+{{ toolkit_code_example(kit_id.value, component.name, 'With Icon') }}
+
+### Pills tabs
+If you want to use pills as a style for the tabs component you can do so by using this example.
+{{ toolkit_code_example(kit_id.value, component.name, 'Variant Pill') }}
+
 ### Vertical
+Use this example to show a vertically aligned set of tabs on the left side of the page.
 {{ toolkit_code_example(kit_id.value, component.name, 'Vertical', { height: '400px' }) }}
 {% endblock %}

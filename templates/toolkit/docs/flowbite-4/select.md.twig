@@ -7,3 +7,13 @@
 {% block usage %}
 {{ toolkit_code_usage(kit_id.value, component.name) }}
 {% endblock %}
+
+{% block examples %}
+### Multiple
+Apply the `multiple` attribute to the select component to allow users to select one or more options.
+{{ toolkit_code_example(kit_id.value, component.name, 'Multiple') }}
+
+### Disabled state
+Apply the `disabled` attribute to the select component to allow users to select one or more options.
+{{ toolkit_code_example(kit_id.value, component.name, 'Disabled') }}
+{% endblock %}

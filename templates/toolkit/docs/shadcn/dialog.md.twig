@@ -14,4 +14,9 @@
 
 ### Custom close button
 {{ toolkit_code_example(kit_id.value, component.name, 'Custom close button', {height: '400px'}) }}
+
+### With Tooltip
+
+Combining `Dialog` with `Tooltip` requires merging their `*_trigger_attrs` attributes using the [`html_attr_merge`](https://twig.symfony.com/doc/3.x/filters/html_attr_merge.html) Twig filter, available in `twig/html-extra:^3.24`.
+{{ toolkit_code_example(kit_id.value, component.name, 'With Tooltip', {height: '400px'}) }}
 {% endblock %}

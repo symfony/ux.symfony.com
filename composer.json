@@ -63,12 +63,12 @@
         "tales-from-a-dev/twig-tailwind-extra": "^1.0",
         "tempest/highlight": "^2.11.2",
         "twbs/bootstrap": "^5.3.3",
-        "twig/extra-bundle": "^3.22",
-        "twig/html-extra": "^3.22",
-        "twig/intl-extra": "^3.22",
-        "twig/markdown-extra": "^3.22",
-        "twig/string-extra": "^3.22",
-        "twig/twig": "^3.22"
+        "twig/extra-bundle": "^3.24",
+        "twig/html-extra": "^3.24",
+        "twig/intl-extra": "^3.24",
+        "twig/markdown-extra": "^3.24",
+        "twig/string-extra": "^3.24",
+        "twig/twig": "^3.24"
     },
     "require-dev": {
         "kocal/phpstan-symfony-ux": "^1.1",
@@ -124,7 +124,8 @@
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "bump-after-update": true
     },
     "extra": {
         "symfony": {

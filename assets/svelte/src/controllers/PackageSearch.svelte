@@ -1,12 +1,12 @@
 <script>
     import PackageList from '../components/PackageList.js';
 
-    export let packages = [];
-    let search = '';
+    let { packages } = $props();
+    let search = $state('');
 
-    $: filteredPackages = packages.filter(
+    const filteredPackages = $derived(packages.filter(
         uxPackage => uxPackage.humanName.toLowerCase().includes(search.toLowerCase())
-    );
+    ));
 </script>
 
 <div>

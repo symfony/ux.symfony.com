@@ -2,8 +2,8 @@
     import { fade } from 'svelte/transition';
     import { flip } from 'svelte/animate';
 
-    export let packages = [];
-    let transitionDuration = 200;
+    let { packages } = $props();
+    let transitionDuration = $state(200);
 </script>
 
 {#if packages.length === 0}

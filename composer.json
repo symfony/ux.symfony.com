@@ -46,7 +46,7 @@
         "symfony/ux-native": "2.x-dev",
         "symfony/ux-notify": "2.x-dev",
         "symfony/ux-react": "2.x-dev",
-        "symfony/ux-svelte": "2.x-dev",
+        "symfony/ux-svelte": "3.x-dev",
         "symfony/ux-swup": "2.x-dev",
         "symfony/ux-toggle-password": "2.x-dev",
         "symfony/ux-toolkit": "2.x-dev",
@@ -146,5 +146,13 @@
             "importmap:install": "symfony-cmd",
             "tailwind:build": "symfony-cmd"
         }
-    }
+    },
+    "repositories": [{
+        "name": "ux-svelte",
+        "type": "path",
+        "url": "../ux/src/Svelte",
+        "options": {
+            "symlink": true
+        }
+    }]
 }

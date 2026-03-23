@@ -112,15 +112,6 @@ return [
     'cropperjs' => [
         'version' => '1.6.2',
     ],
-    'svelte/transition' => [
-        'version' => '4.2.18',
-    ],
-    'svelte/animate' => [
-        'version' => '4.2.18',
-    ],
-    'svelte/internal' => [
-        'version' => '3.59.2',
-    ],
     'intl-messageformat' => [
         'version' => '10.5.14',
     ],
@@ -226,5 +217,32 @@ return [
     ],
     'react-dom/client' => [
         'version' => '18.3.1',
+    ],
+    'svelte' => [
+        'version' => '5.54.1',
+    ],
+    'svelte/animate' => [
+        'version' => '5.54.1',
+    ],
+    'svelte/transition' => [
+        'version' => '5.54.1',
+    ],
+    'esm-env' => [
+        'version' => '1.2.2',
+    ],
+    'svelte/internal/client' => [
+        'version' => '5.54.1',
+    ],
+    'clsx' => [
+        'version' => '2.1.1',
+    ],
+    'esm-env/browser' => [
+        'version' => '1.2.2',
+    ],
+    'esm-env/development' => [
+        'version' => '1.2.2',
+    ],
+    'esm-env/node' => [
+        'version' => '1.2.2',
     ],
 ];

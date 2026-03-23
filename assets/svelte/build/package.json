@@ -2,12 +2,15 @@
     "devDependencies": {
         "@babel/cli": "^7.25.6",
         "@babel/core": "^7.25.2",
-        "tinyglobby": "^0.2.14",
-        "svelte": "^3.59.1"
+        "@rollup/plugin-node-resolve": "^16.0.3",
+        "@rollup/plugin-terser": "^1.0.0",
+        "rollup": "^4.60.0",
+        "svelte": "^5.43.8",
+        "tinyglobby": "^0.2.14"
     },
     "license": "MIT",
     "private": true,
     "scripts": {
-        "build": "node build.js"
+        "build": "node build.js && rollup -c"
     }
 }

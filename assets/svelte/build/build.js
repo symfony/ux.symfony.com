@@ -12,12 +12,12 @@ function compileDirectory(inputDir, outputDir) {
 
     for (const file of files) {
         const inputFile = path.join(inputDir, file);
-        
+
         // Exclude node_modules directory
         if (inputFile.includes('node_')) {
             continue;
         }
-        
+
         const stats = fs.statSync(inputFile);
         if (stats.isDirectory()) {
             const newOutputDir = path.join(outputDir, file);
@@ -28,11 +28,16 @@ function compileDirectory(inputDir, outputDir) {
             compileDirectory(inputFile, newOutputDir);
             continue;
         }
-        
+
         if(path.extname(file) === '.svelte') {
             console.log('Compiling', inputFile);
             const input = fs.readFileSync(inputFile, 'utf-8');
-            const output = compile(input, { format: 'esm' });
+            const output = compile(input, {
+                filename: inputFile,
+                generate: 'client',
+                fragments: 'html',
+                discloseVersion: false
+            });
             const outputFile = path.join(outputDir, `${path.basename(file, '.svelte')}.js`);
             fs.writeFileSync(outputFile, output.js.code);
         }

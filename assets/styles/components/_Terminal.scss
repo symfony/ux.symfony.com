@@ -5,7 +5,7 @@
     background-color: var(--bg-color);
     border-radius: .75rem;
     position: relative;
-    //font-size: 14px;
+    font-size: 14px;
     display: grid; // Ensure the Terminal overflow its parent if "pre" contains a very-long-line of the same highlighted element (e.g.: a long string)
 
     ::selection {
@@ -107,7 +107,7 @@
 .Terminal_body {
     height: 100%;
     font-family: var(--font-family-code);
-    font-size: 16px;
+    font-size: 14px;
     line-height: 165%;
     color: #FFF;
     border-radius: .75rem;

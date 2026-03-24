@@ -124,6 +124,10 @@
 }
 
 @layer base {
+    * {
+        @apply border-border;
+    }
+
     main {
         flex-grow: 1;
     }
@@ -277,11 +281,11 @@
 
     code {
         color: var(--color-code);
+        font-size: var(--text-sm);
     }
     pre code {
+        font-size: inherit;
         color: inherit;
-        word-break: normal;
-
     }
     a > code {
         color: inherit;

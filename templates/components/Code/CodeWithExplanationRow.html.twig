@@ -5,9 +5,11 @@
     <div class="col-12 col-md-{{ 12 - this.codeCols }} code-description {{ not reversed ? 'order-md-2' }}"
          style="{% if reversed %}padding-inline-end: 0;{% endif %} {{ this.sticky|default ? 'position: sticky; top: 4rem;' }}">
         {% block explanation %}
-            {% apply markdown_to_html %}
-                {% block content %}{% endblock %}
-            {% endapply %}
+            <div class="Wysiwyg">
+                {% apply markdown_to_html %}
+                    {{ block('content')|split("\n")|map(x => x|trim)|join("\n") }}
+                {% endapply %}
+            </div>
         {% endblock %}
     </div>
     <div class="col-12 col-md-{{ this.codeCols }} {{ not reversed|default ? 'order-md-1' }}"  {% if reversed %}style="padding-inline-end: 0;"{% endif %}>

@@ -24,12 +24,12 @@
         <div class="hero">
             <div class="container-fluid container-xxl pt-4 px-4 px-md-5 my-5">
                 <div class="text-center mt-md-0">
-                    <p class="eyebrows">
+                    <p class="eyebrows mb-3">
                         <a href="{{ url('app_demos') }}">DEMOS</a> /
                         <a href="{{ url('app_live_component') }}">Live Component</a>
                     </p>
                     <h1 class="text-center">{{ demo.name }}</h1>
-                    <div style="font-size: 1rem; line-height: 1.75rem;" class="mt-4 demo-introduction">
+                    <div style="font-size: 1rem; line-height: 1.75rem;" class="mt-4 demo-introduction Wysiwyg">
                         {% block demo_description %}
                             {{ demo.longDescription|markdown_to_html }}
                         {% endblock %}

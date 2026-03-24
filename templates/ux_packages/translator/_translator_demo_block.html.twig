@@ -8,7 +8,7 @@
         <div class="Terminal Terminal_body">
             <div class="Terminal_content">
                 <pre data-translator-demo-block-target="code">
-<small><span class="hl-keyword">import</span> { trans } <span class="hl-keyword">from</span> '<span class="hl-value">../translator</span>';</small>
+<span class="hl-keyword">import</span> { trans } <span class="hl-keyword">from</span> '<span class="hl-value">../translator</span>';
 
 <span class="hl-property function_">trans</span>(<span class="hl-value">'{{ message }}'</span>{% if parameters %}, {
 {% for name, value in parameters %} {% set is_string = not (value matches '/^[\\d\\.]+$/') %}

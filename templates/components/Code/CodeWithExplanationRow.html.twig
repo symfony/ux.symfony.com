@@ -7,7 +7,7 @@
         {% block explanation %}
             <div class="Wysiwyg">
                 {% apply markdown_to_html %}
-                    {{ block('content')|split("\n")|map(x => x|trim)|join("\n") }}
+                    {{ block('content')|split('\n')|map(x => x|trim)|join('\n') }}
                 {% endapply %}
             </div>
         {% endblock %}

@@ -1,7 +1,7 @@
 <div class="hero">
     <div class="container-fluid container-xxl px-4 pt-4 px-md-5">
         {% if eyebrows|default %}
-            <p class="eyebrows text-center mt-5">{{ eyebrows }}</p>
+            <p class="eyebrows text-center mt-5 mb-3">{{ eyebrows }}</p>
         {% endif %}
         <h1 class="text-center">
             <a href="{{ url ?? url(app.current_route) }}">{{ title }}</a>

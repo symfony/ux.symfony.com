@@ -60,7 +60,30 @@ $utilities: map-remove(
 );
 
 // Layout & components
-@import "../../vendor/twbs/bootstrap/scss/reboot";
+//@import "../../vendor/twbs/bootstrap/scss/reboot";
+%heading {
+  margin-top: 0; // 1
+  margin-bottom: $headings-margin-bottom;
+  font-family: $headings-font-family;
+  font-style: $headings-font-style;
+  font-weight: $headings-font-weight;
+  line-height: $headings-line-height;
+  color: var(--#{$prefix}heading-color);
+}
+
+h5 {
+  @extend %heading;
+  @include font-size($h5-font-size);
+}
+h6 {
+  @extend %heading;
+  @include font-size($h6-font-size);
+}
+mark {
+  padding: $mark-padding;
+  color: var(--#{$prefix}highlight-color);
+  background-color: var(--#{$prefix}highlight-bg);
+}
 @import "../../vendor/twbs/bootstrap/scss/type";
 @import "../../vendor/twbs/bootstrap/scss/images";
 @import "../../vendor/twbs/bootstrap/scss/containers";
@@ -112,14 +135,10 @@ $utilities: map-remove(
 
 // Base
 @import "app/font";
-@import "app/html";
 @import "app/root";
-@import "app/typography";
 
 // Layouts
 @import "layouts/container";
-@import "layouts/cluster";
-@import "layouts/grid";
 @import "layouts/section";
 
 // Components
@@ -154,7 +173,6 @@ $utilities: map-remove(
 @import "components/ThemeSwitcher";
 @import "components/Toolkit";
 @import "components/Wysiwyg_Tabs";
-@import "components/Wysiwyg";
 
 // Utilities
 @import "utilities/animation";
@@ -175,7 +193,6 @@ $utilities: map-remove(
 @import "sections/nav";
 @import "sections/hero";
 
-@import "./container";
 @import "./images";
 
 .code-description a {

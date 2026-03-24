@@ -54,7 +54,7 @@
             {{ cookbook.content|raw|markdown_to_html }}
         </div>
 
-        <div class="cluster">
+        <div class="flex flex-wrap gap-4 justify-center items-center">
             <twig:Badge:Author author="{{ cookbook.author }}" />
             <twig:Badge:Date label="Published" date="{{ cookbook.publishedAt }}" />
         </div>

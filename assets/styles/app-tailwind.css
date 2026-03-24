@@ -40,7 +40,7 @@
     --color-border-subtle: #e9ecef;
     --color-border-translucent: rgba(0, 0, 0, .175);
     --color-code: #d63384;
-    --color-link: #0d6efd;
+    --color-link: #222;
 
     /* Spacing tokens (existing, unchanged) */
     --space-smaller: 0.5rem;
@@ -56,7 +56,7 @@
 
     /* Font stacks (existing, unchanged) */
     --font-family-title: "Ubuntu Sans", "Ubuntu", system-ui, sans-serif;
-    --font-family-text: system-ui, sans-serif;
+    --font-family-text: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-family-code: ui-monospace, "SF Mono", SFMono-Regular, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace;
 }
 
@@ -124,13 +124,345 @@
 }
 
 @layer base {
-    body {
-        font-family: var(--font-family-text);
-        color: var(--color-body-text);
-        background-color: var(--color-body-bg);
+    main {
+        flex-grow: 1;
     }
 
-    * {
-        border-color: var(--color-border);
+    header, main, footer {
+        flex-shrink: 0;
+    }
+
+    button {
+        border: none;
+        background: inherit;
+
+        &:active {
+            border: inherit;
+        }
+    }
+
+    a, a.page-link, a.page-link:hover {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    a.link {
+        --color: var(--color-code);
+        color: var(--color);
+        position: relative;
+        &:after {
+            position: absolute;
+            content:"";
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            display: block;
+            transition: all .2s ease-in-out;
+            background: var(--color);
+            transform: scaleX(0);
+            transform-origin: center left;
+        }
+        &:hover {
+            &:after {
+                transform: scaleX(1);
+                transition: transform .15s ease-in-out revert;
+            }
+        }
+    }
+
+
+    h1, .h1,
+    h2, .h2,
+    h3, .h3,
+    h4, .h4,
+    h5, .h5,
+    h6, .h6 {
+        margin-top: 0;
+        margin-bottom: .5rem;
+        font-weight: var(--font-weight-medium);
+        line-height: 1.2;
+        color: inherit;
+    }
+
+    h1,.h1 {
+        font-size: calc(1.375rem + 1.5vw)
+    }
+
+    h2, .h2 {
+        font-size: calc(1.325rem + 0.9vw)
+    }
+
+    h3, .h3 {
+        font-size: calc(1.3rem + 0.6vw)
+    }
+
+    h4, .h4 {
+        font-size: calc(1.275rem + 0.3vw)
+    }
+
+    @media(min-width: 1200px) {
+        h1,.h1 {
+            font-size:2.5rem
+        }
+
+        h2,.h2 {
+            font-size:2rem
+        }
+
+        h3,.h3 {
+            font-size:1.75rem
+        }
+
+        h4,.h4 {
+            font-size:1.5rem
+        }
+    }
+
+    h5,.h5 {
+        font-size: 1.25rem
+    }
+
+    h6,.h6 {
+        font-size: 1rem
+    }
+
+    h1 {
+        font-size: 52px;
+        font-weight: var(--font-weight-bold);
+        line-height: 60px;
+        letter-spacing: -0.035em;
+        font-family: var(--font-family-title);
+    }
+
+    h2.ubuntu {
+        font-size: 42px;
+        font-weight: var(--font-weight-bold);
+        line-height: 48px;
+        letter-spacing: -2px;
+    }
+
+    h3, a.component-title {
+        font-family: var(--font-family-title);
+        font-weight: var(--font-weight-bold);
+        font-size: var(--text-3xl);
+        line-height: --spacing(10);
+        letter-spacing: -1px;
+        text-decoration: none;
+        color: var(--bs-body-color);
+    }
+
+    h4 {
+        font-size: var(--text-base);
+        font-weight: var(--font-weight-bold);
+        line-height: 18.38px;
+    }
+
+    .component-headlines {
+        width: 50%;
+    }
+
+    @media (max-width: 900px) {
+        .component-headlines {
+            width: 56%;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .component-headlines {
+            text-align: center;
+            width: 100%
+        }
+    }
+
+    code {
+        color: var(--color-code);
+    }
+    pre code {
+        color: inherit;
+        word-break: normal;
+
+    }
+    a > code {
+        color: inherit;
+    }
+
+    .code-description :is(h2, h3) {
+        font-family: var(--font-family-title);
+    }
+    .code-description h2 {
+        font-size: 2.5em;
+        margin-block-end: 1.5rem;
+    }
+    .code-description h3 {
+        font-size: 1.65em;
+        font-weight: 500;
+        margin-block-end: 1.125rem;
+        margin-top: 2.25rem;
+    }
+
+    .code-description:hover strong {
+        background: var(--color-body-text);
+        color: var(--color-body);
+    }
+
+
+    .ubuntu-header {
+        font-family: var(--font-family-title);
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 24px;
+        letter-spacing: -1px;
+        text-decoration: none;
+    }
+
+    .ubuntu-title {
+        font-family: var(--font-family-title);
+        font-weight: 700;
+        font-size: 19px;
+        line-height: 22px;
+        letter-spacing: -0.668767511844635px;
+    }
+
+    .eyebrows {
+        text-transform: uppercase;
+        font-family: var(--font-family-text);
+        font-weight: 600;
+        font-size: 0.7rem;
+        line-height: 1.6;
+        letter-spacing: 0.125rem;
+    }
+
+    @media (max-width: 576px) {
+        h1 {
+            font-size: 36px;
+            line-height: 41px;
+            letter-spacing: -1px;
+        }
+
+        h2.ubuntu {
+            font-size: 28px;
+            line-height: 32px;
+            letter-spacing: -1px;
+        }
+
+        h3, a.component-title {
+            font-size: 22px;
+            line-height: 25px;
+            letter-spacing: -1px;
+        }
+    }
+}
+
+@layer components {
+    .ux-container {
+        border: 1px solid var(--bs-secondary-bg-subtle);
+        border-radius: 1rem;
+    }
+
+    .markdown-container {
+        border: 1px solid var(--bs-secondary-bg-subtle);
+        border-radius: .75rem;
+        height: 100%;
+        width: 100%;
+        position: relative;
+    }
+
+    .Wysiwyg {
+        h1 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            margin-bottom: --spacing(4);
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: --spacing(2);
+            margin-top: --spacing(8);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: --spacing(2);
+            margin-top: --spacing(6);
+        }
+
+        a:not(.Terminal_title) {
+            color: var(--color-link);
+            text-decoration: underline;
+        }
+
+        .table-responsive {
+            margin-bottom: --spacing(1);
+            border: 1px solid var(--color-border);
+            border-radius: .75rem;
+        }
+
+        .table-responsive .table {
+            margin-bottom: 0;
+        }
+
+        p, .Terminal {
+            margin-top: --spacing(4);
+            margin-bottom: --spacing(4);
+        }
+
+        ol, ul {
+            margin-top: --spacing(5);
+            margin-bottom: --spacing(5);
+            padding-inline-start: --spacing(6);
+
+            > li {
+                padding-inline-start: --spacing(2);
+            }
+        }
+
+        ul {
+            list-style-type: disc;
+        }
+
+        ol {
+            list-style-type: decimal;
+        }
+
+        li {
+            margin-top: --spacing(2);
+            margin-bottom: --spacing(2);
+        }
+
+        > ul > li p,
+        > ol > li p {
+            margin-top: --spacing(2);
+            margin-bottom: --spacing(2);
+        }
+
+        > ul > li > p:first-child,
+        > ol > li > p:first-child {
+            margin-top: --spacing(2);
+        }
+
+        > ul > li > p:last-child,
+        > ol > li > p:last-child {
+            margin-bottom: --spacing(2);
+        }
+
+        ul ul, ul ol, ol ul, ol ol {
+            margin-top: --spacing(3);
+            margin-bottom: --spacing(3);
+        }
+
+        h2 + *, h3 + * {
+            margin-top: 0;
+        }
+
+        & > :first-child {
+            margin-top: 0;
+        }
+
+        & > :last-child {
+            margin-bottom: 0;
+        }
     }
 }

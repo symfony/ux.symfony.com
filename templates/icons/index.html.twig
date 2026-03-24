@@ -66,37 +66,35 @@
         </div>
     </section>
 
-    <section class="section">
-        <div class="container-fluid container-xxl px-4 px-md-5 py-3">
+    <section class="container-fluid container-xxl px-4 px-md-5 py-3">
 
-            <div class="d-md-flex justify-content-md-between py-5 text-center align-items-center text-md-start">
-                <h2 class="ubuntu pt-2 component-headlines">Documentation</h2>
-                <a href="https://symfony.com/bundles/ux-icons/current/index.html" class="btn btn-md btn-outline-primary my-3 my-md-0"
-                   rel="external" target="_blank">
-                    Read Full Documentation
-                    <twig:ux:icon name="arrow-right" style="transform: rotate(-45deg);"/>
-                </a>
+        <div class="d-md-flex justify-content-md-between py-5 text-center align-items-center text-md-start">
+            <h2 class="ubuntu pt-2 component-headlines">Documentation</h2>
+            <a href="https://symfony.com/bundles/ux-icons/current/index.html" class="btn btn-md btn-outline-primary my-3 my-md-0"
+               rel="external" target="_blank">
+                Read Full Documentation
+                <twig:ux:icon name="arrow-right" style="transform: rotate(-45deg);"/>
+            </a>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                <h3 class="ubuntu mb-4" style="font-weight: 400;" title="Install UX Icons">Installation</h3>
+                <twig:Terminal bottomPadding="20">
+                    composer require {{ package.composerName }}
+                </twig:Terminal>
             </div>
-
-            <div class="row">
-                <div class="col-4">
-                    <h3 class="ubuntu mb-4" style="font-weight: 400;" title="Install UX Icons">Installation</h3>
-                    <twig:Terminal bottomPadding="20">
-                        composer require {{ package.composerName }}
-                    </twig:Terminal>
-                </div>
-                <div class="col-4">
-                    <h3 class="ubuntu mb-4" style="font-weight: 400;" title="Search UX Icons">Search Icons</h3>
-                    <twig:Terminal bottomPadding="20">
-                        php bin/console ux:icons:search lucide
-                    </twig:Terminal>
-                </div>
-                <div class="col-4">
-                   <h3 class="ubuntu mb-4" style="font-weight: 400;" title="Symfony UX Bundle Configuration">Configuration</h3>
-                    <twig:Terminal bottomPadding="20">
-                        php bin/console debug:config ux_icons
-                    </twig:Terminal>
-                </div>
+            <div class="col-4">
+                <h3 class="ubuntu mb-4" style="font-weight: 400;" title="Search UX Icons">Search Icons</h3>
+                <twig:Terminal bottomPadding="20">
+                    php bin/console ux:icons:search lucide
+                </twig:Terminal>
+            </div>
+            <div class="col-4">
+               <h3 class="ubuntu mb-4" style="font-weight: 400;" title="Symfony UX Bundle Configuration">Configuration</h3>
+                <twig:Terminal bottomPadding="20">
+                    php bin/console debug:config ux_icons
+                </twig:Terminal>
             </div>
         </div>
     </section>

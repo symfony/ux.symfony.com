@@ -39,7 +39,7 @@
     --color-border-subtle: #e9ecef;
     --color-border-translucent: rgba(0, 0, 0, .175);
     --color-code: #d63384;
-    --color-link: #222;
+    --color-link: #6ea8fe;
 
     /* Specific colors */
     --color-purple: #6A2DBA;
@@ -56,10 +56,8 @@
     --border-radius: 1rem;
     --border-radius-large: 1.5rem;
 
-    /* Font stacks (existing, unchanged) */
+    /* Font stacks */
     --font-family-title: "Ubuntu Sans", "Ubuntu", system-ui, sans-serif;
-    --font-family-text: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    --font-family-code: ui-monospace, "SF Mono", SFMono-Regular, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace;
 }
 
 .dark {
@@ -110,8 +108,6 @@
 
     /* Font families */
     --font-title: var(--font-family-title);
-    --font-text: var(--font-family-text);
-    --font-code: var(--font-family-code);
 
     /* Radius */
     --radius-sm: var(--border-radius-small);

@@ -10,7 +10,7 @@
             <a href="{{ path(package.route) }}" class="PackageBox_link">{{ package.humanName }}</a>
             <twig:ux:icon name="arrow-right" class="PackageBox_arrow Icon" />
         </{{ titleTag }}>
-        <div class="PackageBox_description">
+        <div class="PackageBox_description Wysiwyg">
             {{ package.description|markdown_to_html }}
         </div>
     </div>

@@ -2,12 +2,12 @@
 >
     <div class="container-fluid container-xxl px-4 pt-4 px-md-5 pt-md-5 position-relative">
 
-        <p class="eyebrows text-center font-white mt-5 mb-3" style="opacity: 0.85;">{{ eyebrowText|raw }}</p>
+        <p class="eyebrows text-center text-white mt-5 mb-3" style="opacity: 0.85;">{{ eyebrowText|raw }}</p>
 
-        <h1 class="text-center font-white">{% block title_header %}{{ title|default }}{% endblock %}</h1>
+        <h1 class="text-center text-white">{% block title_header %}{{ title|default }}{% endblock %}</h1>
 
         <div class="d-flex justify-content-center">
-            <p class="text-center font-white mt-3 pb-3 hero-sub-text">
+            <p class="text-center text-white mt-3 pb-3 hero-sub-text">
                 {% block sub_content %}{{ subtitle|default }}{% endblock %}
             </p>
         </div>

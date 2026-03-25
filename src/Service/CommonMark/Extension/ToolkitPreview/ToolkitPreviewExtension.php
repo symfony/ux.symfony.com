@@ -21,11 +21,12 @@ use League\CommonMark\Extension\ExtensionInterface;
 use Symfony\Component\HttpFoundation\UriSigner;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-final readonly class ToolkitPreviewExtension implements ExtensionInterface
+final class ToolkitPreviewExtension implements ExtensionInterface
 {
     public function __construct(
         private UriSigner $uriSigner,
         private UrlGeneratorInterface $urlGenerator,
+        private \Twig\Environment $twig,
     ) {
     }
 
@@ -33,6 +34,6 @@ final readonly class ToolkitPreviewExtension implements ExtensionInterface
     {
         $environment
             ->addBlockStartParser(ToolkitPreviewParser::createBlockStartParser(), 100)
-            ->addRenderer(ToolkitPreview::class, new ToolkitPreviewRenderer($this->uriSigner, $this->urlGenerator));
+            ->addRenderer(ToolkitPreview::class, new ToolkitPreviewRenderer($this->uriSigner, $this->urlGenerator, $this->twig));
     }
 }

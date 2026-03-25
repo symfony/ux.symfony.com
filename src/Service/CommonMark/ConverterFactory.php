@@ -32,12 +32,13 @@ use Symfony\UX\TwigComponent\ComponentRendererInterface;
  * @author Kevin Bond <kevinbond@gmail.com>
  */
 #[AsDecorator('twig.markdown.league_common_mark_converter_factory')]
-final readonly class ConverterFactory
+final class ConverterFactory
 {
     public function __construct(
         private ComponentRendererInterface $componentRenderer,
         private UriSigner $uriSigner,
         private UrlGeneratorInterface $urlGenerator,
+        private \Twig\Environment $twig,
     ) {
     }
 
@@ -86,7 +87,7 @@ final readonly class ConverterFactory
             ->addExtension(new TableExtension())
             ->addExtension(new HeadingPermalinkExtension())
             ->addExtension(new TabsExtension())
-            ->addExtension(new ToolkitPreviewExtension($this->uriSigner, $this->urlGenerator))
+            ->addExtension(new ToolkitPreviewExtension($this->uriSigner, $this->urlGenerator, $this->twig))
             ->addRenderer(FencedCode::class, new FencedCodeRenderer($this->componentRenderer))
         ;
 

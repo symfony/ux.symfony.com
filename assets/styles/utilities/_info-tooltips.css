@@ -3,7 +3,7 @@
   font-size: 12px;
   font-weight: 400;
   line-height: 19px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
 }
 
 .copied button svg {
@@ -16,7 +16,7 @@
   content: " ";
   animation: copied 450ms linear forwards;
   border-radius: 50%;
-  border: 2px dotted var(--bs-body-color);
+  border: 2px dotted var(--color-body-text);
 }
 
 @keyframes copied {

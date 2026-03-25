@@ -11,7 +11,7 @@
 
         {% block sub_content %}
             The speed of a single-page web app without writing any JavaScript,
-            courtesy of <a class="font-white text-underline" href="https://turbo.hotwired.dev/" rel="external noopener noreferrer">Turbo</a>
+            courtesy of <a class="text-white underline" href="https://turbo.hotwired.dev/" rel="external noopener noreferrer">Turbo</a>
 
             <div style="position: absolute;  bottom: 3rem;  left: 50%;  transform: translateX(-50%);color: white;">
                 {{ include('ux_packages/turbo/_chat_message_count.html.twig', {messageCount: this.messageCount}) }}
@@ -27,7 +27,7 @@
         <section class="row mb-5">
             <div class="col-12 col-md-6 order-md-2">
                 <div class="px-md-5">
-                    <h2 class="ubuntu mt-3 mt-md-5" id="drive">Turbo <span class="font-purple">Drive</span></h2>
+                    <h2 class="ubuntu mt-3 mt-md-5" id="drive">Turbo <span class="text-purple">Drive</span></h2>
                     <p class="mt-2">Transform all link clicks and form submits into Ajax
                     calls to get that single-page-application feel.</p>
                     <div class="alert alert-secondary d-flex justify-content-start col-12 mt-5">
@@ -75,7 +75,7 @@
         <section class="row mb-5 pt-md-5">
             <div class="col-12 col-md-6">
                 <div class="px-md-5">
-                    <h2 class="ubuntu mt-5" id="frames">Turbo <span class="font-purple">Frames</span></h2>
+                    <h2 class="ubuntu mt-5" id="frames">Turbo <span class="text-purple">Frames</span></h2>
                     <div>Decompose complex pages into different parts that load and behave independently. Try it - it's smooth.</div>
                     <div class="alert alert-secondary d-flex col-12 justify-content-start mt-5">
                         <twig:ux:icon name="bi:info-circle-fill" class="size-5 shrink-0" aria-label="Icon to indication information" />
@@ -105,7 +105,7 @@
         <section {{ turbo_stream_listen('chat') }} class="row mb-5 pt-md-5">
             <div class="col-12 col-md-6 order-md-2">
                 <div class="px-md-5">
-                    <h2 class="ubuntu mt-5" id="turbo-streams">Turbo <span class="font-purple">Streams</span></h2>
+                    <h2 class="ubuntu mt-5" id="turbo-streams">Turbo <span class="text-purple">Streams</span></h2>
                     <div>
                         Deliver page updates - to *any* elements on your page -
                         directly from Symfony. Add Mercure to do this for *any*

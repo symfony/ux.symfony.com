@@ -25,6 +25,7 @@ final class ToolkitPreviewRenderer implements NodeRendererInterface
     public function __construct(
         private UriSigner $uriSigner,
         private UrlGeneratorInterface $urlGenerator,
+        private \Twig\Environment $twig,
     ) {
     }
 
@@ -45,18 +46,9 @@ final class ToolkitPreviewRenderer implements NodeRendererInterface
             )
         );
 
-        return <<<HTML
-            <div class="Toolkit_Loader" style="height: {$height};">
-                <svg width="18" height="18" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
-                <span>Loading...</span>
-            </div>
-            <iframe
-                class="Toolkit_Preview loading"
-                src="{$previewUrl}"
-                loading="lazy"
-                style="height: {$height};"
-                onload="this.previousElementSibling.style.display = 'none'; this.classList.remove('loading')"
-            ></iframe>
-            HTML;
+        return $this->twig->render('toolkit/docs/_preview.html.twig', [
+            'previewUrl' => $previewUrl,
+            'height' => $height,
+        ]);
     }
 }

@@ -170,17 +170,7 @@ mark {
 @import "components/Terminal";
 @import "components/TerminalCommand";
 @import "components/ThemeSwitcher";
-@import "components/Toolkit";
 @import "components/Wysiwyg_Tabs";
-
-// Utilities
-@import "utilities/animation";
-@import "utilities/arrow";
-@import "utilities/background";
-@import "utilities/info-tooltips";
-@import "utilities/font";
-@import "utilities/shadow";
-@import "utilities/text";
 
 // Vendors customization
 @import "vendor/bootstrap";

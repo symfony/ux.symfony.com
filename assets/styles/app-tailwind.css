@@ -2,7 +2,6 @@
 
 @source "../../templates/**/*.html.twig";
 @source "../controllers/**/*.js";
-@source "../**/*.html.twig";
 
 /* Dark mode: class="dark" (aligned with toolkit-shadcn.css) */
 /* Transitional phase: also supports data-bs-theme for coexistence */
@@ -41,6 +40,9 @@
     --color-border-translucent: rgba(0, 0, 0, .175);
     --color-code: #d63384;
     --color-link: #222;
+
+    /* Specific colors */
+    --color-purple: #6A2DBA;
 
     /* Spacing tokens (existing, unchanged) */
     --space-smaller: 0.5rem;
@@ -102,6 +104,9 @@
     --color-signal-red: var(--signal-red);
     --color-signal-yellow: var(--signal-yellow);
     --color-signal-green: var(--signal-green);
+
+    /* Specific colors */
+    --color-purple: var(--color-purple);
 
     /* Font families */
     --font-title: var(--font-family-title);
@@ -320,14 +325,6 @@
         text-decoration: none;
     }
 
-    .ubuntu-title {
-        font-family: var(--font-family-title);
-        font-weight: 700;
-        font-size: 19px;
-        line-height: 22px;
-        letter-spacing: -0.668767511844635px;
-    }
-
     .eyebrows {
         text-transform: uppercase;
         font-family: var(--font-family-text);
@@ -371,102 +368,10 @@
         width: 100%;
         position: relative;
     }
-
-    .Wysiwyg {
-        h1 {
-            font-size: 2.6rem;
-            font-weight: 700;
-            margin-bottom: --spacing(4);
-        }
-
-        h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: --spacing(2);
-            margin-top: --spacing(8);
-        }
-
-        h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: --spacing(2);
-            margin-top: --spacing(6);
-        }
-
-        a:not(.Terminal_title) {
-            color: var(--color-link);
-            text-decoration: underline;
-        }
-
-        .table-responsive {
-            margin-bottom: --spacing(1);
-            border: 1px solid var(--color-border);
-            border-radius: .75rem;
-        }
-
-        .table-responsive .table {
-            margin-bottom: 0;
-        }
-
-        p, .Terminal {
-            margin-top: --spacing(4);
-            margin-bottom: --spacing(4);
-        }
-
-        ol, ul {
-            margin-top: --spacing(5);
-            margin-bottom: --spacing(5);
-            padding-inline-start: --spacing(6);
-
-            > li {
-                padding-inline-start: --spacing(2);
-            }
-        }
-
-        ul {
-            list-style-type: disc;
-        }
-
-        ol {
-            list-style-type: decimal;
-        }
-
-        li {
-            margin-top: --spacing(2);
-            margin-bottom: --spacing(2);
-        }
-
-        > ul > li p,
-        > ol > li p {
-            margin-top: --spacing(2);
-            margin-bottom: --spacing(2);
-        }
-
-        > ul > li > p:first-child,
-        > ol > li > p:first-child {
-            margin-top: --spacing(2);
-        }
-
-        > ul > li > p:last-child,
-        > ol > li > p:last-child {
-            margin-bottom: --spacing(2);
-        }
-
-        ul ul, ul ol, ol ul, ol ol {
-            margin-top: --spacing(3);
-            margin-bottom: --spacing(3);
-        }
-
-        h2 + *, h3 + * {
-            margin-top: 0;
-        }
-
-        & > :first-child {
-            margin-top: 0;
-        }
-
-        & > :last-child {
-            margin-bottom: 0;
-        }
-    }
 }
+
+@import "./components/_Wysiwyg.css";
+@import "./utilities/_arrow.css";
+@import "./utilities/_font.css";
+@import "./utilities/_info-tooltips.css";
+@import "./utilities/_shadow.css";

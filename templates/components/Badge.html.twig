@@ -1,13 +1,13 @@
 <div {{ attributes.defaults({
-    class: 'Badge',
+    class: 'bg-n-800 text-n-50 py-1.5 px-2.5 rounded-sm inline-flex flex-nowrap text-sm gap-2 relative',
 }) }}>
-    <span class="Badge__label">
+    <span class="font-stretch-condensed uppercase text-white flex items-center gap-2 after:content-[':'] after:opacity-50 after:-ml-1">
         {%- if icon %}
-            <twig:ux:Icon name="{{ icon }}" class="Badge__icon" />
+            <twig:ux:Icon name="{{ icon }}" class="size-4 -mbs-0.5" />
         {% endif -%}
         {{- label -}}
     </span>
-    <span class="Badge__value">
+    <span class="text-[#81ADB5]">
         {%- if url %}
             <a href="{{ url }}" class="Badge__link">
                 {{- value -}}

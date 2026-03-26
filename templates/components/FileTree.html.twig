@@ -1,4 +1,4 @@
-<ul class="FileTree FileTree-main list-unstyled px-3">
+<ul class="FileTree FileTree-main list-unstyled px-3 [&_.tooltip-inner]:max-w-87.5">
     {{ _self.fileTree(files) }}
 </ul>
 
@@ -6,14 +6,17 @@
     {% for file_info in files %}
             <li class="FileTree-main {{ file_info.isDirectory ? 'FileTree-dir' : 'FileTree-file' }}">
                 <span
-                    data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="right"
+                    data-bs-toggle="tooltip"
+                    data-bs-html="true"
+                    data-bs-placement="right"
                     title="{{ file_info.description|e('html_attr') }}"
+                    class="inline-flex flex-row items-center gap-2"
                 >
                     <twig:ux:icon name="{{ file_info.isDirectory ? 'folder-open' : 'file' }}" />
                     {{ file_info.filename }}
                 </span>
                 {% if file_info.files is defined %}
-                    <ul class="list-unstyled">
+                    <ul class="flex flex-col items-stretch justify-start relative ps-2 ms-2 border-l border-l-body-text border-dotted">
                         {{ _self.fileTree(file_info.files) }}
                     </ul>
                 {% endif %}

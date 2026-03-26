@@ -71,20 +71,24 @@ $utilities: map-remove(
   color: var(--#{$prefix}heading-color);
 }
 
-h5 {
-  @extend %heading;
-  @include font-size($h5-font-size);
-}
-h6 {
-  @extend %heading;
-  @include font-size($h6-font-size);
-}
+//h1 {
+//  @extend %heading;
+//  @include font-size($h1-font-size);
+//}
+//h5 {
+//  @extend %heading;
+//  @include font-size($h5-font-size);
+//}
+//h6 {
+//  @extend %heading;
+//  @include font-size($h6-font-size);
+//}
 mark {
   padding: $mark-padding;
   color: var(--#{$prefix}highlight-color);
   background-color: var(--#{$prefix}highlight-bg);
 }
-@import "../../vendor/twbs/bootstrap/scss/type";
+//@import "../../vendor/twbs/bootstrap/scss/type";
 @import "../../vendor/twbs/bootstrap/scss/images";
 @import "../../vendor/twbs/bootstrap/scss/containers";
 @import "../../vendor/twbs/bootstrap/scss/grid";
@@ -158,7 +162,6 @@ mark {
 @import "components/IconSetCard";
 @import "components/Pagination";
 @import "components/ProductGrid";
-@import "components/PackageHeader";
 @import "components/PackageBox";
 @import "components/PackageList";
 @import "components/SidebarNav";

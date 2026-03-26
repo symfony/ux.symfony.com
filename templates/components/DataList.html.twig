@@ -1,13 +1,16 @@
 {% props items, itemClass = '' %}
 
-<dl class="DataList">
+<dl class="flex flex-row flex-wrap justify-center content-center gap-6">
     {% for label, value in items %}
         {% if value is not null %}
-            <div class="DataList__item {{ itemClass }}">
-                <dt>{{ label }}</dt>
-                <dd>
+            <div class="flex items-center gap-3 {{ itemClass }}">
+                <dt class="font-bold after:content-[':']">{{ label }}</dt>
+                <dd class="text-code font-normal m-0 ">
                     {%- if value.href|default %}
-                        <a href="{{ value.href }}">{{ value.title }}</a>
+                        <a
+                            href="{{ value.href }}"
+                            class="link-underline-animation"
+                        >{{ value.title }}</a>
                     {% else -%}
                         {{ value.title ?? value }}
                     {%- endif -%}

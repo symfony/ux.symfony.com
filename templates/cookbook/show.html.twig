@@ -20,7 +20,7 @@
 
 {% block content %}
 
-    <article class="Cookbook">
+    <article>
         <div class="hero">
             <div class="container-fluid container-xxl pt-4 px-4 px-md-5 my-5">
                 <div class="text-center mt-md-0">
@@ -40,7 +40,7 @@
                     {% endif %}
                 </div>
                 <div class="pt-4">
-                    <div class="image-title">
+                    <div class="overflow-hidden w-auto rounded-md aspect-video max-w-7xl">
                         <img src="{{ asset('images/cookbook/%s-1280x720.png'|format(cookbook.slug)) }}"
                              alt="{{ cookbook.title }} Illustration"
                              width="1280" height="720"
@@ -50,7 +50,15 @@
             </div>
         </div>
 
-        <div class="content Wysiwyg" style="max-width: 75ch;margin-inline: auto;font-size: 1.25rem;line-height: 1.75;font-weight: 300;">
+        <div
+            class="
+                content Wysiwyg px-2 sm:px-0 max-w-[75ch] mx-auto leading-8 text-xl font-light
+                [&_h2]:mt-12 [&_h2]:mb-4 [&_h2]:font-bold [&_h2]:leading-10
+                [&_h3]:mt-12 [&_h3]:mb-4 [&_h3]:font-bold [&_h3]:leading-9
+                [&_h4]:mt-12 [&_h4]:mb-4
+                [&_.Terminal]:text-base
+            "
+        >
             {{ cookbook.content|raw|markdown_to_html }}
         </div>
 
@@ -58,7 +66,6 @@
             <twig:Badge:Author author="{{ cookbook.author }}" />
             <twig:Badge:Date label="Published" date="{{ cookbook.publishedAt }}" />
         </div>
-
     </article>
 {% endblock %}
 

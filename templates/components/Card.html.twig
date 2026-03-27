@@ -1,33 +1,28 @@
 {% props name, image, url, description, tags, lazyload = true %}
 
-<article class="DemoCard">
-
-    <div class="DemoCard__media">
-        <img class="DemoCard__image"
+<article class="group rounded-xl relative flex flex-col border transition-all duration-250 ease-in-out hover:—translate-y-1 hover:shadow-lg hover:scale-102 ">
+    <div class="rounded-t-xl bg-black place-content-center grid overflow-hidden aspect-video">
+        <img class="object-cover block max-w-full transition-opacity opacity-95 group-hover:opacity-100"
              src="{{ image }}"
              width="640"
-             height="360"
              alt="{{ name }}"
-                {% if lazyload %}
-                    loading="lazy"
-                {% endif %}
+             {% if lazyload %}loading="lazy"{% endif %}
         >
     </div>
 
-    <div class="DemoCard__content">
-        <h4 class="DemoCard__title">
+    <div class="py-3 px-4 flex-1 rounded-b-xl gap-2 flex flex-col">
+        <h4 class="text-lg font-bold m-0">
             <a href="{{ url }}" class="stretched-link">
-                {{- name -}}
+                {{ name }}
             </a>
         </h4>
-        <p class="DemoCard__description">
-            {{- description -}}
+        <p class="text-sm font-stretch-semi-condensed font-normal transition-all duration-250 opacity-65 group-hover:opacity-100 leading-6 m-0">
+            {{ description }}
         </p>
-        <p class="DemoCard__tags">
+        <p class="mt-auto mb-0 flex flex-wrap gap-2">
             {% for tag in tags %}
                 <span class="Tag">{{ tag }}</span>
             {% endfor %}
         </p>
     </div>
-
 </article>

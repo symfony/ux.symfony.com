@@ -3,11 +3,11 @@
 {% block demo_container %}
 
     <div class="container container-xl mb-5">
-        <twig:Browser url="/foo" class="shadow-blur shadow-blur--rainbow w-full" id="browser">
+        <twig:Browser class="shadow-blur shadow-blur--rainbow w-full" id="browser">
 
             {# Retro Tshirt SVG code #}
             {# Used as external ref in ProductGrid2 (to improve code readability) #}
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" display="none">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" hidden>
                 <symbol id="svg-tshirt" viewBox="0 0 1068 1032">
                     <style>
                       #svg-tshirt .retro {

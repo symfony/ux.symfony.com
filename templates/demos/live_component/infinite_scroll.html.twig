@@ -2,7 +2,7 @@
 
 {% block demo_container %}
 
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" display="none">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" hidden>
         <symbol id="svg-tshirt" viewBox="0 0 1274 1280">
               <path d="M502 143c-1 2-5 3-8 3-3 1-7 2-11 5-11 6-58 24-95 35-25 8-39 14-47 19-8 6-39 38-51 54l-26 34-25
               35-65 87a1267 1267 0 0 1-65 78c0 2 11 13 31 28a1375 1375 0 0 1 51 43 704 704 0 0 1 69 59l3 1 10-9a773 773
@@ -16,10 +16,7 @@
     </svg>
 
     <div class="container container-xl mb-5">
-        <twig:Browser
-            url="/foo"
-            class="shadow-blur shadow-blur--rainbow w-full"
-        >
+        <twig:Browser class="shadow-blur shadow-blur--rainbow w-full">
             <twig:ProductGrid />
         </twig:Browser>
     </div>

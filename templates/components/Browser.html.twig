@@ -1,29 +1,20 @@
-{% props url = '/' %}
-
-<div class="Browser {{ attributes.render('class') }}" data-controller="browser tooltips" {{ attributes }}>
-    <div class="Browser__window">
-        <div class="Browser__header">
-            <div class="Browser__dots">
-                <button class="Browser__dot Browser__dot--red">
-                    <span>x</span>
-                </button>
-                <button class="Browser__dot Browser__dot--orange">
-                    <span>-</span>
-                </button>
-                <button class="Browser__dot Browser__dot--green" data-action="browser#reduce">
-                    <span>+</span>
-                </button>
+<div
+    class="place-self-center mx-auto {{ attributes.render('class') }}"
+    data-controller="tooltips" {{ attributes }}
+>
+    <div class="rounded overflow-hidden border border-n-800 ">
+        <div class="grid grid-cols-[1fr_3fr_1fr] justify-between items-center p-2.5 bg-n-800 ">
+            <div class="flex gap-2 px-2">
+                <span class="size-3 rounded-[50%] shadow-sm bg-[#FF5C60]"></span>
+                <span class="size-3 rounded-[50%] shadow-sm bg-[#F2CA44]"></span>
+                <span class="size-3 rounded-[50%] shadow-sm bg-[#65C466]"></span>
             </div>
-            <div class="Browser__url">
-                <twig:ux:icon name="lock" />
-                <span>
-                    <span hidden>https://</span><em>ux.symfony.com</em><span hidden>{{ url }}</span>
-                </span>
-                <button class="Browser__action">
-                    <twig:ux:icon name="refresh" />
-                </button>
+            <div class="bg-n-900 text-n-100 rounded text-xs w-auto py-2 px-2 flex items-center justify-between">
+                <span class="opacity-90"><twig:ux:icon name="lock" /></span>
+                <span>ux.symfony.com</span>
+                <span class="opacity-90"><twig:ux:icon name="refresh" /></span>
             </div>
-            <div class="Browser__actions">
+            {#<div class="Browser__actions">
                 {% if false %}
                     <button class="Browser__action" data-bs-toggle="tooltip" title="Feedback">
                         <twig:ux:icon name="circle-help" />
@@ -34,9 +25,10 @@
                         <twig:ux:icon name="github" />
                     </a>
                 {% endif %}
-            </div>
+            </div>#}
+            <div></div>
         </div>
-        <div class="Browser__viewport">
+        <div class="w-full aspect-2/3 sm:aspect-video bg-body overflow-x-hidden overflow-y-auto thin">
             {% block content %}
             {% endblock %}
         </div>

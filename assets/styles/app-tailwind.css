@@ -22,11 +22,6 @@
     --n-800: #262626;
     --n-900: #0D0D0D;
 
-    /* Signal colors */
-    --signal-red: #FB4040;
-    --signal-yellow: #FBC640;
-    --signal-green: #84DE2C;
-
     /* Semantic colors (replaces --bs-body-bg, --bs-body-color, etc.) */
     --color-body-bg: #fff;
     --color-body-text: #212529;
@@ -97,11 +92,6 @@
     --color-n-700: var(--n-700);
     --color-n-800: var(--n-800);
     --color-n-900: var(--n-900);
-
-    /* Signal colors */
-    --color-signal-red: var(--signal-red);
-    --color-signal-yellow: var(--signal-yellow);
-    --color-signal-green: var(--signal-green);
 
     /* Specific colors */
     --color-purple: var(--color-purple);

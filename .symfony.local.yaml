@@ -1,11 +1,11 @@
 workers:
     docker_compose: ~
     sass:
-        cmd: ['symfony', 'console', 'sass:build', '--watch']
+        cmd: ['symfony', 'console', 'sass:build', '--watch', '-vvv']
     tailwind_app:
-        cmd: ['symfony', 'console', 'tailwind:build', '--watch', 'assets/styles/app-tailwind.css']
+        cmd: ['symfony', 'console', 'tailwind:build', '--watch', 'assets/styles/app-tailwind.css', '-vvv']
     tailwind_toolkit_shadcn:
-        cmd: ['symfony', 'console', 'tailwind:build', '--watch', 'assets/styles/toolkit-shadcn.css']
+        cmd: ['symfony', 'console', 'tailwind:build', '--watch', 'assets/styles/toolkit-shadcn.css', '-vvv']
 
 http:
     port: 9044

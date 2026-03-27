@@ -183,6 +183,7 @@
     h4, .h4,
     h5, .h5,
     h6, .h6 {
+        font-family: var(--font-family-title);
         margin-top: 0;
         margin-bottom: .5rem;
         font-weight: var(--font-weight-medium);
@@ -237,7 +238,6 @@
         font-weight: var(--font-weight-bold);
         line-height: 60px;
         letter-spacing: -0.035em;
-        font-family: var(--font-family-title);
     }
 
     h2.ubuntu {

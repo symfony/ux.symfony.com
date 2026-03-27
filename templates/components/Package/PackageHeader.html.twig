@@ -25,22 +25,23 @@
             </div>
         {% endif %}
 
-        <div class="d-flex justify-content-center flex-column-reverse flex-md-row">
+        <div class="flex gap-3 justify-center translate-y-1/2">
             {% if command is not defined or command %}
                 <twig:TerminalCommand
                     aria-label="Composer command to install {{ package.humanName }}"
                     command="{{ package.composerRequireCommand }}"
-                    style="--color-accent: {{ package.color }}; transform: translateY(50%);"
+                    style="--color-accent: {{ package.color }};"
                 />
             {% endif %}
 
             {% if package.shouldShowDocsLink %}
-                <twig:DocsLink
-                    class="ms-md-3 align-self-center"
-                    size="sm"
-                    title="Read the docs"
-                    url="{{ package.officialDocsUrl }}"
-                />
+                <a
+                    href="{{ package.officialDocsUrl }}"
+                    class="bg-body flex border rounded gap-2 py-2 px-3 relative items-center transition-colors"
+                >
+                    <twig:ux:icon name="mdi:book-open-variant-outline" class="Icon size-6" />
+                    Read the docs
+                </a>
             {% endif %}
         </div>
     </div>

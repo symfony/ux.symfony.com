@@ -1,30 +1,15 @@
-<div {{ attributes.defaults({class: 'DocsLink DocsLink-' ~ size}) }}>
-    <div class="DocsLink_content">
-        {% if isSmall %}
-            <p class="d-flex align-items-center">
-                <twig:ux:icon name="{{ icon|default('mdi:book-open-variant-outline') }}" class="Icon me-2" />
-
-                <a href="{{ url }}" class="DocsLink_link"
-                   rel="{{ isExternal ? 'external noopened noreferrer' }}"
-                >{{ title }}</a>
-            </p>
-        {% else %}
-            <p class="DocsLink_title ubuntu-header">
-                <a href="{{ url }}" class="DocsLink_link" rel="{{ isExternal ? 'external noopened noreferrer' }}">
-                    {{ title }}
-                </a>
-                {% if icon|default %}
-                    <twig:ux:icon name="{{ icon }}" class="Icon DocsLink_arrow"/>
-                {% elseif isExternal %}
-                    <twig:ux:icon name="arrow-right" style="transform: rotate(-45deg);" class="Icon DocsLink_arrow"/>
-                {% endif %}
-            </p>
-        {% endif %}
-
-        {% if text %}
-            <div class="DocsLink_description">
-                <p>{{ text }}</p>
-            </div>
-        {% endif %}
+<a
+    {{ attributes.defaults({
+        href: url,
+        rel: isExternal ? 'external noopened noreferrer' : false,
+    }).without('class') }}
+    class="rounded-2xl flex flex-col p-4 relative place-self-stretch bg-body opacity-90 transition-all duration-250 ease-in-out hover:-translate-y-1 hover:opacity-100"
+>
+    <div class="flex flex-">
+        <span class="h4 font-bold font-stretch-condensed tracking-tight flex-1">
+            {{ title }}
+        </span>
+        <twig:ux:icon name="{{ icon }}" class="Icon size-6"/>
     </div>
-</div>
+    <p>{{ text }}</p>
+</a>

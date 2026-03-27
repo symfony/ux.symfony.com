@@ -272,7 +272,6 @@
 
     code {
         color: var(--color-code);
-        font-size: var(--text-sm);
     }
     pre code {
         font-size: inherit;

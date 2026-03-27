@@ -1,10 +1,10 @@
-<ul class="FileTree FileTree-main list-unstyled px-3 [&_.tooltip-inner]:max-w-87.5">
+<ul class="list-unstyled px-3 [&_.tooltip-inner]:max-w-87.5">
     {{ _self.fileTree(files) }}
 </ul>
 
 {% macro fileTree(files) %}
     {% for file_info in files %}
-            <li class="FileTree-main {{ file_info.isDirectory ? 'FileTree-dir' : 'FileTree-file' }}">
+            <li>
                 <span
                     data-bs-toggle="tooltip"
                     data-bs-html="true"

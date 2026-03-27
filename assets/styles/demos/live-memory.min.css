@@ -57,7 +57,7 @@
         border-radius: 3rem;
         bottom: var(--shadow-bottom, 0);
         filter: blur(3rem);
-        opacity: var(--opacity, 1);
+        opacity: var(--shadow-opacity, 1);
     }
 }
 .shadow-blur--rainbow {
@@ -65,5 +65,5 @@
 }
 
 .shadow-blur--opacity-20 {
-    --opacity: 0.2;
+    --shadow-opacity: 0.2;
 }

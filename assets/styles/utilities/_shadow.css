@@ -10,14 +10,10 @@
             border-radius: 3rem;
             bottom: var(--shadow-bottom, 0);
             filter: blur(3rem);
-            opacity: var(--opacity, 1);
+            opacity: var(--shadow-opacity, 1);
         }
     }
     .shadow-blur--rainbow {
         --gradient: linear-gradient(113.84deg, #D65831 0%, #D2D631 36.52%, #31D673 71.83%, #3aa3ff 100%)
     }
-}
-
-@utility shadow-blur-* {
-    --opacity: 0.2
 }

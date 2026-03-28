@@ -27,7 +27,7 @@
                 <img
                     src="{{ asset('images/taskflow-without-native.webp') }}"
                     alt="A Symfony + Bootstrap todo-list app displayed inside a mobile browser, with the browser navigation bar and the web navbar visible."
-                    style="width: 540px; max-width: 100%"
+                    style="width: 540px; max-width: 100%; display: block; margin-left: auto; margin-right: auto;"
                     loading="lazy"
                 />
                 <p class="text-body-secondary mt-2" style="font-size: 0.9rem;">
@@ -39,7 +39,7 @@
                 <img
                     src="{{ asset('images/taskflow-with-native.webp') }}"
                     alt="The same Symfony + Bootstrap todo-list app but with Hotwire Native: native title bar, no browser chrome, clean native experience."
-                    style="width: 540px; max-width: 100%"
+                    style="width: 540px; max-width: 100%; display: block; margin-left: auto; margin-right: auto;"
                     loading="lazy"
                 />
                 <p class="text-body-secondary mt-2" style="font-size: 0.9rem;">
@@ -125,5 +125,142 @@
                 </div>
             </div>
         {% endblock %}
+
+        <div class="row mb-3 mt-5">
+            <div class="col-12 col-md-7">
+                <h2 class="ubuntu">Bridge Components</h2>
+                <p>Bridge components let you progressively enhance specific web elements with native UI — like replacing a web link with a native navigation bar button — without changing your server-side code.</p>
+            </div>
+            <div class="col-12 col-md-5 text-center mt-4 mt-md-0">
+                <img
+                    src="{{ asset('images/taskflow-bridge-component-native.webp') }}"
+                    alt="The TaskFlow app showing a native navigation bar button added via a bridge component, replacing the original web link."
+                    style="max-width: 100%"
+                    loading="lazy"
+                />
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-12 col-md-6">
+                {% apply markdown_to_html %}
+                ```twig {"filename":"templates/tasks/index.html.twig"}
+                {% verbatim -%}
+                <a href="/profile"
+                   {{ stimulus_controller('button') }}
+                   data-bridge-title="Profile">
+                  View profile
+                </a>
+                {%- endverbatim %}
+                ```
+                {% endapply %}
+            </div>
+            <div class="col-12 col-md-6">
+                <h2 class="ubuntu mt-5">Three layers, one component</h2>
+                <p>A bridge component is made of three parts: an HTML element with <code>data-controller</code>, a Stimulus controller extending <code>BridgeComponent</code>, and a matching Swift class. The web and native sides are linked by a shared component name — <code>"button"</code> in this example.</p>
+            </div>
+        </div>
+
+        <div class="row mb-5 mt-3 mt-md-0">
+            <div class="col-12 col-md-5">
+                <h2 class="ubuntu mt-5">Stimulus sends, native handles</h2>
+                <p>The Stimulus controller calls <code>this.send("connect", {…}, callback)</code> to pass data to the native side. When the native button is tapped, it replies and the callback fires — clicking the original web element.</p>
+            </div>
+            <div class="col-12 col-md-7">
+                {% apply markdown_to_html %}
+                ```js {"filename":"assets/controllers/button_controller.js"}
+                {% verbatim -%}
+                import { BridgeComponent } from "@hotwired/hotwire-native-bridge"
+
+                export default class extends BridgeComponent {
+                  static component = "button"
+
+                  connect() {
+                    super.connect()
+
+                    const element = this.bridgeElement
+                    const title = element.bridgeAttribute("title")
+                    this.send("connect", { title }, () => {
+                      this.element.click()
+                    })
+                  }
+                }
+                {%- endverbatim %}
+                ```
+                {% endapply %}
+            </div>
+        </div>
+
+        <div class="row mb-5 mt-3 mt-md-0">
+            <div class="col-12 col-md-7">
+                {% apply markdown_to_html %}
+                ```swift {"filename":"ios/ButtonComponent.swift"}
+                {% verbatim -%}
+                import HotwireNative
+                import UIKit
+
+                final class ButtonComponent: BridgeComponent {
+                    override class var name: String { "button" }
+
+                    override func onReceive(message: Message) {
+                        guard let viewController else { return }
+                        addButton(via: message, to: viewController)
+                    }
+
+                    private func addButton(via message: Message,
+                                           to viewController: UIViewController) {
+                        guard let data: MessageData = message.data() else { return }
+
+                        let action = UIAction { [unowned self] _ in
+                            self.reply(to: "connect")
+                        }
+                        let item = UIBarButtonItem(title: data.title, primaryAction: action)
+                        viewController.navigationItem.rightBarButtonItem = item
+                    }
+                }
+
+                private extension ButtonComponent {
+                    struct MessageData: Decodable {
+                        let title: String
+                    }
+                }
+                {%- endverbatim %}
+                ```
+                {% endapply %}
+            </div>
+            <div class="col-12 col-md-5">
+                <h2 class="ubuntu mt-5">Native code, same component name</h2>
+                <p>The Swift component overrides <code>name</code> to match the Stimulus identifier <code>"button"</code>. When a message arrives, it builds a <code>UIBarButtonItem</code> and places it in the navigation bar. Tapping it replies to the Stimulus controller, which clicks the original link.</p>
+                <p>Register it once in your <code>AppDelegate</code>:</p>
+                {% apply markdown_to_html %}
+                ```swift {"filename":"ios/AppDelegate.swift"}
+                {% verbatim -%}
+                Hotwire.registerBridgeComponents([
+                    ButtonComponent.self
+                ])
+                {%- endverbatim %}
+                ```
+                {% endapply %}
+            </div>
+        </div>
+
+        <div class="row mb-5 mt-3 mt-md-0">
+            <div class="col-12 col-md-6">
+                <h2 class="ubuntu mt-5">Hide web elements in native apps</h2>
+                <p>When a native button is displayed in the navigation bar, the original web link can be hidden. This CSS selector targets elements marked as supported bridge components, preventing duplicate UI from appearing in the native app.</p>
+            </div>
+            <div class="col-12 col-md-6">
+                {% apply markdown_to_html %}
+                ```css {"filename":"assets/styles/bridge.css"}
+                {% verbatim -%}
+                [data-bridge-components~="button"]
+                [data-controller~="button"] {
+                  display: none;
+                }
+                {%- endverbatim %}
+                ```
+                {% endapply %}
+            </div>
+        </div>
     </section>
 {% endblock %}

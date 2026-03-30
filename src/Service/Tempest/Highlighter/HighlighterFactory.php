@@ -20,7 +20,7 @@ use Tempest\Highlight\Injection;
 use Tempest\Highlight\Languages\Base\Injections\DeletionInjection;
 use Tempest\Highlight\Languages\Twig\TwigLanguage;
 
-final readonly class HighlighterFactory
+final class HighlighterFactory
 {
     public static function create(): Highlighter
     {

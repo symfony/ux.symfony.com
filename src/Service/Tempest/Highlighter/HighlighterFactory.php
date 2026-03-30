@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Service\Tempest\Highlighter;
 
 use App\Service\Tempest\Highlighter\Languages\Shell\ShellLanguage;
+use App\Service\Tempest\Highlighter\Languages\Swift\SwiftLanguage;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\Languages\Base\Injections\DeletionInjection;
@@ -26,6 +27,7 @@ final readonly class HighlighterFactory
         $highlighter = new Highlighter();
 
         $highlighter->addLanguage(new ShellLanguage());
+        $highlighter->addLanguage(new SwiftLanguage());
         $highlighter->addLanguage(new class extends TwigLanguage {
             public function getInjections(): array
             {

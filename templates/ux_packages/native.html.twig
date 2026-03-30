@@ -52,88 +52,87 @@
 
         {% block package_code_blocks %}
             <div class="row mb-5">
-                <div class="col-12 col-md-6">
-                    <h2 class="ubuntu mt-5">One codebase, two experiences</h2>
-                    <p>No need to duplicate templates. The <code>ux_is_native()</code> Twig function lets you adapt your existing Twig templates for native clients: hide the navbar, remove the footer, or show mobile-specific content, all from the same code.</p>
+                <div class="col-12 col-md-6 Wysiwyg">
+                    {% apply markdown_to_html %}
+                    ## One codebase, two experiences
+
+                    No need to duplicate templates.  The `ux_is_native()` Twig function lets you adapt your existing Twig templates for native clients. For example:
+                    - hide the navbar,
+                    - remove the footer,
+                    - or show mobile-specific content, all from the same code.
+                    {% endapply %}
                 </div>
                 <div class="col-12 col-md-6 mt-4 mt-md-0">
-                    {% block code_block_left %}
-                        {% apply markdown_to_html %}
-                            ```twig {"filename":"templates/base.html.twig"}
-                            {% verbatim -%}
-                            {# Navbar only visible in the web browser #}
-                            {% if not ux_is_native() %}
-                                <nav class="navbar">
-                                    <a href="/">TaskFlow</a>
-                                </nav>
-                            {% endif %}
-
-                            <h1>My Tasks</h1>
-                            <!-- ... -->
-                            {%- endverbatim %}
-                            ```
-                        {% endapply %}
-                    {% endblock %}
-                </div>
-            </div>
-            <div class="row mb-5 mt-3">
-                <div class="col-12 col-md-5 order-md-2">
-                    <h2 class="ubuntu mt-5">JSON configurations, the Symfony way</h2>
-                    <p>Use PHP attributes to declare your native configurations: path rules, settings, per-platform overrides.</p>
-                    <p>UX Native serves them dynamically during development and can dump them as static JSON files for production deployment.</p>
-                </div>
-                <div class="col-12 col-md-7 mt-4 mt-md-0 order-md-1">
-                    {% block code_block_right %}
-                        {% apply markdown_to_html %}
-                        ```php {"filename":"src/Native/AppNativeConfiguration.php"}
+                    {% apply markdown_to_html %}
+                        ```twig {"filename":"templates/base.html.twig"}
                         {% verbatim -%}
-                        namespace App\Native;
+                        {# Navbar only visible in the web browser #}
+                        {% if not ux_is_native() %}
+                            <nav class="navbar">
+                                <a href="/">TaskFlow</a>
+                            </nav>
+                        {% endif %}
 
-                        use Symfony\UX\Native\Attribute\AsNativeConfiguration;
-                        use Symfony\UX\Native\Attribute\AsNativeConfigurationProvider;
-                        use Symfony\UX\Native\Configuration\Configuration;
-                        use Symfony\UX\Native\Configuration\Rule;
-
-                        #[AsNativeConfigurationProvider]
-                        final class AppNativeConfiguration
-                        {
-                            #[AsNativeConfiguration('/config/ios_v1.json')]
-                            public function iosV1(): Configuration
-                            {
-                                return new Configuration(
-                                    rules: [
-                                        new Rule(
-                                            patterns: ['.*'],
-                                            properties: [
-                                                'context' => 'default',
-                                                'pull_to_refresh_enabled' => true,
-                                            ],
-                                        ),
-                                        new Rule(
-                                            patterns: ['^/tasks/new$'],
-                                            properties: [
-                                                'context' => 'modal',
-                                                'pull_to_refresh_enabled' => false,
-                                            ],
-                                        ),
-                                    ],
-                                );
-                            }
-                        }
+                        <h1>My Tasks</h1>
+                        <!-- ... -->
                         {%- endverbatim %}
                         ```
-                        {% endapply %}
-                    {% endblock %}
+                    {% endapply %}
                 </div>
             </div>
-        {% endblock %}
+            <div class="row mb-5 mt-4">
+                <div class="col-12 col-md-5 order-md-2 Wysiwyg">
+                    {% apply markdown_to_html %}
+                    ## JSON configurations, the Symfony way
 
-        <div class="row mb-5 mt-3">
-            <div class="col-12 col-md-7">
-                <h2 class="ubuntu">Bridge Components</h2>
-                <p>Bridge components let you progressively enhance specific web elements with native UI — like replacing a web link with a native navigation bar button — without changing your server-side code.</p>
+                    Use PHP attributes `AsNativeConfigurationProvider` and `AsNativeConfiguration` to declare your native configurations: path rules, settings, per-platform overrides.
+
+                    UX Native serves them dynamically during development and can dump them as static JSON files for production deployment.
+                    {% endapply %}
+                </div>
+                <div class="col-12 col-md-7 mt-4 mt-md-0 order-md-1">
+                    {% apply markdown_to_html %}
+                    ```php {"filename":"src/Native/AppNativeConfiguration.php"}
+                    namespace App\Native;
+
+                    use Symfony\UX\Native\Attribute\AsNativeConfiguration;
+                    use Symfony\UX\Native\Attribute\AsNativeConfigurationProvider;
+                    use Symfony\UX\Native\Configuration\Configuration;
+                    use Symfony\UX\Native\Configuration\Rule;
+
+                    #[AsNativeConfigurationProvider]
+                    final class AppNativeConfiguration
+                    {
+                        #[AsNativeConfiguration('/config/ios_v1.json')]
+                        public function iosV1(): Configuration
+                        {
+                            return new Configuration(
+                                rules: [
+                                    new Rule(
+                                        patterns: ['.*'],
+                                        properties: [
+                                            'context' => 'default',
+                                            'pull_to_refresh_enabled' => true,
+                                        ],
+                                    ),
+                                ],
+                            );
+                        }
+                    }
+                    ```
+                    {% endapply %}
+                </div>
             </div>
-            <div class="col-12 col-md-5 mt-4 mt-md-0 text-center">
+
+        <div class="row mb-5 mt-4">
+            <div class="col-12 col-md-6 Wysiwyg">
+                {% apply markdown_to_html %}
+                ## Bridge Components
+
+                Bridge components let you progressively enhance specific web elements with native UI (like replacing a web link with a native navigation bar button), and without changing your server-side code.
+                {% endapply %}
+            </div>
+            <div class="col-12 col-md-6 mt-4 mt-md-0 text-center">
                 <img
                     src="{{ asset('images/taskflow-bridge-component-native.webp') }}"
                     alt="The TaskFlow app showing a native navigation bar button added via a bridge component, replacing the original web link."
@@ -143,10 +142,15 @@
             </div>
         </div>
 
-        <div class="row mb-5 mt-3">
-            <div class="col-12 col-md-6 order-md-2">
-                <h2 class="ubuntu mt-5">Three layers, one component</h2>
-                <p>A bridge component is made of three parts: an HTML element with <code>data-controller</code>, a Stimulus controller extending <code>BridgeComponent</code>, and a matching Swift class. The web and native sides are linked by a shared component name — <code>"button"</code> in this example.</p>
+        <div class="row mb-5 mt-4">
+            <div class="col-12 col-md-6 order-md-2 Wysiwyg">
+                {% apply markdown_to_html %}
+                ## Three layers, one component
+
+                A bridge component is made of three parts: an HTML element with `data-controller`, a Stimulus controller extending `BridgeComponent`, and a matching Swift class.
+
+                The web and native sides are linked by a shared component name:  `button` in this example.
+                {% endapply %}
             </div>
             <div class="col-12 col-md-6 mt-4 mt-md-0 order-md-1">
                 {% apply markdown_to_html %}
@@ -164,12 +168,17 @@
             </div>
         </div>
 
-        <div class="row mb-5 mt-3">
-            <div class="col-12 col-md-5">
-                <h2 class="ubuntu mt-5">Stimulus sends, native handles</h2>
-                <p>The Stimulus controller calls <code>this.send("connect", {…}, callback)</code> to pass data to the native side. When the native button is tapped, it replies and the callback fires — clicking the original web element.</p>
+        <div class="row mb-5 mt-4">
+            <div class="col-12 col-md-6 Wysiwyg">
+                {% apply markdown_to_html %}
+                ## Stimulus sends, native handles
+
+                The Stimulus controller calls `this.send("connect", {/* ... */}, callback)` to pass data to the native side.
+
+                When the native button is tapped, it replies and the callback fires: clicking the original web element.
+                {% endapply %}
             </div>
-            <div class="col-12 col-md-7 mt-4 mt-md-0">
+            <div class="col-12 col-md-6 mt-4 mt-md-0">
                 {% apply markdown_to_html %}
                 ```js {"filename":"assets/controllers/button_controller.js"}
                 {% verbatim -%}
@@ -194,25 +203,30 @@
             </div>
         </div>
 
-        <div class="row mb-5 mt-3">
-            <div class="col-12 col-md-5 order-md-2">
-                <h2 class="ubuntu mt-5">Native code, same component name</h2>
-                <p>The Swift component overrides <code>name</code> to match the Stimulus identifier <code>"button"</code>. When a message arrives, it builds a <code>UIBarButtonItem</code> and places it in the navigation bar. Tapping it replies to the Stimulus controller, which clicks the original link.</p>
-                <p>Register it once in your <code>AppDelegate</code>:</p>
+        <div class="row mb-5 mt-4">
+            <div class="col-12 col-md-5 order-md-2 Wysiwyg">
                 {% apply markdown_to_html %}
-                    ```swift {"filename":"ios/AppDelegate.swift"}
-                    {% verbatim -%}
-                    Hotwire.registerBridgeComponents([
-                        ButtonComponent.self
-                    ])
-                    {%- endverbatim %}
-                    ```
+                ## Native code, same component name
+
+                The Swift component overrides `name` to match the Stimulus identifier `button`.
+
+                When a message arrives, it builds a `UIBarButtonItem` and places it in the navigation bar.
+                Tapping it replies to the Stimulus controller, which clicks the original link.
+
+                Register it one in your `AppDelegate.swift`:
+
+                ```swift {"filename":"ios/AppDelegate.swift"}
+                {% verbatim -%}
+                Hotwire.registerBridgeComponents([
+                    ButtonComponent.self
+                ])
+                {%- endverbatim %}
+                ```
                 {% endapply %}
             </div>
             <div class="col-12 col-md-7 mt-4 mt-md-0 order-md-1">
                 {% apply markdown_to_html %}
                 ```swift {"filename":"ios/ButtonComponent.swift"}
-                {% verbatim -%}
                 import HotwireNative
                 import UIKit
 
@@ -241,16 +255,20 @@
                         let title: String
                     }
                 }
-                {%- endverbatim %}
                 ```
                 {% endapply %}
             </div>
         </div>
 
-        <div class="row mb-5 mt-3">
-            <div class="col-12 col-md-6">
-                <h2 class="ubuntu mt-5">Hide web elements in native apps</h2>
-                <p>When a native button is displayed in the navigation bar, the original web link can be hidden. This CSS selector targets elements marked as supported bridge components, preventing duplicate UI from appearing in the native app.</p>
+        <div class="row mb-5 mt-4">
+            <div class="col-12 col-md-6 Wysiwyg">
+                {% apply markdown_to_html %}
+                ## Hide web elements in native apps
+
+                When a native button is displayed in the navigation bar, the original web link can be hidden.
+
+                This CSS selector targets elements marked as supported bridge components, preventing duplicate UI from appearing in the native app.
+                {% endapply %}
             </div>
             <div class="col-12 col-md-6 mt-4 mt-md-0">
                 {% apply markdown_to_html %}
@@ -265,5 +283,6 @@
                 {% endapply %}
             </div>
         </div>
+        {% endblock %}
     </section>
 {% endblock %}

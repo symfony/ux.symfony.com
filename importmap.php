@@ -220,6 +220,9 @@ return [
     '@symfony/ux-toolkit/kits/shadcn/toggle/assets/controllers/toggle_controller.js' => [
         'path' => './vendor/symfony/ux-toolkit/kits/shadcn/toggle/assets/controllers/toggle_controller.js',
     ],
+    '@symfony/ux-toolkit/kits/flowbite-4/alert/assets/controllers/alert_controller.js' => [
+        'path' => './vendor/symfony/ux-toolkit/kits/flowbite-4/alert/assets/controllers/alert_controller.js',
+    ],
     '@symfony/ux-toolkit/kits/flowbite-4/modal/assets/controllers/modal_controller.js' => [
         'path' => './vendor/symfony/ux-toolkit/kits/flowbite-4/modal/assets/controllers/modal_controller.js',
     ],

@@ -57,6 +57,8 @@ $utilities: map-remove(
     "start",
     "end",
     "translate-middle",
+    // Shadow
+    "shadow",
 );
 
 // Layout & components
@@ -151,7 +153,6 @@ mark {
 @import "components/IconGrid";
 @import "components/IconModal";
 @import "components/IconSearch";
-@import "components/IconSetCard";
 @import "components/Pagination";
 @import "components/ProductGrid";
 @import "components/PackageBox";

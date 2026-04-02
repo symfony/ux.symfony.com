@@ -27,4 +27,4 @@ final class DocsLink
     {
         return !str_starts_with($this->url, 'https://symfony.com');
     }
-    }
+}

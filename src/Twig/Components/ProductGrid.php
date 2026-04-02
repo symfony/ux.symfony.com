@@ -24,7 +24,7 @@ final class ProductGrid
     use ComponentToolsTrait;
     use DefaultActionTrait;
 
-    private const PER_PAGE = 10;
+    private const PER_PAGE = 12;
 
     #[LiveProp]
     public int $page = 1;

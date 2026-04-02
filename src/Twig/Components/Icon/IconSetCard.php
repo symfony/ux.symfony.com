@@ -21,13 +21,12 @@ final class IconSetCard
 
     public int $index = 0;
 
-    public int $samples = 10;
-
     private const ICONSET_SAMPLES = [
         'lucide' => [
             'home', 'user', 'settings', 'search', 'arrow-down',
             'heart', 'star', 'sun', 'grid', 'image',
         ],
+
         'bi' => [
             'house', 'person', 'gear', 'search', 'arrow-down',
             'heart', 'star', 'sun', 'grid', 'image',

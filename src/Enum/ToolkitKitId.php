@@ -28,7 +28,6 @@ enum ToolkitKitId: string
         return match ($kitId) {
             self::Shadcn => 'hsl(0,0%,0%)',
             self::Flowbite4 => 'hsl(221,79%,48%)',
-            default => throw new \InvalidArgumentException('Unknown kit'),
         };
     }
 }

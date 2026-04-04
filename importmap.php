@@ -249,8 +249,8 @@ return [
     'flowbite-datepicker' => [
         'version' => '2.0.0',
     ],
-    'flowbite/dist/flowbite.min.css' => [
-        'version' => '4.0.1',
-        'type' => 'css',
-    ],
+//    'flowbite/dist/flowbite.min.css' => [
+//        'version' => '4.0.1',
+//        'type' => 'css',
+//    ],
 ];

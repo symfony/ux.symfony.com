@@ -66,7 +66,7 @@ Download the importmap packages locally:
 symfony console importmap:install
 ```
 
-Build toolkit assets:
+Build Toolkit assets:
 ```bash
 composer tailwind:build
 ```

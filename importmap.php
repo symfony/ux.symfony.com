@@ -213,6 +213,9 @@ return [
     '@symfony/ux-toolkit/kits/shadcn/tabs/assets/controllers/tabs_controller.js' => [
         'path' => './vendor/symfony/ux-toolkit/kits/shadcn/tabs/assets/controllers/tabs_controller.js',
     ],
+    '@symfony/ux-toolkit/kits/shadcn/toggle/assets/controllers/toggle_controller.js' => [
+        'path' => './vendor/symfony/ux-toolkit/kits/shadcn/toggle/assets/controllers/toggle_controller.js',
+    ],
     'el-transition' => [
         'version' => '0.0.7',
     ],

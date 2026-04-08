@@ -164,6 +164,7 @@ class UxPackageRepository
                 'Quickly render `<Svelte />` components &amp; pass them props.',
                 null,
                 'svelte.svg',
+                isDeprecated: true,
             ))
                 ->setDocsLink('https://svelte.dev/', 'Go deeper with the Svelte docs.'),
 

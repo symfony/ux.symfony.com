@@ -207,6 +207,9 @@ return [
     '@symfony/ux-toolkit/kits/flowbite-4/alert/assets/controllers/alert_controller.js' => [
         'path' => './vendor/symfony/ux-toolkit/kits/flowbite-4/alert/assets/controllers/alert_controller.js',
     ],
+    '@symfony/ux-toolkit/kits/flowbite-4/dropdown/assets/controllers/dropdown_controller.js' => [
+        'path' => './vendor/symfony/ux-toolkit/kits/flowbite-4/dropdown/assets/controllers/dropdown_controller.js',
+    ],
     '@symfony/ux-toolkit/kits/flowbite-4/modal/assets/controllers/modal_controller.js' => [
         'path' => './vendor/symfony/ux-toolkit/kits/flowbite-4/modal/assets/controllers/modal_controller.js',
     ],

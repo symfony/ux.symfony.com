@@ -6339,21 +6339,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/stimulus-bundle.git",
-                "reference": "985ac22ccb6e8958bec33eea2a4f495b9faf82c7"
+                "reference": "2236755f4f99c876da4935911b9edcd75c5bfab2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/stimulus-bundle/zipball/985ac22ccb6e8958bec33eea2a4f495b9faf82c7",
-                "reference": "985ac22ccb6e8958bec33eea2a4f495b9faf82c7",
+                "url": "https://api.github.com/repos/symfony/stimulus-bundle/zipball/2236755f4f99c876da4935911b9edcd75c5bfab2",
+                "reference": "2236755f4f99c876da4935911b9edcd75c5bfab2",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2",
-                "symfony/config": "^6.4|^7.0|^8.0",
-                "symfony/dependency-injection": "^6.4|^7.0|^8.0",
+                "php": ">=8.4",
+                "symfony/config": "^7.4|^8.0",
+                "symfony/dependency-injection": "^7.4|^8.0",
                 "symfony/deprecation-contracts": "^2.0|^3.0",
-                "symfony/finder": "^6.4|^7.0|^8.0",
-                "symfony/http-kernel": "^6.4|^7.0|^8.0",
+                "symfony/finder": "^7.4|^8.0",
+                "symfony/http-kernel": "^7.4|^8.0",
                 "twig/twig": "^2.15.3|^3.8"
             },
             "conflict": {
@@ -6361,9 +6361,9 @@
             },
             "require-dev": {
                 "phpunit/phpunit": "^11.1|^12.0",
-                "symfony/asset-mapper": "^6.4|^7.0|^8.0",
-                "symfony/framework-bundle": "^6.4|^7.0|^8.0",
-                "symfony/twig-bundle": "^6.4|^7.0|^8.0",
+                "symfony/asset-mapper": "^7.4|^8.0",
+                "symfony/framework-bundle": "^7.4|^8.0",
+                "symfony/twig-bundle": "^7.4|^8.0",
                 "zenstruck/browser": "^1.9"
             },
             "type": "symfony-bundle",
@@ -6407,7 +6407,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-03-23T07:25:36+00:00"
+            "time": "2026-04-09T22:56:44+00:00"
         },
         {
             "name": "symfony/stopwatch",
@@ -7096,21 +7096,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-autocomplete.git",
-                "reference": "74473f3334fa6f45635f6080e9fe367831bae4a3"
+                "reference": "58981eba6118fa7ae6e3c0d69481431bb4a0fcd4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-autocomplete/zipball/74473f3334fa6f45635f6080e9fe367831bae4a3",
-                "reference": "74473f3334fa6f45635f6080e9fe367831bae4a3",
+                "url": "https://api.github.com/repos/symfony/ux-autocomplete/zipball/58981eba6118fa7ae6e3c0d69481431bb4a0fcd4",
+                "reference": "58981eba6118fa7ae6e3c0d69481431bb4a0fcd4",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2",
-                "symfony/dependency-injection": "^6.4|^7.0|^8.0",
+                "php": ">=8.4",
+                "symfony/dependency-injection": "^7.4|^8.0",
                 "symfony/deprecation-contracts": "^2.5|^3",
-                "symfony/http-foundation": "^6.4|^7.0|^8.0",
-                "symfony/http-kernel": "^6.4|^7.0|^8.0",
-                "symfony/property-access": "^6.4|^7.0|^8.0"
+                "symfony/http-foundation": "^7.4|^8.0",
+                "symfony/http-kernel": "^7.4|^8.0",
+                "symfony/property-access": "^7.4|^8.0"
             },
             "conflict": {
                 "doctrine/orm": "2.9.0 || 2.9.1"
@@ -7123,16 +7123,16 @@
                 "mtdowling/jmespath.php": "^2.6",
                 "phpunit/phpunit": "^11.1|^12.0",
                 "symfony/form": "^7.2|^8.0",
-                "symfony/framework-bundle": "^6.4|^7.0|^8.0",
+                "symfony/framework-bundle": "^7.4|^8.0",
                 "symfony/maker-bundle": "^1.40",
-                "symfony/options-resolver": "^6.4|^7.0|^8.0",
-                "symfony/process": "^6.4|^7.0|^8.0",
-                "symfony/security-bundle": "^6.4|^7.0|^8.0",
-                "symfony/twig-bundle": "^6.4|^7.0|^8.0",
-                "symfony/uid": "^6.4|^7.0|^8.0",
+                "symfony/options-resolver": "^7.4|^8.0",
+                "symfony/process": "^7.4|^8.0",
+                "symfony/security-bundle": "^7.4|^8.0",
+                "symfony/twig-bundle": "^7.4|^8.0",
+                "symfony/uid": "^7.4|^8.0",
                 "twig/twig": "^2.14.7|^3.0.4",
                 "zenstruck/browser": "^1.9",
-                "zenstruck/foundry": "^2.0"
+                "zenstruck/foundry": "^2.7"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -7182,7 +7182,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-08T06:33:35+00:00"
+            "time": "2026-04-09T22:56:44+00:00"
         },
         {
             "name": "symfony/ux-chartjs",
@@ -7190,19 +7190,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-chartjs.git",
-                "reference": "ac045fdb0de8e400b304f1f3321cb0aebd3925cd"
+                "reference": "48e08bff59a9440c1b3b39cb6d7241a294c7fcb6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-chartjs/zipball/ac045fdb0de8e400b304f1f3321cb0aebd3925cd",
-                "reference": "ac045fdb0de8e400b304f1f3321cb0aebd3925cd",
+                "url": "https://api.github.com/repos/symfony/ux-chartjs/zipball/48e08bff59a9440c1b3b39cb6d7241a294c7fcb6",
+                "reference": "48e08bff59a9440c1b3b39cb6d7241a294c7fcb6",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2",
-                "symfony/config": "^6.4|^7.0|^8.0",
-                "symfony/dependency-injection": "^6.4|^7.0|^8.0",
-                "symfony/http-kernel": "^6.4|^7.0|^8.0",
+                "php": ">=8.4",
+                "symfony/config": "^7.4|^8.0",
+                "symfony/dependency-injection": "^7.4|^8.0",
+                "symfony/http-kernel": "^7.4|^8.0",
                 "symfony/stimulus-bundle": "^2.9.1|^3.0"
             },
             "conflict": {
@@ -7210,9 +7210,9 @@
             },
             "require-dev": {
                 "phpunit/phpunit": "^11.1|^12.0",
-                "symfony/framework-bundle": "^6.4|^7.0|^8.0",
-                "symfony/twig-bundle": "^6.4|^7.0|^8.0",
-                "symfony/var-dumper": "^6.4|^7.0|^8.0"
+                "symfony/framework-bundle": "^7.4|^8.0",
+                "symfony/twig-bundle": "^7.4|^8.0",
+                "symfony/var-dumper": "^7.4|^8.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -7266,7 +7266,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-03T11:51:36+00:00"
+            "time": "2026-04-09T22:56:44+00:00"
         },
         {
             "name": "symfony/ux-cropperjs",
@@ -7274,34 +7274,34 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-cropperjs.git",
-                "reference": "bcce70306844ae0249382193cbd0b44058793087"
+                "reference": "2f2bb21e8a1730b981ff3317b85de50397d0bd0e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-cropperjs/zipball/bcce70306844ae0249382193cbd0b44058793087",
-                "reference": "bcce70306844ae0249382193cbd0b44058793087",
+                "url": "https://api.github.com/repos/symfony/ux-cropperjs/zipball/2f2bb21e8a1730b981ff3317b85de50397d0bd0e",
+                "reference": "2f2bb21e8a1730b981ff3317b85de50397d0bd0e",
                 "shasum": ""
             },
             "require": {
                 "intervention/image": "^2.5",
-                "php": ">=8.2",
-                "symfony/config": "^6.4|^7.0|^8.0",
-                "symfony/dependency-injection": "^6.4|^7.0|^8.0",
+                "php": ">=8.4",
+                "symfony/config": "^7.4|^8.0",
+                "symfony/dependency-injection": "^7.4|^8.0",
                 "symfony/deprecation-contracts": "^2.5|^3",
-                "symfony/form": "^6.4|^7.0|^8.0",
-                "symfony/http-kernel": "^6.4|^7.0|^8.0",
-                "symfony/options-resolver": "^6.4|^7.0|^8.0",
-                "symfony/validator": "^6.4|^7.0|^8.0"
+                "symfony/form": "^7.4|^8.0",
+                "symfony/http-kernel": "^7.4|^8.0",
+                "symfony/options-resolver": "^7.4|^8.0",
+                "symfony/validator": "^7.4|^8.0"
             },
             "conflict": {
                 "symfony/flex": "<1.13"
             },
             "require-dev": {
                 "phpunit/phpunit": "^11.1|^12.0",
-                "symfony/expression-language": "^6.4|^7.0|^8.0",
-                "symfony/framework-bundle": "^6.4|^7.0|^8.0",
-                "symfony/twig-bundle": "^6.4|^7.0|^8.0",
-                "symfony/var-dumper": "^6.4|^7.0|^8.0",
+                "symfony/expression-language": "^7.4|^8.0",
+                "symfony/framework-bundle": "^7.4|^8.0",
+                "symfony/twig-bundle": "^7.4|^8.0",
+                "symfony/var-dumper": "^7.4|^8.0",
                 "twig/twig": "^2.14.7|^3.0.4"
             },
             "type": "symfony-bundle",
@@ -7356,7 +7356,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-04T12:43:13+00:00"
+            "time": "2026-04-09T22:56:44+00:00"
         },
         {
             "name": "symfony/ux-dropzone",
@@ -7364,27 +7364,27 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-dropzone.git",
-                "reference": "bbadb58dcfdc661af6ddbba5f9f27a411a1793ea"
+                "reference": "673098c6d2a2d5fee8be0a0bf73cb232fa9e639e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-dropzone/zipball/bbadb58dcfdc661af6ddbba5f9f27a411a1793ea",
-                "reference": "bbadb58dcfdc661af6ddbba5f9f27a411a1793ea",
+                "url": "https://api.github.com/repos/symfony/ux-dropzone/zipball/673098c6d2a2d5fee8be0a0bf73cb232fa9e639e",
+                "reference": "673098c6d2a2d5fee8be0a0bf73cb232fa9e639e",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2",
-                "symfony/config": "^6.4|^7.0|^8.0",
-                "symfony/dependency-injection": "^6.4|^7.0|^8.0",
-                "symfony/form": "^6.4|^7.0|^8.0",
-                "symfony/http-kernel": "^6.4|^7.0|^8.0",
-                "symfony/options-resolver": "^6.4|^7.0|^8.0"
+                "php": ">=8.4",
+                "symfony/config": "^7.4|^8.0",
+                "symfony/dependency-injection": "^7.4|^8.0",
+                "symfony/form": "^7.4|^8.0",
+                "symfony/http-kernel": "^7.4|^8.0",
+                "symfony/options-resolver": "^7.4|^8.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^11.1|^12.0",
-                "symfony/framework-bundle": "^6.4|^7.0|^8.0",
-                "symfony/twig-bundle": "^6.4|^7.0|^8.0",
-                "symfony/var-dumper": "^6.4|^7.0|^8.0",
+                "symfony/framework-bundle": "^7.4|^8.0",
+                "symfony/twig-bundle": "^7.4|^8.0",
+                "symfony/var-dumper": "^7.4|^8.0",
                 "twig/twig": "^2.14.7|^3.0.4"
             },
             "type": "symfony-bundle",
@@ -7439,7 +7439,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-03-23T07:25:36+00:00"
+            "time": "2026-04-09T22:56:44+00:00"
         },
         {
             "name": "symfony/ux-icons",
@@ -7447,18 +7447,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-icons.git",
-                "reference": "f7240fee7c64b24b18fa073bdb426f9be2640ed0"
+                "reference": "319eeb8a1ee31ffe83e526bc827a50e8f0adecfa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-icons/zipball/f7240fee7c64b24b18fa073bdb426f9be2640ed0",
-                "reference": "f7240fee7c64b24b18fa073bdb426f9be2640ed0",
+                "url": "https://api.github.com/repos/symfony/ux-icons/zipball/319eeb8a1ee31ffe83e526bc827a50e8f0adecfa",
+                "reference": "319eeb8a1ee31ffe83e526bc827a50e8f0adecfa",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2",
-                "symfony/framework-bundle": "^6.4|^7.0|^8.0",
-                "symfony/twig-bundle": "^6.4|^7.0|^8.0"
+                "php": ">=8.4",
+                "symfony/framework-bundle": "^7.4|^8.0",
+                "symfony/twig-bundle": "^7.4|^8.0"
             },
             "conflict": {
                 "symfony/flex": "<1.13",
@@ -7467,9 +7467,9 @@
             "require-dev": {
                 "phpunit/phpunit": "^11.1|^12.0",
                 "psr/log": "^2|^3",
-                "symfony/asset-mapper": "^6.4|^7.0|^8.0",
-                "symfony/console": "^6.4|^7.0|^8.0",
-                "symfony/http-client": "^6.4|^7.0|^8.0",
+                "symfony/asset-mapper": "^7.4|^8.0",
+                "symfony/console": "^7.4|^8.0",
+                "symfony/http-client": "^7.4|^8.0",
                 "symfony/ux-twig-component": "^2.14|^3.0",
                 "zenstruck/console-test": "^1.5"
             },
@@ -7532,7 +7532,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-03T11:51:36+00:00"
+            "time": "2026-04-09T22:56:44+00:00"
         },
         {
             "name": "symfony/ux-leaflet-map",
@@ -7540,16 +7540,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-leaflet-map.git",
-                "reference": "05624c049d8baf82fb6e6dc78c2e009c90168ac1"
+                "reference": "64450e8615aa941155760457c2cb2f27fafedcc0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-leaflet-map/zipball/05624c049d8baf82fb6e6dc78c2e009c90168ac1",
-                "reference": "05624c049d8baf82fb6e6dc78c2e009c90168ac1",
+                "url": "https://api.github.com/repos/symfony/ux-leaflet-map/zipball/64450e8615aa941155760457c2cb2f27fafedcc0",
+                "reference": "64450e8615aa941155760457c2cb2f27fafedcc0",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2",
+                "php": ">=8.4",
                 "symfony/stimulus-bundle": "^2.18.1|^3.0",
                 "symfony/ux-map": "^2.19|^3.0"
             },
@@ -7607,7 +7607,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-03T11:51:36+00:00"
+            "time": "2026-04-09T22:56:44+00:00"
         },
         {
             "name": "symfony/ux-live-component",
@@ -7615,27 +7615,26 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-live-component.git",
-                "reference": "55c37e4a44865384853b57fed727b9bb00f2cfbe"
+                "reference": "a65719c5aa06e2cdd957aae34a35bb4541206484"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-live-component/zipball/55c37e4a44865384853b57fed727b9bb00f2cfbe",
-                "reference": "55c37e4a44865384853b57fed727b9bb00f2cfbe",
+                "url": "https://api.github.com/repos/symfony/ux-live-component/zipball/a65719c5aa06e2cdd957aae34a35bb4541206484",
+                "reference": "a65719c5aa06e2cdd957aae34a35bb4541206484",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2",
+                "php": ">=8.4",
                 "symfony/deprecation-contracts": "^2.5|^3.0",
-                "symfony/property-access": "^6.4|^7.0|^8.0",
-                "symfony/property-info": "^6.4|^7.0|^8.0",
+                "symfony/property-access": "^7.4|^8.0",
+                "symfony/property-info": "^7.4|^8.0",
                 "symfony/stimulus-bundle": "^2.9|^3.0",
+                "symfony/type-info": "^7.4|^8.0",
                 "symfony/ux-twig-component": "^2.33.0|^3.0",
                 "twig/twig": "^3.10.3"
             },
             "conflict": {
-                "symfony/config": "<6.4",
-                "symfony/property-info": "~7.0.0",
-                "symfony/type-info": "<7.2"
+                "symfony/config": "<6.4"
             },
             "require-dev": {
                 "doctrine/annotations": "^1.0|^2.0",
@@ -7645,19 +7644,19 @@
                 "doctrine/persistence": "^2.5.2|^3.0|^4.0",
                 "phpdocumentor/reflection-docblock": "^5.6.2",
                 "phpunit/phpunit": "^11.1|^12.0",
-                "symfony/config": "^6.4|^7.0|^8.0",
-                "symfony/dependency-injection": "^6.4|^7.0|^8.0",
-                "symfony/expression-language": "^6.4|^7.0|^8.0",
-                "symfony/form": "^6.4|^7.0|^8.0",
-                "symfony/framework-bundle": "^6.4|^7.0|^8.0",
-                "symfony/options-resolver": "^6.4|^7.0|^8.0",
-                "symfony/security-bundle": "^6.4|^7.0|^8.0",
-                "symfony/serializer": "^6.4|^7.0|^8.0",
-                "symfony/twig-bundle": "^6.4|^7.0|^8.0",
-                "symfony/uid": "^6.4|^7.0|^8.0",
-                "symfony/validator": "^6.4|^7.0|^8.0",
+                "symfony/config": "^7.4|^8.0",
+                "symfony/dependency-injection": "^7.4|^8.0",
+                "symfony/expression-language": "^7.4|^8.0",
+                "symfony/form": "^7.4|^8.0",
+                "symfony/framework-bundle": "^7.4|^8.0",
+                "symfony/options-resolver": "^7.4|^8.0",
+                "symfony/security-bundle": "^7.4|^8.0",
+                "symfony/serializer": "^7.4|^8.0",
+                "symfony/twig-bundle": "^7.4|^8.0",
+                "symfony/uid": "^7.4|^8.0",
+                "symfony/validator": "^7.4|^8.0",
                 "zenstruck/browser": "^1.9",
-                "zenstruck/foundry": "^2.0"
+                "zenstruck/foundry": "^2.7"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -7709,7 +7708,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-08T06:33:35+00:00"
+            "time": "2026-04-10T05:40:22+00:00"
         },
         {
             "name": "symfony/ux-map",
@@ -7717,16 +7716,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-map.git",
-                "reference": "8b8fe34df5934258a95148722a77572682100834"
+                "reference": "57ee2b2428f4a61940c65d1b0fd3e6cd2b75e389"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-map/zipball/8b8fe34df5934258a95148722a77572682100834",
-                "reference": "8b8fe34df5934258a95148722a77572682100834",
+                "url": "https://api.github.com/repos/symfony/ux-map/zipball/57ee2b2428f4a61940c65d1b0fd3e6cd2b75e389",
+                "reference": "57ee2b2428f4a61940c65d1b0fd3e6cd2b75e389",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2",
+                "php": ">=8.4",
                 "symfony/stimulus-bundle": "^2.18.1|^3.0"
             },
             "conflict": {
@@ -7735,9 +7734,9 @@
             "require-dev": {
                 "phpunit/phpunit": "^11.1|^12.0",
                 "spatie/phpunit-snapshot-assertions": "^5.2.3",
-                "symfony/asset-mapper": "^6.4|^7.0|^8.0",
-                "symfony/framework-bundle": "^6.4|^7.0|^8.0",
-                "symfony/twig-bundle": "^6.4|^7.0|^8.0",
+                "symfony/asset-mapper": "^7.4|^8.0",
+                "symfony/framework-bundle": "^7.4|^8.0",
+                "symfony/twig-bundle": "^7.4|^8.0",
                 "symfony/ux-icons": "^2.18|^3.0",
                 "symfony/ux-twig-component": "^2.18|^3.0"
             },
@@ -7797,7 +7796,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-03T11:51:36+00:00"
+            "time": "2026-04-09T22:56:44+00:00"
         },
         {
             "name": "symfony/ux-native",
@@ -7805,26 +7804,26 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-native.git",
-                "reference": "ee5b54a501b3392bdc717380e2296bacacc3a546"
+                "reference": "aab1afbe4f6d0f642ceffe46ab4f87357f34b470"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-native/zipball/ee5b54a501b3392bdc717380e2296bacacc3a546",
-                "reference": "ee5b54a501b3392bdc717380e2296bacacc3a546",
+                "url": "https://api.github.com/repos/symfony/ux-native/zipball/aab1afbe4f6d0f642ceffe46ab4f87357f34b470",
+                "reference": "aab1afbe4f6d0f642ceffe46ab4f87357f34b470",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2",
-                "symfony/asset": "^6.4|^7.0|^8.0",
-                "symfony/filesystem": "^6.4|^7.0|^8.0",
-                "symfony/process": "^6.4|^7.0|^8.0",
+                "php": ">=8.4",
+                "symfony/asset": "^7.4|^8.0",
+                "symfony/filesystem": "^7.4|^8.0",
+                "symfony/process": "^7.4|^8.0",
                 "symfony/stimulus-bundle": "^2.18.1|^3.0",
                 "symfony/ux-turbo": "^2.18.1|^3.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^11.1|^12.0",
-                "symfony/browser-kit": "^6.4|^7.0|^8.0",
-                "symfony/framework-bundle": "^6.4|^7.0|^8.0",
+                "symfony/browser-kit": "^7.4|^8.0",
+                "symfony/framework-bundle": "^7.4|^8.0",
                 "symfony/maker-bundle": "^1.0"
             },
             "type": "symfony-bundle",
@@ -7877,7 +7876,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-03T11:51:36+00:00"
+            "time": "2026-04-10T05:35:21+00:00"
         },
         {
             "name": "symfony/ux-notify",
@@ -7885,31 +7884,31 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-notify.git",
-                "reference": "06b92153f692a6a7c360950b0c87e6be8ee6d916"
+                "reference": "c9b561b39cbd3b1a372387fc902e3ed957ca2383"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-notify/zipball/06b92153f692a6a7c360950b0c87e6be8ee6d916",
-                "reference": "06b92153f692a6a7c360950b0c87e6be8ee6d916",
+                "url": "https://api.github.com/repos/symfony/ux-notify/zipball/c9b561b39cbd3b1a372387fc902e3ed957ca2383",
+                "reference": "c9b561b39cbd3b1a372387fc902e3ed957ca2383",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2",
-                "symfony/config": "^6.4|^7.0|^8.0",
-                "symfony/dependency-injection": "^6.4|^7.0|^8.0",
-                "symfony/http-kernel": "^6.4|^7.0|^8.0",
+                "php": ">=8.4",
+                "symfony/config": "^7.4|^8.0",
+                "symfony/dependency-injection": "^7.4|^8.0",
+                "symfony/http-kernel": "^7.4|^8.0",
                 "symfony/mercure-bundle": "^0.3.4|^0.4.1",
-                "symfony/mercure-notifier": "^6.4|^7.0|^8.0",
+                "symfony/mercure-notifier": "^7.4|^8.0",
                 "symfony/stimulus-bundle": "^2.9.1|^3.0",
-                "symfony/twig-bundle": "^6.4|^7.0|^8.0"
+                "symfony/twig-bundle": "^7.4|^8.0"
             },
             "conflict": {
                 "symfony/config": "<6.4"
             },
             "require-dev": {
                 "phpunit/phpunit": "^11.1|^12.0",
-                "symfony/framework-bundle": "^6.4|^7.0|^8.0",
-                "symfony/var-dumper": "^6.4|^7.0|^8.0"
+                "symfony/framework-bundle": "^7.4|^8.0",
+                "symfony/var-dumper": "^7.4|^8.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -7963,7 +7962,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-03T11:51:36+00:00"
+            "time": "2026-04-09T22:56:44+00:00"
         },
         {
             "name": "symfony/ux-react",
@@ -7971,25 +7970,25 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-react.git",
-                "reference": "aa6e6ba483dc88451f1fad865470ae2498e62758"
+                "reference": "26e529717a43902d0f2aec4afec7592f4c4cd111"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-react/zipball/aa6e6ba483dc88451f1fad865470ae2498e62758",
-                "reference": "aa6e6ba483dc88451f1fad865470ae2498e62758",
+                "url": "https://api.github.com/repos/symfony/ux-react/zipball/26e529717a43902d0f2aec4afec7592f4c4cd111",
+                "reference": "26e529717a43902d0f2aec4afec7592f4c4cd111",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2",
+                "php": ">=8.4",
                 "symfony/stimulus-bundle": "^2.9.1|^3.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^11.1|^12.0",
-                "symfony/asset-mapper": "^6.4|^7.0|^8.0",
-                "symfony/finder": "^6.4|^7.0|^8.0",
-                "symfony/framework-bundle": "^6.4|^7.0|^8.0",
-                "symfony/twig-bundle": "^6.4|^7.0|^8.0",
-                "symfony/var-dumper": "^6.4|^7.0|^8.0"
+                "symfony/asset-mapper": "^7.4|^8.0",
+                "symfony/finder": "^7.4|^8.0",
+                "symfony/framework-bundle": "^7.4|^8.0",
+                "symfony/twig-bundle": "^7.4|^8.0",
+                "symfony/var-dumper": "^7.4|^8.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -8043,7 +8042,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-03T11:51:36+00:00"
+            "time": "2026-04-09T22:56:44+00:00"
         },
         {
             "name": "symfony/ux-toolkit",
@@ -8051,30 +8050,30 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-toolkit.git",
-                "reference": "e5040f7eb1e13aef593cb92f18f142a642238f36"
+                "reference": "18745afcec0ff6f29b0b5af0508281fa20766307"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-toolkit/zipball/e5040f7eb1e13aef593cb92f18f142a642238f36",
-                "reference": "e5040f7eb1e13aef593cb92f18f142a642238f36",
+                "url": "https://api.github.com/repos/symfony/ux-toolkit/zipball/18745afcec0ff6f29b0b5af0508281fa20766307",
+                "reference": "18745afcec0ff6f29b0b5af0508281fa20766307",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2",
-                "symfony/console": "^6.4|^7.0|^8.0",
-                "symfony/filesystem": "^6.4|^7.0|^8.0",
-                "symfony/framework-bundle": "^6.4|^7.0|^8.0",
-                "symfony/twig-bundle": "^6.4|^7.0|^8.0",
+                "php": ">=8.4",
+                "symfony/console": "^7.4|^8.0",
+                "symfony/filesystem": "^7.4|^8.0",
+                "symfony/framework-bundle": "^7.4|^8.0",
+                "symfony/twig-bundle": "^7.4|^8.0",
                 "symfony/ux-twig-component": "^2.25.1|^3.0",
-                "symfony/yaml": "^6.4|^7.0|^8.0",
+                "symfony/yaml": "^7.4|^8.0",
                 "twig/twig": "^3.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^11.1|^12.0",
                 "spatie/phpunit-snapshot-assertions": "^5.2.3",
-                "symfony/finder": "^6.4|^7.0|^8.0",
-                "symfony/http-client": "^6.4|^7.0|^8.0",
-                "symfony/stopwatch": "^6.4|^7.0|^8.0",
+                "symfony/finder": "^7.4|^8.0",
+                "symfony/http-client": "^7.4|^8.0",
+                "symfony/stopwatch": "^7.4|^8.0",
                 "symfony/ux-icons": "^2.18|^3.0",
                 "tales-from-a-dev/twig-tailwind-extra": "^1.0.0",
                 "twig/extra-bundle": "^3.24|^4.0",
@@ -8150,7 +8149,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-04T08:02:07+00:00"
+            "time": "2026-04-09T22:56:44+00:00"
         },
         {
             "name": "symfony/ux-translator",
@@ -8158,26 +8157,26 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-translator.git",
-                "reference": "9f518a3ca10dadb7efe8452c9aee21b54e6d8a6b"
+                "reference": "be4f08874f9c86e998e4773c628923fa82479150"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-translator/zipball/9f518a3ca10dadb7efe8452c9aee21b54e6d8a6b",
-                "reference": "9f518a3ca10dadb7efe8452c9aee21b54e6d8a6b",
+                "url": "https://api.github.com/repos/symfony/ux-translator/zipball/be4f08874f9c86e998e4773c628923fa82479150",
+                "reference": "be4f08874f9c86e998e4773c628923fa82479150",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2",
-                "symfony/console": "^6.4|^7.0|^8.0",
-                "symfony/filesystem": "^6.4|^7.0|^8.0",
-                "symfony/string": "^6.4|^7.0|^8.0",
-                "symfony/translation": "^6.4|^7.0|^8.0"
+                "php": ">=8.4",
+                "symfony/console": "^7.4|^8.0",
+                "symfony/filesystem": "^7.4|^8.0",
+                "symfony/string": "^7.4|^8.0",
+                "symfony/translation": "^7.4|^8.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^11.1|^12.0",
-                "symfony/framework-bundle": "^6.4|^7.0|^8.0",
-                "symfony/var-dumper": "^6.4|^7.0|^8.0",
-                "symfony/yaml": "^6.4|^7.0|^8.0"
+                "symfony/framework-bundle": "^7.4|^8.0",
+                "symfony/var-dumper": "^7.4|^8.0",
+                "symfony/yaml": "^7.4|^8.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -8231,7 +8230,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-03-23T07:25:36+00:00"
+            "time": "2026-04-09T22:56:44+00:00"
         },
         {
             "name": "symfony/ux-turbo",
@@ -8239,16 +8238,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-turbo.git",
-                "reference": "a2880edb68d5e747a49d32d5f4031f5c464f3f12"
+                "reference": "f32f0eb888a8224589400ffdc1b2b76c6844d30e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-turbo/zipball/a2880edb68d5e747a49d32d5f4031f5c464f3f12",
-                "reference": "a2880edb68d5e747a49d32d5f4031f5c464f3f12",
+                "url": "https://api.github.com/repos/symfony/ux-turbo/zipball/f32f0eb888a8224589400ffdc1b2b76c6844d30e",
+                "reference": "f32f0eb888a8224589400ffdc1b2b76c6844d30e",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2",
+                "php": ">=8.4",
                 "symfony/stimulus-bundle": "^2.9.1|^3.0"
             },
             "conflict": {
@@ -8261,21 +8260,21 @@
                 "php-webdriver/webdriver": "^1.15",
                 "phpstan/phpstan": "^2.1.17",
                 "phpunit/phpunit": "^11.1|^12.0",
-                "symfony/asset-mapper": "^6.4|^7.0|^8.0",
-                "symfony/debug-bundle": "^6.4|^7.0|^8.0",
-                "symfony/expression-language": "^6.4|^7.0|^8.0",
-                "symfony/form": "^6.4|^7.0|^8.0",
-                "symfony/framework-bundle": "^6.4|^7.0|^8.0",
+                "symfony/asset-mapper": "^7.4|^8.0",
+                "symfony/debug-bundle": "^7.4|^8.0",
+                "symfony/expression-language": "^7.4|^8.0",
+                "symfony/form": "^7.4|^8.0",
+                "symfony/framework-bundle": "^7.4|^8.0",
                 "symfony/mercure-bundle": "^0.3.7|^0.4.1",
-                "symfony/messenger": "^6.4|^7.0|^8.0",
+                "symfony/messenger": "^7.4|^8.0",
                 "symfony/panther": "^2.2",
-                "symfony/process": "^6.4|^7.0|^8.0",
-                "symfony/property-access": "^6.4|^7.0|^8.0",
-                "symfony/security-core": "^6.4|^7.0|^8.0",
-                "symfony/stopwatch": "^6.4|^7.0|^8.0",
-                "symfony/twig-bundle": "^6.4|^7.0|^8.0",
+                "symfony/process": "^7.4|^8.0",
+                "symfony/property-access": "^7.4|^8.0",
+                "symfony/security-core": "^7.4|^8.0",
+                "symfony/stopwatch": "^7.4|^8.0",
+                "symfony/twig-bundle": "^7.4|^8.0",
                 "symfony/ux-twig-component": "^2.21|^3.0",
-                "symfony/web-profiler-bundle": "^6.4|^7.0|^8.0"
+                "symfony/web-profiler-bundle": "^7.4|^8.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -8334,7 +8333,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-03T11:51:36+00:00"
+            "time": "2026-04-09T22:56:44+00:00"
         },
         {
             "name": "symfony/ux-twig-component",
@@ -8342,20 +8341,20 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-twig-component.git",
-                "reference": "19bb59df41c376d65832e4f43d910adf3c8499bf"
+                "reference": "dea344e320238234c94f63b152d65821c80cd103"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-twig-component/zipball/19bb59df41c376d65832e4f43d910adf3c8499bf",
-                "reference": "19bb59df41c376d65832e4f43d910adf3c8499bf",
+                "url": "https://api.github.com/repos/symfony/ux-twig-component/zipball/dea344e320238234c94f63b152d65821c80cd103",
+                "reference": "dea344e320238234c94f63b152d65821c80cd103",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2",
-                "symfony/dependency-injection": "^6.4|^7.0|^8.0",
+                "php": ">=8.4",
+                "symfony/dependency-injection": "^7.4|^8.0",
                 "symfony/deprecation-contracts": "^2.2|^3.0",
-                "symfony/event-dispatcher": "^6.4|^7.0|^8.0",
-                "symfony/property-access": "^6.4|^7.0|^8.0",
+                "symfony/event-dispatcher": "^7.4|^8.0",
+                "symfony/property-access": "^7.4|^8.0",
                 "twig/twig": "^3.10.3"
             },
             "conflict": {
@@ -8363,12 +8362,12 @@
             },
             "require-dev": {
                 "phpunit/phpunit": "^11.1|^12.0",
-                "symfony/console": "^6.4|^7.0|^8.0",
-                "symfony/css-selector": "^6.4|^7.0|^8.0",
-                "symfony/dom-crawler": "^6.4|^7.0|^8.0",
-                "symfony/framework-bundle": "^6.4|^7.0|^8.0",
+                "symfony/console": "^7.4|^8.0",
+                "symfony/css-selector": "^7.4|^8.0",
+                "symfony/dom-crawler": "^7.4|^8.0",
+                "symfony/framework-bundle": "^7.4|^8.0",
                 "symfony/stimulus-bundle": "^2.9.1|^3.0",
-                "symfony/twig-bundle": "^6.4|^7.0|^8.0",
+                "symfony/twig-bundle": "^7.4|^8.0",
                 "twig/extra-bundle": "^3.10.3",
                 "twig/html-extra": "^3.10.3"
             },
@@ -8422,7 +8421,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-03T16:17:42+00:00"
+            "time": "2026-04-09T22:56:44+00:00"
         },
         {
             "name": "symfony/ux-vue",
@@ -8430,25 +8429,25 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-vue.git",
-                "reference": "f40821a8354c5841b3237e5eb4d547580f80779d"
+                "reference": "9d0af835a3aed68ddb8c51b4b801b8ce065af7d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-vue/zipball/f40821a8354c5841b3237e5eb4d547580f80779d",
-                "reference": "f40821a8354c5841b3237e5eb4d547580f80779d",
+                "url": "https://api.github.com/repos/symfony/ux-vue/zipball/9d0af835a3aed68ddb8c51b4b801b8ce065af7d6",
+                "reference": "9d0af835a3aed68ddb8c51b4b801b8ce065af7d6",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2",
+                "php": ">=8.4",
                 "symfony/stimulus-bundle": "^2.9.1|^3.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^11.1|^12.0",
-                "symfony/asset-mapper": "^6.4|^7.0|^8.0",
-                "symfony/finder": "^6.4|^7.0|^8.0",
-                "symfony/framework-bundle": "^6.4|^7.0|^8.0",
-                "symfony/twig-bundle": "^6.4|^7.0|^8.0",
-                "symfony/var-dumper": "^6.4|^7.0|^8.0"
+                "symfony/asset-mapper": "^7.4|^8.0",
+                "symfony/finder": "^7.4|^8.0",
+                "symfony/framework-bundle": "^7.4|^8.0",
+                "symfony/twig-bundle": "^7.4|^8.0",
+                "symfony/var-dumper": "^7.4|^8.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -8506,7 +8505,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-03T11:51:36+00:00"
+            "time": "2026-04-09T22:56:44+00:00"
         },
         {
             "name": "symfony/validator",

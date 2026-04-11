@@ -9,12 +9,15 @@
 {% endblock %}
 
 {% block examples %}
-### Default
-{{ toolkit_code_example(kit_id.value, component.name, 'Default') }}
+### Comment Box
+Most often the textarea component is used as the main text field input element in comment sections. Use this example to also apply a helper text and buttons below the textarea itself.
+{{ toolkit_code_example(kit_id.value, component.name, 'Comment Box') }}
 
-### Disabled
-{{ toolkit_code_example(kit_id.value, component.name, 'Disabled') }}
+### WYSIWYG Editor
+Use this example to add action buttons alongside a textarea for rich text editing capabilities.
+{{ toolkit_code_example(kit_id.value, component.name, 'WYSIWYG Editor', {height: '400px'}) }}
 
-### With Label
-{{ toolkit_code_example(kit_id.value, component.name, 'With Label') }}
+### Chatroom Input
+If you want to build a chatroom component you will usually want to use a textarea element to allow users to write multi-line chunks of text.
+{{ toolkit_code_example(kit_id.value, component.name, 'Chatroom Input') }}
 {% endblock %}

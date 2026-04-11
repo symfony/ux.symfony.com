@@ -1,0 +1,39 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block examples %}
+### Bordered
+Apply a border around the avatar component you can use the `ring-{color}` class from Tailwind CSS.
+{{ toolkit_code_example(kit_id.value, component.name, 'Bordered') }}
+
+### Placeholder
+This example can be used to show an icon placeholder or the initials of the user’s first and last name as a placeholder when no profile picture is available.
+{{ toolkit_code_example(kit_id.value, component.name, 'Placeholder') }}
+
+### Dot indicator
+Use the `Indicator` component relative to the avatar component as an indicator for the user (eg. online or offline status).
+{{ toolkit_code_example(kit_id.value, component.name, 'Dot indicator') }}
+
+### Stacked
+Use `Avatar:Group` if you want to stack a group of users by overlapping the avatar components.
+{{ toolkit_code_example(kit_id.value, component.name, 'Stacked') }}
+
+### Avatar with text
+This example can be used if you want to show additional information in the form of text elements such as the user’s name and join date
+{{ toolkit_code_example(kit_id.value, component.name, 'Avatar text') }}
+
+### User dropdown
+Use this example if you want to show a dropdown menu when clicking on the avatar component.
+{{ toolkit_code_example(kit_id.value, component.name, 'User dropdown', {height:'600px'}) }}
+
+### Sizes
+Use the `size` prop to change the avatar dimensions.
+{{ toolkit_code_example(kit_id.value, component.name, 'Sizes') }}
+{% endblock %}

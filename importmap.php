@@ -101,7 +101,7 @@ return [
         'version' => '8.0.4',
     ],
     'typed.js' => [
-        'version' => '2.1.0',
+        'version' => '3.0.0',
     ],
     'snarkdown' => [
         'version' => '2.0.0',

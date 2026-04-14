@@ -5,13 +5,13 @@
         {% block content -%}
             <span
                 style="font-size: 1.2em;"
-                data-controller="symfony--ux-typed"
-                data-symfony--ux-typed-loop-value="true"
-                data-symfony--ux-typed-show-cursor-value="true"
-                data-symfony--ux-typed-type-speed-value="20"
-                data-symfony--ux-typed-cursor-char-value="🖱"
-                data-symfony--ux-typed-content-type-value="html"
-                data-symfony--ux-typed-strings-value="{{ typedStrings|json_encode|e('html_attr') }}"
+                data-controller="typed"
+                data-typed-loop-value="true"
+                data-typed-show-cursor-value="true"
+                data-typed-type-speed-value="20"
+                data-typed-cursor-char-value="🖱"
+                data-typed-content-type-value="html"
+                data-typed-strings-value="{{ typedStrings|json_encode|e('html_attr') }}"
             ></span>
         {%- endblock %}
     {% endcomponent %}

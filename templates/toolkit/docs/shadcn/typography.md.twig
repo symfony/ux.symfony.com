@@ -1,9 +1,63 @@
 {% extends 'toolkit/docs/_base_component.md.twig' %}
 
 {% block demo %}
-{{ toolkit_code_demo(kit_id.value, component.name) }}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '900px'}) }}
 {% endblock %}
 
 {% block usage %}
 {{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block examples %}
+### H1
+
+{{ toolkit_code_example(kit_id.value, component.name, 'H1', {height: '100px'}) }}
+
+### H2
+
+{{ toolkit_code_example(kit_id.value, component.name, 'H2', {height: '100px'}) }}
+
+### H3
+
+{{ toolkit_code_example(kit_id.value, component.name, 'H3', {height: '100px'}) }}
+
+### H4
+
+{{ toolkit_code_example(kit_id.value, component.name, 'H4', {height: '100px'}) }}
+
+### Paragraph
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Paragraph', {height: '100px'}) }}
+
+### Blockquote
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Blockquote', {height: '100px'}) }}
+
+### Table
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Table', {height: '250px'}) }}
+
+### List
+
+{{ toolkit_code_example(kit_id.value, component.name, 'List', {height: '200px'}) }}
+
+### Inline Code
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Inline Code', {height: '80px'}) }}
+
+### Lead
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Lead', {height: '80px'}) }}
+
+### Large
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Large', {height: '80px'}) }}
+
+### Small
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Small', {height: '80px'}) }}
+
+### Muted
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Muted', {height: '80px'}) }}
 {% endblock %}

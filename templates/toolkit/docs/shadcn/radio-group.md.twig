@@ -7,3 +7,29 @@
 {% block usage %}
 {{ toolkit_code_usage(kit_id.value, component.name) }}
 {% endblock %}
+
+{% block examples %}
+### Description
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Description', {height: '300px'}) }}
+
+### Choice Card
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Choice Card', {height: '300px'}) }}
+
+### Fieldset
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Fieldset', {height: '300px'}) }}
+
+### Disabled
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Disabled', {height: '250px'}) }}
+
+### Invalid
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Invalid', {height: '300px'}) }}
+
+### RTL
+
+{{ toolkit_code_example(kit_id.value, component.name, 'RTL', {height: '300px'}) }}
+{% endblock %}

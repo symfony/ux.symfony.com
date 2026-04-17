@@ -25,5 +25,8 @@ jobs:
             -   name: Build Sass assets
                 run: php bin/console sass:build
 
+            -   name: Smoke Tests
+                run: vendor/bin/phpunit --testsuite "Smoke Tests"
+
             -   name: Tests
                 run: vendor/bin/phpunit

@@ -19,6 +19,9 @@
     </php>
 
     <testsuites>
+        <testsuite name="Smoke Tests">
+            <file>tests/Functional/SmokeTest.php</file>
+        </testsuite>
         <testsuite name="Project Test Suite">
             <directory>tests</directory>
         </testsuite>

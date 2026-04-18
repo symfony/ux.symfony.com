@@ -1,0 +1,31 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block examples %}
+### Checkbox
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Checkbox', {height: '350px'}) }}
+
+### Radio
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Radio', {height: '350px'}) }}
+
+### Submenu
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Submenu', {height: '400px'}) }}
+
+### With Icons
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Icons', {height: '350px'}) }}
+
+### RTL
+
+{{ toolkit_code_example(kit_id.value, component.name, 'RTL', {height: '400px'}) }}
+{% endblock %}

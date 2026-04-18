@@ -1,0 +1,39 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block examples %}
+### Outline
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Outline', {height: '100px'}) }}
+
+### Sizes
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Sizes', {height: '200px'}) }}
+
+### Vertical
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Vertical', {height: '200px'}) }}
+
+### Spacing
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Spacing', {height: '100px'}) }}
+
+### Disabled
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Disabled', {height: '100px'}) }}
+
+### Font Weight Selector
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Font Weight Selector', {height: '250px'}) }}
+
+### RTL
+
+{{ toolkit_code_example(kit_id.value, component.name, 'RTL', {height: '250px'}) }}
+{% endblock %}

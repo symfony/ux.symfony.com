@@ -16,6 +16,8 @@ use App\Model\LiveDemo;
 use App\Model\UxPackage;
 use App\Service\LiveDemoRepository;
 use App\Service\UxPackageRepository;
+use PHPUnit\Framework\Attributes\Before;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Browser\Test\HasBrowser;
 use Zenstruck\Foundry\Test\Factories;
@@ -29,17 +31,13 @@ class SmokeTest extends KernelTestCase
     use HasBrowser;
     use ResetDatabase;
 
-    /**
-     * @before
-     */
+    #[Before]
     public function setupEntities(): void
     {
         persist(Food::class, ['name' => 'Pizza', 'votes' => 10]);
     }
 
-    /**
-     * @dataProvider provideStaticUrls
-     */
+    #[DataProvider('provideStaticUrls')]
     public function testStaticPages(string $url)
     {
         $this->browser()
@@ -60,9 +58,7 @@ class SmokeTest extends KernelTestCase
         yield 'sitemap.xml' => ['/sitemap.xml'];
     }
 
-    /**
-     * @dataProvider providePackageUrls
-     */
+    #[DataProvider('providePackageUrls')]
     public function testPackagePages(UxPackage $package)
     {
         $this->browser()
@@ -79,9 +75,7 @@ class SmokeTest extends KernelTestCase
         }
     }
 
-    /**
-     * @dataProvider provideDemoUrls
-     */
+    #[DataProvider('provideDemoUrls')]
     public function testDemoPages(LiveDemo $demo)
     {
         $router = self::bootKernel()->getContainer()->get('router');

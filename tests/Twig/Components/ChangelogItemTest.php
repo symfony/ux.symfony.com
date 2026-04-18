@@ -12,6 +12,7 @@
 namespace App\Tests\Twig\Components;
 
 use App\Twig\Components\ChangelogItem;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class ChangelogItemTest extends TestCase
@@ -30,9 +31,7 @@ class ChangelogItemTest extends TestCase
         $this->assertSame('foobar', $component->getContent());
     }
 
-    /**
-     * @dataProvider provideContentValues
-     */
+    #[DataProvider('provideContentValues')]
     public function testFormatContent(string $body, string $expected)
     {
         $component = new ChangelogItem();

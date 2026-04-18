@@ -13,6 +13,7 @@ namespace App\Tests\Functional;
 
 use App\Model\UxPackage;
 use App\Service\UxPackageRepository;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Browser\Test\HasBrowser;
 
@@ -30,9 +31,7 @@ class UxPackagesTest extends KernelTestCase
         ;
     }
 
-    /**
-     * @dataProvider getSmokeTests
-     */
+    #[DataProvider('getSmokeTests')]
     public function testPackagePagesAllLoad(UxPackage $package, string $expectedText)
     {
         $this->browser()

@@ -11,13 +11,12 @@
 
 namespace App\Tests\Functional;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class RedirectUrlTest extends WebTestCase
 {
-    /**
-     * @dataProvider getRedirectionTests
-     */
+    #[DataProvider('getRedirectionTests')]
     public function testUrlRedirections(string $url, string $expectedUrl, int $expectedStatusCode)
     {
         $client = self::createClient();
@@ -28,7 +27,7 @@ class RedirectUrlTest extends WebTestCase
     /**
      * @return list<array{0: string, 1: string, 2: int}>
      */
-    protected static function getRedirectionTests(): array
+    public static function getRedirectionTests(): array
     {
         return [
             // LiveComponent Demos

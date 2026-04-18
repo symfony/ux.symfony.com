@@ -207,6 +207,9 @@ return [
     '@symfony/ux-toolkit/kits/shadcn/toggle/assets/controllers/toggle_controller.js' => [
         'path' => './vendor/symfony/ux-toolkit/kits/shadcn/toggle/assets/controllers/toggle_controller.js',
     ],
+    '@symfony/ux-toolkit/kits/shadcn/resizable/assets/controllers/resizable_controller.js' => [
+        'path' => './vendor/symfony/ux-toolkit/kits/shadcn/resizable/assets/controllers/resizable_controller.js',
+    ],
     '@symfony/ux-toolkit/kits/shadcn/toggle-group/assets/controllers/toggle_group_controller.js' => [
         'path' => './vendor/symfony/ux-toolkit/kits/shadcn/toggle-group/assets/controllers/toggle_group_controller.js',
     ],

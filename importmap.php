@@ -201,6 +201,12 @@ return [
     '@symfony/ux-toolkit/kits/shadcn/hover-card/assets/controllers/hover_card_controller.js' => [
         'path' => './vendor/symfony/ux-toolkit/kits/shadcn/hover-card/assets/controllers/hover_card_controller.js',
     ],
+    '@symfony/ux-toolkit/kits/shadcn/input-otp/assets/controllers/input_otp_controller.js' => [
+        'path' => './vendor/symfony/ux-toolkit/kits/shadcn/input-otp/assets/controllers/input_otp_controller.js',
+    ],
+    '@symfony/ux-toolkit/kits/shadcn/input-otp/assets/controllers/input_otp_display_controller.js' => [
+        'path' => './vendor/symfony/ux-toolkit/kits/shadcn/input-otp/assets/controllers/input_otp_display_controller.js',
+    ],
     '@symfony/ux-toolkit/kits/shadcn/tooltip/assets/controllers/tooltip_controller.js' => [
         'path' => './vendor/symfony/ux-toolkit/kits/shadcn/tooltip/assets/controllers/tooltip_controller.js',
     ],

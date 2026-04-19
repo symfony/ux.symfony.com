@@ -1,0 +1,16 @@
+{% autoescape false %}
+# Symfony UX Changelog
+
+> Recent releases and changes to Symfony UX packages.
+
+{% for release in releases %}
+## {{ release.name }} ({{ release.version }})
+
+Released: {{ release.date|date('Y-m-d') }}
+
+{% for line in release.body|split('\n') %}
+{% if line|u.startsWith('#') %}#{% endif %}{{ line|raw }}
+{% endfor %}
+
+{% endfor %}
+{% endautoescape %}

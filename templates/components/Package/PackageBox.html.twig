@@ -7,7 +7,7 @@
 
     <div class="PackageBox_content">
         <{{ titleTag }} class="PackageBox_title">
-            <a href="{{ package.isRemoved ? package.githubRepositoryUrl ~ '#readme' : url(package.route) }}" class="PackageBox_link">{{ package.humanName }}</a>
+            <a href="{{ package.isRemoved ? package.migrationGuideUrl : url(package.route) }}" class="PackageBox_link">{{ package.humanName }}</a>
             {% if package.isRemoved %}
                 <twig:ux:icon name="flowbite:arrow-up-right-from-square-outline" class="PackageBox_arrow Icon"/>
             {% else %}

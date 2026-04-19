@@ -1,0 +1,11 @@
+{% autoescape false %}
+{{ llmsIndex }}
+---
+
+{% for path, content in allContent %}
+<source url="https://ux.symfony.com/{{ path }}">
+{{ content }}
+</source>
+
+{% endfor %}
+{% endautoescape %}

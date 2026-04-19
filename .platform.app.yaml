@@ -56,6 +56,7 @@ hooks:
         php bin/console tailwind:build --minify assets/styles/app-tailwind.css
         php bin/console tailwind:build --minify assets/styles/toolkit-shadcn.css
         php bin/console asset-map:compile
+        php bin/console app:generate-llms-files
 
     deploy: |
         set -x -e

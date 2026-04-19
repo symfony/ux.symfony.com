@@ -1,0 +1,19 @@
+{% autoescape false %}
+# Symfony UX Packages
+
+> A collection of PHP and JavaScript packages to add rich UI experiences to Symfony applications.
+
+## Active Packages
+
+{% for package in packages -%}
+- [{{ package.humanName }}](https://ux.symfony.com/{{ package.name }}.md): {{ package.tagLine }}
+{% endfor %}
+
+{% if removed_packages is not empty %}
+## Removed Packages
+
+{% for package in removed_packages -%}
+- **{{ package.humanName }}**: {{ package.tagLine }} — [Migration guide]({{ package.migrationGuideUrl }})
+{% endfor %}
+{% endif %}
+{% endautoescape %}

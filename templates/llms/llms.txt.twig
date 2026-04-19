@@ -1,0 +1,40 @@
+{% autoescape false %}
+# Symfony UX
+
+> Symfony UX is a collection of PHP and JavaScript packages to add rich UI experiences to Symfony applications. This site provides demos, installation guides, and a cookbook. For full documentation, see the official Symfony docs.
+
+## Packages
+
+{% for package in packages -%}
+- [{{ package.humanName }}](https://ux.symfony.com/{{ package.name }}.md): {{ package.tagLine }}
+{% endfor %}
+
+## Demos
+
+- [Live Component Demos](https://ux.symfony.com/demos.md): Interactive demos showcasing Symfony UX Live Components
+
+{% if cookbooks is not empty %}
+## Cookbook
+
+{% for cookbook in cookbooks -%}
+- [{{ cookbook.title }}](https://ux.symfony.com/cookbook/{{ cookbook.slug }}.md): {{ cookbook.description }}
+{% endfor %}
+
+{% endif %}
+## Changelog
+
+- [Changelog](https://ux.symfony.com/changelog.md): Recent releases and changes
+
+## Toolkit
+
+{% for entry in toolkitKits -%}
+{% for recipe in entry.kit.getRecipes(constant('Symfony\\UX\\Toolkit\\Recipe\\RecipeType::Component')) -%}
+- [{{ recipe.name }} ({{ entry.kit.manifest.name }})](https://ux.symfony.com/toolkit/kits/{{ entry.kitId.value }}/components/{{ recipe.name }}.md): {{ recipe.manifest.description ?: 'Toolkit component' }}
+{% endfor -%}
+{% endfor %}
+
+## Optional
+
+- [Official Symfony UX Documentation](https://symfony.com/bundles/ux): Full reference documentation for all Symfony UX packages
+- [Symfony UX GitHub Repository](https://github.com/symfony/ux): Source code and issue tracker
+{% endautoescape %}

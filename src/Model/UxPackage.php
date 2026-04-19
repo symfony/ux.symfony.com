@@ -168,4 +168,9 @@ class UxPackage
     {
         return \sprintf('https://github.com/symfony/ux-%s', $this->name);
     }
+
+    public function getMigrationGuideUrl(): string
+    {
+        return $this->getGithubRepositoryUrl().'#readme';
+    }
 }

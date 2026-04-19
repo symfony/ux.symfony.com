@@ -1,0 +1,27 @@
+{% autoescape false %}
+# {{ package.humanName }}
+
+> {{ package.tagLine }}
+
+{{ package.description }}
+
+## Installation
+
+```bash
+{{ package.composerRequireCommand }}
+```
+
+## Links
+
+- [Demos and examples](https://ux.symfony.com/{{ package.name }})
+{% if package.shouldShowDocsLink() -%}
+- [Official documentation]({{ package.officialDocsUrl }})
+{% endif -%}
+- [GitHub repository]({{ package.githubRepositoryUrl }})
+{% if package.docsLink -%}
+- [{{ package.docsLinkText }}]({{ package.docsLink }})
+{% endif -%}
+{% if package.screencastLink -%}
+- [{{ package.screencastLinkText }}]({{ package.screencastLink }})
+{% endif -%}
+{% endautoescape %}

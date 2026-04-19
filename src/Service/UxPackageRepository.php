@@ -18,7 +18,7 @@ class UxPackageRepository
     /**
      * @return list<UxPackage>
      */
-    public function findAll(?string $query = null, ?bool $removed = null): array
+    public function findAll(?string $query = null, ?bool $removed = null, bool $sortByName = false): array
     {
         $packages = [
             new UxPackage(
@@ -282,6 +282,10 @@ class UxPackageRepository
 
         if (null !== $removed) {
             $packages = array_filter($packages, static fn (UxPackage $package) => $package->isRemoved() === $removed);
+        }
+
+        if ($sortByName) {
+            usort($packages, static fn (UxPackage $a, UxPackage $b) => $a->getHumanName() <=> $b->getHumanName());
         }
 
         return array_values($packages);

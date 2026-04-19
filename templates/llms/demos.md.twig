@@ -1,0 +1,22 @@
+{% autoescape false %}
+# Symfony UX Demos
+
+> Interactive demos showcasing Symfony UX components and features.
+
+{% for demo in demos %}
+## {{ demo.name }}
+
+{{ demo.description }}
+
+{% if demo.longDescription %}
+{{ demo.longDescription }}
+
+{% endif %}
+{% if demo.tags is not empty -%}
+Tags: {{ demo.tags|join(', ') }}
+
+{% endif -%}
+- [View demo](https://ux.symfony.com/demos/live-component/{{ demo.identifier }})
+
+{% endfor %}
+{% endautoescape %}

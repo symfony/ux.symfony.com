@@ -1,0 +1,13 @@
+{% autoescape false %}
+# {{ cookbook.title }}
+
+{% if cookbook.description -%}
+> {{ cookbook.description }}
+
+{% endif -%}
+{% if cookbook.tags is not empty -%}
+Tags: {{ cookbook.tags|join(', ') }}
+
+{% endif -%}
+{{ cookbook.content }}
+{% endautoescape %}

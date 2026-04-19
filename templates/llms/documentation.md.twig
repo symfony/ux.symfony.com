@@ -1,0 +1,19 @@
+{% autoescape false %}
+# Symfony UX Documentation
+
+> Full documentation for all Symfony UX packages is available on [symfony.com](https://symfony.com/bundles#symfony-ux-bundles).
+
+## Packages
+
+{% for package in packages -%}
+- [{{ package.humanName }}]({{ package.officialDocsUrl }}): {{ package.tagLine }}
+{% endfor %}
+
+{% if removed_packages is not empty %}
+## Deprecated and Removed Packages
+
+{% for package in removed_packages -%}
+- **{{ package.humanName }}**: {{ package.tagLine }} — [Migration guide]({{ package.migrationGuideUrl }})
+{% endfor %}
+{% endif %}
+{% endautoescape %}

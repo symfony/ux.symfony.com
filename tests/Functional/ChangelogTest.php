@@ -26,13 +26,5 @@ class ChangelogTest extends KernelTestCase
             ->assertHtml()
             ->assertSeeIn('h1', 'Changelog')
         ;
-
-        $browser = $this->browser()
-            ->visit('/changelog.md')
-            ->assertSuccessful()
-            ->assertContentType('markdown')
-        ;
-
-        self::assertStringContainsString('# Changelog', $browser->content());
     }
 }

@@ -1,0 +1,37 @@
+{% autoescape false %}
+# {{ recipe.name }} ({{ kit.manifest.name }} kit)
+
+{% if recipe.manifest.description -%}
+> {{ recipe.manifest.description }}
+
+{% endif -%}
+{% for component_name, ref in apiRef %}
+{% if ref.props is not empty %}
+## Props for `{{ component_name }}`
+
+| Name | Type | Description |
+|------|------|-------------|
+{% for prop in ref.props %}
+| `{{ prop.name }}` | `{{ prop.type }}` | {{ prop.description }} |
+{% endfor %}
+
+{% endif %}
+{% if ref.blocks is not empty %}
+## Blocks for `{{ component_name }}`
+
+{% for block in ref.blocks %}
+- `{{ block.name }}`: {{ block.description }}
+{% endfor %}
+
+{% endif %}
+{% endfor %}
+{% if recipe.manifest.dependencies is not empty %}
+## Dependencies
+
+{% for dep in recipe.manifest.dependencies %}
+- {{ dep }}
+{% endfor %}
+
+{% endif %}
+- [View component](https://ux.symfony.com/toolkit/kits/{{ kitId.value }}/components/{{ recipe.name }})
+{% endautoescape %}

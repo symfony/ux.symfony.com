@@ -24,18 +24,12 @@ class ChangelogController extends AbstractController
     }
 
     #[Route('/changelog', name: 'app_changelog', defaults: ['_format' => 'html'])]
-    #[Route('/changelog.md', name: 'app_changelog_md', defaults: ['_format' => 'md'])]
-    public function __invoke(string $_format): Response
+    public function __invoke(): Response
     {
         $changelog = $this->changeLogProvider->getChangelog();
 
-        $response = new Response();
-        if ('md' === $_format) {
-            $response->headers->set('Content-Type', 'text/markdown');
-        }
-
-        return $this->render('changelog.'.$_format.'.twig', [
+        return $this->render('changelog.html.twig', [
             'changelog' => $changelog,
-        ], $response);
+        ]);
     }
 }

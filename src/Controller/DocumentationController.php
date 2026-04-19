@@ -21,11 +21,8 @@ class DocumentationController extends AbstractController
     #[Route('/documentation', name: 'app_documentation')]
     public function __invoke(UxPackageRepository $packageRepository): Response
     {
-        $packages = $packageRepository->findAll(removed: false);
-        usort($packages, static fn ($a, $b) => $a->getHumanName() <=> $b->getHumanName());
-
-        $removedPackages = $packageRepository->findAll(removed: true);
-        usort($packages, static fn ($a, $b) => $a->getHumanName() <=> $b->getHumanName());
+        $packages = $packageRepository->findAll(removed: false, sortByName: true);
+        $removedPackages = $packageRepository->findAll(removed: true, sortByName: true);
 
         return $this->render('documentation/index.html.twig', [
             'packages' => $packages,

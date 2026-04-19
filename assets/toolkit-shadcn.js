@@ -7,6 +7,7 @@ import Dialog from '@symfony/ux-toolkit/kits/shadcn/dialog/assets/controllers/di
 import Tabs from '@symfony/ux-toolkit/kits/shadcn/tabs/assets/controllers/tabs_controller.js';
 import Tooltip from '@symfony/ux-toolkit/kits/shadcn/tooltip/assets/controllers/tooltip_controller.js';
 import Toggle from '@symfony/ux-toolkit/kits/shadcn/toggle/assets/controllers/toggle_controller.js';
+import ToggleGroup from '@symfony/ux-toolkit/kits/shadcn/toggle-group/assets/controllers/toggle_group_controller.js';
 
 const app = startStimulusApp();
 app.register('accordion', Accordion);
@@ -16,3 +17,4 @@ app.register('dialog', Dialog);
 app.register('tabs', Tabs);
 app.register('tooltip', Tooltip);
 app.register('toggle', Toggle);
+app.register('toggle-group', ToggleGroup);

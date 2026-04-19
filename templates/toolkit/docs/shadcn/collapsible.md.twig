@@ -1,0 +1,31 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '300px'}) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block examples %}
+### Basic
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Basic', {height: '300px'}) }}
+
+### Settings Panel
+
+Use a trigger button to reveal additional settings.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Settings Panel', {height: '300px'}) }}
+
+### File Tree
+
+Use nested collapsibles to build a file tree.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'File Tree', {height: '500px'}) }}
+
+### RTL
+
+{{ toolkit_code_example(kit_id.value, component.name, 'RTL', {height: '300px'}) }}
+{% endblock %}

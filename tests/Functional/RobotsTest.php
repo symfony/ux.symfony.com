@@ -29,6 +29,7 @@ class RobotsTest extends KernelTestCase
         $robot = $browser->content();
 
         $this->assertStringStartsWith("User-agent: *\nDisallow:\n", $robot);
+        $this->assertStringContainsString('Content-Signal: ai-train=no, search=yes, ai-input=yes', $robot);
         $this->assertStringContainsString('Sitemap: http://ux.symfony.com/sitemap.xml', $robot);
     }
 }

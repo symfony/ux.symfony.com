@@ -58,6 +58,7 @@ hooks:
         php bin/console asset-map:compile
         php bin/console app:generate-llms-files
         mkdir -p tmp && mv var/llms tmp/llms
+        php bin/console app:generate-agent-skills
 
     deploy: |
         set -x -e

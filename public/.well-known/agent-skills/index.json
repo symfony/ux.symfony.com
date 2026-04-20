@@ -1,0 +1,54 @@
+{
+    "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+    "skills": [
+        {
+            "name": "live-component",
+            "type": "skill-md",
+            "description": "Symfony UX LiveComponent for reactive server-rendered UI -- components that re-render via AJAX on user interaction, zero JavaScript required. Use when building live search, real-time filtering, dynamic forms, inline validation, dependent selects, auto-save, polling, deferred/lazy rendering, or any UI that updates itself based on user input. Code triggers: AsLiveComponent, #[AsLiveComponent], LiveProp, #[LiveProp], LiveAction, #[LiveAction], data-model, data-loading, data-live-action-url, ComponentWithFormTrait, LiveListener, emit, defer, lazy, polling. Also trigger when the user asks \"how to build a search that filters as I type\", \"how to validate a form in real-time\", \"how to make a reactive component in PHP\", \"how to build dependent selects\", \"how to defer component rendering\", \"how to communicate between components via emit\", \"how to bind a form to a LiveComponent\". Do NOT trigger for static reusable UI without reactivity (use twig-component), for pure client-side JS behavior (use stimulus), or for page-level navigation (use turbo).",
+            "url": "https://raw.githubusercontent.com/smnandre/symfony-ux-skills/35901c0dce703dd7e653bee576ce72392ca1b7e9/skills/live-component/SKILL.md",
+            "digest": "sha256:4529a647e44e745d4457a14972b5022b5ef628f37a6b061b8c4655f39bfc3fd7"
+        },
+        {
+            "name": "stimulus",
+            "type": "skill-md",
+            "description": "Stimulus JS framework for Symfony UX -- client-side behavior via HTML data attributes, zero server round-trips. Use when creating controllers for DOM manipulation, handling click/input/submit events, managing targets and values, wiring outlets between controllers, wrapping third-party JS libraries, or building toggles, dropdowns, modals, tabs, clipboard interactions. Code triggers: data-controller, data-action, data-target, data-*-value, data-*-class, data-*-outlet, stimulusFetch lazy, connect(), disconnect(), static targets, static values. Also trigger when the user asks \"how do I add a click handler\", \"how to toggle a class\", \"how to build a dropdown/modal/tabs\", \"how to wrap a JS library in Symfony\", \"add keyboard shortcuts\", \"lazy-load a controller\", \"listen to global events\", \"communicate between controllers\". Do NOT trigger for partial page updates without JS (use turbo), server-rendered reactivity (use live-component), or reusable Twig templates (use twig-component).",
+            "url": "https://raw.githubusercontent.com/smnandre/symfony-ux-skills/35901c0dce703dd7e653bee576ce72392ca1b7e9/skills/stimulus/SKILL.md",
+            "digest": "sha256:65a738477a6dc43476cf968e07a04f2f1896b7a523df0d11c6d362b12ff84eb8"
+        },
+        {
+            "name": "symfony-ux",
+            "type": "skill-md",
+            "description": "Symfony UX frontend stack -- decision tree and orchestrator for choosing between Stimulus, Turbo, TwigComponent, LiveComponent, UX Icons, and UX Map. Use when the user is unsure which tool fits, wants to combine multiple UX packages, or asks a general frontend architecture question in Symfony. Also trigger when the user asks \"which UX package should I use\", \"how to make this interactive\", \"should I use Stimulus or LiveComponent\", \"how to structure my Symfony frontend\", \"what is the difference between Turbo and LiveComponent\", \"should this be a Frame or a LiveComponent\", \"how do these UX packages work together\", \"what is the Symfony way to do frontend\". Do NOT trigger when the user clearly names a specific tool (stimulus, turbo, twig-component, live-component, ux-icons, ux-map) -- defer to the specialized skill instead.",
+            "url": "https://raw.githubusercontent.com/smnandre/symfony-ux-skills/35901c0dce703dd7e653bee576ce72392ca1b7e9/skills/symfony-ux/SKILL.md",
+            "digest": "sha256:be147e29060df542c43896b18e97f127e35bcc1f74a1a4e164aa10e5173a92f8"
+        },
+        {
+            "name": "turbo",
+            "type": "skill-md",
+            "description": "Hotwire Turbo for Symfony UX -- SPA-like speed with zero JavaScript. Covers Drive (full-page navigation), Frames (partial page sections), and Streams (multi-target updates). Use when building ajax navigation, lazy-loaded page sections, inline editing, pagination without reload, modals loaded from the server, flash messages via streams, real-time updates via Mercure/SSE, or multi-section page updates. Code triggers: turbo-frame, turbo-stream, data-turbo-frame, data-turbo, data-turbo-action, turbo-stream-source, TurboStreamResponse, <twig:Turbo:Frame>, <twig:Turbo:Stream:Append>, <twig:Turbo:Stream:Replace>, turbo:before-fetch-request. Also trigger when the user asks \"how to update part of the page without reload\", \"how to make navigation feel like SPA\", \"how to lazy-load a section\", \"how to do inline editing\", \"how to push real-time updates from server\", \"how to use Mercure with Turbo\". Do NOT trigger for client-side JS behavior (use stimulus), server-rendered reactive components (use live-component), or reusable static UI (use twig-component).",
+            "url": "https://raw.githubusercontent.com/smnandre/symfony-ux-skills/35901c0dce703dd7e653bee576ce72392ca1b7e9/skills/turbo/SKILL.md",
+            "digest": "sha256:db3a589078fcf9d808d8b470672fadd510328e48de576cb81eb7c48c187d39dd"
+        },
+        {
+            "name": "twig-component",
+            "type": "skill-md",
+            "description": "Symfony UX TwigComponent for reusable UI building blocks -- server-rendered components with PHP classes and Twig templates. Use when creating buttons, cards, alerts, badges, navbars, or any reusable UI element with props, blocks/slots, computed properties, or anonymous (template-only) components. Code triggers: AsTwigComponent, #[AsTwigComponent], ExposeInTemplate, PreMount, PostMount, <twig:Alert />, <twig:Button>, component(), computed properties, anonymous component, HTML syntax. Also trigger when the user asks \"how to create a reusable component\", \"how to make a component library\", \"how to pass props to a component\", \"how to use slots/blocks in a component\", \"how to build a design system in Symfony\", \"what is the HTML syntax for components\", \"how to create a component without a PHP class\". Do NOT trigger for components that re-render dynamically on user input (use live-component), for JS behavior (use stimulus), or for page navigation (use turbo).",
+            "url": "https://raw.githubusercontent.com/smnandre/symfony-ux-skills/35901c0dce703dd7e653bee576ce72392ca1b7e9/skills/twig-component/SKILL.md",
+            "digest": "sha256:71324f33db8e1f3e588c6a65c4b882c2b9fc8b5aaf144907ea6e6cd9cd0b7388"
+        },
+        {
+            "name": "ux-icons",
+            "type": "skill-md",
+            "description": "Symfony UX Icons for rendering SVG icons in Twig templates. Supports 200,000+ Iconify icons (Lucide, Heroicons, Tabler, Material Design, etc.), local SVG files, and custom icon sets with aliases. Use when displaying icons, configuring icon defaults, importing or locking on-demand icons, creating icon aliases, or styling SVG icons with CSS. Code triggers: <twig:ux:icon />, ux_icon(), UX_ICONS_DEFAULT_ICON_ATTRIBUTES, icon.yaml, icons/, iconify:, lucide:, heroicons:, tabler:, mdi:, bin/console ux:icons:lock, bin/console ux:icons:import. Also trigger when the user asks \"how to add an icon\", \"how to use Lucide/Heroicons/Tabler icons\", \"how to render an SVG icon in Twig\", \"how to lock icons for production\", \"how to create icon aliases\", \"how to style an icon\", \"icon not found\", \"icon not rendering\". Do NOT trigger for interactive maps (use ux-map) or general Twig components (use twig-component).",
+            "url": "https://raw.githubusercontent.com/smnandre/symfony-ux-skills/35901c0dce703dd7e653bee576ce72392ca1b7e9/skills/ux-icons/SKILL.md",
+            "digest": "sha256:ca8792229d77314b30f7e639e627677910706d1557e2b32daaa005eaa6592dc7"
+        },
+        {
+            "name": "ux-map",
+            "type": "skill-md",
+            "description": "Symfony UX Map for interactive maps with Leaflet or Google Maps in Symfony. Covers markers, polygons, polylines, circles, info windows, and LiveComponent integration. Use when displaying maps, placing markers, drawing shapes or routes, handling map events, building store locators, using custom tile layers, or making maps reactive with LiveComponent. Code triggers: <twig:ux:map />, Map(), Point(), Marker(), Polygon(), Polyline(), Circle(), InfoWindow(), MapOptionsInterface, ComponentWithMapTrait, fitBoundsToMarkers, ux:map:marker:before-create, ux:map:connect, SYMFONY_UX_MAP_DSN. Also trigger when the user asks \"how to display a map\", \"how to add markers\", \"how to draw a polygon on a map\", \"how to handle map click events\", \"how to make a reactive map\", \"how to use Leaflet in Symfony\", \"how to use Google Maps in Symfony\", \"map not showing\", \"map has zero height\". Do NOT trigger for SVG icons (use ux-icons) or general frontend interactivity (use stimulus).",
+            "url": "https://raw.githubusercontent.com/smnandre/symfony-ux-skills/35901c0dce703dd7e653bee576ce72392ca1b7e9/skills/ux-map/SKILL.md",
+            "digest": "sha256:6b7d017582279cade736565bfb95f818fcd57778e281550182c21ad212125fee"
+        }
+    ]
+}

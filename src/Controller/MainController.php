@@ -17,12 +17,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\WebLink\Link;
 
 class MainController extends AbstractController
 {
     #[Route('/', name: 'app_homepage')]
-    public function homepage(UxPackageRepository $packageRepository): Response
+    public function homepage(UxPackageRepository $packageRepository, Request $request): Response
     {
+        $this->addLink($request, new Link('describedby', '/llms.txt'));
+
         $packages = $packageRepository->findAll(removed: false);
 
         return $this->render('main/homepage.html.twig', [

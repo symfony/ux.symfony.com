@@ -57,12 +57,14 @@ hooks:
         php bin/console tailwind:build --minify assets/styles/toolkit-shadcn.css
         php bin/console asset-map:compile
         php bin/console app:generate-llms-files
+        mkdir -p tmp && mv var/llms tmp/llms
 
     deploy: |
         set -x -e
 
         (>&2 symfony-deploy)
 
+        cp -r tmp/llms var/llms
         php bin/console app:load-data
 
         # needed because StimulusBundle / asset mapper will currently

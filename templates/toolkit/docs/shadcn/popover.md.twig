@@ -1,0 +1,27 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '550px'}) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block examples %}
+### Basic
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Basic', {height: '250px'}) }}
+
+### Align
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Alignments', {height: '200px'}) }}
+
+### With Form
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Form', {height: '350px'}) }}
+
+### RTL
+
+{{ toolkit_code_example(kit_id.value, component.name, 'RTL', {height: '600px'}) }}
+{% endblock %}

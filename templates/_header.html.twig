@@ -1,4 +1,7 @@
-<header class="AppHeader {{ theme is defined ? ('AppHeader--' ~ theme) }}" data-controller="ux-header">
+<header class="AppHeader {{ theme is defined ? ('AppHeader--' ~ theme) }}"
+    data-controller="ux-header search"
+    data-search-url-value="{{ meilisearch_url }}"
+    data-search-key-value="{{ meilisearch_search_key }}">
     <div class="container-xxl px-4 px-md-5">
 
         <nav class="AppNav AppNav--white">
@@ -14,6 +17,14 @@
                     aria-label="Toggle menu"
                 >
                     <twig:ux:icon name="menu"/>
+                </button>
+                <button
+                    class="AppNav_item AppNav_item--icon"
+                    data-action="search#openModal"
+                    aria-label="Search"
+                    title="Search"
+                >
+                    <twig:ux:icon name="icon-search"/>
                 </button>
                 <twig:ThemeSwitcher class="AppNav_item AppNav_item--icon" aria-label="Switch dark/light mode"/>
                 <div class="AppNav_socials">
@@ -64,5 +75,36 @@
 
         </nav>
 
+    </div>
+
+    <div class="fixed inset-0 z-[1000] flex items-start justify-center pt-[10vh] px-4 pb-4 max-sm:px-3 max-sm:pt-3 max-sm:pb-3"
+         hidden
+         data-search-target="modal">
+        <div class="fixed inset-0 bg-black/50 backdrop-blur-sm"
+             data-action="click->search#closeModal"></div>
+        <div class="relative flex flex-col w-full max-w-xl max-h-[70vh] bg-body text-body-text rounded-xl shadow-2xl overflow-hidden max-sm:max-h-[calc(100vh-1.5rem)]">
+            <div class="flex items-center gap-2 px-4 py-3 border-b border-body-text/10">
+                <twig:ux:icon name="icon-search" class="text-lg opacity-40 shrink-0"/>
+                <input type="search"
+                       class="flex-1 bg-transparent border-none outline-none text-base text-body-text py-1 placeholder:text-body-text/40 [&::-webkit-search-cancel-button]:appearance-none"
+                       placeholder="Search packages, demos, recipes…"
+                       aria-label="Search ux.symfony.com"
+                       data-search-target="input"
+                       data-action="input->search#onInput">
+            </div>
+            <div class="overflow-y-auto px-2 py-1" hidden data-search-target="body">
+                <ul class="list-none m-0 p-0" data-search-target="packages"></ul>
+                <ul class="list-none m-0 p-0" data-search-target="demos"></ul>
+                <ul class="list-none m-0 p-0" data-search-target="recipes"></ul>
+                <p class="px-3 py-6 text-center text-sm opacity-50 m-0" hidden data-search-target="empty">
+                    No results found.
+                </p>
+            </div>
+            <div class="border-t border-body-text/10 px-3 py-2" hidden data-search-target="footer">
+                <a class="block text-center text-sm font-medium text-body-text no-underline hover:underline py-1"
+                   data-search-target="seeAll"
+                   href="/search">See all results →</a>
+            </div>
+        </div>
     </div>
 </header>

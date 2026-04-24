@@ -15,8 +15,19 @@ services:
       - mercure_config:/config
 ###< symfony/mercure-bundle ###
 
+  meilisearch:
+    image: getmeili/meilisearch:v1.10
+    restart: unless-stopped
+    environment:
+      MEILI_ENV: development
+      MEILI_MASTER_KEY: '!ChangeMe!MeilisearchMasterKey!'
+      MEILI_NO_ANALYTICS: 'true'
+    volumes:
+      - meili_data:/meili_data
+
 volumes:
 ###> symfony/mercure-bundle ###
   mercure_data:
   mercure_config:
 ###< symfony/mercure-bundle ###
+  meili_data:

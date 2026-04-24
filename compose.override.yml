@@ -4,3 +4,7 @@ services:
     ports:
       - "80"
 ###< symfony/mercure-bundle ###
+
+  meilisearch:
+    ports:
+      - "7700:7700"

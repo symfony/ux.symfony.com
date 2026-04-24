@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% set meta = {
+    title: q ? 'Search results for "' ~ q ~ '"' : 'Search',
+    description: 'Search across Symfony UX packages, demos and Toolkit recipes.',
+    canonical: url('app_search'),
+} %}
+
+{% block content %}
+    <div class="hero">
+        <div class="container-fluid container-xxl px-4 pt-4 px-md-5">
+            <h1 class="text-center mt-5">Search</h1>
+            <p class="text-center mt-2 mb-5">Packages, demos and Toolkit recipes — all in one place</p>
+
+            <form action="{{ path('app_search') }}" method="get" class="mx-auto" style="max-width: 640px;">
+                <input
+                    type="search"
+                    name="q"
+                    value="{{ q }}"
+                    placeholder="Search packages, demos, recipes…"
+                    aria-label="Search"
+                    autofocus
+                    class="form-control form-control-lg"
+                >
+            </form>
+        </div>
+    </div>
+
+    <div class="container-fluid container-xxl px-4 pt-5 px-md-5">
+        {% if q is empty %}
+            <p class="text-center text-muted">Type a query above to search.</p>
+        {% elseif total == 0 %}
+            <p class="text-center text-muted">No results found for <strong>{{ q }}</strong>.</p>
+        {% else %}
+            <p class="text-center text-muted mb-5">
+                {{ total }} result{{ total > 1 ? 's' : '' }} for <strong>{{ q }}</strong>
+            </p>
+
+            {% if groups.package is not empty %}
+                <section class="mb-5">
+                    <h2>Packages <small class="text-muted">({{ totals.package }})</small></h2>
+                    <ul class="list-unstyled mt-3">
+                        {% for hit in groups.package %}
+                            {% set formatted = hit._formatted ?? hit %}
+                            <li class="mb-3">
+                                <a href="{{ hit.url }}" class="d-block p-3 border rounded text-decoration-none">
+                                    <strong>{{ formatted.humanName|raw }}</strong>
+                                    <div class="text-muted small">{{ formatted.description|raw }}</div>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </section>
+            {% endif %}
+
+            {% if groups.demo is not empty %}
+                <section class="mb-5">
+                    <h2>Demos <small class="text-muted">({{ totals.demo }})</small></h2>
+                    <ul class="list-unstyled mt-3">
+                        {% for hit in groups.demo %}
+                            {% set formatted = hit._formatted ?? hit %}
+                            <li class="mb-3">
+                                <a href="{{ hit.url }}" class="d-block p-3 border rounded text-decoration-none">
+                                    <strong>{{ formatted.name|raw }}</strong>
+                                    <div class="text-muted small">{{ formatted.description|raw }}</div>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </section>
+            {% endif %}
+
+            {% if groups.recipe is not empty %}
+                {% set recipes_by_kit = {} %}
+                {% for hit in groups.recipe %}
+                    {% set label = hit.kitHuman ?? hit.kit %}
+                    {% set recipes_by_kit = recipes_by_kit|merge({(label): (recipes_by_kit[label] ?? [])|merge([hit])}) %}
+                {% endfor %}
+                {% for label, hits in recipes_by_kit %}
+                    <section class="mb-5">
+                        <h2>Toolkit — {{ label }} <small class="text-muted">({{ hits|length }})</small></h2>
+                        <ul class="list-unstyled mt-3">
+                            {% for hit in hits %}
+                                {% set formatted = hit._formatted ?? hit %}
+                                <li class="mb-3">
+                                    <a href="{{ hit.url }}" class="d-block p-3 border rounded text-decoration-none">
+                                        <strong>{{ formatted.name|raw }}</strong>
+                                        <div class="text-muted small">{{ formatted.description|raw }}</div>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </section>
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+    </div>
+{% endblock %}

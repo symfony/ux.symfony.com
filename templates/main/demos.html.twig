@@ -22,13 +22,27 @@
         </div>
     </div>
 
-    <div class="container-fluid container-xxl px-4 pt-4 px-md-5">
-        <div style="display: grid; gap: 3rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));">
-            {% for demo in liveComponentDemos %}
-                <twig:Demo:DemoCard demo="{{ demo }}" />
-            {% endfor %}
+    <section class="container-fluid container-xxl px-4 px-md-5 py-3">
+        <h2 class="ubuntu pt-2 component-headlines"><em class="rainbow-emphasis">Live Components</em> Demo</h2>
+        <div class="mt-3 mt-md-5">
+            <div style="display: grid; gap: 3rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));">
+                {% for demo in liveComponentDemos %}
+                    <twig:Demo:DemoCard demo="{{ demo }}" />
+                {% endfor %}
+            </div>
         </div>
-    </div>
+    </section>
+
+    <section class="container-fluid container-xxl px-4 px-md-5 py-3">
+        <h2 class="ubuntu pt-2 component-headlines"><em class="rainbow-emphasis">Turbo</em> Demo</h2>
+        <div class="mt-3 mt-md-5">
+            <div style="display: grid; gap: 3rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));">
+                {% for demo in turboComponentDemos %}
+                    <twig:Demo:DemoCard demo="{{ demo }}" />
+                {% endfor %}
+            </div>
+        </div>
+    </section>
 
 {% endblock %}
 

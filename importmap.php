@@ -195,6 +195,9 @@ return [
     '@symfony/ux-toolkit/kits/shadcn/dialog/assets/controllers/dialog_controller.js' => [
         'path' => './vendor/symfony/ux-toolkit/kits/shadcn/dialog/assets/controllers/dialog_controller.js',
     ],
+    '@symfony/ux-toolkit/kits/shadcn/navigation-menu/assets/controllers/navigation_menu_controller.js' => [
+        'path' => './vendor/symfony/ux-toolkit/kits/shadcn/navigation-menu/assets/controllers/navigation_menu_controller.js',
+    ],
     '@symfony/ux-toolkit/kits/shadcn/tooltip/assets/controllers/tooltip_controller.js' => [
         'path' => './vendor/symfony/ux-toolkit/kits/shadcn/tooltip/assets/controllers/tooltip_controller.js',
     ],

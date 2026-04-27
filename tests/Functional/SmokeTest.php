@@ -13,8 +13,10 @@ namespace App\Tests\Functional;
 
 use App\Entity\Food;
 use App\Model\LiveDemo;
+use App\Model\TurboDemo;
 use App\Model\UxPackage;
 use App\Service\LiveDemoRepository;
+use App\Service\TurboDemoRepository;
 use App\Service\UxPackageRepository;
 use PHPUnit\Framework\Attributes\Before;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -75,8 +77,8 @@ class SmokeTest extends KernelTestCase
         }
     }
 
-    #[DataProvider('provideDemoUrls')]
-    public function testDemoPages(LiveDemo $demo)
+    #[DataProvider('provideLiveDemoUrls')]
+    public function testLiveDemoPages(LiveDemo $demo)
     {
         $router = self::bootKernel()->getContainer()->get('router');
         $url = $router->generate($demo->getRoute());
@@ -87,9 +89,29 @@ class SmokeTest extends KernelTestCase
         ;
     }
 
-    public static function provideDemoUrls(): \Generator
+    #[DataProvider('provideTurboDemoUrls')]
+    public function testTurboDemoPages(TurboDemo $demo)
+    {
+        $router = self::bootKernel()->getContainer()->get('router');
+        $url = $router->generate($demo->getRoute());
+
+        $this->browser()
+            ->visit($url)
+            ->assertSuccessful()
+        ;
+    }
+
+    public static function provideLiveDemoUrls(): \Generator
     {
         $repository = new LiveDemoRepository();
+        foreach ($repository->findAll() as $demo) {
+            yield $demo->getIdentifier() => [$demo];
+        }
+    }
+
+    public static function provideTurboDemoUrls(): \Generator
+    {
+        $repository = new TurboDemoRepository();
         foreach ($repository->findAll() as $demo) {
             yield $demo->getIdentifier() => [$demo];
         }

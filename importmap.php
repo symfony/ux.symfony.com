@@ -198,6 +198,9 @@ return [
     '@symfony/ux-toolkit/kits/shadcn/collapsible/assets/controllers/collapsible_controller.js' => [
         'path' => './vendor/symfony/ux-toolkit/kits/shadcn/collapsible/assets/controllers/collapsible_controller.js',
     ],
+    '@symfony/ux-toolkit/kits/shadcn/hover-card/assets/controllers/hover_card_controller.js' => [
+        'path' => './vendor/symfony/ux-toolkit/kits/shadcn/hover-card/assets/controllers/hover_card_controller.js',
+    ],
     '@symfony/ux-toolkit/kits/shadcn/tooltip/assets/controllers/tooltip_controller.js' => [
         'path' => './vendor/symfony/ux-toolkit/kits/shadcn/tooltip/assets/controllers/tooltip_controller.js',
     ],

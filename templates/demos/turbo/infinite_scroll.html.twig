@@ -21,28 +21,17 @@
                 {# Current page #}
                 <div id="product-grid" class="ProductGrid_page">
                     {% for item in items %}
-                        <article class="ProductGrid_item" style="--color: {{ item.color }};">
-                            <div class="ProductGrid_media">
-                                <svg>
-                                    <use href="#svg-tshirt"/>
-                                </svg>
-                                <span>{{ item.emoji }}</span>
-                            </div>
-                            <data class="ProductGrid_price" value="{{ item.id }}" data-currency="$">
-                                {{ item.id + 1 }}<small>.99</small>
-                            </data>
-                        </article>
+                        <twig:ProductGridItem :item="item" />
                     {% endfor %}
                 </div>
                 <div style="display: grid; place-content: center;padding-block: 2rem;">
                     {% if has_more %}
-                        <twig:Turbo:Frame id="product-grid-load-more" data-turbo-action="advance">
+                        <twig:Turbo:Frame id="product-grid-load-more">
                             <a
                                 class="ProductGrid_more"
                                 href="{{ path('app_demo_turbo_infinite_scroll', {
                                     page: next_page,
                                 }) }}"
-                                data-turbo-action="replace"
                                 data-turbo-prefetch="false"
                             >
                                 Load More
@@ -104,8 +93,8 @@
                 sticky
                 style="--bs-gutter-x: 4rem;"
             >
-                Finally in the `stream` template we use `Turbo:Stream:Append` to append
-                the new items to the grid and `Turbo:Stream:Replace` to replace the
+                Finally we create a new block `stream_success` and we use `Turbo:Stream:Append`
+                and `Turbo:Stream:Replace` to append the new items to the grid and replace the
                 `Load More` link with a new one if there are more results to load.
             </twig:Code:CodeWithExplanationRow>
         </div>
@@ -116,17 +105,7 @@
 {% block stream_success %}
     <twig:Turbo:Stream:Append target="#product-grid">
         {% for item in items %}
-            <article class="ProductGrid_item" style="--color: {{ item.color }};">
-                <div class="ProductGrid_media">
-                    <svg>
-                        <use href="#svg-tshirt"/>
-                    </svg>
-                    <span>{{ item.emoji }}</span>
-                </div>
-                <data class="ProductGrid_price" value="{{ item.id }}" data-currency="$">
-                    {{ item.id + 1 }}<small>.99</small>
-                </data>
-            </article>
+            <twig:ProductGridItem :item="item" />
         {% endfor %}
     </twig:Turbo:Stream:Append>
     <twig:Turbo:Stream:Replace target="#product-grid-load-more">

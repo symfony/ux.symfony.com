@@ -40,7 +40,7 @@ class TurboDemoController extends AbstractController
     #[Route('/infinite-scroll', name: 'app_demo_turbo_infinite_scroll')]
     public function infiniteScroll(
         Request $request,
-        #[MapQueryParameter(filter: \FILTER_VALIDATE_INT)] int $page = 1,
+        #[MapQueryParameter(filter: \FILTER_VALIDATE_INT, options: ['min_range' => 1])] int $page = 1,
     ): Response {
         $items = $this->getItems($page);
 
@@ -50,7 +50,7 @@ class TurboDemoController extends AbstractController
         if ($request->headers->has('Turbo-Frame')) {
             $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
 
-            return $this->renderBlock('demos/turbo/infinite_scroll.stream.html.twig', 'update', [
+            return $this->renderBlock('demos/turbo/infinite_scroll.html.twig', 'stream_success', [
                 'items' => $items,
                 'has_more' => $hasMore,
                 'next_page' => $nextPage,
@@ -65,20 +65,20 @@ class TurboDemoController extends AbstractController
         ]);
     }
 
-    #[Route('/infinite-scroll-v2', name: 'app_demo_turbo_infinite_scroll_2')]
+    #[Route('/infinite-scroll-v2.{_format}', name: 'app_demo_turbo_infinite_scroll_2', requirements: ['_format' => 'html|turbo_stream'], format: 'html')]
     public function infiniteScroll2(
         Request $request,
-        #[MapQueryParameter(filter: \FILTER_VALIDATE_INT)] int $page = 1,
+        #[MapQueryParameter(filter: \FILTER_VALIDATE_INT, options: ['min_range' => 1])] int $page = 1,
     ): Response {
         $items = $this->getItems($page);
 
         $hasMore = \count($this->emojiCollection) > ($page * self::PER_PAGE);
         $nextPage = $hasMore ? $page + 1 : null;
 
-        if ($request->headers->has('Turbo-Frame')) {
+        if (TurboBundle::STREAM_FORMAT === $request->getPreferredFormat()) {
             $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
 
-            return $this->renderBlock('demos/turbo/infinite_scroll_2.stream.html.twig', 'update', [
+            return $this->renderBlock('demos/turbo/infinite_scroll_2.html.twig', 'stream_success', [
                 'items' => $items,
                 'has_more' => $hasMore,
                 'next_page' => $nextPage,

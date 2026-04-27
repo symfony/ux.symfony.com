@@ -40,6 +40,7 @@
                             id="product-grid-pagination"
                             src="{{ path('app_demo_turbo_infinite_scroll_2', {
                                 page: next_page,
+                                _format: 'turbo_stream',
                             }) }}"
                             loading="lazy"
                         />
@@ -69,7 +70,7 @@
             <twig:Code:CodeWithExplanationRow
                 filename="templates/demos/turbo/infinite_scroll_2.html.twig"
                 lineStart="39"
-                lineEnd="45"
+                lineEnd="46"
                 reversed
             >
                 ## Lazy-Loading Trick
@@ -90,9 +91,9 @@
                 existing list and replace itself with the next page link.
             </twig:Code:CodeWithExplanationRow>
             <twig:Code:CodeWithExplanationRow
-                filename="templates/demos/turbo/infinite_scroll_2.stream.html.twig"
-                lineStart="19"
-                lineEnd="25"
+                filename="templates/demos/turbo/infinite_scroll_2.html.twig"
+                lineStart="109"
+                lineEnd="139"
                 reversed
             >
                 ### Stream Content
@@ -103,4 +104,36 @@
             </twig:Code:CodeWithExplanationRow>
         </div>
     </section>
+{% endblock %}
+
+{% block stream_success %}
+    <twig:Turbo:Stream:Append target="#product-grid">
+        {% for item in items %}
+            <article class="ProductGrid_item" style="--color: {{ item.color }};">
+                <div class="ProductGrid_media">
+                    <svg>
+                        <use href="#svg-tshirt"/>
+                    </svg>
+                    <span>{{ item.emoji }}</span>
+                </div>
+                <data class="ProductGrid_price" value="{{ item.id }}" data-currency="$">
+                    {{ item.id + 1 }}<small>.99</small>
+                </data>
+            </article>
+        {% endfor %}
+    </twig:Turbo:Stream:Append>
+    <twig:Turbo:Stream:Replace target="#product-grid-pagination">
+        {% if has_more %}
+            <twig:Turbo:Frame
+                id="product-grid-pagination"
+                src="{{ path('app_demo_turbo_infinite_scroll_2', {
+                    page: next_page,
+                    _format: 'turbo_stream',
+                }) }}"
+                loading="lazy"
+            />
+        {% else %}
+            <span class="code">The End</span>
+        {% endif %}
+    </twig:Turbo:Stream:Replace>
 {% endblock %}

@@ -36,8 +36,15 @@
                 </div>
                 <div style="display: grid; place-content: center;padding-block: 2rem;">
                     {% if has_more %}
-                        <twig:Turbo:Frame id="product-grid-load-more">
-                            <a href="{{ path('app_demo_turbo_infinite_scroll', {page: next_page}) }}" class="ProductGrid_more" data-turbo-prefetch="false">
+                        <twig:Turbo:Frame id="product-grid-load-more" data-turbo-action="advance">
+                            <a
+                                class="ProductGrid_more"
+                                href="{{ path('app_demo_turbo_infinite_scroll', {
+                                    page: next_page,
+                                }) }}"
+                                data-turbo-action="replace"
+                                data-turbo-prefetch="false"
+                            >
                                 Load More
                             </a>
                         </twig:Turbo:Frame>
@@ -51,10 +58,14 @@
 
     <section class="py-5" style="padding-top: 6rem;">
         <div class="container container-xxl">
-            <twig:Code:CodeWithExplanationRow filename="src/Controller/Demo/TurboDemoController.php"
-                                              lineStart="40" lineEnd="66"
-                                              reversed sticky
-                                              style="--bs-gutter-x: 4rem;">
+            <twig:Code:CodeWithExplanationRow
+                filename="src/Controller/Demo/TurboDemoController.php"
+                lineStart="40"
+                lineEnd="66"
+                reversed
+                sticky
+                style="--bs-gutter-x: 4rem;"
+            >
                 This controller is quite standard: the page number as a query parameter, we call
                 a `getItems` method to retrieve the page results, and we define two variables,
                 `$hasMore` and `$nextPage`, to determine if there are more results to load, and
@@ -70,11 +81,14 @@
 
     <section class="py-5">
         <div class="container container-xxl" style="--bs-gutter-x: 4rem;">
-            <twig:Code:CodeWithExplanationRow filename="templates/demos/turbo/infinite_scroll.html.twig"
-                                              lineStart="38" lineEnd="46"
-                                              sticky
-                                              style="--bs-gutter-x: 4rem;">
-                The, in the main template, we wrap the `Load More` link inside a `Turbo Frame` and we set the
+            <twig:Code:CodeWithExplanationRow
+                filename="templates/demos/turbo/infinite_scroll.html.twig"
+                lineStart="38"
+                lineEnd="46"
+                sticky
+                style="--bs-gutter-x: 4rem;"
+            >
+                Then, in the main template, we wrap the `Load More` link inside a `Turbo Frame` and we set the
                 `data-turbo-prefetch` attribute to `false` to disable prefetching.
             </twig:Code:CodeWithExplanationRow>
         </div>
@@ -82,9 +96,14 @@
 
     <section class="py-5">
         <div class="container container-xxl" style="--bs-gutter-x: 4rem;">
-            <twig:Code:CodeWithExplanationRow filename="templates/demos/turbo/infinite_scroll.stream.html.twig"
-                                              reversed sticky
-                                              style="--bs-gutter-x: 4rem;">
+            <twig:Code:CodeWithExplanationRow
+                filename="templates/demos/turbo/infinite_scroll.html.twig"
+                lineStart="116"
+                lineEnd="148"
+                reversed
+                sticky
+                style="--bs-gutter-x: 4rem;"
+            >
                 Finally in the `stream` template we use `Turbo:Stream:Append` to append
                 the new items to the grid and `Turbo:Stream:Replace` to replace the
                 `Load More` link with a new one if there are more results to load.
@@ -92,4 +111,39 @@
         </div>
     </section>
 
+{% endblock %}
+
+{% block stream_success %}
+    <twig:Turbo:Stream:Append target="#product-grid">
+        {% for item in items %}
+            <article class="ProductGrid_item" style="--color: {{ item.color }};">
+                <div class="ProductGrid_media">
+                    <svg>
+                        <use href="#svg-tshirt"/>
+                    </svg>
+                    <span>{{ item.emoji }}</span>
+                </div>
+                <data class="ProductGrid_price" value="{{ item.id }}" data-currency="$">
+                    {{ item.id + 1 }}<small>.99</small>
+                </data>
+            </article>
+        {% endfor %}
+    </twig:Turbo:Stream:Append>
+    <twig:Turbo:Stream:Replace target="#product-grid-load-more">
+        {% if has_more %}
+            <twig:Turbo:Frame id="product-grid-load-more">
+                <a
+                    class="ProductGrid_more"
+                    href="{{ path('app_demo_turbo_infinite_scroll', {
+                        page: next_page,
+                    }) }}"
+                    data-turbo-prefetch="false"
+                >
+                    Load More
+                </a>
+            </twig:Turbo:Frame>
+        {% else %}
+            <span class="code">The End</span>
+        {% endif %}
+    </twig:Turbo:Stream:Replace>
 {% endblock %}

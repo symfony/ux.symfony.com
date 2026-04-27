@@ -13,8 +13,10 @@ namespace App\Tests\Functional;
 
 use App\Entity\Food;
 use App\Model\LiveDemo;
+use App\Model\TurboDemo;
 use App\Model\UxPackage;
 use App\Service\LiveDemoRepository;
+use App\Service\TurboDemoRepository;
 use App\Service\UxPackageRepository;
 use PHPUnit\Framework\Attributes\Before;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -116,6 +118,11 @@ class SmokeTest extends KernelTestCase
     public static function provideDemoUrls(): \Generator
     {
         $repository = new LiveDemoRepository();
+        foreach ($repository->findAll() as $demo) {
+            yield $demo->getIdentifier() => [$demo];
+        }
+
+        $repository = new TurboDemoRepository();
         foreach ($repository->findAll() as $demo) {
             yield $demo->getIdentifier() => [$demo];
         }

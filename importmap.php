@@ -255,4 +255,20 @@ return [
     '@hotwired/hotwire-native-bridge' => [
         'version' => '1.2.2',
     ],
+    'tw-animate-css/dist/tw-animate.css' => [
+        'version' => '1.4.0',
+        'type' => 'css',
+    ],
+    'shadcn/dist/tailwind.css' => [
+        'version' => '4.6.0',
+        'type' => 'css',
+    ],
+    '@fontsource-variable/geist/index.min.css' => [
+        'version' => '5.2.8',
+        'type' => 'css',
+    ],
+    '@fontsource-variable/geist-mono/index.min.css' => [
+        'version' => '5.2.7',
+        'type' => 'css',
+    ],
 ];

@@ -7,6 +7,10 @@
 
 ## Installation
 
+{% if component.manifest.versionAdded is not null %}
+This component has been added in version {{ component.manifest.versionAdded }}.
+{% endif %}
+
 ::: tabs
 
 :: tab Automatic

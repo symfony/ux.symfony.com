@@ -12,26 +12,33 @@
 namespace App\Twig\Components\Demo;
 
 use App\Model\LiveDemo;
+use App\Model\TurboDemo;
 use App\Service\LiveDemoRepository;
+use App\Service\TurboDemoRepository;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('Demo:PrevNext')]
 final class PrevNextDemo
 {
     public function __construct(
-        private readonly LiveDemoRepository $demoRepository,
+        private readonly LiveDemoRepository $liveDemoRepository,
+        private readonly TurboDemoRepository $turboDemoRepository,
     ) {
     }
 
-    public LiveDemo $demo;
+    public LiveDemo|TurboDemo $demo;
 
-    public function getPrevious(bool $loop = false): ?LiveDemo
+    public function getPrevious(bool $loop = false): LiveDemo|TurboDemo|null
     {
-        return $this->demoRepository->getPrevious($this->demo->getIdentifier(), $loop);
+        return $this->demo instanceof LiveDemo
+            ? $this->liveDemoRepository->getPrevious($this->demo->getIdentifier(), $loop)
+            : $this->turboDemoRepository->getPrevious($this->demo->getIdentifier(), $loop);
     }
 
-    public function getNext(bool $loop = false): ?LiveDemo
+    public function getNext(bool $loop = false): LiveDemo|TurboDemo|null
     {
-        return $this->demoRepository->getNext($this->demo->getIdentifier(), $loop);
+        return $this->demo instanceof LiveDemo
+            ? $this->liveDemoRepository->getNext($this->demo->getIdentifier(), $loop)
+            : $this->turboDemoRepository->getNext($this->demo->getIdentifier(), $loop);
     }
 }

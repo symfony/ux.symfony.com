@@ -1,0 +1,26 @@
+{%- props variant = 'note' -%}
+{%- set style = html_cva(
+    base: 'flex gap-2 rounded-md p-2.5 my-1 [&_p]:my-1',
+    variants: {
+        variant: {
+            note: 'border-sky-500 bg-sky-50 text-sky-900',
+            tip: 'border-green-500 bg-green-50 text-green-900',
+            important: 'border-purple-500 bg-purple-50 text-purple-900',
+            warning: 'border-amber-500 bg-amber-50 text-amber-900',
+            caution: 'border-red-500 bg-red-50 text-red-900',
+        },
+    },
+) -%}
+{%- set icons = {note: 'lucide:info', tip: 'lucide:lightbulb', important: 'lucide:message-square-warning', warning: 'lucide:triangle-alert', caution: 'lucide:octagon-alert'} -%}
+{%- set labels = {note: 'Note', tip: 'Tip', important: 'Important', warning: 'Warning', caution: 'Caution'} -%}
+
+<div
+    class="{{ style.apply({variant: variant}, attributes.render('class'))|tailwind_merge }}"
+    {{ attributes.defaults({}).without('class') }}
+>
+    <twig:ux:icon name="{{ icons[variant] }}" class="size-5 shrink-0 mt-0.5" />
+    <div class="flex-1">
+        <span class="font-semibold">{{ labels[variant] }}</span>
+        {% block content %}{% endblock %}
+    </div>
+</div>

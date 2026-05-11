@@ -8002,12 +8002,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-toolkit.git",
-                "reference": "3e92e407f8b031686b1a09d38111455e073fdd2a"
+                "reference": "1760888cee5779a0622aae1a1425402bc1a4a845"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-toolkit/zipball/3e92e407f8b031686b1a09d38111455e073fdd2a",
-                "reference": "3e92e407f8b031686b1a09d38111455e073fdd2a",
+                "url": "https://api.github.com/repos/symfony/ux-toolkit/zipball/1760888cee5779a0622aae1a1425402bc1a4a845",
+                "reference": "1760888cee5779a0622aae1a1425402bc1a4a845",
                 "shasum": ""
             },
             "require": {
@@ -8016,7 +8016,7 @@
                 "symfony/filesystem": "^7.4|^8.0",
                 "symfony/framework-bundle": "^7.4|^8.0",
                 "symfony/twig-bundle": "^7.4|^8.0",
-                "symfony/ux-twig-component": "^2.25.1|^3.0",
+                "symfony/ux-twig-component": "^3.1",
                 "symfony/yaml": "^7.4|^8.0",
                 "twig/twig": "^3.0"
             },
@@ -8102,7 +8102,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-27T05:47:50+00:00"
+            "time": "2026-05-11T08:52:58+00:00"
         },
         {
             "name": "symfony/ux-translator",

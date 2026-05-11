@@ -1,0 +1,34 @@
+<?php
+
+/*
+ * This file is part of the Symfony package.
+ *
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace App\Service\CommonMark\Extension\Alert;
+
+use App\Service\CommonMark\Extension\Alert\Node\Alert;
+use App\Service\CommonMark\Extension\Alert\Parser\AlertParser;
+use App\Service\CommonMark\Extension\Alert\Renderer\AlertRenderer;
+use League\CommonMark\Environment\EnvironmentBuilderInterface;
+use League\CommonMark\Extension\ExtensionInterface;
+
+final class AlertExtension implements ExtensionInterface
+{
+    public function __construct(
+        private \Twig\Environment $twig,
+    ) {
+    }
+
+    public function register(EnvironmentBuilderInterface $environment): void
+    {
+        $environment
+            ->addBlockStartParser(AlertParser::createBlockStartParser(), 100)
+            ->addRenderer(Alert::class, new AlertRenderer($this->twig))
+        ;
+    }
+}

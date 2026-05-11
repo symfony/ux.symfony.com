@@ -11,6 +11,11 @@
 
 :: tab Automatic
 
+{% if component.manifest.versionAdded is not null %}
+> [!NOTE]
+> Available since UX Toolkit {{ component.manifest.versionAdded }}.
+{% endif %}
+
 ```shell
 bin/console ux:install {{ component.name }} --kit {{ kit_id.value }}
 ```

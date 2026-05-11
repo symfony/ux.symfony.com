@@ -11,6 +11,7 @@
 
 namespace App\Service\CommonMark;
 
+use App\Service\CommonMark\Extension\Alert\AlertExtension;
 use App\Service\CommonMark\Extension\FencedCode\FencedCodeRenderer;
 use App\Service\CommonMark\Extension\Tabs\TabsExtension;
 use App\Service\CommonMark\Extension\ToolkitPreview\ToolkitPreviewExtension;
@@ -87,6 +88,7 @@ final class ConverterFactory
             ->addExtension(new TableExtension())
             ->addExtension(new HeadingPermalinkExtension())
             ->addExtension(new TabsExtension())
+            ->addExtension(new AlertExtension($this->twig))
             ->addExtension(new ToolkitPreviewExtension($this->uriSigner, $this->urlGenerator, $this->twig))
             ->addRenderer(FencedCode::class, new FencedCodeRenderer($this->componentRenderer))
         ;

@@ -26,14 +26,23 @@
         {{ include('toolkit/_kit_aside.html.twig') }}
 
         <div>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ path('app_toolkit') }}">UX Toolkit</a></li>
-                    <li class="breadcrumb-item"><a href="{{ path('app_toolkit', {_fragment: 'kits'}) }}">Kits</a></li>
-                    <li class="breadcrumb-item"><a href="{{ path('app_toolkit_kit', {kitId: kit_id.value}) }}">{{ kit.manifest.name }}</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ component.manifest.name }}</li>
-                </ol>
-            </nav>
+            <div class="flex items-center justify-between gap-4 flex-wrap">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ path('app_toolkit') }}">UX Toolkit</a></li>
+                        <li class="breadcrumb-item"><a href="{{ path('app_toolkit', {_fragment: 'kits'}) }}">Kits</a></li>
+                        <li class="breadcrumb-item"><a href="{{ path('app_toolkit_kit', {kitId: kit_id.value}) }}">{{ kit.manifest.name }}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ component.manifest.name }}</li>
+                    </ol>
+                </nav>
+
+                <a href="{{ path('app_toolkit_component', {kitId: kit_id.value, componentName: component.name}) }}.md"
+                   class="inline-flex items-center gap-2 text-sm text-foreground/80 hover:text-foreground underline-offset-4 hover:underline"
+                   title="View this page as Markdown (useful for LLMs)">
+                    <twig:ux:icon name="lucide:file-text" class="size-4" />
+                    View as Markdown
+                </a>
+            </div>
 
             <twig:Toolkit:ComponentDoc kitId="{{ kit_id }}" component="{{ component }}" />
         </div>

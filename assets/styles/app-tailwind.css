@@ -50,9 +50,6 @@
     --border-radius-small: 0.5rem;
     --border-radius: 1rem;
     --border-radius-large: 1.5rem;
-
-    /* Font stacks */
-    --font-family-title: "Ubuntu Sans", "Ubuntu", system-ui, sans-serif;
 }
 
 .dark {
@@ -97,7 +94,9 @@
     --color-purple: var(--color-purple);
 
     /* Font families */
-    --font-title: var(--font-family-title);
+    --font-title: "Ubuntu Sans", "Ubuntu", system-ui, sans-serif;
+    --font-sans: system-ui, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", SFMono-Regular, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace;
 
     /* Radius */
     --radius-sm: var(--border-radius-small);
@@ -112,6 +111,15 @@
     --breakpoint-lg: 980px;
     --breakpoint-xl: 1114px;
     --breakpoint-2xl: 1400px;
+
+    /* Animations */
+    --animate-icon-loading: icon-loading 250ms forwards;
+}
+
+@keyframes icon-loading {
+    0% { transform: scale(.95); }
+    80% { transform: scale(1.04); }
+    100% { transform: scale(1); }
 }
 
 @layer base {
@@ -173,7 +181,7 @@
     h4, .h4,
     h5, .h5,
     h6, .h6 {
-        font-family: var(--font-family-title);
+        font-family: var(--font-title);
         margin-top: 0;
         margin-bottom: .5rem;
         font-weight: var(--font-weight-medium);
@@ -238,7 +246,7 @@
     }
 
     h3, a.component-title {
-        font-family: var(--font-family-title);
+        font-family: var(--font-title);
         font-weight: var(--font-weight-bold);
         font-size: var(--text-3xl);
         line-height: --spacing(10);
@@ -282,7 +290,7 @@
     }
 
     .code-description :is(h2, h3) {
-        font-family: var(--font-family-title);
+        font-family: var(--font-title);
     }
     .code-description h2 {
         font-size: 2.5em;
@@ -302,7 +310,7 @@
 
 
     .ubuntu-header {
-        font-family: var(--font-family-title);
+        font-family: var(--font-title);
         font-weight: 700;
         font-size: 24px;
         line-height: 24px;
@@ -312,7 +320,7 @@
 
     .eyebrows {
         text-transform: uppercase;
-        font-family: var(--font-family-text);
+        font-family: var(--font-sans);
         font-weight: 600;
         font-size: 0.7rem;
         line-height: 1.6;
@@ -353,10 +361,45 @@
         width: 100%;
         position: relative;
     }
+
+    .tippy-content {
+        font-stretch: semi-condensed;
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+    }
+    .tippy-content button {
+        border: 0;
+        background: none;
+    }
+    .tippy-content span:first-child {
+        color: var(--color-code);
+    }
+    .tippy-content span:not(:first-child) {
+        color: var(--color-body-text);
+    }
+
+    .bg-icon-grid {
+        background-image:
+            linear-gradient(currentColor 1px, transparent 1px),
+            linear-gradient(to right, currentColor 1px, transparent 1px);
+        background-size: 12% 12%;
+        background-position: center;
+        background-blend-mode: soft-light;
+    }
+
+    .bg-icon-check {
+        --bg-color: var(--color-border-translucent);
+        background-image:
+            repeating-linear-gradient(45deg, var(--bg-color) 25%, transparent 25%, transparent 75%, var(--bg-color) 75%, var(--bg-color)),
+            repeating-linear-gradient(45deg, var(--bg-color) 25%, transparent 25%, transparent 75%, var(--bg-color) 75%, var(--bg-color));
+        background-position: 0 0, 20px 20px;
+        background-size: calc(2 * 20px) calc(2 * 20px);
+    }
 }
 
 @import "./components/_DemoContainer.css";
 @import "./components/_ProductGrid.css";
+@import "./components/_Terminal.css";
 @import "./components/_Wysiwyg.css";
 @import "./utilities/_arrow.css";
 @import "./utilities/_font.css";

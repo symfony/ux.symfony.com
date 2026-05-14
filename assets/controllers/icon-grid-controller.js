@@ -7,7 +7,7 @@ export default class extends Controller {
     connect() {
         this.element.addEventListener('click', this.click.bind(this), true);
         this.tippy = delegate(this.element, {
-            target: '.IconCard',
+            target: '[data-icon-card]',
             content: (reference) => '<button title="Copy Icon name" data-controller="clipboarder" data-action="clipboarder#copy"  data-clipboarder-target="button source">'
                 + '<span>'
                 + reference.title.split(':').join('</span>:<span>')
@@ -35,7 +35,7 @@ export default class extends Controller {
     }
 
     click(event) {
-        const iconCard = event.target.closest('.IconCard');
+        const iconCard = event.target.closest('[data-icon-card]');
         if (!iconCard) {
             return;
         }

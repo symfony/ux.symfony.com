@@ -1,22 +1,22 @@
-<article {{ attributes.defaults({class: 'ChangelogItem'}) }} id="{{ item.version }}">
+<article {{ attributes.defaults({class: 'grid gap-16 grid-cols-[var(--left-pane)_1fr] max-lg:gap-0 max-lg:grid-cols-[auto_1fr]'}) }} id="{{ item.version }}">
 
-    <div class="ChangelogItem__Anchor">
-        <a class="ChangelogItem__Version" href="https://github.com/symfony/ux/releases/tag/{{ item.version }}"
+    <div class="self-start sticky top-8 flex flex-col content-stretch justify-center text-center pt-4 after:content-[''] after:absolute after:-right-2 after:w-4 after:h-4 after:rounded-full after:bg-body-text max-lg:hidden">
+        <a class="text-xl font-normal block text-code opacity-90 transition-all duration-150 ease-in-out hover:opacity-100" href="https://github.com/symfony/ux/releases/tag/{{ item.version }}"
             target="_blank" rel="external noreferer">
             <code>{{ this.getVersion() }}</code>
         </a>
-        <div class="ChangelogItem__Date">
+        <div class="text-sm font-normal block text-muted font-stretch-semi-condensed">
             <span>{{ item.date|date('Y-m-d') }}</span>
         </div>
     </div>
 
-    <div class="ChangelogItem__Content">
-        <details {{ isOpen|default ? 'open' }}>
-            <summary class="ChangelogItem__Head">
-                <h2 class="ChangelogItem__Title">
+    <div class="p-6 rounded-sm bg-[#eef0f91a] border border-surface dark:bg-[#1c2024]">
+        <details class="group" {{ isOpen|default ? 'open' }}>
+            <summary class="list-none [&::-webkit-details-marker]:hidden cursor-pointer flex flex-row items-center gap-4 justify-between">
+                <h2 class="text-lg font-normal text-body-text mb-0 group-open:text-xl">
                     {{- this.getTitle() -}}
                 </h2>
-                <twig:ux:icon name="chevron-down" class="Icon ChangelogItem__Toggle" />
+                <twig:ux:icon name="chevron-down" class="Icon transition-all duration-150 ease-in-out rotate-0 opacity-50 group-open:rotate-180 group-open:opacity-75" />
             </summary>
             <div class="border-t mt-4 pt-4 Wysiwyg [&_a]:text-[#0969da]">
                 {{ this.getContent()|markdown_to_html }}

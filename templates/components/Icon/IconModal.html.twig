@@ -1,5 +1,5 @@
 <dialog {{ attributes.defaults({
-    class: 'IconModal',
+    class: 'fixed inset-0 m-auto w-[54rem] min-h-4 max-w-screen max-h-screen overflow-auto py-4 px-6 bg-body text-body-text rounded-xl shadow-[0_0_1rem_0_#0000004a] border border-(--color-border-subtle) [&_img]:opacity-10 open:[&_img]:opacity-100 backdrop:backdrop-blur-[3px] backdrop:bg-[rgba(7,7,7,0.05)] max-md:p-2 max-md:m-2 max-md:w-auto max-md:h-auto',
     id: 'IconModal',
     'data-open': this.icon ? 'open' : false,
 }).defaults(stimulus_controller('icon-modal')) }}>
@@ -16,8 +16,8 @@
         {% set icon_set = this.iconSet() %}
 
         <div id="IconModal--{{ icon }}">
-            <div class="IconModal__header">
-                <p class="IconModal__title">
+            <div class="flex flex-row items-center justify-between mb-3 border-b border-subtle pb-2 [&_button]:opacity-25 [&_button]:absolute [&_button]:right-3 [&_button:hover]:opacity-100">
+                <p class="text-base font-mono m-0 text-center w-full [&_span:first-child]:text-code">
                     <span>{{ icon.prefix }}</span><span>:</span><span>{{ icon.name }}</span>
                 </p>
                 <button type="button" class="btn close" data-action="icon-modal#close">
@@ -25,25 +25,25 @@
                 </button>
             </div>
 
-            <div class="IconModal__body">
-                <div class="IconModal__media">
-                    <div class="IconModal__icon IconModal__icon--grid {{ icon_set.palette ? 'IconModal__color' }}">
-                        <img src="{{ icon.imageUrl }}" alt="Icon {{ icon.prefix }} {{ icon.name|humanize }}">
+            <div class="grid gap-6 md:grid-cols-[300px_1fr]">
+                <div>
+                    <div class="bg-icon-grid aspect-square flex place-content-center rounded-xl text-(--color-border-subtle) border border-(--color-border-subtle) bg-[rgb(9,16,17)] [&_svg]:text-body-text">
+                        <img class="w-3/4 h-auto in-data-[open=open]:animate-icon-loading {{ icon_set.palette ? '' : 'invert' }}" src="{{ icon.imageUrl }}" alt="Icon {{ icon.prefix }} {{ icon.name|humanize }}">
                     </div>
-                    <div class="IconModal__icons">
-                        <div class="IconModal__icon {{ icon_set.palette ? 'IconModal__color' }}">
-                            <img src="{{ icon.imageUrl }}" alt="Icon {{ icon.prefix }} {{ icon.name|humanize }}">
+                    <div class="grid grid-cols-3 pt-3 gap-3 opacity-50">
+                        <div class="aspect-square flex place-content-center rounded bg-body-text">
+                            <img class="w-3/4 h-auto in-data-[open=open]:animate-icon-loading" src="{{ icon.imageUrl }}" alt="Icon {{ icon.prefix }} {{ icon.name|humanize }}">
                         </div>
-                        <div class="IconModal__icon IconModal__icon--check {{ icon_set.palette ? 'IconModal__color' }}">
-                            <img src="{{ icon.imageUrl }}" alt="Icon {{ icon.prefix }} {{ icon.name|humanize }}">
+                        <div class="bg-icon-check aspect-square flex place-content-center rounded text-muted">
+                            <img class="w-3/4 h-auto in-data-[open=open]:animate-icon-loading" src="{{ icon.imageUrl }}" alt="Icon {{ icon.prefix }} {{ icon.name|humanize }}">
                         </div>
-                        <div class="IconModal__icon {{ icon_set.palette ? 'IconModal__color' }}">
-                            <img src="{{ icon.imageUrl }}" alt="Icon {{ icon.prefix }} {{ icon.name|humanize }}">
+                        <div class="aspect-square flex place-content-center rounded bg-white invert">
+                            <img class="w-3/4 h-auto in-data-[open=open]:animate-icon-loading" src="{{ icon.imageUrl }}" alt="Icon {{ icon.prefix }} {{ icon.name|humanize }}">
                         </div>
                     </div>
                 </div>
 
-                <div class="IconModal__main">
+                <div class="min-w-0 [&_h3]:pt-6 [&_h3]:leading-none [&_h3]:text-body-text [&_h3]:font-sans [&_h3]:text-base [&_h3]:font-light [&_h3]:tracking-normal [&_h3]:opacity-95 [&_h3]:mb-3 [&_h3]:font-stretch-semi-condensed [&_h3:first-child]:pt-0 [&_.TabBody]:pb-0">
                     <div data-controller="tabs"
                          data-tabs-tab-value="icon"
                          data-tabs-active-class="active"
@@ -69,17 +69,17 @@
 
                             <div class="[&:not(.active)]:hidden" data-tab="icon" data-tabs-target="tab">
                                 <h3>Import Icon</h3>
-                                <twig:Code:CodeLine class="IconModal__code">
+                                <twig:Code:CodeLine>
                                     symfony console ux:icon:import <span>{{ icon }}</span>
                                 </twig:Code:CodeLine>
 
                                 <h3>Twig Component</h3>
-                                <twig:Code:CodeLine class="IconModal__code">
+                                <twig:Code:CodeLine>
                                     {{- '<%s:ux:icon name="'|format('twig') -}} <span>{{ icon }}</span>{{ '" />' -}}
                                 </twig:Code:CodeLine>
 
                                 <h3>Render Icon</h3>
-                                <twig:Code:CodeLine class="IconModal__code">
+                                <twig:Code:CodeLine>
                                     {{- '{{ ' -}} ux_icon('<span>{{ icon }}</span>') {{- ' }}' -}}
                                 </twig:Code:CodeLine>
                             </div>
@@ -89,7 +89,7 @@
                                 {% if _svg %}
                                     <div data-live-ignore id="IconModal-Tab-Svg--{{ icon }}">
                                         <h3>SVG Icon</h3>
-                                        <twig:Code:CodeLine class="IconModal__code" height="12rem">
+                                        <twig:Code:CodeLine height="12rem">
                                             {{ _svg|highlight('xml') }}
                                         </twig:Code:CodeLine>
                                     </div>
@@ -108,7 +108,7 @@
                                         title: icon_set.license.title,
                                         href: icon_set.license.url|default,
                                     } : null,
-                                } }}" itemClass="w-full IconModal__code"/>
+                                } }}" itemClass="w-full"/>
                             </div>
                         </div>
                     </div>

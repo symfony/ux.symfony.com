@@ -17,7 +17,7 @@
     </div>
 
     <div class="max-w-[1400px] mx-auto px-6 pt-6 md:px-12">
-        <div class="Changelog">
+        <div class="max-w-[1000px] mx-auto flex flex-col gap-16 relative [--left-pane:10rem] max-lg:[--left-pane:0rem] before:content-[''] before:absolute before:top-10 before:left-(--left-pane) before:w-0.5 before:bottom-8 before:bg-surface before:border-r before:border-surface max-lg:before:hidden">
             {% for entry in changelog %}
                 <twig:ChangelogItem item="{{ entry }}" isOpen="{{ loop.index < 4 }}" />
             {% endfor %}

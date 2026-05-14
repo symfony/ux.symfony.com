@@ -7,7 +7,7 @@
   --text-color: var(--bs-body-color);
   position: absolute;
   inset: 0 0 auto;
-  z-index: 2;
+  z-index: 10;
   padding: 1.5rem 0;
   color: var(--text-color);
   @media (min-width: 860px) {

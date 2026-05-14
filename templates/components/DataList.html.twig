@@ -3,7 +3,7 @@
 <dl class="flex flex-row flex-wrap justify-center content-center gap-6">
     {% for label, value in items %}
         {% if value is not null %}
-            <div class="flex items-center gap-4 {{ itemClass }}">
+            <twig:Code:Snippet class="flex items-center gap-4 {{ itemClass }}">
                 <dt class="font-bold after:content-[':']">{{ label }}</dt>
                 <dd class="text-code font-normal m-0 ">
                     {%- if value.href|default %}
@@ -15,7 +15,7 @@
                         {{ value.title ?? value }}
                     {%- endif -%}
                 </dd>
-            </div>
+            </twig:Code:Snippet>
         {% endif %}
     {% endfor %}
 </dl>

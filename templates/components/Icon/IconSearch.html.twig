@@ -1,15 +1,15 @@
-<div{{ attributes.defaults({class: 'IconSearch'}) }}>
+<div{{ attributes }}>
 
-    <div class="IconSearchBox">
+    <div class="sticky top-0 bg-body z-2">
         <div class="p-6 markdown-container bg-white/75 dark:bg-black/75 shadow-blur shadow-blur--rainbow mt-12"
              style="border-radius: .75rem">
-            <fieldset class="flex gap-6">
+            <fieldset class="flex items-stretch gap-6 max-md:flex-wrap">
 
-                <div class="input-group" style="max-width: 200px;">
-                    <label class="input-group-text" for="IconSearch-Set">
+                <div class="flex items-stretch w-[220px] shrink-0 max-md:w-full">
+                    <label class="flex items-center px-3 bg-subtle border border-solid border-border border-e-0 rounded-s-sm" for="IconSearch-Set">
                         <twig:ux:icon name="icon-sets"/>
                     </label>
-                    <select class="form-control" data-model="set" id="IconSearch-Set">
+                    <select class="flex-1 min-w-0 px-3 py-1.5 border border-solid border-border rounded-e-sm bg-body text-body-text focus:border-link focus:[outline:revert]" data-model="set" id="IconSearch-Set">
                         <option value="">All sets</option>
                         {% for group_name, options in this.getIconSetOptionGroups() %}
                             <optgroup label="{{ group_name }}">
@@ -21,8 +21,8 @@
                     </select>
                 </div>
 
-                <div class="input-group IconSearch__Query">
-                    <label class="input-group-text" for="IconSearch-Query">
+                <div class="flex flex-1 items-stretch relative max-md:order-2 max-md:w-full max-md:basis-full">
+                    <label class="flex items-center px-3 bg-subtle border border-solid border-border border-e-0 rounded-s-sm" for="IconSearch-Query">
                         <twig:ux:icon name="icon-search"/>
                     </label>
                     <input
@@ -30,23 +30,21 @@
                         type="search"
                         data-model="query"
                         placeholder="Results update as you type..."
-                        class="form-control IconSearch__Input"
+                        class="flex-1 min-w-0 px-3 py-1.5 border border-solid border-border rounded-e-sm bg-body text-body-text focus:border-link focus:[outline:revert]"
                         id="IconSearch-Query"
                     >
-                    <p class="IconSearch__Iconify">
+                    <p class="absolute right-3 text-[0.7rem] font-stretch-semi-condensed opacity-50 m-0 top-1/2 -translate-y-1/2 max-md:top-[125%] max-md:text-[xx-small]">
                         Powered by <a href="https://iconify.design/">iconify<span>.</span>design</a>
                     </p>
                 </div>
 
-                <div class="flex shrink-0 IconSearch__Display">
-                    <div class="btn-group" role="group" data-controller="icon-size">
-                        <button class="btn" data-action="icon-size#small">
-                            <twig:ux:icon name="grid-small"/>
-                        </button>
-                        <button class="btn" data-action="icon-size#large">
-                            <twig:ux:icon name="grid-large"/>
-                        </button>
-                    </div>
+                <div class="flex items-stretch shrink-0 max-md:hidden" role="group" data-controller="icon-size">
+                    <button class="px-3 flex items-center justify-center border border-solid border-border border-e-0 rounded-s-sm bg-body hover:bg-subtle cursor-pointer text-lg" data-action="icon-size#small" aria-label="Small grid">
+                        <twig:ux:icon name="grid-small"/>
+                    </button>
+                    <button class="px-3 flex items-center justify-center border border-solid border-border rounded-e-sm bg-body hover:bg-subtle cursor-pointer text-lg" data-action="icon-size#large" aria-label="Large grid">
+                        <twig:ux:icon name="grid-large"/>
+                    </button>
                 </div>
 
                 {% if false %}

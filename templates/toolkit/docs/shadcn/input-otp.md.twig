@@ -1,0 +1,47 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block examples %}
+### Pattern
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Pattern', {height: '150px'}) }}
+
+### Separator
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Separator', {height: '120px'}) }}
+
+### Disabled
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Disabled', {height: '120px'}) }}
+
+### Controlled
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Controlled', {height: '150px'}) }}
+
+### Invalid
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Invalid', {height: '120px'}) }}
+
+### Four Digits
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Four Digits', {height: '120px'}) }}
+
+### Alphanumeric
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Alphanumeric', {height: '120px'}) }}
+
+### RTL
+
+{{ toolkit_code_example(kit_id.value, component.name, 'RTL', {height: '250px'}) }}
+
+### Form
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Form', {height: '500px'}) }}
+{% endblock %}

@@ -245,7 +245,7 @@ class GenerateLlmsFilesCommand
         $packages = $this->packageRepository->findAll(removed: false, sortByName: true);
         $cookbooks = $this->cookbookRepository->findAll();
 
-        // Homepage (index.html.md) and llms.txt share the same content
+        // Homepage (index.md) and llms.txt share the same content
         $io->section('Generating llms.txt and homepage Markdown');
         $llmsTxt = $this->twig->render('llms/llms.txt.twig', [
             'packages' => $packages,
@@ -269,7 +269,7 @@ class GenerateLlmsFilesCommand
     /**
      * Converts a route URL to the corresponding .md file path relative to the output directory.
      *
-     * "/" becomes "index.html.md", "/foo/bar" becomes "foo/bar.md".
+     * "/" becomes "index.md", "/foo/bar" becomes "foo/bar.md".
      *
      * @param array<string, string> $parameters
      */
@@ -278,7 +278,7 @@ class GenerateLlmsFilesCommand
         $url = $this->urlGenerator->generate($route, $parameters);
 
         if ('/' === $url) {
-            return 'index.html.md';
+            return 'index.md';
         }
 
         return ltrim($url, '/').'.md';

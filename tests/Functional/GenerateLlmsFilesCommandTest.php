@@ -61,7 +61,7 @@ class GenerateLlmsFilesCommandTest extends KernelTestCase
         $llmsDir = self::getContainer()->getParameter('app.llms_dir');
 
         // Core files
-        self::assertFileExists($llmsDir.'/index.html.md');
+        self::assertFileExists($llmsDir.'/index.md');
         self::assertFileExists($llmsDir.'/packages.md');
         self::assertFileExists($llmsDir.'/documentation.md');
         self::assertFileExists($llmsDir.'/demos.md');
@@ -93,6 +93,7 @@ class GenerateLlmsFilesCommandTest extends KernelTestCase
             ->visit($mdUrl)
             ->assertSuccessful()
             ->assertContentType('markdown')
+            ->assertHeaderContains('Vary', 'Accept')
         ;
 
         // Content negotiation with Accept: text/markdown
@@ -100,6 +101,7 @@ class GenerateLlmsFilesCommandTest extends KernelTestCase
             ->get($htmlUrl, HttpOptions::create()->withHeader('Accept', 'text/markdown'))
             ->assertSuccessful()
             ->assertContentType('markdown')
+            ->assertHeaderContains('Vary', 'Accept')
         ;
 
         // HTML is preferred when listed before markdown
@@ -107,7 +109,32 @@ class GenerateLlmsFilesCommandTest extends KernelTestCase
             ->get($htmlUrl, HttpOptions::create()->withHeader('Accept', 'text/html, text/markdown'))
             ->assertSuccessful()
             ->assertHeaderContains('Content-Type', 'text/html')
+            ->assertHeaderContains('Vary', 'Accept')
         ;
+    }
+
+    #[DataProvider('provideUrlsWithoutMarkdown')]
+    public function testPagesWithoutMarkdownVariantDoNotSetVaryAccept(string $htmlUrl)
+    {
+        // No .md file exists for these URLs
+        $this->browser()
+            ->visit($htmlUrl.'.md')
+            ->assertStatus(404)
+        ;
+
+        // HTML response must NOT carry Vary: Accept (no markdown variant)
+        $this->browser()
+            ->visit($htmlUrl)
+            ->assertSuccessful()
+            ->assertHeaderContains('Content-Type', 'text/html')
+            ->assertHeaderEquals('Vary', null)
+        ;
+    }
+
+    public static function provideUrlsWithoutMarkdown(): \Generator
+    {
+        yield 'cookbook listing' => ['/cookbook'];
+        yield 'support page' => ['/support'];
     }
 
     public function testPathTraversalIsBlocked()
@@ -131,7 +158,7 @@ class GenerateLlmsFilesCommandTest extends KernelTestCase
 
         // Core pages
         $homepageUrl = $router->generate('app_homepage');
-        yield 'homepage' => [$homepageUrl, '/index.html.md'];
+        yield 'homepage' => [$homepageUrl, '/index.md'];
 
         foreach (['app_packages', 'app_documentation', 'app_demos', 'app_changelog'] as $route) {
             $url = $router->generate($route);

@@ -7,3 +7,29 @@
 {% block usage %}
 {{ toolkit_code_usage(kit_id.value, component.name) }}
 {% endblock %}
+
+{% block examples %}
+### Vertical
+
+Use `orientation="vertical"` for a vertical separator.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Vertical') }}
+
+### Menu
+
+Vertical separators between menu items with descriptions.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Menu') }}
+
+### List
+
+Horizontal separators between list items.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'List') }}
+
+### RTL
+
+To enable RTL support, set the `dir="rtl"` attribute on the root element.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'RTL', {height: '350px'}) }}
+{% endblock %}

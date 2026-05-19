@@ -1,7 +1,7 @@
 {% extends 'toolkit/docs/_base_component.md.twig' %}
 
 {% block demo %}
-{{ toolkit_code_demo(kit_id.value, component.name) }}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '300px'}) }}
 {% endblock %}
 
 {% block usage %}
@@ -13,7 +13,7 @@
 
 A basic accordion that shows one item at a time. The first item is open by default.
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Basic', {height: '400px'}) }}
+{{ toolkit_code_example(kit_id.value, component.name, 'Basic', {height: '300px'}) }}
 
 ### Multiple
 
@@ -25,17 +25,23 @@ Use the `multiple` prop to allow multiple items to be open at the same time.
 
 Use the `disabled` prop on `Accordion:Item` to disable individual items.
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Disabled', {height: '400px'}) }}
+{{ toolkit_code_example(kit_id.value, component.name, 'Disabled', {height: '300px'}) }}
 
 ### Borders
 
 Add `border` to the `Accordion` and `border-b last:border-b-0` to the `Accordion:Item` to add borders to the items.
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Borders', {height: '400px'}) }}
+{{ toolkit_code_example(kit_id.value, component.name, 'Borders', {height: '300px'}) }}
 
 ### Card
 
 Wrap the `Accordion` in a `Card` component.
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Card', {height: '400px'}) }}
+{{ toolkit_code_example(kit_id.value, component.name, 'Card', {height: '450px'}) }}
+
+### RTL
+
+To enable RTL support, set the `dir="rtl"` attribute on the root element.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'RTL', {height: '450px'}) }}
 {% endblock %}

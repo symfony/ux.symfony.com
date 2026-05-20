@@ -1,9 +1,29 @@
 {% extends 'toolkit/docs/_base_component.md.twig' %}
 
 {% block demo %}
-{{ toolkit_code_demo(kit_id.value, component.name) }}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '500px'}) }}
 {% endblock %}
 
 {% block usage %}
 {{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block examples %}
+### Size
+
+Use the `size="sm"` prop to set the size of the card to small. The small size variant uses smaller spacing.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Size', {height: '400px'}) }}
+
+### Image
+
+Add an image before the card header to create a card with an image.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Image', {height: '550px'}) }}
+
+### RTL
+
+To enable RTL support, set the `dir="rtl"` attribute on the root element.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'RTL', {height: '900px'}) }}
 {% endblock %}

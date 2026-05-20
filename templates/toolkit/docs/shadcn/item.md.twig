@@ -1,7 +1,7 @@
 {% extends 'toolkit/docs/_base_component.md.twig' %}
 
 {% block demo %}
-{{ toolkit_code_demo(kit_id.value, component.name) }}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '250px'}) }}
 {% endblock %}
 
 {% block usage %}
@@ -9,19 +9,57 @@
 {% endblock %}
 
 {% block examples %}
-### Variants
+### Variant
+
+Use the `variant` prop to change the visual style of the item.
+
 {{ toolkit_code_example(kit_id.value, component.name, 'Variants', {height: '400px'}) }}
 
 ### Size
+
+Use the `size` prop to change the size of the item. Available sizes are `default`, `sm`, and `xs`.
+
 {{ toolkit_code_example(kit_id.value, component.name, 'Size', {height: '400px'}) }}
 
 ### Icon
+
+Use `Item:Media` with `variant="icon"` to display an icon.
+
 {{ toolkit_code_example(kit_id.value, component.name, 'Icon') }}
 
 ### Avatar
-{{ toolkit_code_example(kit_id.value, component.name, 'Avatar', {height: '400px'}) }}
+
+Use `Item:Media` to display an avatar.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Avatar', {height: '300px'}) }}
+
+### Image
+
+Use `Item:Media` with `variant="image"` to display an image.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Image', {height: '350px'}) }}
+
+### Group
+
+Use `Item:Group` to group related items together.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Group', {height: '350px'}) }}
+
+### Header
+
+Use `Item:Header` to add a header above the item content.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Header', {height: '400px'}) }}
 
 ### Link
-{{ toolkit_code_example(kit_id.value, component.name, 'Link', {height: '400px'}) }}
 
+Use the `as` prop to render the item as a link. The hover and focus states will be applied to the anchor element.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Link', {height: '300px'}) }}
+
+### RTL
+
+To enable RTL support, set the `dir="rtl"` attribute on the root element.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'RTL', {height: '400px'}) }}
 {% endblock %}

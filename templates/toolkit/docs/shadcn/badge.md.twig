@@ -1,7 +1,7 @@
 {% extends 'toolkit/docs/_base_component.md.twig' %}
 
 {% block demo %}
-{{ toolkit_code_demo(kit_id.value, component.name) }}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '150px'}) }}
 {% endblock %}
 
 {% block usage %}
@@ -9,6 +9,39 @@
 {% endblock %}
 
 {% block examples %}
-### As link
-{{ toolkit_code_example(kit_id.value, component.name, 'As link') }}
+### Variants
+
+Use the `variant` prop to change the variant of the badge.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Variants', {height: '150px'}) }}
+
+### With Icon
+
+You can render an icon inside the badge. Use `data-icon="inline-start"` to render the icon on the left and `data-icon="inline-end"` to render the icon on the right.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'With Icon', {height: '150px'}) }}
+
+### With Spinner
+
+You can render a spinner inside the badge. Remember to add the `data-icon="inline-start"` or `data-icon="inline-end"` attribute to the spinner.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'With Spinner', {height: '150px'}) }}
+
+### Link
+
+Use the `as` prop to render a link as a badge.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Link', {height: '150px'}) }}
+
+### Custom Colors
+
+You can customize the colors of a badge by adding custom classes such as `bg-green-50 dark:bg-green-800` to the `Badge` component.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Custom Colors', {height: '150px'}) }}
+
+### RTL
+
+To enable RTL support, set the `dir="rtl"` attribute on the root element.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'RTL') }}
 {% endblock %}

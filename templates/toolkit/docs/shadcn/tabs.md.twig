@@ -1,7 +1,7 @@
 {% extends 'toolkit/docs/_base_component.md.twig' %}
 
 {% block demo %}
-{{ toolkit_code_demo(kit_id.value, component.name) }}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '300px'}) }}
 {% endblock %}
 
 {% block usage %}
@@ -10,9 +10,15 @@
 
 {% block examples %}
 ### Line
-{{ toolkit_code_example(kit_id.value, component.name, 'Variant Line') }}
+
+Use the `variant="line"` prop on `Tabs:List` for a line style.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Line') }}
 
 ### Vertical
+
+Use `orientation="vertical"` for vertical tabs.
+
 {{ toolkit_code_example(kit_id.value, component.name, 'Vertical') }}
 
 ### Disabled
@@ -20,4 +26,10 @@
 
 ### Icons
 {{ toolkit_code_example(kit_id.value, component.name, 'Icons') }}
+
+### RTL
+
+To enable RTL support, set the `dir="rtl"` attribute on the root element.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'RTL', {height: '500px'}) }}
 {% endblock %}

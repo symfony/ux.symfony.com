@@ -1,7 +1,7 @@
 {% extends 'toolkit/docs/_base_component.md.twig' %}
 
 {% block demo %}
-{{ toolkit_code_demo(kit_id.value, component.name) }}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '300px'}) }}
 {% endblock %}
 
 {% block usage %}
@@ -32,4 +32,10 @@ Use `Alert:Action` to add a button or other action element to the alert.
 You can customize the alert colors by adding custom classes such as `bg-amber-50 dark:bg-amber-950` to the `Alert` component.
 
 {{ toolkit_code_example(kit_id.value, component.name, 'Custom Colors') }}
+
+### RTL
+
+To enable RTL support, set the `dir="rtl"` attribute on the root element.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'RTL', {height: '450px'}) }}
 {% endblock %}

@@ -11,14 +11,33 @@
 {% block examples %}
 ### Size
 
-Use the `size-` utility class to change the size of the spinner.
+Use the `size-*` utility class to change the size of the spinner.
 
 {{ toolkit_code_example(kit_id.value, component.name, 'Size') }}
 
-### Color
+### Button
 
-Use the `text-` utility class to change the color of the spinner.
+Add a spinner to a button to indicate a loading state. Place the `Spinner` before the label with `data-icon="inline-start"` for a start position, or after the label with `data-icon="inline-end"` for an end position.
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Color') }}
+{{ toolkit_code_example(kit_id.value, component.name, 'Button') }}
 
+### Badge
+
+Add a spinner to a badge to indicate a loading state. Place the `Spinner` before the label with `data-icon="inline-start"` for a start position, or after the label with `data-icon="inline-end"` for an end position.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Badge') }}
+
+### Input Group
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Input Group') }}
+
+### Empty
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Empty') }}
+
+### RTL
+
+To enable RTL support, set the `dir="rtl"` attribute on the root element.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'RTL') }}
 {% endblock %}

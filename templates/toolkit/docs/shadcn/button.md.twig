@@ -1,7 +1,7 @@
 {% extends 'toolkit/docs/_base_component.md.twig' %}
 
 {% block demo %}
-{{ toolkit_code_demo(kit_id.value, component.name) }}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '150px'}) }}
 {% endblock %}
 
 {% block usage %}
@@ -9,52 +9,68 @@
 {% endblock %}
 
 {% block examples %}
+### Size
+
+Use the `size` prop to change the size of the button.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Size', {height: '150px'}) }}
+
 ### Default
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Default') }}
+{{ toolkit_code_example(kit_id.value, component.name, 'Default', {height: '150px'}) }}
 
 ### Outline
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Outline') }}
+{{ toolkit_code_example(kit_id.value, component.name, 'Outline', {height: '150px'}) }}
 
 ### Secondary
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Secondary') }}
+{{ toolkit_code_example(kit_id.value, component.name, 'Secondary', {height: '150px'}) }}
 
 ### Ghost
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Ghost') }}
+{{ toolkit_code_example(kit_id.value, component.name, 'Ghost', {height: '150px'}) }}
 
 ### Destructive
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Destructive') }}
+{{ toolkit_code_example(kit_id.value, component.name, 'Destructive', {height: '150px'}) }}
 
 ### Link
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Link') }}
+{{ toolkit_code_example(kit_id.value, component.name, 'Link', {height: '150px'}) }}
 
 ### Icon
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Icon') }}
+{{ toolkit_code_example(kit_id.value, component.name, 'Icon', {height: '150px'}) }}
 
 ### With Icon
 
-{{ toolkit_code_example(kit_id.value, component.name, 'With Icon') }}
+Remember to add the `data-icon="inline-start"` or `data-icon="inline-end"` attribute to the icon for the correct spacing.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'With Icon', {height: '150px'}) }}
 
 ### Rounded
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Rounded') }}
+Use the `rounded-full` class to make the button rounded.
 
-### Loading
+{{ toolkit_code_example(kit_id.value, component.name, 'Rounded', {height: '150px'}) }}
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Loading') }}
+### Spinner
 
-### Different sizes
+Render a `Spinner` component inside the button to show a loading state. Remember to add the `data-icon="inline-start"` or `data-icon="inline-end"` attribute to the spinner for the correct spacing.
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Different sizes') }}
+{{ toolkit_code_example(kit_id.value, component.name, 'Spinner', {height: '150px'}) }}
 
-### As link
+### As Child
 
-{{ toolkit_code_example(kit_id.value, component.name, 'As link') }}
+You can use the `as` prop on `Button` to make another element look like a button. Here's an example of a link that looks like a button.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'As Child', {height: '150px'}) }}
+
+### RTL
+
+To enable RTL support, set the `dir="rtl"` attribute on the root element.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'RTL') }}
 
 {% endblock %}

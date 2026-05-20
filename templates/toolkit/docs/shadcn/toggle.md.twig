@@ -1,7 +1,7 @@
 {% extends 'toolkit/docs/_base_component.md.twig' %}
 
 {% block demo %}
-{{ toolkit_code_demo(kit_id.value, component.name) }}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '150px'}) }}
 {% endblock %}
 
 {% block usage %}
@@ -10,14 +10,28 @@
 
 {% block examples %}
 ### Outline
-{{ toolkit_code_example(kit_id.value, component.name, 'Outline') }}
+
+Use `variant="outline"` for an outline style.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Outline', {height: '150px'}) }}
 
 ### With Text
-{{ toolkit_code_example(kit_id.value, component.name, 'With Text') }}
+
+{{ toolkit_code_example(kit_id.value, component.name, 'With Text', {height: '150px'}) }}
 
 ### Size
-{{ toolkit_code_example(kit_id.value, component.name, 'Size') }}
+
+Use the `size` prop to change the size of the toggle.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Size', {height: '150px'}) }}
 
 ### Disabled
-{{ toolkit_code_example(kit_id.value, component.name, 'Disabled') }}
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Disabled', {height: '150px'}) }}
+
+### RTL
+
+To enable RTL support, set the `dir="rtl"` attribute on the root element.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'RTL') }}
 {% endblock %}

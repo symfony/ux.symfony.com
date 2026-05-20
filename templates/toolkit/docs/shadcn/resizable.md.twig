@@ -1,7 +1,7 @@
 {% extends 'toolkit/docs/_base_component.md.twig' %}
 
 {% block demo %}
-{{ toolkit_code_demo(kit_id.value, component.name) }}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '300px'}) }}
 {% endblock %}
 
 {% block usage %}
@@ -11,13 +11,19 @@
 {% block examples %}
 ### Vertical
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Vertical', {height: '260px'}) }}
+Use `orientation="vertical"` for vertical resizing.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Vertical', {height: '300px'}) }}
 
 ### Handle
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Handle', {height: '260px'}) }}
+Use the `withHandle` prop on `Resizable:Handle` to show a visible handle.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Handle', {height: '300px'}) }}
 
 ### RTL
 
-{{ toolkit_code_example(kit_id.value, component.name, 'RTL', {height: '600px'}) }}
+To enable RTL support, set the `dir="rtl"` attribute on the root element.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'RTL', {height: '550px'}) }}
 {% endblock %}

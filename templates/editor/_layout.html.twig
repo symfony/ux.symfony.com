@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ pageTitle ?? 'UX Editor demo' }}{% endblock %}
+
+{% block meta %}
+    {{ include('_meta.html.twig', {meta: {title: pageTitle ?? 'UX Editor demo', description: 'UX Editor demo page', canonical: app.request.uri}}) }}
+{% endblock %}
+
+{% block content %}
+    <div class="container pt-32 pb-8 px-4">
+        <h1 class="text-2xl font-bold mb-6">{{ pageTitle ?? 'UX Editor demo' }}</h1>
+        {% block editor_body %}{% endblock %}
+
+        {% if entityDump is defined and entityDump is not null %}
+            <h2 class="text-xl font-semibold mt-8 mb-2">Submitted entity</h2>
+            <pre data-test-id="entity-dump" class="bg-gray-100 dark:bg-gray-800 p-4 rounded overflow-auto text-sm">{{ entityDump }}</pre>
+        {% endif %}
+    </div>
+{% endblock %}

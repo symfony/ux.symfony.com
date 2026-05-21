@@ -1,0 +1,21 @@
+{% extends 'editor/_layout.html.twig' %}
+
+{% set pageTitle = 'Page-builder demo — GrapesJS' %}
+
+{% block editor_body %}
+    {{ form_start(form) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.homepage) }}
+        {{ form_row(form.save) }}
+    {{ form_end(form) }}
+
+    {{ include('editor/_demos_grid.html.twig') }}
+
+    <script type="module">
+        document.addEventListener('ux:editor:connect', (e) => {
+            if (e.detail?.bridgeId === 'grapesjs') {
+                window.__demoGrapes = e.detail.instance;
+            }
+        });
+    </script>
+{% endblock %}

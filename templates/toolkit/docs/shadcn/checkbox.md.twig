@@ -1,9 +1,45 @@
 {% extends 'toolkit/docs/_base_component.md.twig' %}
 
 {% block demo %}
-{{ toolkit_code_demo(kit_id.value, component.name) }}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '380px'}) }}
 {% endblock %}
 
 {% block usage %}
 {{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block examples %}
+### Basic
+
+Pair the checkbox with `Field` and `Field:Label` for proper layout and labeling.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Basic') }}
+
+### Description
+
+Use `Field:Content` and `Field:Description` for helper text.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Description') }}
+
+### Disabled
+
+Use the `disabled` attribute to prevent interaction and add the `data-disabled` attribute to the `Field` component for disabled styles.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Disabled') }}
+
+### Group
+
+Use multiple fields to create a checkbox list.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Group', {height: '300px'}) }}
+
+### Table
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Table', {height: '300px'}) }}
+
+### RTL
+
+To enable RTL support, set the `dir="rtl"` attribute on the root element.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'RTL', {height: '680px'}) }}
 {% endblock %}

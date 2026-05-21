@@ -1,9 +1,23 @@
 {% extends 'toolkit/docs/_base_component.md.twig' %}
 
 {% block demo %}
-{{ toolkit_code_demo(kit_id.value, component.name) }}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '200px'}) }}
 {% endblock %}
 
 {% block usage %}
 {{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block examples %}
+### Label
+
+Use a `Field` component to add a label to the progress bar.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Label') }}
+
+### RTL
+
+To enable RTL support, set the `dir="rtl"` attribute on the root element.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'RTL') }}
 {% endblock %}

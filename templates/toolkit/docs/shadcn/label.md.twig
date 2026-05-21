@@ -7,3 +7,17 @@
 {% block usage %}
 {{ toolkit_code_usage(kit_id.value, component.name) }}
 {% endblock %}
+
+{% block examples %}
+### Label in Field
+
+For form fields, use the `Field` component which includes built-in label, description, and error handling.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Field') }}
+
+### RTL
+
+To enable RTL support, set the `dir="rtl"` attribute on the root element.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'RTL') }}
+{% endblock %}

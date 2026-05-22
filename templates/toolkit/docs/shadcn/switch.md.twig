@@ -1,9 +1,45 @@
 {% extends 'toolkit/docs/_base_component.md.twig' %}
 
 {% block demo %}
-{{ toolkit_code_demo(kit_id.value, component.name) }}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '200px'}) }}
 {% endblock %}
 
 {% block usage %}
 {{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block examples %}
+### Description
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Description') }}
+
+### Choice Card
+
+Card-style selection where `Field:Label` wraps the entire `Field` for a clickable card pattern.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Choice Card', {height: '300px'}) }}
+
+### Disabled
+
+Add the `disabled` prop to the `Switch` to disable it. Add the `data-disabled` prop to the `Field` for styling.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Disabled') }}
+
+### Invalid
+
+Add `aria-invalid="true"` to the `Switch` to indicate an invalid state. Add `data-invalid` to the `Field` for styling.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Invalid') }}
+
+### Size
+
+Use the `size` prop to change the size of the switch.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Size') }}
+
+### RTL
+
+To enable RTL support, set the `dir="rtl"` attribute on the root element.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'RTL', {height: '300px'}) }}
 {% endblock %}

@@ -1,7 +1,7 @@
 {% extends 'toolkit/docs/_base_component.md.twig' %}
 
 {% block demo %}
-{{ toolkit_code_demo(kit_id.value, component.name) }}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '200px'}) }}
 {% endblock %}
 
 {% block usage %}
@@ -9,20 +9,85 @@
 {% endblock %}
 
 {% block examples %}
+### Basic
 
-### Default
-{{ toolkit_code_example(kit_id.value, component.name, 'Default') }}
+{{ toolkit_code_example(kit_id.value, component.name, 'Basic') }}
 
-### File
-{{ toolkit_code_example(kit_id.value, component.name, 'File') }}
+### Field
+
+Use `Field`, `Field:Label`, and `Field:Description` to create an input with a label and description.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Field') }}
+
+### Field Group
+
+Use `Field:Group` to show multiple `Field` blocks and to build forms.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Field Group', {height: '400px'}) }}
 
 ### Disabled
+
+Use the `disabled` prop to disable the input. To style the disabled state, add the `data-disabled` attribute to the `Field` component.
+
 {{ toolkit_code_example(kit_id.value, component.name, 'Disabled') }}
 
-### With Label
-{{ toolkit_code_example(kit_id.value, component.name, 'With Label') }}
+### Invalid
 
-### With Button
-{{ toolkit_code_example(kit_id.value, component.name, 'With Button') }}
+Use the `aria-invalid` prop to mark the input as invalid. To style the invalid state, add the `data-invalid` attribute to the `Field` component.
 
+{{ toolkit_code_example(kit_id.value, component.name, 'Invalid') }}
+
+### File
+
+Use the `type="file"` prop to create a file input.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'File') }}
+
+### Inline
+
+Use `Field` with `orientation="horizontal"` to create an inline input. Pair with `Button` to create a search input with a button.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Inline') }}
+
+### Grid
+
+Use a grid layout to place multiple inputs side by side.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Grid') }}
+
+### Required
+
+Use the `required` attribute to indicate required inputs.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Required') }}
+
+### Badge
+
+Use `Badge` in the label to highlight a recommended field.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Badge') }}
+
+### Input Group
+
+To add icons, text, or buttons inside an input, use the `InputGroup` component.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Input Group') }}
+
+### Button Group
+
+To add buttons to an input, use the `ButtonGroup` component.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Button Group') }}
+
+### Form
+
+A full form example with multiple inputs, a select, and a button.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Form', {height: '550px'}) }}
+
+### RTL
+
+To enable RTL support, set the `dir="rtl"` attribute on the root element.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'RTL', {height: '320px'}) }}
 {% endblock %}

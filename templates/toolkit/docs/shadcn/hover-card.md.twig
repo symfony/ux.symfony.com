@@ -1,7 +1,7 @@
 {% extends 'toolkit/docs/_base_component.md.twig' %}
 
 {% block demo %}
-{{ toolkit_code_demo(kit_id.value, component.name) }}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '300px'}) }}
 {% endblock %}
 
 {% block usage %}
@@ -9,11 +9,17 @@
 {% endblock %}
 
 {% block examples %}
+### Basic
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Basic', {height: '300px'}) }}
+
 ### Sides
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Sides', {height: '350px'}) }}
+{{ toolkit_code_example(kit_id.value, component.name, 'Sides', {height: '300px'}) }}
 
 ### RTL
 
-{{ toolkit_code_example(kit_id.value, component.name, 'RTL', {height: '700px'}) }}
+To enable RTL support, set the `dir="rtl"` attribute on the root element.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'RTL', {height: '400px'}) }}
 {% endblock %}

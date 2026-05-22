@@ -7,8 +7,9 @@
         border-radius: var(--radius-xl);
         position: relative;
         font-size: var(--text-sm);
-        /* Ensure the Terminal overflows its parent if "pre" contains a very-long-line of the same highlighted element (e.g.: a long string) */
+        /* prevents long <pre> lines from overflowing the parent grid item */
         display: grid;
+        min-width: 0;
 
         ::selection {
             background-color: #424c57;
@@ -119,6 +120,7 @@
         border-radius: var(--radius-xl);
         border: 1px solid var(--color-body-text);
         position: relative;
+        min-width: 0;
 
         .dark & {
             border: 1px solid var(--color-secondary-bg-subtle);

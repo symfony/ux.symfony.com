@@ -1,7 +1,7 @@
 {% extends 'toolkit/docs/_base_component.md.twig' %}
 
 {% block demo %}
-{{ toolkit_code_demo(kit_id.value, component.name) }}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '200px'}) }}
 {% endblock %}
 
 {% block usage %}
@@ -11,29 +11,27 @@
 {% block examples %}
 ### Outline
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Outline', {height: '100px'}) }}
+{{ toolkit_code_example(kit_id.value, component.name, 'Outline') }}
 
-### Sizes
+### Size
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Sizes', {height: '200px'}) }}
-
-### Vertical
-
-{{ toolkit_code_example(kit_id.value, component.name, 'Vertical', {height: '200px'}) }}
+{{ toolkit_code_example(kit_id.value, component.name, 'Size') }}
 
 ### Spacing
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Spacing', {height: '100px'}) }}
+{{ toolkit_code_example(kit_id.value, component.name, 'Spacing') }}
+
+### Vertical
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Vertical') }}
 
 ### Disabled
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Disabled', {height: '100px'}) }}
-
-### Font Weight Selector
-
-{{ toolkit_code_example(kit_id.value, component.name, 'Font Weight Selector', {height: '250px'}) }}
+{{ toolkit_code_example(kit_id.value, component.name, 'Disabled') }}
 
 ### RTL
+
+To enable RTL support, set the `dir="rtl"` attribute on the root element.
 
 {{ toolkit_code_example(kit_id.value, component.name, 'RTL', {height: '250px'}) }}
 {% endblock %}

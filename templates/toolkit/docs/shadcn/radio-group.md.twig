@@ -1,7 +1,7 @@
 {% extends 'toolkit/docs/_base_component.md.twig' %}
 
 {% block demo %}
-{{ toolkit_code_demo(kit_id.value, component.name) }}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '200px'}) }}
 {% endblock %}
 
 {% block usage %}
@@ -11,25 +11,37 @@
 {% block examples %}
 ### Description
 
+Radio group items with a description using the `Field` component.
+
 {{ toolkit_code_example(kit_id.value, component.name, 'Description', {height: '300px'}) }}
 
 ### Choice Card
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Choice Card', {height: '300px'}) }}
+Use `Field:Label` to wrap the entire `Field` for a clickable card-style selection.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Choice Card', {height: '350px'}) }}
 
 ### Fieldset
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Fieldset', {height: '300px'}) }}
+Use `Field:Set` and `Field:Legend` to group radio items with a label and description.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Fieldset', {height: '250px'}) }}
 
 ### Disabled
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Disabled', {height: '250px'}) }}
+Use the `disabled` prop on `RadioGroup:Item` to disable individual items.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Disabled') }}
 
 ### Invalid
+
+Use `aria-invalid` on `RadioGroup:Item` and `data-invalid` on `Field` to show validation errors.
 
 {{ toolkit_code_example(kit_id.value, component.name, 'Invalid', {height: '300px'}) }}
 
 ### RTL
 
-{{ toolkit_code_example(kit_id.value, component.name, 'RTL', {height: '300px'}) }}
+To enable RTL support, set the `dir="rtl"` attribute on the root element.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'RTL', {height: '450px'}) }}
 {% endblock %}

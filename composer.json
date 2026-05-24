@@ -34,6 +34,7 @@
         "symfony/twig-bundle": "8.0.*",
         "symfony/uid": "8.0.*",
         "symfony/ux-autocomplete": "3.x-dev",
+        "symfony/ux-calendar-link": "3.x-dev",
         "symfony/ux-chartjs": "3.x-dev",
         "symfony/ux-cropperjs": "3.x-dev",
         "symfony/ux-dropzone": "3.x-dev",

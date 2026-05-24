@@ -93,6 +93,11 @@
     /* Specific colors */
     --color-purple: var(--color-purple);
 
+    --color-calendar-google: #5384ED;
+    --color-calendar-outlook: #0078D4;
+    --color-calendar-office365: #EA3E23;
+    --color-calendar-ics: #1F2937;
+
     /* Font families */
     --font-title: "Ubuntu Sans", "Ubuntu", system-ui, sans-serif;
     --font-sans: system-ui, sans-serif;

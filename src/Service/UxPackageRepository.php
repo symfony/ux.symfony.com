@@ -253,6 +253,18 @@ class UxPackageRepository
             ),
 
             new UxPackage(
+                'calendar-link',
+                'CalendarLink',
+                'app_calendar_link',
+                '#7F1D1D',
+                'linear-gradient(95deg, #7F1D1D -5%, #B91C1C 105%)',
+                'Save the date, anywhere',
+                'Let users add your events to their calendar of choice in one click.',
+                'I want users to save my events in one click.',
+                imageFileName: 'calendar-link.svg',
+            ),
+
+            new UxPackage(
                 'toggle-password',
                 'Toggle Password',
                 'app_toggle_password',

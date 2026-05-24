@@ -1,0 +1,116 @@
+{% extends 'ux_packages/package.html.twig' %}
+
+{% block package_header %}
+    {% component PackageHeader with {
+        package: 'calendar-link',
+        eyebrowText: 'Add to Calendar links',
+    } %}
+        {% block title_header %}
+            Save the date, <em>anywhere</em>
+        {% endblock %}
+
+        {% block sub_content %}
+            Let users add your events to their calendar of choice in one click.
+        {% endblock %}
+    {% endcomponent %}
+{% endblock %}
+
+{% block package_content %}
+    <section class="max-w-[1400px] mx-auto px-6 pt-6 md:px-12 md:pt-12">
+        <div class="arrow mb-4 hidden md:block"></div>
+
+        {# Example 1: simple event #}
+        <div class="grid grid-cols-12 gap-x-6 mb-12">
+            <div class="col-span-12 md:col-span-6 Wysiwyg">
+                {% apply markdown_to_html %}
+                    ## A simple event
+
+                    Create a `CalendarEvent` with a title, a start and end date, and optionally a `location` and `description`.
+
+                    Then call `ux_calendar_links(event)` in your Twig template to get a link for each registered calendar provider.
+                {% endapply %}
+            </div>
+            <div class="col-span-12 md:col-span-6 mt-6 md:mt-0">
+                {% apply markdown_to_html %}
+                    ```php {"filename":"src/Controller/UxPackage/CalendarLinkController.php"}
+                    $timezone = new \DateTimeZone('Europe/Warsaw');
+                    $event = new CalendarEvent(
+                        title: 'SymfonyCon Warsaw 2026',
+                        start: new \DateTimeImmutable('2026-11-26 09:00', $timezone),
+                        end: new \DateTimeImmutable('2026-11-27 18:00', $timezone),
+                        description: 'Share your best practices, experience and knowledge with Symfony.',
+                        location: 'Hilton Warsaw Hotel and Convention Centre, Grzybowska 63, 00-844, Warszawa, Poland',
+                    );
+                    ```
+                {% endapply %}
+                {{ include('ux_packages/calendar_link/_link_buttons.html.twig', { event: symfonyCon }) }}
+            </div>
+        </div>
+
+        {# Example 2: recurring all-day event #}
+        <div class="grid grid-cols-12 gap-x-6 mb-12 mt-6">
+            <div class="col-span-12 md:col-span-6 md:order-2 Wysiwyg">
+                {% apply markdown_to_html %}
+                    ## A recurring, all-day event
+
+                    For events that repeat on a fixed schedule, birthdays, public holidays, weekly team meetings, you don't want users to add them manually every time.
+
+                    Set `allDay: true` if the event spans the whole day, and pass a `CalendarRecurrence` to let the user's calendar handle the repetition automatically.
+
+                    > [!NOTE]
+                    > Recurrence is honored by Google Calendar and the `.ics` file only.
+                {% endapply %}
+            </div>
+            <div class="col-span-12 md:col-span-6 mt-6 md:mt-0 md:order-1">
+                {% apply markdown_to_html %}
+                    ```php {"filename":"src/Controller/UxPackage/CalendarLinkController.php"}
+                    $timezone = new \DateTimeZone('Europe/Paris');
+                    $event = new CalendarEvent(
+                        title: 'Victory in Europe Day',
+                        start: new \DateTimeImmutable('2025-05-08', $timezone),
+                        end: new \DateTimeImmutable('2025-05-09', $timezone),
+                        description: 'Public holiday in France marking the end of World War II in Europe (1945).',
+                        allDay: true,
+                        recurrence: CalendarRecurrence::yearly(),
+                    );
+                    ```
+                {% endapply %}
+                {{ include('ux_packages/calendar_link/_link_buttons.html.twig', { event: victoryDay }) }}
+            </div>
+        </div>
+
+        {# Example 3: event with a reminder #}
+        <div class="grid grid-cols-12 gap-x-6 mb-12 mt-6">
+            <div class="col-span-12 md:col-span-6 Wysiwyg">
+                {% apply markdown_to_html %}
+                    ## An event with a reminder
+
+                    Having the event in the calendar is a good start, but some appointments really need a heads-up.
+
+                    Pass one or more `CalendarReminder` instances to remind users ahead of time, a day before, an hour before, whatever makes sense for the event.
+
+                    > [!NOTE]
+                    > Reminders are honored by the `.ics` file only.
+                {% endapply %}
+            </div>
+            <div class="col-span-12 md:col-span-6 mt-6 md:mt-0">
+                {% apply markdown_to_html %}
+                    ```php {"filename":"src/Controller/UxPackage/CalendarLinkController.php"}
+                    $timezone = new \DateTimeZone('Europe/Paris');
+                    $event = new CalendarEvent(
+                        title: 'Blood donation',
+                        start: new \DateTimeImmutable('2025-06-12 14:00', $timezone),
+                        end: new \DateTimeImmutable('2025-06-12 15:00', $timezone),
+                        location: 'EFS Lyon Part-Dieu, 74 rue de la Villette, 69003 Lyon',
+                        reminders: [
+                            CalendarReminder::before(days: 1, description: 'Eat and drink well.'),
+                            CalendarReminder::before(hours: 2, description: 'Time to go!'),
+                        ],
+                    );
+                    ```
+                {% endapply %}
+                {{ include('ux_packages/calendar_link/_link_buttons.html.twig', { event: bloodDonation }) }}
+            </div>
+        </div>
+    </section>
+{% endblock %}

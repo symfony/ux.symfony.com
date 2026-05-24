@@ -1307,6 +1307,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  * @psalm-type UxNativeConfig = array{
  *     output_dir?: scalar|null|Param, // Directory where configuration JSON files are written. Defaults to %kernel.project_dir%/public. // Default: null
  * }
+ * @psalm-type UxCalendarLinkConfig = array<mixed>
  * @psalm-type ConfigType = array{
  *     imports?: ImportsConfig,
  *     parameters?: ParametersConfig,
@@ -1333,6 +1334,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     tales_from_a_dev_twig_extra_tailwind?: TalesFromADevTwigExtraTailwindConfig,
  *     symfonycasts_tailwind?: SymfonycastsTailwindConfig,
  *     ux_native?: UxNativeConfig,
+ *     ux_calendar_link?: UxCalendarLinkConfig,
  *     "when@dev"?: array{
  *         imports?: ImportsConfig,
  *         parameters?: ParametersConfig,
@@ -1363,6 +1365,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         tales_from_a_dev_twig_extra_tailwind?: TalesFromADevTwigExtraTailwindConfig,
  *         symfonycasts_tailwind?: SymfonycastsTailwindConfig,
  *         ux_native?: UxNativeConfig,
+ *         ux_calendar_link?: UxCalendarLinkConfig,
  *     },
  *     "when@prod"?: array{
  *         imports?: ImportsConfig,
@@ -1390,6 +1393,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         tales_from_a_dev_twig_extra_tailwind?: TalesFromADevTwigExtraTailwindConfig,
  *         symfonycasts_tailwind?: SymfonycastsTailwindConfig,
  *         ux_native?: UxNativeConfig,
+ *         ux_calendar_link?: UxCalendarLinkConfig,
  *     },
  *     "when@test"?: array{
  *         imports?: ImportsConfig,
@@ -1419,6 +1423,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         tales_from_a_dev_twig_extra_tailwind?: TalesFromADevTwigExtraTailwindConfig,
  *         symfonycasts_tailwind?: SymfonycastsTailwindConfig,
  *         ux_native?: UxNativeConfig,
+ *         ux_calendar_link?: UxCalendarLinkConfig,
  *     },
  *     ...<string, ExtensionType|array{ // extra keys must follow the when@%env% pattern or match an extension alias
  *         imports?: ImportsConfig,

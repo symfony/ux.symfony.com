@@ -31,4 +31,5 @@ return [
     TalesFromADev\Twig\Extra\Tailwind\Bridge\Symfony\Bundle\TalesFromADevTwigExtraTailwindBundle::class => ['all' => true],
     Symfonycasts\TailwindBundle\SymfonycastsTailwindBundle::class => ['all' => true],
     Symfony\UX\Native\UXNativeBundle::class => ['all' => true],
+    Symfony\UX\CalendarLink\UXCalendarLinkBundle::class => ['all' => true],
 ];

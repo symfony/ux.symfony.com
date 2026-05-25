@@ -1,3 +1,21 @@
-<div class="Wysiwyg">
-    {{ this.markdownContent|markdown_to_html }}
+<div class="flex gap-8 items-start">
+    <div class="flex-1 min-w-0 Wysiwyg">
+        {{ this.markdownContent|markdown_to_html }}
+    </div>
+
+    {% if computed.tocItems %}
+        <nav class="hidden xl:block w-48 shrink-0 sticky top-4 max-h-[calc(100vh-2rem)] overflow-y-auto text-sm" aria-label="On this page">
+            <strong class="font-semibold mb-2 text-foreground block">On this page</strong>
+            <ul class="list-unstyled space-y-1">
+                {% for item in computed.tocItems %}
+                    <li{% if item.level == 3 %} class="pl-3"{% endif %}>
+                        <a href="#{{ item.id }}"
+                           class="block py-0.5 text-foreground/60 hover:text-foreground transition-colors duration-100 leading-snug break-words">
+                            {{ item.title }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+    {% endif %}
 </div>

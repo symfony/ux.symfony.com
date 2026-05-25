@@ -24,6 +24,7 @@ use League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension;
 use League\CommonMark\Extension\Mention\MentionExtension;
 use League\CommonMark\Extension\Table\Table;
 use League\CommonMark\Extension\Table\TableExtension;
+use League\CommonMark\Extension\TableOfContents\TableOfContentsExtension;
 use Symfony\Component\DependencyInjection\Attribute\AsDecorator;
 use Symfony\Component\HttpFoundation\UriSigner;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -43,9 +44,9 @@ final class ConverterFactory
     ) {
     }
 
-    public function __invoke(): CommonMarkConverter
+    public function __invoke(bool $withTableOfContents = false): CommonMarkConverter
     {
-        $converter = new CommonMarkConverter([
+        $config = [
             'default_attributes' => [
                 Table::class => [
                     'class' => 'Wysiwyg_Table',
@@ -67,13 +68,25 @@ final class ConverterFactory
                 'internal_hosts' => ['/(^|\.)symfony\.com$/'],
             ],
             'heading_permalink' => [
-                'id_prefix' => 'content',
                 'apply_id_to_heading' => true,
-                'insert' => 'none',
+                // Headings only need their `id` for anchors when rendered as content.
+                // The table of contents needs the permalink nodes in the AST to be generated.
+                'insert' => $withTableOfContents ? 'before' : 'none',
             ],
-        ]);
+        ];
 
-        $converter->getEnvironment()
+        if ($withTableOfContents) {
+            $config['table_of_contents'] = [
+                'min_heading_level' => 2,
+                'max_heading_level' => 3,
+                'normalize' => 'flat',
+                'position' => 'top',
+            ];
+        }
+
+        $converter = new CommonMarkConverter($config);
+
+        $environment = $converter->getEnvironment()
             ->addExtension(new DefaultAttributesExtension())
             ->addExtension(new ExternalLinkExtension())
             ->addExtension(new MentionExtension())
@@ -85,6 +98,10 @@ final class ConverterFactory
             ->addExtension(new ToolkitPreviewExtension($this->uriSigner, $this->urlGenerator, $this->twig))
             ->addRenderer(FencedCode::class, new FencedCodeRenderer($this->componentRenderer))
         ;
+
+        if ($withTableOfContents) {
+            $environment->addExtension(new TableOfContentsExtension());
+        }
 
         return $converter;
     }

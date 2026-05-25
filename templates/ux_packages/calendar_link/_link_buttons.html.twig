@@ -1,12 +1,11 @@
 {% set providers = {
-    google:    { icon: 'logos:google-calendar', class: 'text-calendar-google border-calendar-google hover:bg-calendar-google hover:text-white' },
-    outlook:   { icon: 'file-icons:microsoft-outlook', class: 'text-calendar-outlook border-calendar-outlook hover:bg-calendar-outlook hover:text-white' },
-    office365: { icon: 'hugeicons:office-365', class: 'text-calendar-office365 border-calendar-office365 hover:bg-calendar-office365 hover:text-white' },
-    ics:       { icon: 'lucide:calendar', class: 'text-calendar-ics border-calendar-ics hover:bg-calendar-ics hover:text-white' },
+    google: {icon: 'logos:google-calendar', class: 'text-calendar-google border-calendar-google hover:bg-calendar-google hover:text-white'},
+    outlook: {icon: 'file-icons:microsoft-outlook', class: 'text-calendar-outlook border-calendar-outlook hover:bg-calendar-outlook hover:text-white'},
+    ics: {icon: 'lucide:calendar', class: 'text-calendar-ics border-calendar-ics hover:bg-calendar-ics hover:text-white'},
 } %}
 
 <div class="flex flex-wrap gap-2 justify-center sm:justify-start mt-2">
-    {% for link in ux_calendar_links(event) %}
+    {% for link in ux_calendar_links(event)|filter(link => providers[link.provider] is defined) %}
         {% set p = providers[link.provider] %}
         <a href="{{ link.url }}"
            target="_blank"

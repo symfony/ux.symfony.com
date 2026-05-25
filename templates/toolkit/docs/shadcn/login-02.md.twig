@@ -1,0 +1,9 @@
+{% extends 'toolkit/docs/_base_block.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '600px'}) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_example(kit_id.value, component.name, 'Demo', preview: false) }}
+{% endblock %}

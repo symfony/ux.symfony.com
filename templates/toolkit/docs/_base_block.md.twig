@@ -1,0 +1,90 @@
+{# twig-cs-fixer-disable FileName.Error #}
+# {{ component.name }}{% if is_llm ?? false %} ({{ kit.manifest.name }} kit){% endif %}
+
+{{ component.manifest.description }}
+
+{{ block('demo')|trim|raw }}
+
+## Installation
+
+{% if is_llm ?? false %}
+{% if component.manifest.versionAdded is not null %}
+> [!NOTE]
+> Available since UX Toolkit {{ component.manifest.versionAdded }}.
+{% endif %}
+
+```shell
+bin/console ux:install {{ component.name }} --kit {{ kit_id.value }}
+```
+{% else %}
+::: tabs
+
+:: tab Automatic
+
+{% if component.manifest.versionAdded is not null %}
+> [!NOTE]
+> Available since UX Toolkit {{ component.manifest.versionAdded }}.
+{% endif %}
+
+```shell
+bin/console ux:install {{ component.name }} --kit {{ kit_id.value }}
+```
+
+That's it!
+
+:: tab Manual
+
+{% if php_package_dependencies|length > 0 %}
+Install the following Composer dependencies:
+```shell
+composer require {{ php_package_dependencies|join(' ') }}
+```
+{% endif %}
+
+{% if npm_package_dependencies|length > 0 and importmap_package_dependencies|length > 0 %}
+Install the following front dependencies:
+```shell
+# with npm/pnpm/yarn...
+npm install {{ npm_package_dependencies|join(' ') }}
+
+# ...or with Symfony AssetMapper
+php bin/console importmap:require {{ importmap_package_dependencies|join(' ') }}
+```
+{% elseif npm_package_dependencies|length > 0 %}
+Install the following npm/pnpm/yarn dependencies:
+```shell
+npm install {{ npm_package_dependencies|join(' ') }}
+```
+{% elseif importmap_package_dependencies|length > 0 %}
+Install the following Symfony AssetMapper dependencies:
+```shell
+php bin/console importmap:require {{ importmap_package_dependencies|join(' ') }}
+```
+{% endif %}
+
+Copy the following file(s) into your Symfony app:
+
+{% for file in files %}
+```{{ file.language }} {{ {filename: file.path_name}|json_encode|raw }}
+{{ file.content|trim|raw }}
+```
+{% endfor %}
+
+Happy coding!
+
+:::
+{% endif %}
+
+{% if block('usage') is defined %}
+## Usage
+
+{{ block('usage') }}
+
+{% endif %}
+
+{% if block('examples') is defined %}
+## Examples
+
+{{ block('examples') }}
+
+{% endif %}

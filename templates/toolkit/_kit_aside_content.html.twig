@@ -7,6 +7,19 @@
     </li>
 </ul>
 
+{% if blocks is defined and blocks is not empty %}
+    <div class="px-2 font-semibold">Blocks</div>
+    <ul class="list-unstyled mb-4 space-y-[.1rem]">
+        {% for block_recipe in blocks %}
+            <li class="rounded transition-colors duration-100 ease-in-out hover:bg-surface [&.active]:bg-surface {{ app.current_route == 'app_toolkit_block' and app.current_route_parameters.blockName == block_recipe.name ? 'active' : '' }}">
+                <a class="block px-2 py-0.5 text-[.9rem]" href="{{ path('app_toolkit_block', {kitId: kit_id.value, blockName: block_recipe.name}) }}">
+                    {{ block_recipe.name }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
 <div class="px-2 font-semibold">Components</div>
 <ul class="list-unstyled mb-4 space-y-[.1rem]">
     {% for component in components %}

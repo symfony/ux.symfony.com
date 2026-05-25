@@ -225,6 +225,17 @@ class GenerateLlmsFilesCommand
                 $content[$path] = $md;
                 $io->writeln('  ['.$kitId->value.'] '.$recipe->name);
             }
+
+            foreach ($kit->getRecipes(RecipeType::Block) as $recipe) {
+                $md = $this->toolkitService->renderRecipeMarkdown($kitId, $recipe, isLlm: true);
+                $path = $this->generateMdPath('app_toolkit_block', [
+                    'kitId' => $kitId->value,
+                    'blockName' => $recipe->name,
+                ]);
+                $this->fs->dumpFile($this->outputDir.'/'.$path, $md);
+                $content[$path] = $md;
+                $io->writeln('  ['.$kitId->value.'] '.$recipe->name.' (block)');
+            }
         }
 
         return [$content, $toolkitKits];

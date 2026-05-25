@@ -52,10 +52,11 @@ final class ToolkitPreviewParser extends AbstractBlockContinueParser
 
                 $kitId = $options['kit'] ?? throw new \LogicException('The "kit" option is required for toolkit-preview code blocks.');
                 $kitId = ToolkitKitId::tryFrom($kitId) ?? throw new \LogicException(\sprintf('Invalid toolkit kit ID "%s" provided for toolkit-preview code block.', $kitId));
-                unset($options['kit']);
+                $recipeName = $options['recipe'] ?? null;
+                unset($options['kit'], $options['recipe']);
 
                 return BlockStart::of(new ToolkitPreviewParser(
-                    new ToolkitPreview($kitId, $options),
+                    new ToolkitPreview($kitId, $options, $recipeName),
                 ))->at($cursor);
             }
         };

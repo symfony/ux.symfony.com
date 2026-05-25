@@ -73,6 +73,10 @@ final class SitemapController extends AbstractController
             foreach ($kit->getRecipes(RecipeType::Component) as $component) {
                 yield $this->generateAbsoluteUrl('app_toolkit_component', ['kitId' => $kitId, 'componentName' => $component->manifest->name]);
             }
+
+            foreach ($kit->getRecipes(RecipeType::Block) as $block) {
+                yield $this->generateAbsoluteUrl('app_toolkit_block', ['kitId' => $kitId, 'blockName' => $block->name]);
+            }
         }
     }
 

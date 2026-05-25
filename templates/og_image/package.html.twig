@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <title>OG / {{ package.humanName }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap">
+    {{ importmap('app') }}
+</head>
+<body
+    class="relative w-[1200px] h-[675px] overflow-hidden bg-[#0b0d10] m-0 text-white antialiased"
+    style="--accent: {{ package.color }};"
+>
+    <div class="absolute inset-7 rounded-3xl bg-[#11151b] shadow-[0_0_40px_-12px_var(--accent)] ring-1 ring-white/5"></div>
+
+    <img
+        src="{{ asset('images/sf-ux.svg') }}"
+        alt="Symfony UX"
+        class="absolute top-[52px] right-[64px] h-[48px] w-auto invert opacity-90"
+    >
+
+    <div class="absolute inset-0 flex items-center px-[90px] gap-[64px]">
+        <div
+            class="shrink-0 w-[200px] h-[200px] rounded-[44px] flex items-center justify-center shadow-[0_24px_50px_-22px_rgba(0,0,0,0.7)]"
+            style="background: {{ package.color }}; background-image: {{ package.gradient }};"
+        >
+            {% set image_filename = package.imageFilename %}
+            <img
+                src="{{ asset('images/ux_packages/' ~ image_filename) }}"
+                alt=""
+                class="w-[100px] h-[100px] object-contain"
+            >
+        </div>
+
+        <div class="flex-1 min-w-0">
+            <h1 class="text-[72px] font-bold leading-[1.02] tracking-[-0.02em] m-0">{{ package.humanName }}</h1>
+            <div class="
+                mt-7 text-[30px] leading-[1.35] text-white/85 max-w-[680px]
+                [&_p]:m-0
+                [&_code]:font-mono [&_code]:text-[26px] [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded-md
+                [&_code]:text-[#ff79c6] [&_code]:bg-pink-500/10
+            ">{{ package.description|markdown_to_html }}</div>
+        </div>
+    </div>
+
+    <script>
+        (async () => {
+            try { await document.fonts.ready; } catch (e) {}
+            const imgs = Array.from(document.images);
+            await Promise.all(imgs.map(img => img.complete ? Promise.resolve() : new Promise(res => {
+                img.addEventListener('load', res, { once: true });
+                img.addEventListener('error', res, { once: true });
+            })));
+            await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+            document.body.dataset.ogReady = 'true';
+        })();
+    </script>
+</body>
+</html>

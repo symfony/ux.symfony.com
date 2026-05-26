@@ -48,7 +48,7 @@ final class ConverterFactory
         $converter = new CommonMarkConverter([
             'default_attributes' => [
                 Table::class => [
-                    'class' => 'table table-hover',
+                    'class' => 'table',
                 ],
             ],
             'mentions' => [

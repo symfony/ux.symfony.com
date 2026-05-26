@@ -4,7 +4,7 @@
         --bg-color: #1b1e21;
 
         background-color: var(--bg-color);
-        border-radius: var(--radius-xl);
+        border-radius: var(--border-radius);
         position: relative;
         font-size: var(--text-sm);
         /* prevents long <pre> lines from overflowing the parent grid item */

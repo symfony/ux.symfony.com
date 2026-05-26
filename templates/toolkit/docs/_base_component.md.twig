@@ -100,19 +100,19 @@ Happy coding!
 ## API Reference
 
 {% for component_name, component_api_reference in api_reference %}
-### {{ component_name }}
+### Component `{{ component_name }}`
 
 {% if component_api_reference.props is not empty %}
-| Prop | Type | Description |
-|------|------|-------------|
+| Prop   | Type  | Description  |
+|:-------|:------|:-------------|
 {% for prop in component_api_reference.props %}
 | `{{ prop.name }}` | `{{ prop.type|replace({'|': '\\|'})|raw }}` | {{ prop.description }} |
 {% endfor %}
 {% endif %}
 
 {% if component_api_reference.blocks is not empty %}
-| Block | Description |
-|-------|-------------|
+| Block  | Description  |
+|:-------|:-------------|
 {% for block in component_api_reference.blocks %}
 | `{{ block.name }}` | {{ block.description }} |
 {% endfor %}

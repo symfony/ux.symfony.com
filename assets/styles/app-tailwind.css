@@ -33,7 +33,8 @@
     --color-border: #dee2e6;
     --color-border-subtle: #e9ecef;
     --color-border-translucent: rgba(0, 0, 0, .175);
-    --color-code: #d63384;
+    --color-code: #cf0067;
+    --color-code-bg: #ffeffa;
     --color-link: #6ea8fe;
 
     /* Specific colors */
@@ -45,11 +46,6 @@
     --space-regular: 1rem;
     --space-large: 1.5rem;
     --space-larger: 2rem;
-
-    /* Border radius tokens (existing, unchanged) */
-    --border-radius-small: 0.5rem;
-    --border-radius: 1rem;
-    --border-radius-large: 1.5rem;
 }
 
 .dark {
@@ -63,7 +59,9 @@
     --color-border: #495057;
     --color-border-subtle: #343a40;
     --color-border-translucent: rgba(255, 255, 255, .175);
-    --color-code: #e685b5;
+    --color-code: #ff79c6;
+    --color-code-bg: --alpha(var(--color-pink-500) / 10%);
+
     --color-link: #6ea8fe;
 }
 
@@ -101,11 +99,6 @@
     --font-title: "Ubuntu Sans", "Ubuntu", system-ui, sans-serif;
     --font-sans: system-ui, sans-serif;
     --font-mono: ui-monospace, "SF Mono", SFMono-Regular, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace;
-
-    /* Radius */
-    --radius-sm: var(--border-radius-small);
-    --radius-md: var(--border-radius);
-    --radius-lg: var(--border-radius-large);
 
     /* Custom breakpoints */
     --breakpoint-xs: 480px;
@@ -283,14 +276,20 @@
     }
 
     code {
+        font-size: smaller;
         color: var(--color-code);
+        background-color: var(--color-code-bg);
+        padding: --spacing(0.5) --spacing(1);
+        border-radius: var(--radius-sm);
     }
     pre code {
         font-size: inherit;
         color: inherit;
+        background-color: inherit;
     }
     a > code {
         color: inherit;
+        background-color: inherit;
     }
 
     .code-description :is(h2, h3) {

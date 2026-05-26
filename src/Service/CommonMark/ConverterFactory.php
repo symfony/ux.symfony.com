@@ -48,7 +48,7 @@ final class ConverterFactory
         $converter = new CommonMarkConverter([
             'default_attributes' => [
                 Table::class => [
-                    'class' => 'table',
+                    'class' => 'Wysiwyg_Table',
                 ],
             ],
             'mentions' => [
@@ -65,13 +65,6 @@ final class ConverterFactory
             ],
             'external_link' => [
                 'internal_hosts' => ['/(^|\.)symfony\.com$/'],
-            ],
-            'table' => [
-                'wrap' => [
-                    'enabled' => true,
-                    'tag' => 'div',
-                    'attributes' => ['class' => 'table-responsive'],
-                ],
             ],
             'heading_permalink' => [
                 'id_prefix' => 'content',

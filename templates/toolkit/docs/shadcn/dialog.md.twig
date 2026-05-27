@@ -1,7 +1,7 @@
 {% extends 'toolkit/docs/_base_component.md.twig' %}
 
 {% block demo %}
-{{ toolkit_code_demo(kit_id.value, component.name) }}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '450px'}) }}
 {% endblock %}
 
 {% block usage %}
@@ -9,14 +9,33 @@
 {% endblock %}
 
 {% block examples %}
-### Opened by default
-{{ toolkit_code_example(kit_id.value, component.name, 'Opened by default', {height: '400px'}) }}
+### Custom Close Button
 
-### Custom close button
-{{ toolkit_code_example(kit_id.value, component.name, 'Custom close button', {height: '400px'}) }}
+Replace the default close control with your own button.
 
-### With Tooltip
+{{ toolkit_code_example(kit_id.value, component.name, 'Custom close button', {height: '450px'}) }}
 
-Combining `Dialog` with `Tooltip` requires merging their `*_trigger_attrs` attributes using the [`html_attr_merge`](https://twig.symfony.com/doc/3.x/filters/html_attr_merge.html) Twig filter, available in `twig/html-extra:^3.24`.
-{{ toolkit_code_example(kit_id.value, component.name, 'With Tooltip', {height: '400px'}) }}
+### No Close Button
+
+Set the `showCloseButton` prop to `false` to hide the close button.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'No Close Button', {height: '450px'}) }}
+
+### Sticky Footer
+
+Keep actions visible while the content scrolls.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Sticky Footer', {height: '450px'}) }}
+
+### Scrollable Content
+
+Long content can scroll while the header stays in view.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Scrollable Content', {height: '450px'}) }}
+
+### RTL
+
+To enable RTL support, set the `dir="rtl"` attribute on the root element.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'RTL', {height: '450px'}) }}
 {% endblock %}

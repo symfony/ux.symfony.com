@@ -1,7 +1,7 @@
 {% extends 'toolkit/docs/_base_component.md.twig' %}
 
 {% block demo %}
-{{ toolkit_code_demo(kit_id.value, component.name) }}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '300px'}) }}
 {% endblock %}
 
 {% block usage %}
@@ -10,15 +10,38 @@
 
 {% block examples %}
 ### Outline
+
+Use the `border` utility class to create an outline empty state.
+
 {{ toolkit_code_example(kit_id.value, component.name, 'Outline', {height: '300px'}) }}
 
 ### Background
+
+Use the `bg-*` utilities to add a background to the empty state.
+
 {{ toolkit_code_example(kit_id.value, component.name, 'Background', {height: '300px'}) }}
 
 ### Avatar
+
+Use the `Empty:Media` component to display an avatar in the empty state.
+
 {{ toolkit_code_example(kit_id.value, component.name, 'Avatar', {height: '300px'}) }}
 
-### Avatar group
-{{ toolkit_code_example(kit_id.value, component.name, 'Avatar group', {height: '300px'}) }}
+### Avatar Group
 
+Use the `Empty:Media` component to display an avatar group in the empty state.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Avatar Group', {height: '300px'}) }}
+
+### InputGroup
+
+You can add an `InputGroup` component to the `Empty:Content` component.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'InputGroup', {height: '300px'}) }}
+
+### RTL
+
+To enable RTL support, set the `dir="rtl"` attribute on the root element.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'RTL', {height: '600px'}) }}
 {% endblock %}

@@ -6291,12 +6291,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/stimulus-bundle.git",
-                "reference": "b2ffd031ece2901e8f41341a6b9ed4260308a46e"
+                "reference": "9dc58d7cbb77356642c63434033e64d00b6c6946"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/stimulus-bundle/zipball/b2ffd031ece2901e8f41341a6b9ed4260308a46e",
-                "reference": "b2ffd031ece2901e8f41341a6b9ed4260308a46e",
+                "url": "https://api.github.com/repos/symfony/stimulus-bundle/zipball/9dc58d7cbb77356642c63434033e64d00b6c6946",
+                "reference": "9dc58d7cbb77356642c63434033e64d00b6c6946",
                 "shasum": ""
             },
             "require": {
@@ -6360,7 +6360,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-06T04:34:57+00:00"
+            "time": "2026-05-22T05:04:55+00:00"
         },
         {
             "name": "symfony/stopwatch",
@@ -7049,12 +7049,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-autocomplete.git",
-                "reference": "eae10441b1a09cfabbeacdbbb9990f1068fa2284"
+                "reference": "744361c331fdb93fd334776f1f29f5d07bad7892"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-autocomplete/zipball/eae10441b1a09cfabbeacdbbb9990f1068fa2284",
-                "reference": "eae10441b1a09cfabbeacdbbb9990f1068fa2284",
+                "url": "https://api.github.com/repos/symfony/ux-autocomplete/zipball/744361c331fdb93fd334776f1f29f5d07bad7892",
+                "reference": "744361c331fdb93fd334776f1f29f5d07bad7892",
                 "shasum": ""
             },
             "require": {
@@ -7136,7 +7136,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-06T04:34:57+00:00"
+            "time": "2026-05-29T05:48:35+00:00"
         },
         {
             "name": "symfony/ux-calendar-link",
@@ -7231,12 +7231,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-chartjs.git",
-                "reference": "d719bca0cb68d514f6ffe1410e02fd3bf5b6554c"
+                "reference": "129f511b9f3dfca6cb34975c9b77af09aa6d2a8b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-chartjs/zipball/d719bca0cb68d514f6ffe1410e02fd3bf5b6554c",
-                "reference": "d719bca0cb68d514f6ffe1410e02fd3bf5b6554c",
+                "url": "https://api.github.com/repos/symfony/ux-chartjs/zipball/129f511b9f3dfca6cb34975c9b77af09aa6d2a8b",
+                "reference": "129f511b9f3dfca6cb34975c9b77af09aa6d2a8b",
                 "shasum": ""
             },
             "require": {
@@ -7308,7 +7308,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-06T04:34:57+00:00"
+            "time": "2026-05-22T05:04:55+00:00"
         },
         {
             "name": "symfony/ux-cropperjs",
@@ -7316,12 +7316,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-cropperjs.git",
-                "reference": "6ef06a477bb8fa6ddee0f68061ccf48216fb60a9"
+                "reference": "e49b20946048de2a4010ec4e81add822355ef3bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-cropperjs/zipball/6ef06a477bb8fa6ddee0f68061ccf48216fb60a9",
-                "reference": "6ef06a477bb8fa6ddee0f68061ccf48216fb60a9",
+                "url": "https://api.github.com/repos/symfony/ux-cropperjs/zipball/e49b20946048de2a4010ec4e81add822355ef3bc",
+                "reference": "e49b20946048de2a4010ec4e81add822355ef3bc",
                 "shasum": ""
             },
             "require": {
@@ -7399,7 +7399,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-06T04:34:57+00:00"
+            "time": "2026-05-22T05:04:55+00:00"
         },
         {
             "name": "symfony/ux-dropzone",
@@ -7407,12 +7407,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-dropzone.git",
-                "reference": "53b5463e9ea7ec68b57d0bdc0f91cd618b627059"
+                "reference": "49475de4db15e2065969ff4e8cf67299c0c3fae6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-dropzone/zipball/53b5463e9ea7ec68b57d0bdc0f91cd618b627059",
-                "reference": "53b5463e9ea7ec68b57d0bdc0f91cd618b627059",
+                "url": "https://api.github.com/repos/symfony/ux-dropzone/zipball/49475de4db15e2065969ff4e8cf67299c0c3fae6",
+                "reference": "49475de4db15e2065969ff4e8cf67299c0c3fae6",
                 "shasum": ""
             },
             "require": {
@@ -7483,7 +7483,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-06T04:34:57+00:00"
+            "time": "2026-05-22T05:04:55+00:00"
         },
         {
             "name": "symfony/ux-icons",
@@ -7491,12 +7491,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-icons.git",
-                "reference": "433acdbf9613988c49ffb3f7bfbaf9179c608996"
+                "reference": "8a50a3d439a1612f5952c587af72933041b7308e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-icons/zipball/433acdbf9613988c49ffb3f7bfbaf9179c608996",
-                "reference": "433acdbf9613988c49ffb3f7bfbaf9179c608996",
+                "url": "https://api.github.com/repos/symfony/ux-icons/zipball/8a50a3d439a1612f5952c587af72933041b7308e",
+                "reference": "8a50a3d439a1612f5952c587af72933041b7308e",
                 "shasum": ""
             },
             "require": {
@@ -7577,7 +7577,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-21T11:43:29+00:00"
+            "time": "2026-05-22T05:04:55+00:00"
         },
         {
             "name": "symfony/ux-leaflet-map",
@@ -7585,12 +7585,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-leaflet-map.git",
-                "reference": "95de64ea1d371e341a7951af1ae6a4c9e71e0521"
+                "reference": "8ad68a905c95b8e19b65368cec2f723a564ca1c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-leaflet-map/zipball/95de64ea1d371e341a7951af1ae6a4c9e71e0521",
-                "reference": "95de64ea1d371e341a7951af1ae6a4c9e71e0521",
+                "url": "https://api.github.com/repos/symfony/ux-leaflet-map/zipball/8ad68a905c95b8e19b65368cec2f723a564ca1c2",
+                "reference": "8ad68a905c95b8e19b65368cec2f723a564ca1c2",
                 "shasum": ""
             },
             "require": {
@@ -7653,7 +7653,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-06T04:34:57+00:00"
+            "time": "2026-05-22T05:04:55+00:00"
         },
         {
             "name": "symfony/ux-live-component",
@@ -7661,12 +7661,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-live-component.git",
-                "reference": "14dd13873028b5c91b76bbcbdb55161100facdd5"
+                "reference": "9a100f8fc5ce965b14c4cd72e104ef1e9cc8e47e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-live-component/zipball/14dd13873028b5c91b76bbcbdb55161100facdd5",
-                "reference": "14dd13873028b5c91b76bbcbdb55161100facdd5",
+                "url": "https://api.github.com/repos/symfony/ux-live-component/zipball/9a100f8fc5ce965b14c4cd72e104ef1e9cc8e47e",
+                "reference": "9a100f8fc5ce965b14c4cd72e104ef1e9cc8e47e",
                 "shasum": ""
             },
             "require": {
@@ -7755,7 +7755,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-08T13:59:07+00:00"
+            "time": "2026-05-29T05:48:35+00:00"
         },
         {
             "name": "symfony/ux-map",
@@ -7763,12 +7763,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-map.git",
-                "reference": "8f6335c6060ee3c3c5c9177d213e4cf79b28f08b"
+                "reference": "1b327b84c6b548f29e45d9fe8a1585db832ebd05"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-map/zipball/8f6335c6060ee3c3c5c9177d213e4cf79b28f08b",
-                "reference": "8f6335c6060ee3c3c5c9177d213e4cf79b28f08b",
+                "url": "https://api.github.com/repos/symfony/ux-map/zipball/1b327b84c6b548f29e45d9fe8a1585db832ebd05",
+                "reference": "1b327b84c6b548f29e45d9fe8a1585db832ebd05",
                 "shasum": ""
             },
             "require": {
@@ -7844,7 +7844,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-06T04:34:57+00:00"
+            "time": "2026-05-22T05:04:55+00:00"
         },
         {
             "name": "symfony/ux-native",
@@ -7933,12 +7933,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-notify.git",
-                "reference": "a29857eb523f6a13d1c49575d7bf4af3bae7f9dc"
+                "reference": "1455e2e7dd57013bffc17fd16bd65bdc1977ac3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-notify/zipball/a29857eb523f6a13d1c49575d7bf4af3bae7f9dc",
-                "reference": "a29857eb523f6a13d1c49575d7bf4af3bae7f9dc",
+                "url": "https://api.github.com/repos/symfony/ux-notify/zipball/1455e2e7dd57013bffc17fd16bd65bdc1977ac3e",
+                "reference": "1455e2e7dd57013bffc17fd16bd65bdc1977ac3e",
                 "shasum": ""
             },
             "require": {
@@ -8012,7 +8012,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-06T04:34:57+00:00"
+            "time": "2026-05-22T05:04:55+00:00"
         },
         {
             "name": "symfony/ux-react",
@@ -8020,12 +8020,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-react.git",
-                "reference": "af04f12f091f9d30f1ff73c456a82397d63006f5"
+                "reference": "d98f6f2edd99cdfc0d57253b15b9b300b0b603dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-react/zipball/af04f12f091f9d30f1ff73c456a82397d63006f5",
-                "reference": "af04f12f091f9d30f1ff73c456a82397d63006f5",
+                "url": "https://api.github.com/repos/symfony/ux-react/zipball/d98f6f2edd99cdfc0d57253b15b9b300b0b603dc",
+                "reference": "d98f6f2edd99cdfc0d57253b15b9b300b0b603dc",
                 "shasum": ""
             },
             "require": {
@@ -8093,7 +8093,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-06T04:34:57+00:00"
+            "time": "2026-05-22T05:04:55+00:00"
         },
         {
             "name": "symfony/ux-toolkit",
@@ -8209,12 +8209,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-translator.git",
-                "reference": "caa69ebda001ad9a5c734f6b2ffad5749ba3b819"
+                "reference": "e51565f1cbcf82b450eaaf74b2a9fd435aee1fc3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-translator/zipball/caa69ebda001ad9a5c734f6b2ffad5749ba3b819",
-                "reference": "caa69ebda001ad9a5c734f6b2ffad5749ba3b819",
+                "url": "https://api.github.com/repos/symfony/ux-translator/zipball/e51565f1cbcf82b450eaaf74b2a9fd435aee1fc3",
+                "reference": "e51565f1cbcf82b450eaaf74b2a9fd435aee1fc3",
                 "shasum": ""
             },
             "require": {
@@ -8283,7 +8283,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-06T04:34:57+00:00"
+            "time": "2026-05-28T13:53:01+00:00"
         },
         {
             "name": "symfony/ux-turbo",
@@ -8291,12 +8291,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-turbo.git",
-                "reference": "23e2d19154ecf0f8f453d8c7055cd85313ca370b"
+                "reference": "50faf143c13154dd928cfedb96f951bbecad4c73"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-turbo/zipball/23e2d19154ecf0f8f453d8c7055cd85313ca370b",
-                "reference": "23e2d19154ecf0f8f453d8c7055cd85313ca370b",
+                "url": "https://api.github.com/repos/symfony/ux-turbo/zipball/50faf143c13154dd928cfedb96f951bbecad4c73",
+                "reference": "50faf143c13154dd928cfedb96f951bbecad4c73",
                 "shasum": ""
             },
             "require": {
@@ -8384,7 +8384,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-06T04:34:57+00:00"
+            "time": "2026-05-22T05:04:55+00:00"
         },
         {
             "name": "symfony/ux-twig-component",
@@ -8392,12 +8392,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-twig-component.git",
-                "reference": "ed2a7241a8b0ca7b216875331b6b1c36b3fdf4c1"
+                "reference": "ba77383076a8b0d13e6bfbb3e85f81e84aa48dd8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-twig-component/zipball/ed2a7241a8b0ca7b216875331b6b1c36b3fdf4c1",
-                "reference": "ed2a7241a8b0ca7b216875331b6b1c36b3fdf4c1",
+                "url": "https://api.github.com/repos/symfony/ux-twig-component/zipball/ba77383076a8b0d13e6bfbb3e85f81e84aa48dd8",
+                "reference": "ba77383076a8b0d13e6bfbb3e85f81e84aa48dd8",
                 "shasum": ""
             },
             "require": {
@@ -8473,7 +8473,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-07T14:44:04+00:00"
+            "time": "2026-05-27T19:19:37+00:00"
         },
         {
             "name": "symfony/ux-vue",
@@ -8481,12 +8481,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-vue.git",
-                "reference": "d36b540bb2405dee3852c17360441419bd6c291e"
+                "reference": "a505d5508aee8bcfefd32a444caed7d1d94bda1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-vue/zipball/d36b540bb2405dee3852c17360441419bd6c291e",
-                "reference": "d36b540bb2405dee3852c17360441419bd6c291e",
+                "url": "https://api.github.com/repos/symfony/ux-vue/zipball/a505d5508aee8bcfefd32a444caed7d1d94bda1d",
+                "reference": "a505d5508aee8bcfefd32a444caed7d1d94bda1d",
                 "shasum": ""
             },
             "require": {
@@ -8558,7 +8558,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-06T04:34:57+00:00"
+            "time": "2026-05-22T05:04:55+00:00"
         },
         {
             "name": "symfony/validator",

@@ -100,7 +100,7 @@ class ToolkitService
     }
 
     /**
-     * @return array<string, array{props: list<array{name: string, type: string, description: string}>, blocks: list<array{name: string, description: string}>}>
+     * @return array<string, array{props: list<array{name: string, type: string, default: string|null, description: string}>, blocks: list<array{name: string, description: string}>}>
      */
     public function extractRecipeApiReference(Recipe $recipe): array
     {
@@ -130,11 +130,18 @@ class ToolkitService
                     ->toString();
 
                 $apiReference[$componentName] = [
-                    'props' => array_map(static fn (array $prop) => [
-                        'name' => $prop['name'],
-                        'type' => $prop['type'],
-                        'description' => trim(preg_replace('/\s+/', ' ', $prop['description'])),
-                    ], $props),
+                    'props' => array_map(static function (array $prop) {
+                        ['description' => $description, 'default' => $default] = self::extractPropDefault(
+                            trim(preg_replace('/\s+/', ' ', $prop['description']))
+                        );
+
+                        return [
+                            'name' => $prop['name'],
+                            'type' => $prop['type'],
+                            'default' => $default,
+                            'description' => $description,
+                        ];
+                    }, $props),
                     'blocks' => array_map(static fn (array $block) => [
                         'name' => $block['name'],
                         'description' => trim(preg_replace('/\s+/', ' ', $block['description'])),
@@ -144,5 +151,20 @@ class ToolkitService
         }
 
         return $apiReference;
+    }
+
+    /**
+     * Splits the normalized "Defaults to `...`" suffix out of a prop description
+     * so the default value can be displayed in its own column. See symfony/ux#3345.
+     *
+     * @return array{description: string, default: string|null}
+     */
+    public static function extractPropDefault(string $description): array
+    {
+        if (preg_match('/^(?P<description>.*?)\s*Defaults to `(?P<default>.*)`$/', $description, $matches)) {
+            return ['description' => $matches['description'], 'default' => $matches['default']];
+        }
+
+        return ['description' => $description, 'default' => null];
     }
 }

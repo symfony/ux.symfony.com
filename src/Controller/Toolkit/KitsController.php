@@ -38,6 +38,7 @@ class KitsController extends AbstractController
             'kit' => $kit,
             'kit_id' => $kitId,
             'components' => $kit->getRecipes(RecipeType::Component),
+            'blocks' => $kit->getRecipes(RecipeType::Block),
         ]);
     }
 }

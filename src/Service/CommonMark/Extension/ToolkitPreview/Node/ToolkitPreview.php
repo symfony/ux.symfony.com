@@ -25,6 +25,7 @@ final class ToolkitPreview extends AbstractBlock implements StringContainerInter
     public function __construct(
         private readonly ToolkitKitId $kitId,
         private readonly array $options = [],
+        private readonly ?string $recipeName = null,
     ) {
         parent::__construct();
     }
@@ -50,5 +51,10 @@ final class ToolkitPreview extends AbstractBlock implements StringContainerInter
     public function getOptions(): array
     {
         return $this->options;
+    }
+
+    public function getRecipeName(): ?string
+    {
+        return $this->recipeName;
     }
 }

@@ -52,7 +52,7 @@ final class ToolkitRuntime implements RuntimeExtensionInterface
             );
         }
 
-        $options = json_encode($options + ['kit' => $kitId->value]);
+        $options = json_encode($options + ['kit' => $kitId->value, 'recipe' => $recipeName]);
 
         if ($preview) {
             return \sprintf(

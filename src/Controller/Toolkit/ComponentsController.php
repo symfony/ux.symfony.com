@@ -50,6 +50,7 @@ class ComponentsController extends AbstractController
             'kit' => $kit,
             'kit_id' => $kitId,
             'component' => $component,
+            'toc_items' => $this->toolkitService->getRecipeTocItems($kitId, $component),
         ]);
     }
 

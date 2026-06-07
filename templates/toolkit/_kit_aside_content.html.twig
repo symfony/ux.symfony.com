@@ -1,0 +1,19 @@
+<div class="px-2 font-semibold">
+    Kit
+</div>
+<ul class="list-unstyled mb-4 space-y-[.1rem]">
+    <li class="rounded transition-colors duration-100 ease-in-out hover:bg-surface [&.active]:bg-surface {{ app.current_route == 'app_toolkit_kit' ? 'active' : '' }}">
+        <a class="block px-2 py-[.1rem] text-[.9rem]" href="{{ path('app_toolkit_kit', {kitId: kit_id.value}) }}">Getting started</a>
+    </li>
+</ul>
+
+<div class="px-2 font-semibold">Components</div>
+<ul class="list-unstyled mb-4 space-y-[.1rem]">
+    {% for component in components %}
+        <li class="rounded transition-colors duration-100 ease-in-out hover:bg-surface [&.active]:bg-surface {{ app.current_route == 'app_toolkit_component' and app.current_route_parameters.componentName == component.name ? 'active' : '' }}">
+            <a class="block px-2 py-0.5 text-[.9rem]" href="{{ path('app_toolkit_component', {kitId: kit_id.value, componentName: component.name}) }}">
+                {{ component.manifest.name }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>

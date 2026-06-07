@@ -4,23 +4,23 @@
             <h1 class="mb-0">{{ component.manifest.name }}</h1>
             <a
                 href="{{ path('app_toolkit_component', {kitId: kitId.value, componentName: component.name}) }}.md"
-               class="inline-flex items-center gap-2 text-sm text-foreground/80  no-underline hover:underline underline-offset-4 shrink-0"
-               title="View this page as Markdown (useful for LLMs)"
+                class="inline-flex items-center gap-2 text-sm text-foreground/80  no-underline hover:underline underline-offset-4 shrink-0"
+                title="View this page as Markdown (useful for LLMs)"
             >
                 <twig:ux:icon name="material-symbols:markdown-outline" class="size-6" />
-                View as Markdown
+                <span>View as Markdown</span>
             </a>
         </div>
 
         {{ this.markdownContent|markdown_to_html }}
     </div>
 
-    {% if computed.tocItems %}
+    {% if tocItems %}
         <nav data-controller="toolkit-recipe-toc"
              class="hidden xl:block w-52 shrink-0 sticky top-4 max-h-[calc(100vh-2rem)] overflow-y-auto text-sm" aria-label="On this page">
             <strong class="font-semibold px-2 mb-2 text-foreground block">On this page</strong>
             <ul class="list-unstyled space-y-1">
-                {% for item in computed.tocItems %}
+                {% for item in tocItems %}
                     {% set class = item.level == 3 ? 'ml-2' %}
                     <li
                         class="rounded transition-colors duration-100 ease-in-out hover:bg-surface [&.active]:bg-surface {{ class }}"

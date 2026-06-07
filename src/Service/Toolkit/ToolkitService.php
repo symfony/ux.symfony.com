@@ -12,6 +12,11 @@
 namespace App\Service\Toolkit;
 
 use App\Enum\ToolkitKitId;
+use App\Service\CommonMark\ConverterFactory;
+use League\CommonMark\Extension\CommonMark\Node\Block\Heading;
+use League\CommonMark\Node\NodeIterator;
+use League\CommonMark\Parser\MarkdownParser;
+use League\CommonMark\Renderer\HtmlRenderer;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Filesystem\Path;
 use Symfony\UX\Toolkit\Installer\Pool;
@@ -42,6 +47,7 @@ class ToolkitService
         #[Autowire(service: 'ux_toolkit.registry.registry_factory')]
         private RegistryFactory $registryFactory,
         private Environment $twig,
+        private ConverterFactory $converterFactory,
     ) {
     }
 
@@ -66,6 +72,38 @@ class ToolkitService
     public function resolveRecipePool(Kit $kit, Recipe $component): Pool
     {
         return (new PoolResolver())->resolveForRecipe($kit, $component);
+    }
+
+    /**
+     * @return list<array{level: int, title: string, id: string}>
+     */
+    public function getRecipeTocItems(ToolkitKitId $kitId, Recipe $recipe): array
+    {
+        $environment = ($this->converterFactory)()->getEnvironment();
+        $document = new MarkdownParser($environment)->parse($this->renderRecipeMarkdown($kitId, $recipe));
+        $renderer = new HtmlRenderer($environment);
+
+        $items = [];
+        foreach ($document->iterator(NodeIterator::FLAG_BLOCKS_ONLY) as $node) {
+            if (!$node instanceof Heading) {
+                continue;
+            }
+            $level = $node->getLevel();
+            if ($level < 2 || $level > 3) {
+                continue;
+            }
+            $id = $node->data->get('attributes/id', null);
+            if (null === $id) {
+                continue;
+            }
+            $items[] = [
+                'level' => $level,
+                'title' => (string) $renderer->renderNodes($node->children()),
+                'id' => $id,
+            ];
+        }
+
+        return $items;
     }
 
     public function renderRecipeMarkdown(ToolkitKitId $kitId, Recipe $recipe, bool $isLlm = false): string

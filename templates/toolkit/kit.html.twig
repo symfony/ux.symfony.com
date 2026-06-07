@@ -20,15 +20,53 @@
 {% block content %}
     <div class="hero"></div>
 
-    <div class="max-w-[1140px] mx-auto pt-6" style="display: grid; grid-template-columns: 180px 1fr; gap: 2rem">
-        {{ include('toolkit/_kit_aside.html.twig') }}
+    <div class="max-w-[1140px] mx-auto lg:pt-6 grid grid-cols-1 lg:grid-cols-[180px_1fr] gap-8 px-4 lg:px-0">
+        <div class="hidden lg:block">
+            {{ include('toolkit/_kit_aside.html.twig') }}
+        </div>
 
-        <div>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ path('app_toolkit') }}">UX Toolkit</a></li>
-                    <li class="breadcrumb-item"><a href="{{ path('app_toolkit', {_fragment: 'kits'}) }}">Kits</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ kit.manifest.name }}</li>
+        <div class="min-w-0">
+            <div class="xl:hidden sticky top-0 z-9 -mx-4 mb-6 px-4 py-3 bg-body/85 backdrop-blur border-b border-border flex items-center gap-3">
+                <div data-controller="disclosure" data-disclosure-lock-body-value="true" data-disclosure-portal-value="true" class="lg:hidden">
+                    <button type="button"
+                            data-action="disclosure#toggle"
+                            class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-border text-sm hover:bg-surface"
+                            aria-expanded="false"
+                            aria-controls="kit-drawer-panel"
+                            aria-label="Open menu">
+                        <twig:ux:icon name="lucide:panel-left" class="size-4" />
+                        Menu
+                    </button>
+
+                    <div data-disclosure-target="panel"
+                         id="kit-drawer-panel"
+                         role="dialog"
+                         aria-modal="true"
+                         aria-label="Menu"
+                         class="hidden fixed inset-0 z-30">
+                        <div class="absolute inset-0 bg-black/50 backdrop-blur opacity-0 transition-opacity duration-200 ease-out [.is-open_&]:opacity-100" data-action="click->disclosure#close"></div>
+                        <aside class="absolute inset-y-0 left-0 w-72 bg-body border-r border-border shadow-xl flex flex-col -translate-x-full transition-transform duration-250 ease-out [.is-open_&]:translate-x-0">
+                            <div class="flex items-center justify-between p-4 border-b border-border">
+                                <strong class="text-sm font-semibold">Menu</strong>
+                                <button type="button" data-action="disclosure#close" aria-label="Close" class="p-1 rounded hover:bg-surface">
+                                    <twig:ux:icon name="lucide:x" class="size-4" />
+                                </button>
+                            </div>
+                            <div class="overflow-y-auto flex-1 p-4">
+                                {{ include('toolkit/_kit_aside_content.html.twig') }}
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+
+            <nav aria-label="breadcrumb" class="mb-2">
+                <ol class="flex flex-wrap items-center gap-1.5 text-sm text-foreground/60">
+                    <li><a class="hover:text-foreground hover:underline underline-offset-4" href="{{ path('app_toolkit') }}">UX Toolkit</a></li>
+                    <li aria-hidden="true" class="flex items-center"><twig:ux:icon name="lucide:chevron-right" class="size-3.5 text-foreground/40" /></li>
+                    <li><a class="hover:text-foreground hover:underline underline-offset-4" href="{{ path('app_toolkit', {_fragment: 'kits'}) }}">Kits</a></li>
+                    <li aria-hidden="true" class="flex items-center"><twig:ux:icon name="lucide:chevron-right" class="size-3.5 text-foreground/40" /></li>
+                    <li class="text-foreground font-medium" aria-current="page">{{ kit.manifest.name }}</li>
                 </ol>
             </nav>
 

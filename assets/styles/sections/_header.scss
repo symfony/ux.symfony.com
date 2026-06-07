@@ -25,20 +25,13 @@
 
 .AppHeader::before {
   position: fixed;
+  display: none;
+  transition: all .25s ease-in-out allow-discrete;
   inset: 0;
   content: " ";
   backdrop-filter: blur(5px);
   background: rgb(var(--color-background-rgb) / 0.85);
   opacity: 0;
-  transform: scaleX(0);
-}
-@keyframes header-fade {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
 }
 
 body.locked {
@@ -48,9 +41,10 @@ body.locked {
   background: var(--bs-body-bg-rgb);
 }
 .AppHeader.open::before {
-  transform: scaleX(1);
-  inset: 0;
-  animation: header-fade 200ms;
+  @starting-style {
+    opacity: 0;
+  }
+  display: block;
   opacity: 1;
 }
 

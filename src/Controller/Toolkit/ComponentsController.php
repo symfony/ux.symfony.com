@@ -16,6 +16,8 @@ use App\Service\Toolkit\ToolkitService;
 use App\Service\UxPackageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\UriSigner;
@@ -63,7 +65,7 @@ class ComponentsController extends AbstractController
         \Twig\Environment $twig,
         #[Autowire(service: 'ux_toolkit.kit.kit_context_runner')]
         KitContextRunner $kitContextRunner,
-        #[Autowire(service: 'profiler')]
+        #[Autowire(new Reference('profiler', invalidBehavior: ContainerInterface::NULL_ON_INVALID_REFERENCE))]
         ?Profiler $profiler,
     ): Response {
         if (!$uriSigner->checkRequest($request)) {

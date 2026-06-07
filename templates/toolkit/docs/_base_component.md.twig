@@ -1,5 +1,7 @@
 {# twig-cs-fixer-disable FileName.Error #}
-# {{ component.manifest.name }}{% if is_llm ?? false %} ({{ kit.manifest.name }} kit){% endif %}
+{% if is_llm ?? false %}
+# {{ component.manifest.name }} ({{ kit.manifest.name }} kit)
+{% endif %}
 
 {{ component.manifest.description }}
 
@@ -108,6 +110,7 @@ Happy coding!
 {% for prop in component_api_reference.props %}
 | `{{ prop.name }}` | `{{ prop.type|replace({'|': '\\|'})|raw }}` | {{ prop.description }} |
 {% endfor %}
+{{ ' ' }}
 {% endif %}
 
 {% if component_api_reference.blocks is not empty %}

@@ -94,17 +94,23 @@
                 </div>
             </div>
 
-            <nav aria-label="breadcrumb" class="mb-2">
-                <ol class="flex flex-wrap items-center gap-1.5 text-sm text-foreground/60">
-                    <li><a class="hover:text-foreground hover:underline underline-offset-4" href="{{ path('app_toolkit') }}">UX Toolkit</a></li>
-                    <li aria-hidden="true" class="flex items-center"><twig:ux:icon name="lucide:chevron-right" class="size-3.5 text-foreground/40" /></li>
-                    <li><a class="hover:text-foreground hover:underline underline-offset-4" href="{{ path('app_toolkit', {_fragment: 'kits'}) }}">Kits</a></li>
-                    <li aria-hidden="true" class="flex items-center"><twig:ux:icon name="lucide:chevron-right" class="size-3.5 text-foreground/40" /></li>
-                    <li><a class="hover:text-foreground hover:underline underline-offset-4" href="{{ path('app_toolkit_kit', {kitId: kit_id.value}) }}">{{ kit.manifest.name }}</a></li>
-                    <li aria-hidden="true" class="flex items-center"><twig:ux:icon name="lucide:chevron-right" class="size-3.5 text-foreground/40" /></li>
-                    <li class="text-foreground font-medium" aria-current="page">{{ component.manifest.name }}</li>
-                </ol>
-            </nav>
+            <twig:Toolkit:Breadcrumb class="mb-2">
+                <twig:Toolkit:Breadcrumb:Item>
+                    <twig:Toolkit:Breadcrumb:Link href="{{ path('app_toolkit') }}">UX Toolkit</twig:Toolkit:Breadcrumb:Link>
+                </twig:Toolkit:Breadcrumb:Item>
+                <twig:Toolkit:Breadcrumb:Separator />
+                <twig:Toolkit:Breadcrumb:Item>
+                    <twig:Toolkit:Breadcrumb:Link href="{{ path('app_toolkit', {_fragment: 'kits'}) }}">Kits</twig:Toolkit:Breadcrumb:Link>
+                </twig:Toolkit:Breadcrumb:Item>
+                <twig:Toolkit:Breadcrumb:Separator />
+                <twig:Toolkit:Breadcrumb:Item>
+                    <twig:Toolkit:Breadcrumb:Link href="{{ path('app_toolkit_kit', {kitId: kit_id.value}) }}">{{ kit.manifest.name }}</twig:Toolkit:Breadcrumb:Link>
+                </twig:Toolkit:Breadcrumb:Item>
+                <twig:Toolkit:Breadcrumb:Separator />
+                <twig:Toolkit:Breadcrumb:Item active>
+                    {{ component.manifest.name }}
+                </twig:Toolkit:Breadcrumb:Item>
+            </twig:Toolkit:Breadcrumb>
 
             <twig:Toolkit:ComponentDoc kitId="{{ kit_id }}" component="{{ component }}" tocItems="{{ toc_items }}" />
         </div>

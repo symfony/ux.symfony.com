@@ -1,0 +1,8 @@
+<nav{{ attributes.defaults({
+    'aria-label': 'breadcrumb',
+    'class': 'mb-2'
+}) }}>
+    <ol class="flex flex-wrap items-center gap-1.5 text-sm text-foreground/60">
+        {% block content %}{% endblock %}
+    </ol>
+</nav>

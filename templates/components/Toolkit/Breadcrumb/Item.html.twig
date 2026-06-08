@@ -1,0 +1,7 @@
+{% props active = false %}
+{% do provide('_toolkit_breadcrumb_item_active', active) %}
+<li{{ attributes.defaults({
+    ...(active ? { 'aria-current': 'page', class: 'text-foreground font-medium'} : {})
+}) }}>
+    {% block content %}{% endblock %}
+</li>

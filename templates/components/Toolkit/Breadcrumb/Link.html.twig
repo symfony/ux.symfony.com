@@ -1,0 +1,6 @@
+{% set active = inject('_toolkit_breadcrumb_item_active') %}
+<a{{ attributes.defaults({
+    class: 'hover:text-foreground hover:underline underline-offset-4'
+}) }}>
+    {% block content %}{% endblock %}
+</a>

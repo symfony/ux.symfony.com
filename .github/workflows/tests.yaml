@@ -30,3 +30,12 @@ jobs:
 
             -   name: Tests
                 run: vendor/bin/phpunit
+
+            -   name: Upload browser artifacts on failure
+                if: failure()
+                uses: actions/upload-artifact@v4
+                with:
+                    name: browser-output
+                    path: var/browser/
+                    if-no-files-found: ignore
+                    retention-days: 7

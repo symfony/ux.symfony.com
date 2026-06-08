@@ -1,0 +1,11 @@
+{% props name, lockBody = false, portal = false, transitionDuration = 200 %}
+{% do provide('_toolkit_disclosure_name', name) %}
+<div
+    {{ attributes.defaults({}) }}
+    data-controller="disclosure"
+    data-disclosure-lock-body-value="{{ lockBody ? 'true' : 'false' }}"
+    data-disclosure-portal-value="{{ portal ? 'true' : 'false' }}"
+    data-disclosure-transition-duration-value="{{ transitionDuration }}"
+>
+    {% block content %}{% endblock %}
+</div>

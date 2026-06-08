@@ -1,0 +1,28 @@
+<twig:Toolkit:Disclosure name="kit-drawer-panel" lockBody portal class="lg:hidden">
+    <twig:Toolkit:Disclosure:Trigger
+        label="Open menu"
+        class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-border text-sm hover:bg-surface">
+        <twig:ux:icon name="lucide:panel-left" class="size-4" />
+        Menu
+    </twig:Toolkit:Disclosure:Trigger>
+
+    <twig:Toolkit:Disclosure:Panel
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu"
+        class="fixed inset-0 z-30"
+    >
+        <twig:Toolkit:Disclosure:Backdrop />
+        <aside class="absolute inset-y-0 left-0 w-72 bg-body border-r border-border shadow-xl flex flex-col -translate-x-full transition-transform duration-250 ease-out [.is-open_&]:translate-x-0">
+            <div class="flex items-center justify-between p-4 border-b border-border">
+                <strong class="text-sm font-semibold">Menu</strong>
+                <button type="button" data-action="disclosure#close" aria-label="Close" class="p-1 rounded hover:bg-surface">
+                    <twig:ux:icon name="lucide:x" class="size-4" />
+                </button>
+            </div>
+            <div class="overflow-y-auto flex-1 p-4">
+                {{ include('toolkit/_kit_aside_content.html.twig') }}
+            </div>
+        </aside>
+    </twig:Toolkit:Disclosure:Panel>
+</twig:Toolkit:Disclosure>

@@ -1,0 +1,11 @@
+{% props label = null, action = 'toggle' %}
+{% set name = inject('_toolkit_disclosure_name') %}
+<button type="button"
+    {{ attributes.defaults({}) }}
+    data-action="disclosure#{{ action }}"
+    aria-expanded="false"
+    aria-controls="{{ name }}"
+    {% if label %}aria-label="{{ label }}"{% endif %}
+>
+    {% block content %}{% endblock %}
+</button>

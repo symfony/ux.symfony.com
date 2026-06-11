@@ -138,22 +138,27 @@
 
     .Terminal_actions {
         white-space: nowrap;
+    }
 
-        .btn-link {
-            color: var(--color-n-200) !important;
-            background: none;
+    /* GitHub / copy icon buttons (ex Bootstrap `.btn .btn-link .btn-sm`) */
+    .code-buttons :is(a, button) {
+        display: inline-block;
+        padding: --spacing(1) --spacing(2);
+        background: none;
+        color: var(--color-n-200);
+        font-size: var(--text-sm);
+        line-height: 1.5;
+        cursor: pointer;
+        transition: color 250ms ease-in-out;
+
+        &:hover {
+            color: var(--color-n-100);
         }
-        .btn-link:hover {
-            color: var(--color-n-100) !important;
-        }
-        .btn-copy {
-            color: var(--color-n-200) !important;
-            background: none;
-            transition: all 250ms ease-in-out;
-            &:hover {
-                color: var(--color-n-100) !important;
-            }
-        }
+    }
+
+    /* offset parent for the `.copied button::after` feedback ring */
+    .btn-copy {
+        position: relative;
     }
 
     /* copy button inside the code block itself */

@@ -1,8 +1,9 @@
 {#
     Site button. Renders an <a> when `href` is set, otherwise a <button>.
 
-    Variants are added as the migration needs them (Phase 9). For now only the
-    neutral `outline` variant is wired up (ex Bootstrap `.btn-outline-primary`).
+    Variants are added as the migration needs them (Phase 9):
+    - outline: ex Bootstrap `.btn-outline-primary` (neutral, transparent, fills on hover)
+    - dark:    ex Bootstrap `.btn-dark` (solid near-black)
 #}
 {%- props href = null, variant = 'outline', size = 'md' -%}
 {%- set style = html_cva(
@@ -10,6 +11,7 @@
     variants: {
         variant: {
             outline: 'border-body-text text-body-text bg-transparent opacity-75 hover:opacity-100 hover:bg-body-text hover:text-body',
+            dark: 'border-[#212529] bg-[#212529] text-white hover:opacity-90',
         },
         size: {
             sm: 'px-2.5 py-1 text-sm',

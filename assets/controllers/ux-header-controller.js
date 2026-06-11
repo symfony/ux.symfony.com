@@ -8,20 +8,20 @@ export default class extends Controller {
     }
 
     connect() {
-        document.body.classList.remove('locked');
+        document.body.classList.remove('overflow-y-hidden');
     }
 
     disconnect() {
-        document.body.classList.remove('locked');
+        document.body.classList.remove('overflow-y-hidden');
     }
 
     menuButtonDisconnected() {
-        document.body.classList.remove('locked');
+        document.body.classList.remove('overflow-y-hidden');
     }
 
     toggleMenu() {
         this.open = !this.open;
         this.element.classList.toggle('open', this.open);
-        document.body.classList.toggle('locked', this.open);
+        document.body.classList.toggle('overflow-y-hidden', this.open);
     }
 }

@@ -1,0 +1,9 @@
+{% props href, title = null %}
+<a
+    href="{{ href }}"
+    rel="external me"
+    {%- if title %} title="{{ title }}"{% endif %}
+    class="relative grid place-content-center w-6 h-6 opacity-90 transition-all duration-250 hover:opacity-100 hover:scale-110 [&_.Icon]:text-xl"
+>
+    {%- block content %}{% endblock -%}
+</a>

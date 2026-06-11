@@ -73,6 +73,8 @@
 
         code {
             font-size: inherit;
+            background-color: inherit;
+            color: inherit;
             opacity: 0.8;
 
             em {

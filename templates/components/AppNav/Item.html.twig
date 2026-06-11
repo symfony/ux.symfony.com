@@ -1,0 +1,8 @@
+{% props href, badge = null, hideOnCramped = false %}
+<a
+    href="{{ href }}"
+    class="relative text-center font-title text-base font-medium leading-[1.45] opacity-90 transition-all duration-250 hover:opacity-100{{ hideOnCramped ? ' nav:max-[1023px]:hidden' }}"
+>
+    {%- if badge %}<twig:AppNav:Badge text="{{ badge }}" />{% endif -%}
+    {%- block content %}{% endblock -%}
+</a>

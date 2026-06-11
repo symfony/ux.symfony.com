@@ -26,7 +26,7 @@ final class IconsTest extends KernelTestCase
         $this->browser()
             ->visit('/')
             ->assertSuccessful()
-            ->assertSeeIn('.AppNav_menu', 'Icons')
+            ->assertSeeIn('header', 'Icons')
             ->click('Icons')
             ->assertSuccessful()
             ->assertSeeIn('title', 'Icons')

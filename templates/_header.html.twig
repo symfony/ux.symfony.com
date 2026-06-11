@@ -1,69 +1,55 @@
-<header class="AppHeader {{ theme is defined ? ('AppHeader--' ~ theme) }}" data-controller="ux-header">
+{% set white = theme is defined and theme == 'white' %}
+<header
+    class="group absolute inset-x-0 top-0 z-10 py-6 nav:pt-8 {{ white ? 'text-white' : 'text-body-text' }} before:content-[''] before:fixed before:inset-0 before:hidden before:opacity-0 before:backdrop-blur-[5px] before:transition-all before:duration-250 before:ease-in-out before:transition-discrete {{ white ? 'before:bg-[#505050]/85' : 'before:bg-white/85 dark:before:bg-[#141414]/85' }} [&.open]:before:block [&.open]:before:opacity-100 starting:[&.open]:before:opacity-0"
+    data-controller="ux-header"
+>
     <div class="max-w-[1400px] mx-auto px-6 md:px-12">
 
-        <nav class="AppNav AppNav--white">
+        <nav class="relative flex flex-row justify-between gap-6 max-nav:flex-wrap">
 
-            <a class="AppHeader_logo" href="{{ path('app_homepage') }}"  aria-label="Symfony UX">
-                <img src="{{ asset('images/sf-ux.svg') }}" alt="Symfony UX" width="161" height="30" />
+            <a
+                href="{{ path('app_homepage') }}"
+                aria-label="Symfony UX"
+                class="block shrink-0 h-8 min-[1020px]:h-10 transition-[filter] duration-250 ease-in {{ white ? 'invert' : 'dark:invert' }}"
+            >
+                <img src="{{ asset('images/sf-ux.svg') }}" alt="Symfony UX" width="161" height="30" class="block h-full w-auto" />
             </a>
 
-            <div class="AppNav_actions">
+            <div class="flex flex-row-reverse items-center gap-3 shrink-0 nav:order-2">
                 <button
-                    class="AppHeader_toggler AppNav_item AppNav_item--icon"
+                    class="relative grid place-content-center w-6 h-6 border-0 text-inherit opacity-90 transition-all duration-250 hover:opacity-100 hover:scale-110 [&_.Icon]:text-2xl nav:hidden"
                     data-action="ux-header#toggleMenu"
                     aria-label="Toggle menu"
                 >
                     <twig:ux:icon name="menu"/>
                 </button>
-                <twig:ThemeSwitcher class="AppNav_item AppNav_item--icon" aria-label="Switch dark/light mode"/>
-                <div class="AppNav_socials">
-                    <a
-                        class="AppNav_item AppNav_item--icon grid"
-                        href="https://x.com/symfonyux"
-                        rel="external me"
-                        title="Symfony UX on X (Twitter)"
-                    >
+
+                <twig:ThemeSwitcher class="opacity-90 hover:opacity-100 hover:scale-110 transition-all duration-250 text-xl" aria-label="Switch dark/light mode"/>
+
+                <div class="flex items-center justify-center gap-3 max-sm:absolute max-sm:top-[80vh] max-sm:w-full max-sm:hidden group-[.open]:max-sm:flex group-[.open]:max-sm:gap-8 group-[.open]:max-sm:[&_.Icon]:text-[2rem]">
+                    <twig:AppNav:IconLink href="https://x.com/symfonyux" title="Symfony UX on X (Twitter)">
                         <twig:ux:icon name="x-twitter"/>
-                    </a>
-                    <a
-                        class="AppNav_item AppNav_item--icon grid"
-                        href="https://bsky.app/profile/ux.symfony.com"
-                        rel="external me"
-                        title="Symfony UX on BlueSky"
-                    >
-                        <span class="AppNav_badge" data-content="New"></span>
+                    </twig:AppNav:IconLink>
+                    <twig:AppNav:IconLink href="https://bsky.app/profile/ux.symfony.com" title="Symfony UX on BlueSky">
+                        <twig:AppNav:Badge />
                         <twig:ux:icon name="bluesky"/>
-                    </a>
-                    <a
-                        class="AppNav_item AppNav_item--icon grid"
-                        href="https://github.com/symfony/ux"
-                        rel="external me"
-                        title="Symfony UX on GitHub"
-                    >
+                    </twig:AppNav:IconLink>
+                    <twig:AppNav:IconLink href="https://github.com/symfony/ux" title="Symfony UX on GitHub">
                         <twig:ux:icon name="github" />
-                    </a>
+                    </twig:AppNav:IconLink>
                 </div>
             </div>
 
-            <div class="AppNav_menu">
-                <a href="{{ path('app_calendar_link') }}" class="AppNav_item AppNav_item--cs">
-                    <span class="AppNav_badge" data-content="New"></span>
-                    Calendar Link
-                </a>
-                <a href="{{ path('app_native') }}" class="AppNav_item AppNav_item--cs">
-                    <span class="AppNav_badge" data-content="New"></span>
-                    Native
-                </a>
-                <a href="{{ path('app_toolkit') }}" class="AppNav_item AppNav_item--cs">
-                    <span class="AppNav_badge" data-content="New"></span>
-                    Toolkit
-                </a>
-                <a href="{{ path('app_turbo') }}" class="AppNav_item">Turbo</a>
-                <a href="{{ path('app_live_component') }}" class="AppNav_item">Live <span>Components</span></a>
-                <a href="{{ path('app_icons') }}" class="AppNav_item">Icons</a>
-                <a href="{{ path('app_packages') }}" class="AppNav_item">Packages</a>
-                <a href="{{ path('app_demos') }}" class="AppNav_item">Demos</a>
-                {# <a href="{{ path('app_cookbook') }}" class="AppNav_item AppNav_item--cs">Cookbook</a> #}
+            <div class="flex flex-col justify-end gap-4 nav:flex-row nav:items-center nav:gap-8 nav:ml-auto max-nav:hidden max-nav:w-full max-nav:p-4 max-nav:opacity-0 max-nav:-z-[1] max-nav:transition-all max-nav:transition-discrete max-nav:duration-250 max-nav:ease-in-out group-[.open]:max-nav:flex group-[.open]:max-nav:opacity-100 group-[.open]:max-nav:z-[1] starting:group-[.open]:max-nav:opacity-0 [&_a]:max-nav:text-2xl [&_a]:max-nav:p-2 [&_a]:max-nav:opacity-100">
+                <twig:AppNav:Item href="{{ path('app_calendar_link') }}" badge="New" hideOnCramped>Calendar Link</twig:AppNav:Item>
+                <twig:AppNav:Item href="{{ path('app_native') }}" badge="New" hideOnCramped>Native</twig:AppNav:Item>
+                <twig:AppNav:Item href="{{ path('app_toolkit') }}" badge="New" hideOnCramped>Toolkit</twig:AppNav:Item>
+                <twig:AppNav:Item href="{{ path('app_turbo') }}">Turbo</twig:AppNav:Item>
+                <twig:AppNav:Item href="{{ path('app_live_component') }}">Live <span>Components</span></twig:AppNav:Item>
+                <twig:AppNav:Item href="{{ path('app_icons') }}">Icons</twig:AppNav:Item>
+                <twig:AppNav:Item href="{{ path('app_packages') }}">Packages</twig:AppNav:Item>
+                <twig:AppNav:Item href="{{ path('app_demos') }}">Demos</twig:AppNav:Item>
+                {# <twig:AppNav:Item href="{{ path('app_cookbook') }}" hideOnCramped>Cookbook</twig:AppNav:Item> #}
             </div>
 
         </nav>

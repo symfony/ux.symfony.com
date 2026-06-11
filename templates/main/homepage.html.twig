@@ -48,10 +48,10 @@
     <p class="eyebrows" style="margin: 70px 0 0;">Stimulus Controllers</p>
     <div class="md:flex md:justify-between items-center text-center md:text-start">
         <h2 class="ubuntu pt-2 component-headlines">Write custom JavaScript inside <em class="rainbow-emphasis">Stimulus Controllers</em></h2>
-        <a style="height: 100%;" class="btn btn-md btn-outline-primary my-4 md:my-0" href="https://symfony.com/doc/current/frontend/ux.html">
+        <twig:Button href="https://symfony.com/doc/current/frontend/ux.html" class="my-4 md:my-0">
             Read full Documentation
-            <twig:ux:icon name="arrow-right" style="transform: rotate(-45deg);"/>
-        </a>
+            <twig:ux:icon name="arrow-right" class="-rotate-45"/>
+        </twig:Button>
     </div>
 
     <div class="arrow mb-4 hidden md:block"></div>
@@ -81,7 +81,7 @@
                 <div class="grid grid-cols-12 gap-x-6 items-stretch" data-controller="markdown">
                     <div class="col-span-6 flex">
                         <textarea
-                            rows="2" class="form-control p-4"
+                            rows="2" class="w-full bg-body border rounded-sm p-4"
                             aria-label="Type markdown into this box"
                             autocomplete="off"
                             data-markdown-target="input"
@@ -102,10 +102,10 @@
     <p class="eyebrows" style="margin: 111px 0 0;">Packages</p>
     <div class="md:flex md:justify-between text-center items-center md:text-start">
         <h2 class="ubuntu pt-2 component-headlines">Install UX <em class="rainbow-emphasis">Components</em></h2>
-        <a style="height: 100%;" class="btn btn-md btn-outline-primary mt-4 md:mt-0"  href="{{ path('app_packages') }}">
+        <twig:Button href="{{ path('app_packages') }}" class="mt-4 md:mt-0">
             Browse all Packages
-            <twig:ux:icon name="arrow-right" style="transform: rotate(-45deg);"/>
-        </a>
+            <twig:ux:icon name="arrow-right" class="-rotate-45"/>
+        </twig:Button>
     </div>
     <div class="mt-4 md:mt-12">
         <div style="display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));">

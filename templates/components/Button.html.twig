@@ -1,42 +1,29 @@
-{%- props variant = 'default', outline = false, size = 'default' -%}
+{#
+    Site button. Renders an <a> when `href` is set, otherwise a <button>.
+
+    Variants are added as the migration needs them (Phase 9):
+    - outline: ex Bootstrap `.btn-outline-primary` (neutral, transparent, fills on hover)
+    - dark:    ex Bootstrap `.btn-dark` (solid near-black)
+#}
+{%- props href = null, variant = 'outline', size = 'md' -%}
 {%- set style = html_cva(
-    base: 'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
+    base: 'inline-flex items-center justify-center gap-2 rounded-md border cursor-pointer transition duration-150 ease-in-out',
     variants: {
         variant: {
-            default: 'bg-primary text-primary-foreground hover:bg-primary/90',
-            secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-            destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
-            ghost: 'hover:bg-accent hover:text-accent-foreground',
-            link: 'text-primary underline-offset-4 hover:underline',
-        },
-        outline: {
-            true: 'text-foreground bg-white',
+            outline: 'border-body-text text-body-text bg-transparent opacity-75 hover:opacity-100 hover:bg-body-text hover:text-body',
+            dark: 'border-[#212529] bg-[#212529] text-white hover:opacity-90',
         },
         size: {
-            default: 'h-10 px-6 py-2',
-            sm: 'h-9 rounded-md px-4',
-            lg: 'h-11 rounded-md px-8',
-            icon: 'h-10 w-10',
+            sm: 'px-2.5 py-1 text-sm',
+            md: 'px-3 py-1.5 text-base',
         },
     },
-    compound_variants: [{
-        variant: ['default'],
-        outline: ['true'],
-        class: 'border-primary',
-    }, {
-        variant: ['secondary'],
-        outline: ['true'],
-        class: 'border-secondary',
-    }, {
-        variant: ['destructive'],
-        outline: ['true'],
-        class: 'border-destructive',
-    }],
 ) -%}
+{%- set classes = style.apply({ variant: variant, size: size }, attributes.render('class'))|tailwind_merge -%}
+{%- set tag = href ? 'a' : 'button' -%}
 
-<button
-    class="{{ style.apply({variant: variant, outline: outline, size: size}, attributes.render('class'))|tailwind_merge }}"
-    {{ attributes.defaults({}).without('class') }}
->
-    {% block content %}{% endblock %}
-</button>
+<{{ tag }}
+    class="{{ classes }}"
+    {%- if href %} href="{{ href }}"{% endif %}
+    {{ attributes.defaults(href ? {} : { type: 'button' }).without('class') }}
+>{% block content %}{% endblock %}</{{ tag }}>

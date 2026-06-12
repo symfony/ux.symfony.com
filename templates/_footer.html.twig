@@ -1,20 +1,19 @@
 <footer>
     <div class="max-w-[1400px] mx-auto py-12 lg:px-12">
-        <div class="grid grid-cols-12 gap-x-6 items-center" style="--bs-gutter-x: 0;">
+        <div class="grid grid-cols-12 gap-x-6 items-center">
             <div class="col-span-12 xl:col-span-3 xl:order-3 text-center xl:text-end">
-                <p class="flex items-center justify-center xl:justify-end mb-0" style="gap: .5rem;">
+                <p class="flex items-center justify-center xl:justify-end gap-2 mb-0">
                     <a href="https://github.com/symfony/ux" rel="external noopener noreferrer"
-                       style="font-size: 1.5rem;"
                        aria-label="Symfony UX on GitHub"
-                       class="lg:order-1"
+                       class="lg:order-1 text-2xl"
                     >
                         <twig:ux:icon name="github"/>
                     </a>
-                    <a href="{{ url('app_documentation') }}" style="font-size: 11px; text-transform: uppercase;" class="lg:order-0">Docs</a>
-                    <a href="{{ url('app_changelog') }}" style="font-size: 11px; text-transform: uppercase;" class="lg:order-0">Changelog</a>
-                    <a href="{{ url('app_support') }}" style="font-size: 11px; text-transform: uppercase;" class="lg:order-0">Support</a>
+                    <a href="{{ url('app_documentation') }}" class="lg:order-0 text-[11px] uppercase">Docs</a>
+                    <a href="{{ url('app_changelog') }}" class="lg:order-0 text-[11px] uppercase">Changelog</a>
+                    <a href="{{ url('app_support') }}" class="lg:order-0 text-[11px] uppercase">Support</a>
                     <a href="https://symfony.com" rel="external noopener noreferrer"
-                       style="font-size: 1.5rem;"
+                       class="text-2xl"
                        aria-label="Symfony website"
                     >
                         <twig:ux:icon name="symfony"/>
@@ -22,34 +21,32 @@
                 </p>
             </div>
             <div class="col-span-12 xl:col-span-6 xl:order-2">
-                <p class="xl:mb-0 mt-4 xl:mt-0 text-center" style="font-size: 12px; text-transform: uppercase;">
+                <p class="xl:mb-0 mt-4 xl:mt-0 text-center text-xs uppercase">
                     <span class="block md:inline">
                         crafted by
                         <a href="https://symfonycasts.com"
                            rel="external noopener noreferrer"
-                           style="font-weight: 700;"
+                           class="font-bold"
                         >SymfonyCasts</a>
                         &amp;
                         <a href="https://locastic.com"
                            rel="external noopener noreferrer"
-                           style="font-weight: 700;"
+                           class="font-bold"
                         >Locastic</a><span class="hidden md:inline">,</span>
                     </span>
                     <span class="block md:inline">
                         hosted with
-                        <span style="font-weight: 700;">
-                            <a href="https://upsun.com"
-                               rel="external"
-                               style="font-weight: 700;"
-                            >Upsun</a>
-                        </span>
+                        <a href="https://upsun.com"
+                           rel="external"
+                           class="font-bold"
+                        >Upsun</a>
                     </span>
                 </p>
             </div>
             <div class="col-span-12 xl:col-span-3 text-center xl:text-start">
-                <p class="mb-0" style="font-size: 11px; text-transform: uppercase;">
+                <p class="mb-0 text-[11px] uppercase">
                     &copy;
-                    <a href="https://symfony.com" style="font-weight: 700;">Symfony</a>
+                    <a href="https://symfony.com" class="font-bold">Symfony</a>
                     All rights reserved.
                 </p>
             </div>

@@ -48,11 +48,10 @@
         <p class="eyebrows" style="margin: 4rem 0 0;">Iconic Packages</p>
         <div class="md:flex md:justify-between text-center items-center md:text-start">
             <h2 class="ubuntu pt-2 component-headlines">Popular <em class="rainbow-emphasis">Icon Sets</em></h2>
-            <a style="height: 100%;" class="btn btn-md btn-outline-primary my-4 md:my-0"
-               href="https://symfony.com/bundles/ux-icons/current/index.html" rel="external" target="_blank">
+            <twig:Button href="https://symfony.com/bundles/ux-icons/current/index.html" rel="external" target="_blank" class="my-4 md:my-0">
                 Read Documentation
-                <twig:ux:icon name="arrow-right" style="transform: rotate(-45deg);"/>
-            </a>
+                <twig:ux:icon name="arrow-right" class="Icon -rotate-45"/>
+            </twig:Button>
         </div>
         <div class="mt-4 md:mt-12">
             <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2rem;">
@@ -70,11 +69,10 @@
 
         <div class="md:flex md:justify-between py-12 text-center items-center md:text-start">
             <h2 class="ubuntu pt-2 component-headlines">Documentation</h2>
-            <a href="https://symfony.com/bundles/ux-icons/current/index.html" class="btn btn-md btn-outline-primary my-4 md:my-0"
-               rel="external" target="_blank">
+            <twig:Button href="https://symfony.com/bundles/ux-icons/current/index.html" rel="external" target="_blank" class="my-4 md:my-0">
                 Read Full Documentation
-                <twig:ux:icon name="arrow-right" style="transform: rotate(-45deg);"/>
-            </a>
+                <twig:ux:icon name="arrow-right" class="Icon -rotate-45"/>
+            </twig:Button>
         </div>
 
         <div class="grid sm:grid-cols-3 gap-x-6 gap-y-3">

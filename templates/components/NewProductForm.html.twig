@@ -29,11 +29,11 @@
             </div>
             <div class="col-span-3">
                 {# resolved here: inside <twig:Form:Select>'s slot `this` is the Select component, not this form #}
-                {% set currentCategory = this.category %}
+                {% set current_category = this.category %}
                 <twig:Form:Select id="product-category" data-model="category" hasError="{{ _errors.has('category') }}">
                     <option value="">Choose a category</option>
                     {% for category_option in categories %}
-                        <option value="{{ category_option.id }}" {{ category_option is same as(currentCategory) ? 'selected' }}>{{ category_option.name }}</option>
+                        <option value="{{ category_option.id }}" {{ category_option is same as(current_category) ? 'selected' }}>{{ category_option.name }}</option>
                     {% endfor %}
                 </twig:Form:Select>
                 <twig:Form:Errors errors="{{ _errors.get('category') }}" />

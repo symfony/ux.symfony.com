@@ -38,7 +38,45 @@
         <div class="col-span-6">
             {% block alert_default_example %}
                 <twig:Alert>
-                    Heads up! This is the default alert.
+                    No variant set, so the alert falls back to the neutral "info" style.
+                </twig:Alert>
+            {% endblock %}
+        </div>
+    </div>
+
+    <div class="grid grid-cols-12 gap-x-6 my-2">
+        <div class="col-span-6">
+            <twig:CodeBlock
+                filename="templates/ux_packages/twig_component.html.twig"
+                :showFilename="false"
+                targetTwigBlock="alert_success_example"
+                :showTwigExtends="false"
+                height="auto"
+            />
+        </div>
+        <div class="col-span-6">
+            {% block alert_success_example %}
+                <twig:Alert variant="success">
+                    Your changes were saved.
+                </twig:Alert>
+            {% endblock %}
+        </div>
+    </div>
+
+    <div class="grid grid-cols-12 gap-x-6 my-2">
+        <div class="col-span-6">
+            <twig:CodeBlock
+                filename="templates/ux_packages/twig_component.html.twig"
+                :showFilename="false"
+                targetTwigBlock="alert_warning_example"
+                :showTwigExtends="false"
+                height="auto"
+            />
+        </div>
+        <div class="col-span-6">
+            {% block alert_warning_example %}
+                <twig:Alert variant="warning">
+                    Your session will expire in a few minutes.
                 </twig:Alert>
             {% endblock %}
         </div>

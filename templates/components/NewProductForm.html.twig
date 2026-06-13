@@ -28,23 +28,23 @@
                 <twig:Form:Label for="product-category">Category:</twig:Form:Label>
             </div>
             <div class="col-span-3">
+                {# resolved here: inside <twig:Form:Select>'s slot `this` is the Select component, not this form #}
+                {% set currentCategory = this.category %}
                 <twig:Form:Select id="product-category" data-model="category" hasError="{{ _errors.has('category') }}">
                     <option value="">Choose a category</option>
                     {% for category_option in categories %}
-                        <option value="{{ category_option.id }}" {{ this.isCurrentCategory(category_option) ? 'selected' }}>{{ category_option.name }}</option>
+                        <option value="{{ category_option.id }}" {{ category_option is same as(currentCategory) ? 'selected' }}>{{ category_option.name }}</option>
                     {% endfor %}
                 </twig:Form:Select>
                 <twig:Form:Errors errors="{{ _errors.get('category') }}" />
             </div>
             <div class="col-auto">
-                <div class="text-sm text-muted">
-                    <a
-                        class="cursor-pointer text-code hover:underline"
-                        data-bs-toggle="modal"
-                        data-bs-target="#new-category-modal"
-                    >+ Add Category
-                    </a>
-                </div>
+                <twig:Button
+                    class="text-sm"
+                    data-bs-toggle="modal"
+                    data-bs-target="#new-category-modal"
+                >+ Add Category
+                </twig:Button>
             </div>
         </div>
 

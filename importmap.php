@@ -153,17 +153,6 @@ return [
     'scheduler' => [
         'version' => '0.23.2',
     ],
-    'tippy.js' => [
-        'version' => '6.3.7',
-    ],
-    'tippy.js/dist/tippy.css' => [
-        'version' => '6.3.7',
-        'type' => 'css',
-    ],
-    'tippy.js/themes/translucent.css' => [
-        'version' => '6.3.7',
-        'type' => 'css',
-    ],
     'path-to-regexp' => [
         'version' => '6.2.1',
     ],

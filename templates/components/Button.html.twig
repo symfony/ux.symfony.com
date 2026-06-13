@@ -1,13 +1,5 @@
 {#
     Site button. Renders an <a> when `href` is set, otherwise a <button>.
-
-    Variants (ex Bootstrap buttons):
-    - outline:   `.btn-outline-primary` (neutral, transparent, fills on hover)
-    - dark:      `.btn-dark` (solid near-black)
-    - primary:   `.btn-primary` (solid, project $primary #222)
-    - secondary: `.btn-secondary` (solid grey)
-    - success:   `.btn-success` (solid signal-green)
-    - link:      `.btn-link` (borderless text/icon button)
 #}
 {%- props href = null, variant = 'outline', size = 'md' -%}
 {%- set style = html_cva(

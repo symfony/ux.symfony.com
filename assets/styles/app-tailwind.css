@@ -91,7 +91,7 @@
     /* Specific colors */
     --color-purple: var(--color-purple);
 
-    /* Signal colors (ex SCSS $red/$yellow/$green) */
+    /* Signal colors (terminal window-control palette): red = delete/error, green = success, yellow reserved */
     --color-signal-red: #FB4040;
     --color-signal-yellow: #FBC640;
     --color-signal-green: #84DE2C;

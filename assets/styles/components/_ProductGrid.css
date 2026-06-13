@@ -29,11 +29,16 @@
         backdrop-filter: blur(5px);
     }
 
-    .ProductGrid_items,
-    .ProductGrid_page {
+    .ProductGrid_items {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(min(35vw, --spacing(45)), 1fr));
         gap: min(--spacing(4), 4vw);
+    }
+
+    /* Pages dissolve into the single .ProductGrid_items grid so items from every
+       page flow continuously instead of each page starting its own ragged row. */
+    .ProductGrid_page {
+        display: contents;
     }
 
     .ProductGrid_item {

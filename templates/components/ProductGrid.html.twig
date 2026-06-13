@@ -2,26 +2,28 @@
 
     <div id="results" style="display: flex; gap: 1rem; flex-direction: column;" class="p-6">
 
-        {% if page > 1 %}
-            {# 🦊 #}
-            {# Adding a fake "previous page" div is enough to trick the system #}
-            {# It must have the same ID than the original page #}
-            <div class="ProductGrid_page" id="page--{{ page - 1 }}" data-live-ignore="true"></div>
-        {% endif %}
+        <div class="ProductGrid_items">
+            {% if page > 1 %}
+                {# 🦊 #}
+                {# Adding a fake "previous page" div is enough to trick the system #}
+                {# It must have the same ID than the original page #}
+                <div class="ProductGrid_page" id="page--{{ page - 1 }}" data-live-ignore="true"></div>
+            {% endif %}
 
-        {# Current page #}
-        <div class="ProductGrid_page" id="page--{{ page }}" data-live-ignore="true">
-            {% for item in this.items %}
-                <article class="ProductGrid_item" style="--color: {{ item.color }};">
-                    <div class="ProductGrid_media">
-                        <svg><use href="#svg-tshirt"/></svg>
-                        <span>{{ item.emoji }}</span>
-                    </div>
-                    <data class="ProductGrid_price" value="{{ item.id }}" data-currency="$">
-                        {{ item.id + 1 }}<small>.99</small>
-                    </data>
-                </article>
-            {% endfor %}
+            {# Current page #}
+            <div class="ProductGrid_page" id="page--{{ page }}" data-live-ignore="true">
+                {% for item in this.items %}
+                    <article class="ProductGrid_item" style="--color: {{ item.color }};">
+                        <div class="ProductGrid_media">
+                            <svg><use href="#svg-tshirt"/></svg>
+                            <span>{{ item.emoji }}</span>
+                        </div>
+                        <data class="ProductGrid_price" value="{{ item.id }}" data-currency="$">
+                            {{ item.id + 1 }}<small>.99</small>
+                        </data>
+                    </article>
+                {% endfor %}
+            </div>
         </div>
 
         <div style="display: grid; place-content: center;padding-block: 2rem;">

@@ -57,7 +57,7 @@
                         <th>Tax rate:</th>
                         <td class="flex justify-end">
                             <div class="flex w-[110px]">
-                                <twig:Form:Input type="number" data-model="invoice.taxRate" hasError="{{ _errors.has('invoice.taxRate') }}" class="rounded-l-md" />
+                                <twig:Form:Input type="number" data-model="invoice.taxRate" hasError="{{ _errors.has('invoice.taxRate') }}" class="rounded-l-md rounded-r-none" />
                                 <span class="inline-flex items-center border border-l-0 rounded-r-md bg-surface px-2">%</span>
                             </div>
                             <twig:Form:Errors errors="{{ _errors.get('invoice.taxRate') }}" />

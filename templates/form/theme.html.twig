@@ -79,8 +79,9 @@
 {%- block choice_widget_collapsed -%}
     {%- set select_attr = attr -%}
     {%- if required %}{% set select_attr = select_attr|merge({required: true}) %}{% endif -%}
+    {# field_name() already carries the trailing [] for multiple selects (ChoiceType::buildView). #}
     {% component 'Form:Select' with {
-        name: field_name(form) ~ (multiple ? '[]' : ''),
+        name: field_name(form),
         id: field_id(form),
         hasError: not form.vars.valid,
         multiple: multiple,

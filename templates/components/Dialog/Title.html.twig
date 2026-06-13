@@ -1,0 +1,10 @@
+{# @block content The title text of the dialog #}
+{%- set _dialog_titleId = inject('dialog.titleId') -%}
+<h2
+    id="{{ _dialog_titleId }}"
+    data-slot="dialog-title"
+    class="{{ ('cn-font-heading text-base leading-none font-medium ' ~ attributes.render('class'))|tailwind_merge }}"
+    {{ attributes.without('id') }}
+>
+    {%- block content %}{% endblock -%}
+</h2>

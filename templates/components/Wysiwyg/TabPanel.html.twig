@@ -1,9 +1,0 @@
-{% props target, active = false %}
-<div{{ attributes.defaults({
-    class: 'relative [&:not(.active)]:hidden has-[.Toolkit_Preview]:border has-[.Toolkit_Preview]:border-border has-[.Toolkit_Preview]:rounded-xl' ~ (active ? ' active' : ''),
-    role: 'tabpanel',
-    'data-tabs-target': 'tab',
-    'data-tab': target,
-}) }}>
-    {%- block content %}{% endblock -%}
-</div>

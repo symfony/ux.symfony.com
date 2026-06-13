@@ -1,30 +1,30 @@
+{# Resolve the tab ids here: inside the <twig:Tabs> slot `this` is the (anonymous)
+   Tabs component, not this one, so this.getItemId() must be called in this scope. #}
+{% set tabs = [] %}
+{% for filename in files %}
+    {% set tabs = tabs|merge([{ filename: filename, id: this.getItemId(filename) }]) %}
+{% endfor %}
+
 <div {{ attributes.defaults({
-    class: 'position-relative',
+    class: 'relative',
 }) }}>
     <div class="Terminal">
-        <div class="Terminal_header pb-0">
-            <ul class="nav nav-tabs">
-                {# set this in the child template #}
-                {% for filename in files %}
-                    <li class="nav-item" role="presentation">
-                        <button
-                            class="nav-link {{ loop.first ? 'active' }}"
-                            data-bs-toggle="tab"
-                            data-bs-target="#{{ this.getItemId(filename) }}"
-                            type="button" role="tab"
-                            aria-controls="{{ this.getItemId(filename) }}"
-                            aria-selected="{{ loop.first ? 'true' : 'false' }}"
-                        >{{ filename }}</button>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="tab-content">
-            {% for filename in files %}
-                <div class="tab-pane {{ loop.first ? 'active show' }}" id="{{ this.getItemId(filename) }}">
-                    <twig:CodeBlock filename="{{ filename }}" :showFilename="false" height="auto" />
-                </div>
+        <twig:Tabs defaultValue="{{ tabs[0].id }}" class="gap-0">
+            <div class="Terminal_header pb-0">
+                <twig:Tabs:List class="h-auto w-full justify-start gap-1 rounded-none bg-transparent p-0">
+                    {% for tab in tabs %}
+                        <twig:Tabs:Trigger
+                            value="{{ tab.id }}"
+                            class="flex-none rounded-none border-0 px-3 py-2 font-mono text-n-200 hover:text-n-100 data-active:bg-(--bg-color) data-active:text-white data-active:shadow-none"
+                        >{{ tab.filename }}</twig:Tabs:Trigger>
+                    {% endfor %}
+                </twig:Tabs:List>
+            </div>
+            {% for tab in tabs %}
+                <twig:Tabs:Content value="{{ tab.id }}">
+                    <twig:CodeBlock filename="{{ tab.filename }}" :showFilename="false" height="auto" />
+                </twig:Tabs:Content>
             {% endfor %}
-        </div>
+        </twig:Tabs>
     </div>
 </div>

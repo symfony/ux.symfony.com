@@ -36,37 +36,6 @@
             opacity: 1;
             transition: all 350ms ease-out;
         }
-
-        .nav-tabs {
-            border: 0;
-        }
-        .nav-tabs .nav-link,
-        .nav-tabs .nav-item {
-            border: 0;
-        }
-        .nav-link {
-            border-bottom: 0;
-            margin-bottom: 0;
-        }
-        /* Inactive tabs: Bootstrap's unlayered `.nav-link` color (#222) wins over
-           this @layer, leaving dark-on-dark text — force a readable light color. */
-        .nav-tabs .nav-link:not(.active) {
-            color: var(--color-n-200) !important;
-        }
-        .nav-tabs .nav-link:not(.active):hover {
-            color: var(--color-n-100) !important;
-        }
-        .nav-tabs .nav-link.active,
-        .nav-tabs .nav-item.show .nav-link {
-            background-color: var(--bg-color);
-            border-color: var(--color-n-800);
-            color: var(--color-n-100);
-        }
-        .nav-tabs .nav-link:hover,
-        .nav-tabs .nav-link:focus {
-            border-color: var(--color-n-800);
-            color: var(--color-n-100);
-        }
     }
 
     .Terminal_title {

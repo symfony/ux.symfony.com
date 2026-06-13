@@ -14,6 +14,8 @@
 
         {% set icon = this.iconMeta() %}
         {% set icon_set = this.iconSet() %}
+        {# resolved here: inside a <twig:Tabs:Content> slot `this` is the (anonymous) component, not this one #}
+        {% set _svg = this.svg() %}
 
         <div id="IconModal--{{ icon }}">
             <div class="flex flex-row items-center justify-between mb-3 border-b border-subtle pb-2 [&_button]:opacity-25 [&_button]:absolute [&_button]:right-3 [&_button:hover]:opacity-100">
@@ -44,30 +46,29 @@
                 </div>
 
                 <div class="min-w-0 [&_h3]:pt-6 [&_h3]:leading-none [&_h3]:text-body-text [&_h3]:font-sans [&_h3]:text-base [&_h3]:font-light [&_h3]:tracking-normal [&_h3]:opacity-95 [&_h3]:mb-3 [&_h3]:font-stretch-semi-condensed [&_h3:first-child]:pt-0 [&_.TabBody]:pb-0">
-                    <div data-controller="tabs"
-                         data-tabs-tab-value="icon"
-                         data-tabs-active-class="active"
-                    >
+                    {%- set _icon_tab_class = 'm-0 h-auto flex-none cursor-pointer rounded-xl border-0 px-4 py-1.5 text-sm font-medium text-muted transition-all duration-150 ease-in-out hover:text-body-text data-active:bg-black/10 data-active:text-body-text data-active:shadow-none' -%}
+                    <twig:Tabs defaultValue="icon" class="gap-0">
 
-                        <nav class="flex justify-center gap-1 rounded-xl bg-surface p-1">
-                            {% for _tab, _label in {
-                                icon: 'Icon',
-                                svg: 'SVG code',
-                                meta: 'Metadata',
-                            } %}
-                                <button
-                                    class="m-0 cursor-pointer rounded-xl border-none px-4 py-1.5 text-sm font-medium text-muted transition-all duration-150 ease-in-out hover:text-body-text [&.active]:bg-black/10 [&.active]:text-body-text"
-                                    data-action="tabs#show {% if 'svg' == _tab %} live#action{% endif %}"
-                                    data-live-action-param="loadSvg"
-                                    data-tabs-tab-param="{{ _tab }}"
-                                    data-tabs-target="control"
-                                >{{ _label }}</button>
-                            {% endfor %}
-                        </nav>
+                        <twig:Tabs:List class="h-auto w-full justify-center gap-1 rounded-xl bg-surface p-1">
+                            <twig:Tabs:Trigger value="icon" class="{{ _icon_tab_class }}">Icon</twig:Tabs:Trigger>
+                            {# SVG tab hand-written so it can also fire the lazy `loadSvg` live action (the recipe Trigger hardcodes its own data-action). #}
+                            <button
+                                id="tab-svg"
+                                role="tab"
+                                aria-controls="tab-svg-description"
+                                aria-selected="false"
+                                data-tabs-target="trigger"
+                                data-tab-id="svg"
+                                data-action="tabs#open live#action"
+                                data-live-action-param="loadSvg"
+                                class="relative inline-flex items-center justify-center whitespace-nowrap {{ _icon_tab_class }}"
+                            >SVG code</button>
+                            <twig:Tabs:Trigger value="meta" class="{{ _icon_tab_class }}">Metadata</twig:Tabs:Trigger>
+                        </twig:Tabs:List>
 
                         <div class="py-8">
 
-                            <div class="[&:not(.active)]:hidden" data-tab="icon" data-tabs-target="tab">
+                            <twig:Tabs:Content value="icon">
                                 <h3>Import Icon</h3>
                                 <twig:Code:CodeLine>
                                     symfony console ux:icon:import <span>{{ icon }}</span>
@@ -82,10 +83,9 @@
                                 <twig:Code:CodeLine>
                                     {{- '{{ ' -}} ux_icon('<span>{{ icon }}</span>') {{- ' }}' -}}
                                 </twig:Code:CodeLine>
-                            </div>
+                            </twig:Tabs:Content>
 
-                            <div class="[&:not(.active)]:hidden" data-tabs-target="tab" id="IconModal-Tab-Svg" data-tab="svg">
-                                {% set _svg = this.svg() %}
+                            <twig:Tabs:Content value="svg">
                                 {% if _svg %}
                                     <div data-live-ignore id="IconModal-Tab-Svg--{{ icon }}">
                                         <h3>SVG Icon</h3>
@@ -94,9 +94,9 @@
                                         </twig:Code:CodeLine>
                                     </div>
                                 {% endif %}
-                            </div>
+                            </twig:Tabs:Content>
 
-                            <div class="[&:not(.active)]:hidden" data-tabs-target="tab" id="IconModal-Tab-Meta" data-tab="meta">
+                            <twig:Tabs:Content value="meta">
                                 <twig:DataList items="{{ {
                                     Name: icon.name,
                                     Author: icon_set.author.name,
@@ -109,9 +109,9 @@
                                         href: icon_set.license.url|default,
                                     } : null,
                                 } }}" itemClass="w-full"/>
-                            </div>
+                            </twig:Tabs:Content>
                         </div>
-                    </div>
+                    </twig:Tabs>
 
                 </div>
             </div>

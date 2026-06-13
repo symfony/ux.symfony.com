@@ -1,6 +1,6 @@
 <div{{ attributes }}>
 
-    <input type="text"  data-model="query" placeholder="Results update as you type..." class="form-control" />
+    <twig:Form:Input type="text" data-model="query" placeholder="Results update as you type..." />
 
     <div class="pt-3 grid gap-2 grid-cols-[repeat(auto-fill,minmax(260px,1fr))]" data-loading="addClass(opacity-50)">
         {% for package in computed.packages %}

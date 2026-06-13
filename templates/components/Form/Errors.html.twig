@@ -1,0 +1,20 @@
+{#-
+    Presentational error list. `errors` accepts null, a single message string,
+    or any iterable of messages (e.g. the field_errors() generator).
+-#}
+{%- props errors = null -%}
+{%- set list = [] -%}
+{%- if errors is not null and errors is not same as('') -%}
+    {%- if errors is iterable -%}
+        {%- for error in errors %}{% set list = list|merge([error]) %}{%- endfor -%}
+    {%- else -%}
+        {%- set list = [errors] -%}
+    {%- endif -%}
+{%- endif -%}
+{%- if list is not empty -%}
+    <ul class="mt-1 list-none p-0 text-sm text-red-600 dark:text-red-400">
+        {%- for error in list -%}
+            <li>{{ error }}</li>
+        {%- endfor -%}
+    </ul>
+{%- endif -%}

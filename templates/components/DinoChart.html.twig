@@ -1,12 +1,12 @@
 <div {{ attributes }}>
     <div class="grid grid-cols-12 gap-x-6">
         <div class="col-span-2">
-            <label for="fromYear" class="form-label">
+            <twig:Form:Label for="fromYear">
                 From: <code><small>({{ fromYear|abs }} mya)</small></code>
-            </label>
+            </twig:Form:Label>
             <input
                 type="range"
-                class="form-range"
+                class="w-full accent-[#222]"
                 id="fromYear"
                 data-model="fromYear"
                 min="-200"
@@ -15,12 +15,12 @@
         </div>
 
         <div class="col-span-2">
-            <label for="toYear" class="form-label">
+            <twig:Form:Label for="toYear">
                 To: <code><small>({{ toYear|abs }} mya)</small></code>
-            </label>
+            </twig:Form:Label>
             <input
                 type="range"
-                class="form-range"
+                class="w-full accent-[#222]"
                 id="toYear"
                 data-model="toYear"
                 min="{{ fromYear }}"
@@ -29,7 +29,7 @@
         </div>
 
         <div class="col-span-8">
-            <label for="dinoTypes" class="form-label">Choose Dino Types</label>
+            <twig:Form:Label for="dinoTypes">Choose Dino Types</twig:Form:Label>
             <select
                 data-model="currentTypes"
                 multiple

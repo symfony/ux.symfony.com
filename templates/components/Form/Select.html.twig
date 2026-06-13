@@ -1,0 +1,14 @@
+{#-
+    Presentational form select. Provide <option>s as slot content (both direct
+    usage and the form theme build the options).
+-#}
+{#- `value` is declared only to absorb the attribute LiveComponent injects on
+    `data-model` elements; selects show selection via <option selected>. -#}
+{%- props name = null, id = null, hasError = false, multiple = false, value = null -%}
+<select
+    {%- if name is not null %} name="{{ name }}"{% endif %}
+    {%- if id is not null %} id="{{ id }}"{% endif %}
+    {%- if multiple %} multiple{% endif %}
+    class="{{ ('w-full bg-body border rounded-md px-3 py-1.5' ~ (hasError ? ' border-red-500 dark:border-red-400') ~ ' ' ~ attributes.render('class'))|tailwind_merge }}"
+    {{- attributes.without('class') }}
+>{% block content %}{% endblock %}</select>

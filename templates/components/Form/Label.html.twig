@@ -1,0 +1,10 @@
+{#-
+    Presentational form label. Framework-agnostic: used directly in
+    LiveComponent forms and from the form theme (templates/form/theme.html.twig).
+-#}
+{%- props for = null -%}
+<label
+    {%- if for is not null %} for="{{ for }}"{% endif %}
+    class="{{ ('block text-sm text-muted mb-1 ' ~ attributes.render('class'))|tailwind_merge }}"
+    {{- attributes.without('class') }}
+>{% block content %}{% endblock %}</label>

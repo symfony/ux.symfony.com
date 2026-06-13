@@ -40,12 +40,12 @@
         } %}
             {% block parameters %}
                 <div class="mb-2">
-                    <label for="say_hello-name" class="text-sm text-muted">Name</label>
-                    <input id="say_hello-name" class="w-full bg-body border rounded-md px-3 py-1.5"
+                    <twig:Form:Label for="say_hello-name">Name</twig:Form:Label>
+                    <twig:Form:Input id="say_hello-name"
                            type="text" name="name" value="Fabien"
                            data-translator-demo-block-target="parameters"
                            data-action="translator-demo-block#render"
-                    >
+                    />
                 </div>
             {% endblock %}
         {% endembed %}
@@ -59,8 +59,8 @@
         } %}
             {% block parameters %}
                 <div class="mb-2">
-                    <label for="invitation_title-organizer_gender" class="text-sm text-muted">Gender</label>
-                    <select id="invitation_title-organizer_gender" class="w-full bg-body border rounded-md px-3 py-1.5"
+                    <twig:Form:Label for="invitation_title-organizer_gender">Gender</twig:Form:Label>
+                    <twig:Form:Select id="invitation_title-organizer_gender"
                         name="organizer_gender"
                         data-translator-demo-block-target="parameters"
                         data-action="translator-demo-block#render"
@@ -69,16 +69,16 @@
                         <option value="male">Male</option>
                         <option value="multiple">Multiple</option>
                         <option value="trans">Trans</option>
-                    </select>
+                    </twig:Form:Select>
                 </div>
                 <div class="mb-2">
-                    <label for="invitation_title-organizer_name" class="text-sm text-muted">Name</label>
-                    <input id="invitation_title-organizer_name" class="w-full bg-body border rounded-md px-3 py-1.5"
+                    <twig:Form:Label for="invitation_title-organizer_name">Name</twig:Form:Label>
+                    <twig:Form:Input id="invitation_title-organizer_name"
                            name="organizer_name"
                            value="Clara"
                            data-translator-demo-block-target="parameters"
                            data-action="translator-demo-block#render"
-                    >
+                    />
                 </div>
             {% endblock %}
         {% endembed %}
@@ -91,12 +91,12 @@
         } %}
             {% block parameters %}
                 <div class="mb-2">
-                    <label for="num_of_apples-apples" class="text-sm text-muted">Count</label>
-                    <input id="num_of_apples-apples" class="w-full bg-body border rounded-md px-3 py-1.5"
+                    <twig:Form:Label for="num_of_apples-apples">Count</twig:Form:Label>
+                    <twig:Form:Input id="num_of_apples-apples"
                            name="apples" type="number" min="0" max="5" value="2"
                            data-translator-demo-block-target="parameters"
                            data-action="translator-demo-block#render"
-                    >
+                    />
                 </div>
             {% endblock %}
         {% endembed %}
@@ -109,12 +109,12 @@
         } %}
             {% block parameters %}
                 <div class="mb-2">
-                    <label for="finish_place-place" class="text-sm text-muted">Place</label>
-                    <input id="finish_place-place" class="w-full bg-body border rounded-md px-3 py-1.5"
+                    <twig:Form:Label for="finish_place-place">Place</twig:Form:Label>
+                    <twig:Form:Input id="finish_place-place"
                            name="place" type="number" min="0" max="5" value="1"
                            data-translator-demo-block-target="parameters"
                            data-action="translator-demo-block#render"
-                    >
+                    />
                 </div>
             {% endblock %}
         {% endembed %}
@@ -127,12 +127,12 @@
         } %}
             {% block parameters %}
                 <div class="mb-2">
-                    <label for="published_at-publication_date" class="text-sm text-muted">Date</label>
-                    <input id="published_at-publication_date" class="w-full bg-body border rounded-md px-3 py-1.5"
+                    <twig:Form:Label for="published_at-publication_date">Date</twig:Form:Label>
+                    <twig:Form:Input id="published_at-publication_date"
                            name="publication_date" type="datetime-local" value="2023-04-27 08:12"
                            data-translator-demo-block-target="parameters"
                            data-action="translator-demo-block#render"
-                    >
+                    />
                 </div>
             {% endblock %}
         {% endembed %}
@@ -145,8 +145,8 @@
         } %}
             {% block parameters %}
                 <div class="mb-2">
-                    <label for="progress-progress" class="text-sm text-muted">Place</label>
-                    <input id="progress-progress" class="form-range"
+                    <twig:Form:Label for="progress-progress">Place</twig:Form:Label>
+                    <input id="progress-progress" class="w-full accent-[#222]"
                            name="progress" type="range" min="0" max="100" value="42"
                            data-translator-demo-block-target="parameters"
                            data-action="translator-demo-block#render"
@@ -163,12 +163,12 @@
         } %}
             {% block parameters %}
                 <div class="mb-2">
-                    <label for="value_of_object-price" class="text-sm text-muted">Price</label>
-                    <input id="value_of_object-price" class="w-full bg-body border rounded-md px-3 py-1.5"
+                    <twig:Form:Label for="value_of_object-price">Price</twig:Form:Label>
+                    <twig:Form:Input id="value_of_object-price"
                            name="price" type="number" min="1"  value="30" step="0.1"
                            data-translator-demo-block-target="parameters"
                            data-action="translator-demo-block#render"
-                    >
+                    />
                 </div>
             {% endblock %}
         {% endembed %}

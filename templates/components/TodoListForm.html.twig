@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <table class="table table-borderless form-no-mb">
+        <table class="w-full text-left [&_td]:pr-3 [&_td]:py-1 [&_:is(input,select)]:mb-0">
             <thead>
                 <tr>
                     <td>Item</td>
@@ -39,15 +39,15 @@
                             }) }}
                         </td>
                         <td>
-                            {{ form_row(item_form.vars.button_delete, {label: 'X', attr: {class: 'btn btn-outline-danger'}}) }}
+                            {{ form_row(item_form.vars.button_delete, {label: 'X', attr: {class: 'border-signal-red bg-transparent text-signal-red hover:bg-signal-red hover:text-white'}}) }}
                         </td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
 
-        {{ form_widget(form.todoItems.vars.button_add, {label: '+ Add Item', attr: {class: 'btn btn-outline-primary'}}) }}
+        {{ form_widget(form.todoItems.vars.button_add, {label: '+ Add Item', attr: {class: 'border-body-text bg-transparent text-body-text opacity-75 hover:opacity-100 hover:bg-body-text hover:text-body'}}) }}
 
-        <button type="submit" class="btn btn-success" formnovalidate>Save</button>
+        <twig:Button variant="success" type="submit" class="mt-4" formnovalidate>Save</twig:Button>
     {{ form_end(form) }}
 </div>

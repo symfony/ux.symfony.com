@@ -1,29 +1,27 @@
 <div class="max-w-[1240px] mx-auto" {{ attributes }}>
     <p class="text-muted"><strong>Note:</strong> files aren't persisted and will be lost on each rerender if not stored.</p>
-    <div class="form-group mb-4">
-        <label for="single-file" class="form-label">Single file:</label>
+    <div class="mb-4">
+        <twig:Form:Label for="single-file">Single file:</twig:Form:Label>
         <input
             type="file"
             name="single"
             autocomplete="off"
             id="single-file"
-            class="form-control-file {{ singleFileUploadError ? 'is-invalid' : '' }}"
+            class="block w-full text-sm file:mr-3 file:rounded-md file:border file:border-border file:bg-surface file:px-3 file:py-1.5 file:cursor-pointer"
         >
-        <div class="form-text text-muted">Current file:
+        <div class="text-sm text-muted mt-1">Current file:
         {% if singleUploadFilename %}
             {{ singleUploadFilename }}
         {% else %}
             none
         {% endif %}
         </div>
-        {% if singleFileUploadError %}
-            <div class="invalid-feedback">{{ singleFileUploadError }}</div>
-        {% endif %}
+        <twig:Form:Errors errors={{ singleFileUploadError }} />
     </div>
-    <div class="form-group mb-4">
-        <label for="multiple-files" class="form-label">Multiple files:</label>
-        <input type="file" class="form-control-file" name="multiple[]" autocomplete="off" multiple="" id="multiple-files" >
-        <div class="form-text text-muted">Current files:
+    <div class="mb-4">
+        <twig:Form:Label for="multiple-files">Multiple files:</twig:Form:Label>
+        <input type="file" class="block w-full text-sm file:mr-3 file:rounded-md file:border file:border-border file:bg-surface file:px-3 file:py-1.5 file:cursor-pointer" name="multiple[]" autocomplete="off" multiple="" id="multiple-files" >
+        <div class="text-sm text-muted mt-1">Current files:
         {% if multipleUploadFilenames %}
         <ul>
             {% for file in multipleUploadFilenames %}
@@ -35,9 +33,9 @@
         {% endif %}
         </div>
     </div>
-    <button
+    <twig:Button
+        variant="primary"
         data-action="live#action"
         data-live-action-param="files|uploadFiles"
-        class="btn btn-primary"
-    >Upload files!</button>
+    >Upload files!</twig:Button>
 </div>

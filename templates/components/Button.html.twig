@@ -1,9 +1,13 @@
 {#
     Site button. Renders an <a> when `href` is set, otherwise a <button>.
 
-    Variants are added as the migration needs them (Phase 9):
-    - outline: ex Bootstrap `.btn-outline-primary` (neutral, transparent, fills on hover)
-    - dark:    ex Bootstrap `.btn-dark` (solid near-black)
+    Variants (ex Bootstrap buttons):
+    - outline:   `.btn-outline-primary` (neutral, transparent, fills on hover)
+    - dark:      `.btn-dark` (solid near-black)
+    - primary:   `.btn-primary` (solid, project $primary #222)
+    - secondary: `.btn-secondary` (solid grey)
+    - success:   `.btn-success` (solid signal-green)
+    - link:      `.btn-link` (borderless text/icon button)
 #}
 {%- props href = null, variant = 'outline', size = 'md' -%}
 {%- set style = html_cva(
@@ -12,9 +16,13 @@
         variant: {
             outline: 'border-body-text text-body-text bg-transparent opacity-75 hover:opacity-100 hover:bg-body-text hover:text-body',
             dark: 'border-[#212529] bg-[#212529] text-white hover:opacity-90',
+            primary: 'border-[#222] bg-[#222] text-white hover:opacity-90',
+            secondary: 'border-[#6c757d] bg-[#6c757d] text-white hover:opacity-90',
+            success: 'border-signal-green bg-signal-green text-black hover:opacity-90',
+            link: 'border-transparent bg-transparent text-body-text hover:underline',
         },
         size: {
-            sm: 'px-2.5 py-1 text-sm',
+            sm: 'px-2 py-1 text-sm',
             md: 'px-3 py-1.5 text-base',
         },
     },

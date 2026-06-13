@@ -5,67 +5,41 @@
     >
         <div class="grid grid-cols-12 gap-x-6 items-center">
             <div class="col-span-2">
-                <label for="product-name">Product name:</label>
+                <twig:Form:Label for="product-name">Product name:</twig:Form:Label>
             </div>
             <div class="col-span-3">
-                <input
-                    type="text"
-                    data-model="name"
-                    class="form-control {{ _errors.has('name') ? 'is-invalid' }}"
-                    id="product-name"
-                >
-                {% if _errors.has('name') %}
-                    <div class="invalid-feedback">
-                        {{ _errors.get('name') }}
-                    </div>
-                {% endif %}
+                <twig:Form:Input type="text" id="product-name" data-model="name" hasError={{ _errors.has('name') }} />
+                <twig:Form:Errors errors={{ _errors.get('name') }} />
             </div>
         </div>
 
         <div class="grid grid-cols-12 gap-x-6 items-center mt-4">
             <div class="col-span-2">
-                <label for="product-price">Price:</label>
+                <twig:Form:Label for="product-price">Price:</twig:Form:Label>
             </div>
             <div class="col-span-3">
-                <input
-                    type="text"
-                    data-model="price"
-                    class="form-control {{ _errors.has('price') ? 'is-invalid' }}"
-                    id="product-price"
-                >
-                {% if _errors.has('price') %}
-                    <div class="invalid-feedback">
-                        {{ _errors.get('price') }}
-                    </div>
-                {% endif %}
+                <twig:Form:Input type="text" id="product-price" data-model="price" hasError={{ _errors.has('price') }} />
+                <twig:Form:Errors errors={{ _errors.get('price') }} />
             </div>
         </div>
 
         <div class="grid grid-cols-12 gap-x-6 items-center mt-4">
             <div class="col-span-2">
-                <label for="product-category">Category:</label>
+                <twig:Form:Label for="product-category">Category:</twig:Form:Label>
             </div>
             <div class="col-span-3">
-                <select
-                    data-model="category"
-                    id="product-category"
-                    class="form-control {{ _errors.has('category') ? 'is-invalid' }}"
-                >
+                <twig:Form:Select id="product-category" data-model="category" hasError={{ _errors.has('category') }}>
                     <option value="">Choose a category</option>
                     {% for category_option in categories %}
                         <option value="{{ category_option.id }}" {{ this.isCurrentCategory(category_option) ? 'selected' }}>{{ category_option.name }}</option>
                     {% endfor %}
-                </select>
-                {% if _errors.has('category') %}
-                    <div class="invalid-feedback">
-                        {{ _errors.get('category') }}
-                    </div>
-                {% endif %}
+                </twig:Form:Select>
+                <twig:Form:Errors errors={{ _errors.get('category') }} />
             </div>
             <div class="col-auto">
-                <div class="form-text">
+                <div class="text-sm text-muted">
                     <a
-                        type="button"
+                        class="cursor-pointer text-code hover:underline"
                         data-bs-toggle="modal"
                         data-bs-target="#new-category-modal"
                     >+ Add Category
@@ -75,7 +49,7 @@
         </div>
 
         <div class="mt-4">
-            <button type="submit" class="btn btn-primary">Save Product</button>
+            <twig:Button variant="primary" type="submit">Save Product</twig:Button>
         </div>
     </form>
 

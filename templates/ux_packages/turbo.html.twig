@@ -54,14 +54,11 @@
                                 <div class="flex justify-between">
                                     <div class="grow">
                                         {{ form_row(form.name, {
-                                            row_attr: {class: 'form-floating'},
                                             attr: {placeholder: 'Enter a name'},
                                         }) }}
                                     </div>
                                     <div class="grow ms-2">
-                                        {{ form_row(form.animal, {
-                                            row_attr: {class: 'form-floating'},
-                                        }) }}
+                                        {{ form_row(form.animal) }}
                                     </div>
                                 </div>
                                 <twig:Button variant="dark" type="submit" class="mt-12 w-full">Create!</twig:Button>

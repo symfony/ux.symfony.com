@@ -1,11 +1,7 @@
 <tr {{ attributes }}>
     <td>
         {% if isEditing %}
-            <select
-                data-model="product"
-                aria-label="Choose a Product"
-                class="form-control {{ _errors.has('product') ? 'is-invalid' }}"
-            >
+            <twig:Form:Select data-model="product" aria-label="Choose a Product" hasError={{ _errors.has('product') }}>
                 <option value="" {{ not product ? 'selected' }}>Choose a Product</option>
                 {% for product_option in products %}
                     <option
@@ -15,12 +11,8 @@
                         {{ product_option.name }} ({{ product_option.priceInCents|format_currency('USD') }})
                     </option>
                 {% endfor %}
-            </select>
-            {% if _errors.has('product') %}
-                <div class="invalid-feedback">
-                    {{ _errors.get('product') }}
-                </div>
-            {% endif %}
+            </twig:Form:Select>
+            <twig:Form:Errors errors={{ _errors.get('product') }} />
 
         {% else %}
             {{ product.name }}
@@ -35,44 +27,36 @@
 
     <td>
         {% if isEditing %}
-            <input
-                type="number"
-                data-model="quantity"
-                aria-label="Quantity"
-                class="form-control {{ _errors.has('quantity') ? 'is-invalid' }}"
-            >
-            {% if _errors.has('quantity') %}
-                <div class="invalid-feedback">
-                    {{ _errors.get('quantity') }}
-                </div>
-            {% endif %}
+            <twig:Form:Input type="number" data-model="quantity" aria-label="Quantity" hasError={{ _errors.has('quantity') }} />
+            <twig:Form:Errors errors={{ _errors.get('quantity') }} />
         {% else %}
             {{ quantity }}
         {% endif %}
     </td>
-    <td class="text-end text-nowrap">
+    <td class="text-right text-nowrap">
         {% if isEditing %}
-            <button
+            <twig:Button
+                variant="success"
+                size="sm"
                 data-action="live#action"
                 data-live-action-param="save"
-                class="btn btn-success btn-sm"
-                type="button"
-            >Save</button>
+            >Save</twig:Button>
         {% else %}
-            <button
+            <twig:Button
+                variant="primary"
+                size="sm"
                 data-action="live#action"
                 data-live-action-param="edit"
-                class="btn btn-primary btn-sm"
-                type="button"
-            >Edit</button>
+            >Edit</twig:Button>
         {% endif %}
 
-        <button
+        <twig:Button
+            variant="link"
+            size="sm"
             data-action="live#emitUp"
             data-live-event-param="removeLineItem"
             data-live-key-param="{{ key }}"
-            class="btn btn-link text-danger btn-sm ml-2"
-            type="button"
-        ><twig:ux:icon name="cross" /></button>
+            class="ml-2 text-signal-red"
+        ><twig:ux:icon name="cross" /></twig:Button>
     </td>
 </tr>

@@ -13,16 +13,16 @@
                     <form class="inline" action="{{ path('app_turbo_remove_todo_item', {
                         id: key,
                     }) }}">
-                        <button type="submit" class="btn btn-link p-0" title="All done!"><twig:ux:icon name="circle-check" /></button>
+                        <twig:Button variant="link" type="submit" class="p-0" title="All done!"><twig:ux:icon name="circle-check" /></twig:Button>
                     </form>
                 </li>
             {% endfor %}
         </ul>
 
         {% if todos is empty %}
-            <div class="alert alert-success">You did it! Order a 🍕 and take the afternoon off.</div>
+            <div class="rounded-md border border-green-200 bg-green-100 p-4 text-green-800 dark:border-green-900 dark:bg-green-950 dark:text-green-300">You did it! Order a 🍕 and take the afternoon off.</div>
         {% endif %}
 
-        <a class="btn btn-dark mt-12" style="width: 100%;" href="{{ path('app_turbo_add_todo_item') }}">+ Add another item</a>
+        <twig:Button variant="dark" href="{{ path('app_turbo_add_todo_item') }}" class="mt-12 w-full">+ Add another item</twig:Button>
     </turbo-frame>
 {% endblock %}

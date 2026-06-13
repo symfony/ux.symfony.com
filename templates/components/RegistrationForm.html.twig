@@ -15,10 +15,7 @@
             {{ form_row(form.password) }}
             {{ form_row(form.terms) }}
 
-            <button
-                type="submit"
-                class="btn btn-primary {{ this.hasValidationErrors ? 'disabled' : '' }}"
-            >Register</button>
+            <twig:Button variant="primary" type="submit" :disabled="this.hasValidationErrors">Register</twig:Button>
 
             {{ form_rest(form) }}
         {{ form_end(form) }}

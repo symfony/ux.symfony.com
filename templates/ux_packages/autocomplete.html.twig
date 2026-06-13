@@ -33,7 +33,7 @@
     {# The frame is used just to keep the form submit all in one place: it feels nice #}
     <turbo-frame id="autocomplete-demo-form">
         {% for message in app.flashes('autocomplete_success') %}
-            <div class="alert alert-success" data-turbo-cache="false">{{ message }}</div>
+            <div class="rounded-md border border-green-200 bg-green-100 p-4 text-green-800 dark:border-green-900 dark:bg-green-950 dark:text-green-300" data-turbo-cache="false">{{ message }}</div>
         {% endfor %}
 
         {{ form_start(form) }}
@@ -41,7 +41,7 @@
 
             {{ form_row(form.name, {attr: {class: 'mb-3'}}) }}
 
-            <button type="submit" class="btn btn-primary">Let's Nom!</button>
+            <twig:Button variant="primary" type="submit">Let's Nom!</twig:Button>
         {{ form_end(form) }}
     </turbo-frame>
 {% endblock %}

@@ -1,0 +1,94 @@
+{#
+    Site form theme (Tailwind). Instead of restyling form_div_layout's markup,
+    it delegates to the presentational Form:* components, fed with the Symfony
+    field_* helpers. form_div_layout is only kept as a fallback for blocks we
+    don't override (expanded choices, grouped options, ...).
+#}
+{% use "form_div_layout.html.twig" %}
+
+{%- block form_row -%}
+    <div class="mb-4{{ row_attr.class is defined ? ' ' ~ row_attr.class }}">
+        {{- form_label(form) -}}
+        {{- form_widget(form) -}}
+        {{- form_errors(form) -}}
+        {{- form_help(form) -}}
+    </div>
+{%- endblock form_row -%}
+
+{%- block form_label -%}
+    {%- if label is not same as(false) -%}
+        <twig:Form:Label for="{{ field_id(form) }}" class="{{ required ? 'required' }}">{{ field_label(form) }}</twig:Form:Label>
+    {%- endif -%}
+{%- endblock form_label -%}
+
+{%- block form_errors -%}
+    <twig:Form:Errors errors={{ field_errors(form) }} />
+{%- endblock form_errors -%}
+
+{%- block form_help -%}
+    {%- set help = field_help(form) -%}
+    {%- if help is not empty -%}
+        <div class="text-sm text-muted mt-1">{{ help }}</div>
+    {%- endif -%}
+{%- endblock form_help -%}
+
+{%- block form_widget_simple -%}
+    {%- set widget_attr = attr -%}
+    {%- if required %}{% set widget_attr = widget_attr|merge({required: true}) %}{% endif -%}
+    {%- if disabled %}{% set widget_attr = widget_attr|merge({disabled: true}) %}{% endif -%}
+    {{- component('Form:Input', {
+        type: type|default('text'),
+        name: field_name(form),
+        id: field_id(form),
+        value: value,
+        hasError: not form.vars.valid,
+    }|merge(widget_attr)) -}}
+{%- endblock form_widget_simple -%}
+
+{%- block textarea_widget -%}
+    {%- set widget_attr = attr -%}
+    {%- if required %}{% set widget_attr = widget_attr|merge({required: true}) %}{% endif -%}
+    {%- if disabled %}{% set widget_attr = widget_attr|merge({disabled: true}) %}{% endif -%}
+    {{- component('Form:Textarea', {
+        name: field_name(form),
+        id: field_id(form),
+        value: value,
+        hasError: not form.vars.valid,
+    }|merge(widget_attr)) -}}
+{%- endblock textarea_widget -%}
+
+{%- block choice_widget_collapsed -%}
+    {%- set select_attr = attr -%}
+    {%- if required %}{% set select_attr = select_attr|merge({required: true}) %}{% endif -%}
+    {% component 'Form:Select' with {
+        name: field_name(form) ~ (multiple ? '[]' : ''),
+        id: field_id(form),
+        hasError: not form.vars.valid,
+        multiple: multiple,
+    }|merge(select_attr) %}
+        {%- block content -%}
+            {%- if placeholder is not none -%}
+                <option value=""{{ value is empty ? ' selected' }}>{{ placeholder }}</option>
+            {%- endif -%}
+            {%- for label, choice in field_choices(form) -%}
+                <option value="{{ choice }}"{{ (multiple ? choice in value : choice == value) ? ' selected' }}>{{ label }}</option>
+            {%- endfor -%}
+        {%- endblock -%}
+    {% endcomponent %}
+{%- endblock choice_widget_collapsed -%}
+
+{%- block checkbox_widget -%}
+    {%- set attr = attr|merge({class: (attr.class|default('') ~ ' size-4 accent-[#222]')|trim}) -%}
+    {{- parent() -}}
+{%- endblock checkbox_widget -%}
+
+{%- block radio_widget -%}
+    {%- set attr = attr|merge({class: (attr.class|default('') ~ ' size-4 accent-[#222]')|trim}) -%}
+    {{- parent() -}}
+{%- endblock radio_widget -%}
+
+{# Default to a primary button; `attr.class` wins via tailwind_merge. #}
+{%- block button_widget -%}
+    {%- set attr = attr|merge({class: ('inline-flex items-center justify-center gap-2 rounded-md border cursor-pointer transition duration-150 px-3 py-1.5 border-[#222] bg-[#222] text-white hover:opacity-90 ' ~ attr.class|default(''))|tailwind_merge}) -%}
+    {{- parent() -}}
+{%- endblock button_widget -%}

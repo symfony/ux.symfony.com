@@ -5,28 +5,26 @@
     </td>
     <td style="width: 250px;">
         {% if hasVoted %}
-            <div class="alert alert-success">
+            <div class="rounded-md border border-green-200 bg-green-100 p-4 text-green-800 dark:border-green-900 dark:bg-green-950 dark:text-green-300">
                 Thanks for voting! <twig:ux:icon name="circle-check" />
             </div>
         {% else %}
-            <button
-                type="button"
-                class="btn btn-secondary"
+            <twig:Button
+                variant="secondary"
                 data-action="live#action"
                 data-live-action-param="vote"
                 data-live-direction-param="up"
             >
                 <twig:ux:icon name="arrow-up" />
-            </button>
-            <button
-                type="button"
-                class="btn btn-secondary"
+            </twig:Button>
+            <twig:Button
+                variant="secondary"
                 data-action="live#action"
                 data-live-action-param="vote"
                 data-live-direction-param="down"
             >
                 <twig:ux:icon name="arrow-down" />
-            </button>
+            </twig:Button>
         {% endif %}
     </td>
 </tr>

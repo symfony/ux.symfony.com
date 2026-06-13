@@ -1,9 +1,9 @@
 
-<select aria-label="Choose a message" name="chat_message" class="p-2 form-select" style="width: 100%;">
+<twig:Form:Select aria-label="Choose a message" name="chat_message" class="py-2">
     <option value="">Choose a message</option>
     {% for key, message in messageChoices %}
         <option value="{{ key }}">{{ message }}</option>
     {% endfor %}
-</select>
+</twig:Form:Select>
 
-<button type="submit" class="btn btn-dark mt-3" style="width: 100%;">Chat!</button>
+<twig:Button variant="dark" type="submit" class="mt-3 w-full">Chat!</twig:Button>

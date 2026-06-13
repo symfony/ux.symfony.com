@@ -43,7 +43,7 @@
     {% if messages %}
         <div class="max-w-[1400px] mx-auto px-6 md:px-12">
             {% for message in messages %}
-                <div class="rounded-md border border-green-200 bg-green-100 p-4 text-green-800 dark:border-green-900 dark:bg-green-950 dark:text-green-300" data-turbo-cache="false">{{ message }}</div>
+                <twig:Alert variant="success" data-turbo-cache="false">{{ message }}</twig:Alert>
             {% endfor %}
         </div>
     {% endif %}

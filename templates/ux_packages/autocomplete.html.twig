@@ -13,7 +13,7 @@
         {% block sub_content %}
             Breathe life into <code>EntityType</code> and
             <code>ChoiceType</code> fields
-            with <a class="underline" href="https://tom-select.js.org/" rel="noopener nofollow noreferrer">Tom Select</a>
+            with <a href="https://tom-select.js.org/" rel="noopener nofollow noreferrer">Tom Select</a>
             and a sprinkle of Ajax.
         {% endblock %}
     {% endcomponent %}
@@ -33,7 +33,7 @@
     {# The frame is used just to keep the form submit all in one place: it feels nice #}
     <turbo-frame id="autocomplete-demo-form">
         {% for message in app.flashes('autocomplete_success') %}
-            <div class="rounded-md border border-green-200 bg-green-100 p-4 text-green-800 dark:border-green-900 dark:bg-green-950 dark:text-green-300" data-turbo-cache="false">{{ message }}</div>
+            <twig:Alert variant="success" data-turbo-cache="false">{{ message }}</twig:Alert>
         {% endfor %}
 
         {{ form_start(form) }}

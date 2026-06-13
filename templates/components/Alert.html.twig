@@ -1,4 +1,16 @@
-<div class="alert alert-{{ type }} alert-dismissible" role="alert">
-    <twig:ux:icon name="{{ this.icon }}" class="Icon bi" />
-    {{ message }}
+{#- Alert / message box. Variants via html_cva; message via `message` prop or slot. -#}
+{%- set style = html_cva(
+    base: 'flex items-center gap-2 rounded-md border p-4',
+    variants: {
+        variant: {
+            success: 'border-green-200 bg-green-100 text-green-800 dark:border-green-900 dark:bg-green-950 dark:text-green-300',
+            danger: 'border-red-200 bg-red-100 text-red-800 dark:border-red-900 dark:bg-red-950 dark:text-red-300',
+            warning: 'border-yellow-200 bg-yellow-100 text-yellow-800 dark:border-yellow-900 dark:bg-yellow-950 dark:text-yellow-300',
+            info: 'border-blue-200 bg-blue-100 text-blue-800 dark:border-blue-900 dark:bg-blue-950 dark:text-blue-300',
+        },
+    },
+) -%}
+<div class="{{ style.apply({variant: variant}, attributes.render('class'))|tailwind_merge }}" role="alert" {{ attributes.without('class') }}>
+    <twig:ux:icon name="{{ this.icon }}" class="Icon shrink-0" />
+    <span>{% block content %}{{ message }}{% endblock %}</span>
 </div>

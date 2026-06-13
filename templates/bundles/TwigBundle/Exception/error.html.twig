@@ -10,7 +10,7 @@
             <span class="eyebrows" style="font-size: 1rem;">Error</span>
             <h1 style="font-size: calc(6rem + 10vw); line-height: .75;letter-spacing: -.5rem;">{{ status_code }}</h1>
             <p class="w-1/2 text-balance max-xl:w-3/5 max-[734px]:w-4/5 [&_a]:border-b-[1.5px] [&_a]:border-white [&_a:hover]:text-inherit">{{ status_text }}</p>
-            <a class="inline-flex items-center justify-center gap-2 rounded-md border border-body-text px-3 py-1.5 text-body-text opacity-75 transition duration-150 hover:opacity-100 hover:bg-body-text hover:text-body after:absolute after:inset-0" href="{{ url('app_homepage') }}">Back to the homepage</a>
+            <twig:Button href="{{ url('app_homepage') }}" variant="outline" class="after:absolute after:inset-0">Back to the homepage</twig:Button>
         </div>
     </main>
 {% endblock %}

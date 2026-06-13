@@ -32,6 +32,8 @@
     {%- endif -%}
 {%- endblock form_help -%}
 
+{# Uses the block-local `value` var, not field_value(form): the helper is typed
+   string|array and throws on a null value (empty optional field). #}
 {%- block form_widget_simple -%}
     {%- set widget_attr = attr -%}
     {%- if required %}{% set widget_attr = widget_attr|merge({required: true}) %}{% endif -%}

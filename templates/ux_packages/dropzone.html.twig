@@ -31,7 +31,7 @@
 
 {% block demo_content %}
     {% for message in app.flashes('dropzone_success') %}
-        <div class="rounded-md border border-green-200 bg-green-100 p-4 text-green-800 dark:border-green-900 dark:bg-green-950 dark:text-green-300" data-turbo-cache="false">{{ message }}</div>
+        <twig:Alert variant="success" data-turbo-cache="false">{{ message }}</twig:Alert>
     {% endfor %}
 
     {{ form_start(form) }}

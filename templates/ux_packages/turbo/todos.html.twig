@@ -20,7 +20,7 @@
         </ul>
 
         {% if todos is empty %}
-            <div class="rounded-md border border-green-200 bg-green-100 p-4 text-green-800 dark:border-green-900 dark:bg-green-950 dark:text-green-300">You did it! Order a 🍕 and take the afternoon off.</div>
+            <twig:Alert variant="success">You did it! Order a 🍕 and take the afternoon off.</twig:Alert>
         {% endif %}
 
         <twig:Button variant="dark" href="{{ path('app_turbo_add_todo_item') }}" class="mt-12 w-full">+ Add another item</twig:Button>

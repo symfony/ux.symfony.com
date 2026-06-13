@@ -1,6 +1,6 @@
 <div {{ attributes }}>
     {% if flashMessage %}
-        <div class="rounded-md border border-green-200 bg-green-100 p-4 text-green-800 dark:border-green-900 dark:bg-green-950 dark:text-green-300">{{ flashMessage }}</div>
+        <twig:Alert variant="success">{{ flashMessage }}</twig:Alert>
     {% endif %}
 
     <div class="inline-flex">
@@ -12,7 +12,7 @@
 
                     <twig:Form:Label for="food_name">Food name</twig:Form:Label>
                     <div class="flex gap-2">
-                        <twig:Form:Input type="text" id="food_name" data-model="food.name" hasError="{{ error }}" class="py-2" autofocus />
+                        <twig:Form:Input type="text" id="food_name" data-model="food.name" hasError="{{ error is not null }}" class="py-2" autofocus />
                         <twig:Button
                             variant="outline"
                             class="shrink-0 {{ error ? 'border-signal-red text-signal-red' }}"

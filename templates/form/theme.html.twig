@@ -17,9 +17,25 @@
 
 {%- block form_label -%}
     {%- if label is not same as(false) -%}
-        <twig:Form:Label for="{{ field_id(form) }}" class="{{ required ? 'required' }}">{{ field_label(form) }}</twig:Form:Label>
+        <twig:Form:Label for="{{ field_id(form) }}" class="{{ ((required ? 'required ' : '') ~ label_attr.class|default(''))|trim }}">{{ field_label(form) }}</twig:Form:Label>
     {%- endif -%}
 {%- endblock form_label -%}
+
+{# Checkbox/radio rows: widget and label sit side by side, not stacked. #}
+{%- block checkbox_row -%}
+    <div class="mb-4{{ row_attr.class is defined ? ' ' ~ row_attr.class }}">
+        <div class="flex items-center gap-2">
+            {{- form_widget(form) -}}
+            {{- form_label(form, null, {label_attr: {class: 'mb-0'}}) -}}
+        </div>
+        {{- form_errors(form) -}}
+        {{- form_help(form) -}}
+    </div>
+{%- endblock checkbox_row -%}
+
+{%- block radio_row -%}
+    {{- block('checkbox_row') -}}
+{%- endblock radio_row -%}
 
 {%- block form_errors -%}
     <twig:Form:Errors errors="{{ field_errors(form) }}" />

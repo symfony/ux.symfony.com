@@ -32,6 +32,22 @@
             margin-bottom: --spacing(4);
         }
 
+        blockquote {
+            margin-top: --spacing(4);
+            margin-bottom: --spacing(4);
+            padding-inline-start: --spacing(4);
+            border-inline-start: 4px solid var(--color-border);
+            color: --alpha(var(--color-body-text) / 70%);
+
+            > :first-child {
+                margin-top: 0;
+            }
+
+            > :last-child {
+                margin-bottom: 0;
+            }
+        }
+
         ol, ul {
             margin-top: --spacing(5);
             margin-bottom: --spacing(5);

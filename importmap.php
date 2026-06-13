@@ -51,12 +51,6 @@ return [
     '@symfony/ux-live-component' => [
         'path' => './vendor/symfony/ux-live-component/assets/dist/live_controller.js',
     ],
-    'bootstrap' => [
-        'version' => '5.3.3',
-    ],
-    '@popperjs/core' => [
-        'version' => '2.11.8',
-    ],
     'stimulus-clipboard' => [
         'version' => '4.0.1',
     ],

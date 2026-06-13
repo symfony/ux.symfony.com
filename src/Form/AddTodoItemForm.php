@@ -26,6 +26,7 @@ class AddTodoItemForm extends AbstractType
         $builder
             ->add('item', TextType::class, [
                 'constraints' => [new NotBlank(message: 'You need something to do!')],
+                'label' => 'What should we do?',
             ])
         ;
     }

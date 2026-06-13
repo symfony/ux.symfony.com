@@ -27,6 +27,9 @@ $utilities: map-remove(
     "subtle-background-color",
     // Opacity
     "opacity",
+    // Visibility (Bootstrap's `.invisible`/`.visible` are unlayered + !important and
+    // override Tailwind's layered `open:visible`, breaking the Tooltip recipe)
+    "visibility",
 
     // Negative margin
     "negative-margin",

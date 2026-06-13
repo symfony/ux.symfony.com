@@ -38,7 +38,7 @@
         </div>
         <div class="col-span-6">
             {% block alert_success_example %}
-                <twig:Alert message="I am a success alert!" />
+                <twig:Alert>I am a success alert!</twig:Alert>
             {% endblock %}
         </div>
     </div>
@@ -55,10 +55,7 @@
         </div>
         <div class="col-span-6">
             {% block alert_danger_example %}
-                <twig:Alert
-                    variant="danger"
-                    message="Oh no! The dinos escaped!"
-                />
+                <twig:Alert variant="danger">Oh no! The dinos escaped!</twig:Alert>
             {% endblock %}
         </div>
     </div>

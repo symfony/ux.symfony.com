@@ -17,7 +17,6 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 final class Alert
 {
     public string $variant = 'success';
-    public ?string $message = null;
 
     public function getIcon(): string
     {

@@ -1,4 +1,4 @@
-{#- Alert / message box. Variants via html_cva; message via `message` prop or slot. -#}
+{#- Alert / message box. Variants via html_cva; message passed as the default slot. -#}
 {%- set style = html_cva(
     base: 'flex items-center gap-2 rounded-md border p-4',
     variants: {
@@ -12,5 +12,5 @@
 ) -%}
 <div class="{{ style.apply({variant: variant}, attributes.render('class'))|tailwind_merge }}" role="alert" {{ attributes.without('class') }}>
     <twig:ux:icon name="{{ this.icon }}" class="Icon shrink-0" />
-    <span>{% block content %}{{ message }}{% endblock %}</span>
+    <span>{% block content %}{% endblock %}</span>
 </div>

@@ -15,12 +15,11 @@
     {% endcomponent %}
 {% endblock %}
 
-{% block code_block_left %}
-    <twig:CodeBlock filename="src/Twig/Components/Alert.php" height="330px" />
-{% endblock %}
-
-{% block code_block_right %}
-    <twig:CodeBlock filename="templates/components/Alert.html.twig" height="330px"/>
+{# Alert is an anonymous component (template only), so a single code block is enough. #}
+{% block package_code_blocks %}
+    <div class="mb-12">
+        <twig:CodeBlock filename="templates/components/Alert.html.twig" height="330px" />
+    </div>
 {% endblock %}
 
 {% block demo_title %}UX Twig Components{% endblock %}
@@ -31,14 +30,16 @@
             <twig:CodeBlock
                 filename="templates/ux_packages/twig_component.html.twig"
                 :showFilename="false"
-                targetTwigBlock="alert_success_example"
+                targetTwigBlock="alert_default_example"
                 :showTwigExtends="false"
                 height="auto"
             />
         </div>
         <div class="col-span-6">
-            {% block alert_success_example %}
-                <twig:Alert>I am a success alert!</twig:Alert>
+            {% block alert_default_example %}
+                <twig:Alert>
+                    Heads up! This is the default alert.
+                </twig:Alert>
             {% endblock %}
         </div>
     </div>
@@ -55,7 +56,9 @@
         </div>
         <div class="col-span-6">
             {% block alert_danger_example %}
-                <twig:Alert variant="danger">Oh no! The dinos escaped!</twig:Alert>
+                <twig:Alert variant="danger">
+                    Oh no! The dinos escaped!
+                </twig:Alert>
             {% endblock %}
         </div>
     </div>

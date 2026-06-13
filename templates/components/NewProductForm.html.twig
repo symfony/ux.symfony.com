@@ -39,12 +39,18 @@
                 <twig:Form:Errors errors="{{ _errors.get('category') }}" />
             </div>
             <div class="col-auto">
-                <twig:Button
-                    class="text-sm"
-                    data-bs-toggle="modal"
-                    data-bs-target="#new-category-modal"
-                >+ Add Category
-                </twig:Button>
+                {# `modal:close` is dispatched by NewCategoryForm after a successful save (bubbles up to this controller). #}
+                <twig:Dialog id="new-category" data-action="modal:close->dialog#close">
+                    <twig:Dialog:Trigger>
+                        <twig:Button {{ ...dialog_trigger_attrs }} class="text-sm">+ Add Category</twig:Button>
+                    </twig:Dialog:Trigger>
+                    <twig:Dialog:Content>
+                        <twig:Dialog:Header>
+                            <twig:Dialog:Title>Add a Category</twig:Dialog:Title>
+                        </twig:Dialog:Header>
+                        <twig:NewCategoryForm />
+                    </twig:Dialog:Content>
+                </twig:Dialog>
             </div>
         </div>
 
@@ -52,14 +58,4 @@
             <twig:Button variant="primary" type="submit">Save Product</twig:Button>
         </div>
     </form>
-
-    {% component BootstrapModal with {id: 'new-category-modal'} %}
-        {% block modal_header %}
-            <h5>Add a Category</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        {% endblock %}
-        {% block modal_body %}
-            <twig:NewCategoryForm />
-        {% endblock %}
-    {% endcomponent %}
 </div>

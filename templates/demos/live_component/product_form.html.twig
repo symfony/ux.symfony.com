@@ -24,10 +24,10 @@ Symfony uses that id to query for the `Category` object.
     <twig:Code:CodeWithExplanationRow filename="templates/components/NewProductForm.html.twig" sticky reversed>
 ## New Product Template
 
-Near the bottom, this renders the `BootstrapModal` component with another
-component - `NewCategoryForm` - inside of it. Opening the modal is done entirely
-with normal Bootstrap logic: an `a` tag with `data-bs-toggle="modal"`
-and `data-bs-target="#new-category-modal"`.
+Near the bottom, this renders the `Dialog` component (the UX Toolkit "dialog"
+recipe) with another component - `NewCategoryForm` - inside of it. Opening it is
+pure Stimulus on a native `dialog` element: the trigger button carries
+`dialog#open`, no Bootstrap JS involved.
     </twig:Code:CodeWithExplanationRow>
 
     <twig:Code:CodeWithExplanationRow
@@ -35,19 +35,19 @@ and `data-bs-target="#new-category-modal"`.
     >
 ## New Category Form
 
-This component opens up in the modal! It has a `#[LiveAction]` that saves
+This component opens up in the dialog! It has a `#[LiveAction]` that saves
 the new `Category` to the database and then does two important things:
 
 1. Emits the `category:created` event with the new `Category`'s id (see
    `NewProductForm.php`).
-1. Dispatches a browser event called `modal:closed` to close the modal
-   (see `bootstrap-modal-controller.js`).
+1. Dispatches a browser event called `modal:close` to close the dialog (the
+   `Dialog` component listens for it with `modal:close->dialog#close`).
     </twig:Code:CodeWithExplanationRow>
 
     <twig:Code:TabbedCodeBlocks :files="[
-        'src/Twig/Components/BootstrapModal.php',
-        'templates/components/BootstrapModal.html.twig',
-        'assets/controllers/bootstrap-modal-controller.js',
+        'templates/components/Dialog.html.twig',
+        'templates/components/Dialog/Content.html.twig',
+        'assets/controllers/dialog_controller.js',
     ]" />
 {% endblock %}
 

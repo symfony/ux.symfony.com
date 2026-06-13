@@ -1,20 +1,30 @@
-<ul class="list-unstyled px-4 [&_.tooltip-inner]:max-w-87.5">
+<ul class="list-unstyled px-4">
     {{ _self.fileTree(files) }}
 </ul>
 
 {% macro fileTree(files) %}
     {% for file_info in files %}
             <li>
-                <span
-                    data-bs-toggle="tooltip"
-                    data-bs-html="true"
-                    data-bs-placement="right"
-                    title="{{ file_info.description|e('html_attr') }}"
-                    class="inline-flex flex-row items-center gap-2"
-                >
-                    <twig:ux:icon name="{{ file_info.isDirectory ? 'folder-open' : 'file' }}" />
-                    {{ file_info.filename }}
-                </span>
+                {% if file_info.description|default %}
+                    {%- set _ft_id = 'tt-' ~ random(1000000000) -%}
+                    <twig:Tooltip id="{{ _ft_id }}" class="block">
+                        <span
+                            data-tooltip-target="trigger"
+                            aria-describedby="{{ _ft_id }}_content"
+                            data-action="mouseenter->tooltip#show mouseleave->tooltip#hide focus->tooltip#show blur->tooltip#hide"
+                            class="inline-flex flex-row items-center gap-2"
+                        >
+                            <twig:ux:icon name="{{ file_info.isDirectory ? 'folder-open' : 'file' }}" />
+                            {{ file_info.filename }}
+                        </span>
+                        <twig:Tooltip:Content side="right">{{ file_info.description|raw }}</twig:Tooltip:Content>
+                    </twig:Tooltip>
+                {% else %}
+                    <span class="inline-flex flex-row items-center gap-2">
+                        <twig:ux:icon name="{{ file_info.isDirectory ? 'folder-open' : 'file' }}" />
+                        {{ file_info.filename }}
+                    </span>
+                {% endif %}
                 {% if file_info.files is defined %}
                     <ul class="flex flex-col items-stretch justify-start relative ps-2 ms-2 border-l border-l-body-text border-dotted">
                         {{ _self.fileTree(file_info.files) }}

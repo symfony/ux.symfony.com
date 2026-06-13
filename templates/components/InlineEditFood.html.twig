@@ -12,7 +12,7 @@
 
                     <twig:Form:Label for="food_name">Food name</twig:Form:Label>
                     <div class="flex gap-2">
-                        <twig:Form:Input type="text" id="food_name" data-model="food.name" hasError={{ error" class="py-2 }} autofocus />
+                        <twig:Form:Input type="text" id="food_name" data-model="food.name" hasError="{{ error }}" class="py-2" autofocus />
                         <twig:Button
                             variant="outline"
                             class="shrink-0 {{ error ? 'border-signal-red text-signal-red' }}"
@@ -21,7 +21,7 @@
                         >Save</twig:Button>
                     </div>
 
-                    <twig:Form:Errors errors={{ error ? error.message : null }} />
+                    <twig:Form:Errors errors="{{ error ? error.message : null }}" />
                 </div>
                 <div class="text-sm text-muted">Clear the field to trigger validation!</div>
             </form>

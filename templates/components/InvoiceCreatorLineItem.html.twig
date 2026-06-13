@@ -1,7 +1,7 @@
 <tr {{ attributes }}>
     <td>
         {% if isEditing %}
-            <twig:Form:Select data-model="product" aria-label="Choose a Product" hasError={{ _errors.has('product') }}>
+            <twig:Form:Select data-model="product" aria-label="Choose a Product" hasError="{{ _errors.has('product') }}">
                 <option value="" {{ not product ? 'selected' }}>Choose a Product</option>
                 {% for product_option in products %}
                     <option
@@ -12,7 +12,7 @@
                     </option>
                 {% endfor %}
             </twig:Form:Select>
-            <twig:Form:Errors errors={{ _errors.get('product') }} />
+            <twig:Form:Errors errors="{{ _errors.get('product') }}" />
 
         {% else %}
             {{ product.name }}
@@ -27,8 +27,8 @@
 
     <td>
         {% if isEditing %}
-            <twig:Form:Input type="number" data-model="quantity" aria-label="Quantity" hasError={{ _errors.has('quantity') }} />
-            <twig:Form:Errors errors={{ _errors.get('quantity') }} />
+            <twig:Form:Input type="number" data-model="quantity" aria-label="Quantity" hasError="{{ _errors.has('quantity') }}" />
+            <twig:Form:Errors errors="{{ _errors.get('quantity') }}" />
         {% else %}
             {{ quantity }}
         {% endif %}

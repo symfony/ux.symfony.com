@@ -8,8 +8,8 @@
                 <twig:Form:Label for="product-name">Product name:</twig:Form:Label>
             </div>
             <div class="col-span-3">
-                <twig:Form:Input type="text" id="product-name" data-model="name" hasError={{ _errors.has('name') }} />
-                <twig:Form:Errors errors={{ _errors.get('name') }} />
+                <twig:Form:Input type="text" id="product-name" data-model="name" hasError="{{ _errors.has('name') }}" />
+                <twig:Form:Errors errors="{{ _errors.get('name') }}" />
             </div>
         </div>
 
@@ -18,8 +18,8 @@
                 <twig:Form:Label for="product-price">Price:</twig:Form:Label>
             </div>
             <div class="col-span-3">
-                <twig:Form:Input type="text" id="product-price" data-model="price" hasError={{ _errors.has('price') }} />
-                <twig:Form:Errors errors={{ _errors.get('price') }} />
+                <twig:Form:Input type="text" id="product-price" data-model="price" hasError="{{ _errors.has('price') }}" />
+                <twig:Form:Errors errors="{{ _errors.get('price') }}" />
             </div>
         </div>
 
@@ -28,13 +28,13 @@
                 <twig:Form:Label for="product-category">Category:</twig:Form:Label>
             </div>
             <div class="col-span-3">
-                <twig:Form:Select id="product-category" data-model="category" hasError={{ _errors.has('category') }}>
+                <twig:Form:Select id="product-category" data-model="category" hasError="{{ _errors.has('category') }}">
                     <option value="">Choose a category</option>
                     {% for category_option in categories %}
                         <option value="{{ category_option.id }}" {{ this.isCurrentCategory(category_option) ? 'selected' }}>{{ category_option.name }}</option>
                     {% endfor %}
                 </twig:Form:Select>
-                <twig:Form:Errors errors={{ _errors.get('category') }} />
+                <twig:Form:Errors errors="{{ _errors.get('category') }}" />
             </div>
             <div class="col-auto">
                 <div class="text-sm text-muted">

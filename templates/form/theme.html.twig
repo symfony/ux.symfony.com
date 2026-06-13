@@ -22,7 +22,7 @@
 {%- endblock form_label -%}
 
 {%- block form_errors -%}
-    <twig:Form:Errors errors={{ field_errors(form) }} />
+    <twig:Form:Errors errors="{{ field_errors(form) }}" />
 {%- endblock form_errors -%}
 
 {%- block form_help -%}

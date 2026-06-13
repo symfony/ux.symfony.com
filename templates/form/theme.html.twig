@@ -6,8 +6,9 @@
 #}
 {% use "form_div_layout.html.twig" %}
 
+{# `row_attr.class`, when given (even ''), replaces the default margin so callers keep full control. #}
 {%- block form_row -%}
-    <div class="mb-4{{ row_attr.class is defined ? ' ' ~ row_attr.class }}">
+    <div class="{{ row_attr.class is defined ? row_attr.class : 'mb-4' }}">
         {{- form_label(form) -}}
         {{- form_widget(form) -}}
         {{- form_errors(form) -}}
@@ -23,7 +24,7 @@
 
 {# Checkbox/radio rows: widget and label sit side by side, not stacked. #}
 {%- block checkbox_row -%}
-    <div class="mb-4{{ row_attr.class is defined ? ' ' ~ row_attr.class }}">
+    <div class="{{ row_attr.class is defined ? row_attr.class : 'mb-4' }}">
         <div class="flex items-center gap-2">
             {{- form_widget(form) -}}
             {{- form_label(form, null, {label_attr: {class: 'mb-0'}}) -}}

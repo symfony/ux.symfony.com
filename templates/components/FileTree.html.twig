@@ -5,6 +5,7 @@
 {% macro fileTree(files) %}
     {% for file_info in files %}
             <li>
+                {% set _label %}<twig:ux:icon name="{{ file_info.isDirectory ? 'folder-open' : 'file' }}" /> {{ file_info.filename }}{% endset %}
                 {% if file_info.description|default %}
                     {%- set _ft_id = 'tt-' ~ random(1000000000) -%}
                     <twig:Tooltip id="{{ _ft_id }}" class="block">
@@ -13,18 +14,12 @@
                             aria-describedby="{{ _ft_id }}_content"
                             data-action="mouseenter->tooltip#show mouseleave->tooltip#hide focus->tooltip#show blur->tooltip#hide"
                             class="inline-flex flex-row items-center gap-2"
-                        >
-                            <twig:ux:icon name="{{ file_info.isDirectory ? 'folder-open' : 'file' }}" />
-                            {{ file_info.filename }}
-                        </span>
+                        >{{ _label }}</span>
                         {# block (not the recipe's inline-flex): descriptions are prose, not a label+icon #}
                         <twig:Tooltip:Content side="right" class="block whitespace-normal">{{ file_info.description|raw }}</twig:Tooltip:Content>
                     </twig:Tooltip>
                 {% else %}
-                    <span class="inline-flex flex-row items-center gap-2">
-                        <twig:ux:icon name="{{ file_info.isDirectory ? 'folder-open' : 'file' }}" />
-                        {{ file_info.filename }}
-                    </span>
+                    <span class="inline-flex flex-row items-center gap-2">{{ _label }}</span>
                 {% endif %}
                 {% if file_info.files is defined %}
                     <ul class="flex flex-col items-stretch justify-start relative ps-2 ms-2 border-l border-l-body-text border-dotted">

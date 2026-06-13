@@ -1,5 +1,4 @@
-{#- Alert / message box. Anonymous component: variants via html_cva, content via the default slot. -#}
-{%- props variant = 'info' -%}
+{#- Alert / message box. Variants via html_cva; content passed as the default slot. -#}
 {%- set style = html_cva(
     base: 'flex items-center gap-2 rounded-md border p-4',
     variants: {
@@ -11,13 +10,7 @@
         },
     },
 ) -%}
-{%- set icon = {
-    success: 'bi:check-circle',
-    danger: 'bi:exclamation-circle',
-    warning: 'bi:exclamation-triangle',
-    info: 'bi:info-circle',
-}[variant]|default('bi:info-circle') -%}
 <div class="{{ style.apply({variant: variant}, attributes.render('class'))|tailwind_merge }}" role="alert" {{ attributes.without('class') }}>
-    <twig:ux:icon name="{{ icon }}" class="Icon shrink-0" />
+    <twig:ux:icon name="{{ this.icon }}" class="Icon shrink-0" />
     <span>{% block content %}{% endblock %}</span>
 </div>

@@ -47,7 +47,14 @@
         .nav-link {
             border-bottom: 0;
             margin-bottom: 0;
-            color: var(--color-n-100);
+        }
+        /* Inactive tabs: Bootstrap's unlayered `.nav-link` color (#222) wins over
+           this @layer, leaving dark-on-dark text — force a readable light color. */
+        .nav-tabs .nav-link:not(.active) {
+            color: var(--color-n-200) !important;
+        }
+        .nav-tabs .nav-link:not(.active):hover {
+            color: var(--color-n-100) !important;
         }
         .nav-tabs .nav-link.active,
         .nav-tabs .nav-item.show .nav-link {

@@ -53,9 +53,7 @@ hooks:
         export NO_NPM=1
 
         (>&2 symfony-build)
-        php bin/console tailwind:build --minify assets/styles/app.css
-        php bin/console tailwind:build --minify assets/styles/demos/live-memory.css
-        php bin/console tailwind:build --minify assets/styles/toolkit-shadcn.css
+        composer run tailwind:build
         php bin/console asset-map:compile
         php bin/console app:generate-llms-files
         mkdir -p tmp && mv var/llms tmp/llms

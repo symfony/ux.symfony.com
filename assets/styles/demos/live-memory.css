@@ -1,0 +1,119 @@
+@import "tailwindcss" source(none);
+
+@source "../../../templates/demos/live_memory/**/*.html.twig";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Base layout & theming. The pure resets that used to live in _reset.scss are
+   now provided by Tailwind's Preflight; only the layout/theme rules remain. */
+body {
+    line-height: 1.5;
+    font-family: var(--font-text), sans-serif;
+    font-weight: 400;
+    min-height: 100vh;
+    min-width: 320px;
+    overflow-x: clip;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background: var(--color-background);
+    color: var(--color-text);
+    transition: background 500ms linear, color 500ms ease-in-out;
+}
+
+::selection {
+    background: var(--color-text);
+    color: var(--color-background);
+    -webkit-text-fill-color: currentColor;
+}
+
+a {
+    text-decoration: none;
+    text-underline-offset: .25ex;
+    color: inherit;
+}
+
+main {
+    flex: 1 1 auto;
+    width: 100%;
+    display: grid;
+    margin-block-end: 3rem;
+}
+
+input, button, textarea, select {
+    font: inherit;
+    background: none;
+    color: inherit;
+    border: 0;
+    padding: 0;
+}
+
+.wrapper {
+    padding: 0 1rem;
+    max-inline-size: var(--container-max-width);
+    margin-inline: auto;
+}
+
+.wrapper--full {
+    max-inline-size: 100%;
+}
+
+/* Decorative utilities (glass panels, cover image, blurred glow) */
+.background-glass {
+    --glass-opacity: .75;
+    --glass-color: 255 255 255;
+    background: rgba(var(--glass-color) / var(--glass-opacity));
+}
+.dark .background-glass {
+    --glass-color: 0 0 0;
+}
+
+.background-cover {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+.background-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(var(--blur, 2px));
+    opacity: var(--opacity, .15);
+}
+
+.shadow-blur {
+    position: relative;
+}
+.shadow-blur:after {
+    position: absolute;
+    content: "";
+    z-index: -1;
+    background: var(--gradient);
+    inset: 3rem;
+    border-radius: 3rem;
+    bottom: var(--shadow-bottom, 0);
+    filter: blur(3rem);
+    opacity: var(--shadow-opacity, 1);
+}
+.shadow-blur--rainbow {
+    --gradient: linear-gradient(113.84deg, #D65831 0%, #D2D631 36.52%, #31D673 71.83%, #3aa3ff 100%);
+}
+.shadow-blur--opacity-20 {
+    --shadow-opacity: 0.2;
+}
+
+/* Design tokens, shared icon primitive, and component styles */
+@import "./live-memory/app/_root.css";
+@import "../components/_Icon.css";
+@import "./live-memory/components/_Board.css";
+@import "./live-memory/components/_Card.css";
+@import "./live-memory/components/_Debug.css";
+@import "./live-memory/components/_Header.css";
+@import "./live-memory/components/_Logo.css";
+@import "./live-memory/components/_Metric.css";
+@import "./live-memory/components/_Overlay.css";
+@import "./live-memory/components/_Score.css";
+@import "./live-memory/components/_ThemeSwitch.css";
+@import "./live-memory/components/_Timer.css";

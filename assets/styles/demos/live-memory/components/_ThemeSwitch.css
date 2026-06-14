@@ -1,6 +1,6 @@
-// -----------------------------------------------------------------
-// ThemeSwitch
-// -----------------------------------------------------------------
+/* ----------------------------------------------------------------- */
+/* ThemeSwitch */
+/* ----------------------------------------------------------------- */
 
 .LiveMemory-ThemeSwitch {
   position: relative;
@@ -13,7 +13,7 @@
   border-radius: 12%;
   transition: transform 250ms linear;
 }
-[data-bs-theme="dark"] .LiveMemory-ThemeSwitch {
+.dark .LiveMemory-ThemeSwitch {
   transform: rotateY(180deg);
 }
 .LiveMemory-ThemeSwitch[data-switch="dark"] {

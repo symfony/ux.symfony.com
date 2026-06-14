@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2e309902ac7e8bb2a77ca51f50182bd1",
+    "content-hash": "00f1230f8770d951328ad39110ad5e72",
     "packages": [
         {
             "name": "composer/semver",
@@ -9184,61 +9184,6 @@
             "time": "2025-11-11T15:35:10+00:00"
         },
         {
-            "name": "symfonycasts/sass-bundle",
-            "version": "v0.9.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/SymfonyCasts/sass-bundle.git",
-                "reference": "3472f2018417b4f7258095089b327a7ba79018ad"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/SymfonyCasts/sass-bundle/zipball/3472f2018417b4f7258095089b327a7ba79018ad",
-                "reference": "3472f2018417b4f7258095089b327a7ba79018ad",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.1",
-                "symfony/asset-mapper": "^6.3|^7.0|^8.0",
-                "symfony/console": "^5.4|^6.3|^7.0|^8.0",
-                "symfony/filesystem": "^5.4|^6.3|^7.0|^8.0",
-                "symfony/http-client": "^5.4|^6.3|^7.0|^8.0",
-                "symfony/process": "^5.4|^6.3|^7.0|^8.0"
-            },
-            "require-dev": {
-                "matthiasnoback/symfony-config-test": "^5.0|^6.0",
-                "phpunit/phpunit": "^9.6",
-                "symfony/framework-bundle": "^6.3|^7.0|^8.0",
-                "symfony/phpunit-bridge": "^6.3.9|^7.0|^8.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Symfonycasts\\SassBundle\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mathéo Daninos",
-                    "homepage": "https://github.com/WebMamba"
-                }
-            ],
-            "description": "Delightful Sass Support for Symfony + AssetMapper",
-            "keywords": [
-                "asset-mapper",
-                "sass"
-            ],
-            "support": {
-                "issues": "https://github.com/SymfonyCasts/sass-bundle/issues",
-                "source": "https://github.com/SymfonyCasts/sass-bundle/tree/v0.9.0"
-            },
-            "time": "2025-11-29T13:44:16+00:00"
-        },
-        {
             "name": "symfonycasts/tailwind-bundle",
             "version": "v0.12.0",
             "source": {
@@ -9465,56 +9410,6 @@
                 }
             ],
             "time": "2025-11-17T07:31:35+00:00"
-        },
-        {
-            "name": "twbs/bootstrap",
-            "version": "v5.3.8",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "25aa8cc0b32f0d1a54be575347e6d84b70b1acd7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/25aa8cc0b32f0d1a54be575347e6d84b70b1acd7",
-                "reference": "25aa8cc0b32f0d1a54be575347e6d84b70b1acd7",
-                "shasum": ""
-            },
-            "replace": {
-                "twitter/bootstrap": "self.version"
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mark Otto",
-                    "email": "markdotto@gmail.com"
-                },
-                {
-                    "name": "Jacob Thornton",
-                    "email": "jacobthornton@gmail.com"
-                }
-            ],
-            "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
-            "homepage": "https://getbootstrap.com/",
-            "keywords": [
-                "JS",
-                "css",
-                "framework",
-                "front-end",
-                "mobile-first",
-                "responsive",
-                "sass",
-                "web"
-            ],
-            "support": {
-                "issues": "https://github.com/twbs/bootstrap/issues",
-                "source": "https://github.com/twbs/bootstrap/tree/v5.3.8"
-            },
-            "time": "2025-08-26T02:01:02+00:00"
         },
         {
             "name": "twig/extra-bundle",

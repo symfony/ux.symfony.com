@@ -21,8 +21,6 @@ export default class extends Controller {
         this.timeout = setTimeout(() => {
             localStorage.setItem('user-theme', theme);
             document.documentElement.classList.toggle('dark', theme === 'dark');
-            // Temporary BC-layer during Tailwind migration
-            document.documentElement.setAttribute('data-bs-theme', theme);
         }, 250);
     }
 }

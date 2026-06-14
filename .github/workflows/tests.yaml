@@ -22,9 +22,6 @@ jobs:
             -   name: Install dependencies
                 uses: ramsey/composer-install@v3
 
-            -   name: Build Sass assets
-                run: php bin/console sass:build
-
             -   name: Smoke Tests
                 run: vendor/bin/phpunit --testsuite "Smoke Tests"
 

@@ -23,8 +23,6 @@
             <script>
               const applyTheme = (theme) => {
                 theme = theme === 'light' ? 'light' : 'dark';
-                // Temporary BC-layer during Tailwind migration
-                document.documentElement.setAttribute('data-bs-theme', theme);
                 document.documentElement.classList.toggle('dark', theme === 'dark');
               };
 

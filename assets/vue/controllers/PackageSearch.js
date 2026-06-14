@@ -28,7 +28,7 @@ export default {
         <div>
             <input
                 v-model="search"
-                class="form-control"
+                class="w-full px-3 py-1.5 border border-solid border-border rounded-sm bg-body text-body-text focus:border-link focus:[outline:revert]"
                 type="search"
                 placeholder="This search is built in Vue.js!"
             />

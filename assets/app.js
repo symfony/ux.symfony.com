@@ -1,5 +1,4 @@
-import './styles/app.scss';
-import './styles/app-tailwind.css';
+import './styles/app.css';
 
 // start the Stimulus application
 import './bootstrap.js';

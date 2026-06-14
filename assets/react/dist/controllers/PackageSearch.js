@@ -11,7 +11,7 @@ export default class extends Component {
     return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
       type: "search",
       placeholder: "This search is built in React!",
-      className: "form-control",
+      className: "w-full px-3 py-1.5 border border-solid border-border rounded-sm bg-body text-body-text focus:border-link focus:[outline:revert]",
       value: this.state.search,
       onChange: event => this.setState({
         search: event.target.value

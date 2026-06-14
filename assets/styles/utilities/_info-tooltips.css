@@ -1,22 +1,24 @@
-.info-tooltips {
-  font-family: var(--font-sans);
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 19px;
-  letter-spacing: 0;
-}
+@layer utilities {
+  .info-tooltips {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0;
+  }
 
-.copied button svg {
-  animation: copied 450ms linear alternate-reverse;
-}
+  .copied button svg {
+    animation: copied 450ms linear alternate-reverse;
+  }
 
-.copied button::after {
-  position: absolute;
-  inset: 0;
-  content: " ";
-  animation: copied 450ms linear forwards;
-  border-radius: 50%;
-  border: 2px dotted var(--color-body-text);
+  .copied button::after {
+    position: absolute;
+    inset: 0;
+    content: " ";
+    animation: copied 450ms linear forwards;
+    border-radius: 50%;
+    border: 2px dotted var(--color-body-text);
+  }
 }
 
 @keyframes copied {

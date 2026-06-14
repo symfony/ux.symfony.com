@@ -1,0 +1,138 @@
+@layer base {
+    h1, .h1,
+    h2, .h2,
+    h3, .h3,
+    h4, .h4,
+    h5, .h5,
+    h6, .h6 {
+        font-family: var(--font-title);
+        margin-top: 0;
+        margin-bottom: .5rem;
+        font-weight: var(--font-weight-medium);
+        line-height: 1.2;
+        color: inherit;
+    }
+
+    h1,.h1 {
+        font-size: calc(1.375rem + 1.5vw)
+    }
+
+    h2, .h2 {
+        font-size: calc(1.325rem + 0.9vw)
+    }
+
+    h3, .h3 {
+        font-size: calc(1.3rem + 0.6vw)
+    }
+
+    h4, .h4 {
+        font-size: calc(1.275rem + 0.3vw)
+    }
+
+    @media(min-width: 1200px) {
+        h1,.h1 {
+            font-size:2.5rem
+        }
+
+        h2,.h2 {
+            font-size:2rem
+        }
+
+        h3,.h3 {
+            font-size:1.75rem
+        }
+
+        h4,.h4 {
+            font-size:1.5rem
+        }
+    }
+
+    h5,.h5 {
+        font-size: 1.25rem
+    }
+
+    h6,.h6 {
+        font-size: 1rem
+    }
+
+    h1 {
+        font-size: 52px;
+        font-weight: var(--font-weight-bold);
+        line-height: 60px;
+        letter-spacing: -0.035em;
+    }
+
+    h2.ubuntu {
+        font-size: 42px;
+        font-weight: var(--font-weight-bold);
+        line-height: 48px;
+        letter-spacing: -2px;
+    }
+
+    h3, a.component-title {
+        font-family: var(--font-title);
+        font-weight: var(--font-weight-bold);
+        font-size: var(--text-3xl);
+        line-height: --spacing(10);
+        letter-spacing: -1px;
+        text-decoration: none;
+        color: var(--color-body-text);
+    }
+
+    h4 {
+        font-size: var(--text-base);
+        font-weight: var(--font-weight-bold);
+        line-height: 18.38px;
+    }
+
+    .component-headlines {
+        width: 50%;
+    }
+
+    @media (max-width: 900px) {
+        .component-headlines {
+            width: 56%;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .component-headlines {
+            text-align: center;
+            width: 100%
+        }
+    }
+
+    code {
+        font-size: smaller;
+        color: var(--color-code);
+        background-color: var(--color-code-bg);
+        padding: --spacing(0.5) --spacing(1);
+        border-radius: var(--radius-sm);
+    }
+    pre code {
+        font-size: inherit;
+        color: inherit;
+        background-color: inherit;
+        padding: 0;
+    }
+
+    @media (max-width: 576px) {
+        h1 {
+            font-size: 36px;
+            line-height: 41px;
+            letter-spacing: -1px;
+        }
+
+        h2.ubuntu {
+            font-size: 28px;
+            line-height: 32px;
+            letter-spacing: -1px;
+        }
+
+        h3, a.component-title {
+            font-size: 22px;
+            line-height: 25px;
+            letter-spacing: -1px;
+        }
+    }
+}

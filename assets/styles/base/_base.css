@@ -1,0 +1,27 @@
+@layer base {
+    * {
+        @apply border-border;
+    }
+
+    main {
+        flex-grow: 1;
+    }
+
+    header, main, footer {
+        flex-shrink: 0;
+    }
+
+    button {
+        border: none;
+        background: inherit;
+
+        &:active {
+            border: inherit;
+        }
+    }
+
+    a, a.page-link, a.page-link:hover {
+        text-decoration: none;
+        color: inherit;
+    }
+}

@@ -1,0 +1,14 @@
+@layer components {
+    .ux-container {
+        border: 1px solid var(--color-secondary-bg-subtle);
+        border-radius: 1rem;
+    }
+
+    .markdown-container {
+        border: 1px solid var(--color-secondary-bg-subtle);
+        border-radius: .75rem;
+        height: 100%;
+        width: 100%;
+        position: relative;
+    }
+}

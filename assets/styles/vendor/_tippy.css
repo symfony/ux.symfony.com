@@ -1,0 +1,17 @@
+@layer components {
+    .tippy-content {
+        font-stretch: semi-condensed;
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+    }
+    .tippy-content button {
+        border: 0;
+        background: none;
+    }
+    .tippy-content span:first-child {
+        color: var(--color-code);
+    }
+    .tippy-content span:not(:first-child) {
+        color: var(--color-body-text);
+    }
+}

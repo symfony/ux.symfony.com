@@ -1,0 +1,19 @@
+@layer utilities {
+    .bg-icon-grid {
+        background-image:
+            linear-gradient(currentColor 1px, transparent 1px),
+            linear-gradient(to right, currentColor 1px, transparent 1px);
+        background-size: 12% 12%;
+        background-position: center;
+        background-blend-mode: soft-light;
+    }
+
+    .bg-icon-check {
+        --bg-color: var(--color-border-translucent);
+        background-image:
+            repeating-linear-gradient(45deg, var(--bg-color) 25%, transparent 25%, transparent 75%, var(--bg-color) 75%, var(--bg-color)),
+            repeating-linear-gradient(45deg, var(--bg-color) 25%, transparent 25%, transparent 75%, var(--bg-color) 75%, var(--bg-color));
+        background-position: 0 0, 20px 20px;
+        background-size: calc(2 * 20px) calc(2 * 20px);
+    }
+}

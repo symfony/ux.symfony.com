@@ -1,0 +1,63 @@
+@layer components {
+    a.link {
+        --color: var(--color-code);
+        color: var(--color);
+        position: relative;
+        &:after {
+            position: absolute;
+            content: "";
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            display: block;
+            transition: all .2s ease-in-out;
+            background: var(--color);
+            transform: scaleX(0);
+            transform-origin: center left;
+        }
+        &:hover:after {
+            transform: scaleX(1);
+        }
+    }
+
+    .code-description :is(h2, h3) {
+        font-family: var(--font-title);
+    }
+    .code-description h2 {
+        font-size: 2.5em;
+        margin-block-end: 1.5rem;
+    }
+    .code-description h3 {
+        font-size: 1.65em;
+        font-weight: 500;
+        margin-block-end: 1.125rem;
+        margin-top: 2.25rem;
+    }
+    .code-description:hover strong {
+        background: var(--color-body-text);
+        color: var(--color-body);
+    }
+
+    .ubuntu {
+        font-family: var(--font-title);
+    }
+
+    .ubuntu-header {
+        font-family: var(--font-title);
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 24px;
+        letter-spacing: -1px;
+        text-decoration: none;
+    }
+
+    .eyebrows {
+        text-transform: uppercase;
+        font-family: var(--font-sans);
+        font-weight: 600;
+        font-size: 0.7rem;
+        line-height: 1.6;
+        letter-spacing: 0.125rem;
+    }
+}

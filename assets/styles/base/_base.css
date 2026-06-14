@@ -20,7 +20,7 @@
         }
     }
 
-    a, a.page-link, a.page-link:hover {
+    a {
         text-decoration: none;
         color: inherit;
     }

@@ -43,15 +43,6 @@
         font-family: var(--font-title);
     }
 
-    .ubuntu-header {
-        font-family: var(--font-title);
-        font-weight: 700;
-        font-size: 24px;
-        line-height: 24px;
-        letter-spacing: -1px;
-        text-decoration: none;
-    }
-
     .eyebrows {
         text-transform: uppercase;
         font-family: var(--font-sans);

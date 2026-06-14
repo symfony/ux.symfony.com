@@ -155,28 +155,8 @@
         animation-duration: var(--duration);
         transform: translateX(-100%);
     }
-
-    .ProductGrid_media.loaded span,
-    .ProductGrid_media.loaded svg {
-        opacity: .2;
-        filter: brightness(0);
-        --duration: 1000ms;
-        animation: productloaded var(--duration) linear forwards;
-        animation-delay: calc(var(--delay) * 0.9 * var(--duration));
-    }
 }
 
 @keyframes productloading {
     100% { transform: translateX(0); }
-}
-
-@keyframes productloaded {
-    0% {
-        opacity: 0.2;
-        filter: brightness(0);
-    }
-    100% {
-        opacity: 1;
-        filter: brightness(1);
-    }
 }

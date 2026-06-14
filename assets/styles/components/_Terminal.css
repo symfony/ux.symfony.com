@@ -16,10 +16,6 @@
         }
     }
 
-    .Terminal_light {
-        --header-opacity: 0.25;
-    }
-
     .Terminal_header {
         display: flex;
         background-color: var(--bg-header, #0D0D0DBA);
@@ -116,7 +112,6 @@
         white-space: nowrap;
     }
 
-    /* GitHub / copy icon buttons (ex Bootstrap `.btn .btn-link .btn-sm`) */
     .code-buttons :is(a, button) {
         display: inline-block;
         padding: --spacing(1) --spacing(2);

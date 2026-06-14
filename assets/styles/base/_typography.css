@@ -69,7 +69,7 @@
         letter-spacing: -2px;
     }
 
-    h3, a.component-title {
+    h3 {
         font-family: var(--font-title);
         font-weight: var(--font-weight-bold);
         font-size: var(--text-3xl);
@@ -129,7 +129,7 @@
             letter-spacing: -1px;
         }
 
-        h3, a.component-title {
+        h3 {
             font-size: 22px;
             line-height: 25px;
             letter-spacing: -1px;

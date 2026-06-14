@@ -3,7 +3,7 @@
         {% for tab in tabs %}
             <twig:Tabs:Trigger
                 value="{{ tab.id }}"
-                class="flex-none rounded-none border-0 border-b-[3px] border-transparent -mb-px px-4 text-[.9rem] leading-[2] text-body-text/70 hover:text-body-text data-active:border-muted dark:data-active:border-muted data-active:bg-transparent data-active:text-body-text group-data-[variant=default]/tabs-list:data-active:shadow-none"
+                class="flex-none rounded-none border-0 border-b-[3px] border-transparent -mb-px px-4 text-[.9rem] leading-[2] text-body-text/70 hover:text-body-text data-active:border-muted dark:data-active:border-muted data-active:bg-transparent dark:data-active:bg-transparent data-active:text-body-text group-data-[variant=default]/tabs-list:data-active:shadow-none"
             >{{ tab.title }}</twig:Tabs:Trigger>
         {% endfor %}
     </twig:Tabs:List>

@@ -51,12 +51,6 @@ return [
     '@symfony/ux-live-component' => [
         'path' => './vendor/symfony/ux-live-component/assets/dist/live_controller.js',
     ],
-    'bootstrap' => [
-        'version' => '5.3.3',
-    ],
-    '@popperjs/core' => [
-        'version' => '2.11.8',
-    ],
     'stimulus-clipboard' => [
         'version' => '4.0.1',
     ],
@@ -152,17 +146,6 @@ return [
     ],
     'scheduler' => [
         'version' => '0.23.2',
-    ],
-    'tippy.js' => [
-        'version' => '6.3.7',
-    ],
-    'tippy.js/dist/tippy.css' => [
-        'version' => '6.3.7',
-        'type' => 'css',
-    ],
-    'tippy.js/themes/translucent.css' => [
-        'version' => '6.3.7',
-        'type' => 'css',
     ],
     'path-to-regexp' => [
         'version' => '6.2.1',

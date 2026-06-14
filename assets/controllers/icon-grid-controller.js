@@ -1,40 +1,22 @@
 import {Controller} from '@hotwired/stimulus';
-import {delegate} from 'tippy.js';
 
+/*
+ * Icon grid: clicking a card opens the shared IconModal (a LiveComponent) by
+ * dispatching `Icon:Clicked`. The hover name is handled per-card by the
+ * <twig:Tooltip> component (see IconGrid.html.twig).
+ */
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
 
     connect() {
-        this.element.addEventListener('click', this.click.bind(this), true);
-        this.tippy = delegate(this.element, {
-            target: '[data-icon-card]',
-            content: (reference) => '<button title="Copy Icon name" data-controller="clipboarder" data-action="clipboarder#copy"  data-clipboarder-target="button source">'
-                + '<span>'
-                + reference.title.split(':').join('</span>:<span>')
-                + '</span>'
-                + '</button>',
-            arrow: true,
-            theme: 'translucent',
-            animation: 'scale',
-            inertia: true,
-            allowHTML: true,
-            onShow: () => {
-                if (document.body.dataset.iconSize !== 'small') {
-                    return false;
-                }
-            },
-            interactive: true,
-            delay: [250, 0],
-        });
+        this.element.addEventListener('click', this.onClick, true);
     }
 
     disconnect() {
-        this.tippy.unmount();
-        this.tippy.destroy();
-        this.element.removeEventListener('click', this.click.bind(this), true);
+        this.element.removeEventListener('click', this.onClick, true);
     }
 
-    click(event) {
+    onClick = (event) => {
         const iconCard = event.target.closest('[data-icon-card]');
         if (!iconCard) {
             return;
@@ -42,8 +24,7 @@ export default class extends Controller {
         event.preventDefault();
         event.stopPropagation();
 
-        const customEvent = new CustomEvent('Icon:Clicked', { detail: { icon: iconCard.title }, bubbles: true });
+        const customEvent = new CustomEvent('Icon:Clicked', {detail: {icon: iconCard.title}, bubbles: true});
         window.dispatchEvent(customEvent);
-    }
-
+    };
 }

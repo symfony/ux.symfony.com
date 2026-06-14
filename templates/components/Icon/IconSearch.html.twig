@@ -3,7 +3,9 @@
     <div class="sticky top-0 bg-body z-2">
         <div class="p-6 markdown-container bg-white/75 dark:bg-black/75 shadow-blur shadow-blur--rainbow mt-12"
              style="border-radius: .75rem">
-            <fieldset class="flex items-stretch gap-6 max-md:flex-wrap">
+            {# min-w-0 overrides the <fieldset> UA `min-inline-size: min-content`, which otherwise
+               keeps it as wide as the longest icon-set name and overflows on mobile #}
+            <fieldset class="flex min-w-0 items-stretch gap-6 max-md:flex-wrap">
 
                 <div class="flex items-stretch w-[220px] shrink-0 max-md:w-full">
                     <label class="flex items-center px-3 bg-subtle border border-solid border-border border-e-0 rounded-s-sm" for="IconSearch-Set">

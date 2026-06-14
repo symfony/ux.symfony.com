@@ -4,15 +4,24 @@
 
     {% for icon in icons %}
 
-        <div data-icon-card title="{{ icon }}" class="group grid rounded-xl border border-border bg-white/50 dark:bg-black/50 p-2 aspect-square relative transition duration-150 ease-linear place-content-stretch content-center hover:duration-300 hover:ease-out hover:scale-[1.07]">
-            <button class="bg-transparent border-0 grid place-items-center content-center relative aspect-square w-full in-data-[icon-size=large]:py-4" data-icon-link>
-                {% if iconSet is not defined %}
-                    <span class="absolute text-center text-xs font-mono opacity-25 leading-[1.1] hidden transition-opacity duration-150 ease-linear text-body-text inset-x-2 top-2 in-data-[icon-size=large]:block group-hover:opacity-75">{{ icon.prefix }}</span>
-                {% endif %}
-                <img class="w-6 max-w-10 h-auto block max-h-10 in-data-[icon-size=large]:w-1/2 dark:not-[.Icon__color]:invert dark:not-[.Icon__color]:hue-rotate-180 {{ iconSet.palette|default ? 'Icon__color' }}" width="32" height="32" src="{{ icon.imageUrl }}" alt="Icon {{ icon.prefix }} {{ icon.name|humanize }}">
-                <span class="absolute text-center text-xs font-mono opacity-25 leading-[1.1] hidden transition-opacity duration-150 ease-linear text-body-text inset-x-2 bottom-2 in-data-[icon-size=large]:block group-hover:opacity-75">{{ icon.name }}</span>
-            </button>
-        </div>
+        {# `contents` keeps the card as the grid item; the Tooltip:Content wrapper is position:fixed, so it never takes a grid cell. Hidden at the large size, where the name is already labelled under the icon. #}
+        {%- set _tip_id = 'icontip-' ~ icon|replace({':': '-', '.': '-', '/': '-', ' ': '-'}) -%}
+        <twig:Tooltip id="{{ _tip_id }}" class="contents">
+            <div data-icon-card title="{{ icon }}"
+                 data-tooltip-target="trigger"
+                 aria-describedby="{{ _tip_id }}_content"
+                 data-action="mouseenter->tooltip#show mouseleave->tooltip#hide"
+                 class="group grid rounded-xl border border-border bg-white/50 dark:bg-black/50 p-2 aspect-square relative transition duration-150 ease-linear place-content-stretch content-center hover:duration-300 hover:ease-out hover:scale-[1.07]">
+                <button class="bg-transparent border-0 grid place-items-center content-center relative aspect-square w-full in-data-[icon-size=large]:py-4" data-icon-link>
+                    {% if iconSet is not defined %}
+                        <span class="absolute text-center text-xs font-mono opacity-25 leading-[1.1] hidden transition-opacity duration-150 ease-linear text-body-text inset-x-2 top-2 in-data-[icon-size=large]:block group-hover:opacity-75">{{ icon.prefix }}</span>
+                    {% endif %}
+                    <img class="w-6 max-w-10 h-auto block max-h-10 in-data-[icon-size=large]:w-1/2 dark:not-[.Icon__color]:invert dark:not-[.Icon__color]:hue-rotate-180 {{ iconSet.palette|default ? 'Icon__color' }}" width="32" height="32" src="{{ icon.imageUrl }}" alt="Icon {{ icon.prefix }} {{ icon.name|humanize }}">
+                    <span class="absolute text-center text-xs font-mono opacity-25 leading-[1.1] hidden transition-opacity duration-150 ease-linear text-body-text inset-x-2 bottom-2 in-data-[icon-size=large]:block group-hover:opacity-75">{{ icon.name }}</span>
+                </button>
+            </div>
+            <twig:Tooltip:Content side="top" class="in-data-[icon-size=large]:hidden">{{ icon }}</twig:Tooltip:Content>
+        </twig:Tooltip>
 
     {% endfor %}
 

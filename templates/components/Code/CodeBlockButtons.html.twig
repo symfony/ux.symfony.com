@@ -1,37 +1,44 @@
 {% props source, link, copyButton = true %}
 
 {% set github_button %}
-    <a
-        href="{{ link }}"
-        rel="external noopener noreferrer"
-        target="_blank"
-        data-bs-toggle="tooltip"
-        data-bs-placement="bottom"
-        title="View on GitHub"
-    >
-        <twig:ux:icon name="github"/>
-    </a>
+    {%- set _gh_id = 'tt-' ~ random(1000000000) -%}
+    <twig:Tooltip id="{{ _gh_id }}">
+        <a
+            href="{{ link }}"
+            rel="external noopener noreferrer"
+            target="_blank"
+            data-tooltip-target="trigger"
+            aria-describedby="{{ _gh_id }}_content"
+            data-action="mouseenter->tooltip#show mouseleave->tooltip#hide focus->tooltip#show blur->tooltip#hide"
+        >
+            <twig:ux:icon name="github"/>
+        </a>
+        <twig:Tooltip:Content side="bottom">View on GitHub</twig:Tooltip:Content>
+    </twig:Tooltip>
 {% endset %}
 
 {% if copyButton %}
 
     <div
-        data-controller="tooltips clipboarder"
+        data-controller="clipboarder"
         data-clipboarder-source-value="{{ source }}"
         class="code-buttons"
     >
         {{ github_button }}
-        <button
-            type="button"
-            class="btn-copy"
-            data-bs-toggle="tooltip"
-            data-bs-placement="bottom"
-            title="Copy code"
-            data-action="clipboarder#copy"
-            data-clipboarder-target="button"
-        >
-            <twig:ux:icon name="copy"/>
-        </button>
+        {%- set _copy_id = 'tt-' ~ random(1000000000) -%}
+        <twig:Tooltip id="{{ _copy_id }}">
+            <button
+                type="button"
+                class="btn-copy"
+                data-tooltip-target="trigger"
+                aria-describedby="{{ _copy_id }}_content"
+                data-action="clipboarder#copy mouseenter->tooltip#show mouseleave->tooltip#hide focus->tooltip#show blur->tooltip#hide"
+                data-clipboarder-target="button"
+            >
+                <twig:ux:icon name="copy"/>
+            </button>
+            <twig:Tooltip:Content side="bottom">Copy code</twig:Tooltip:Content>
+        </twig:Tooltip>
     </div>
 
 {% else %}

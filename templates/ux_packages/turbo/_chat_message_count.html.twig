@@ -1,9 +1,13 @@
-<a
-    href="{{ path('app_turbo') }}#turbo-streams"
-    data-bs-toggle="tooltip"
-    data-bs-placement="bottom"
-    id="message-count-header"
-    title="The number of chat messages from Turbo Streams"
->
-    <twig:ux:icon name="comment" /> {{ messageCount }}
-</a>
+{%- set _mc_id = 'tt-' ~ random(1000000000) -%}
+<twig:Tooltip id="{{ _mc_id }}">
+    <a
+        href="{{ path('app_turbo') }}#turbo-streams"
+        id="message-count-header"
+        data-tooltip-target="trigger"
+        aria-describedby="{{ _mc_id }}_content"
+        data-action="mouseenter->tooltip#show mouseleave->tooltip#hide focus->tooltip#show blur->tooltip#hide"
+    >
+        <twig:ux:icon name="comment" /> {{ messageCount }}
+    </a>
+    <twig:Tooltip:Content side="bottom">The number of chat messages from Turbo Streams</twig:Tooltip:Content>
+</twig:Tooltip>

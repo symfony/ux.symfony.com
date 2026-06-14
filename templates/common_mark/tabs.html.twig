@@ -1,12 +1,16 @@
-<twig:Wysiwyg:Tabs active="{{ active_tab_id }}">
-    <twig:block name="controls">
+<twig:Tabs defaultValue="{{ active_tab_id }}">
+    <twig:Tabs:List class="mb-4 w-full justify-start gap-0 rounded-none border-b border-border bg-transparent p-0">
         {% for tab in tabs %}
-            <twig:Wysiwyg:TabControl id="{{ tab.id }}" :active="tab.id == active_tab_id">{{ tab.title }}</twig:Wysiwyg:TabControl>
+            <twig:Tabs:Trigger
+                value="{{ tab.id }}"
+                class="flex-none rounded-none border-0 border-b-[3px] border-transparent -mb-px px-4 text-[.9rem] leading-[2] text-body-text/70 hover:text-body-text data-active:border-muted dark:data-active:border-muted data-active:bg-transparent dark:data-active:bg-transparent data-active:text-body-text group-data-[variant=default]/tabs-list:data-active:shadow-none"
+            >{{ tab.title }}</twig:Tabs:Trigger>
         {% endfor %}
-    </twig:block>
-    <twig:block name="panels">
-        {% for tab in tabs %}
-            <twig:Wysiwyg:TabPanel target="{{ tab.id }}" :active="tab.id == active_tab_id">{{ tab.content|raw }}</twig:Wysiwyg:TabPanel>
-        {% endfor %}
-    </twig:block>
-</twig:Wysiwyg:Tabs>
+    </twig:Tabs:List>
+    {% for tab in tabs %}
+        <twig:Tabs:Content
+            value="{{ tab.id }}"
+            class="relative has-[.Toolkit_Preview]:rounded-xl has-[.Toolkit_Preview]:border has-[.Toolkit_Preview]:border-border"
+        >{{ tab.content|raw }}</twig:Tabs:Content>
+    {% endfor %}
+</twig:Tabs>

@@ -27,6 +27,9 @@ $utilities: map-remove(
     "subtle-background-color",
     // Opacity
     "opacity",
+    // Visibility (Bootstrap's `.invisible`/`.visible` are unlayered + !important and
+    // override Tailwind's layered `open:visible`, breaking the Tooltip recipe)
+    "visibility",
 
     // Negative margin
     "negative-margin",
@@ -42,6 +45,10 @@ $utilities: map-remove(
     "link-underline",
     "link-underline-opacity",
     // Text
+    // `color` (Bootstrap's `.text-body`/`.text-muted`/... are unlayered + !important
+    // and override Tailwind's `text-body`/`text-muted`; every text color the site
+    // uses is a Tailwind token now)
+    "color",
     "text-align",
     // Border
     "border",

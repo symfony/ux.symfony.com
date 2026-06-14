@@ -1,0 +1,21 @@
+{# @prop variant 'default'|'line' The visual style variant. Defaults to `default` #}
+{# @block content The default block #}
+{%- props variant = 'default' -%}
+{%- set style = html_cva(
+    base: 'group/tabs-list inline-flex w-fit items-center justify-center rounded-lg p-[3px] text-muted group-data-[orientation=horizontal]/tabs:h-8 group-data-[orientation=vertical]/tabs:h-fit group-data-[orientation=vertical]/tabs:flex-col data-[variant=line]:rounded-none',
+    variants: {
+        variant: {
+            default: 'bg-subtle',
+            line: 'gap-1 bg-transparent',
+        },
+    },
+) -%}
+
+<nav
+    data-slot="tabs-list"
+    role="tablist"
+    data-variant="{{ variant }}"
+    class="{{ style.apply({variant: variant}, attributes.render('class'))|tailwind_merge }}"
+{{ attributes }}>
+    {% block content %}{% endblock %}
+</nav>

@@ -5,12 +5,9 @@
         {% if value is not null %}
             <twig:Code:Snippet class="flex items-center gap-4 {{ itemClass }}">
                 <dt class="font-bold after:content-[':']">{{ label }}</dt>
-                <dd class="text-code font-normal m-0 ">
+                <dd class="text-code font-normal m-0 Wysiwyg">
                     {%- if value.href|default %}
-                        <a
-                            href="{{ value.href }}"
-                            class="link-underline-animation"
-                        >{{ value.title }}</a>
+                        <a href="{{ value.href }}">{{ value.title }}</a>
                     {% else -%}
                         {{ value.title ?? value }}
                     {%- endif -%}

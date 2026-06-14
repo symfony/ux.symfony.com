@@ -442,6 +442,7 @@
 }
 
 @import "./components/_DemoContainer.css";
+@import "./components/_Icon.css";
 @import "./components/_ProductGrid.css";
 @import "./components/_Terminal.css";
 @import "./components/_Wysiwyg.css";
@@ -451,22 +452,3 @@
 @import "./utilities/_shadow.css";
 @import "./vendor/_highlight.css";
 @import "./vendor/_tom-select.css";
-
-@utility link-underline-animation {
-    position: relative;
-
-    &::before {
-        content: "";
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        height: 2px;
-        background-color: currentColor;
-        transition: width 0.3s;
-        width: 0%;
-    }
-
-    &:hover::before {
-        width: 100%;
-    }
-}

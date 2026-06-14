@@ -15,7 +15,7 @@
                             data-action="mouseenter->tooltip#show mouseleave->tooltip#hide focus->tooltip#show blur->tooltip#hide"
                             class="inline-flex flex-row items-center gap-2"
                         >{{ _label }}</span>
-                        {# block (not the recipe's inline-flex): descriptions are prose, not a label+icon #}
+                        {# block (not the recipe's inline-flex/gap-1.5): a description is multi-node prose (text + <code> + …), so its parts would otherwise be flex items spaced by the gap #}
                         <twig:Tooltip:Content side="right" class="block whitespace-normal">{{ file_info.description|raw }}</twig:Tooltip:Content>
                     </twig:Tooltip>
                 {% else %}

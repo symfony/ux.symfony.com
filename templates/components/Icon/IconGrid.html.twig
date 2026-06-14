@@ -20,8 +20,7 @@
                     <span class="absolute text-center text-xs font-mono opacity-25 leading-[1.1] hidden transition-opacity duration-150 ease-linear text-body-text inset-x-2 bottom-2 in-data-[icon-size=large]:block group-hover:opacity-75">{{ icon.name }}</span>
                 </button>
             </div>
-            {# block (not the recipe's inline-flex/gap-1.5): plain name, not a label+kbd #}
-            <twig:Tooltip:Content side="top" class="block in-data-[icon-size=large]:hidden">{{ icon }}</twig:Tooltip:Content>
+            <twig:Tooltip:Content side="top" class="in-data-[icon-size=large]:hidden">{{ icon }}</twig:Tooltip:Content>
         </twig:Tooltip>
 
     {% endfor %}

@@ -42,13 +42,10 @@ the new `Category` to the database and then does two important things:
    `NewProductForm.php`).
 1. Dispatches a browser event called `modal:close` to close the dialog (the
    `Dialog` component listens for it with `modal:close->dialog#close`).
-    </twig:Code:CodeWithExplanationRow>
 
-    <twig:Code:TabbedCodeBlocks :files="[
-        'templates/components/Dialog.html.twig',
-        'templates/components/Dialog/Content.html.twig',
-        'assets/controllers/dialog_controller.js',
-    ]" />
+> [!NOTE]
+> This modal uses the UX Toolkit [Dialog recipe (Shadcn UI)](https://ux.symfony.com/toolkit/kits/shadcn/components/dialog), adapted to the site's Tailwind tokens.
+    </twig:Code:CodeWithExplanationRow>
 {% endblock %}
 
 {% block code_block_left %}

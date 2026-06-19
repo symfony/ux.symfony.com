@@ -1,63 +1,65 @@
 {% extends 'toolkit/docs/_base_component.md.twig' %}
 
 {% block demo %}
-{{ toolkit_code_demo(kit_id.value, component.name, {height: '900px'}) }}
-{% endblock %}
-
-{% block usage %}
-{{ toolkit_code_usage(kit_id.value, component.name) }}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '1600px'}) }}
 {% endblock %}
 
 {% block examples %}
-### H1
+### h1
 
-{{ toolkit_code_example(kit_id.value, component.name, 'H1', {height: '100px'}) }}
+{{ toolkit_code_example(kit_id.value, component.name, 'h1', {height: '200px'}) }}
 
-### H2
+### h2
 
-{{ toolkit_code_example(kit_id.value, component.name, 'H2', {height: '100px'}) }}
+{{ toolkit_code_example(kit_id.value, component.name, 'h2', {height: '200px'}) }}
 
-### H3
+### h3
 
-{{ toolkit_code_example(kit_id.value, component.name, 'H3', {height: '100px'}) }}
+{{ toolkit_code_example(kit_id.value, component.name, 'h3', {height: '200px'}) }}
 
-### H4
+### h4
 
-{{ toolkit_code_example(kit_id.value, component.name, 'H4', {height: '100px'}) }}
+{{ toolkit_code_example(kit_id.value, component.name, 'h4', {height: '200px'}) }}
 
-### Paragraph
+### p
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Paragraph', {height: '100px'}) }}
+{{ toolkit_code_example(kit_id.value, component.name, 'p', {height: '200px'}) }}
 
-### Blockquote
+### blockquote
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Blockquote', {height: '100px'}) }}
+{{ toolkit_code_example(kit_id.value, component.name, 'blockquote', {height: '200px'}) }}
 
-### Table
+### table
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Table', {height: '250px'}) }}
+{{ toolkit_code_example(kit_id.value, component.name, 'table', {height: '250px'}) }}
 
-### List
+### list
 
-{{ toolkit_code_example(kit_id.value, component.name, 'List', {height: '200px'}) }}
+{{ toolkit_code_example(kit_id.value, component.name, 'list', {height: '200px'}) }}
 
 ### Inline Code
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Inline Code', {height: '80px'}) }}
+{{ toolkit_code_example(kit_id.value, component.name, 'Inline Code', {height: '200px'}) }}
 
 ### Lead
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Lead', {height: '80px'}) }}
+{{ toolkit_code_example(kit_id.value, component.name, 'Lead', {height: '200px'}) }}
 
 ### Large
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Large', {height: '80px'}) }}
+{{ toolkit_code_example(kit_id.value, component.name, 'Large', {height: '200px'}) }}
 
 ### Small
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Small', {height: '80px'}) }}
+{{ toolkit_code_example(kit_id.value, component.name, 'Small', {height: '200px'}) }}
 
 ### Muted
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Muted', {height: '80px'}) }}
+{{ toolkit_code_example(kit_id.value, component.name, 'Muted', {height: '200px'}) }}
+
+### RTL
+
+To enable RTL support, set the `dir="rtl"` attribute on the root element.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'RTL', {height: '1600px'}) }}
 {% endblock %}

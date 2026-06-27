@@ -21,6 +21,7 @@ use Symfony\UX\Editor\Form\EditorType;
 use Symfony\UX\Editor\Live\LiveEditor;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
+use Symfony\UX\LiveComponent\Attribute\LiveArg;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 
@@ -82,5 +83,18 @@ final class LiveEditorDemo
     public function toggleReadOnly(): void
     {
         $this->readOnly = !$this->readOnly;
+    }
+
+    /**
+     * Autosave entry point invoked from the editor-autosave Stimulus controller,
+     * which debounces the editor's `ux:editor:change` events. Persists the draft
+     * (via the LiveEditor trait) and keeps the bodyDraft prop in sync so the form
+     * re-renders with the saved content.
+     */
+    #[LiveAction]
+    public function autosave(#[LiveArg] string $field, #[LiveArg] string $content): void
+    {
+        $this->bodyDraft = $content;
+        $this->saveDraft($field, $content);
     }
 }

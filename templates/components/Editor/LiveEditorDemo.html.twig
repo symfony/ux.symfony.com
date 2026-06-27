@@ -1,4 +1,4 @@
-<div {{ attributes }} class="live-editor-demo">
+<div {{ attributes.defaults(stimulus_controller('editor-autosave', { field: 'bodyDraft' })) }} class="live-editor-demo">
     <label class="flex items-center gap-2 mb-4">
         <input type="checkbox" data-test-id="toggle-readonly"
                {{ this.readOnly ? 'checked' : '' }}
@@ -6,7 +6,7 @@
         Read-only
     </label>
 
-    <form data-live-ignore-form>
+    <form>
         {# Editor field rendered via the component's pre-built form view #}
         {{ form_widget(this.editorFormWidget) }}
     </form>

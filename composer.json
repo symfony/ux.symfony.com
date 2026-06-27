@@ -3,6 +3,12 @@
     "license": "proprietary",
     "type": "project",
     "homepage": "https://ux.symfony.com",
+    "repositories": [
+        {"type": "path", "url": "../src/Editor", "options": {"symlink": true}},
+        {"type": "path", "url": "../src/Editor/src/Bridge/EditorJS", "options": {"symlink": true}},
+        {"type": "path", "url": "../src/Editor/src/Bridge/CKEditor", "options": {"symlink": true}},
+        {"type": "path", "url": "../src/Editor/src/Bridge/GrapesJS", "options": {"symlink": true}}
+    ],
     "require": {
         "php": "~8.5.0",
         "ext-ctype": "*",
@@ -38,6 +44,10 @@
         "symfony/ux-chartjs": "3.x-dev",
         "symfony/ux-cropperjs": "3.x-dev",
         "symfony/ux-dropzone": "3.x-dev",
+        "symfony/ux-editor": "@dev",
+        "symfony/ux-editor-ckeditor": "@dev",
+        "symfony/ux-editor-editorjs": "@dev",
+        "symfony/ux-editor-grapesjs": "@dev",
         "symfony/ux-icons": "3.x-dev",
         "symfony/ux-leaflet-map": "3.x-dev",
         "symfony/ux-live-component": "3.x-dev",

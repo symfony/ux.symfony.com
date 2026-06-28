@@ -1,0 +1,32 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '550px'}) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block examples %}
+### With Default Value
+{{ toolkit_code_example(kit_id.value, component.name, 'With Default Value', {height: '550px'}) }}
+
+### With Form
+{{ toolkit_code_example(kit_id.value, component.name, 'With Form', {height: '550px'}) }}
+
+### Disabled
+{{ toolkit_code_example(kit_id.value, component.name, 'Disabled') }}
+
+### Clearable
+{{ toolkit_code_example(kit_id.value, component.name, 'Clearable', {height: '550px'}) }}
+
+### With Groups
+{{ toolkit_code_example(kit_id.value, component.name, 'With Groups', {height: '600px'}) }}
+
+### Empty State
+{{ toolkit_code_example(kit_id.value, component.name, 'Empty State', {height: '550px'}) }}
+
+### Long List
+{{ toolkit_code_example(kit_id.value, component.name, 'Long List', {height: '550px'}) }}
+{% endblock %}

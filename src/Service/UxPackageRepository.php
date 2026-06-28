@@ -30,6 +30,7 @@ class UxPackageRepository
                 'Rich-text editing made easy',
                 'Drop-in editor field types for Symfony forms: EditorJS, CKEditor 5 or GrapesJS.',
                 'I need a rich-text editor in my form.',
+                'editor.svg',
             ),
 
             new UxPackage(

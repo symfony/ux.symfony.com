@@ -655,7 +655,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         uuid47_secret?: scalar|Param|null, // A high-entropy secret used by the "uuid47_transformer" service. Defaults to "kernel.secret". // Default: null
  *     },
  *     html_sanitizer?: bool|array{ // HtmlSanitizer configuration
- *         enabled?: bool|Param, // Default: true
+ *         enabled?: bool|Param, // Default: false
  *         sanitizers?: array<string, array{ // Default: []
  *             default_action?: "drop"|"block"|"allow"|Param, // Defines how the sanitizer must behave by default.
  *             allow_safe_elements?: bool|Param, // Allows "safe" elements and attributes. // Default: false
@@ -1306,15 +1306,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  * @psalm-type UxNativeConfig = array{
  *     output_dir?: scalar|Param|null, // Directory where configuration JSON files are written. Defaults to %kernel.project_dir%/public. // Default: null
  * }
- * @psalm-type UxEditorConfig = array{
- *     html?: array{
- *         sanitize_required?: bool|Param, // Default: true
- *     },
- *     upload?: array{
- *         default_profile?: scalar|null|Param, // Default: "default"
- *         ttl_seconds?: int|Param, // Default: 3600
- *     },
- * }
  * @psalm-type ConfigType = array{
  *     imports?: ImportsConfig,
  *     parameters?: ParametersConfig,
@@ -1339,7 +1330,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     tales_from_a_dev_twig_extra_tailwind?: TalesFromADevTwigExtraTailwindConfig,
  *     symfonycasts_tailwind?: SymfonycastsTailwindConfig,
  *     ux_native?: UxNativeConfig,
- *     ux_editor?: UxEditorConfig,
  *     "when@dev"?: array{
  *         imports?: ImportsConfig,
  *         parameters?: ParametersConfig,
@@ -1368,7 +1358,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         tales_from_a_dev_twig_extra_tailwind?: TalesFromADevTwigExtraTailwindConfig,
  *         symfonycasts_tailwind?: SymfonycastsTailwindConfig,
  *         ux_native?: UxNativeConfig,
- *         ux_editor?: UxEditorConfig,
  *     },
  *     "when@prod"?: array{
  *         imports?: ImportsConfig,
@@ -1394,7 +1383,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         tales_from_a_dev_twig_extra_tailwind?: TalesFromADevTwigExtraTailwindConfig,
  *         symfonycasts_tailwind?: SymfonycastsTailwindConfig,
  *         ux_native?: UxNativeConfig,
- *         ux_editor?: UxEditorConfig,
  *     },
  *     "when@test"?: array{
  *         imports?: ImportsConfig,
@@ -1422,7 +1410,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         tales_from_a_dev_twig_extra_tailwind?: TalesFromADevTwigExtraTailwindConfig,
  *         symfonycasts_tailwind?: SymfonycastsTailwindConfig,
  *         ux_native?: UxNativeConfig,
- *         ux_editor?: UxEditorConfig,
  *     },
  *     ...<string, ExtensionType|array{ // extra keys must follow the when@%env% pattern or match an extension alias
  *         imports?: ImportsConfig,

@@ -1,0 +1,26 @@
+{% extends 'editor/_layout.html.twig' %}
+
+{% set pageTitle = 'Block demo — EditorJS' %}
+
+{% block editor_body %}
+    {{ form_start(form) }}
+        {{ form_row(form.title) }}
+        <div data-test-id="editorjs-canvas">
+            {{ form_row(form.body) }}
+        </div>
+        {{ form_row(form.save) }}
+    {{ form_end(form) }}
+
+    {{ include('editor/_demos_grid.html.twig') }}
+
+    <script type="module">
+        document.addEventListener('ux:editor:connect', (e) => {
+            if (e.detail?.bridgeId === 'editorjs') {
+                const el = document.createElement('span');
+                el.dataset.testId = 'editor-state';
+                el.textContent = 'connected';
+                document.body.append(el);
+            }
+        });
+    </script>
+{% endblock %}

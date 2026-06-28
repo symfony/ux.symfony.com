@@ -81,6 +81,33 @@
                 "enabled": true,
                 "fetch": "lazy"
             }
+        },
+        "@symfony/ux-editor-ckeditor": {
+            "ckeditor": {
+                "main": "dist/controller.js",
+                "fetch": "lazy",
+                "enabled": true,
+                "name": "symfony--ux-editor--ckeditor"
+            }
+        },
+        "@symfony/ux-editor-editorjs": {
+            "editorjs": {
+                "main": "dist/controller.js",
+                "fetch": "lazy",
+                "enabled": true,
+                "name": "symfony--ux-editor--editorjs"
+            }
+        },
+        "@symfony/ux-editor-grapesjs": {
+            "grapesjs": {
+                "main": "dist/controller.js",
+                "fetch": "lazy",
+                "enabled": true,
+                "name": "symfony--ux-editor--grapesjs",
+                "autoimport": {
+                    "grapesjs/dist/css/grapes.min.css": true
+                }
+            }
         }
     },
     "entrypoints": []

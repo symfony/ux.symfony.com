@@ -22,6 +22,18 @@ class UxPackageRepository
     {
         $packages = [
             new UxPackage(
+                'editor',
+                'UX Editor',
+                'app_editor',
+                '#7c3aed',
+                'linear-gradient(135deg, #4f46e5 0%, #7c3aed 60%, #a855f7 100%)',
+                'Rich-text editing made easy',
+                'Drop-in editor field types for Symfony forms: EditorJS, CKEditor 5 or GrapesJS.',
+                'I need a rich-text editor in my form.',
+                'editor.svg',
+            ),
+
+            new UxPackage(
                 'icons',
                 'Icons',
                 'app_icons',

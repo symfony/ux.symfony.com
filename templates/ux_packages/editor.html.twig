@@ -1,0 +1,53 @@
+{% extends 'ux_packages/package.html.twig' %}
+
+{% block package_header %}
+    {% component PackageHeader with {
+        package: 'editor',
+        eyebrowText: 'Rich-Text Editing',
+    } %}
+        {% block title_header %}
+            Rich-text editors for Symfony
+        {% endblock %}
+
+        {% block sub_content %}
+            Drop-in editor field types for your Symfony forms, backed by
+            <strong>EditorJS</strong>, <strong>CKEditor 5</strong> or <strong>GrapesJS</strong>.
+        {% endblock %}
+    {% endcomponent %}
+{% endblock %}
+
+{% block code_block_left %}
+<twig:Terminal>
+composer require symfony/ux-editor-ckeditor
+</twig:Terminal>
+{% endblock %}
+
+{% block code_block_right %}
+<twig:Terminal>
+# or pick your bridge
+composer require symfony/ux-editor-editorjs
+composer require symfony/ux-editor-grapesjs
+</twig:Terminal>
+{% endblock %}
+
+{% block demo_title %}
+    UX Editor
+{% endblock %}
+
+{% block demo_content %}
+    <div class="d-flex eyebrows pt-4 gap-2 align-items-center justify-content-center flex-wrap">
+        <div>One Symfony <em>form type</em></div>
+        <twig:ux:icon name="circle-fill" />
+        <div>Multiple <em>editor bridges</em></div>
+        <twig:ux:icon name="circle-fill" />
+        <div>Sanitized, autosaved &amp; <em>Live</em>-ready</div>
+    </div>
+{% endblock %}
+
+{% block documentation_links %}{% endblock %}
+
+{% block package_links %}
+    {{ include('editor/_demos_grid.html.twig') }}
+
+    {{ parent() }}
+{% endblock %}

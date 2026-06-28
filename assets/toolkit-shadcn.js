@@ -11,6 +11,7 @@ import Tooltip from '@symfony/ux-toolkit/kits/shadcn/tooltip/assets/controllers/
 import Toggle from '@symfony/ux-toolkit/kits/shadcn/toggle/assets/controllers/toggle_controller.js';
 import ToggleGroup from '@symfony/ux-toolkit/kits/shadcn/toggle-group/assets/controllers/toggle_group_controller.js';
 import Combobox from '@symfony/ux-toolkit/kits/shadcn/combobox/assets/controllers/combobox_controller.js';
+import Sonner from '@symfony/ux-toolkit/kits/shadcn/sonner/assets/controllers/sonner_controller.js';
 
 const app = startStimulusApp();
 app.register('accordion', Accordion);
@@ -24,3 +25,4 @@ app.register('tooltip', Tooltip);
 app.register('toggle', Toggle);
 app.register('toggle-group', ToggleGroup);
 app.register('combobox', Combobox);
+app.register('sonner', Sonner);

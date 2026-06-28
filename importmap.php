@@ -202,6 +202,9 @@ return [
     '@symfony/ux-toolkit/kits/shadcn/combobox/assets/controllers/combobox_controller.js' => [
         'path' => './vendor/symfony/ux-toolkit/kits/shadcn/combobox/assets/controllers/combobox_controller.js',
     ],
+    '@symfony/ux-toolkit/kits/shadcn/sonner/assets/controllers/sonner_controller.js' => [
+        'path' => './vendor/symfony/ux-toolkit/kits/shadcn/sonner/assets/controllers/sonner_controller.js',
+    ],
     '@symfony/ux-toolkit/kits/flowbite-4/alert/assets/controllers/alert_controller.js' => [
         'path' => './vendor/symfony/ux-toolkit/kits/flowbite-4/alert/assets/controllers/alert_controller.js',
     ],

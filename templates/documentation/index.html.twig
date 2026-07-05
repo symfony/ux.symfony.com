@@ -16,14 +16,20 @@
             {{ package.humanName }}
         </twig:block>
         <twig:block name="description">
-            <a href="{{ package.officialDocsUrl }}"
-               class="stretched-link inline-flex items-center gap-1 text-body-text no-underline"
-               rel="external noopener noreferrer"
-               title="{{ package.humanName }} documentation on symfony.com"
-            >
-                <twig:ux:icon name="lucide:book" />
-                Read Docs
-            </a>
+            {% if package.shouldShowDocsLink %}
+                <a href="{{ package.officialDocsUrl }}"
+                class="stretched-link inline-flex items-center gap-1 text-body-text no-underline"
+                rel="external noopener noreferrer"
+                title="{{ package.humanName }} documentation on symfony.com"
+                >
+                    <twig:ux:icon name="lucide:book" />
+                    Read Docs
+                </a>
+            {% else %}
+                <span class="text-body-text italic">
+                    No documentation
+                </span>
+            {% endif %}
         </twig:block>
     </twig:Box>
 {% endmacro %}

@@ -13,6 +13,7 @@ namespace App\Service\CommonMark;
 
 use App\Service\CommonMark\Extension\Alert\AlertExtension;
 use App\Service\CommonMark\Extension\FencedCode\FencedCodeRenderer;
+use App\Service\CommonMark\Extension\Popover\PopoverExtension;
 use App\Service\CommonMark\Extension\Tabs\TabsExtension;
 use App\Service\CommonMark\Extension\ToolkitPreview\ToolkitPreviewExtension;
 use League\CommonMark\CommonMarkConverter;
@@ -82,6 +83,7 @@ final class ConverterFactory
             ->addExtension(new HeadingPermalinkExtension())
             ->addExtension(new TabsExtension($this->twig))
             ->addExtension(new AlertExtension($this->twig))
+            ->addExtension(new PopoverExtension($this->twig))
             ->addExtension(new ToolkitPreviewExtension($this->uriSigner, $this->urlGenerator, $this->twig))
             ->addRenderer(FencedCode::class, new FencedCodeRenderer($this->componentRenderer))
         ;

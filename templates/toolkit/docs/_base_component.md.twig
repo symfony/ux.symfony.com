@@ -105,10 +105,10 @@ Happy coding!
 ### `{{ '<' }}twig:{{ component_name }}{{ '>' }}`
 
 {% if component_api_reference.props is not empty %}
-| Prop   | Type  | Description  |
-|:-------|:------|:-------------|
+| Prop   | Type  | Default  | Description  |
+|:-------|:------|:---------|:-------------|
 {% for prop in component_api_reference.props %}
-| `{{ prop.name }}` | `{{ prop.type|replace({'|': '\\|'})|raw }}` | {{ prop.description }} |
+| `{{ prop.name }}` | `{{ prop.type|replace({'|': '\\|'})|raw }}` | {{ (prop.default is not null ? '`' ~ prop.default|replace({'|': '\\|'}) ~ '`' : '-')|raw }} | {{ prop.description }} |
 {% endfor %}
 {{ ' ' }}
 {% endif %}

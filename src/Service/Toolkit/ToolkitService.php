@@ -19,6 +19,8 @@ use League\CommonMark\Parser\MarkdownParser;
 use League\CommonMark\Renderer\HtmlRenderer;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Filesystem\Path;
+use Symfony\UX\Toolkit\Component\ComponentDoc;
+use Symfony\UX\Toolkit\Component\ComponentDocParser;
 use Symfony\UX\Toolkit\Installer\Pool;
 use Symfony\UX\Toolkit\Installer\PoolResolver;
 use Symfony\UX\Toolkit\Kit\Kit;
@@ -33,21 +35,13 @@ class ToolkitService
     /** @var array<value-of<ToolkitKitId>, Kit> */
     private array $kits = [];
 
-    /**
-     * @see https://regex101.com/r/3JXNX7/1
-     */
-    private const RE_API_PROPS = '/{#\s+@prop\s+(?P<name>\w+)\s+(?P<type>[^\s]+)\s+(?P<description>.+?)\s+#}/s';
-
-    /**
-     * @see https://regex101.com/r/jYjXpq/1
-     */
-    private const RE_API_BLOCKS = '/{#\s+@block\s+(?P<name>\w+)\s+(?P<description>.+?)\s+#}/s';
-
     public function __construct(
-        #[Autowire(service: 'ux_toolkit.registry.registry_factory')]
-        private RegistryFactory $registryFactory,
         private Environment $twig,
         private ConverterFactory $converterFactory,
+        #[Autowire(service: 'ux_toolkit.registry.registry_factory')]
+        private RegistryFactory $registryFactory,
+        #[Autowire(service: 'ux_toolkit.component.component_doc_parser')]
+        private ComponentDocParser $componentDocParser,
     ) {
     }
 
@@ -138,47 +132,35 @@ class ToolkitService
     }
 
     /**
-     * @return array<string, array{props: list<array{name: string, type: string, description: string}>, blocks: list<array{name: string, description: string}>}>
+     * @return array<string, ComponentDoc>
      */
     public function extractRecipeApiReference(Recipe $recipe): array
     {
         $apiReference = [];
 
         foreach ($recipe->getFiles() as $file) {
+            if (!str_ends_with($file->sourceRelativePathName, '.html.twig')) {
+                continue;
+            }
+
             $filePath = Path::join($recipe->absolutePath, $file->sourceRelativePathName);
             if (!file_exists($filePath)) {
                 continue;
             }
 
-            $fileContent = s(file_get_contents($filePath));
+            $componentDoc = $this->componentDocParser->parse(file_get_contents($filePath));
 
-            // Twig files...
-            if (str_ends_with($file->sourceRelativePathName, '.html.twig')) {
-                $props = $fileContent->match(self::RE_API_PROPS, \PREG_SET_ORDER);
-                $blocks = $fileContent->match(self::RE_API_BLOCKS, \PREG_SET_ORDER);
-
-                if ([] === $props && [] === $blocks) {
-                    continue;
-                }
-
-                $componentName = s($file->sourceRelativePathName)
-                    ->replace('templates/components/', '')
-                    ->replace('.html.twig', '')
-                    ->replace('/', ':')
-                    ->toString();
-
-                $apiReference[$componentName] = [
-                    'props' => array_map(static fn (array $prop) => [
-                        'name' => $prop['name'],
-                        'type' => $prop['type'],
-                        'description' => trim(preg_replace('/\s+/', ' ', $prop['description'])),
-                    ], $props),
-                    'blocks' => array_map(static fn (array $block) => [
-                        'name' => $block['name'],
-                        'description' => trim(preg_replace('/\s+/', ' ', $block['description'])),
-                    ], $blocks),
-                ];
+            if ([] === $componentDoc->props && [] === $componentDoc->blocks) {
+                continue;
             }
+
+            $componentName = s($file->sourceRelativePathName)
+                ->replace('templates/components/', '')
+                ->replace('.html.twig', '')
+                ->replace('/', ':')
+                ->toString();
+
+            $apiReference[$componentName] = $componentDoc;
         }
 
         return $apiReference;

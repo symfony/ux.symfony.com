@@ -1,9 +1,9 @@
 {# twig-cs-fixer-disable FileName.Error #}
 {% if is_llm ?? false %}
 # {{ component.manifest.name }} ({{ kit.manifest.name }} kit)
-{% endif %}
 
-{{ component.manifest.description }}
+{% endif %}
+{{ component.manifest.description|trim }}
 
 {{ block('demo')|trim|raw }}
 
@@ -13,8 +13,8 @@
 {% if component.manifest.versionAdded is not null %}
 > [!NOTE]
 > Available since UX Toolkit {{ component.manifest.versionAdded }}.
-{% endif %}
 
+{% endif %}
 ```shell
 bin/console ux:install {{ component.name }} --kit {{ kit_id.value }}
 ```
@@ -76,35 +76,32 @@ Happy coding!
 
 :::
 {% endif %}
-
 {% if block('usage') is defined %}
+
 ## Usage
 
-{{ block('usage') }}
-
+{{ block('usage')|trim|raw }}
 {% endif %}
-
 {% if block('accessibility') is defined %}
+
 ## Accessibility
 
-{{ block('accessibility') }}
-
+{{ block('accessibility')|trim|raw }}
 {% endif %}
-
 {% if block('examples') is defined %}
+
 ## Examples
 
-{{ block('examples') }}
-
+{{ block('examples')|trim|raw }}
 {% endif %}
-
 {% if api_reference is not empty %}
+
 ## API Reference
-
 {% for component_name, component_api_reference in api_reference %}
-### `{{ '<' }}twig:{{ component_name }}{{ '>' }}`
 
+### `{{ '<' }}twig:{{ component_name }}{{ '>' }}`
 {% if component_api_reference.props is not empty %}
+
 {% if is_llm ?? false %}
 | Prop   | Type  | Default  | Description  |
 |:-------|:------|:---------|:-------------|
@@ -118,17 +115,14 @@ Happy coding!
 | `{{ prop.name }}`{% if prop.description %}&nbsp;(?)[{{ prop.description|raw }}]{% endif %} | `{{ prop.type|replace({'|': '\\|'})|raw }}` | {{ (prop.default is not null ? '`' ~ prop.default|replace({'|': '\\|'}) ~ '`' : '-')|raw }} |
 {% endfor %}
 {% endif %}
-{{ ' ' }}
 {% endif %}
-
 {% if component_api_reference.blocks is not empty %}
+
 | Block  | Description  |
 |:-------|:-------------|
 {% for block in component_api_reference.blocks %}
 | `{{ block.name }}` | {{ block.description|raw }} |
 {% endfor %}
 {% endif %}
-
 {% endfor %}
-
 {% endif %}

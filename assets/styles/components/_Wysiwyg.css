@@ -104,6 +104,14 @@
             margin-bottom: 0;
         }
 
+        [data-slot='tabs-content'] > :first-child {
+            margin-top: 0;
+        }
+
+        [data-slot='tabs-content'] > :last-child {
+            margin-bottom: 0;
+        }
+
         .Wysiwyg_Table {
             outline: 1px solid var(--color-border);
             border-radius: var(--radius-lg);

@@ -105,11 +105,19 @@ Happy coding!
 ### `{{ '<' }}twig:{{ component_name }}{{ '>' }}`
 
 {% if component_api_reference.props is not empty %}
+{% if is_llm ?? false %}
 | Prop   | Type  | Default  | Description  |
 |:-------|:------|:---------|:-------------|
 {% for prop in component_api_reference.props %}
 | `{{ prop.name }}` | `{{ prop.type|replace({'|': '\\|'})|raw }}` | {{ (prop.default is not null ? '`' ~ prop.default|replace({'|': '\\|'}) ~ '`' : '-')|raw }} | {{ prop.description }} |
 {% endfor %}
+{% else %}
+| Prop   | Type  | Default  |
+|:-------|:------|:---------|
+{% for prop in component_api_reference.props %}
+| `{{ prop.name }}`{% if prop.description %}&nbsp;(?)[{{ prop.description|raw }}]{% endif %} | `{{ prop.type|replace({'|': '\\|'})|raw }}` | {{ (prop.default is not null ? '`' ~ prop.default|replace({'|': '\\|'}) ~ '`' : '-')|raw }} |
+{% endfor %}
+{% endif %}
 {{ ' ' }}
 {% endif %}
 
@@ -117,7 +125,7 @@ Happy coding!
 | Block  | Description  |
 |:-------|:-------------|
 {% for block in component_api_reference.blocks %}
-| `{{ block.name }}` | {{ block.description }} |
+| `{{ block.name }}` | {{ block.description|raw }} |
 {% endfor %}
 {% endif %}
 

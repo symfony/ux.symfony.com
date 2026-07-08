@@ -20,12 +20,14 @@ namespace App\Enum;
  */
 enum ToolkitKitId: string
 {
+    case Common = 'common';
     case Shadcn = 'shadcn';
     case Flowbite4 = 'flowbite-4';
 
     public function color(): string
     {
         return match ($this) {
+            self::Common => '#7c3aed',
             self::Shadcn => 'hsl(0,0%,0%)',
             self::Flowbite4 => 'hsl(221,79%,48%)',
         };

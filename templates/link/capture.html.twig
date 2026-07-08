@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Link captured</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        const theme = localStorage.getItem('user-theme');
+        if (theme) {
+            document.documentElement.classList.add(theme);
+        }
+    </script>
+    <style>
+        :root { color-scheme: light dark; --bg: #fff; --fg: #1c1c1c; --muted: #6b7280; --border: #e5e7eb; --card: #f9fafb; --accent: #7c3aed; }
+        html.dark { --bg: #0f172a; --fg: #e2e8f0; --muted: #94a3b8; --border: #1e293b; --card: #1e293b; --accent: #a78bfa; }
+        * { box-sizing: border-box; }
+        body { margin: 0; padding: .75rem; font: 14px/1.5 ui-sans-serif, system-ui, sans-serif; background: var(--bg); color: var(--fg); }
+        h1 { font-size: 1.1rem; margin: 0 0 .6rem; display: flex; align-items: center; gap: .5rem; }
+        h2 { font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin: 1rem 0 .35rem; }
+        table { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+        th, td { text-align: left; padding: .35rem .6rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+        tr:last-child th, tr:last-child td { border-bottom: 0; }
+        th { width: 12rem; font-weight: 600; color: var(--muted); white-space: nowrap; }
+        code { font-family: ui-monospace, monospace; }
+        .method { display: inline-block; padding: .1rem .5rem; border-radius: 6px; background: var(--accent); color: #fff; font-weight: 700; font-family: ui-monospace, monospace; }
+        .empty { color: var(--muted); font-style: italic; }
+        .back { display: inline-flex; align-items: center; gap: .35rem; margin-bottom: .75rem; color: var(--accent); text-decoration: none; font-weight: 600; }
+        .back:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <a class="back" href="#" onclick="history.back(); return false;">&larr; Back</a>
+    <h1>🔗 Link captured</h1>
+    <table>
+        <tr><th>Request path</th><td><code>/{{ path }}</code></td></tr>
+        <tr><th>HTTP method</th><td><span class="method">{{ method }}</span></td></tr>
+        {% if spoofed_method %}
+            <tr><th>Spoofed method <code>_method</code></th><td><span class="method">{{ spoofed_method|upper }}</span> <span class="empty">(needs <code>http_method_override</code> to take effect)</span></td></tr>
+        {% endif %}
+        {% if csrf_token %}
+            <tr><th>CSRF token <code>_csrf_token</code></th><td><code>{{ csrf_token }}</code></td></tr>
+        {% endif %}
+    </table>
+
+    {% if body is not empty %}
+        <h2>Body parameters</h2>
+        <table>
+            {% for key, value in body %}
+                <tr><th><code>{{ key }}</code></th><td><code>{{ value is iterable ? value|json_encode : value }}</code></td></tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    {% if query is not empty %}
+        <h2>Query parameters</h2>
+        <table>
+            {% for key, value in query %}
+                <tr><th><code>{{ key }}</code></th><td><code>{{ value is iterable ? value|json_encode : value }}</code></td></tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+</body>
+</html>

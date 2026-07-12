@@ -63,9 +63,6 @@ return [
     '@hotwired/stimulus' => [
         'version' => '3.2.2',
     ],
-    'tom-select' => [
-        'version' => '2.3.1',
-    ],
     'react' => [
         'version' => '18.3.1',
     ],
@@ -142,10 +139,6 @@ return [
     '@formatjs/fast-memoize' => [
         'version' => '2.2.0',
     ],
-    'tom-select/dist/css/tom-select.bootstrap5.css' => [
-        'version' => '2.3.1',
-        'type' => 'css',
-    ],
     'cropperjs/dist/cropper.min.css' => [
         'version' => '1.6.2',
         'type' => 'css',
@@ -216,14 +209,6 @@ return [
     'el-transition' => [
         'version' => '0.0.7',
     ],
-    'tom-select/dist/css/tom-select.default.css' => [
-        'version' => '2.4.3',
-        'type' => 'css',
-    ],
-    'tom-select/dist/css/tom-select.bootstrap4.css' => [
-        'version' => '2.4.3',
-        'type' => 'css',
-    ],
     'react-dom/client' => [
         'version' => '18.3.1',
     ],
@@ -239,5 +224,26 @@ return [
     ],
     '@hotwired/hotwire-native-bridge' => [
         'version' => '1.2.2',
+    ],
+    'tom-select' => [
+        'version' => '2.6.2',
+    ],
+    'tom-select/dist/css/tom-select.bootstrap5.css' => [
+        'version' => '2.6.2',
+        'type' => 'css',
+    ],
+    'tom-select/dist/css/tom-select.default.css' => [
+        'version' => '2.6.2',
+        'type' => 'css',
+    ],
+    'tom-select/dist/css/tom-select.bootstrap4.css' => [
+        'version' => '2.6.2',
+        'type' => 'css',
+    ],
+    '@orchidjs/sifter' => [
+        'version' => '1.1.0',
+    ],
+    '@orchidjs/unicode-variants' => [
+        'version' => '1.1.2',
     ],
 ];

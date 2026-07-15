@@ -1,7 +1,7 @@
 {% extends 'toolkit/docs/_base_component.md.twig' %}
 
 {% block demo %}
-{{ toolkit_code_demo(kit_id.value, component.name, {height: '190px'}) }}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '190px', collapseClass: true}) }}
 {% endblock %}
 
 {% block usage %}
@@ -16,17 +16,17 @@ Set the `method` prop to submit the form with a spoofed HTTP method. A hidden `_
 > [!WARNING]
 > Method spoofing only works when HTTP method override is enabled in your Symfony app. Set `framework.http_method_override: true` in `config/packages/framework.yaml`.
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Custom Method', {height: '300px'}) }}
+{{ toolkit_code_example(kit_id.value, component.name, 'Custom Method', {height: '300px', collapseClass: true}) }}
 
 ### With Confirmation
 
 Pass a `confirm` message to prompt the user with a native confirmation dialog before the form is submitted.
 
-{{ toolkit_code_example(kit_id.value, component.name, 'With Confirmation', {height: '190px'}) }}
+{{ toolkit_code_example(kit_id.value, component.name, 'With Confirmation', {height: '190px', collapseClass: true}) }}
 
 ### With CSRF Protection
 
 Set `csrfTokenId` to add a hidden CSRF token field, protecting the form against cross-site request forgery.
 
-{{ toolkit_code_example(kit_id.value, component.name, 'With CSRF Protection', {height: '300px'}) }}
+{{ toolkit_code_example(kit_id.value, component.name, 'With CSRF Protection', {height: '300px', collapseClass: true}) }}
 {% endblock %}

@@ -41,7 +41,7 @@
         {% endif %}
         <div class="Terminal_content">
             <pre><code class="language-{{ language }}">
-                {{- code|highlight(language) -}}
+                {{- code|highlight(language, collapse_classes: collapseClass) -}}
             </code></pre>
         </div>
     </div>

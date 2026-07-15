@@ -1,7 +1,7 @@
 {% extends 'toolkit/docs/_base_component.md.twig' %}
 
 {% block demo %}
-{{ toolkit_code_demo(kit_id.value, component.name, {height: '300px'}) }}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '300px', collapseClass: true}) }}
 {% endblock %}
 
 {% block usage %}
@@ -38,5 +38,5 @@ security:
 
 Set the `firewall` prop to log out from a specific firewall instead of the current one.
 
-{{ toolkit_code_example(kit_id.value, component.name, 'Specific Firewall', {height: '300px'}) }}
+{{ toolkit_code_example(kit_id.value, component.name, 'Specific Firewall', {height: '300px', collapseClass: true}) }}
 {% endblock %}

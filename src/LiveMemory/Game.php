@@ -186,11 +186,6 @@ class Game
         return $this->cards[$key];
     }
 
-    public function geTimeLimit(): ?int
-    {
-        return $this->timeLimit;
-    }
-
     public function isStarted(): bool
     {
         return null !== $this->startedAt;
@@ -214,6 +209,11 @@ class Game
     public function setScore(int $score): void
     {
         $this->score = $score;
+    }
+
+    public function getTimeBonus(): int
+    {
+        return $this->timeBonus
     }
     
     public function setTimeBonus(int $timeBonus): void

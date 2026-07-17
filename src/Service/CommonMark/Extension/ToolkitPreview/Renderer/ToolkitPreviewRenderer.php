@@ -36,10 +36,15 @@ final class ToolkitPreviewRenderer implements NodeRendererInterface
         $options = $node->getOptions();
         $height = $options['height'] ?? '200px';
 
+        $params = ['kitId' => $node->getKitId()->value, 'code' => $node->getLiteral(), 'height' => $height];
+        if (null !== $node->getRecipeName()) {
+            $params['recipe'] = $node->getRecipeName();
+        }
+
         $previewUrl = $this->uriSigner->sign(
             $this->urlGenerator->generate(
                 'app_toolkit_component_preview',
-                ['kitId' => $node->getKitId()->value, 'code' => $node->getLiteral(), 'height' => $height],
+                $params,
                 UrlGeneratorInterface::ABSOLUTE_URL
             )
         );

@@ -47,10 +47,31 @@ class ComponentsController extends AbstractController
         return $this->render('toolkit/component.html.twig', [
             'package' => $package,
             'components' => $kit->getRecipes(RecipeType::Component),
+            'blocks' => $kit->getRecipes(RecipeType::Block),
             'kit' => $kit,
             'kit_id' => $kitId,
             'component' => $component,
             'toc_items' => $this->toolkitService->getRecipeTocItems($kitId, $component),
+        ]);
+    }
+
+    #[Route('/toolkit/kits/{kitId}/blocks/{blockName}', name: 'app_toolkit_block')]
+    public function showBlock(ToolkitKitId $kitId, string $blockName): Response
+    {
+        $kit = $this->toolkitService->getKit($kitId);
+        if (null === $block = $kit->getRecipe($blockName, type: RecipeType::Block)) {
+            throw $this->createNotFoundException(\sprintf('Block "%s" not found', $blockName));
+        }
+
+        $package = $this->uxPackageRepository->find('toolkit');
+
+        return $this->render('toolkit/block.html.twig', [
+            'package' => $package,
+            'components' => $kit->getRecipes(RecipeType::Component),
+            'blocks' => $kit->getRecipes(RecipeType::Block),
+            'kit' => $kit,
+            'kit_id' => $kitId,
+            'block_recipe' => $block,
         ]);
     }
 
@@ -60,20 +81,26 @@ class ComponentsController extends AbstractController
         #[MapQueryParameter] ToolkitKitId $kitId,
         #[MapQueryParameter] string $code,
         #[MapQueryParameter] string $height,
+        #[MapQueryParameter] ?string $recipe,
         UriSigner $uriSigner,
         \Twig\Environment $twig,
         #[Autowire(service: 'ux_toolkit.kit.kit_context_runner')]
         KitContextRunner $kitContextRunner,
-        //#[Autowire(service: 'profiler')]
-        //?Profiler $profiler,
+        // #[Autowire(service: 'profiler')]
+        // ?Profiler $profiler,
     ): Response {
         if (!$uriSigner->checkRequest($request)) {
             throw new BadRequestHttpException('Request is invalid.');
         }
 
-        //$profiler?->disable();
+        // $profiler?->disable();
 
         $kit = $this->toolkitService->getKit($kitId);
+
+        $isBlock = null !== $recipe && null !== ($r = $kit->getRecipe($recipe)) && RecipeType::Block === $r->manifest->type;
+        $bodyClass = $isBlock
+            ? 'w-full justify-center items-center text-neutral-800 dark:text-neutral-300'
+            : "flex min-h-[{$height}] w-full justify-center p-5 items-center text-neutral-800 dark:text-neutral-300";
 
         $template = $twig->createTemplate(<<<HTML
             <html lang="en">
@@ -95,12 +122,14 @@ class ComponentsController extends AbstractController
                     </script>
                     {{ importmap('toolkit-{$kitId->value}') }}
                 </head>
-                <body class="flex min-h-[{$height}] w-full justify-center p-5 items-center text-neutral-800 dark:text-neutral-300">{$code}</body>
+                <body class="{$bodyClass}">{$code}</body>
             </html>
             HTML);
 
+        $prioritizedRecipe = null !== $recipe ? $kit->getRecipe($recipe) : null;
+
         return new Response(
-            $kitContextRunner->runForKit($kit, static fn () => $twig->render($template)),
+            $kitContextRunner->runForKit($kit, static fn () => $twig->render($template), $prioritizedRecipe),
             Response::HTTP_OK,
             ['X-Robots-Tag' => 'noindex, nofollow']
         );

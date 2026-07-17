@@ -145,6 +145,7 @@
         "tailwind:build": [
             "@php bin/console tailwind:build --minify assets/styles/app.css",
             "@php bin/console tailwind:build --minify assets/styles/demos/live-memory.css",
+            "@php bin/console tailwind:build --minify assets/styles/toolkit-common.css",
             "@php bin/console tailwind:build --minify assets/styles/toolkit-shadcn.css",
             "@php bin/console tailwind:build --minify assets/styles/toolkit-flowbite-4.css"
         ]

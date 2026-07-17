@@ -28,6 +28,10 @@ return [
         'path' => './assets/demos/live-memory.js',
         'entrypoint' => true,
     ],
+    'toolkit-common' => [
+        'path' => './assets/toolkit-common.js',
+        'entrypoint' => true,
+    ],
     'toolkit-shadcn' => [
         'path' => './assets/toolkit-shadcn.js',
         'entrypoint' => true,

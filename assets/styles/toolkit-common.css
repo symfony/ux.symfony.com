@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+/* Scan the `common` kit's demo/example templates for the Tailwind classes used. */
+@source "../../vendor/symfony/ux-toolkit/kits/common";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * The `common` kit is design-system agnostic and ships no styles, so the shared
+ * component preview `<body>` has no background of its own. Give these previews a
+ * theme-aware canvas so the demo buttons read well in both light and dark mode.
+ */
+body {
+    background-color: white;
+}
+
+.dark body {
+    background-color: #0a0a0a;
+}

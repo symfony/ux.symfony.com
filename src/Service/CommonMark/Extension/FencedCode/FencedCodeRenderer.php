@@ -42,6 +42,7 @@ final class FencedCodeRenderer implements NodeRendererInterface
             'code' => $code,
             'language' => $language,
             'filename' => $options['filename'] ?? null,
+            'collapseClass' => $options['collapseClass'] ?? false,
         ]);
     }
 }

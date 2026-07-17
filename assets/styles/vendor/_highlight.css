@@ -74,4 +74,37 @@
         background-color: #EA4334;
         color: #fff;
     }
+
+    /* Collapsible `class="..."` values (see HighlightExtension::collapseClasses). */
+    .hl-collapse {
+        cursor: pointer;
+    }
+
+    .hl-collapse-cb {
+        display: none;
+    }
+
+    .hl-collapse-dots {
+        padding: 0 0.45em;
+        border-radius: 0.35em;
+        background: rgba(255, 255, 255, 0.12);
+        opacity: 0.85;
+    }
+
+    .hl-collapse:hover .hl-collapse-dots {
+        background: rgba(255, 255, 255, 0.22);
+        opacity: 1;
+    }
+
+    .hl-collapse-full {
+        display: none;
+    }
+
+    .hl-collapse-cb:checked ~ .hl-collapse-full {
+        display: inline;
+    }
+
+    .hl-collapse-cb:checked ~ .hl-collapse-dots {
+        display: none;
+    }
 }

@@ -19,4 +19,10 @@ final class CodeBlockInline
     public string $code;
     public string $language;
     public ?string $filename = null;
+
+    /**
+     * When true, `class="..."` attribute values are collapsed to a click-to-expand
+     * `…` in the rendered snippet (used to hide presentation-only classes).
+     */
+    public bool $collapseClass = false;
 }

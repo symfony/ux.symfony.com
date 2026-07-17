@@ -215,12 +215,7 @@ class Game
     {
         $this->score = $score;
     }
-
-    public function getTimeBonus(): int
-    {
-        return $this->timeBonus;
-    }
-
+    
     public function setTimeBonus(int $timeBonus): void
     {
         $this->timeBonus = $timeBonus;

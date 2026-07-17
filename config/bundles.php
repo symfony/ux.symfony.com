@@ -31,4 +31,5 @@ return [
     Symfonycasts\TailwindBundle\SymfonycastsTailwindBundle::class => ['all' => true],
     Symfony\UX\Native\UXNativeBundle::class => ['all' => true],
     Symfony\UX\CalendarLink\UXCalendarLinkBundle::class => ['all' => true],
+    Symfony\UX\Editor\UXEditorBundle::class => ['all' => true],
 ];

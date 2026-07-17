@@ -1,0 +1,56 @@
+{% set editor_demos = [
+    {
+        name: 'WYSIWYG editor',
+        description: 'Drop-in rich-text editing backed by CKEditor 5, with hot-reloadable toolbars and HTML sanitization on submit.',
+        url: path('demo_editor_wysiwyg'),
+        image: asset('images/ux_packages/editor.png'),
+        tags: ['wysiwyg', 'ckeditor', 'html', 'sanitizer'],
+    },
+    {
+        name: 'Block editor',
+        description: 'Structured block content powered by Editor.js, persisted as JSON and rendered through pluggable block renderers.',
+        url: path('demo_editor_block'),
+        image: asset('images/ux_packages/editor.png'),
+        tags: ['blocks', 'editorjs', 'json', 'renderers'],
+    },
+    {
+        name: 'Page builder',
+        description: 'Full visual page builder with GrapesJS — drag components, edit styles, and store HTML + CSS + assets as one bundle.',
+        url: path('demo_editor_page'),
+        image: asset('images/ux_packages/editor.png'),
+        tags: ['page-builder', 'grapesjs', 'html', 'css'],
+    },
+    {
+        name: 'Live Component integration',
+        description: 'Compose the LiveEditor trait into a Live Component for autosaved drafts and dirty-tracking, all without writing JavaScript.',
+        url: path('demo_editor_live'),
+        image: asset('images/ux_packages/editor.png'),
+        tags: ['live-component', 'autosave', 'drafts'],
+    },
+] %}
+
+<section class="container-fluid container-xxl px-4 pt-4 px-md-5 pt-md-5">
+    <h2 class="eyebrows mt-5" id="demos">UX Editor Demos</h2>
+    <div class="d-md-flex justify-content-md-between text-center align-items-center text-md-start">
+        <h2 class="ubuntu pt-2 component-headlines">Pick the right <span style="color: #AE5929;">editor</span> for your form</h2>
+        <a style="height: 100%;" class="btn btn-md btn-outline-primary my-3 my-md-0"
+           href="https://symfony.com/bundles/ux-editor/current/index.html">
+            Read full Documentation
+            <twig:ux:icon name="arrow-right" style="transform: rotate(-45deg);"/>
+        </a>
+    </div>
+
+    <div class="row mt-5 pb-5">
+        <div style="display: grid; gap: 2rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));">
+            {% for demo in editor_demos %}
+                <twig:Card
+                    name="{{ demo.name }}"
+                    description="{{ demo.description }}"
+                    image="{{ demo.image }}"
+                    url="{{ demo.url }}"
+                    tags="{{ demo.tags }}"
+                />
+            {% endfor %}
+        </div>
+    </div>
+</section>

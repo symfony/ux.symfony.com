@@ -1,0 +1,20 @@
+<div {{ attributes.defaults(stimulus_controller('editor-autosave', { field: 'bodyDraft' })) }} class="live-editor-demo">
+    <label class="flex items-center gap-2 mb-4">
+        <input type="checkbox" data-test-id="toggle-readonly"
+               {{ this.readOnly ? 'checked' : '' }}
+               data-action="live#action" data-live-action-param="toggleReadOnly">
+        Read-only
+    </label>
+
+    <form>
+        {# Editor field rendered via the component's pre-built form view #}
+        {{ form_widget(this.editorFormWidget) }}
+    </form>
+
+    <p data-test-id="dirty-state" class="mt-4 text-sm text-gray-600">
+        {% if this.isDirty('bodyDraft') %}dirty{% else %}clean{% endif %}
+        {% if this.getLastSavedAt('bodyDraft') %}
+            · saved at {{ this.getLastSavedAt('bodyDraft')|date('H:i:s') }}
+        {% endif %}
+    </p>
+</div>

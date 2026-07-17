@@ -1,0 +1,9 @@
+{% extends 'editor/_layout.html.twig' %}
+
+{% set pageTitle = 'LiveComponent demo — hot config + autosave' %}
+
+{% block editor_body %}
+    <twig:Editor:LiveEditorDemo />
+
+    {{ include('editor/_demos_grid.html.twig') }}
+{% endblock %}

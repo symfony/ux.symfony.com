@@ -1,0 +1,3 @@
+ux_editor:
+    html:
+        sanitize_required: false

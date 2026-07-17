@@ -4,6 +4,10 @@ framework:
         paths:
             assets/: ''
             vendor/symfony/ux-toolkit/kits/: '@symfony/ux-toolkit/kits'
+            vendor/symfony/ux-editor/assets/: '@symfony/ux-editor'
+            vendor/symfony/ux-editor-ckeditor/assets/: '@symfony/ux-editor-ckeditor'
+            vendor/symfony/ux-editor-editorjs/assets/: '@symfony/ux-editor-editorjs'
+            vendor/symfony/ux-editor-grapesjs/assets/: '@symfony/ux-editor-grapesjs'
         excluded_patterns:
             - '*/assets/styles/**/_*.css'
             - '*/assets/styles/**/_*.scss'

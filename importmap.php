@@ -256,4 +256,62 @@ return [
         'version' => '4.6.0',
         'type' => 'css',
     ],
+    '@symfony/ux-editor' => [
+        'path' => '@symfony/ux-editor/dist/controller.js',
+    ],
+    '@symfony/ux-editor-editorjs' => [
+        'path' => '@symfony/ux-editor-editorjs/dist/controller.js',
+    ],
+    '@symfony/ux-editor-ckeditor' => [
+        'path' => '@symfony/ux-editor-ckeditor/dist/controller.js',
+    ],
+    '@symfony/ux-editor-grapesjs' => [
+        'path' => '@symfony/ux-editor-grapesjs/dist/controller.js',
+    ],
+    '@symfony/ux-editor/format/wysiwyg' => [
+        'path' => '@symfony/ux-editor/dist/format/wysiwyg_controller.js',
+    ],
+    '@symfony/ux-editor/format/block' => [
+        'path' => '@symfony/ux-editor/dist/format/block_controller.js',
+    ],
+    '@symfony/ux-editor/format/page' => [
+        'path' => '@symfony/ux-editor/dist/format/page_builder_controller.js',
+    ],
+    '@symfony/ux-editor/upload' => [
+        'path' => '@symfony/ux-editor/dist/upload/SignedUploadClient.js',
+    ],
+    '@symfony/ux-editor/live' => [
+        'path' => '@symfony/ux-editor/dist/live/live-editor.js',
+    ],
+    '@symfony/ux-editor/content' => [
+        'path' => '@symfony/ux-editor/dist/content/EditorContent.js',
+    ],
+    '@editorjs/editorjs' => [
+        'path' => './assets/vendor/@editorjs/editorjs/editorjs.js',
+    ],
+    '@editorjs/header' => [
+        'version' => '2.8.1',
+    ],
+    '@editorjs/list' => [
+        'version' => '1.10.0',
+    ],
+    '@editorjs/image' => [
+        'version' => '2.9.0',
+    ],
+    '@editorjs/quote' => [
+        'version' => '2.6.0',
+    ],
+    '@ckeditor/ckeditor5-build-classic' => [
+        'version' => '41.4.2',
+    ],
+    'grapesjs' => [
+        'version' => '0.21.7',
+    ],
+    'grapesjs/dist/css/grapes.min.css' => [
+        'version' => '0.22.16',
+        'type' => 'css',
+    ],
+    '@editorjs/paragraph' => [
+        'version' => '2.11.7',
+    ],
 ];

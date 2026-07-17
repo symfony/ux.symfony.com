@@ -213,7 +213,7 @@ class Game
 
     public function getTimeBonus(): int
     {
-        return $this->timeBonus
+        return $this->timeBonus;
     }
     
     public function setTimeBonus(int $timeBonus): void

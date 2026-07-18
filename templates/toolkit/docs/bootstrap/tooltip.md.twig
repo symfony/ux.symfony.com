@@ -1,0 +1,47 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '200px'}) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block accessibility %}
+Apply `tooltip_trigger_attrs` to a natively focusable, interactive element such as a button or link so the tooltip works with both pointer and keyboard input. Do not configure hover as the only trigger.
+
+Disabled controls cannot receive focus or pointer events. Put the tooltip attributes on a focusable wrapper as shown below. Bootstrap sanitizes HTML tooltip content by default, but plain text remains preferable for user-provided content.
+{% endblock %}
+
+{% block examples %}
+### Enable tooltips
+
+Bootstrap tooltips are opt-in and must be initialized explicitly after Bootstrap's JavaScript is loaded.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Enable tooltips') }}
+
+### Tooltips on links
+
+Apply the trigger attributes directly to inline links so they remain keyboard accessible.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Tooltips on links') }}
+
+### Custom tooltips
+
+Use a custom class and Bootstrap CSS variables to change a generated tooltip's appearance.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Custom tooltips') }}
+
+### Directions
+
+Choose a preferred placement or enable Bootstrap's sanitized HTML content.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Directions') }}
+
+### Disabled elements
+
+Put the trigger on a focusable wrapper when the described control is disabled.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Disabled elements') }}
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '180px'}) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block accessibility %}
+Include a `Modal:Title` so the root modal's `aria-labelledby` points to a real heading. A modal represents a separate document context, so an `h1` is usually appropriate; use the `tag` prop when the surrounding hierarchy requires another level.
+
+Bootstrap adds the dialog role and manages focus while the modal is open. The HTML `autofocus` attribute does not focus controls inside a modal; listen for `shown.bs.modal` when an initial focus target is required. Do not nest modals, and always provide an explicit dismiss action.
+{% endblock %}
+
+{% block examples %}
+### Modal components
+Display the complete modal structure statically when composing or reviewing its content.
+{{ toolkit_code_example(kit_id.value, component.name, 'Modal components', {height: '450px'}) }}
+
+### Live demo
+Open and dismiss a standard animated modal through Bootstrap data attributes.
+{{ toolkit_code_example(kit_id.value, component.name, 'Live demo', {height: '180px'}) }}
+
+### Static backdrop
+Prevent backdrop clicks and Escape from dismissing a modal that requires an explicit choice.
+{{ toolkit_code_example(kit_id.value, component.name, 'Static backdrop', {height: '180px'}) }}
+
+### Scrolling long content
+Let the viewport scroll with a long modal or constrain scrolling to the modal body.
+{{ toolkit_code_example(kit_id.value, component.name, 'Scrolling long content', {height: '180px'}) }}
+
+### Vertically centered
+Center the dialog vertically, with or without an independently scrollable body.
+{{ toolkit_code_example(kit_id.value, component.name, 'Vertically centered', {height: '180px'}) }}
+
+### Tooltips and popovers
+Place supplementary Bootstrap overlays inside a modal. Bootstrap dismisses them automatically when the modal closes.
+{{ toolkit_code_example(kit_id.value, component.name, 'Tooltips and popovers', {height: '180px'}) }}
+
+### Using the grid
+Nest Bootstrap's responsive grid inside the modal body.
+{{ toolkit_code_example(kit_id.value, component.name, 'Using the grid', {height: '180px'}) }}
+
+### Varying modal content
+Read data attributes from the triggering button to update a shared modal before it is displayed.
+{{ toolkit_code_example(kit_id.value, component.name, 'Varying modal content', {height: '200px'}) }}
+
+### Toggle between modals
+Switch between two modals without displaying them at the same time.
+{{ toolkit_code_example(kit_id.value, component.name, 'Toggle between modals', {height: '180px'}) }}
+
+### Remove animation
+Disable the fade transition when the modal should appear immediately.
+{{ toolkit_code_example(kit_id.value, component.name, 'Remove animation', {height: '180px'}) }}
+
+### Optional sizes
+Choose Bootstrap's small, large, or extra-large modal widths.
+{{ toolkit_code_example(kit_id.value, component.name, 'Optional sizes', {height: '180px'}) }}
+
+### Fullscreen modal
+Fill the viewport at every size or only below a selected breakpoint.
+{{ toolkit_code_example(kit_id.value, component.name, 'Fullscreen modal', {height: '260px'}) }}
+{% endblock %}

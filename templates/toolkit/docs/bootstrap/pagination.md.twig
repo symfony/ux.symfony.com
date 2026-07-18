@@ -1,0 +1,53 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '120px'}) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block accessibility %}
+Give each pagination landmark a descriptive `ariaLabel`, especially when a page contains more than one pagination control.
+
+The active item exposes `aria-current="page"`. Disabled items render as non-interactive `span` elements instead of links.
+{% endblock %}
+
+{% block examples %}
+### Overview
+
+Use connected page links to navigate through a series of related pages.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Overview', {height: '120px'}) }}
+
+### Working with icons
+
+When replacing previous and next labels with symbols, provide an accessible label and hide the symbol from assistive technologies.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Working with icons', {height: '120px'}) }}
+
+### Active
+
+Mark the page currently being viewed as active. It can remain a link or render as a non-interactive item.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Active', {height: '130px'}) }}
+
+### Disabled
+
+Disable unavailable navigation items without leaving an unusable link in the keyboard tab order.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Disabled', {height: '120px'}) }}
+
+### Sizing
+
+Use Bootstrap's large and small pagination sizes.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Sizing', {height: '200px'}) }}
+
+### Alignment
+
+Align the pagination links with Bootstrap flexbox utilities through the `align` prop.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Alignment', {height: '180px'}) }}
+{% endblock %}

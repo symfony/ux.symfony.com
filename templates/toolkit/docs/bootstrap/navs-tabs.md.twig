@@ -1,0 +1,107 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '180px'}) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block accessibility %}
+Use `aria-current="page"` for active navigation links. Dynamic tab interfaces instead need `role="tablist"`, `role="tab"`, `role="tabpanel"`, and the `aria-selected`, `aria-controls`, and `aria-labelledby` relationships shown in the examples.
+
+Prefer buttons for dynamic tabs. Do not put `role="tablist"` directly on a `nav` landmark; place it on a nested `div` instead. Vertical tab lists also need `aria-orientation="vertical"`.
+{% endblock %}
+
+{% block examples %}
+### Base nav
+
+Build navigation with list markup or direct links inside a `nav` element.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Base nav') }}
+
+### Horizontal alignment
+
+Align navigation items with Bootstrap flexbox utilities through the `align` prop.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Horizontal alignment') }}
+
+### Vertical
+
+Stack navigation links vertically with list or landmark markup.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Vertical', {height: '250px'}) }}
+
+### Tabs
+
+Apply the static tab appearance to navigation links.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Tabs') }}
+
+### Pills
+
+Render active navigation links with Bootstrap's pill style.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Pills') }}
+
+### Underline
+
+Use the underline style introduced in Bootstrap 5.3.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Underline') }}
+
+### Fill and justify
+
+Fill the available width proportionally or give every navigation item the same width.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Fill and justify') }}
+
+### Responsive flex
+
+Combine the component with responsive flex utilities for breakpoint-specific layouts.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Responsive flex') }}
+
+### Tabs with dropdowns
+
+Add a Bootstrap dropdown to a static tabs navigation.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Tabs with dropdowns', {height: '400px'}) }}
+
+### Pills with dropdowns
+
+Add a Bootstrap dropdown to a static pills navigation.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Pills with dropdowns', {height: '400px'}) }}
+
+### JavaScript tabs
+
+Connect tab buttons to focusable content panels with Bootstrap's Tab plugin.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'JavaScript tabs') }}
+
+### JavaScript nav
+
+Keep the navigation landmark while placing `role="tablist"` on a nested container.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'JavaScript nav') }}
+
+### JavaScript pills
+
+Use the same dynamic tab semantics with Bootstrap's pill appearance.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'JavaScript pills') }}
+
+### Vertical pills
+
+Build a vertical dynamic tab interface and expose its orientation to assistive technologies.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Vertical pills', {height: '280px'}) }}
+
+### Fade effect
+
+Add Bootstrap's fade transition to tab panels. The initially active panel also receives `show`.
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Fade effect') }}
+{% endblock %}

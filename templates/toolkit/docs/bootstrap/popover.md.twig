@@ -1,0 +1,59 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '180px'}) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+
+Bootstrap popovers are opt-in. Initialize them after Bootstrap is loaded:
+
+```js
+import { Popover } from 'bootstrap';
+
+document.querySelectorAll('[data-bs-toggle="popover"]').forEach((element) => {
+    Popover.getOrCreateInstance(element);
+});
+```
+
+The component follows an as-child pattern: render `popover_trigger_attrs` with Twig's `html_attr()` function on the actual interactive element so Bootstrap receives the data attributes without an extra wrapper.
+{% endblock %}
+
+{% block accessibility %}
+Use a button for popovers opened by click. For a dismiss-on-next-click popover, use the `focus` trigger on an element that can receive keyboard focus. Never rely on `hover` alone because keyboard and touch users cannot reliably reach that content.
+
+Keep popovers short and supplementary. Their generated markup is not a modal dialog and does not trap focus. Disabled controls cannot receive focus, so attach the popover to a focusable wrapper and keep the disabled control inside it.
+
+When `html` is enabled, Bootstrap sanitizes allowed markup by default. Do not disable sanitization for untrusted content.
+{% endblock %}
+
+{% block examples %}
+### Enable popovers
+Initialize every `data-bs-toggle="popover"` trigger before expecting it to open.
+{{ toolkit_code_example(kit_id.value, component.name, 'Enable popovers', {height: '120px'}) }}
+
+### Live demo
+Combine a heading and body content in a conventional click-triggered popover.
+{{ toolkit_code_example(kit_id.value, component.name, 'Live demo', {height: '140px'}) }}
+
+### Four directions
+Prefer top, right, bottom, or left placement while allowing Popper to adjust when space is constrained.
+{{ toolkit_code_example(kit_id.value, component.name, 'Four directions', {height: '280px'}) }}
+
+### Custom container
+Append the generated popover to a specific container when the surrounding layout requires it.
+{{ toolkit_code_example(kit_id.value, component.name, 'Custom container', {height: '180px'}) }}
+
+### Custom popovers
+Attach a custom class to the generated popover and customize Bootstrap's CSS variables in your stylesheet.
+{{ toolkit_code_example(kit_id.value, component.name, 'Custom popovers', {height: '140px'}) }}
+
+### Dismiss on next click
+Use the `focus` trigger so moving focus away closes the popover.
+{{ toolkit_code_example(kit_id.value, component.name, 'Dismiss on next click', {height: '140px'}) }}
+
+### Disabled elements
+Place a disabled control inside a focusable wrapper that owns the popover attributes.
+{{ toolkit_code_example(kit_id.value, component.name, 'Disabled elements', {height: '140px'}) }}
+{% endblock %}

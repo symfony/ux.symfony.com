@@ -1,0 +1,49 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '160px'}) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block accessibility %}
+Button groups need `role="group"` and an explicit accessible name. The `label` prop supplies `aria-label`; set it to `null` only when providing an equivalent `aria-labelledby` attribute.
+
+Use `role="toolbar"` and a meaningful label on toolbars that combine multiple button groups.
+{% endblock %}
+
+{% block examples %}
+### Basic example
+Group buttons or links together as one related set of controls.
+{{ toolkit_code_example(kit_id.value, component.name, 'Basic example', {height: '160px'}) }}
+
+### Mixed styles
+Mix contextual button styles within one group.
+{{ toolkit_code_example(kit_id.value, component.name, 'Mixed styles', {height: '120px'}) }}
+
+### Outlined styles
+Use outline buttons for a group with less visual weight.
+{{ toolkit_code_example(kit_id.value, component.name, 'Outlined styles', {height: '120px'}) }}
+
+### Checkbox and radio button groups
+Combine Bootstrap toggle inputs and labels into seamless checkbox or radio groups.
+{{ toolkit_code_example(kit_id.value, component.name, 'Checkbox and radio button groups', {height: '160px'}) }}
+
+### Button toolbar
+Combine several button groups, and optionally input groups, inside a labeled toolbar.
+{{ toolkit_code_example(kit_id.value, component.name, 'Button toolbar', {height: '220px'}) }}
+
+### Sizing
+Apply a size to the group instead of repeating it on every button.
+{{ toolkit_code_example(kit_id.value, component.name, 'Sizing', {height: '200px'}) }}
+
+### Nesting
+Nest a button group to place a dropdown alongside other buttons.
+{{ toolkit_code_example(kit_id.value, component.name, 'Nesting', {height: '260px'}) }}
+
+### Vertical variation
+Stack buttons, dropdowns, or radio controls in a vertical group.
+{{ toolkit_code_example(kit_id.value, component.name, 'Vertical variation', {height: '300px'}) }}
+{% endblock %}

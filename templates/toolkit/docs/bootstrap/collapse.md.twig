@@ -1,0 +1,29 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '220px'}) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block accessibility %}
+Prefer a native button trigger. If an anchor is used, add `role="button"`. Set the initial `aria-expanded` value to match the `show` prop and point `aria-controls` to the collapsible element's ID.
+
+Bootstrap synchronizes `aria-expanded` while toggling. Avoid padding directly on the collapse element because Bootstrap animates its height or width; place padding on an inner element instead.
+{% endblock %}
+
+{% block examples %}
+### Example
+Control the same collapsible panel with a link or a button.
+{{ toolkit_code_example(kit_id.value, component.name, 'Example', {height: '240px'}) }}
+
+### Horizontal
+Animate width instead of height and set a width on the immediate child.
+{{ toolkit_code_example(kit_id.value, component.name, 'Horizontal', {height: '240px'}) }}
+
+### Multiple toggles and targets
+Use ID and class selectors to control individual panels or several targets together.
+{{ toolkit_code_example(kit_id.value, component.name, 'Multiple toggles and targets', {height: '280px'}) }}
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '220px'}) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block accessibility %}
+Every trigger must identify the panel with either `href` or `data-bs-target` and expose the same id through `aria-controls`. The offcanvas root derives its `aria-labelledby` value from its `id`, so the header title must use `<id>-label` exactly.
+
+Bootstrap adds the dialog role and manages focus when a non-responsive offcanvas opens. Keep a visible dismiss control in the header, use descriptive trigger text, and verify that responsive panels remain understandable when they become regular page content above their breakpoint.
+{% endblock %}
+
+{% block examples %}
+### Offcanvas components
+Display the complete panel structure statically while composing its content.
+{{ toolkit_code_example(kit_id.value, component.name, 'Offcanvas components', {height: '460px'}) }}
+
+### Live demo
+Open the same panel from either a link or a button.
+{{ toolkit_code_example(kit_id.value, component.name, 'Live demo', {height: '220px'}) }}
+
+### Body scrolling
+Allow body scrolling without displaying a backdrop.
+{{ toolkit_code_example(kit_id.value, component.name, 'Body scrolling', {height: '180px'}) }}
+
+### Body scrolling and backdrop
+Keep the body scrollable while retaining the backdrop.
+{{ toolkit_code_example(kit_id.value, component.name, 'Body scrolling and backdrop', {height: '180px'}) }}
+
+### Static backdrop
+Require an explicit dismiss action instead of closing on backdrop clicks.
+{{ toolkit_code_example(kit_id.value, component.name, 'Static backdrop', {height: '180px'}) }}
+
+### Dark offcanvas
+Apply Bootstrap's dark color mode to the panel and its close button.
+{{ toolkit_code_example(kit_id.value, component.name, 'Dark offcanvas', {height: '180px'}) }}
+
+### Responsive
+Turn an offcanvas panel into regular content at a selected breakpoint.
+{{ toolkit_code_example(kit_id.value, component.name, 'Responsive', {height: '380px'}) }}
+
+### Placement
+Open panels from any viewport edge.
+{{ toolkit_code_example(kit_id.value, component.name, 'Placement', {height: '260px'}) }}
+{% endblock %}

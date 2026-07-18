@@ -1,0 +1,23 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '120px'}) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block accessibility %}
+Give the navigation a meaningful accessible name. Apply `aria-current="page"` to the final breadcrumb item so assistive technologies can identify the current page.
+{% endblock %}
+
+{% block examples %}
+### Example
+Build breadcrumb trails with linked items followed by an active item for the current page.
+{{ toolkit_code_example(kit_id.value, component.name, 'Example', {height: '200px'}) }}
+
+### Dividers
+Customize the divider with text, an escaped SVG data URL, or an empty CSS custom property.
+{{ toolkit_code_example(kit_id.value, component.name, 'Dividers', {height: '200px'}) }}
+{% endblock %}

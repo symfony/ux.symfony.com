@@ -40,6 +40,10 @@ return [
         'path' => './assets/toolkit-flowbite-4.js',
         'entrypoint' => true,
     ],
+    'toolkit-bootstrap' => [
+        'path' => './assets/toolkit-bootstrap.js',
+        'entrypoint' => true,
+    ],
     // The UX Toolkit's base CSS, imported from assets/bootstrap.js. Its Stimulus controllers (base
     // + per-kit) are auto-registered as importmap entries by ToolkitControllersImportMapConfigReader,
     // so they need no entry here.
@@ -214,5 +218,15 @@ return [
     'shadcn/dist/tailwind.css' => [
         'version' => '4.6.0',
         'type' => 'css',
+    ],
+    'bootstrap' => [
+        'version' => '5.3.8',
+    ],
+    'bootstrap/dist/css/bootstrap.min.css' => [
+        'version' => '5.3.8',
+        'type' => 'css',
+    ],
+    '@popperjs/core' => [
+        'version' => '2.11.8',
     ],
 ];

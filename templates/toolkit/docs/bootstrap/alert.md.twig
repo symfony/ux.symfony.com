@@ -1,0 +1,37 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '160px'}) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block accessibility %}
+Do not rely on color alone to communicate the alert's meaning. Include clear visible text or additional context for assistive technologies.
+
+Dismissal removes the alert from the document. When appropriate, listen for Bootstrap's `closed.bs.alert` event and move focus to a logical destination.
+{% endblock %}
+
+{% block examples %}
+### Contextual variants
+Use one of Bootstrap's eight contextual colors to match the message's purpose.
+{{ toolkit_code_example(kit_id.value, component.name, 'Contextual variants', {height: '580px'}) }}
+
+### Link color
+Use `alert-link` for links that inherit a suitable color from their alert variant.
+{{ toolkit_code_example(kit_id.value, component.name, 'Link color', {height: '580px'}) }}
+
+### Additional content
+Alerts can contain headings, paragraphs, dividers, and other structured content.
+{{ toolkit_code_example(kit_id.value, component.name, 'Additional content', {height: '240px'}) }}
+
+### Icons
+Combine alerts with flex utilities and accessible inline icons.
+{{ toolkit_code_example(kit_id.value, component.name, 'Icons', {height: '390px'}) }}
+
+### Dismissing
+Enable Bootstrap's alert plugin with a close button, dismissal classes, and transition classes.
+{{ toolkit_code_example(kit_id.value, component.name, 'Dismissing', {height: '140px'}) }}
+{% endblock %}

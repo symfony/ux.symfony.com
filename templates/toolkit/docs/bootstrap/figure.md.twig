@@ -1,0 +1,25 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '400px'}) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block accessibility %}
+Write image alternative text that describes the image's purpose in context. Avoid repeating the caption verbatim unless both carry distinct information.
+
+Use an empty `alt` value for a decorative image. The caption remains associated with the figure through the native `figure` and `figcaption` elements.
+{% endblock %}
+
+{% block examples %}
+### Default figure
+Display a responsive image with a caption below it.
+{{ toolkit_code_example(kit_id.value, component.name, 'Default figure', {height: '400px'}) }}
+
+### Caption alignment
+Align the caption with Bootstrap's text utilities through the `captionAlign` prop.
+{{ toolkit_code_example(kit_id.value, component.name, 'Caption alignment', {height: '400px'}) }}
+{% endblock %}

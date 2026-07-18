@@ -1,0 +1,49 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name, {height: '120px'}) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block accessibility %}
+Give every progress indicator a concise accessible name with `ariaLabel`. Keep `value`, `min`, and `max` synchronized with the task's real state.
+
+Do not rely on color alone to communicate status. Long labels can cross both the filled and unfilled backgrounds, so prefer a separate visible label when contrast cannot be guaranteed.
+{% endblock %}
+
+{% block examples %}
+### How it works
+Set the current value to update both the visual width and the progressbar accessibility attributes.
+{{ toolkit_code_example(kit_id.value, component.name, 'How it works', {height: '140px'}) }}
+
+### Width
+Use Bootstrap width utilities when the visual width should be controlled by a class.
+{{ toolkit_code_example(kit_id.value, component.name, 'Width', {height: '100px'}) }}
+
+### Height
+Set a custom height on the progress container.
+{{ toolkit_code_example(kit_id.value, component.name, 'Height', {height: '100px'}) }}
+
+### Labels
+Display short text inside the bar, with care for overflow and contrast when labels are long.
+{{ toolkit_code_example(kit_id.value, component.name, 'Labels', {height: '110px'}) }}
+
+### Backgrounds
+Apply contextual background colors, with matching text-background helpers for labeled bars.
+{{ toolkit_code_example(kit_id.value, component.name, 'Backgrounds', {height: '180px'}) }}
+
+### Multiple bars
+Wrap stacked progress segments in Bootstrap's `progress-stacked` container.
+{{ toolkit_code_example(kit_id.value, component.name, 'Multiple bars', {height: '100px'}) }}
+
+### Striped
+Add striped styling to default and contextual progress bars.
+{{ toolkit_code_example(kit_id.value, component.name, 'Striped', {height: '140px'}) }}
+
+### Animated stripes
+Animate a striped bar to emphasize an actively changing task.
+{{ toolkit_code_example(kit_id.value, component.name, 'Animated stripes', {height: '100px'}) }}
+{% endblock %}

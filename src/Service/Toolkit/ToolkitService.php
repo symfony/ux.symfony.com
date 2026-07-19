@@ -11,158 +11,72 @@
 
 namespace App\Service\Toolkit;
 
-use App\Enum\ToolkitKitId;
 use App\Service\CommonMark\ConverterFactory;
-use League\CommonMark\Extension\CommonMark\Node\Block\Heading;
-use League\CommonMark\Node\NodeIterator;
-use League\CommonMark\Parser\MarkdownParser;
-use League\CommonMark\Renderer\HtmlRenderer;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
-use Symfony\Component\Filesystem\Path;
-use Symfony\UX\Toolkit\Component\ComponentDoc;
-use Symfony\UX\Toolkit\Component\ComponentDocParser;
-use Symfony\UX\Toolkit\Installer\Pool;
-use Symfony\UX\Toolkit\Installer\PoolResolver;
+use Symfony\UX\Toolkit\Doc\RecipeDocRenderer;
+use Symfony\UX\Toolkit\Doc\RenderedRecipeDoc;
 use Symfony\UX\Toolkit\Kit\Kit;
 use Symfony\UX\Toolkit\Recipe\Recipe;
-use Symfony\UX\Toolkit\Registry\RegistryFactory;
+use Symfony\UX\Toolkit\Registry\LocalRegistry;
 use Twig\Environment;
-
-use function Symfony\Component\String\s;
 
 class ToolkitService
 {
-    /** @var array<value-of<ToolkitKitId>, Kit> */
+    /** @var array<string, Kit> */
     private array $kits = [];
+
+    /** @var array<string, RenderedRecipeDoc> */
+    private array $renderedRecipes = [];
 
     public function __construct(
         private Environment $twig,
+        #[Autowire(service: '.ux_toolkit.registry.local')]
+        private LocalRegistry $localRegistry,
+        private ComponentPreviewUrlGeneratorFactory $previewUrlGeneratorFactory,
         private ConverterFactory $converterFactory,
-        #[Autowire(service: 'ux_toolkit.registry.registry_factory')]
-        private RegistryFactory $registryFactory,
-        #[Autowire(service: 'ux_toolkit.component.component_doc_parser')]
-        private ComponentDocParser $componentDocParser,
     ) {
     }
 
-    public function getKit(ToolkitKitId $kitId): Kit
+    public function getKit(string $kitId): Kit
     {
-        return $this->kits[$kitId->value] ??= $this->registryFactory->getForKit($kitId->value)->getKit($kitId->value);
+        return $this->kits[$kitId] ??= $this->localRegistry->getKit($kitId);
     }
 
     /**
-     * @return array<ToolkitKitId,Kit>
+     * @return array<string, Kit>
      */
     public function getKits(): array
     {
-        $kits = [];
-        foreach (ToolkitKitId::cases() as $kitId) {
-            $kits[$kitId->value] = $this->getKit($kitId);
-        }
-
-        return $kits;
+        return $this->kits = $this->localRegistry->getAvailableKits();
     }
 
-    public function resolveRecipePool(Kit $kit, Recipe $component): Pool
+    public function renderRecipeHtml(string $kitId, Recipe $recipe): string
     {
-        return (new PoolResolver())->resolveForRecipe($kit, $component);
+        return $this->renderRecipe($kitId, $recipe)->html;
     }
 
     /**
      * @return list<array{level: int, title: string, id: string}>
      */
-    public function getRecipeTocItems(ToolkitKitId $kitId, Recipe $recipe): array
+    public function getRecipeTocItems(string $kitId, Recipe $recipe): array
     {
-        $environment = ($this->converterFactory)()->getEnvironment();
-        $document = new MarkdownParser($environment)->parse($this->renderRecipeMarkdown($kitId, $recipe));
-        $renderer = new HtmlRenderer($environment);
-
-        $items = [];
-        foreach ($document->iterator(NodeIterator::FLAG_BLOCKS_ONLY) as $node) {
-            if (!$node instanceof Heading) {
-                continue;
-            }
-            $level = $node->getLevel();
-            if ($level < 2 || $level > 3) {
-                continue;
-            }
-            $id = $node->data->get('attributes/id', null);
-            if (null === $id) {
-                continue;
-            }
-            $items[] = [
-                'level' => $level,
-                'title' => (string) $renderer->renderNodes($node->children()),
-                'id' => $id,
-            ];
-        }
-
-        return $items;
-    }
-
-    public function renderRecipeMarkdown(ToolkitKitId $kitId, Recipe $recipe, bool $isLlm = false): string
-    {
-        $kit = $this->getKit($kitId);
-        $pool = $this->resolveRecipePool($kit, $recipe);
-        $apiReference = $this->extractRecipeApiReference($recipe);
-
-        $files = [];
-        foreach ($pool->getFiles() as $recipeFullPath => $recipeFiles) {
-            foreach ($recipeFiles as $recipeFile) {
-                $recipeFileSourcePath = Path::join($recipeFullPath, $recipeFile->sourceRelativePathName);
-                $files[] = [
-                    'path_name' => $recipeFile->sourceRelativePathName,
-                    'content' => file_get_contents($recipeFileSourcePath),
-                    'language' => pathinfo($recipeFileSourcePath, \PATHINFO_EXTENSION),
-                ];
-            }
-        }
-
-        return $this->twig->render(\sprintf('toolkit/docs/%s/%s.md.twig', $kitId->value, $recipe->name), [
-            'kit_id' => $kitId,
-            'kit' => $kit,
-            'component' => $recipe,
-            'files' => $files,
-            'php_package_dependencies' => $pool->getPhpPackageDependencies(),
-            'npm_package_dependencies' => $pool->getNpmPackageDependencies(),
-            'importmap_package_dependencies' => $pool->getImportmapPackageDependencies(),
-            'api_reference' => $apiReference,
-            'is_llm' => $isLlm,
-        ]);
+        return $this->renderRecipe($kitId, $recipe)->tableOfContents;
     }
 
     /**
-     * @return array<string, ComponentDoc>
+     * Renders the recipe README through the Toolkit's RecipeDocRenderer, reusing the site's CommonMark
+     * environment so the docs get the site's Markdown treatment (highlighting, links, heading anchors,
+     * and the shared Alert/Tabs/Popover extensions).
      */
-    public function extractRecipeApiReference(Recipe $recipe): array
+    private function renderRecipe(string $kitId, Recipe $recipe): RenderedRecipeDoc
     {
-        $apiReference = [];
+        $cacheKey = $kitId.'/'.$recipe->name;
 
-        foreach ($recipe->getFiles() as $file) {
-            if (!str_ends_with($file->sourceRelativePathName, '.html.twig')) {
-                continue;
-            }
-
-            $filePath = Path::join($recipe->absolutePath, $file->sourceRelativePathName);
-            if (!file_exists($filePath)) {
-                continue;
-            }
-
-            $componentDoc = $this->componentDocParser->parse(file_get_contents($filePath));
-
-            if ([] === $componentDoc->props && [] === $componentDoc->blocks) {
-                continue;
-            }
-
-            $componentName = s($file->sourceRelativePathName)
-                ->replace('templates/components/', '')
-                ->replace('.html.twig', '')
-                ->replace('/', ':')
-                ->toString();
-
-            $apiReference[$componentName] = $componentDoc;
-        }
-
-        return $apiReference;
+        return $this->renderedRecipes[$cacheKey] ??= (new RecipeDocRenderer($this->twig))->renderAsHtml(
+            $this->getKit($kitId),
+            $recipe,
+            $this->previewUrlGeneratorFactory->forKit($kitId),
+            ($this->converterFactory)()->getEnvironment(),
+        );
     }
 }

@@ -11,7 +11,6 @@
 
 namespace App\Service\CommonMark\Extension\ToolkitPreview\Parser;
 
-use App\Enum\ToolkitKitId;
 use App\Service\CommonMark\Extension\ToolkitPreview\Node\ToolkitPreview;
 use League\CommonMark\Node\Block\AbstractBlock;
 use League\CommonMark\Parser\Block\AbstractBlockContinueParser;
@@ -21,6 +20,7 @@ use League\CommonMark\Parser\Block\BlockStart;
 use League\CommonMark\Parser\Block\BlockStartParserInterface;
 use League\CommonMark\Parser\Cursor;
 use League\CommonMark\Parser\MarkdownParserStateInterface;
+use Symfony\UX\Toolkit\Registry\LocalRegistry;
 
 final class ToolkitPreviewParser extends AbstractBlockContinueParser
 {
@@ -51,7 +51,9 @@ final class ToolkitPreviewParser extends AbstractBlockContinueParser
                 $options = json_validate($remainder) ? json_decode($remainder, true) : [];
 
                 $kitId = $options['kit'] ?? throw new \LogicException('The "kit" option is required for toolkit-preview code blocks.');
-                $kitId = ToolkitKitId::tryFrom($kitId) ?? throw new \LogicException(\sprintf('Invalid toolkit kit ID "%s" provided for toolkit-preview code block.', $kitId));
+                if (!LocalRegistry::exists($kitId)) {
+                    throw new \LogicException(\sprintf('Invalid toolkit kit ID "%s" provided for toolkit-preview code block.', $kitId));
+                }
                 unset($options['kit']);
 
                 return BlockStart::of(new ToolkitPreviewParser(

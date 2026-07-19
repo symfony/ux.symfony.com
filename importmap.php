@@ -40,6 +40,13 @@ return [
         'path' => './assets/toolkit-flowbite-4.js',
         'entrypoint' => true,
     ],
+    // The UX Toolkit's base CSS, imported from assets/bootstrap.js. Its Stimulus controllers (base
+    // + per-kit) are auto-registered as importmap entries by ToolkitControllersImportMapConfigReader,
+    // so they need no entry here.
+    '@symfony/ux-toolkit/assets/styles/toolkit.css' => [
+        'path' => './vendor/symfony/ux-toolkit/assets/styles/toolkit.css',
+        'type' => 'css',
+    ],
     '@symfony/stimulus-bundle' => [
         'path' => '@symfony/stimulus-bundle/loader.js',
     ],
@@ -172,54 +179,6 @@ return [
     ],
     '@symfony/ux-leaflet-map' => [
         'path' => './vendor/symfony/ux-leaflet-map/assets/dist/map_controller.js',
-    ],
-    '@symfony/ux-toolkit/kits/shadcn/accordion/assets/controllers/accordion_controller.js' => [
-        'path' => './vendor/symfony/ux-toolkit/kits/shadcn/accordion/assets/controllers/accordion_controller.js',
-    ],
-    '@symfony/ux-toolkit/kits/shadcn/alert-dialog/assets/controllers/alert_dialog_controller.js' => [
-        'path' => './vendor/symfony/ux-toolkit/kits/shadcn/alert-dialog/assets/controllers/alert_dialog_controller.js',
-    ],
-    '@symfony/ux-toolkit/kits/shadcn/dialog/assets/controllers/dialog_controller.js' => [
-        'path' => './vendor/symfony/ux-toolkit/kits/shadcn/dialog/assets/controllers/dialog_controller.js',
-    ],
-    '@symfony/ux-toolkit/kits/shadcn/collapsible/assets/controllers/collapsible_controller.js' => [
-        'path' => './vendor/symfony/ux-toolkit/kits/shadcn/collapsible/assets/controllers/collapsible_controller.js',
-    ],
-    '@symfony/ux-toolkit/kits/shadcn/hover-card/assets/controllers/hover_card_controller.js' => [
-        'path' => './vendor/symfony/ux-toolkit/kits/shadcn/hover-card/assets/controllers/hover_card_controller.js',
-    ],
-    '@symfony/ux-toolkit/kits/shadcn/tooltip/assets/controllers/tooltip_controller.js' => [
-        'path' => './vendor/symfony/ux-toolkit/kits/shadcn/tooltip/assets/controllers/tooltip_controller.js',
-    ],
-    '@symfony/ux-toolkit/kits/shadcn/tabs/assets/controllers/tabs_controller.js' => [
-        'path' => './vendor/symfony/ux-toolkit/kits/shadcn/tabs/assets/controllers/tabs_controller.js',
-    ],
-    '@symfony/ux-toolkit/kits/shadcn/toggle/assets/controllers/toggle_controller.js' => [
-        'path' => './vendor/symfony/ux-toolkit/kits/shadcn/toggle/assets/controllers/toggle_controller.js',
-    ],
-    '@symfony/ux-toolkit/kits/shadcn/resizable/assets/controllers/resizable_controller.js' => [
-        'path' => './vendor/symfony/ux-toolkit/kits/shadcn/resizable/assets/controllers/resizable_controller.js',
-    ],
-    '@symfony/ux-toolkit/kits/shadcn/toggle-group/assets/controllers/toggle_group_controller.js' => [
-        'path' => './vendor/symfony/ux-toolkit/kits/shadcn/toggle-group/assets/controllers/toggle_group_controller.js',
-    ],
-    '@symfony/ux-toolkit/kits/shadcn/combobox/assets/controllers/combobox_controller.js' => [
-        'path' => './vendor/symfony/ux-toolkit/kits/shadcn/combobox/assets/controllers/combobox_controller.js',
-    ],
-    '@symfony/ux-toolkit/kits/shadcn/sonner/assets/controllers/sonner_controller.js' => [
-        'path' => './vendor/symfony/ux-toolkit/kits/shadcn/sonner/assets/controllers/sonner_controller.js',
-    ],
-    '@symfony/ux-toolkit/kits/flowbite-4/alert/assets/controllers/alert_controller.js' => [
-        'path' => './vendor/symfony/ux-toolkit/kits/flowbite-4/alert/assets/controllers/alert_controller.js',
-    ],
-    '@symfony/ux-toolkit/kits/flowbite-4/dropdown/assets/controllers/dropdown_controller.js' => [
-        'path' => './vendor/symfony/ux-toolkit/kits/flowbite-4/dropdown/assets/controllers/dropdown_controller.js',
-    ],
-    '@symfony/ux-toolkit/kits/flowbite-4/modal/assets/controllers/modal_controller.js' => [
-        'path' => './vendor/symfony/ux-toolkit/kits/flowbite-4/modal/assets/controllers/modal_controller.js',
-    ],
-    '@symfony/ux-toolkit/kits/flowbite-4/tabs/assets/controllers/tabs_controller.js' => [
-        'path' => './vendor/symfony/ux-toolkit/kits/flowbite-4/tabs/assets/controllers/tabs_controller.js',
     ],
     'el-transition' => [
         'version' => '0.0.7',

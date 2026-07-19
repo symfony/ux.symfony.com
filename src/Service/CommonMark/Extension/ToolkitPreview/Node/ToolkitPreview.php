@@ -11,7 +11,6 @@
 
 namespace App\Service\CommonMark\Extension\ToolkitPreview\Node;
 
-use App\Enum\ToolkitKitId;
 use League\CommonMark\Node\Block\AbstractBlock;
 use League\CommonMark\Node\StringContainerInterface;
 
@@ -23,7 +22,7 @@ final class ToolkitPreview extends AbstractBlock implements StringContainerInter
      * @param array<string,mixed> $options
      */
     public function __construct(
-        private readonly ToolkitKitId $kitId,
+        private readonly string $kitId,
         private readonly array $options = [],
     ) {
         parent::__construct();
@@ -39,7 +38,7 @@ final class ToolkitPreview extends AbstractBlock implements StringContainerInter
         return $this->literal;
     }
 
-    public function getKitId(): ToolkitKitId
+    public function getKitId(): string
     {
         return $this->kitId;
     }

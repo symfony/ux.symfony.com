@@ -29,7 +29,7 @@
 
 {% for entry in toolkitKits -%}
 {% for recipe in entry.kit.getRecipes(constant('Symfony\\UX\\Toolkit\\Recipe\\RecipeType::Component')) -%}
-- [{{ recipe.name }} ({{ entry.kit.manifest.name }})](https://ux.symfony.com/toolkit/kits/{{ entry.kitId.value }}/components/{{ recipe.name }}.md): {{ recipe.manifest.description ?: 'Toolkit component' }}
+- [{{ recipe.name }} ({{ entry.kit.manifest.name }})](https://ux.symfony.com/toolkit/kits/{{ entry.kitId }}/components/{{ recipe.name }}.md): {{ recipe.description ?: 'Toolkit component' }}
 {% endfor -%}
 {% endfor %}
 

@@ -39,7 +39,7 @@ final class ToolkitPreviewRenderer implements NodeRendererInterface
         $previewUrl = $this->uriSigner->sign(
             $this->urlGenerator->generate(
                 'app_toolkit_component_preview',
-                ['kitId' => $node->getKitId()->value, 'code' => $node->getLiteral(), 'height' => $height],
+                ['kitId' => $node->getKitId(), 'code' => $node->getLiteral(), 'height' => $height],
                 UrlGeneratorInterface::ABSOLUTE_URL
             )
         );

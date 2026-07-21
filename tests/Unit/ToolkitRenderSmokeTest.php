@@ -16,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class ToolkitRenderSmokeTest extends KernelTestCase
 {
-    public function testRendersRecipeReadmeToHtmlWithLivePreview(): void
+    public function testRendersRecipeReadmeToHtmlWithLivePreview()
     {
         $svc = self::getContainer()->get(ToolkitService::class);
         $kit = $svc->getKit('shadcn');
@@ -32,7 +32,7 @@ final class ToolkitRenderSmokeTest extends KernelTestCase
         self::assertStringContainsString('Installation', $html);
     }
 
-    public function testTocItemsMatchHeadingIdsInRenderedHtml(): void
+    public function testTocItemsMatchHeadingIdsInRenderedHtml()
     {
         $svc = self::getContainer()->get(ToolkitService::class);
         $kit = $svc->getKit('shadcn');

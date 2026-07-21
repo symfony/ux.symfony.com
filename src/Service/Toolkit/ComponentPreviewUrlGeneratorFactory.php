@@ -39,7 +39,7 @@ final class ComponentPreviewUrlGeneratorFactory
             ) {
             }
 
-            public function generate(string $code, CodeOptions $options): ?string
+            public function generate(string $code, CodeOptions $options): string
             {
                 return $this->uriSigner->sign($this->urlGenerator->generate(
                     'app_toolkit_component_preview',

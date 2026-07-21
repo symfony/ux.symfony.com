@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 final class ToolkitComponentPageTest extends WebTestCase
 {
-    public function testComponentPageRendersReadmeTabsAndApiTable(): void
+    public function testComponentPageRendersReadmeTabsAndApiTable()
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/toolkit/kits/shadcn/components/accordion');

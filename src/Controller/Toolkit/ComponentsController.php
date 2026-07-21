@@ -11,7 +11,6 @@
 
 namespace App\Controller\Toolkit;
 
-use App\Enum\ToolkitKitId;
 use App\Service\Toolkit\ToolkitService;
 use App\Service\UxPackageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,6 +24,7 @@ use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\UX\Toolkit\Kit\KitContextRunner;
 use Symfony\UX\Toolkit\Recipe\RecipeType;
+use Symfony\UX\Toolkit\Registry\LocalRegistry;
 
 class ComponentsController extends AbstractController
 {
@@ -35,8 +35,12 @@ class ComponentsController extends AbstractController
     }
 
     #[Route('/toolkit/kits/{kitId}/components/{componentName}', name: 'app_toolkit_component')]
-    public function showComponent(ToolkitKitId $kitId, string $componentName): Response
+    public function showComponent(string $kitId, string $componentName): Response
     {
+        if (!LocalRegistry::exists($kitId)) {
+            throw $this->createNotFoundException(\sprintf('Kit "%s" not found', $kitId));
+        }
+
         $kit = $this->toolkitService->getKit($kitId);
         if (null === $component = $kit->getRecipe($componentName, type: RecipeType::Component)) {
             throw $this->createNotFoundException(\sprintf('Component "%s" not found', $componentName));
@@ -57,21 +61,25 @@ class ComponentsController extends AbstractController
     #[Route('/toolkit/component_preview', name: 'app_toolkit_component_preview')]
     public function previewComponent(
         Request $request,
-        #[MapQueryParameter] ToolkitKitId $kitId,
+        #[MapQueryParameter] string $kitId,
         #[MapQueryParameter] string $code,
         #[MapQueryParameter] string $height,
         UriSigner $uriSigner,
         \Twig\Environment $twig,
         #[Autowire(service: 'ux_toolkit.kit.kit_context_runner')]
         KitContextRunner $kitContextRunner,
-        //#[Autowire(service: 'profiler')]
-        //?Profiler $profiler,
+        #[Autowire(service: 'profiler')]
+        ?Profiler $profiler,
     ): Response {
         if (!$uriSigner->checkRequest($request)) {
             throw new BadRequestHttpException('Request is invalid.');
         }
 
-        //$profiler?->disable();
+        if (!LocalRegistry::exists($kitId)) {
+            throw $this->createNotFoundException(\sprintf('Kit "%s" not found', $kitId));
+        }
+
+        $profiler?->disable();
 
         $kit = $this->toolkitService->getKit($kitId);
 
@@ -93,7 +101,7 @@ class ComponentsController extends AbstractController
                             }
                         });
                     </script>
-                    {{ importmap('toolkit-{$kitId->value}') }}
+                    {{ importmap('toolkit-{$kitId}') }}
                 </head>
                 <body class="flex min-h-[{$height}] w-full justify-center p-5 items-center text-neutral-800 dark:text-neutral-300">{$code}</body>
             </html>

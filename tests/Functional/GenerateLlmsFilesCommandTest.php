@@ -11,7 +11,6 @@
 
 namespace App\Tests\Functional;
 
-use App\Enum\ToolkitKitId;
 use App\Service\CookbookRepository;
 use App\Service\Toolkit\ToolkitService;
 use App\Service\UxPackageRepository;
@@ -21,6 +20,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\UX\Toolkit\Recipe\RecipeType;
+use Symfony\UX\Toolkit\Registry\LocalRegistry;
 use Zenstruck\Browser\HttpOptions;
 use Zenstruck\Browser\Test\HasBrowser;
 
@@ -80,8 +80,8 @@ class GenerateLlmsFilesCommandTest extends KernelTestCase
         }
 
         // Toolkit files
-        foreach (ToolkitKitId::cases() as $kitId) {
-            self::assertDirectoryExists($llmsDir.'/toolkit/kits/'.$kitId->value.'/components');
+        foreach (LocalRegistry::getAvailableKitsName() as $kitId) {
+            self::assertDirectoryExists($llmsDir.'/toolkit/kits/'.$kitId.'/components');
         }
     }
 
@@ -181,14 +181,13 @@ class GenerateLlmsFilesCommandTest extends KernelTestCase
 
         // Toolkit component pages
         $toolkitService = $container->get(ToolkitService::class);
-        foreach (ToolkitKitId::cases() as $kitId) {
-            $kit = $toolkitService->getKit($kitId);
+        foreach ($toolkitService->getKits() as $kitId => $kit) {
             foreach ($kit->getRecipes(RecipeType::Component) as $recipe) {
                 $url = $router->generate('app_toolkit_component', [
-                    'kitId' => $kitId->value,
+                    'kitId' => $kitId,
                     'componentName' => $recipe->name,
                 ]);
-                yield $kitId->value.'/'.$recipe->name => [$url, $url.'.md'];
+                yield $kitId.'/'.$recipe->name => [$url, $url.'.md'];
             }
         }
     }

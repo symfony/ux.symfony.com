@@ -11,13 +11,13 @@
 
 namespace App\Controller\Toolkit;
 
-use App\Enum\ToolkitKitId;
 use App\Service\Toolkit\ToolkitService;
 use App\Service\UxPackageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\UX\Toolkit\Recipe\RecipeType;
+use Symfony\UX\Toolkit\Registry\LocalRegistry;
 
 class KitsController extends AbstractController
 {
@@ -28,8 +28,12 @@ class KitsController extends AbstractController
     }
 
     #[Route('/toolkit/kits/{kitId}', name: 'app_toolkit_kit')]
-    public function showKit(ToolkitKitId $kitId, ToolkitService $toolkitService, UxPackageRepository $uxPackageRepository): Response
+    public function showKit(string $kitId, ToolkitService $toolkitService, UxPackageRepository $uxPackageRepository): Response
     {
+        if (!LocalRegistry::exists($kitId)) {
+            throw $this->createNotFoundException(\sprintf('Kit "%s" not found', $kitId));
+        }
+
         $kit = $toolkitService->getKit($kitId);
         $package = $uxPackageRepository->find('toolkit');
 

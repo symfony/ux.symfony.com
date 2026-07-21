@@ -1,18 +1,17 @@
 <div class="flex gap-8 items-start">
     <div class="flex-1 min-w-0 Wysiwyg">
-        <div class="flex items-baseline justify-between gap-4 flex-wrap my-4">
-            <h1 class="mb-0">{{ component.manifest.name }}</h1>
-            <a
-                href="{{ path('app_toolkit_component', {kitId: kitId.value, componentName: component.name}) }}.md"
-                class="inline-flex items-center gap-2 text-sm text-foreground/80  no-underline hover:underline underline-offset-4 shrink-0"
-                title="View this page as Markdown (useful for LLMs)"
-            >
-                <twig:ux:icon name="material-symbols:markdown-outline" class="size-6" />
-                <span>View as Markdown</span>
-            </a>
-        </div>
+        {# The recipe README owns the page title (its `# ` heading), so we render no chrome <h1>
+           here. The "View as Markdown" link floats to the top-right, beside that title. #}
+        <a
+            href="{{ path('app_toolkit_component', {kitId: kitId, componentName: component.name}) }}.md"
+            class="float-right ml-4 mt-1 inline-flex items-center gap-2 text-sm text-foreground/80 no-underline hover:underline underline-offset-4 shrink-0"
+            title="View this page as Markdown (useful for LLMs)"
+        >
+            <twig:ux:icon name="material-symbols:markdown-outline" class="size-6" />
+            <span>View as Markdown</span>
+        </a>
 
-        {{ this.markdownContent|markdown_to_html }}
+        {{ this.htmlContent|raw }}
     </div>
 
     {% if tocItems %}

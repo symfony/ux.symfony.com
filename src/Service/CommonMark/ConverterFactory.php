@@ -11,10 +11,7 @@
 
 namespace App\Service\CommonMark;
 
-use App\Service\CommonMark\Extension\Alert\AlertExtension;
 use App\Service\CommonMark\Extension\FencedCode\FencedCodeRenderer;
-use App\Service\CommonMark\Extension\Popover\PopoverExtension;
-use App\Service\CommonMark\Extension\Tabs\TabsExtension;
 use App\Service\CommonMark\Extension\ToolkitPreview\ToolkitPreviewExtension;
 use League\CommonMark\CommonMarkConverter;
 use League\CommonMark\Extension\CommonMark\Node\Block\FencedCode;
@@ -28,6 +25,9 @@ use League\CommonMark\Extension\Table\TableExtension;
 use Symfony\Component\DependencyInjection\Attribute\AsDecorator;
 use Symfony\Component\HttpFoundation\UriSigner;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\UX\Toolkit\Markdown\Extension\Alert\AlertExtension;
+use Symfony\UX\Toolkit\Markdown\Extension\Popover\PopoverExtension;
+use Symfony\UX\Toolkit\Markdown\Extension\Tabs\TabsExtension;
 use Symfony\UX\TwigComponent\ComponentRendererInterface;
 
 /**

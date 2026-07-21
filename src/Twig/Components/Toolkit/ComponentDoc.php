@@ -11,7 +11,6 @@
 
 namespace App\Twig\Components\Toolkit;
 
-use App\Enum\ToolkitKitId;
 use App\Service\Toolkit\ToolkitService;
 use Symfony\UX\Toolkit\Recipe\Recipe;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
@@ -19,21 +18,21 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 #[AsTwigComponent]
 final class ComponentDoc
 {
-    public ToolkitKitId $kitId;
+    public string $kitId;
     public Recipe $component;
 
     /** @var list<array{level: int, title: string, id: string}> */
     public array $tocItems = [];
 
-    private ?string $markdownContent = null;
+    private ?string $htmlContent = null;
 
     public function __construct(
         private readonly ToolkitService $toolkitService,
     ) {
     }
 
-    public function getMarkdownContent(): string
+    public function getHtmlContent(): string
     {
-        return $this->markdownContent ??= $this->toolkitService->renderRecipeMarkdown($this->kitId, $this->component);
+        return $this->htmlContent ??= $this->toolkitService->renderRecipeHtml($this->kitId, $this->component);
     }
 }

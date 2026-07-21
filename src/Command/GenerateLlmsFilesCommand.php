@@ -11,7 +11,6 @@
 
 namespace App\Command;
 
-use App\Enum\ToolkitKitId;
 use App\Service\Changelog\ChangelogProvider;
 use App\Service\CookbookRepository;
 use App\Service\LiveDemoRepository;
@@ -23,6 +22,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\UX\Toolkit\Doc\RecipeDocRenderer;
 use Symfony\UX\Toolkit\Recipe\RecipeType;
 use Twig\Environment;
 
@@ -203,27 +203,27 @@ class GenerateLlmsFilesCommand
     }
 
     /**
-     * @return array{array<string, string>, list<array{kitId: ToolkitKitId, kit: object}>}
+     * @return array{array<string, string>, list<array{kitId: string, kit: object}>}
      */
     private function generateToolkit(SymfonyStyle $io): array
     {
         $io->section('Generating toolkit Markdown files');
         $content = [];
         $toolkitKits = [];
+        $recipeDocRenderer = new RecipeDocRenderer($this->twig);
 
-        foreach (ToolkitKitId::cases() as $kitId) {
-            $kit = $this->toolkitService->getKit($kitId);
+        foreach ($this->toolkitService->getKits() as $kitId => $kit) {
             $toolkitKits[] = ['kitId' => $kitId, 'kit' => $kit];
 
             foreach ($kit->getRecipes(RecipeType::Component) as $recipe) {
-                $md = $this->toolkitService->renderRecipeMarkdown($kitId, $recipe, isLlm: true);
+                $md = $recipeDocRenderer->renderAsMarkdown($kit, $recipe);
                 $path = $this->generateMdPath('app_toolkit_component', [
-                    'kitId' => $kitId->value,
+                    'kitId' => $kitId,
                     'componentName' => $recipe->name,
                 ]);
                 $this->fs->dumpFile($this->outputDir.'/'.$path, $md);
                 $content[$path] = $md;
-                $io->writeln('  ['.$kitId->value.'] '.$recipe->name);
+                $io->writeln('  ['.$kitId.'] '.$recipe->name);
             }
         }
 
@@ -231,8 +231,8 @@ class GenerateLlmsFilesCommand
     }
 
     /**
-     * @param array<string, string>                         $allContent
-     * @param list<array{kitId: ToolkitKitId, kit: object}> $toolkitKits
+     * @param array<string, string>                   $allContent
+     * @param list<array{kitId: string, kit: object}> $toolkitKits
      */
     private function generateLlmsFiles(SymfonyStyle $io, array $allContent, array $toolkitKits): void
     {

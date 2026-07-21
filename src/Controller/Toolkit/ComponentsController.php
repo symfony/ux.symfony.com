@@ -68,8 +68,8 @@ class ComponentsController extends AbstractController
         \Twig\Environment $twig,
         #[Autowire(service: 'ux_toolkit.kit.kit_context_runner')]
         KitContextRunner $kitContextRunner,
-        // #[Autowire(service: 'profiler')]
-        // ?Profiler $profiler,
+         #[Autowire(service: 'profiler')]
+         ?Profiler $profiler,
     ): Response {
         if (!$uriSigner->checkRequest($request)) {
             throw new BadRequestHttpException('Request is invalid.');
@@ -79,7 +79,7 @@ class ComponentsController extends AbstractController
             throw $this->createNotFoundException(\sprintf('Kit "%s" not found', $kitId));
         }
 
-        // $profiler?->disable();
+         $profiler?->disable();
 
         $kit = $this->toolkitService->getKit($kitId);
 

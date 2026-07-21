@@ -215,4 +215,7 @@ return [
         'version' => '4.6.0',
         'type' => 'css',
     ],
+    '@symfony/ux-toolkit/kits/' => [
+        'glob' => './vendor/symfony/ux-toolkit/kits/*/*/assets/controllers/*_controller.js'
+    ]
 ];

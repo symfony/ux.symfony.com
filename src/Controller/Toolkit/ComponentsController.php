@@ -103,7 +103,7 @@ class ComponentsController extends AbstractController
                     </script>
                     {{ importmap('toolkit-{$kitId}') }}
                 </head>
-                <body class="flex min-h-[{$height}] w-full justify-center p-5 items-center text-neutral-800 dark:text-neutral-300">{$code}</body>
+                <body class="flex w-full justify-center p-5 items-center text-neutral-800 dark:text-neutral-300" style="min-height: {$height}">{$code}</body>
             </html>
             HTML);
 

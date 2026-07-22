@@ -90,14 +90,15 @@ class ComponentsController extends AbstractController
                     <title>Preview</title>
                     <meta name="viewport" content="width=device-width, initial-scale=1">
                     <script>
-                        const theme = localStorage.getItem('user-theme');
-                        if (theme) {
-                            document.documentElement.classList.add(theme);
-                        }
+                        const applyTheme = (theme) => {
+                            theme = theme === 'light' ? 'light' : 'dark';
+                            document.documentElement.classList.toggle('dark', theme === 'dark');
+                            document.documentElement.setAttribute('data-bs-theme', theme);
+                        };
+                        applyTheme(localStorage.getItem('user-theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
                         window.addEventListener('storage', (event) => {
-                            if (event.key === 'user-theme') {
-                                document.documentElement.classList.toggle('dark', event.newValue === 'dark');
-                                document.documentElement.classList.toggle('light', event.newValue === 'light');
+                            if (event.key === 'user-theme' && event.newValue) {
+                                applyTheme(event.newValue);
                             }
                         });
                     </script>

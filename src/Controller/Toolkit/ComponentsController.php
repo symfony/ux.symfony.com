@@ -89,6 +89,16 @@ class ComponentsController extends AbstractController
                     <meta charset="utf-8">
                     <title>Preview</title>
                     <meta name="viewport" content="width=device-width, initial-scale=1">
+                    <style>
+                        body {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            margin: 0;
+                            width: 100%;
+                            padding: 48px;
+                        }
+                    </style>
                     <script>
                         const applyTheme = (theme) => {
                             theme = theme === 'light' ? 'light' : 'dark';
@@ -104,7 +114,7 @@ class ComponentsController extends AbstractController
                     </script>
                     {{ importmap('toolkit-{$kitId}') }}
                 </head>
-                <body class="flex w-full justify-center p-5 items-center text-neutral-800 dark:text-neutral-300" style="min-height: {$height}">{$code}</body>
+                <body style="min-height: {$height}">{$code}</body>
             </html>
             HTML);
 

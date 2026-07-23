@@ -89,21 +89,32 @@ class ComponentsController extends AbstractController
                     <meta charset="utf-8">
                     <title>Preview</title>
                     <meta name="viewport" content="width=device-width, initial-scale=1">
-                    <script>
-                        const theme = localStorage.getItem('user-theme');
-                        if (theme) {
-                            document.documentElement.classList.add(theme);
+                    <style>
+                        body {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            margin: 0;
+                            width: 100%;
+                            padding: 48px;
                         }
+                    </style>
+                    <script>
+                        const applyTheme = (theme) => {
+                            theme = theme === 'light' ? 'light' : 'dark';
+                            document.documentElement.classList.toggle('dark', theme === 'dark');
+                            document.documentElement.setAttribute('data-bs-theme', theme);
+                        };
+                        applyTheme(localStorage.getItem('user-theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
                         window.addEventListener('storage', (event) => {
-                            if (event.key === 'user-theme') {
-                                document.documentElement.classList.toggle('dark', event.newValue === 'dark');
-                                document.documentElement.classList.toggle('light', event.newValue === 'light');
+                            if (event.key === 'user-theme' && event.newValue) {
+                                applyTheme(event.newValue);
                             }
                         });
                     </script>
                     {{ importmap('toolkit-{$kitId}') }}
                 </head>
-                <body class="flex min-h-[{$height}] w-full justify-center p-5 items-center text-neutral-800 dark:text-neutral-300">{$code}</body>
+                <body style="min-height: {$height}">{$code}</body>
             </html>
             HTML);
 

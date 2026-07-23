@@ -186,11 +186,6 @@ class Game
         return $this->cards[$key];
     }
 
-    public function geTimeLimit(): ?int
-    {
-        return $this->timeLimit;
-    }
-
     public function isStarted(): bool
     {
         return null !== $this->startedAt;

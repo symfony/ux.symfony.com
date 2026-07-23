@@ -4,6 +4,8 @@ workers:
         cmd: ['symfony', 'console', 'tailwind:build', '--watch', 'assets/styles/app.css', '-vvv']
     tailwind_toolkit_shadcn:
         cmd: ['symfony', 'console', 'tailwind:build', '--watch', 'assets/styles/toolkit-shadcn.css', '-vvv']
+    tailwind_toolkit_common:
+        cmd: ['symfony', 'console', 'tailwind:build', '--watch', 'assets/styles/toolkit-common.css', '-vvv']
     tailwind_live_memory:
         cmd: ['symfony', 'console', 'tailwind:build', '--watch', 'assets/styles/demos/live-memory.css', '-vvv']
 

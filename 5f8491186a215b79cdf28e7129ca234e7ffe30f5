@@ -1,0 +1,25 @@
+---------------------------------------------------------------------------
+
+by kbond at 2026-07-23T20:45:11Z
+
+Here's what the iframe refresh button looks like.
+
+<img width="709" height="372" alt="Screenshot 2026-07-23 at 4 29 40 PM" src="https://github.com/user-attachments/assets/ac19cafe-6b0e-4567-9c1e-56bb62525554" />
+
+---------------------------------------------------------------------------
+
+by kbond at 2026-07-23T20:53:44Z
+
+Once merged, all iframes will have this behaviour
+
+---------------------------------------------------------------------------
+
+by Kocal at 2026-07-23T21:12:53Z
+
+Yeah, sorry I wasn't clear, but I was speaking about "So time-based demos (a component that auto-dismisses after a few seconds)"
+
+---------------------------------------------------------------------------
+
+by kbond at 2026-07-23T21:27:10Z
+
+Ah, ok. The new closeable recipe will have this. A couple of the examples show auto closing after a few seconds

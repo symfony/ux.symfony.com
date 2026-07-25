@@ -1,0 +1,36 @@
+@layer components {
+    /* Alignment grid overlay (adapted from Storybook): a coarse 100px grid over
+       a fine 20px one, blended with `difference` so the lines stay legible on
+       both light and dark previews. */
+    .Toolkit_Preview_grid {
+        background-image:
+            linear-gradient(rgba(130, 130, 130, 0.5) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(130, 130, 130, 0.5) 1px, transparent 1px),
+            linear-gradient(rgba(130, 130, 130, 0.25) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(130, 130, 130, 0.25) 1px, transparent 1px);
+        background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+        background-position: 16px 16px, 16px 16px, 16px 16px, 16px 16px;
+        background-blend-mode: difference;
+        /* Overlay sits over the iframe, so invert against the content behind it
+           (not just the layers) to stay legible on light and dark previews. */
+        mix-blend-mode: difference;
+    }
+
+    /* Resize handle grip: a pseudo-element pill that fades in while hovering
+       the preview or actively dragging. */
+    .Toolkit_Preview_handle::before {
+        content: "";
+        width: 4px;
+        height: --spacing(8);
+        max-height: 60%;
+        border-radius: 9999px;
+        background: --alpha(var(--color-body-text) / 25%);
+        opacity: 0;
+        transition: opacity 150ms ease-in-out;
+    }
+
+    .Toolkit_Preview:hover .Toolkit_Preview_handle::before,
+    .is-resizing .Toolkit_Preview_handle::before {
+        opacity: 1;
+    }
+}

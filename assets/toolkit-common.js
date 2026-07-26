@@ -1,15 +1,13 @@
 import './styles/toolkit-common.css';
 import { startStimulusApp } from '@symfony/stimulus-bundle';
 import * as Turbo from '@hotwired/turbo';
-import Closeable from '@symfony/ux-toolkit/kits/common/closeable/assets/controllers/closeable_controller.js';
+import { registerKitControllers } from './toolkit-controllers.js';
 
 // The `common` kit is design-system agnostic and ships no styling of its own.
 // Its demo/example templates use a few Tailwind utility classes (compiled via
-// toolkit-common.css) purely to look good in this preview. We boot Stimulus for
-// the iframe as the other kits do and register the kit's controllers by hand,
-// since `startStimulusApp()` only auto-discovers the app's own controllers.
+// toolkit-common.css) purely to look good in this preview.
 const app = startStimulusApp();
-app.register('closeable', Closeable);
+registerKitControllers(app, 'common');
 
 // The `common` kit previews (PostLink/LogoutLink) submit real forms to our
 // /link capture endpoint, which responds 200 instead of redirecting. Turbo

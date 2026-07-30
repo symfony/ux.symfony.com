@@ -103,6 +103,7 @@ class ComponentsController extends AbstractController
                             theme = theme === 'light' ? 'light' : 'dark';
                             document.documentElement.classList.toggle('dark', theme === 'dark');
                             document.documentElement.setAttribute('data-bs-theme', theme);
+                            document.documentElement.style.colorScheme = theme;
                         };
                         applyTheme(localStorage.getItem('user-theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
                         window.addEventListener('storage', (event) => {

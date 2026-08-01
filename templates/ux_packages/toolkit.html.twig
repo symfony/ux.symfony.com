@@ -75,6 +75,10 @@ tree templates/components
             Kits are a set of ready-to-use and fully-customizable UI Twig components and more, to help you to build your Design System.<br>
         </p>
 
+        <twig:Toolkit:Alert variant="important" class="max-w-3xl mx-auto mt-8">
+            <p><strong>Once installed, components live in your app and are yours to modify as you wish</strong> — installing copies the files into your project. Because of that, components come with <strong>no backward-compatibility guarantee</strong>: they can change or be removed in any release, and your installed copy is unaffected. Re-install a component to pick up the latest version, but since it may differ from your copy, be sure to verify it still works in your app.</p>
+        </twig:Toolkit:Alert>
+
         <div class="mt-12 shadow-blur shadow-blur--rainbow" style="display: grid; gap: 2rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); --shadow-opacity: 0.2">
             {% for kit_id, kit in kits %}
                 <twig:Box color="{{ toolkit_color(kit_id) }}" titleTag="h2">

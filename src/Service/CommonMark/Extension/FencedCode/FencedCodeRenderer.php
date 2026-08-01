@@ -15,6 +15,7 @@ use League\CommonMark\Extension\CommonMark\Node\Block\FencedCode;
 use League\CommonMark\Node\Node;
 use League\CommonMark\Renderer\ChildNodeRendererInterface;
 use League\CommonMark\Renderer\NodeRendererInterface;
+use Symfony\UX\Toolkit\Markdown\CodeOptions;
 use Symfony\UX\TwigComponent\ComponentRendererInterface;
 
 final class FencedCodeRenderer implements NodeRendererInterface
@@ -36,13 +37,13 @@ final class FencedCodeRenderer implements NodeRendererInterface
         $infoWords = $node->getInfoWords();
         $language = $infoWords[0] ?? 'txt';
 
-        $options = isset($infoWords[1]) && json_validate($infoWords[1]) ? json_decode($infoWords[1], true) : [];
+        $options = (isset($infoWords[1]) ? CodeOptions::fromInfoJson($infoWords[1]) : null) ?? new CodeOptions();
 
         return $this->componentRenderer->createAndRender('CodeBlockInline', [
             'code' => $code,
             'language' => $language,
-            'filename' => $options['filename'] ?? null,
-            'collapseClass' => $options['collapseClass'] ?? false,
+            'filename' => $options->filename,
+            'collapseClass' => $options->collapseClass,
         ]);
     }
 }

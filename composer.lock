@@ -8240,12 +8240,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-toolkit.git",
-                "reference": "f62765b7f50c246124e7b0587aaa801d2dce26ce"
+                "reference": "aa0357a397ea2dca1cce80977b4257b41b6d34ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-toolkit/zipball/f62765b7f50c246124e7b0587aaa801d2dce26ce",
-                "reference": "f62765b7f50c246124e7b0587aaa801d2dce26ce",
+                "url": "https://api.github.com/repos/symfony/ux-toolkit/zipball/aa0357a397ea2dca1cce80977b4257b41b6d34ad",
+                "reference": "aa0357a397ea2dca1cce80977b4257b41b6d34ad",
                 "shasum": ""
             },
             "require": {
@@ -8344,7 +8344,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-07-31T11:50:23+00:00"
+            "time": "2026-08-01T06:01:44+00:00"
         },
         {
             "name": "symfony/ux-translator",

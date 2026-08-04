@@ -78,11 +78,6 @@ tree templates/components
 
         <div class="mt-12 shadow-blur shadow-blur--rainbow" style="display: grid; gap: 2rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); --shadow-opacity: 0.2">
             {% for kit_id, kit in kits %}
-                {% set kit_description = kit.manifest.description %}
-                {% if kit_id == 'flowbite-4' %}
-                    {% set kit_description = 'Components based on Flowbite (v4), a popular open-source UI library built with Tailwind CSS.' %}
-                {% endif %}
-
                 <twig:Box color="{{ toolkit_color(kit_id) }}" radius="xl" titleTag="h2">
                     <twig:block name="logo">
                         <twig:ux:icon name="toolkit:{{ kit_id }}" alt="{{ kit.manifest.name }}" style="color: #fff; width: 50%; height: 50%;" />
@@ -91,7 +86,7 @@ tree templates/components
                         <a href="{{ path('app_toolkit_kit', {kitId: kit_id}) }}" class="stretched-link text-body-text no-underline">{{ kit.manifest.name }}</a>
                     </twig:block>
                     <twig:block name="description">
-                        <p>{{ kit_description }}</p>
+                        <p>{{ kit.manifest.description }}</p>
                     </twig:block>
                 </twig:Box>
             {% endfor %}

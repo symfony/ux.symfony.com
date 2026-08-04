@@ -1,11 +1,13 @@
 <aside class="bg-subtle mt-12">
     <div class="max-w-[1400px] mx-auto p-6 md:p-12">
         <div style="display: grid; gap: 2rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));">
-            {% if package.shouldShowDocsLink %}
+            {% set docs_url = docs_url|default(null) %}
+            {% set docs_text = docs_text|default('Symfony UX ' ~ package.humanName ~ ' Docs') %}
+            {% if package.shouldShowDocsLink or docs_url %}
                 <twig:DocsLink
                     title="Documentation"
-                    text="Symfony UX {{ package.humanName }} Docs"
-                    url="{{ package.officialDocsUrl }}"
+                    text="{{ docs_text }}"
+                    url="{{ docs_url|default(package.officialDocsUrl) }}"
                     icon="symfony"
                 />
             {% endif %}
@@ -33,7 +35,7 @@
                     title="Support"
                     text="Get help with Symfony UX {{ package.humanName }}"
                     url="{{ url('app_support') }}"
-                    icon="symfony"
+                    icon="raphael:help"
                 />
             {% endif %}
 

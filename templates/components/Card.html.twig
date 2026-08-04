@@ -1,7 +1,7 @@
 {% props name, image, url, description, tags, lazyload = true %}
 
-<article class="group rounded-xl relative flex flex-col border transition-all duration-250 ease-in-out hover:—translate-y-1 hover:shadow-lg hover:scale-102 ">
-    <div class="rounded-t-xl bg-black place-content-center grid overflow-hidden aspect-video">
+<article class="Card group rounded-xl relative flex flex-col overflow-hidden border transition-all duration-250 ease-in-out hover:-translate-y-1 hover:shadow-lg hover:scale-[1.02]">
+    <div class="bg-black place-content-center grid aspect-video">
         <img class="object-cover block max-w-full transition-opacity opacity-95 group-hover:opacity-100"
              src="{{ image }}"
              width="640"
@@ -10,7 +10,7 @@
         >
     </div>
 
-    <div class="py-4 px-6 flex-1 rounded-b-xl gap-2 flex flex-col">
+    <div class="py-4 px-6 flex-1 gap-2 flex flex-col">
         <h4 class="text-lg font-bold m-0">
             <a href="{{ url }}" class="stretched-link">
                 {{ name }}

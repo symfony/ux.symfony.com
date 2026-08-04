@@ -60,7 +60,7 @@
     --color-border-subtle: #343a40;
     --color-border-translucent: rgba(255, 255, 255, .175);
     --color-code: #ff79c6;
-    --color-code-bg: --alpha(var(--color-pink-500) / 10%);
+    --color-code-bg: transparent;
 
     --color-link: #6ea8fe;
 }
@@ -131,6 +131,7 @@
 
 /* ─── Components ─── */
 @import "./components/_container.css";
+@import "./components/_Card.css";
 @import "./components/_typography.css";
 @import "./components/_DemoContainer.css";
 @import "./components/_Icon.css";

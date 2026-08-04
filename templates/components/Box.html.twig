@@ -1,3 +1,7 @@
+{% props radius = 'md' %}
+
+{% set radius_class = radius == 'xl' ? 'rounded-xl before:rounded-xl after:rounded-xl' : 'rounded-md before:rounded-md after:rounded-md' %}
+
 {% set attr_style = [
     '--color: ' ~ color,
     '--gradient: ' ~ gradient ?: 'none',
@@ -5,7 +9,7 @@
 ]|join(' ;') %}
 
 <div
-    class="group relative flex gap-3 p-3 sm:gap-6 sm:p-6 self-stretch border border-surface rounded-md bg-body transition-all duration-750 ease-in-out hover:-translate-y-1 hover:duration-200 before:content-[''] before:absolute before:top-1 before:inset-x-0 before:-bottom-1 before:rounded-md before:opacity-0 before:blur-md before:-z-10 before:transition-opacity before:duration-600 before:[background-image:var(--gradient)] before:bg-black/50 hover:before:opacity-25 hover:before:duration-250 after:content-[''] after:absolute after:inset-0 after:rounded-md after:bg-body after:-z-10 after:opacity-95 after:transition-opacity after:duration-600 hover:after:opacity-[0.99] hover:after:duration-250"
+    class="group relative flex gap-3 p-3 sm:gap-6 sm:p-6 self-stretch border border-surface {{ radius_class }} bg-body transition-all duration-750 ease-in-out hover:-translate-y-1 hover:duration-200 before:content-[''] before:absolute before:top-1 before:inset-x-0 before:-bottom-1 before:opacity-0 before:blur-md before:-z-10 before:transition-opacity before:duration-600 before:[background-image:var(--gradient)] before:bg-black/50 hover:before:opacity-25 hover:before:duration-250 after:content-[''] after:absolute after:inset-0 after:bg-body after:-z-10 after:opacity-95 after:transition-opacity after:duration-600 hover:after:opacity-[0.99] hover:after:duration-250"
     style="{{ attr_style }}"
 >
     {% block badge %}{% endblock %}

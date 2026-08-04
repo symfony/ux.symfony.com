@@ -1,12 +1,15 @@
 {% props url, label, outline = false, arrow = false %}
 
-{% set variant_classes = outline
-    ? 'border-body-text bg-transparent text-body-text opacity-85 hover:bg-body-text hover:text-body hover:opacity-100'
-    : 'border-body-text bg-body-text text-body opacity-85 hover:opacity-100'
-%}
-
 <a
     href="{{ url }}"
-    class="{{ ('inline-flex items-center justify-center gap-2 align-middle rounded-full border px-4 py-2 text-center transition-all duration-450 ease-out hover:duration-200 hover:scale-[1.02] ' ~ variant_classes ~ ' ' ~ attributes.render('class'))|tailwind_merge }}"
+    class="{{ html_cva(
+        base: 'inline-flex items-center justify-center gap-2 align-middle rounded-full border px-4 py-2 text-center transition-all duration-450 ease-out hover:duration-200 hover:scale-[1.02]',
+        variants: {
+            variant: {
+                outline: 'border-body-text bg-transparent text-body-text opacity-85 hover:bg-body-text hover:text-body hover:opacity-100',
+                solid: 'border-body-text bg-body-text text-body opacity-85 hover:opacity-100',
+            },
+        },
+    ).apply({variant: outline ? 'outline' : 'solid'}, attributes.render('class'))|tailwind_merge }}"
     {{ attributes.without('class') }}
 >{{ label }}{% if arrow %} <twig:ux:icon name="arrow-right" class="Icon -rotate-45" />{% endif %}</a>

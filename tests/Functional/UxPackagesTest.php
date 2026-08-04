@@ -49,7 +49,7 @@ class UxPackagesTest extends KernelTestCase
         foreach ($repository->findAll(removed: false) as $package) {
             if ('live-component' === $package->getName()) {
                 // Live Component has a different bottom section
-                yield $package->getName() => [$package, 'Read full Documentation'];
+                yield $package->getName() => [$package, 'Read documentation'];
                 continue;
             }
             if ('icons' === $package->getName()) {

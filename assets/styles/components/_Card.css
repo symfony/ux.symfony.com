@@ -1,0 +1,26 @@
+@layer components {
+    .Tag {
+        display: inline-flex;
+        align-items: center;
+        max-inline-size: 100%;
+        padding-block: .25rem;
+        padding-inline: .5rem;
+        border: 1px solid var(--color-border-subtle);
+        border-radius: var(--radius-sm);
+        background-color: var(--color-subtle);
+        color: var(--color-body-text);
+        font-family: var(--font-sans);
+        font-size: .8rem;
+        font-stretch: semi-condensed;
+        font-weight: 400;
+        line-height: 1.25;
+        list-style: none;
+        overflow-wrap: anywhere;
+    }
+
+    .stretched-link::after {
+        position: absolute;
+        inset: 0;
+        content: "";
+    }
+}

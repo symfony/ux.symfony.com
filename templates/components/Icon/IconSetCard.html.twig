@@ -1,11 +1,11 @@
 {% set sample_icons = this.getSampleIcons() %}
 {% set samples = sample_icons|length %}
 <article
-    class="rounded-md relative flex flex-col transition duration-250 ease-in-out hover:-translate-y-2 shadow-sm hover:shadow-xl text-(--iconset-color)"
+    class="rounded-xl relative flex flex-col overflow-hidden transition duration-250 ease-in-out hover:-translate-y-2 shadow-sm hover:shadow-xl text-(--iconset-color)"
     data-iconset="{{ this.iconSet.identifier }}"
     style="--index: {{ index }}; --hue: calc(var(--index) * 77); --iconset-color: lch(70% 110 var(--hue, 240)); --iconset-color-bg: lch(80% 30 var(--hue, 240));"
 >
-    <div class="rounded-t-md grid w-full min-h-100px overflow-hidden bg-(--iconset-color-bg) place-content-stretch " style="aspect-ratio: 5/{{ samples / 5 }};">
+    <div class="grid w-full min-h-100px overflow-hidden bg-(--iconset-color-bg) place-content-stretch " style="aspect-ratio: 5/{{ samples / 5 }};">
         <div class="max-h-full w-full rounded place-content-stretch grid grid-cols-5 items-stretch justify-stretch">
 
             {% for icon in sample_icons|default([]) %}

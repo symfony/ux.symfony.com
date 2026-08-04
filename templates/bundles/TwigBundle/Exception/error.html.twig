@@ -10,7 +10,7 @@
             <span class="eyebrows" style="font-size: 1rem;">Error</span>
             <h1 style="font-size: calc(6rem + 10vw); line-height: .75;letter-spacing: -.5rem;">{{ status_code }}</h1>
             <p class="Wysiwyg w-1/2 text-balance max-xl:w-3/5 max-[734px]:w-4/5">{{ status_text }}</p>
-            <twig:Button href="{{ url('app_homepage') }}" variant="outline" class="after:absolute after:inset-0">Back to the homepage</twig:Button>
+            <twig:LinkButton outline label="Back to the homepage" url="{{ url('app_homepage') }}" class="after:absolute after:inset-0" />
         </div>
     </main>
 {% endblock %}

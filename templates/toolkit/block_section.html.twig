@@ -46,9 +46,14 @@
 
     <div class="mt-8 space-y-12">
         {% for variant in variants %}
-            <div id="{{ variant.recipe.name }}" class="scroll-mt-24">
+            <section id="{{ variant.recipe.name }}" class="scroll-mt-24">
+                <div class="Wysiwyg mb-4">
+                    <h2>
+                        <a href="#{{ variant.recipe.name }}" class="no-underline hover:underline">{{ variant.recipe.name }}</a>
+                    </h2>
+                </div>
                 {{ include('toolkit/_block_preview.html.twig', {variant: variant, kit_id: kit_id, show_install: true}) }}
-            </div>
+            </section>
         {% endfor %}
     </div>
 {% endblock %}

@@ -43,7 +43,7 @@ class BlocksController extends AbstractController
         $sections = array_map(
             fn (BlockSection $section): array => [
                 'section' => $section,
-                'preview_url' => $this->previewUrl($kitId, $section->recipes[0]),
+                'variants' => $this->variantsOf($kitId, $section),
             ],
             $this->blockSectionResolver->forKit($kit),
         );
@@ -68,21 +68,27 @@ class BlocksController extends AbstractController
             throw $this->createNotFoundException(\sprintf('Block section "%s" not found', $section));
         }
 
-        $variants = array_map(
-            fn (Recipe $recipe): array => [
-                'recipe' => $recipe,
-                'preview_url' => $this->previewUrl($kitId, $recipe),
-            ],
-            $blockSection->recipes,
-        );
-
         return $this->render('toolkit/block_section.html.twig', [
             'package' => $this->uxPackageRepository->find('toolkit'),
             'kit' => $kit,
             'kit_id' => $kitId,
             'section' => $blockSection,
-            'variants' => $variants,
+            'variants' => $this->variantsOf($kitId, $blockSection),
         ]);
+    }
+
+    /**
+     * @return list<array{recipe: Recipe, preview_url: ?string}>
+     */
+    private function variantsOf(string $kitId, BlockSection $section): array
+    {
+        return array_map(
+            fn (Recipe $recipe): array => [
+                'recipe' => $recipe,
+                'preview_url' => $this->previewUrl($kitId, $recipe),
+            ],
+            $section->recipes,
+        );
     }
 
     private function previewUrl(string $kitId, Recipe $recipe): ?string

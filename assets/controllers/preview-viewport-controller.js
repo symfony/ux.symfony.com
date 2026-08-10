@@ -16,6 +16,10 @@ export default class extends Controller {
         width: { type: Number, default: 0 },
         zoom: { type: Number, default: 1 },
         grid: Boolean,
+        // When set, zoom out on connect so an emulated width wider than the
+        // available space fits fully (e.g. a desktop block preview shown in a
+        // narrow docs column) instead of scrolling horizontally.
+        fit: { type: Boolean, default: false },
     };
 
     connect() {
@@ -23,6 +27,7 @@ export default class extends Controller {
             if (this.widthValue === 0) this.#render();
         });
         this.observer.observe(this.viewportTarget);
+        if (this.fitValue) this.#fitToWidth();
         this.#render();
     }
 
@@ -106,6 +111,14 @@ export default class extends Controller {
     #viewportCenterX() {
         const rect = this.viewportTarget.getBoundingClientRect();
         return rect.left + this.viewportTarget.clientWidth / 2;
+    }
+
+    #fitToWidth() {
+        if (this.widthValue <= 0) return;
+        const available = this.#availableWidth();
+        if (this.widthValue > available) {
+            this.zoomValue = Math.max(ZOOM_MIN, available / this.widthValue);
+        }
     }
 
     #render() {

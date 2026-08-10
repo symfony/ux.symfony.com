@@ -10,6 +10,7 @@
      data-controller="lazy-iframe preview-viewport"
      data-lazy-iframe-src-value="{{ previewUrl }}"
      data-preview-viewport-width-value="{{ initial_width|default(0) }}"
+     data-preview-viewport-fit-value="{{ fit|default(false) ? 'true' : 'false' }}"
 >
     <div class="flex flex-wrap items-center gap-2 px-2 py-1.5 border-b border-border bg-surface/50">
         <div role="group" aria-label="Viewport size" class="flex items-center gap-0.5">

@@ -50,7 +50,7 @@
                 {% endif %}
 
                 {% if variant.preview_url %}
-                    {{ include('toolkit/docs/_preview.html.twig', {previewUrl: variant.preview_url, initial_width: 1280}) }}
+                    {{ include('toolkit/docs/_preview.html.twig', {previewUrl: variant.preview_url, initial_width: 1280, fit: true}) }}
                 {% endif %}
 
                 <div class="mt-4" data-controller="toolkit-clipboard">

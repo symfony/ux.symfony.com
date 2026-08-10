@@ -71,28 +71,21 @@ class BlocksController extends AbstractController
     }
 
     /**
-     * @return list<array{recipe: Recipe, preview_url: ?string}>
+     * @return list<array{recipe: Recipe, code: ?string, language: ?string, preview_url: ?string}>
      */
     private function variantsOf(string $kitId, BlockSection $section): array
     {
-        return array_map(
-            fn (Recipe $recipe): array => [
+        return array_map(function (Recipe $recipe) use ($kitId): array {
+            if (null === $example = $recipe->getExamples()[0] ?? null) {
+                return ['recipe' => $recipe, 'code' => null, 'language' => null, 'preview_url' => null];
+            }
+
+            return [
                 'recipe' => $recipe,
-                'preview_url' => $this->previewUrl($kitId, $recipe),
-            ],
-            $section->recipes,
-        );
-    }
-
-    private function previewUrl(string $kitId, Recipe $recipe): ?string
-    {
-        $examples = $recipe->getExamples();
-        if ([] === $examples) {
-            return null;
-        }
-
-        return $this->previewUrlGeneratorFactory
-            ->forRecipe($kitId, $recipe->name)
-            ->generate($examples[0]['code'], $examples[0]['options']);
+                'code' => $example['code'],
+                'language' => $example['language'],
+                'preview_url' => $this->previewUrlGeneratorFactory->forRecipe($kitId, $recipe->name)->generate($example['code'], $example['options']),
+            ];
+        }, $section->recipes);
     }
 }

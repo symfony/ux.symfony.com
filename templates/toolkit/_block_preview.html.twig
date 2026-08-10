@@ -1,5 +1,5 @@
-{# One block variant: its description, a live desktop-width preview, and — when show_install is true —
-   the copy-paste install command. Shared by the Blocks index and the block section page. #}
+{# One block variant: its description, the example as Preview/Code tabs, and — when show_install is
+   true — the copy-paste install command. Shared by the Blocks index and the block section page. #}
 <div class="space-y-4">
     {% if variant.recipe.description %}
         <div class="Wysiwyg">
@@ -8,7 +8,19 @@
     {% endif %}
 
     {% if variant.preview_url %}
-        {{ include('toolkit/docs/_preview.html.twig', {previewUrl: variant.preview_url, initial_width: 1280, fit: true}) }}
+        {% set preview_html %}
+            {{ include('toolkit/docs/_preview.html.twig', {previewUrl: variant.preview_url, initial_width: 1280, fit: true}) }}
+        {% endset %}
+        {% set code_html %}
+            <twig:CodeBlockInline code="{{ variant.code }}" language="{{ variant.language }}" />
+        {% endset %}
+        {{ include('common_mark/tabs.html.twig', {
+            active_tab_id: 'preview-' ~ variant.recipe.name,
+            tabs: [
+                {id: 'preview-' ~ variant.recipe.name, title: 'Preview', content: preview_html},
+                {id: 'code-' ~ variant.recipe.name, title: 'Code', content: code_html},
+            ],
+        }) }}
     {% endif %}
 
     {% if show_install|default(false) %}

@@ -40,19 +40,12 @@ class BlocksController extends AbstractController
         }
 
         $kit = $this->toolkitService->getKit($kitId);
-        $sections = array_map(
-            fn (BlockSection $section): array => [
-                'section' => $section,
-                'variants' => $this->variantsOf($kitId, $section),
-            ],
-            $this->blockSectionResolver->forKit($kit),
-        );
 
         return $this->render('toolkit/blocks.html.twig', [
             'package' => $this->uxPackageRepository->find('toolkit'),
             'kit' => $kit,
             'kit_id' => $kitId,
-            'sections' => $sections,
+            'sections' => $this->blockSectionResolver->forKit($kit),
         ]);
     }
 

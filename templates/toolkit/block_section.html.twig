@@ -46,7 +46,9 @@
 
     <div class="mt-8 space-y-12">
         {% for variant in variants %}
-            {{ include('toolkit/_block_preview.html.twig', {variant: variant, kit_id: kit_id, show_install: true}) }}
+            <div id="{{ variant.recipe.name }}" class="scroll-mt-24">
+                {{ include('toolkit/_block_preview.html.twig', {variant: variant, kit_id: kit_id, show_install: true}) }}
+            </div>
         {% endfor %}
     </div>
 {% endblock %}

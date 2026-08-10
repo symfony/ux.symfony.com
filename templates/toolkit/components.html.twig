@@ -43,13 +43,11 @@
 
     <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
         {% for component in components %}
-            <a href="{{ path('app_toolkit_component', {kitId: kit_id, componentName: component.name}) }}"
-               class="group rounded-xl border border-border bg-subtle p-4 transition-colors hover:border-body-text/25 hover:bg-surface">
-                <div class="font-semibold group-hover:underline underline-offset-4">{{ component.manifest.name }}</div>
-                {% if component.description %}
-                    <p class="mt-1 text-sm text-body-text/70 line-clamp-2">{{ component.description }}</p>
-                {% endif %}
-            </a>
+            {{ include('toolkit/_kit_card.html.twig', {
+                href: path('app_toolkit_component', {kitId: kit_id, componentName: component.name}),
+                title: component.manifest.name,
+                description: component.description,
+            }) }}
         {% endfor %}
     </div>
 {% endblock %}

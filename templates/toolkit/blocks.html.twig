@@ -41,18 +41,22 @@
         <p>Ready-to-use, copy-paste page sections built from the kit's components.</p>
     </div>
 
-    <div class="mt-10 space-y-16">
-        {% for entry in sections %}
+    <div class="mt-8 space-y-8">
+        {% for section in sections %}
             <section>
-                <div class="Wysiwyg mb-6">
+                <div class="Wysiwyg mb-3">
                     <h2>
-                        <a href="{{ path('app_toolkit_block_section', {kitId: kit_id, section: entry.section.slug}) }}"
-                           class="no-underline hover:underline">{{ entry.section.name }}</a>
+                        <a href="{{ path('app_toolkit_block_section', {kitId: kit_id, section: section.slug}) }}"
+                           class="no-underline hover:underline">{{ section.name }}</a>
                     </h2>
                 </div>
-                <div class="space-y-10">
-                    {% for variant in entry.variants %}
-                        {{ include('toolkit/_block_preview.html.twig', {variant: variant, kit_id: kit_id}) }}
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+                    {% for recipe in section.recipes %}
+                        {{ include('toolkit/_kit_card.html.twig', {
+                            href: path('app_toolkit_block_section', {kitId: kit_id, section: section.slug}) ~ '#' ~ recipe.name,
+                            title: recipe.name,
+                            description: recipe.description,
+                        }) }}
                     {% endfor %}
                 </div>
             </section>

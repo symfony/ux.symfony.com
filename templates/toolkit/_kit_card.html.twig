@@ -1,0 +1,9 @@
+{# A card linking to a component or block, with a title and an optional description.
+   Shared by the Components and Blocks index pages so both list items look the same. #}
+<a href="{{ href }}"
+   class="group rounded-xl border border-border bg-subtle p-4 transition-colors hover:border-body-text/25 hover:bg-surface">
+    <div class="font-semibold group-hover:underline underline-offset-4">{{ title }}</div>
+    {% if description %}
+        <p class="mt-1 text-sm text-body-text/70 line-clamp-2">{{ description }}</p>
+    {% endif %}
+</a>

@@ -63,6 +63,7 @@ class ComponentsController extends AbstractController
         Request $request,
         #[MapQueryParameter] string $kitId,
         #[MapQueryParameter] string $code,
+        #[MapQueryParameter] ?string $recipe,
         UriSigner $uriSigner,
         \Twig\Environment $twig,
         #[Autowire(service: 'ux_toolkit.kit.kit_context_runner')]
@@ -82,6 +83,18 @@ class ComponentsController extends AbstractController
 
         $kit = $this->toolkitService->getKit($kitId);
 
+        // A prioritized recipe lets a block's own templates win when several recipes ship a component
+        // of the same name (e.g. login-01 and login-02 both define a LoginForm).
+        $prioritizedRecipe = null !== $recipe ? $kit->getRecipe($recipe) : null;
+        $isBlock = null !== $prioritizedRecipe && RecipeType::Block === $prioritizedRecipe->manifest->type;
+
+        // Blocks ship their own full-page layout, so render them edge-to-edge instead of the padded,
+        // centered frame used for standalone components.
+        $bodyCss = $isBlock
+            ? 'display: block; margin: 0; width: 100%;'
+            : 'display: flex; align-items: center; justify-content: center; margin: 0; width: 100%; padding: 48px;';
+        $bodyStyle = $isBlock ? '' : 'min-height: 200px';
+
         $template = $twig->createTemplate(<<<HTML
             <html lang="en">
                 <head>
@@ -90,12 +103,7 @@ class ComponentsController extends AbstractController
                     <meta name="viewport" content="width=device-width, initial-scale=1">
                     <style>
                         body {
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            margin: 0;
-                            width: 100%;
-                            padding: 48px;
+                            {$bodyCss}
                         }
                     </style>
                     <script>
@@ -113,12 +121,12 @@ class ComponentsController extends AbstractController
                     </script>
                     {{ importmap('toolkit-{$kitId}') }}
                 </head>
-                <body style="min-height: 200px">{$code}</body>
+                <body style="{$bodyStyle}">{$code}</body>
             </html>
             HTML);
 
         return new Response(
-            $kitContextRunner->runForKit($kit, static fn () => $twig->render($template)),
+            $kitContextRunner->runForKit($kit, static fn () => $twig->render($template), $prioritizedRecipe),
             Response::HTTP_OK,
             ['X-Robots-Tag' => 'noindex, nofollow']
         );

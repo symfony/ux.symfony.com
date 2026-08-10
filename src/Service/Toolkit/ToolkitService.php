@@ -105,7 +105,7 @@ class ToolkitService
         return $this->renderedRecipes[$cacheKey] ??= (new RecipeDocRenderer($this->twig))->renderAsHtml(
             $this->getKit($kitId),
             $recipe,
-            $this->previewUrlGeneratorFactory->forKit($kitId),
+            $this->previewUrlGeneratorFactory->forRecipe($kitId, $recipe->name),
             ($this->converterFactory)()->getEnvironment(),
         );
     }

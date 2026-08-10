@@ -17,9 +17,10 @@ use Symfony\UX\Toolkit\Markdown\CodeOptions;
 use Symfony\UX\Toolkit\Markdown\PreviewUrlGenerator;
 
 /**
- * Builds a kit-scoped {@see PreviewUrlGenerator} for the Toolkit's RecipeDocRenderer: the generated
+ * Builds a recipe-scoped {@see PreviewUrlGenerator} for the Toolkit's RecipeDocRenderer: the generated
  * URL points at the app_toolkit_component_preview controller, signed so the preview iframe can render
- * arbitrary example code safely.
+ * arbitrary example code safely. The recipe is forwarded so the controller can prioritize its templates
+ * when several recipes ship a component of the same name (e.g. login-01 and login-02 both define a LoginForm).
  */
 final class ComponentPreviewUrlGeneratorFactory
 {
@@ -29,11 +30,12 @@ final class ComponentPreviewUrlGeneratorFactory
     ) {
     }
 
-    public function forKit(string $kitId): PreviewUrlGenerator
+    public function forRecipe(string $kitId, string $recipeName): PreviewUrlGenerator
     {
-        return new class($kitId, $this->uriSigner, $this->urlGenerator) implements PreviewUrlGenerator {
+        return new class($kitId, $recipeName, $this->uriSigner, $this->urlGenerator) implements PreviewUrlGenerator {
             public function __construct(
                 private readonly string $kitId,
+                private readonly string $recipeName,
                 private readonly UriSigner $uriSigner,
                 private readonly UrlGeneratorInterface $urlGenerator,
             ) {
@@ -46,7 +48,7 @@ final class ComponentPreviewUrlGeneratorFactory
                     [
                         'kitId' => $this->kitId,
                         'code' => $code,
-                        'height' => '200px',
+                        'recipe' => $this->recipeName,
                     ],
                     UrlGeneratorInterface::ABSOLUTE_URL,
                 ));

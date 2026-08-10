@@ -14,6 +14,7 @@ namespace App\Command;
 use App\Service\Changelog\ChangelogProvider;
 use App\Service\CookbookRepository;
 use App\Service\LiveDemoRepository;
+use App\Service\Toolkit\BlockSectionResolver;
 use App\Service\Toolkit\ToolkitService;
 use App\Service\UxPackageRepository;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -40,6 +41,7 @@ class GenerateLlmsFilesCommand
         private readonly CookbookRepository $cookbookRepository,
         private readonly ChangelogProvider $changelogProvider,
         private readonly ToolkitService $toolkitService,
+        private readonly BlockSectionResolver $blockSectionResolver,
         private readonly UrlGeneratorInterface $urlGenerator,
         #[Autowire('%kernel.project_dir%')] private readonly string $projectDir,
         #[Autowire('%app.llms_dir%')] private readonly string $llmsDir,
@@ -224,6 +226,20 @@ class GenerateLlmsFilesCommand
                 $this->fs->dumpFile($this->outputDir.'/'.$path, $md);
                 $content[$path] = $md;
                 $io->writeln('  ['.$kitId.'] '.$recipe->name);
+            }
+
+            foreach ($this->blockSectionResolver->forKit($kit) as $section) {
+                $md = '# '.$section->name."\n\n";
+                foreach ($section->recipes as $recipe) {
+                    $md .= trim($recipeDocRenderer->renderAsMarkdown($kit, $recipe))."\n\n";
+                }
+                $path = $this->generateMdPath('app_toolkit_block_section', [
+                    'kitId' => $kitId,
+                    'section' => $section->slug,
+                ]);
+                $this->fs->dumpFile($this->outputDir.'/'.$path, $md);
+                $content[$path] = $md;
+                $io->writeln('  ['.$kitId.'] '.$section->name.' (block section)');
             }
         }
 

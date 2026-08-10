@@ -12,6 +12,7 @@
 namespace App\Controller;
 
 use App\Service\LiveDemoRepository;
+use App\Service\Toolkit\BlockSectionResolver;
 use App\Service\Toolkit\ToolkitService;
 use App\Service\UxPackageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,6 +28,7 @@ final class SitemapController extends AbstractController
         private readonly UxPackageRepository $uxPackageRepository,
         private readonly LiveDemoRepository $liveDemoRepository,
         private readonly ToolkitService $toolkitService,
+        private readonly BlockSectionResolver $blockSectionResolver,
     ) {
     }
 
@@ -69,9 +71,18 @@ final class SitemapController extends AbstractController
         // Toolkit kits
         foreach ($this->toolkitService->getKits() as $kitId => $kit) {
             yield $this->generateAbsoluteUrl('app_toolkit_kit', ['kitId' => $kitId]);
+            yield $this->generateAbsoluteUrl('app_toolkit_kit_components', ['kitId' => $kitId]);
 
             foreach ($kit->getRecipes(RecipeType::Component) as $component) {
-                yield $this->generateAbsoluteUrl('app_toolkit_component', ['kitId' => $kitId, 'componentName' => $component->manifest->name]);
+                yield $this->generateAbsoluteUrl('app_toolkit_component', ['kitId' => $kitId, 'componentName' => $component->name]);
+            }
+
+            $sections = $this->blockSectionResolver->forKit($kit);
+            if ([] !== $sections) {
+                yield $this->generateAbsoluteUrl('app_toolkit_kit_blocks', ['kitId' => $kitId]);
+            }
+            foreach ($sections as $section) {
+                yield $this->generateAbsoluteUrl('app_toolkit_block_section', ['kitId' => $kitId, 'section' => $section->slug]);
             }
         }
     }

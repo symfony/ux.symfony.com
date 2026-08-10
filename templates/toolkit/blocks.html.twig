@@ -36,27 +36,30 @@
         <twig:Toolkit:Breadcrumb:Item active>Blocks</twig:Toolkit:Breadcrumb:Item>
     </twig:Toolkit:Breadcrumb>
 
-    <h1 class="text-3xl font-bold mb-2">Blocks</h1>
-    <p class="text-body-text/70 mb-8">Ready-to-use, copy-paste page sections built from the kit's components.</p>
+    <div class="Wysiwyg">
+        <h1>Blocks</h1>
+        <p>Ready-to-use, copy-paste page sections built from the kit's components.</p>
+    </div>
 
-    <div class="space-y-20">
+    <div class="mt-10 space-y-16">
         {% for entry in sections %}
             <section>
-                <div class="mb-6">
-                    <a href="{{ path('app_toolkit_block_section', {kitId: kit_id, section: entry.section.slug}) }}"
-                       class="text-2xl font-bold hover:underline underline-offset-4">
-                        {{ entry.section.name }}
-                    </a>
-                    <p class="mt-1 text-sm text-body-text/60">{{ entry.variants|length }} block{{ entry.variants|length > 1 ? 's' }}</p>
+                <div class="Wysiwyg mb-6">
+                    <h2>
+                        <a href="{{ path('app_toolkit_block_section', {kitId: kit_id, section: entry.section.slug}) }}"
+                           class="no-underline hover:underline">{{ entry.section.name }}</a>
+                    </h2>
                 </div>
-                <div class="space-y-12">
+                <div class="space-y-10">
                     {% for variant in entry.variants %}
                         {{ include('toolkit/_block_preview.html.twig', {variant: variant, kit_id: kit_id}) }}
                     {% endfor %}
                 </div>
             </section>
         {% else %}
-            <p class="text-body-text/60">This kit has no blocks yet.</p>
+            <div class="Wysiwyg">
+                <p>This kit has no blocks yet.</p>
+            </div>
         {% endfor %}
     </div>
 {% endblock %}

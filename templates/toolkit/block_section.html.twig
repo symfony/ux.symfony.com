@@ -40,9 +40,11 @@
         <twig:Toolkit:Breadcrumb:Item active>{{ section.name }}</twig:Toolkit:Breadcrumb:Item>
     </twig:Toolkit:Breadcrumb>
 
-    <h1 class="text-3xl font-bold mb-8">{{ section.name }}</h1>
+    <div class="Wysiwyg">
+        <h1>{{ section.name }}</h1>
+    </div>
 
-    <div class="space-y-16">
+    <div class="mt-8 space-y-12">
         {% for variant in variants %}
             {{ include('toolkit/_block_preview.html.twig', {variant: variant, kit_id: kit_id, show_install: true}) }}
         {% endfor %}

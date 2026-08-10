@@ -2,7 +2,9 @@
    the copy-paste install command. Shared by the Blocks index and the block section page. #}
 <div class="space-y-4">
     {% if variant.recipe.description %}
-        <p class="text-body-text/70">{{ variant.recipe.description }}</p>
+        <div class="Wysiwyg">
+            <p>{{ variant.recipe.description }}</p>
+        </div>
     {% endif %}
 
     {% if variant.preview_url %}

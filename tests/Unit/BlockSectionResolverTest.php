@@ -17,7 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class BlockSectionResolverTest extends KernelTestCase
 {
-    public function testGroupsVariantsIntoASingleSection(): void
+    public function testGroupsVariantsIntoASingleSection()
     {
         $resolver = self::getContainer()->get(BlockSectionResolver::class);
         $kit = self::getContainer()->get(ToolkitService::class)->getKit('shadcn');
@@ -33,7 +33,7 @@ final class BlockSectionResolverTest extends KernelTestCase
         );
     }
 
-    public function testUnknownSectionReturnsNull(): void
+    public function testUnknownSectionReturnsNull()
     {
         $resolver = self::getContainer()->get(BlockSectionResolver::class);
         $kit = self::getContainer()->get(ToolkitService::class)->getKit('shadcn');

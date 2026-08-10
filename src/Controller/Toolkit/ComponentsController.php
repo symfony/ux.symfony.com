@@ -34,6 +34,23 @@ class ComponentsController extends AbstractController
     ) {
     }
 
+    #[Route('/toolkit/kits/{kitId}/components', name: 'app_toolkit_kit_components')]
+    public function index(string $kitId): Response
+    {
+        if (!LocalRegistry::exists($kitId)) {
+            throw $this->createNotFoundException(\sprintf('Kit "%s" not found', $kitId));
+        }
+
+        $kit = $this->toolkitService->getKit($kitId);
+
+        return $this->render('toolkit/components.html.twig', [
+            'package' => $this->uxPackageRepository->find('toolkit'),
+            'kit' => $kit,
+            'kit_id' => $kitId,
+            'components' => $kit->getRecipes(RecipeType::Component),
+        ]);
+    }
+
     #[Route('/toolkit/kits/{kitId}/components/{componentName}', name: 'app_toolkit_component')]
     public function showComponent(string $kitId, string $componentName): Response
     {

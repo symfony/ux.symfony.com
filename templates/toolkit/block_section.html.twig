@@ -1,0 +1,72 @@
+{% extends 'toolkit/kit_page.html.twig' %}
+
+{% set title = section.name ~ ' - Blocks - ' ~ kit.manifest.name ~ ' Kit' %}
+{% set description = "The #{section.name} blocks from the UX Toolkit #{kit.manifest.name} kit." %}
+{% set meta = {
+    title: title,
+    description: description,
+    canonical: url('app_icons'),
+    social: {
+        title: title,
+        description: description,
+        image: {
+            url: absolute_url(asset(package.getSocialImage('1200x675'))),
+            type: 'image/png',
+            width: 1200,
+            height: 675,
+            alt: package.humanName ~ ' - Kit ' ~ kit.manifest.name,
+        },
+    },
+} %}
+
+{% block kit_main %}
+    <twig:Toolkit:Breadcrumb class="mb-2">
+        <twig:Toolkit:Breadcrumb:Item>
+            <twig:Toolkit:Breadcrumb:Link href="{{ path('app_toolkit') }}">UX Toolkit</twig:Toolkit:Breadcrumb:Link>
+        </twig:Toolkit:Breadcrumb:Item>
+        <twig:Toolkit:Breadcrumb:Separator />
+        <twig:Toolkit:Breadcrumb:Item>
+            <twig:Toolkit:Breadcrumb:Link href="{{ path('app_toolkit', {_fragment: 'kits'}) }}">Kits</twig:Toolkit:Breadcrumb:Link>
+        </twig:Toolkit:Breadcrumb:Item>
+        <twig:Toolkit:Breadcrumb:Separator />
+        <twig:Toolkit:Breadcrumb:Item>
+            <twig:Toolkit:Breadcrumb:Link href="{{ path('app_toolkit_kit', {kitId: kit_id}) }}">{{ kit.manifest.name }}</twig:Toolkit:Breadcrumb:Link>
+        </twig:Toolkit:Breadcrumb:Item>
+        <twig:Toolkit:Breadcrumb:Separator />
+        <twig:Toolkit:Breadcrumb:Item>
+            <twig:Toolkit:Breadcrumb:Link href="{{ path('app_toolkit_kit_blocks', {kitId: kit_id}) }}">Blocks</twig:Toolkit:Breadcrumb:Link>
+        </twig:Toolkit:Breadcrumb:Item>
+        <twig:Toolkit:Breadcrumb:Separator />
+        <twig:Toolkit:Breadcrumb:Item active>{{ section.name }}</twig:Toolkit:Breadcrumb:Item>
+    </twig:Toolkit:Breadcrumb>
+
+    <h1 class="text-3xl font-bold mb-8">{{ section.name }}</h1>
+
+    <div class="space-y-16">
+        {% for variant in variants %}
+            <section>
+                {% if variant.recipe.description %}
+                    <p class="text-body-text/70 mb-3">{{ variant.recipe.description }}</p>
+                {% endif %}
+
+                {% if variant.preview_url %}
+                    {{ include('toolkit/docs/_preview.html.twig', {previewUrl: variant.preview_url, initial_width: 1280}) }}
+                {% endif %}
+
+                <div class="mt-4" data-controller="toolkit-clipboard">
+                    <div class="flex items-center gap-2 rounded-lg border border-border bg-subtle px-3 py-2 font-mono text-sm">
+                        <span class="text-body-text/50 select-none">$</span>
+                        <code class="flex-1 overflow-x-auto" data-toolkit-clipboard-target="source">php bin/console ux:install {{ variant.recipe.name }} --kit {{ kit_id }}</code>
+                        <button type="button"
+                                class="shrink-0 rounded-md px-2 py-1 text-xs font-medium hover:bg-surface text-body-text/70 hover:text-body-text"
+                                aria-label="Copy install command"
+                                data-toolkit-clipboard-target="button"
+                                data-action="toolkit-clipboard#copy">
+                            Copy
+                        </button>
+                    </div>
+                </div>
+            </section>
+        {% endfor %}
+    </div>
+{% endblock %}

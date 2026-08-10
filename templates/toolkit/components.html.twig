@@ -1,0 +1,53 @@
+{% extends 'toolkit/kit_page.html.twig' %}
+
+{% set title = 'Components - ' ~ kit.manifest.name ~ ' Kit' %}
+{% set description = "All components from the UX Toolkit #{kit.manifest.name} kit." %}
+{% set meta = {
+    title: title,
+    description: description,
+    canonical: url('app_icons'),
+    social: {
+        title: title,
+        description: description,
+        image: {
+            url: absolute_url(asset(package.getSocialImage('1200x675'))),
+            type: 'image/png',
+            width: 1200,
+            height: 675,
+            alt: package.humanName ~ ' - Kit ' ~ kit.manifest.name,
+        },
+    },
+} %}
+
+{% block kit_main %}
+    <twig:Toolkit:Breadcrumb class="mb-2">
+        <twig:Toolkit:Breadcrumb:Item>
+            <twig:Toolkit:Breadcrumb:Link href="{{ path('app_toolkit') }}">UX Toolkit</twig:Toolkit:Breadcrumb:Link>
+        </twig:Toolkit:Breadcrumb:Item>
+        <twig:Toolkit:Breadcrumb:Separator />
+        <twig:Toolkit:Breadcrumb:Item>
+            <twig:Toolkit:Breadcrumb:Link href="{{ path('app_toolkit', {_fragment: 'kits'}) }}">Kits</twig:Toolkit:Breadcrumb:Link>
+        </twig:Toolkit:Breadcrumb:Item>
+        <twig:Toolkit:Breadcrumb:Separator />
+        <twig:Toolkit:Breadcrumb:Item>
+            <twig:Toolkit:Breadcrumb:Link href="{{ path('app_toolkit_kit', {kitId: kit_id}) }}">{{ kit.manifest.name }}</twig:Toolkit:Breadcrumb:Link>
+        </twig:Toolkit:Breadcrumb:Item>
+        <twig:Toolkit:Breadcrumb:Separator />
+        <twig:Toolkit:Breadcrumb:Item active>Components</twig:Toolkit:Breadcrumb:Item>
+    </twig:Toolkit:Breadcrumb>
+
+    <h1 class="text-3xl font-bold mb-2">Components</h1>
+    <p class="text-body-text/70 mb-8">The building blocks of the {{ kit.manifest.name }} kit.</p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+        {% for component in components %}
+            <a href="{{ path('app_toolkit_component', {kitId: kit_id, componentName: component.name}) }}"
+               class="group rounded-xl border border-border bg-subtle p-4 transition-colors hover:border-body-text/25 hover:bg-surface">
+                <div class="font-semibold group-hover:underline underline-offset-4">{{ component.manifest.name }}</div>
+                {% if component.description %}
+                    <p class="mt-1 text-sm text-body-text/70 line-clamp-2">{{ component.description }}</p>
+                {% endif %}
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}

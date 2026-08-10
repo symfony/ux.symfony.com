@@ -1,0 +1,41 @@
+{% set blocks_active = app.current_route in ['app_toolkit_kit_blocks', 'app_toolkit_block_section'] %}
+{% set components_active = app.current_route in ['app_toolkit_kit_components', 'app_toolkit_component'] %}
+
+<div class="px-2 font-semibold">Kit</div>
+<ul class="list-unstyled mb-4 space-y-[.1rem]">
+    <li class="rounded transition-colors duration-100 ease-in-out hover:bg-surface [&.active]:bg-surface {{ app.current_route == 'app_toolkit_kit' ? 'active' : '' }}">
+        <a class="block px-2 py-[.1rem] text-[.9rem]" href="{{ path('app_toolkit_kit', {kitId: kitId}) }}">Getting started</a>
+    </li>
+    {% if this.blockSections is not empty %}
+        <li class="rounded transition-colors duration-100 ease-in-out hover:bg-surface [&.active]:bg-surface {{ blocks_active ? 'active' : '' }}">
+            <a class="block px-2 py-[.1rem] text-[.9rem]" href="{{ path('app_toolkit_kit_blocks', {kitId: kitId}) }}">Blocks</a>
+        </li>
+    {% endif %}
+    <li class="rounded transition-colors duration-100 ease-in-out hover:bg-surface [&.active]:bg-surface {{ components_active ? 'active' : '' }}">
+        <a class="block px-2 py-[.1rem] text-[.9rem]" href="{{ path('app_toolkit_kit_components', {kitId: kitId}) }}">Components</a>
+    </li>
+</ul>
+
+{% if this.blockSections is not empty %}
+    <div class="px-2 font-semibold">Blocks</div>
+    <ul class="list-unstyled mb-4 space-y-[.1rem]">
+        {% for section in this.blockSections %}
+            <li class="rounded transition-colors duration-100 ease-in-out hover:bg-surface [&.active]:bg-surface {{ app.current_route == 'app_toolkit_block_section' and app.current_route_parameters.section == section.slug ? 'active' : '' }}">
+                <a class="block px-2 py-0.5 text-[.9rem]" href="{{ path('app_toolkit_block_section', {kitId: kitId, section: section.slug}) }}">
+                    {{ section.name }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<div class="px-2 font-semibold">Components</div>
+<ul class="list-unstyled mb-4 space-y-[.1rem]">
+    {% for component in this.components %}
+        <li class="rounded transition-colors duration-100 ease-in-out hover:bg-surface [&.active]:bg-surface {{ app.current_route == 'app_toolkit_component' and app.current_route_parameters.componentName == component.name ? 'active' : '' }}">
+            <a class="block px-2 py-0.5 text-[.9rem]" href="{{ path('app_toolkit_component', {kitId: kitId, componentName: component.name}) }}">
+                {{ component.manifest.name }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>

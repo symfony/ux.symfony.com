@@ -1,0 +1,60 @@
+{% extends 'toolkit/kit_page.html.twig' %}
+
+{% set title = 'Blocks - ' ~ kit.manifest.name ~ ' Kit' %}
+{% set description = "Ready-to-use blocks from the UX Toolkit #{kit.manifest.name} kit." %}
+{% set meta = {
+    title: title,
+    description: description,
+    canonical: url('app_icons'),
+    social: {
+        title: title,
+        description: description,
+        image: {
+            url: absolute_url(asset(package.getSocialImage('1200x675'))),
+            type: 'image/png',
+            width: 1200,
+            height: 675,
+            alt: package.humanName ~ ' - Kit ' ~ kit.manifest.name,
+        },
+    },
+} %}
+
+{% block kit_main %}
+    <twig:Toolkit:Breadcrumb class="mb-2">
+        <twig:Toolkit:Breadcrumb:Item>
+            <twig:Toolkit:Breadcrumb:Link href="{{ path('app_toolkit') }}">UX Toolkit</twig:Toolkit:Breadcrumb:Link>
+        </twig:Toolkit:Breadcrumb:Item>
+        <twig:Toolkit:Breadcrumb:Separator />
+        <twig:Toolkit:Breadcrumb:Item>
+            <twig:Toolkit:Breadcrumb:Link href="{{ path('app_toolkit', {_fragment: 'kits'}) }}">Kits</twig:Toolkit:Breadcrumb:Link>
+        </twig:Toolkit:Breadcrumb:Item>
+        <twig:Toolkit:Breadcrumb:Separator />
+        <twig:Toolkit:Breadcrumb:Item>
+            <twig:Toolkit:Breadcrumb:Link href="{{ path('app_toolkit_kit', {kitId: kit_id}) }}">{{ kit.manifest.name }}</twig:Toolkit:Breadcrumb:Link>
+        </twig:Toolkit:Breadcrumb:Item>
+        <twig:Toolkit:Breadcrumb:Separator />
+        <twig:Toolkit:Breadcrumb:Item active>Blocks</twig:Toolkit:Breadcrumb:Item>
+    </twig:Toolkit:Breadcrumb>
+
+    <h1 class="text-3xl font-bold mb-2">Blocks</h1>
+    <p class="text-body-text/70 mb-8">Ready-to-use, copy-paste page sections built from the kit's components.</p>
+
+    <div class="space-y-12">
+        {% for entry in sections %}
+            <div>
+                <div class="flex items-baseline justify-between gap-4 mb-3">
+                    <a href="{{ path('app_toolkit_block_section', {kitId: kit_id, section: entry.section.slug}) }}"
+                       class="text-lg font-semibold hover:underline underline-offset-4">
+                        {{ entry.section.name }}
+                    </a>
+                    <span class="text-sm text-body-text/60">{{ entry.section.recipes|length }} block{{ entry.section.recipes|length > 1 ? 's' }}</span>
+                </div>
+                {% if entry.preview_url %}
+                    {{ include('toolkit/docs/_preview.html.twig', {previewUrl: entry.preview_url, initial_width: 1280}) }}
+                {% endif %}
+            </div>
+        {% else %}
+            <p class="text-body-text/60">This kit has no blocks yet.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'toolkit/kit_page.html.twig' %}
 
 {% set meta = {
     title: 'UX Toolkit - Kits - ' ~ kit.manifest.name,
@@ -17,36 +17,22 @@
     },
 } %}
 
-{% block content %}
-    <div class="pt-20"></div>
+{% block kit_main %}
+    <twig:Toolkit:Breadcrumb class="mb-2">
+        <twig:Toolkit:Breadcrumb:Item>
+            <twig:Toolkit:Breadcrumb:Link href="{{ path('app_toolkit') }}">UX Toolkit</twig:Toolkit:Breadcrumb:Link>
+        </twig:Toolkit:Breadcrumb:Item>
+        <twig:Toolkit:Breadcrumb:Separator />
+        <twig:Toolkit:Breadcrumb:Item>
+            <twig:Toolkit:Breadcrumb:Link href="{{ path('app_toolkit', {_fragment: 'kits'}) }}">Kits</twig:Toolkit:Breadcrumb:Link>
+        </twig:Toolkit:Breadcrumb:Item>
+        <twig:Toolkit:Breadcrumb:Separator />
+        <twig:Toolkit:Breadcrumb:Item active>
+            {{ kit.manifest.name }}
+        </twig:Toolkit:Breadcrumb:Item>
+    </twig:Toolkit:Breadcrumb>
 
-    <div class="max-w-[1140px] mx-auto lg:pt-6 grid grid-cols-1 lg:grid-cols-[180px_1fr] gap-8 px-4 lg:px-0">
-        <div class="hidden lg:block">
-            {{ include('toolkit/_kit_aside.html.twig') }}
-        </div>
-
-        <div class="min-w-0">
-            <div class="xl:hidden sticky top-0 z-9 -mx-4 mb-6 px-4 py-3 bg-body/85 backdrop-blur border-b border-border flex items-center gap-3">
-                {{ include('toolkit/_kit_mobile_menu.html.twig') }}
-            </div>
-
-            <twig:Toolkit:Breadcrumb class="mb-2">
-                <twig:Toolkit:Breadcrumb:Item>
-                    <twig:Toolkit:Breadcrumb:Link href="{{ path('app_toolkit') }}">UX Toolkit</twig:Toolkit:Breadcrumb:Link>
-                </twig:Toolkit:Breadcrumb:Item>
-                <twig:Toolkit:Breadcrumb:Separator />
-                <twig:Toolkit:Breadcrumb:Item>
-                    <twig:Toolkit:Breadcrumb:Link href="{{ path('app_toolkit', {_fragment: 'kits'}) }}">Kits</twig:Toolkit:Breadcrumb:Link>
-                </twig:Toolkit:Breadcrumb:Item>
-                <twig:Toolkit:Breadcrumb:Separator />
-                <twig:Toolkit:Breadcrumb:Item active>
-                    {{ kit.manifest.name }}
-                </twig:Toolkit:Breadcrumb:Item>
-            </twig:Toolkit:Breadcrumb>
-
-            <div class="Wysiwyg">
-                {{- kit.installAsMarkdown|markdown_to_html -}}
-            </div>
-        </div>
+    <div class="Wysiwyg">
+        {{- kit.installAsMarkdown|markdown_to_html -}}
     </div>
 {% endblock %}

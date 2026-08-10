@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "00f1230f8770d951328ad39110ad5e72",
+    "content-hash": "1415e1f533cf0b55005f7ee3809dcc35",
     "packages": [
         {
             "name": "composer/semver",
@@ -8240,12 +8240,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-toolkit.git",
-                "reference": "aa0357a397ea2dca1cce80977b4257b41b6d34ad"
+                "reference": "32c9748eedfa339c3df4372b052dc74f63d71270"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-toolkit/zipball/aa0357a397ea2dca1cce80977b4257b41b6d34ad",
-                "reference": "aa0357a397ea2dca1cce80977b4257b41b6d34ad",
+                "url": "https://api.github.com/repos/symfony/ux-toolkit/zipball/32c9748eedfa339c3df4372b052dc74f63d71270",
+                "reference": "32c9748eedfa339c3df4372b052dc74f63d71270",
                 "shasum": ""
             },
             "require": {
@@ -8268,7 +8268,7 @@
                 "symfony/http-client": "^7.4|^8.0",
                 "symfony/stopwatch": "^7.4|^8.0",
                 "symfony/ux-icons": "^2.18|^3.0",
-                "tales-from-a-dev/twig-tailwind-extra": "^1.0.0",
+                "tales-from-a-dev/twig-tailwind-extra": "^1.3.0",
                 "twig/extra-bundle": "^3.24|^4.0",
                 "twig/html-extra": "^3.24",
                 "zenstruck/console-test": "^1.7"
@@ -8344,7 +8344,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-08-01T06:01:44+00:00"
+            "time": "2026-08-10T06:10:43+00:00"
         },
         {
             "name": "symfony/ux-translator",
@@ -9244,16 +9244,16 @@
         },
         {
             "name": "tales-from-a-dev/tailwind-merge-php",
-            "version": "v0.1.0",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tales-from-a-dev/tailwind-merge-php.git",
-                "reference": "dbf99fb623411a4db549fe8aac44a9ed350edd51"
+                "reference": "48ecbb5c87ebcc521a344a6d3bfeec9720af00da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tales-from-a-dev/tailwind-merge-php/zipball/dbf99fb623411a4db549fe8aac44a9ed350edd51",
-                "reference": "dbf99fb623411a4db549fe8aac44a9ed350edd51",
+                "url": "https://api.github.com/repos/tales-from-a-dev/tailwind-merge-php/zipball/48ecbb5c87ebcc521a344a6d3bfeec9720af00da",
+                "reference": "48ecbb5c87ebcc521a344a6d3bfeec9720af00da",
                 "shasum": ""
             },
             "require": {
@@ -9296,29 +9296,30 @@
             ],
             "support": {
                 "issues": "https://github.com/tales-from-a-dev/tailwind-merge-php/issues",
-                "source": "https://github.com/tales-from-a-dev/tailwind-merge-php/tree/v0.1.0"
+                "source": "https://github.com/tales-from-a-dev/tailwind-merge-php/tree/v0.3.0"
             },
-            "time": "2025-11-20T17:56:36+00:00"
+            "time": "2026-05-11T09:52:11+00:00"
         },
         {
             "name": "tales-from-a-dev/twig-tailwind-extra",
-            "version": "v1.0.0",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tales-from-a-dev/twig-tailwind-extra.git",
-                "reference": "c398d66cd164de0a52282fff0e2d45ecbcbb06ef"
+                "reference": "bdc48d7da01383dc95e5d232344bc758aae1f80d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tales-from-a-dev/twig-tailwind-extra/zipball/c398d66cd164de0a52282fff0e2d45ecbcbb06ef",
-                "reference": "c398d66cd164de0a52282fff0e2d45ecbcbb06ef",
+                "url": "https://api.github.com/repos/tales-from-a-dev/twig-tailwind-extra/zipball/bdc48d7da01383dc95e5d232344bc758aae1f80d",
+                "reference": "bdc48d7da01383dc95e5d232344bc758aae1f80d",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.1",
                 "symfony/cache": "^6.4 || ^7.0 || ^8.0",
                 "symfony/framework-bundle": "^6.4 || ^7.0 || ^8.0",
-                "tales-from-a-dev/tailwind-merge-php": "^0.1",
+                "tales-from-a-dev/tailwind-merge-php": "^0.3",
+                "twig/html-extra": "^3.24",
                 "twig/twig": "^3.0"
             },
             "require-dev": {
@@ -9352,9 +9353,9 @@
             ],
             "support": {
                 "issues": "https://github.com/tales-from-a-dev/twig-tailwind-extra/issues",
-                "source": "https://github.com/tales-from-a-dev/twig-tailwind-extra/tree/v1.0.0"
+                "source": "https://github.com/tales-from-a-dev/twig-tailwind-extra/tree/v1.3.0"
             },
-            "time": "2025-11-21T15:19:24+00:00"
+            "time": "2026-08-09T15:21:26+00:00"
         },
         {
             "name": "tempest/highlight",

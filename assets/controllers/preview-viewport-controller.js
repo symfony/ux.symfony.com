@@ -25,6 +25,7 @@ export default class extends Controller {
     connect() {
         this.observer = new ResizeObserver(() => {
             if (this.widthValue === 0) this.#render();
+            else if (this.fitValue) this.#fitToWidth();
         });
         this.observer.observe(this.viewportTarget);
         if (this.fitValue) this.#fitToWidth();
@@ -115,10 +116,7 @@ export default class extends Controller {
 
     #fitToWidth() {
         if (this.widthValue <= 0) return;
-        const available = this.#availableWidth();
-        if (this.widthValue > available) {
-            this.zoomValue = Math.max(ZOOM_MIN, available / this.widthValue);
-        }
+        this.zoomValue = Math.min(1, Math.max(ZOOM_MIN, this.#availableWidth() / this.widthValue));
     }
 
     #render() {

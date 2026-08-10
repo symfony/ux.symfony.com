@@ -1,0 +1,21 @@
+{# Shared kit-page breadcrumb: the fixed "UX Toolkit > Kits" trunk, then the given trail.
+   Each trail item is {label, href}; an item without an href is the active last rung. #}
+<twig:Toolkit:Breadcrumb class="mb-2">
+    <twig:Toolkit:Breadcrumb:Item>
+        <twig:Toolkit:Breadcrumb:Link href="{{ path('app_toolkit') }}">UX Toolkit</twig:Toolkit:Breadcrumb:Link>
+    </twig:Toolkit:Breadcrumb:Item>
+    <twig:Toolkit:Breadcrumb:Separator />
+    <twig:Toolkit:Breadcrumb:Item>
+        <twig:Toolkit:Breadcrumb:Link href="{{ path('app_toolkit', {_fragment: 'kits'}) }}">Kits</twig:Toolkit:Breadcrumb:Link>
+    </twig:Toolkit:Breadcrumb:Item>
+    {% for item in trail %}
+        <twig:Toolkit:Breadcrumb:Separator />
+        {% if item.href|default(null) %}
+            <twig:Toolkit:Breadcrumb:Item>
+                <twig:Toolkit:Breadcrumb:Link href="{{ item.href }}">{{ item.label }}</twig:Toolkit:Breadcrumb:Link>
+            </twig:Toolkit:Breadcrumb:Item>
+        {% else %}
+            <twig:Toolkit:Breadcrumb:Item active>{{ item.label }}</twig:Toolkit:Breadcrumb:Item>
+        {% endif %}
+    {% endfor %}
+</twig:Toolkit:Breadcrumb>

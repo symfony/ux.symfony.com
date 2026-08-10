@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'toolkit/kit_page.html.twig' %}
 
 {% set title = 'Component ' ~ component.manifest.name ~ ' - ' ~ kit.manifest.name ~ ' Kit' %}
 {% set description = "Documentation of component #{component.manifest.name}, from the UX Toolkit #{kit.manifest.name}, #{kit.manifest.description}." %}
@@ -19,73 +19,45 @@
     },
 } %}
 
-{% block content %}
-    <div class="pt-20"></div>
+{% block kit_toolbar %}
+    <twig:Toolkit:Disclosure name="toc-popover-panel" transitionDuration="150" class="ml-auto relative">
+        <twig:Toolkit:Disclosure:Trigger
+            label="Open table of contents"
+            class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-border text-sm hover:bg-surface"
+        >
+            On this page
+            <twig:ux:icon name="lucide:chevron-down" class="size-4" />
+        </twig:Toolkit:Disclosure:Trigger>
 
-    <div class="max-w-[1140px] xl:max-w-[1280px] 2xl:max-w-[1440px] mx-auto lg:pt-6 grid grid-cols-1 lg:grid-cols-[180px_1fr] gap-8 px-4 lg:px-0">
-        <div class="hidden lg:block">
-            {{ include('toolkit/_kit_aside.html.twig') }}
-        </div>
+        <twig:Toolkit:Disclosure:Panel
+            aria-label="On this page"
+            class="absolute right-0 top-full mt-2 w-72 max-h-[60vh] overflow-y-auto bg-subtle border border-border rounded-lg shadow-lg p-3 text-sm z-20 opacity-0 -translate-y-1 transition duration-150 ease-out [&.is-open]:opacity-100 [&.is-open]:translate-y-0"
+        >
+            {% if toc_items|length > 0 %}
+                <ul class="list-unstyled space-y-1">
+                    {% for item in toc_items %}
+                        {% set class = item.level == 3 ? 'ml-2' %}
+                        <li class="rounded transition-colors duration-100 ease-in-out hover:bg-surface {{ class }}">
+                            <a href="#{{ item.id }}" class="flex items-center gap-1.5 px-2 py-0.5 text-[.9rem]" data-action="click->disclosure#close">
+                                {% if item.icon is defined %}<twig:ux:icon name="{{ item.icon }}" class="size-3.5 shrink-0" />{% endif %}
+                                {{ item.title|raw }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="px-2 py-1 text-foreground/60">No headings on this page.</p>
+            {% endif %}
+        </twig:Toolkit:Disclosure:Panel>
+    </twig:Toolkit:Disclosure>
+{% endblock %}
 
-        <div class="min-w-0">
-            <div class="xl:hidden sticky top-0 z-9 -mx-4 mb-6 px-4 py-3 bg-body/85 backdrop-blur border-b border-border flex items-center gap-3">
-                {{ include('toolkit/_kit_mobile_menu.html.twig') }}
+{% block kit_main %}
+    {{ include('toolkit/_kit_breadcrumb.html.twig', {trail: [
+        {label: kit.manifest.name, href: path('app_toolkit_kit', {kitId: kit_id})},
+        {label: 'Components', href: path('app_toolkit_kit_components', {kitId: kit_id})},
+        {label: component.manifest.name},
+    ]}) }}
 
-                <twig:Toolkit:Disclosure name="toc-popover-panel" transitionDuration="150" class="ml-auto relative">
-                    <twig:Toolkit:Disclosure:Trigger
-                        label="Open table of contents"
-                        class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-border text-sm hover:bg-surface"
-                    >
-                        On this page
-                        <twig:ux:icon name="lucide:chevron-down" class="size-4" />
-                    </twig:Toolkit:Disclosure:Trigger>
-
-                    <twig:Toolkit:Disclosure:Panel
-                        aria-label="On this page"
-                        class="absolute right-0 top-full mt-2 w-72 max-h-[60vh] overflow-y-auto bg-subtle border border-border rounded-lg shadow-lg p-3 text-sm z-20 opacity-0 -translate-y-1 transition duration-150 ease-out [&.is-open]:opacity-100 [&.is-open]:translate-y-0"
-                    >
-                        {% if toc_items|length > 0 %}
-                            <ul class="list-unstyled space-y-1">
-                                {% for item in toc_items %}
-                                    {% set class = item.level == 3 ? 'ml-2' %}
-                                    <li class="rounded transition-colors duration-100 ease-in-out hover:bg-surface {{ class }}">
-                                        <a href="#{{ item.id }}" class="flex items-center gap-1.5 px-2 py-0.5 text-[.9rem]" data-action="click->disclosure#close">
-                                            {% if item.icon is defined %}<twig:ux:icon name="{{ item.icon }}" class="size-3.5 shrink-0" />{% endif %}
-                                            {{ item.title|raw }}
-                                        </a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        {% else %}
-                            <p class="px-2 py-1 text-foreground/60">No headings on this page.</p>
-                        {% endif %}
-                    </twig:Toolkit:Disclosure:Panel>
-                </twig:Toolkit:Disclosure>
-            </div>
-
-            <twig:Toolkit:Breadcrumb class="mb-2">
-                <twig:Toolkit:Breadcrumb:Item>
-                    <twig:Toolkit:Breadcrumb:Link href="{{ path('app_toolkit') }}">UX Toolkit</twig:Toolkit:Breadcrumb:Link>
-                </twig:Toolkit:Breadcrumb:Item>
-                <twig:Toolkit:Breadcrumb:Separator />
-                <twig:Toolkit:Breadcrumb:Item>
-                    <twig:Toolkit:Breadcrumb:Link href="{{ path('app_toolkit', {_fragment: 'kits'}) }}">Kits</twig:Toolkit:Breadcrumb:Link>
-                </twig:Toolkit:Breadcrumb:Item>
-                <twig:Toolkit:Breadcrumb:Separator />
-                <twig:Toolkit:Breadcrumb:Item>
-                    <twig:Toolkit:Breadcrumb:Link href="{{ path('app_toolkit_kit', {kitId: kit_id}) }}">{{ kit.manifest.name }}</twig:Toolkit:Breadcrumb:Link>
-                </twig:Toolkit:Breadcrumb:Item>
-                <twig:Toolkit:Breadcrumb:Separator />
-                <twig:Toolkit:Breadcrumb:Item>
-                    <twig:Toolkit:Breadcrumb:Link href="{{ path('app_toolkit_kit_components', {kitId: kit_id}) }}">Components</twig:Toolkit:Breadcrumb:Link>
-                </twig:Toolkit:Breadcrumb:Item>
-                <twig:Toolkit:Breadcrumb:Separator />
-                <twig:Toolkit:Breadcrumb:Item active>
-                    {{ component.manifest.name }}
-                </twig:Toolkit:Breadcrumb:Item>
-            </twig:Toolkit:Breadcrumb>
-
-            <twig:Toolkit:ComponentDoc kitId="{{ kit_id }}" component="{{ component }}" tocItems="{{ toc_items }}" />
-        </div>
-    </div>
+    <twig:Toolkit:ComponentDoc kitId="{{ kit_id }}" component="{{ component }}" tocItems="{{ toc_items }}" />
 {% endblock %}

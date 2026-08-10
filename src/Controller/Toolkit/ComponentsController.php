@@ -67,7 +67,6 @@ class ComponentsController extends AbstractController
 
         return $this->render('toolkit/component.html.twig', [
             'package' => $package,
-            'components' => $kit->getRecipes(RecipeType::Component),
             'kit' => $kit,
             'kit_id' => $kitId,
             'component' => $component,

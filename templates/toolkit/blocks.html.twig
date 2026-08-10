@@ -20,21 +20,10 @@
 } %}
 
 {% block kit_main %}
-    <twig:Toolkit:Breadcrumb class="mb-2">
-        <twig:Toolkit:Breadcrumb:Item>
-            <twig:Toolkit:Breadcrumb:Link href="{{ path('app_toolkit') }}">UX Toolkit</twig:Toolkit:Breadcrumb:Link>
-        </twig:Toolkit:Breadcrumb:Item>
-        <twig:Toolkit:Breadcrumb:Separator />
-        <twig:Toolkit:Breadcrumb:Item>
-            <twig:Toolkit:Breadcrumb:Link href="{{ path('app_toolkit', {_fragment: 'kits'}) }}">Kits</twig:Toolkit:Breadcrumb:Link>
-        </twig:Toolkit:Breadcrumb:Item>
-        <twig:Toolkit:Breadcrumb:Separator />
-        <twig:Toolkit:Breadcrumb:Item>
-            <twig:Toolkit:Breadcrumb:Link href="{{ path('app_toolkit_kit', {kitId: kit_id}) }}">{{ kit.manifest.name }}</twig:Toolkit:Breadcrumb:Link>
-        </twig:Toolkit:Breadcrumb:Item>
-        <twig:Toolkit:Breadcrumb:Separator />
-        <twig:Toolkit:Breadcrumb:Item active>Blocks</twig:Toolkit:Breadcrumb:Item>
-    </twig:Toolkit:Breadcrumb>
+    {{ include('toolkit/_kit_breadcrumb.html.twig', {trail: [
+        {label: kit.manifest.name, href: path('app_toolkit_kit', {kitId: kit_id})},
+        {label: 'Blocks'},
+    ]}) }}
 
     <div class="Wysiwyg">
         <h1>Blocks</h1>

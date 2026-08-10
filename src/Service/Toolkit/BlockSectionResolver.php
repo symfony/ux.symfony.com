@@ -23,9 +23,27 @@ use Symfony\UX\Toolkit\Recipe\RecipeType;
 final class BlockSectionResolver
 {
     /**
+     * @var \WeakMap<Kit, list<BlockSection>>
+     */
+    private \WeakMap $cache;
+
+    public function __construct()
+    {
+        $this->cache = new \WeakMap();
+    }
+
+    /**
      * @return list<BlockSection>
      */
     public function forKit(Kit $kit): array
+    {
+        return $this->cache[$kit] ??= $this->resolve($kit);
+    }
+
+    /**
+     * @return list<BlockSection>
+     */
+    private function resolve(Kit $kit): array
     {
         $recipesBySlug = [];
         foreach ($kit->getRecipes(RecipeType::Block) as $recipe) {

@@ -39,6 +39,7 @@
         "symfony/ux-cropperjs": "3.x-dev",
         "symfony/ux-dropzone": "3.x-dev",
         "symfony/ux-icons": "3.x-dev",
+        "symfony/ux-image": "3.x-dev",
         "symfony/ux-leaflet-map": "3.x-dev",
         "symfony/ux-live-component": "3.x-dev",
         "symfony/ux-map": "3.x-dev",

@@ -1,0 +1,96 @@
+{% extends 'ux_packages/package.html.twig' %}
+
+{% block package_header %}
+    {% component PackageHeader with {
+        package: 'image',
+        eyebrowText: 'HTML Images Made Easy',
+    } %}
+        {% block title_header %}
+            Responsive <em>images</em> made simple
+        {% endblock %}
+
+        {% block sub_content %}
+            Twig components for <code>&lt;img&gt;</code>, <code>&lt;picture&gt;</code> and <code>&lt;source&gt;</code> elements with responsive images and lazy loading.
+        {% endblock %}
+    {% endcomponent %}
+{% endblock %}
+
+{% block package_content %}
+    <section class="max-w-[1400px] mx-auto px-6 pt-6 md:px-12 md:pt-12">
+        <div class="arrow mb-4 hidden md:block"></div>
+
+        {# Example 1: basic image #}
+        <div class="grid grid-cols-12 gap-x-6 mb-12">
+            <div class="col-span-12 md:col-span-6 Wysiwyg">
+                {% apply markdown_to_html %}
+                    ## A basic image
+
+                    Render an `<img>` element with the `ux:img` component.
+                {% endapply %}
+            </div>
+            <div class="col-span-12 md:col-span-6 mt-6 md:mt-0">
+                <twig:CodeBlock filename="templates/ux_packages/image/_example_basic.html.twig" :showFilename="false" />
+            </div>
+        </div>
+
+        {# Example 2: responsive srcset #}
+        <div class="grid grid-cols-12 gap-x-6 mb-12 mt-6">
+            <div class="col-span-12 md:col-span-6 md:order-2 Wysiwyg">
+                {% apply markdown_to_html %}
+                    ## Responsive images
+
+                    Pass `srcset` and `sizes` as arrays. Width descriptors (`480w`) and density descriptors (`2x`) are supported.
+                {% endapply %}
+            </div>
+            <div class="col-span-12 md:col-span-6 mt-6 md:mt-0 md:order-1">
+                <twig:CodeBlock filename="templates/ux_packages/image/_example_responsive.html.twig" :showFilename="false" />
+                <div class="mt-4">
+                    <twig:CodeBlock filename="templates/ux_packages/image/_example_density.html.twig" :showFilename="false" />
+                </div>
+            </div>
+        </div>
+
+        {# Example 3: format selection #}
+        <div class="grid grid-cols-12 gap-x-6 mb-12 mt-6">
+            <div class="col-span-12 md:col-span-6 Wysiwyg">
+                {% apply markdown_to_html %}
+                    ## Format selection
+
+                    Serve modern formats (AVIF, WebP) with automatic JPEG fallback using `ux:picture` and `ux:source`.
+                {% endapply %}
+            </div>
+            <div class="col-span-12 md:col-span-6 mt-6 md:mt-0">
+                <twig:CodeBlock filename="templates/ux_packages/image/_example_format.html.twig" :showFilename="false" />
+            </div>
+        </div>
+
+        {# Example 4: art direction #}
+        <div class="grid grid-cols-12 gap-x-6 mb-12 mt-6">
+            <div class="col-span-12 md:col-span-6 md:order-2 Wysiwyg">
+                {% apply markdown_to_html %}
+                    ## Art direction
+
+                    Serve different images per viewport with `media` on `ux:source`.
+                {% endapply %}
+            </div>
+            <div class="col-span-12 md:col-span-6 mt-6 md:mt-0 md:order-1">
+                <twig:CodeBlock filename="templates/ux_packages/image/_example_picture.html.twig" :showFilename="false" />
+            </div>
+        </div>
+
+        {# Example 5: Twig functions #}
+        <div class="grid grid-cols-12 gap-x-6 mb-12 mt-6">
+            <div class="col-span-12 md:col-span-6 Wysiwyg">
+                {% apply markdown_to_html %}
+                    ## Twig functions
+
+                    Use `ux_img()` and `ux_picture()` as an alternative to the component syntax.
+                {% endapply %}
+            </div>
+            <div class="col-span-12 md:col-span-6 mt-6 md:mt-0">
+                <twig:CodeBlock filename="templates/ux_packages/image/_example_functions.html.twig" :showFilename="false" />
+            </div>
+        </div>
+
+    </section>
+{% endblock %}

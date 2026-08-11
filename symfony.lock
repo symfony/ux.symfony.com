@@ -581,6 +581,9 @@
             "assets/icons/symfony.svg"
         ]
     },
+    "symfony/ux-image": {
+        "version": "3.x-dev"
+    },
     "symfony/ux-leaflet-map": {
         "version": "2.19",
         "recipe": {

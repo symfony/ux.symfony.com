@@ -1,0 +1,17 @@
+{# Simple image #}
+{{ ux_img(
+    src: '/photos/hero.jpg',
+    alt: 'Hero image',
+    width: 1200,
+    height: 800,
+) }}
+
+{# Picture with sources #}
+{{ ux_picture(
+    sources: [
+        {srcset: '/photos/hero.avif', type: 'image/avif'},
+        {srcset: '/photos/hero.webp', type: 'image/webp'},
+    ],
+    src: '/photos/hero.jpg',
+    alt: 'Hero image',
+) }}

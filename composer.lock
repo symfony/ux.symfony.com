@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1415e1f533cf0b55005f7ee3809dcc35",
+    "content-hash": "e87e4f32aa52a360fbbc2d6ba161e903",
     "packages": [
         {
             "name": "composer/semver",
@@ -7719,6 +7719,72 @@
             "time": "2026-06-19T06:54:48+00:00"
         },
         {
+            "name": "symfony/ux-image",
+            "version": "3.x-dev",
+            "dist": {
+                "type": "path",
+                "url": "../ux/src/Image",
+                "reference": "15f90eeb9f29dcb926fd184484a89e75773dfe24"
+            },
+            "require": {
+                "php": ">=8.4",
+                "symfony/framework-bundle": "^7.4|^8.0"
+            },
+            "conflict": {
+                "symfony/flex": "<1.13",
+                "symfony/ux-twig-component": "<2.21"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "dev-master",
+                "phpunit/phpunit": "^11.1|^12.0",
+                "symfony/asset-mapper": "^7.4|^8.0",
+                "symfony/twig-bundle": "^7.4|^8.0",
+                "symfony/ux-twig-component": "^2.14|^3.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "thanks": {
+                    "name": "symfony/ux",
+                    "url": "https://github.com/symfony/ux"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\UX\\Image\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Symfony\\UX\\Image\\Tests\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sébastien Jean",
+                    "email": "sebastien.jean@magnolia.fr"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Twig components for rendering optimized HTML image elements.",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "image",
+                "picture",
+                "responsive",
+                "symfony-ux",
+                "twig"
+            ],
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
             "name": "symfony/ux-leaflet-map",
             "version": "3.x-dev",
             "source": {
@@ -13145,6 +13211,7 @@
         "symfony/ux-cropperjs": 20,
         "symfony/ux-dropzone": 20,
         "symfony/ux-icons": 20,
+        "symfony/ux-image": 20,
         "symfony/ux-leaflet-map": 20,
         "symfony/ux-live-component": 20,
         "symfony/ux-map": 20,
@@ -13165,5 +13232,5 @@
         "ext-iconv": "*"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.9.0"
+    "plugin-api-version": "2.6.0"
 }

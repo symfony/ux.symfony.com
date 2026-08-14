@@ -22,6 +22,18 @@ class UxPackageRepository
     {
         $packages = [
             new UxPackage(
+                'image',
+                'Image',
+                'app_image',
+                '#3B82F6',
+                'linear-gradient(to bottom right, #3B82F6, #8B5CF6)',
+                'Optimized HTML Images',
+                'Render <code>&lt;img&gt;</code>, <code>&lt;picture&gt;</code> and <code>&lt;source&gt;</code> elements with responsive images and lazy loading.',
+                'I need to render optimized responsive images.',
+                'image.svg',
+            ),
+
+            new UxPackage(
                 'icons',
                 'Icons',
                 'app_icons',

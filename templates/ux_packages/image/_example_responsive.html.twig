@@ -1,0 +1,15 @@
+<twig:ux:img
+    src="/photos/hero-800.jpg"
+    alt="Responsive hero image"
+    :srcset="[
+        '/photos/hero-480.jpg 480w',
+        '/photos/hero-800.jpg 800w',
+        '/photos/hero-1200.jpg 1200w',
+    ]"
+    :sizes="[
+        '(max-width: 600px) 480px',
+        '(max-width: 1000px) 800px',
+        '1200px',
+    ]"
+    loading="lazy"
+/>

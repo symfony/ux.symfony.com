@@ -1,6 +1,6 @@
 {%- props variant = 'note' -%}
 {%- set style = html_cva(
-    base: 'flex gap-2 rounded-md p-2.5 my-1 [&_p]:my-1',
+    base: 'flex gap-2 rounded-md p-2.5 my-1',
     variants: {
         variant: {
             note: 'border-sky-500 bg-sky-50 text-sky-900 dark:bg-sky-950 dark:text-sky-300',
@@ -21,6 +21,8 @@
     <twig:ux:icon name="{{ icons[variant] }}" class="size-5 shrink-0 mt-0.5" />
     <div class="flex-1">
         <span class="font-semibold">{{ labels[variant] }}</span>
-        {% block content %}{% endblock %}
+        <div class="mt-1 [&_p]:my-3 [&>:first-child]:mt-0 [&>:last-child]:mb-0">
+            {% block content %}{% endblock %}
+        </div>
     </div>
 </div>

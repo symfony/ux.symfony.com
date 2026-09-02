@@ -77,7 +77,9 @@ tree templates/components
         </p>
 
         <twig:Toolkit:Alert variant="important" class="max-w-3xl mx-auto mt-8">
-            <p><strong>Once installed, components live in your app and are yours to modify as you wish</strong> — installing copies the files into your project. Because of that, components come with <strong>no backward-compatibility guarantee</strong>: they can change or be removed in any release, and your installed copy is unaffected. Re-install a component to pick up the latest version, but since it may differ from your copy, be sure to verify it still works in your app.</p>
+            <p>Installing a component with <code>ux:install</code> copies its files straight into your app.</p>
+            <p>The catch: there's <strong>no upgrade path</strong>. Fixes, new options and new features added to a kit never reach a component you've already installed. Commit right after installing, then run <code>ux:install</code> again later and read the diff: it asks before overwriting anything, so nothing gets lost.</p>
+            <p>The upside: the component is <strong>really yours</strong>. Adapting it means editing a template in your own <code>templates/</code>, readable, debuggable and versioned with your app: no override mechanism to learn, free to strip out or add what the kit never anticipated. It's why the Toolkit copies files instead of shipping a library.</p>
         </twig:Toolkit:Alert>
 
         <div class="mt-12 shadow-blur shadow-blur--rainbow" style="display: grid; gap: 2rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); --shadow-opacity: 0.2">

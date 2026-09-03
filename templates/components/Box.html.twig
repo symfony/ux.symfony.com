@@ -1,4 +1,4 @@
-{% props radius = 'md' %}
+{% props radius = 'md', alignContentTop = false %}
 
 {% set radius_class = radius == 'xl' ? 'rounded-xl before:rounded-xl after:rounded-xl' : 'rounded-md before:rounded-md after:rounded-md' %}
 
@@ -18,7 +18,7 @@
         {% block logo %}{% endblock %}
     </div>
 
-    <div class="flex flex-col justify-center flex-1">
+    <div class="flex flex-col {{ alignContentTop ? 'justify-start' : 'justify-center' }} flex-1">
         <{{ titleTag }} class="flex flex-row items-center gap-3 font-title font-bold text-2xl leading-normal text-body-text m-0 {{ titleClass }}">
             {% block title %}{% endblock %}
         </{{ titleTag }}>

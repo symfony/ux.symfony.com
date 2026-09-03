@@ -12,6 +12,7 @@
 namespace App\Controller;
 
 use App\Model\RecipeFileTree;
+use App\Service\Toolkit\ToolkitService;
 use App\Service\UxPackageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,14 +23,18 @@ use Symfony\Component\WebLink\Link;
 class MainController extends AbstractController
 {
     #[Route('/', name: 'app_homepage')]
-    public function homepage(UxPackageRepository $packageRepository, Request $request): Response
-    {
+    public function homepage(
+        UxPackageRepository $packageRepository,
+        ToolkitService $toolkitService,
+        Request $request,
+    ): Response {
         $this->addLink($request, new Link('describedby', '/llms.txt'));
 
         $packages = $packageRepository->findAll(removed: false);
 
         return $this->render('main/homepage.html.twig', [
             'packages' => $packages,
+            'kits' => $toolkitService->getKits(),
             'recipeFileTree' => new RecipeFileTree(),
         ]);
     }

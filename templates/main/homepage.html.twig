@@ -120,6 +120,38 @@
             {% endfor %}
         </div>
     </div>
+
+    <section aria-labelledby="homepage-ui-kits-title">
+        <p class="eyebrows" style="margin: 111px 0 0;">UI Kits</p>
+        <div class="md:flex md:justify-between text-center items-center md:text-start">
+            <h2 id="homepage-ui-kits-title" class="ubuntu pt-2 component-headlines">Build with reusable <em class="rainbow-emphasis">UI Kits</em></h2>
+            <twig:LinkButton
+                outline
+                label="Browse all UI Kits"
+                url="{{ path('app_toolkit', {_fragment: 'kits'}) }}"
+                arrow
+                class="mt-4 md:mt-0"
+            />
+        </div>
+        <div class="mt-4 md:mt-12">
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+                {% for kit_id in ['shadcn', 'common', 'bootstrap', 'flowbite-4'] %}
+                    {% set kit = kits[kit_id] %}
+                    <twig:Box color="{{ toolkit_color(kit_id) }}" radius="xl" titleTag="h3" :alignContentTop="true">
+                        <twig:block name="logo">
+                            <twig:ux:icon name="toolkit:{{ kit_id }}" alt="{{ kit.manifest.name }}" style="color: #fff; width: 50%; height: 50%;" />
+                        </twig:block>
+                        <twig:block name="title">
+                            <a href="{{ path('app_toolkit_kit', {kitId: kit_id}) }}" class="stretched-link text-body-text no-underline">{{ kit.manifest.name }}</a>
+                        </twig:block>
+                        <twig:block name="description">
+                            <p>{{ kit.manifest.description }}</p>
+                        </twig:block>
+                    </twig:Box>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
 </div>
 
 {{ include('_aside.html.twig') }}

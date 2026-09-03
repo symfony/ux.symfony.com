@@ -58,6 +58,22 @@ class SmokeTest extends KernelTestCase
         yield 'sitemap.xml' => ['/sitemap.xml'];
     }
 
+    public function testHomepageListsUiKits()
+    {
+        $page = $this->browser()
+            ->visit('/')
+            ->assertSuccessful()
+            ->assertSee('Browse all UI Kits')
+        ;
+
+        self::assertSame('Build with reusable UI Kits', $page->crawler()->filter('#homepage-ui-kits-title')->text());
+        self::assertSame(
+            ['Shadcn UI', 'Common', 'Bootstrap', 'Flowbite v4'],
+            $page->crawler()->filter('[aria-labelledby="homepage-ui-kits-title"] h3 a[href*="/toolkit/kits/"]')->each(static fn ($node): string => $node->text()),
+        );
+        self::assertSame(1, $page->crawler()->filter('[aria-labelledby="homepage-ui-kits-title"] a[href$="/toolkit#kits"]')->count());
+    }
+
     #[DataProvider('providePackageUrls')]
     public function testPackagePages(UxPackage $package)
     {

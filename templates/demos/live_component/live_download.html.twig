@@ -1,0 +1,67 @@
+{% extends 'demos/live_demo.html.twig' %}
+
+{% block demo_container %}
+
+    <div class="mx-auto mb-16 max-w-[1328px] px-4 sm:px-6">
+        <twig:Browser class="shadow-blur shadow-blur--rainbow w-full">
+            <twig:DownloadFiles />
+        </twig:Browser>
+    </div>
+
+    <section class="bg-subtle border-t py-12">
+        <div class="max-w-[1400px] mx-auto flex flex-col">
+            <twig:Code:CodeWithExplanationRow
+                filename="src/Twig/Components/DownloadFiles.php"
+                lineStart="81"
+                lineEnd="93"
+                reversed
+                codeCols="6"
+                :copyButton="false"
+                class="gap-y-8"
+            >
+## Download from a URL
+
+Generate the URL of a dedicated download route, then return it with
+`downloadUrl()`. LiveComponent renders the updated counters first. The browser
+then makes a separate GET request.
+
+Choose this for files served by their own route, especially large or resumable
+downloads.
+            </twig:Code:CodeWithExplanationRow>
+
+            <twig:Code:CodeWithExplanationRow
+                filename="src/Twig/Components/DownloadFiles.php"
+                lineStart="95"
+                lineEnd="121"
+                codeCols="6"
+                :copyButton="false"
+                class="gap-y-8"
+            >
+## Generate a file in the action
+
+Pass a `Closure` to `downloadFile()` when the action builds the file. Here, the
+closure yields a text report line by line without writing a temporary file.
+
+LiveComponent renders the updated counters and filename before the download
+starts. The browser buffers the content before saving the report.
+            </twig:Code:CodeWithExplanationRow>
+
+            <twig:Code:CodeWithExplanationRow
+                filename="src/Twig/Components/DownloadFiles.php"
+                lineStart="123"
+                lineEnd="147"
+                reversed
+                codeCols="6"
+                :copyButton="false"
+                class="gap-y-8"
+            >
+## Download with events
+
+Call `emit()` and `dispatchBrowserEvent()` before returning `downloadFile()`.
+LiveComponent renders the updated counters, emits `download`, dispatches the
+matching browser event, then starts the download.
+            </twig:Code:CodeWithExplanationRow>
+        </div>
+    </section>
+
+{% endblock %}

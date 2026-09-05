@@ -1,0 +1,85 @@
+{% extends 'demos/live_demo.html.twig' %}
+
+{% block stylesheets %}
+    <style>
+        @media (prefers-reduced-motion: no-preference) {
+            .animation-drop-out[data-live-removing] {
+                animation: drop-out 1100ms linear forwards;
+                will-change: scale, rotate, translate, opacity;
+            }
+        }
+
+        .RemovalExample:has(> .RemovalExample__component) > .RemovalExample__result {
+            visibility: hidden;
+        }
+    </style>
+{% endblock %}
+
+{% block demo_container %}
+    <div class="mx-auto mb-16 max-w-[1328px] px-4 sm:px-6">
+        <twig:Browser
+            class="shadow-blur shadow-blur--rainbow w-full"
+        >
+            <div class="min-h-full bg-n-900 text-n-100 md:h-full md:min-h-0">
+                <twig:RemovalExamples />
+            </div>
+        </twig:Browser>
+    </div>
+
+    <section class="bg-subtle border-t py-12">
+        <div class="mx-auto flex max-w-[1200px] flex-col px-4 sm:px-6">
+            <twig:Code:CodeWithExplanationRow
+                filename="src/Twig/Components/NotificationBanner.php"
+                lineStart="45"
+                lineEnd="49"
+                reversed
+                codeCols="6"
+                :copyButton="false"
+                class="gap-y-8"
+            >
+## Remove the component
+
+Return `LiveResponse::remove()` from a `LiveAction`. The response contains the
+final render and an `X-Live-Remove: 1` header. The browser applies that render,
+then removes the component root.
+
+This only removes the component from the page. Persist or delete application
+data inside the action.
+            </twig:Code:CodeWithExplanationRow>
+
+            <twig:Code:CodeWithExplanationRow
+                filename="src/Twig/Components/NotificationBanner.php"
+                lineStart="51"
+                lineEnd="60"
+                codeCols="6"
+                :copyButton="false"
+                class="gap-y-8"
+            >
+## Dispatch an event before removal
+
+Call `dispatchBrowserEvent()` before returning `LiveResponse::remove()`. The
+final render carries `dismissed` with `id: 42`, and the browser dispatches it
+before removing the component.
+            </twig:Code:CodeWithExplanationRow>
+
+            <twig:Code:CodeWithExplanationRow
+                filename="templates/demos/live_component/live_remove.html.twig"
+                lineStart="5"
+                lineEnd="10"
+                language="css"
+                reversed
+                codeCols="6"
+                :copyButton="false"
+                class="gap-y-8"
+            >
+## Animate removal
+
+With a `drop-out` keyframe already defined, start it when LiveComponent adds
+`[data-live-removing]` to the component root. LiveComponent waits for the
+animation to finish before removing the element.
+
+The media query skips the effect for people who prefer reduced motion.
+            </twig:Code:CodeWithExplanationRow>
+        </div>
+    </section>
+{% endblock %}

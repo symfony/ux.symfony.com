@@ -7812,12 +7812,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-live-component.git",
-                "reference": "bb7a955e68dbedbbd4c24ab0b6acab1ca22d8720"
+                "reference": "b1ced251d9d1997e922a39e368ad7d47a06350d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-live-component/zipball/bb7a955e68dbedbbd4c24ab0b6acab1ca22d8720",
-                "reference": "bb7a955e68dbedbbd4c24ab0b6acab1ca22d8720",
+                "url": "https://api.github.com/repos/symfony/ux-live-component/zipball/b1ced251d9d1997e922a39e368ad7d47a06350d8",
+                "reference": "b1ced251d9d1997e922a39e368ad7d47a06350d8",
                 "shasum": ""
             },
             "require": {
@@ -7906,7 +7906,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-07-25T17:54:47+00:00"
+            "time": "2026-08-31T22:39:50+00:00"
         },
         {
             "name": "symfony/ux-map",

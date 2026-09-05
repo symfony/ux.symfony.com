@@ -34,16 +34,27 @@ class SourceCleaner
                 ->trim('{}')
                 // Remove use statements
                 ->replaceMatches('/^use [^\n]*$/m', '');
-
-            // Unindent all lines by 4 spaces
-            $lines = explode("\n", $contents);
-            $lines = array_map(static function (string $line) {
-                return substr($line, 4);
-            }, $lines);
-            $contents = u(implode("\n", $lines));
         }
 
-        return $contents->trim()->toString();
+        $lines = explode("\n", $contents->toString());
+        $indentation = null;
+        foreach ($lines as $line) {
+            if ('' === trim($line)) {
+                continue;
+            }
+
+            $lineIndentation = strspn($line, ' ');
+            $indentation = null === $indentation ? $lineIndentation : min($indentation, $lineIndentation);
+        }
+
+        if ($indentation) {
+            $lines = array_map(
+                static fn (string $line): string => substr($line, $indentation),
+                $lines,
+            );
+        }
+
+        return trim(implode("\n", $lines));
     }
 
     public static function processTerminalLines(string $content): string

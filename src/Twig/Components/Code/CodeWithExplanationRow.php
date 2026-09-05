@@ -35,4 +35,6 @@ final class CodeWithExplanationRow
     public bool $copyButton = true;
 
     public int $codeCols = 6;
+
+    public ?string $language = null;
 }

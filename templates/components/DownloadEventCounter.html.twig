@@ -1,0 +1,11 @@
+<div class="text-center" {{ attributes }}>
+    <p class="whitespace-nowrap text-xs {{ lastFilename ? 'text-n-400' : 'text-n-500' }}">
+        <strong class="font-semibold text-n-300" data-testid="live-event-count">{{ count }}</strong>
+        {% if lastFilename %}
+            <span class="font-mono text-pink-300">· download</span>
+        {% else %}
+            events
+        {% endif %}
+    </p>
+    {% if lastFilename %}<span class="sr-only" data-testid="live-event-filename">{{ lastFilename }}</span>{% endif %}
+</div>

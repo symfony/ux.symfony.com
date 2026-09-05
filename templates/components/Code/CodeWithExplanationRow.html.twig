@@ -5,13 +5,12 @@
          style="{% if reversed %}padding-inline-end: 0;{% endif %} {{ this.sticky|default ? 'position: sticky; top: 4rem;' }}">
         {% block explanation %}
             <div class="Wysiwyg">
-                {% apply markdown_to_html %}
-                    {{ block('content')|split('\n')|map(x => x|trim)|join('\n')|raw }}
-                {% endapply %}
+                {% set explanation = block('content')|split('\n')|map(line => line|trim)|join('\n') %}
+                {{ explanation|markdown_to_html }}
             </div>
         {% endblock %}
     </div>
-    <div class="col-span-12 md:col-span-{{ this.codeCols }} {{ not reversed|default ? 'md:order-1' }}"  {% if reversed %}style="padding-inline-end: 0;"{% endif %}>
+    <div class="col-span-12 md:col-span-{{ this.codeCols }} {{ not reversed|default ? 'md:order-1' }}" {% if reversed %}style="padding-inline-end: 0;"{% endif %}>
         {% block code %}
             <twig:CodeBlock
                 :filename="filename"
@@ -22,6 +21,7 @@
                 :lineEnd="lineEnd"
                 :copyButton="copyButton"
                 :stripExcessHtml="stripExcessHtml"
+                :language="language"
                 height="{{ height|default('auto') }}"
                 style="--bg-header: rgba(13, 13, 13, 0.729); --header-opacity: .5;"
             />

@@ -1,0 +1,34 @@
+<section
+    {{ attributes.defaults({
+        class: 'RemovalExample relative flex min-h-[15rem] items-center overflow-hidden lg:min-h-[17rem]',
+    }) }}
+    aria-label="{{ example.title }} example"
+>
+    <div class="RemovalExample__result absolute inset-0 grid place-items-center px-6 text-center">
+        <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.12em] text-n-500">{{ example.resultLabel }}</p>
+            {% if example.resultDetail %}
+                <span class="mt-2 block font-mono text-sm font-medium text-pink-300">{{ example.resultDetail }}</span>
+            {% endif %}
+            <twig:Button
+                variant="outline"
+                size="sm"
+                class="mt-5 rounded-full border-n-500 bg-transparent px-4 text-n-200 hover:border-n-100 hover:bg-n-100 hover:text-n-900"
+                data-action="live#action"
+                data-live-action-param="reset"
+                data-loading="addAttribute(disabled)"
+            >Reset</twig:Button>
+        </div>
+    </div>
+
+    <twig:NotificationBanner
+        key="notification-{{ example.variant }}-{{ revision }}"
+        class="RemovalExample__component relative h-[15rem] max-h-full w-full lg:h-[17rem]"
+        title="{{ example.title }}"
+        message="{{ example.message }}"
+        buttonLabel="{{ example.buttonLabel }}"
+        icon="{{ example.icon }}"
+        action="{{ example.action }}"
+        variant="{{ example.variant }}"
+    />
+</section>

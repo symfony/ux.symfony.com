@@ -55,4 +55,22 @@ class LiveComponentDemosTest extends KernelTestCase
             yield $demo->getIdentifier() => [$demo];
         }
     }
+
+    public function testLiveDownloadDocumentRoute()
+    {
+        $this->browser()
+            ->visit('/demos/live-component/live-download/live-components.md')
+            ->assertSuccessful()
+            ->assertHeaderContains('Content-Disposition', 'attachment')
+            ->assertHeaderContains('Content-Disposition', 'live-components.md')
+        ;
+    }
+
+    public function testLiveDownloadDocumentRouteRejectsAnUnknownFilename()
+    {
+        $this->browser()
+            ->visit('/demos/live-component/live-download/unknown.md')
+            ->assertStatus(404)
+        ;
+    }
 }

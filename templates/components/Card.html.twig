@@ -19,9 +19,9 @@
         <p class="text-sm font-stretch-semi-condensed font-normal transition-all duration-250 opacity-65 group-hover:opacity-100 leading-6 m-0">
             {{ description }}
         </p>
-        <p class="mt-auto mb-0 flex flex-wrap gap-2">
+        <p class="mt-auto mb-0 flex flex-wrap gap-1.5">
             {% for tag in tags %}
-                <span class="Tag">{{ tag }}</span>
+                <span class="text-xs leading-5 px-2 py-0.5 rounded-full bg-body-text/5 border border-body-text/10 text-body-text/75">{{ tag }}</span>
             {% endfor %}
         </p>
     </div>

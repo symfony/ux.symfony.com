@@ -1,0 +1,50 @@
+@keyframes icon-loading {
+    0% { transform: scale(.95); }
+    80% { transform: scale(1.04); }
+    100% { transform: scale(1); }
+}
+
+.animation-drop-out {
+    outline: 1px solid transparent;
+    outline-offset: -1px;
+    transform-origin: center;
+}
+
+@keyframes drop-out {
+    0% {
+        opacity: 1;
+    }
+    10%, 34% {
+        outline-color: var(--color-code);
+    }
+    15% {
+        rotate: -.7deg;
+        translate: -.4% 0;
+    }
+    20% {
+        rotate: .9deg;
+        translate: .5% 0;
+    }
+    25% {
+        rotate: -.6deg;
+        translate: -.35% 0;
+    }
+    30% {
+        rotate: .4deg;
+        translate: .25% 0;
+    }
+    34% {
+        rotate: 0;
+        scale: .98;
+        translate: 0;
+        animation-timing-function:
+            cubic-bezier(.55, .06, .68, .19);
+    }
+    100% {
+        outline-color: transparent;
+        opacity: 0;
+        rotate: 18deg;
+        scale: .52;
+        translate: 12% 230%;
+    }
+}

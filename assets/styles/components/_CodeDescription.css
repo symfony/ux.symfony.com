@@ -1,0 +1,22 @@
+@layer components {
+    .code-description :is(h2, h3) {
+        font-family: var(--font-title);
+    }
+
+    .code-description h2 {
+        font-size: 2.5em;
+        margin-block-end: 1.5rem;
+    }
+
+    .code-description h3 {
+        font-size: 1.65em;
+        font-weight: 500;
+        margin-block-end: 1.125rem;
+        margin-top: 2.25rem;
+    }
+
+    .code-description:hover strong {
+        background: var(--color-body-text);
+        color: var(--color-body);
+    }
+}

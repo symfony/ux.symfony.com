@@ -1,0 +1,43 @@
+<section class="grid min-h-full min-w-0 content-center gap-6 bg-black p-6 text-n-100 md:h-full md:min-h-0 md:grid-cols-3 md:gap-5 md:p-5 lg:gap-8 lg:p-8 xl:gap-12 xl:p-12" {{ attributes }}>
+    {% for key, item in this.examples %}
+        <article class="flex min-h-[18.5rem] min-w-0 flex-col items-center gap-3 rounded-xl bg-n-800 px-5 py-5 text-center ring-1 ring-inset ring-white/8 lg:min-h-[21rem] lg:gap-5 lg:px-7 lg:py-7">
+            <div class="flex flex-col items-center gap-3 lg:gap-5">
+                <twig:ux:icon name="{{ item.icon }}" class="LiveDemoIcon size-12 shrink-0 text-pink-300 lg:size-14" />
+
+                <h4 class="mb-0 text-balance text-lg font-semibold text-n-100 lg:text-xl">{{ item.title }}</h4>
+                <p class="max-w-[18rem] text-balance text-xs leading-4 text-n-400 lg:text-sm lg:leading-5">{{ item.description }}</p>
+            </div>
+
+            <div class="mt-auto flex flex-col items-center gap-3 lg:gap-5">
+                <twig:Button
+                    variant="primary"
+                    size="md"
+                    class="shrink-0 whitespace-nowrap rounded-full border-black bg-black px-5 py-2.5 text-xs font-semibold text-white hover:bg-n-900 hover:opacity-100 lg:px-7 lg:py-3 lg:text-sm"
+                    data-action="live#action"
+                    data-live-action-param="{{ item.action }}"
+                    data-loading="addAttribute(disabled)"
+                >{{ item.buttonLabel }}</twig:Button>
+
+                <div class="min-h-6 text-center" aria-live="polite">
+                    {% if key == 'events' %}
+                        <twig:DownloadEventCounter />
+                    {% else %}
+                        {% set count = key == 'url' ? urlDownloads : fileDownloads %}
+                        <p class="text-xs text-n-500">
+                            <strong class="font-semibold text-n-300" data-testid="{{ key }}-download-count">{{ count }}</strong>
+                            {{ count == 1 ? 'download' : 'downloads' }}
+                            {% if key == 'file' and lastGeneratedFilename %}
+                                <span class="mt-1 block font-mono text-pink-300">{{ lastGeneratedFilename }}</span>
+                            {% endif %}
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+        </article>
+    {% endfor %}
+
+    <p class="mb-0 text-center text-xs text-n-600 md:col-span-3">
+        <strong class="font-semibold text-n-300" data-testid="download-total">{{ totalDownloads }}</strong>
+        {{ totalDownloads == 1 ? 'download' : 'downloads' }} total
+    </p>
+</section>

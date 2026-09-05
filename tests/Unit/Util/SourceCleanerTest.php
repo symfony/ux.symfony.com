@@ -65,6 +65,27 @@ class SourceCleanerTest extends TestCase
         $this->assertSame($expected, SourceCleaner::cleanupPhpFile($source, removeClass: true));
     }
 
+    public function testItRemovesSharedIndentationFromExtractedLines()
+    {
+        $source = <<<'PHP'
+                #[LiveAction]
+                public function dismiss(): LiveResponse
+                {
+                    return LiveResponse::remove();
+                }
+            PHP;
+
+        $expected = <<<'PHP'
+            #[LiveAction]
+            public function dismiss(): LiveResponse
+            {
+                return LiveResponse::remove();
+            }
+            PHP;
+
+        $this->assertSame($expected, SourceCleaner::cleanupPhpFile($source));
+    }
+
     public function testItExtractsTwigBlock()
     {
         $source = <<<EOF

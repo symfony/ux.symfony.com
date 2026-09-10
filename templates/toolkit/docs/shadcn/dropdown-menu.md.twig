@@ -1,0 +1,59 @@
+{% extends 'toolkit/docs/_base_component.md.twig' %}
+
+{% block demo %}
+{{ toolkit_code_demo(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block usage %}
+{{ toolkit_code_usage(kit_id.value, component.name) }}
+{% endblock %}
+
+{% block examples %}
+### Basic
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Basic', {height: '280px'}) }}
+
+### Submenu
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Submenu', {height: '280px'}) }}
+
+### Shortcuts
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Shortcuts', {height: '280px'}) }}
+
+### Icons
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Icons', {height: '280px'}) }}
+
+### Checkboxes
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Checkboxes', {height: '280px'}) }}
+
+### Checkboxes Icons
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Checkboxes Icons', {height: '280px'}) }}
+
+### Radio Group
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Radio', {height: '280px'}) }}
+
+### Radio Icons
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Radio Icons', {height: '280px'}) }}
+
+### Destructive
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Destructive', {height: '250px'}) }}
+
+### Avatar
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Avatar', {height: '280px'}) }}
+
+### Complex
+
+{{ toolkit_code_example(kit_id.value, component.name, 'Complex', {height: '900px'}) }}
+
+### RTL
+
+{{ toolkit_code_example(kit_id.value, component.name, 'RTL', {height: '500px'}) }}
+{% endblock %}

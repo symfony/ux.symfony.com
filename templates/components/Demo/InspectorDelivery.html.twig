@@ -1,0 +1,7 @@
+{% import 'ux_packages/inspector/_shapes.html.twig' as shape %}
+<div {{ attributes }} class="delivery" data-demo="delivery">
+    {{ shape.bar('48%', 6) }}
+    <button type="button" data-demo="delivery-toggle" aria-label="Express delivery" aria-pressed="{{ express ? 'true' : 'false' }}" data-action="live#action" data-live-action-param="toggle">
+        {{ shape.bar('58%', 6) }}<span class="selection-dot" aria-hidden="true"></span>
+    </button>
+</div>

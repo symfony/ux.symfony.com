@@ -1,0 +1,35 @@
+{# Placeholder storefront: all text is confined to accessible names, never painted.
+   The Inspector is the real package build, copied here until its release. #}
+{% import 'ux_packages/inspector/_shapes.html.twig' as shape %}
+<!DOCTYPE html>
+<html lang="en" class="dark"{% if page != 'find' %} data-ux-inspector-open{% endif %}>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <title>Inspector {{ page }} demo</title>
+    <link rel="stylesheet" href="{{ asset('styles/demos/inspector.css') }}">
+</head>
+<body>
+    <header class="store-header" aria-label="Example shop">{{ shape.bar('120px', 12) }}<div class="header-links">{{ shape.bar('32px', 6) }}{{ shape.bar('44px', 6) }}</div></header>
+    <main class="store" data-page="{{ page }}">
+        {% if page == 'inspect' %}
+            <twig:Demo:InspectorSearch/>
+            {{ include('ux_packages/inspector/_results.html.twig', {query: ''}) }}
+        {% else %}
+            <div class="page-title">{{ shape.bar('42%', 13) }}{{ shape.bar('23%', 6) }}</div>
+            <div class="checkout-layout">
+                <turbo-frame id="checkout-items">
+                    <div class="list-heading">{{ shape.bar('25%', 6) }}{{ shape.bar('15%', 6) }}</div>
+                    {% for product in 1..4 %}{{ include('ux_packages/inspector/_product.html.twig', {product}) }}{% endfor %}
+                    <turbo-frame id="product-updates" hidden></turbo-frame>
+                </turbo-frame>
+                <twig:Demo:InspectorCart :items="[1, 2, 3, 4]"/>
+            </div>
+        {% endif %}
+    </main>
+    {{ importmap() }}
+    <div hidden data-controller="inspector-demo" data-inspector-demo-scenario-value="{{ page }}"></div>
+    <ux-inspector{% if page != 'find' %} open{% endif %} id="ux-inspector" data-config='{"ignore_selectors":["[data-controller~=\"inspector-demo\"]"],"packages":{"stimulus":true,"livecomponent":true,"turbo":true}}'></ux-inspector>
+</body>
+</html>

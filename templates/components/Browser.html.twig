@@ -1,22 +1,32 @@
-{%- props frameClass = 'aspect-2/3 sm:aspect-video' -%}
+{%- props frameClass = 'aspect-2/3 sm:aspect-video', url = 'ux.symfony.com', zoomAction = null -%}
 
 <div
     class="place-self-center mx-auto {{ attributes.render('class') }}"
     {{ attributes }}
 >
     <div class="flex flex-col overflow-hidden rounded-xl border border-n-800 {{ frameClass }}">
-        <div class="grid shrink-0 grid-cols-[1fr_3fr_1fr] items-center justify-between bg-n-800 p-2.5">
+        <div class="browser-chrome relative z-10 grid shrink-0 grid-cols-[1fr_3fr_1fr] items-center justify-between bg-n-800 {{ url ? 'p-2.5' : 'px-2.5 py-2' }}">
             <div class="flex gap-2 px-2">
                 <span class="size-3 rounded-[50%] shadow-sm bg-[#FF5C60]"></span>
                 <span class="size-3 rounded-[50%] shadow-sm bg-[#F2CA44]"></span>
-                <span class="size-3 rounded-[50%] shadow-sm bg-[#65C466]"></span>
+                {%- if zoomAction -%}
+                    {# the green dot does what a green dot does, when a page asks for it #}
+                    <button type="button" class="browser-zoom size-3 rounded-[50%] shadow-sm bg-[#65C466] border-0 p-0 cursor-pointer"
+                            aria-label="Toggle full screen" data-action="{{ zoomAction }}"></button>
+                {%- else -%}
+                    <span class="size-3 rounded-[50%] shadow-sm bg-[#65C466]"></span>
+                {%- endif -%}
             </div>
-            <div class="bg-n-900 text-n-100 rounded text-xs w-auto py-2 px-2 flex items-center justify-between">
-                <span class="opacity-90"><twig:ux:icon name="lock" /></span>
-                <span>ux.symfony.com</span>
-                <span class="opacity-90"><twig:ux:icon name="refresh" /></span>
-            </div>
-            <div></div>
+            {%- if url -%}
+                <div class="bg-n-900 text-n-100 rounded text-xs w-auto py-2 px-2 flex items-center justify-between">
+                    <span class="opacity-90"><twig:ux:icon name="lock" /></span>
+                    <span>{{ url }}</span>
+                    <span class="opacity-90"><twig:ux:icon name="refresh" /></span>
+                </div>
+            {%- else -%}
+                <div>{% block chrome_title %}{% endblock %}</div>
+            {%- endif -%}
+            <div>{% block chrome_actions %}{% endblock %}</div>
         </div>
         <div class="thin min-h-0 w-full flex-1 overflow-x-hidden overflow-y-auto bg-body">
             {% block content %}

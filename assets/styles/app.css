@@ -146,3 +146,11 @@
 @import "./vendor/_highlight.css";
 @import "./vendor/_tippy.css";
 @import "./vendor/_tom-select.css";
+
+/* UX Inspector hero: the halo stays inside the frame, since the chapter band
+   cuts the browser off and nothing coloured may show below it */
+.ux-hero-glow.shadow-blur::after {
+    inset: 2rem 1rem 1rem;
+    filter: blur(5rem);
+    opacity: .55;
+}

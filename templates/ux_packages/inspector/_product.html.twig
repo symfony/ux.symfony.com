@@ -1,0 +1,12 @@
+{% import 'ux_packages/inspector/_shapes.html.twig' as shape %}
+{% set controller = grid|default(false) ? 'demo-product' : 'demo-cart-row' %}
+<article class="result {{ grid|default(false) ? 'result--card' : '' }}" id="product-{{ product }}" aria-label="Example product {{ product }}"
+         data-controller="{{ controller }}" data-{{ controller }}-id-value="{{ product }}"
+         {% if not grid|default(false) %}data-demo-cart-row-demo-cart-outlet="[data-demo='cart']"{% endif %}>
+    <div class="fake-thumb" aria-hidden="true"></div>
+    <div class="lines" aria-hidden="true">{{ shape.bar((90 - product * 5) ~ '%') }}{{ shape.bar('45%', 6) }}</div>
+    <div class="row-actions">
+        <button type="button" class="favorite" aria-label="Favorite product {{ product }}" aria-pressed="false" data-{{ controller }}-target="favorite" data-action="{{ controller }}#toggleFavorite">{{ shape.icon('heart') }}</button>
+        <a class="delete" aria-label="Delete product {{ product }}" href="{{ path('app_demo_inspector_remove', {product}) }}" data-turbo-stream data-action="{{ controller }}#remove">{{ shape.icon('cross') }}</a>
+    </div>
+</article>

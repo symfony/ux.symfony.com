@@ -1,0 +1,196 @@
+{% extends 'ux_packages/package.html.twig' %}
+
+{# The Icons page does the same: the repository keeps the bare name, the page
+   presents it as a UX package. #}
+{% set meta = {
+    title: 'UX Inspector - ' ~ package.tagline,
+    description: package.description,
+    canonical: url(package.route),
+    social: {
+        title: package.tagline ~ ' - Symfony UX Inspector',
+        description: package.description|striptags,
+        image: {
+            url: absolute_url(asset(package.getSocialImage('1200x675'))),
+            type: 'image/png',
+            width: 1200,
+            height: 675,
+            alt: 'UX Inspector - Component Icon',
+        },
+    },
+} %}
+
+{% macro package(pkg, items) %}
+    <article class="ux-pk__card" style="--color: {{ pkg.color }}">
+        <a href="{{ url(pkg.route) }}" class="ux-pk__link">
+            <img class="ux-pk__logo" width="36" height="36" src="{{ asset('images/ux_packages/' ~ pkg.imageFilename) }}" alt="">
+            <h3>{{ pkg.humanName }}</h3>
+        </a>
+        <ul class="ux-pk__list">
+            {% for item in items %}
+                <li class="ux-pk__li">
+                    <span>{{ item }}</span>
+                    <twig:ux:icon name="feature:circle-check" class="shrink-0 ux-pk__check"/>
+                </li>
+            {% endfor %}
+        </ul>
+    </article>
+{% endmacro %}
+
+{% macro trait(label) %}
+    <li class="ux-tr__item">{{ label }}</li>
+{% endmacro %}
+
+{% import _self as ph %}
+
+{% block header %}
+    {# The hero has no coloured band: keep the regular header, not the white-on-dark one. #}
+    {{ include('_header.html.twig') }}
+{% endblock %}
+
+{% block package_header %}
+    <div class="pt-20">
+        <div class="max-w-[1400px] mx-auto px-6 pt-6 md:px-12">
+            <p class="eyebrows text-center text-balance mt-12 mb-4">{{ package.tagLine }}</p>
+            <h1 class="text-center">
+                <a href="{{ url('app_inspector') }}">UX Inspector</a>
+            </h1>
+            <div style="font-size: 1rem; line-height: 1.75rem;" class="mt-6 text-center text-balance demo-introduction">
+                <p class="text-balance">
+                    List and locate your <code>Stimulus</code> controllers, <code>Live Components</code>
+                    and <code>Turbo</code> frames. Inspect their props, attributes and relationships.
+                    Trace the events they dispatch or listen to.
+                </p>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block package_content %}
+
+    <style>
+        /* The site toggles themes with a class and never declares a
+           color-scheme, so light-dark() would always resolve to its light half.
+           Scope it here, like the hero does. */
+        .ux-install, .ux-pk, .ux-tr { color-scheme: light; }
+        .dark :is(.ux-install, .ux-pk, .ux-tr) { color-scheme: dark; }
+
+        .ux-pk__head { margin: 1.5rem auto 0; font-size: clamp(1.8rem, 3vw, 2.5rem); line-height: 1.2; }
+
+        .ux-pk {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+        }
+        .ux-pk__card { padding: 1.5rem; border: 1px solid light-dark(#dee2e6, #343a40); border-radius: .75rem; background: light-dark(#fff, #1b1e22); }
+        .ux-pk__link { display: grid; justify-items: center; gap: 1rem; color: inherit; text-decoration: none; }
+        .ux-pk__link h3 { margin: 0; font: 500 1.4rem/1.3 var(--font-title); }
+        .ux-pk__logo { width: 36px; height: 36px; object-fit: contain; filter: brightness(0); opacity: .8; }
+        .dark .ux-pk__logo { filter: brightness(0) invert(1); }
+        .ux-pk__list {
+            display: grid; gap: .7rem; margin: 1.5rem 0 0; padding: 0; list-style: none;
+            align-self: stretch; text-align: left;
+        }
+        .ux-pk__li { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin: 0; font-size: .95rem; }
+        .ux-pk__check { height: 1.375rem; width: 1.375rem; flex: 0 0 auto; }
+        /* the ring stays quiet, the tick carries the package colour */
+        .ux-pk__check circle { stroke: light-dark(#ced4da, #495057); stroke-width: 1; }
+        .ux-pk__check path { stroke: var(--color); stroke-width: 2.5; transform-box: view-box; transform-origin: center; transform: scale(1.2); }
+        /* package colours are picked for a light ground: Turbo's #5920A0 is
+           invisible on a dark card, so lift the tick there */
+        .dark .ux-pk__check path { stroke: color-mix(in oklch, var(--color) 55%, white); }
+
+        .ux-tr { text-align: center; text-wrap: balance; max-width: 58rem; margin-inline: auto; padding: 0; list-style: none; }
+        .ux-tr__item { display: inline-block; margin: .35rem .3rem; padding: .4rem .8rem; border-radius: 99px; background: light-dark(#e9ecef, #292e34); font-size: .9rem; line-height: 1.3; color: light-dark(#495057, #adb5bd); }
+
+        /* The links block below ships its own top margin, which would leave a
+           band of page background between two tinted sections. */
+        .ux-install + aside { margin-top: 0; }
+
+        .ux-install__grid { display: grid; gap: 3rem; align-items: center; }
+        @media (min-width: 768px) { .ux-install__grid { grid-template-columns: 1.35fr 1fr; gap: 4.5rem; } }
+        .ux-install__title { margin: 0 0 1.75rem; font-size: clamp(1.6rem, 3vw, 2.2rem); }
+
+        /* Real keys: a lit top edge and a hard shadow for the key travel. */
+        .ux-keys { display: flex; gap: 1rem; }
+        .ux-key {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 4.5rem; height: 4.5rem; border-radius: .75rem;
+            background: light-dark(#fff, #2b3035);
+            box-shadow:
+                inset 0 1px 0 light-dark(#fff, rgb(255 255 255 / .1)),
+                0 0 0 1px light-dark(#ced4da, #14171a),
+                0 5px 0 light-dark(#ced4da, #14171a),
+                0 7px 12px rgb(0 0 0 / .25);
+            color: light-dark(#1c2024, #f1f3f5);
+            font: 700 2rem/1 ui-monospace, SFMono-Regular, monospace;
+            text-transform: uppercase;
+        }
+    </style>
+
+    {# --------------------------------------------------- what it reads, per package #}
+    <section class="bg-subtle py-16 md:pt-16 md:pb-24">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-12">
+            <h2 class="ubuntu text-center ux-pk__head">
+                Inspect your components
+            </h2>
+
+            <div class="ux-pk mt-12 md:mt-16">
+                {{ ph.package(covered[0], [
+                    'Values and defaults',
+                    'Targets and CSS classes',
+                    'Actions and parameters',
+                    'Outlets and nesting',
+                    'Connection status',
+                    'Controller events',
+                ]) }}
+                {{ ph.package(covered[1], [
+                    'Props and parent props',
+                    'Models and modifiers',
+                    'Actions and arguments',
+                    'Event listeners',
+                    'Loading and polling',
+                    'Parents and children',
+                ]) }}
+                {{ ph.package(covered[2], [
+                    'Frame attributes',
+                    'Loading and state',
+                    'Links and forms',
+                    'Nested frames',
+                    'Fetch and render events',
+                    'Stream actions',
+                ]) }}
+            </div>
+
+            <ul class="ux-tr mt-14 md:mt-20">
+                {% for label in ['DOM picker', 'Live updates', 'Relations', 'Event log', 'Filters', 'Copy events', 'Keyboard', 'Shadow DOM', 'No deps', 'No build', 'Turbo persistent'] %}
+                    {{ ph.trait(label) }}
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+
+    {# ------------------------------------------------------------------------ install #}
+    <section class="ux-install py-16 md:py-20">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-12">
+            <div class="ux-install__grid">
+                <div>
+                    <h2 class="ubuntu ux-install__title">Install it</h2>
+                    {% component Terminal with {bottomPadding: 20} %}
+                        {% block content %}{{ package.composerRequireCommand }}{% endblock %}
+                    {% endcomponent %}
+                </div>
+                <div>
+                    <h2 class="ubuntu ux-install__title">Then type</h2>
+                    <div class="ux-keys">
+                        <kbd class="ux-key">u</kbd>
+                        <kbd class="ux-key">x</kbd>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block package_install %}{% endblock %}

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% set meta = {
+{% set meta = meta|default({
     title: package.humanName ~ ' - ' ~ package.tagline,
     description: package.description,
     canonical: url(package.route),
@@ -15,7 +15,7 @@
             alt: package.humanName ~ ' - Component Icon',
         },
     },
-} %}
+}) %}
 
 {% block header %}
     {{ include('_header.html.twig', {

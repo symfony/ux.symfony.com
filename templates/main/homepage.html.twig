@@ -116,7 +116,7 @@
     <div class="mt-4 md:mt-12">
         <div style="display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));">
             {% for package in packages|slice(0, 12) %}
-                <twig:Package:PackageBox package="{{ package }}" titleTag="h3" />
+                <twig:Package:PackageBox package="{{ package }}" titleTag="h3" badge="{{ package.name == 'inspector' ? 'New' : null }}" />
             {% endfor %}
         </div>
     </div>

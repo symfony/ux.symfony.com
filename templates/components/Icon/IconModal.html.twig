@@ -1,5 +1,5 @@
 <dialog {{ attributes.defaults({
-    class: 'fixed inset-0 m-auto w-[54rem] min-h-4 max-w-screen max-h-screen overflow-auto py-4 px-6 bg-body text-body-text rounded-xl shadow-[0_0_1rem_0_#0000004a] border border-(--color-border-subtle) [&_img]:opacity-10 open:[&_img]:opacity-100 backdrop:backdrop-blur-[3px] backdrop:bg-[rgba(7,7,7,0.05)] max-md:p-2 max-md:m-2 max-md:w-auto max-md:h-auto',
+    class: 'fixed inset-0 m-auto w-[54rem] min-h-4 max-w-screen max-h-screen overflow-auto py-4 px-6 bg-body text-body-text rounded-xl shadow-[0_0_1rem_0_#0000004a] border border-(--color-border-subtle) [&_iconify-icon]:opacity-10 open:[&_iconify-icon]:opacity-100 backdrop:backdrop-blur-[3px] backdrop:bg-[rgba(7,7,7,0.05)] max-md:p-2 max-md:m-2 max-md:w-auto max-md:h-auto',
     id: 'IconModal',
     'data-open': this.icon ? 'open' : false,
 }).defaults(stimulus_controller('icon-modal')) }}>
@@ -29,18 +29,18 @@
 
             <div class="grid gap-6 md:grid-cols-[300px_1fr]">
                 <div>
-                    <div class="bg-icon-grid aspect-square flex place-content-center rounded-xl text-(--color-border-subtle) border border-(--color-border-subtle) bg-[rgb(9,16,17)] [&_svg]:text-body-text">
-                        <img class="w-3/4 h-auto in-data-[open=open]:animate-icon-loading {{ icon_set.palette ? '' : 'invert' }}" src="{{ icon.imageUrl }}" alt="Icon {{ icon.prefix }} {{ icon.name|humanize }}">
+                    <div class="bg-icon-grid aspect-square flex place-content-center items-center rounded-xl text-(--color-border-subtle) border border-(--color-border-subtle) bg-[rgb(9,16,17)]">
+                        <iconify-icon icon="{{ icon }}" width="100%" height="100%" class="w-3/4 h-3/4 in-data-[open=open]:animate-icon-loading text-white" aria-label="Icon {{ icon.prefix }} {{ icon.name|humanize }}"></iconify-icon>
                     </div>
                     <div class="grid grid-cols-3 pt-3 gap-3 opacity-50">
-                        <div class="aspect-square flex place-content-center rounded bg-body-text">
-                            <img class="w-3/4 h-auto in-data-[open=open]:animate-icon-loading" src="{{ icon.imageUrl }}" alt="Icon {{ icon.prefix }} {{ icon.name|humanize }}">
+                        <div class="aspect-square flex place-content-center items-center rounded bg-body-text">
+                            <iconify-icon icon="{{ icon }}" width="100%" height="100%" class="w-3/4 h-3/4 in-data-[open=open]:animate-icon-loading text-body" aria-label="Icon {{ icon.prefix }} {{ icon.name|humanize }}"></iconify-icon>
                         </div>
-                        <div class="bg-icon-check aspect-square flex place-content-center rounded text-muted">
-                            <img class="w-3/4 h-auto in-data-[open=open]:animate-icon-loading" src="{{ icon.imageUrl }}" alt="Icon {{ icon.prefix }} {{ icon.name|humanize }}">
+                        <div class="bg-icon-check aspect-square flex place-content-center items-center rounded text-muted">
+                            <iconify-icon icon="{{ icon }}" width="100%" height="100%" class="w-3/4 h-3/4 in-data-[open=open]:animate-icon-loading text-black" aria-label="Icon {{ icon.prefix }} {{ icon.name|humanize }}"></iconify-icon>
                         </div>
-                        <div class="aspect-square flex place-content-center rounded bg-white invert">
-                            <img class="w-3/4 h-auto in-data-[open=open]:animate-icon-loading" src="{{ icon.imageUrl }}" alt="Icon {{ icon.prefix }} {{ icon.name|humanize }}">
+                        <div class="aspect-square flex place-content-center items-center rounded bg-white invert">
+                            <iconify-icon icon="{{ icon }}" width="100%" height="100%" class="w-3/4 h-3/4 in-data-[open=open]:animate-icon-loading text-black" aria-label="Icon {{ icon.prefix }} {{ icon.name|humanize }}"></iconify-icon>
                         </div>
                     </div>
                 </div>

@@ -59,11 +59,6 @@ class Icon implements \Stringable
         return $this->name;
     }
 
-    public function getImageUrl(): string
-    {
-        return \sprintf('https://api.iconify.design/%s/%s.svg', $this->prefix, $this->name);
-    }
-
     public function __toString(): string
     {
         return $this->getIdentifier();

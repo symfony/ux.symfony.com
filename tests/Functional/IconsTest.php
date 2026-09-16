@@ -11,6 +11,7 @@
 
 namespace App\Tests\Functional;
 
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Browser\Test\HasBrowser;
 
@@ -40,6 +41,22 @@ final class IconsTest extends KernelTestCase
             ->visit('/icons')
             ->assertSuccessful()
             ->assertSeeIn('h1', 'Icons')
+        ;
+    }
+
+    public function testIconsAreRenderedByTheWebComponentNotIconifysSvgEndpoint()
+    {
+        $this->browser()
+            ->visit('/icons?set=lucide')
+            ->assertSuccessful()
+            ->use(function (KernelBrowser $client) {
+                $html = $client->getResponse()->getContent();
+
+                // that endpoint rate limits an IP after ~65 requests; the component
+                // uses Iconify's batched JSON API instead
+                $this->assertSame(0, preg_match_all('#api\\.iconify\\.design/[a-z0-9-]+/#', $html));
+                $this->assertGreaterThan(0, substr_count($html, '<iconify-icon'));
+            })
         ;
     }
 }

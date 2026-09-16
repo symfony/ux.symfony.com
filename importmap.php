@@ -97,4 +97,5 @@ return [
     '@floating-ui/utils/dom' => ['version' => '0.2.12'],
     '@orchidjs/sifter' => ['version' => '1.1.0'],
     '@orchidjs/unicode-variants' => ['version' => '1.1.2'],
+    'iconify-icon' => ['version' => '3.0.2'],
 ];

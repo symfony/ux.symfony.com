@@ -16,7 +16,7 @@
                     {% if iconSet is not defined %}
                         <span class="absolute text-center text-xs font-mono opacity-25 leading-[1.1] hidden transition-opacity duration-150 ease-linear text-body-text inset-x-2 top-2 in-data-[icon-size=large]:block group-hover:opacity-75">{{ icon.prefix }}</span>
                     {% endif %}
-                    <img class="w-6 max-w-10 h-auto block max-h-10 in-data-[icon-size=large]:w-1/2 dark:not-[.Icon__color]:invert dark:not-[.Icon__color]:hue-rotate-180 {{ iconSet.palette|default ? 'Icon__color' }}" width="32" height="32" src="{{ icon.imageUrl }}" alt="Icon {{ icon.prefix }} {{ icon.name|humanize }}">
+                    <img class="w-6 max-w-10 h-auto block max-h-10 in-data-[icon-size=large]:w-1/2 dark:not-[.Icon__color]:invert dark:not-[.Icon__color]:hue-rotate-180 {{ iconSet.palette|default ? 'Icon__color' }}" width="32" height="32" src="{{ path('app_icon_svg', {prefix: icon.prefix, name: icon.name}) }}" alt="Icon {{ icon.prefix }} {{ icon.name|humanize }}">
                     <span class="absolute text-center text-xs font-mono opacity-25 leading-[1.1] hidden transition-opacity duration-150 ease-linear text-body-text inset-x-2 bottom-2 in-data-[icon-size=large]:block group-hover:opacity-75">{{ icon.name }}</span>
                 </button>
             </div>

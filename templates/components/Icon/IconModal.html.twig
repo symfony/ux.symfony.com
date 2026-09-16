@@ -30,17 +30,17 @@
             <div class="grid gap-6 md:grid-cols-[300px_1fr]">
                 <div>
                     <div class="bg-icon-grid aspect-square flex place-content-center rounded-xl text-(--color-border-subtle) border border-(--color-border-subtle) bg-[rgb(9,16,17)] [&_svg]:text-body-text">
-                        <img class="w-3/4 h-auto in-data-[open=open]:animate-icon-loading {{ icon_set.palette ? '' : 'invert' }}" src="{{ icon.imageUrl }}" alt="Icon {{ icon.prefix }} {{ icon.name|humanize }}">
+                        <img class="w-3/4 h-auto in-data-[open=open]:animate-icon-loading {{ icon_set.palette ? '' : 'invert' }}" src="{{ path('app_icon_svg', {prefix: icon.prefix, name: icon.name}) }}" alt="Icon {{ icon.prefix }} {{ icon.name|humanize }}">
                     </div>
                     <div class="grid grid-cols-3 pt-3 gap-3 opacity-50">
                         <div class="aspect-square flex place-content-center rounded bg-body-text">
-                            <img class="w-3/4 h-auto in-data-[open=open]:animate-icon-loading" src="{{ icon.imageUrl }}" alt="Icon {{ icon.prefix }} {{ icon.name|humanize }}">
+                            <img class="w-3/4 h-auto in-data-[open=open]:animate-icon-loading" src="{{ path('app_icon_svg', {prefix: icon.prefix, name: icon.name}) }}" alt="Icon {{ icon.prefix }} {{ icon.name|humanize }}">
                         </div>
                         <div class="bg-icon-check aspect-square flex place-content-center rounded text-muted">
-                            <img class="w-3/4 h-auto in-data-[open=open]:animate-icon-loading" src="{{ icon.imageUrl }}" alt="Icon {{ icon.prefix }} {{ icon.name|humanize }}">
+                            <img class="w-3/4 h-auto in-data-[open=open]:animate-icon-loading" src="{{ path('app_icon_svg', {prefix: icon.prefix, name: icon.name}) }}" alt="Icon {{ icon.prefix }} {{ icon.name|humanize }}">
                         </div>
                         <div class="aspect-square flex place-content-center rounded bg-white invert">
-                            <img class="w-3/4 h-auto in-data-[open=open]:animate-icon-loading" src="{{ icon.imageUrl }}" alt="Icon {{ icon.prefix }} {{ icon.name|humanize }}">
+                            <img class="w-3/4 h-auto in-data-[open=open]:animate-icon-loading" src="{{ path('app_icon_svg', {prefix: icon.prefix, name: icon.name}) }}" alt="Icon {{ icon.prefix }} {{ icon.name|humanize }}">
                         </div>
                     </div>
                 </div>

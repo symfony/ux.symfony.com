@@ -13,8 +13,8 @@ namespace App\Twig\Components\Icon;
 
 use App\Model\Icon\Icon;
 use App\Model\Icon\IconSet;
-use App\Service\Icon\Iconify;
 use App\Service\Icon\IconSetRepository;
+use App\Service\Icon\JsDelivr;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
@@ -38,7 +38,7 @@ final class IconModal
 
     public function __construct(
         private readonly IconSetRepository $iconSetRepository,
-        private readonly Iconify $iconify,
+        private readonly JsDelivr $jsDelivr,
     ) {
     }
 
@@ -61,7 +61,7 @@ final class IconModal
             return;
         }
 
-        $this->svg ??= $this->iconify->svg($icon->getPrefix(), $icon->getName());
+        $this->svg ??= $this->jsDelivr->svg($icon->getPrefix(), $icon->getName());
     }
 
     public function getIconSet(): ?IconSet

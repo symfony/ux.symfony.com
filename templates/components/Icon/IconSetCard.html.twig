@@ -10,7 +10,7 @@
 
             {% for icon in sample_icons|default([]) %}
                 <div class="grid place-items-center shadow-[0_0_1px_#0007] {{ loop.index % 2 ? 'bg-white/3' : 'bg-black/3' }}">
-                    <img src="https://api.iconify.design/{{ this.iconSet.identifier }}/{{ icon }}.svg"
+                    <img src="{{ path('app_icon_svg', {prefix: this.iconSet.identifier, name: icon}) }}"
                          alt="{{ icon }}"
                          width="24"
                          height="24"

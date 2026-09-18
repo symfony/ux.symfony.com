@@ -1,0 +1,72 @@
+/* Reserve the final dock width before the custom element upgrades. */
+:root { --demo-panel-width: 380px; --ux-inspector-width: var(--demo-panel-width); }
+ux-inspector { --panel-width: var(--demo-panel-width); }
+@media (min-width: 42.5rem) { html[data-ux-inspector-open] { padding-right: var(--ux-inspector-width); } }
+:root { color-scheme: dark; --bg: #212529; --ink: #a7b0b8; --fill: #465059; --line: #ffffff16; }
+* { box-sizing: border-box; }
+html, body { scrollbar-width: none; }
+html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.5 system-ui, sans-serif; }
+[hidden] { display: none !important; }
+.store-header { display: flex; justify-content: space-between; align-items: center; height: 82px; padding-inline: 48px; border-bottom: 1px solid var(--line); }
+.header-links { display: flex; align-items: center; gap: 24px; }
+.store { display: grid; gap: 26px; padding: 32px 48px; }
+.ph { display: block; width: var(--pw, 65%); max-width: 100%; height: var(--ph, 8px); flex-shrink: 0; border-radius: 99px; background: var(--fill); transition: width .25s, background-color .25s; }
+svg { width: 18px; height: 18px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+button, a { display: inline-flex; align-items: center; justify-content: center; gap: 10px; color: inherit; background: transparent; border: 1px solid var(--line); border-radius: 6px; padding: 9px; cursor: pointer; }
+button:disabled { opacity: .4; cursor: default; }
+button:hover, a:hover { background: #ffffff08; }
+button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.page-title { display: grid; gap: 14px; padding-bottom: 8px; }
+.checkout-layout { display: grid; grid-template-columns: minmax(0, 1fr) 190px; gap: 32px; align-items: start; }
+turbo-frame { display: block; min-width: 0; }
+#checkout-items { display: grid; gap: 22px; padding: 20px; }
+#checkout-items .list-heading { padding: 0; border: 0; }
+#checkout-items .result { padding-block: 6px; }
+.list-heading, .between, .total-amount { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.list-heading { padding: 8px 0 16px; border-bottom: 1px solid var(--line); }
+.result { display: flex; align-items: center; gap: 14px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+.fake-thumb { width: 44px; height: 52px; flex-shrink: 0; border-radius: 7px; background: #343d45; }
+.lines { display: grid; flex: 1; min-width: 0; gap: 11px; }
+.row-actions { display: flex; gap: 2px; }
+.row-actions button, .row-actions a { padding: 7px; border: 0; }
+.favorite[aria-pressed="true"] svg { fill: currentColor; }
+.summary { display: grid; gap: 24px; padding: 20px; border: 1px solid var(--line); border-radius: 8px; background: #252b30; }
+.summary-title { display: flex; gap: 14px; align-items: center; }
+.basket-items, .basket-empty, .total, .delivery { display: grid; gap: 15px; }
+.basket-item { display: flex; align-items: center; gap: 12px; }
+.basket-item .fake-thumb { width: 20px; height: 25px; border-radius: 4px; }
+.summary > .delivery, .summary > .total { width: 100%; min-width: 0; justify-self: stretch; }
+.summary > .total { margin-top: 16px; }
+.total { padding-top: 10px; }
+.total-amount { padding-top: 18px; border-top: 1px solid var(--line); }
+.total-amount .ph:last-child { background: #85949f; }
+.delivery button { justify-content: space-between; padding: 10px 8px; }
+.selection-dot { width: 10px; height: 10px; border: 1px solid #82949e; border-radius: 50%; }
+.delivery [aria-pressed="true"] .selection-dot { background: currentColor; border-color: currentColor; }
+.search { display: grid; gap: 20px; }
+.search-controls { display: flex; gap: 12px; }
+.search-controls > button { width: 46px; background: #3a444e; }
+.search-field { display: flex; align-items: center; position: relative; height: 46px; padding: 12px 14px; gap: 14px; flex: 1; border: 1px solid var(--line); border-radius: 6px; background: #1c2125; }
+.search-field input { position: absolute; inset: 0; width: 100%; border: 0; background: transparent; color: transparent; caret-color: transparent; padding: 12px 42px; font: inherit; }
+.search-field input::-webkit-search-cancel-button { display: none; }
+.search-field .ph { pointer-events: none; }
+.filters { display: flex; gap: 10px; }
+.filters button { border-radius: 99px; padding: 12px 16px; }
+.filters button[aria-pressed="true"] { background: #3e4851; border-color: #67747f; }
+.product-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.result--card { position: relative; display: grid; gap: 12px; padding: 12px; border: 1px solid var(--line); border-radius: 8px; }
+.result--card > .fake-thumb { width: 100%; height: 80px; background: linear-gradient(135deg, #39444d, #2e353c); }
+.result--card .row-actions { justify-content: flex-end; }
+.result--card .lines { gap: 8px; }
+.demo-pointer { position: fixed; inset: auto; width: 40px; height: 40px; margin: -20px; padding: 0; border: 0; overflow: visible; background: transparent; color: #ff65b2; pointer-events: none; animation: demo-ripple 950ms ease-out forwards; }
+.demo-pointer svg { width: 100%; height: 100%; }
+.demo-pointer::backdrop { background: transparent; pointer-events: none; }
+@keyframes demo-ripple { 0% { transform: scale(.35); opacity: 1; } 65% { opacity: .9; } 100% { transform: scale(1.3); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .ph { transition: none; } .demo-pointer { animation: none; } }
+
+.demo-shortcut { position: fixed; inset: 0; display: flex; gap: 14px; width: fit-content; height: fit-content; margin: auto; padding: 0; border: 0; overflow: visible; background: transparent; pointer-events: none; }
+.demo-shortcut::backdrop { background: transparent; pointer-events: none; }
+.demo-shortcut kbd { display: grid; place-items: center; width: 68px; height: 68px; border: 1px solid #ffffff30; border-radius: 12px; background: #292e34; color: #a7b0b8; font: 300 30px/1 system-ui, sans-serif; box-shadow: 0 4px 0 #14171b, 0 8px 24px #0005; transition: transform .12s ease, color .12s ease, box-shadow .12s ease; }
+.demo-shortcut kbd.is-pressed { transform: translateY(3px); color: #ff65b2; box-shadow: 0 1px 0 #14171b, 0 4px 12px #0005; }
+@media (prefers-reduced-motion: reduce) { .demo-shortcut kbd { transition: none; } }

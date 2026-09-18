@@ -11,6 +11,9 @@
 
     <twig:block name="title">
         <a href="{{ package.isRemoved ? package.migrationGuideUrl : url(package.route) }}" class="stretched-link text-body-text no-underline">{{ package.humanName }}</a>
+        {% if badge|default(null) %}
+            <span class="inline-flex shrink-0 items-center rounded-full border border-surface px-2 py-1 text-xs font-semibold leading-none">{{ badge }}</span>
+        {% endif %}
         {% if package.isRemoved %}
             <twig:ux:icon name="flowbite:arrow-up-right-from-square-outline" class="Icon opacity-50" />
         {% endif %}

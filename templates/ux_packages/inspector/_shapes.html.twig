@@ -1,0 +1,8 @@
+{% macro bar(width = '65%', height = 8) %}<span class="ph" style="--pw: {{ width }}; --ph: {{ height }}px" aria-hidden="true"></span>{% endmacro %}
+{% macro icon(name) %}
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        {% if name == 'heart' %}<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/>
+        {% elseif name == 'cross' %}<path d="m7 7 10 10M7 17 17 7"/>
+        {% endif %}
+    </svg>
+{% endmacro %}

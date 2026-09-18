@@ -1,0 +1,185 @@
+{% macro chapter(mode, icon, title, line) %}
+    <button
+        type="button" role="tab" id="inspector-chapter-{{ mode }}" aria-controls="inspector-stage" class="uxc-chapter" data-mode="{{ mode }}"
+        data-url="{{ path('app_demo_inspector', {page: mode}) }}"
+        data-inspector-mockup-target="tab"
+        data-action="inspector-mockup#select"
+        data-inspector-mockup-mode-param="{{ mode }}"
+    >
+        <span class="uxc-chapter__head ubuntu">
+            <twig:ux:icon name="feature:{{ icon }}" class="uxc-chapter__icon **:stroke-1"/>
+            {{ title }}
+        </span>
+        <span class="uxc-chapter__reveal"><span class="uxc-chapter__line text-balance">{{ line }}</span></span>
+    </button>
+{% endmacro %}
+
+{% import _self as ph %}
+
+<style>
+    /* The site toggles themes with a class and declares no color-scheme, so
+       light-dark() would always resolve to its light half. Scope it here. */
+    .uxc { color-scheme: light; --w: 1150; --h: 700; --uxc-line: light-dark(#dee2e6, #343a40); }
+    .dark .uxc { color-scheme: dark; }
+
+    .uxc-top { max-width: 1400px; margin-inline: auto; padding-inline: 1.5rem; }
+    @media (min-width: 768px) { .uxc-top { padding-inline: 3rem; } }
+
+    /* The frame is cut off at the bottom: no rounding, no border, no shadow
+       there. The chapter bar below takes over, edge to edge. */
+    .uxc-frame > div {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom: 0;
+    }
+
+    /* A hairline shadow under the window bar, above the page inside the frame,
+       so the chrome reads as chrome and not as part of the page. */
+    .uxc-frame .browser-chrome { min-height: 44px; padding-block: 0; box-shadow: 0 6px 10px -6px rgb(0 0 0 / .55); }
+    .uxc-frame .browser-chrome > :last-child { justify-self: end; }
+    .uxc-title {
+        display: block; text-align: center; white-space: nowrap;
+        font-size: .625rem; font-weight: 300; font-stretch: semi-condensed; letter-spacing: .24em;
+        color: #8b8e93; text-shadow: 0 1px 0 rgb(255 255 255 / .1), 0 -1px 1px rgb(0 0 0 / .9);
+    }
+    .uxc-interact {
+        display: grid; place-items: center; width: 40px; height: 40px;
+        padding: 0; border: 0; border-radius: .4rem; background: transparent;
+        color: rgb(255 255 255 / .6); cursor: pointer;
+        transition: color .15s ease;
+    }
+    .uxc-interact[aria-pressed="true"] { color: rgb(255 255 255 / .8); }
+    .uxc-interact:focus-visible { outline: 2px solid rgb(255 255 255 / .8); outline-offset: -3px; }
+    .uxc-interact svg { width: 16px; height: 16px; }
+    .uxc-interact[aria-pressed="true"] .uxc-lock-open,
+    .uxc-interact[aria-pressed="false"] .uxc-lock-closed { display: none; }
+    @media (prefers-reduced-motion: reduce) { .uxc-interact { transition: none; } }
+
+    .uxc-stage {
+        position: relative; width: 100%; overflow: hidden;
+        aspect-ratio: var(--w) / var(--h);
+    }
+    /* The iframe renders at a real desktop width, then gets scaled to fit. */
+    .uxc-stage iframe {
+        position: absolute; top: 0; left: 0; border: 0; transform-origin: top left;
+        width: calc(var(--w) * 1px); height: calc(var(--h) * 1px);
+    }
+
+    .uxc-error { position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; background: #212529; color: #f1f3f5; }
+    .uxc-error[hidden] { display: none; }
+    .uxc-error button { padding: .6rem 1rem; border: 1px solid #eb72af; border-radius: .4rem; color: inherit; cursor: pointer; }
+    .uxc-shield { position: absolute; inset: 0; z-index: 2; cursor: default; }
+    /* A full width band: it rides over the bottom of the browser so the frame is
+       cut, and hides the halo behind it. The ground comes from bg-subtle. */
+    .uxc-cut {
+        position: relative; z-index: 1;
+        margin-top: 0;
+    }
+    /* Only the middle is tinted, on the browser's own width, closing the frame. */
+    .uxc-chapters {
+        position: relative; display: grid; grid-template-columns: repeat(2, 1fr);
+        border: 1px solid var(--uxc-line); border-top: 0;
+        border-radius: 0 0 .75rem .75rem;
+        background: light-dark(#f1f3f5, #16191d);
+        overflow: hidden;
+    }
+    @media (min-width: 768px) { .uxc-chapters { grid-template-columns: repeat(4, 1fr); } }
+
+    .uxc-chapter {
+        display: grid; gap: 0; align-content: center; min-height: 120px;
+        padding: 1.1rem 1.5rem 1.25rem;
+        border: 0; margin: 0;
+        background: transparent; text-align: left;
+        color: light-dark(#495057, #adb5bd);
+        transition: background-color .25s ease, color .25s ease, border-color .25s ease;
+    }
+    .uxc-chapter + .uxc-chapter { box-shadow: inset 1px 0 var(--uxc-line); }
+    .uxc-chapter.is-current {
+        background: light-dark(#e4e7eb, #121519);
+        color: light-dark(#1c2024, #f1f3f5);
+    }
+    .uxc-chapter__head { display: flex; align-items: center; gap: .6rem; font-size: 1.1rem; font-weight: 700; }
+    .uxc-chapter__icon {
+        height: 1.45rem; width: 1.45rem; flex: 0 0 auto; opacity: .45;
+        transition: opacity .25s ease, scale .25s ease;
+    }
+    .uxc-chapter.is-current .uxc-chapter__icon { opacity: 1; scale: 1.15; }
+    .uxc-chapters::before { content: ''; position: absolute; inset: 0 0 auto; height: 3px; background: #eb72af; transform: scaleX(var(--progress, 0)); transform-origin: left; z-index: 2; }
+    .uxc-chapter__reveal { display: grid; grid-template-rows: 0fr; opacity: 0; transform: translateY(9px); visibility: hidden; transition: grid-template-rows .35s ease, opacity .3s ease, transform .35s ease, visibility .35s; }
+    .uxc-chapter.is-current .uxc-chapter__reveal { grid-template-rows: 1fr; opacity: 1; transform: translateY(0); visibility: visible; }
+    .uxc-chapter__line { min-height: 0; overflow: hidden; font-size: .82rem; line-height: 1.4; opacity: .75; padding-top: 0; }
+    .uxc-chapter.is-current .uxc-chapter__line { padding-top: .5rem; }
+    @media (prefers-reduced-motion: reduce) { .uxc-chapter, .uxc-chapter__reveal, .uxc-chapter__icon { transition: none; } }
+
+    /* Full screen keeps the chapters: the whole shell goes, not just the frame. */
+    .uxc-shell:fullscreen {
+        display: grid; align-content: center;
+        padding-block: 2vmin;
+        background: light-dark(#e9ecef, #0d1117);
+    }
+    /* An explicit width, not a max-width: the shell is a grid here, and the
+       auto inline margins stop the item from stretching to the track. */
+    .uxc-shell:fullscreen .uxc-top {
+        width: min(96vw, calc(78vh * var(--w) / var(--h)));
+        max-width: none;
+        padding-inline: 0;
+    }
+</style>
+
+<div class="uxc mt-12 md:mt-16"
+     data-controller="inspector-mockup"
+     data-inspector-mockup-mode-value="find">
+
+    <div class="uxc-shell">
+        <div class="uxc-top">
+            <twig:Browser
+                class="uxc-frame ux-hero-glow shadow-blur shadow-blur--rainbow w-full"
+                frameClass=""
+                url="{{ null }}"
+                zoomAction="inspector-mockup#zoom"
+            >
+                <twig:block name="chrome_title">
+                    <span class="uxc-title">UX INSPECTOR</span>
+                </twig:block>
+                <twig:block name="chrome_actions">
+                    <button type="button" class="uxc-interact" aria-label="Lock demo interactions"
+                            aria-pressed="true" aria-controls="inspector-stage" title="Unlock to try the demo"
+                            data-inspector-mockup-target="interaction" data-action="inspector-mockup#toggleInteraction">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="5" y="10" width="14" height="11" rx="2"/>
+                            <path class="uxc-lock-closed" d="M8 10V6a4 4 0 0 1 8 0v4"/>
+                            <path class="uxc-lock-open" d="M8 10V6a4 4 0 0 1 7.5-2"/>
+                        </svg>
+                    </button>
+                </twig:block>
+                <div class="uxc-stage" id="inspector-stage" role="tabpanel" aria-labelledby="inspector-chapter-find" data-inspector-mockup-target="stage" data-mode="find">
+                    <iframe
+                        title="The UX Inspector running on a page"
+                        src="about:blank"
+                        loading="lazy"
+                        tabindex="-1"
+                        inert
+                        data-inspector-mockup-target="frame"
+                    ></iframe>
+                    <div class="uxc-shield" aria-hidden="true" data-inspector-mockup-target="shield"></div>
+                    <div class="uxc-error" data-inspector-mockup-target="error" role="alert" hidden>
+                        <p>The demo could not load.</p>
+                        <button type="button" data-action="inspector-mockup#load">Replay scenario</button>
+                    </div>
+                </div>
+            </twig:Browser>
+        </div>
+
+        <div class="uxc-cut bg-subtle">
+            <div class="uxc-top">
+                <div class="uxc-chapters" role="tablist" aria-label="Inspector views"
+                     data-action="keydown->inspector-mockup#move">
+                    {{ ph.chapter('find', 'layers', 'Find', 'Every Stimulus, Live and Turbo element, outlined in the page.') }}
+                    {{ ph.chapter('inspect', 'crosshair', 'Inspect', 'Values and props, read from the running instance.') }}
+                    {{ ph.chapter('connect', 'git-fork', 'Connect', 'Nested Live Components and Stimulus outlets, connected.') }}
+                    {{ ph.chapter('trace', 'activity', 'Trace', 'Events as they fire, in the order they fire.') }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

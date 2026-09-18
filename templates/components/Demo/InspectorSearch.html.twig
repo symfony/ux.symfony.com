@@ -1,0 +1,12 @@
+{% import 'ux_packages/inspector/_shapes.html.twig' as shape %}
+<form {{ attributes }} class="search" data-action="live#action:prevent" data-live-action-param="search">
+    <div class="search-controls">
+        <label class="search-field"><input id="catalog-search" type="search" aria-label="Search example products" data-model="norender|query">{{ shape.bar(query ? '45%' : '30%', 7) }}</label>
+        <button type="submit" aria-label="Search" data-demo="search" data-loading="action(search)|addAttribute(disabled)">{{ shape.bar('18px', 6) }}</button>
+    </div>
+    <div class="filters" aria-label="Product filters">
+        <button type="button" data-demo="filter-all" aria-label="All products" aria-pressed="{{ query == '' ? 'true' : 'false' }}" data-action="live#action" data-live-action-param="filter" data-live-query-param="">{{ shape.bar('42px', 6) }}</button>
+        <button type="button" data-demo="filter-live" aria-label="Live products" aria-pressed="{{ query == 'live' ? 'true' : 'false' }}" data-action="live#action" data-live-action-param="filter" data-live-query-param="live">{{ shape.bar('58px', 6) }}</button>
+        <button type="button" aria-label="Turbo products" aria-pressed="{{ query == 'turbo' ? 'true' : 'false' }}" data-action="live#action" data-live-action-param="filter" data-live-query-param="turbo">{{ shape.bar('36px', 6) }}</button>
+    </div>
+</form>

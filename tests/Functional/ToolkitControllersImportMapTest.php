@@ -43,7 +43,7 @@ final class ToolkitControllersImportMapTest extends KernelTestCase
         }
 
         self::assertContains('@symfony/ux-toolkit/kits/shadcn/accordion/assets/controllers/accordion_controller.js', $implicitImports);
-        self::assertContains('@symfony/ux-toolkit/kits/flowbite-4/modal/assets/controllers/modal_controller.js', $implicitImports);
+        self::assertContains('@symfony/ux-toolkit/kits/flowbite-4/modal/assets/controllers/flowbite_modal_controller.js', $implicitImports);
 
         // The base CSS stays an explicit entry.
         self::assertTrue($entries->has('@symfony/ux-toolkit/assets/styles/toolkit.css'));

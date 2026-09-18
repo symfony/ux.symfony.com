@@ -1,0 +1,6 @@
+{% import 'ux_packages/inspector/_shapes.html.twig' as shape %}
+<div {{ attributes }} class="total" data-demo="total" data-demo-total="{{ this.total }}" aria-label="Total {{ this.total }} euros">
+    <div class="between">{{ shape.bar('40%', 6) }}{{ shape.bar('22%', 6) }}</div>
+    <div class="between">{{ shape.bar('32%', 6) }}{{ shape.bar(express ? '28%' : '15%', 6) }}</div>
+    <div class="total-amount">{{ shape.bar('38%') }}{{ shape.bar((18 + this.total / 5) ~ '%', 12) }}</div>
+</div>

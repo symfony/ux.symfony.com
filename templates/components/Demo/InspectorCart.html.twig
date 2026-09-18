@@ -1,0 +1,15 @@
+{% import 'ux_packages/inspector/_shapes.html.twig' as shape %}
+<aside {{ attributes.defaults({'data-controller': 'demo-cart'}) }} data-demo="cart" class="summary" data-demo-count="{{ items|length }}" aria-label="Example basket">
+    <div class="summary-title">{{ shape.bar('62%') }}</div>
+    <div class="basket-items">
+        {% for product in items %}
+            <div class="basket-item" aria-label="Example product {{ product }}">
+                <span class="fake-thumb" aria-hidden="true"></span>{{ shape.bar((55 + product * 4) ~ '%', 6) }}
+            </div>
+        {% else %}
+            <div class="basket-empty" aria-label="Empty basket">{{ shape.bar('70%') }}{{ shape.bar('40%', 6) }}</div>
+        {% endfor %}
+    </div>
+    <twig:Demo:InspectorDelivery key="checkout-delivery"/>
+    <twig:Demo:InspectorTotal key="checkout-total" :subtotal="this.subtotal"/>
+</aside>

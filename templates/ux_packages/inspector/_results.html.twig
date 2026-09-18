@@ -1,0 +1,11 @@
+<turbo-frame id="results" data-controller="demo-results" data-demo-results-url-value="{{ path('app_demo_inspector_results') }}" data-action="inspector:search@window->demo-results#search">
+    <div class="product-grid">
+        {% set guides = ['Live components', 'Stimulus controllers', 'Turbo frames', 'Live forms', 'Stimulus targets', 'Turbo streams'] %}
+        {% for title in guides %}
+            {% if query|default('') == '' or query|lower in title|lower %}
+                {{ include('ux_packages/inspector/_product.html.twig', {product: loop.index, grid: true}) }}
+            {% endif %}
+        {% endfor %}
+    </div>
+    <turbo-frame id="product-updates" hidden></turbo-frame>
+</turbo-frame>

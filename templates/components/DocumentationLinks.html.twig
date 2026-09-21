@@ -12,7 +12,10 @@
     <ul class="m-0 p-0 list-none flex flex-wrap gap-x-2 gap-y-1">
         {% for link in links %}
             <li>
-                <a href="{{ link.url }}" class="text-(--package-primary-text) underline decoration-current/35 underline-offset-[.2em] hover:decoration-current">{{ link.title }}</a>{{ loop.last ? '' : ',' }}
+                <a href="{{ link.url }}" class="text-(--package-primary-text) underline decoration-current/35 underline-offset-[.2em] hover:decoration-current">
+                    {{- link.title -}}
+                </a>
+                {{- loop.last ? '' : ',' -}}
             </li>
         {% endfor %}
     </ul>

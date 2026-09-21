@@ -21,13 +21,48 @@
     {% endcomponent %}
 {% endblock %}
 
-{% block package_content %}
-    <div class="max-w-[1400px] mx-auto px-6 pt-6 md:px-12">
+{% block package_features %}
+    {% set turbo_features = [
+        {
+            icon: 'lucide:gauge',
+            title: 'Turbo <strong>Drive</strong>',
+            description: 'Links and forms become Ajax, no full reloads.',
+        },
+        {
+            icon: 'lucide:frame',
+            title: 'Turbo <strong>Frames</strong>',
+            description: 'Update one region of the page in place.',
+        },
+        {
+            icon: 'lucide:layers',
+            title: 'Turbo <strong>Streams</strong>',
+            description: 'Append, replace or remove any element from PHP.',
+        },
+        {
+            icon: 'lucide:radio',
+            title: 'Real time with <strong>Mercure</strong>',
+            description: 'Broadcast Doctrine changes to every open tab.',
+        },
+        {
+            icon: 'lucide:smartphone',
+            title: 'Native <strong>ready</strong>',
+            description: 'The same app, wrapped by Hotwire Native.',
+        },
+    ] %}
+    <twig:FeaturesCluster
+        :items="turbo_features"
+        title="What Turbo gives you"
+        titleId="turbo-overview-title"
+    />
+{% endblock %}
 
-        <section class="grid grid-cols-12 gap-x-6 mb-12">
+{% block package_content %}
+
+        {% set turbo_drive %}
+        <div class="grid grid-cols-12 gap-x-6">
             <div class="col-span-12 md:col-span-6 md:order-2">
                 <div class="md:px-12">
-                    <h2 class="ubuntu mt-4 md:mt-12" id="drive">Turbo <span class="text-purple">Drive</span></h2>
+                    <twig:Package:SectionTitle size="md" title="Turbo <strong>Drive</strong>." />
                     <p class="mt-2">Transform all link clicks and form submits into Ajax
                     calls to get that single-page-application feel.</p>
                     <div class="rounded-md border bg-surface p-4 flex justify-start col-span-12 mt-12">
@@ -67,12 +102,15 @@
                     {% endblock %}
                 {% endembed %}
             </div>
-        </section>
+        </div>
+        {% endset %}
+        <twig:Package:Section id="drive" tone="subtle">{{ turbo_drive }}</twig:Package:Section>
 
-        <section class="grid grid-cols-12 gap-x-6 mb-12 md:pt-12">
+        {% set turbo_frames %}
+        <div class="grid grid-cols-12 gap-x-6">
             <div class="col-span-12 md:col-span-6">
                 <div class="md:px-12">
-                    <h2 class="ubuntu mt-12" id="frames">Turbo <span class="text-purple">Frames</span></h2>
+                    <twig:Package:SectionTitle size="md" title="Turbo <strong>Frames</strong>." />
                     <div>Decompose complex pages into different parts that load and behave independently. Try it - it's smooth.</div>
                     <div class="rounded-md border bg-surface p-4 flex col-span-12 justify-start mt-12">
                         <twig:ux:icon name="bi:info-circle-fill" class="size-5 shrink-0" aria-label="Icon to indication information" />
@@ -97,12 +135,15 @@
                     {% endblock %}
                 {% endembed %}
             </div>
-        </section>
+        </div>
+        {% endset %}
+        <twig:Package:Section id="frames" tone="default">{{ turbo_frames }}</twig:Package:Section>
 
-        <section {{ turbo_stream_listen('chat') }} class="grid grid-cols-12 gap-x-6 mb-12 md:pt-12">
+        {% set turbo_turbo_streams %}
+        <div {{ turbo_stream_listen('chat') }} class="grid grid-cols-12 gap-x-6">
             <div class="col-span-12 md:col-span-6 md:order-2">
                 <div class="md:px-12">
-                    <h2 class="ubuntu mt-12" id="turbo-streams">Turbo <span class="text-purple">Streams</span></h2>
+                    <twig:Package:SectionTitle size="md" title="Turbo <strong>Streams</strong>." />
                     <div>
                         Deliver page updates - to *any* elements on your page -
                         directly from Symfony. Add Mercure to do this for *any*
@@ -134,7 +175,8 @@
                     {% endblock %}
                 {% endembed %}
             </div>
-        </section>
+        </div>
+        {% endset %}
+        <twig:Package:Section id="turbo-streams" tone="subtle">{{ turbo_turbo_streams }}</twig:Package:Section>
 
-    </div>
 {% endblock %}

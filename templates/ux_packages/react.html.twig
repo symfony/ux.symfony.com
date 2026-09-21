@@ -19,6 +19,81 @@
     {% endcomponent %}
 {% endblock %}
 
+{% block package_features %}
+    {% set react_features = [
+        {
+            icon: 'lucide:component',
+            title: 'React in <strong>Twig</strong>',
+            description: 'Render a component with one Twig function.',
+        },
+        {
+            icon: 'lucide:arrow-right-left',
+            title: 'Props from <strong>PHP</strong>',
+            description: 'Pass arrays straight into the component.',
+        },
+        {
+            icon: 'lucide:server',
+            title: 'Server <strong>rendering</strong>',
+            description: 'Ship HTML first, hydrate on the client.',
+        },
+        {
+            icon: 'lucide:package',
+            title: 'AssetMapper <strong>ready</strong>',
+            description: 'No bundler required to get started.',
+        },
+        {
+            icon: 'lucide:layers',
+            title: 'Island by <strong>island</strong>',
+            description: 'Add React only where the page needs it.',
+        },
+    ] %}
+    <twig:FeaturesCluster
+        :items="react_features"
+        title="What React gives you"
+        titleId="react-overview-title"
+    />
+{% endblock %}
+
+{% block package_highlights %}
+    {% set rc_register %}assets/react/controllers/
+└── Hello.jsx{% endset %}
+    {% set rc_render %}{% verbatim %}<div {{ react_component('Hello', {
+    name: app.user.name,
+}) }}></div>{% endverbatim %}{% endset %}
+    {% set rc_props %}export default function Hello({ name }) {
+    return <div>Hello {name}!</div>;
+}{% endset %}
+
+    <twig:Package:Highlights
+        eyebrow="Islands inside your Twig"
+        title="How a component <strong>lands</strong> on the page."
+        intro="Symfony still renders the page. React takes over only the elements you hand it, with the props you built in PHP."
+        :items="[
+            {
+                icon: 'lucide:folder',
+                title: 'Registered by <strong>convention</strong>',
+                description: 'Anything under the controllers directory is registered by name. No manifest to maintain.',
+                code: rc_register,
+                language: 'bash',
+            },
+            {
+                icon: 'lucide:component',
+                title: 'Rendered from <strong>Twig</strong>',
+                description: 'The function writes the data attributes the Stimulus controller reads to mount the component.',
+                code: rc_render,
+                language: 'twig',
+            },
+            {
+                icon: 'lucide:arrow-right-left',
+                title: 'Props built in <strong>PHP</strong>',
+                description: 'Arrays and objects are serialised to JSON, so the component receives plain data.',
+                code: rc_props,
+                language: 'javascript',
+            },
+        ]"
+    />
+{% endblock %}
+
 {% block code_block_left %}
     <twig:CodeBlock filename="assets/react/src/controllers/PackageSearch.jsx" height="300px" />
 {% endblock %}

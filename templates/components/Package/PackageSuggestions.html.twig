@@ -1,0 +1,18 @@
+{% set suggestions = this.packages %}
+{% set human_name = package.humanName %}
+
+<twig:Package:Section tone="accent">
+    <twig:Package:SectionHeading centered title="More from <strong>Symfony UX</strong>.">
+        <p>{{ human_name }} is one package among many. They share the same Stimulus foundation and install the same way.</p>
+    </twig:Package:SectionHeading>
+
+    <div class="grid gap-8 lg:grid-cols-3">
+        {% for suggestion in suggestions %}
+            <twig:PackageBox package="{{ suggestion }}" titleTag="h3" />
+        {% endfor %}
+    </div>
+
+    <p class="mt-12 text-center">
+        <twig:LinkButton outline label="Browse every package" url="{{ path('app_packages') }}" arrow />
+    </p>
+</twig:Package:Section>

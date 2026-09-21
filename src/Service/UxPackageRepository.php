@@ -25,7 +25,7 @@ class UxPackageRepository
                 'icons',
                 'Icons',
                 'app_icons',
-                '#fff',
+                '#7C5CD6',
                 'SVG icons made easy',
                 'Render SVG icons seamlessly from your Twig templates.',
                 'I need to render SVG icons.',

@@ -19,6 +19,92 @@
     {% endcomponent %}
 {% endblock %}
 
+{% block package_features %}
+    {% set autocomplete_features = [
+        {
+            icon: 'lucide:search',
+            title: 'Search as you <strong>type</strong>',
+            description: 'Query the server without leaving the form.',
+        },
+        {
+            icon: 'lucide:text-cursor-input',
+            title: 'A real <strong>form type</strong>',
+            description: 'Drop it into any Symfony form.',
+        },
+        {
+            icon: 'lucide:database',
+            title: 'Doctrine <strong>aware</strong>',
+            description: 'Point it at an entity and it queries for you.',
+        },
+        {
+            icon: 'lucide:list-plus',
+            title: 'Create on the <strong>fly</strong>',
+            description: 'Let users add a value that does not exist yet.',
+        },
+        {
+            icon: 'lucide:layers-2',
+            title: 'Multiple <strong>selection</strong>',
+            description: 'Tags, grouping and dependent fields.',
+        },
+    ] %}
+    <twig:FeaturesCluster
+        :items="autocomplete_features"
+        title="What Autocomplete gives you"
+        titleId="autocomplete-overview-title"
+    />
+{% endblock %}
+
+{% block package_highlights %}
+    {% set ac_option %}$builder->add('food', EntityType::class, [
+    'class' => Food::class,
+    'autocomplete' => true,
+]);{% endset %}
+    {% set ac_field %}#[AsEntityAutocompleteField]
+class FoodField extends AbstractType
+{
+    public function configureOptions(
+        OptionsResolver $resolver,
+    ): void {
+        $resolver->setDefaults([
+            'class' => Food::class,
+        ]);
+    }
+}{% endset %}
+    {% set ac_create %}$resolver->setDefaults([
+    'class' => Food::class,
+    'allow_options_create' => true,
+]);{% endset %}
+
+    <twig:Package:Highlights
+        eyebrow="From a select to a search field"
+        title="Where the <strong>options</strong> come from."
+        intro="A plain select ships every row to the browser. Autocomplete keeps them on the server and fetches only what the visitor is looking for."
+        :items="[
+            {
+                icon: 'lucide:toggle-right',
+                title: 'One <strong>option</strong> to switch it on',
+                description: 'Add autocomplete to an existing EntityType or ChoiceType and the field becomes searchable.',
+                code: ac_option,
+                language: 'php',
+            },
+            {
+                icon: 'lucide:database',
+                title: 'Its own <strong>endpoint</strong>',
+                description: 'The attribute registers a dedicated controller, so the browser queries the database instead of downloading it.',
+                code: ac_field,
+                language: 'php',
+            },
+            {
+                icon: 'lucide:list-plus',
+                title: 'Values that do not <strong>exist yet</strong>',
+                description: 'allow_options_create lets a visitor type something new. Your code decides whether to persist it.',
+                code: ac_create,
+                language: 'php',
+            },
+        ]"
+    />
+{% endblock %}
+
 {% block code_block_left %}
     <twig:CodeBlock filename="src/Form/TimeForAMealForm.php" height="300px" />
 {% endblock %}

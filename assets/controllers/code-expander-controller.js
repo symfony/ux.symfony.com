@@ -17,6 +17,8 @@ export default class extends Controller {
 
     expandCode(event) {
         this.codeContentTarget.style.height = 'auto';
+        // the height cap can also sit on the .Terminal wrapper, lift it too
+        this.element.closest('.Terminal')?.style.setProperty('max-height', 'none');
         if (this.hasExpandCodeButtonTarget) {
             this.expandCodeButtonTarget.remove();
         }

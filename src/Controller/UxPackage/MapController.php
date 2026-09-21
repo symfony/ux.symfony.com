@@ -14,8 +14,6 @@ namespace App\Controller\UxPackage;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\UX\Map\Bridge\Leaflet\LeafletOptions;
-use Symfony\UX\Map\Bridge\Leaflet\Option\TileLayer;
 use Symfony\UX\Map\InfoWindow;
 use Symfony\UX\Map\Map;
 use Symfony\UX\Map\Marker;
@@ -36,15 +34,7 @@ class MapController extends AbstractController
                 infoWindow: new InfoWindow(
                     content: '<p>Thank you <a href="https://github.com/Kocal">@Kocal</a> for this component!</p>',
                 )
-            ))
-
-            ->options((new LeafletOptions())
-                ->tileLayer(new TileLayer(
-                    url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-                    options: ['maxZoom' => 19]
-                ))
-            );
+            ));
 
         return $this->render('ux_packages/map.html.twig', [
             'map' => $map,

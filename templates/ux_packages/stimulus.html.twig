@@ -5,7 +5,6 @@
         package="stimulus"
         eyebrowText="Symfony UX Central Piece"
         title="Stimulus Bundle"
-        :command="false"
     >
         <twig:block name="sub_content">
             Connects <a href="https://stimulus.hotwire.dev" target="_blank">Stimulus</a>,
@@ -15,26 +14,102 @@
     </twig:PackageHeader>
 {% endblock %}
 
+{% block package_features %}
+    {% set stimulus_features = [
+        {
+            icon: 'lucide:plug',
+            title: 'Controllers, <strong>connected</strong>',
+            description: 'Wire behaviour to the markup you already write.',
+        },
+        {
+            icon: 'lucide:code',
+            title: 'Twig <strong>helpers</strong>',
+            description: 'stimulus_controller, stimulus_target and stimulus_action.',
+        },
+        {
+            icon: 'lucide:package',
+            title: 'Asset <strong>pipeline</strong>',
+            description: 'Works with AssetMapper and Webpack Encore.',
+        },
+        {
+            icon: 'lucide:hourglass',
+            title: 'Lazy <strong>loading</strong>',
+            description: 'Load a controller when its element appears.',
+        },
+        {
+            icon: 'lucide:globe',
+            title: 'Web <strong>standards</strong>',
+            description: 'Plain DOM events and data attributes, nothing more.',
+        },
+    ] %}
+    <twig:FeaturesCluster
+        :items="stimulus_features"
+        title="What Stimulus Bundle gives you"
+        titleId="stimulus-overview-title"
+    />
+{% endblock %}
+
+{% block package_highlights %}
+    {% set st_json %}{
+    "controllers": {
+        "@symfony/ux-autocomplete": {
+            "autocomplete": {
+                "enabled": true,
+                "fetch": "lazy"
+            }
+        }
+    }
+}{% endset %}
+    {% set st_lazy %}/* stimulusFetch: 'lazy' */
+export default class extends Controller {
+    connect() {
+        // ...
+    }
+}{% endset %}
+    {% set st_make %}php bin/console make:stimulus-controller{% endset %}
+
+    <twig:Package:Highlights
+        eyebrow="What the bundle wires for you"
+        title="Controllers you never have to <strong>register</strong>."
+        intro="Beyond the Twig helpers, the bundle owns the plumbing: where controllers come from, when they load, and how new ones are created."
+        :items="[
+            {
+                icon: 'lucide:file-json',
+                title: 'Third-party <strong>controllers</strong>',
+                description: 'Every UX package declares its controllers in controllers.json. The bundle reads that file and loads them.',
+                code: st_json,
+                language: 'json',
+            },
+            {
+                icon: 'lucide:hourglass',
+                title: 'Loaded when <strong>needed</strong>',
+                description: 'One comment keeps a controller out of the initial payload until an element asks for it.',
+                code: st_lazy,
+                language: 'javascript',
+            },
+            {
+                icon: 'lucide:wand-sparkles',
+                title: 'Scaffolded by <strong>Maker</strong>',
+                description: 'A command writes the controller in the right place, already registered.',
+                code: st_make,
+                language: 'bash',
+            },
+        ]"
+    />
+{% endblock %}
+
 {% block package_content %}
 
-    <section class="mb-12">
-        <div class="max-w-[1240px] mx-auto">
-            <div style="display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))">
-                <twig:FeatureBox icon="rocket" title="Simple by Design"/>
-                <twig:FeatureBox icon="link" title="Seamless Integration"/>
-                <twig:FeatureBox icon="zap" title="Optimized for Performance"/>
-                <twig:FeatureBox icon="square-dashed-mouse-pointer" title="Lazy Loading"/>
-                <twig:FeatureBox icon="globe" title="Web Standards"/>
-            </div>
-        </div>
-    </section>
-
-    <section class="bg-subtle border-y py-4">
-        <div class="max-w-[1140px] mx-auto">
-
-            <div class="pt-12">
-                <h2 class="ubuntu">Stimulus Twig Helpers</h2>
-            </div>
+    <twig:Package:Section tone="subtle">
+        <twig:Package:SectionHeading
+            eyebrow="Stimulus Twig helpers"
+            title="Wire a controller from <strong>your template</strong>."
+        >
+            <p>
+                Three Twig functions write the data attributes Stimulus looks for. The markup stays
+                readable, and the controller stays plain JavaScript.
+            </p>
+        </twig:Package:SectionHeading>
 
             <twig:Code:CodeWithExplanationRow
                 filename="templates/{{ _self }}"
@@ -124,7 +199,5 @@
                 This simplifies event handling by mapping DOM events (like `click`, `input`, etc.) directly to
                 controller methods, improving the clarity and maintainability of your code.
             </twig:Code:CodeWithExplanationRow>
-
-        </div>
-    </section>
+    </twig:Package:Section>
 {% endblock %}

@@ -12,64 +12,6 @@
         --pagination-accent-text: var(--pagination-accent);
     }
 
-    .PaginationEyebrow {
-        margin: 0;
-        color: var(--pagination-primary-text);
-        font-family: var(--font-title);
-        font-size: .72rem;
-        font-stretch: semi-condensed;
-        font-weight: 600;
-        letter-spacing: .12em;
-        line-height: 1.4;
-        text-transform: uppercase;
-    }
-
-    .PaginationSectionTitle {
-        margin: 0;
-        font-family: var(--font-title);
-        font-size: clamp(2.35rem, 3.8vw, 3.7rem);
-        font-weight: var(--font-weight-bold);
-        letter-spacing: -.04em;
-        line-height: .98;
-        text-wrap: balance;
-    }
-
-    .PaginationSectionHeading {
-        max-inline-size: 48rem;
-        margin-block-end: clamp(3.5rem, 7vw, 5rem);
-    }
-
-    .PaginationSectionHeading .PaginationEyebrow {
-        margin-block-end: 1.25rem;
-    }
-
-    .PaginationSectionHeading > p:last-child {
-        max-inline-size: 42rem;
-        margin: 2rem 0 0;
-        color: color-mix(in oklch, var(--color-body-text) 80%, transparent);
-        font-size: 1.125rem;
-        line-height: 1.75;
-        text-wrap: balance;
-    }
-
-    .PaginationSectionHeading--centered {
-        margin-inline: auto;
-        text-align: center;
-    }
-
-    .PaginationSectionHeading--centered > p:last-child {
-        margin-inline: auto;
-    }
-
-    .PaginationFeatureTitle {
-        font-family: var(--font-title);
-        font-size: clamp(1.85rem, 2.6vw, 2.2rem);
-        font-weight: var(--font-weight-bold);
-        letter-spacing: -.025em;
-        line-height: 1.08;
-        text-wrap: balance;
-    }
-
     .PaginationCta {
         display: inline-flex;
         align-items: center;
@@ -123,10 +65,6 @@
 
     .PaginationCta--secondary:hover {
         background: color-mix(in oklch, var(--pagination-primary) 86%, black);
-    }
-
-    .PaginationAccentPrimary {
-        color: var(--pagination-primary-text);
     }
 
     [data-pagination-feature] .Terminal .btn-copy {
@@ -516,14 +454,6 @@
         line-height: 1.5;
     }
 
-    .PaginationIntegrationSection {
-        background: color-mix(in oklch, var(--color-body-bg) 96%, black);
-    }
-
-    .dark .PaginationIntegrationSection {
-        background: #1b1e21;
-    }
-
     .PaginationLiveLayout {
         display: grid;
         align-items: center;
@@ -584,18 +514,6 @@
 
     .PaginationLiveContent > .PaginationCta {
         margin-block-start: 1.5rem;
-    }
-
-    .PaginationProductionSection {
-        background: var(--color-secondary-bg-subtle);
-    }
-
-    .PaginationDemosSection {
-        background: color-mix(in oklch, var(--color-body-bg) 92%, var(--pagination-accent));
-    }
-
-    .dark .PaginationDemosSection {
-        background: color-mix(in oklch, var(--color-body-bg) 88%, var(--pagination-primary));
     }
 
     .PaginationProductionGrid {
@@ -766,15 +684,6 @@
     }
 
     @media (width < 40rem) {
-        .PaginationSectionHeading {
-            margin-block-end: 3rem;
-        }
-
-        .PaginationSectionHeading > p:last-child {
-            margin-block-start: 1.5rem;
-            font-size: 1rem;
-            line-height: 1.7;
-        }
 
         .PaginationDataFlow {
             gap: 1rem;
@@ -854,40 +763,3 @@
     }
 }
 
-@layer utilities {
-    .PaginationCodeFlow {
-        display: grid;
-        gap: 6rem 5rem;
-    }
-
-    .PaginationCodeFlow .PaginationSourceArrow,
-    .PaginationCodeFlow .PaginationResultArrow {
-        position: absolute;
-        right: 1.5rem;
-        bottom: -5.25rem;
-        width: 3rem;
-        height: 4rem;
-        background-image: url(../images/arrow-2.png);
-        pointer-events: none;
-    }
-
-    .PaginationCodeResult {
-        margin-top: 6rem;
-    }
-
-    @media (min-width: 64rem) {
-        .PaginationCodeFlow {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            padding-top: 2rem;
-        }
-
-        .PaginationCodeFlow .PaginationSourceArrow {
-            top: -3.25rem;
-            right: -6.5rem;
-            bottom: auto;
-            width: 8rem;
-            height: 3rem;
-            background-image: url(../images/arrow.png);
-        }
-    }
-}

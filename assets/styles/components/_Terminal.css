@@ -83,6 +83,11 @@
     }
 
     .Terminal_body {
+        /* always the bounded row of .Terminal, header or not, so a capped terminal
+           hands its height down and the content scrolls instead of overflowing */
+        grid-row: 2;
+        display: grid;
+        grid-template-rows: minmax(0, 1fr);
         height: 100%;
         font-family: var(--font-mono);
         font-size: var(--text-sm);

@@ -22,6 +22,8 @@
     },
 } %}
 
+{% block html_attributes %} style="{{ include('ux_packages/_package_tokens.html.twig')|trim }}"{% endblock %}
+
 {% block content %}
 
     <div class="pt-20">
@@ -40,14 +42,84 @@
         </div>
     </div>
 
+    {% set icons_features = [
+        {
+            icon: 'lucide:search',
+            title: '200,000 <strong>icons</strong>',
+            description: 'Every set published on Iconify, searchable from the console.',
+        },
+        {
+            icon: 'lucide:file-code-2',
+            title: 'One Twig <strong>call</strong>',
+            description: 'A function or a component tag, nothing else to wire.',
+        },
+        {
+            icon: 'lucide:hard-drive-download',
+            title: 'Stored in your <strong>repository</strong>',
+            description: 'Each icon is downloaded once and committed with your code.',
+        },
+        {
+            icon: 'lucide:gauge',
+            title: 'No runtime <strong>request</strong>',
+            description: 'SVGs are inlined at render time from local files.',
+        },
+        {
+            icon: 'lucide:paintbrush',
+            title: 'Styled like <strong>text</strong>',
+            description: 'They inherit colour and size from the CSS around them.',
+        },
+    ] %}
+    <twig:FeaturesCluster
+        :items="icons_features"
+        title="What UX Icons gives you"
+        titleId="icons-overview-title"
+    />
+
     <section class="max-w-[1400px] mx-auto px-6 md:px-12 py-4">
         <twig:Icon:IconSearch/>
     </section>
 
-    <section class="max-w-[1400px] mx-auto px-6 md:px-12 py-4">
-        <p class="eyebrows" style="margin: 4rem 0 0;">Iconic Packages</p>
-        <div class="md:flex md:justify-between text-center items-center md:text-start">
-            <h2 class="ubuntu pt-2 component-headlines">Popular <em class="rainbow-emphasis">Icon Sets</em></h2>
+    {% set icons_search %}php bin/console ux:icons:search heart{% endset %}
+    {% set icons_import %}php bin/console ux:icons:import lucide:heart
+
+# assets/icons/lucide/heart.svg{% endset %}
+    {% set icons_render %}{% verbatim %}<twig:ux:icon name="lucide:heart" />
+
+{{ ux_icon('lucide:heart') }}{% endverbatim %}{% endset %}
+
+    <twig:Package:Highlights
+        tone="subtle"
+        eyebrow="Search, import, render"
+        title="How an icon reaches your <strong>template</strong>."
+        intro="Icons are not fetched when a visitor loads the page. You pick them once, they land in your repository, and Twig inlines them from there."
+        :items="[
+            {
+                icon: 'lucide:terminal',
+                title: 'Found from the <strong>console</strong>',
+                description: 'Search any Iconify set by name without leaving your terminal.',
+                code: icons_search,
+                language: 'bash',
+            },
+            {
+                icon: 'lucide:file-down',
+                title: 'Imported <strong>once</strong>',
+                description: 'The SVG is written next to your code, so a build never depends on the network.',
+                code: icons_import,
+                language: 'bash',
+            },
+            {
+                icon: 'lucide:code',
+                title: 'Inlined in <strong>Twig</strong>',
+                description: 'A component tag or a function, both returning the SVG straight into your markup.',
+                code: icons_render,
+                language: 'twig',
+            },
+        ]"
+    />
+
+    <twig:Package:Section>
+        <div class="items-end justify-between gap-8 md:flex">
+            <twig:Package:SectionTitle class="max-w-2xl" title="Popular <strong>icon sets</strong>." />
             <twig:LinkButton
                 outline
                 label="Read documentation"
@@ -55,10 +127,10 @@
                 arrow
                 rel="external"
                 target="_blank"
-                class="my-4 md:my-0"
+                class="my-4 md:my-0 shrink-0"
             />
         </div>
-        <div class="mt-4 md:mt-12">
+        <div class="mt-12">
             <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2rem;">
                 {% for icon_set in iconSets %}
                     <twig:Icon:IconSetCard
@@ -68,22 +140,10 @@
                 {% endfor %}
             </div>
         </div>
-    </section>
+    </twig:Package:Section>
 
-    <section class="max-w-[1400px] mx-auto px-6 md:px-12 py-4">
-
-        <div class="md:flex md:justify-between py-12 text-center items-center md:text-start">
-            <h2 class="ubuntu pt-2 component-headlines">Documentation</h2>
-            <twig:LinkButton
-                outline
-                label="Read documentation"
-                url="https://symfony.com/bundles/ux-icons/current/index.html"
-                arrow
-                rel="external"
-                target="_blank"
-                class="my-4 md:my-0"
-            />
-        </div>
+    <twig:Package:Section tone="deep">
+        <twig:Package:SectionHeading centered title="Three commands to <strong>remember</strong>." />
 
         <div class="grid sm:grid-cols-3 gap-x-6 gap-y-3">
             <div class="col-span-1">
@@ -105,7 +165,9 @@
                 </twig:Terminal>
             </div>
         </div>
-    </section>
+    </twig:Package:Section>
+
+    <twig:PackageSuggestions package="{{ package }}" />
 
 {% endblock %}
 

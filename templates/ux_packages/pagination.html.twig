@@ -34,8 +34,7 @@
     {% endcomponent %}
 {% endblock %}
 
-{% block package_content %}
-    {% set pagination_docs_url = 'https://github.com/symfony/ux/blob/3.x/src/Pagination/doc/' %}
+{% block package_features %}
     {% set pagination_features = [
         {
             icon: 'lucide:database',
@@ -71,454 +70,421 @@
         titleId="pagination-overview-title"
         data-pagination-feature="overview"
     />
+{% endblock %}
 
-    <section id="pagination-tour" class="scroll-mt-20 border-t border-body-text/10 bg-subtle py-24" data-pagination-code aria-labelledby="pagination-first-result">
-        <div class="mx-auto max-w-[1400px] px-6 max-xs:px-4 md:px-12">
-            <div class="mb-16 max-w-4xl lg:mb-20">
-                <p class="PaginationEyebrow">ONE FLOW, END TO END.</p>
-                <h2 id="pagination-first-result" class="PaginationSectionTitle mt-5 mb-10">
-                    From your query to <strong class="PaginationAccentPrimary font-bold">pagination links</strong>.
-                </h2>
-                <p class="m-0 max-w-2xl text-balance text-lg leading-8 text-body-text/80">
-                    Give <code>PaginatorInterface</code> an unpaginated source. It resolves the current
-                    request, fetches one slice, and returns an iterable result ready for Twig.
-                </p>
-            </div>
+{% block package_content %}
+    {% set pagination_docs_url = 'https://github.com/symfony/ux/blob/3.x/src/Pagination/doc/' %}
 
-            {% set php_example %}public function __invoke(
-    ProductRepository $repository,
-    PaginatorInterface $paginator,
+    <twig:Package:Section id="pagination-tour" tone="subtle" data-pagination-code aria-labelledby="pagination-first-result">
+        <twig:Package:SectionHeading
+            eyebrow="One flow, end to end."
+            id="pagination-first-result"
+            title="From your query to <strong>pagination links</strong>."
+        >
+            <p>
+                Give <code>PaginatorInterface</code> an unpaginated source. It resolves the current
+                request, fetches one slice, and returns an iterable result ready for Twig.
+            </p>
+        </twig:Package:SectionHeading>
+
+        {% set php_example %}public function __invoke(
+ProductRepository $repository,
+PaginatorInterface $paginator,
 ): Response {
-    $products = $paginator->paginate(
-        $repository->createListQuery(),
-    );
+$products = $paginator->paginate(
+    $repository->createListQuery(),
+);
 
-    return $this->render('product/index.html.twig', [
-        'products' => $products,
-    ]);
+return $this->render('product/index.html.twig', [
+    'products' => $products,
+]);
 }{% endset %}
 {% set twig_example %}{% verbatim %}{% for product in products %}
-    <article>
-        <h3>{{ product.name }}</h3>
-        <p>{{ product.category }}</p>
-        <strong>{{ product.price }}</strong>
-    </article>
+<article>
+    <h3>{{ product.name }}</h3>
+    <p>{{ product.category }}</p>
+    <strong>{{ product.price }}</strong>
+</article>
 {% endfor %}
 
 {{ ux_pagination(products) }}{% endverbatim %}{% endset %}
 
-            <div class="PaginationCodeFlow">
-                <div class="relative min-w-0">
-                    <twig:CodeBlockInline
-                        :code="php_example"
-                        language="php"
-                        filename="src/Controller/ProductController.php"
-                        class="h-full"
-                    />
-                    <div class="arrow PaginationSourceArrow" aria-hidden="true"></div>
-                </div>
-                <div class="relative min-w-0">
-                    <twig:CodeBlockInline
-                        :code="twig_example"
-                        language="twig"
-                        filename="templates/product/index.html.twig"
-                        class="h-full"
-                    />
-                    <div class="arrow-2 PaginationResultArrow" aria-hidden="true"></div>
-                </div>
-            </div>
+        <twig:Package:CodeFlow arrows>
+            <twig:block name="source">
+                <twig:CodeBlockInline
+                    :code="php_example"
+                    language="php"
+                    filename="src/Controller/ProductController.php"
+                    class="h-full"
+                />
+            </twig:block>
+            <twig:block name="result">
+                <twig:CodeBlockInline
+                    :code="twig_example"
+                    language="twig"
+                    filename="templates/product/index.html.twig"
+                    class="h-full"
+                />
+            </twig:block>
+        </twig:Package:CodeFlow>
 
-            <div class="PaginationCodeResult overflow-hidden rounded-xl border border-body-text/15 bg-body" data-pagination-result>
-                <div class="flex items-center gap-2 border-b border-body-text/10 bg-subtle px-4 py-3 font-mono text-[0.65rem] text-muted" aria-hidden="true">
-                    <span class="size-2 rounded-full bg-body-text/20"></span>
-                    <span class="size-2 rounded-full bg-body-text/20"></span>
-                    <span class="size-2 rounded-full bg-body-text/20"></span>
-                    <span class="ml-3 truncate">/products?page=5</span>
-                </div>
-                <div class="overflow-x-auto px-6 py-16 max-xs:px-4 sm:px-10 sm:py-20">
-                    <nav class="PaginationPreview mx-auto max-w-5xl" aria-label="Pagination preview" data-pagination-preview>
-                        <a class="PaginationPreviewLink" href="{{ path('app_pagination', {products: 4}) }}">
-                            <span aria-hidden="true">&larr;</span> <span class="PaginationPreviewControlText">Previous</span>
-                        </a>
-                        <div class="PaginationPreviewPages">
-                            {% for page in [1, 3, 4, 5, 6, 7, 9] %}
-                                {% if page in [3, 9] %}<span class="text-muted" aria-hidden="true">&hellip;</span>{% endif %}
-                                <a
-                                    class="PaginationPreviewLink{{ page == 5 ? ' PaginationPreviewLink--current' : '' }}"
-                                    href="{{ path('app_pagination', {products: page}) }}"
-                                    data-pagination-page="{{ page }}"
-                                    {% if page == 5 %}aria-current="page"{% endif %}
-                                >{{ page }}</a>
-                            {% endfor %}
-                        </div>
-                        <a class="PaginationPreviewLink" href="{{ path('app_pagination', {products: 6}) }}">
-                            <span class="PaginationPreviewControlText">Next</span> <span aria-hidden="true">&rarr;</span>
-                        </a>
-                    </nav>
-                </div>
-            </div>
+        <twig:Package:CodeResult label="/products?page=5" data-pagination-result>
+                <nav class="PaginationPreview mx-auto max-w-5xl" aria-label="Pagination preview" data-pagination-preview>
+                    <a class="PaginationPreviewLink" href="{{ path('app_pagination', {products: 4}) }}">
+                        <span aria-hidden="true">&larr;</span> <span class="PaginationPreviewControlText">Previous</span>
+                    </a>
+                    <div class="PaginationPreviewPages">
+                        {% for page in [1, 3, 4, 5, 6, 7, 9] %}
+                            {% if page in [3, 9] %}<span class="text-muted" aria-hidden="true">&hellip;</span>{% endif %}
+                            <a
+                                class="PaginationPreviewLink{{ page == 5 ? ' PaginationPreviewLink--current' : '' }}"
+                                href="{{ path('app_pagination', {products: page}) }}"
+                                data-pagination-page="{{ page }}"
+                                {% if page == 5 %}aria-current="page"{% endif %}
+                            >{{ page }}</a>
+                        {% endfor %}
+                    </div>
+                    <a class="PaginationPreviewLink" href="{{ path('app_pagination', {products: 6}) }}">
+                        <span class="PaginationPreviewControlText">Next</span> <span aria-hidden="true">&rarr;</span>
+                    </a>
+                </nav>
+        </twig:Package:CodeResult>
 
-            {% set first_page_docs = [
-                {title: 'Getting started', url: pagination_docs_url ~ 'getting-started.rst'},
-                {title: 'Page resolution', url: pagination_docs_url ~ 'getting-started.rst#understand-where-the-page-comes-from'},
-                {title: 'Rendering links', url: pagination_docs_url ~ 'getting-started.rst#render-ordinary-links'},
-            ] %}
-            <twig:DocumentationLinks
-                :links="first_page_docs"
-                label="Documentation for getting started with pagination"
-                centered
-            />
+        {% set first_page_docs = [
+            {title: 'Getting started', url: pagination_docs_url ~ 'getting-started.rst'},
+            {title: 'Page resolution', url: pagination_docs_url ~ 'getting-started.rst#understand-where-the-page-comes-from'},
+            {title: 'Rendering links', url: pagination_docs_url ~ 'getting-started.rst#render-ordinary-links'},
+        ] %}
+        <twig:DocumentationLinks
+            :links="first_page_docs"
+            label="Documentation for getting started with pagination"
+            centered
+        />
+    </twig:Package:Section>
+
+    <twig:Package:Section tone="default" data-pagination-feature="data" data-pagination-integration="data">
+        <twig:Package:SectionHeading title="Bring any <strong>data source</strong>.">
+            <p>
+                UX Pagination adapts what your application already returns. Your repositories and API clients
+                stay focused on data; the paginator owns page state, limits, and navigation.
+            </p>
+        </twig:Package:SectionHeading>
+
+        <div class="PaginationDataFlow" aria-label="Data sources converge on the same pagination contract">
+            <ul class="PaginationDataSources" aria-label="Supported data sources">
+                <li><twig:ux:icon name="lucide:database" class="Icon" /><span>Doctrine ORM</span></li>
+                <li><twig:ux:icon name="lucide:table-properties" class="Icon" /><span>Doctrine DBAL</span></li>
+                <li><twig:ux:icon name="lucide:list" class="Icon" /><span>Arrays</span></li>
+                <li><twig:ux:icon name="lucide:cloud" class="Icon" /><span>APIs and search</span></li>
+            </ul>
+            <div class="PaginationDataArrow" aria-hidden="true">
+                <span></span>
+                <twig:ux:icon name="lucide:chevron-right" class="Icon" />
+            </div>
+            <div class="PaginationDataContract">
+                <twig:ux:icon name="pagination-dots" class="Icon PaginationDataContractIcon" />
+                <span>One contract</span>
+                <code>PaginatorInterface</code>
+                <p>One iterable result for controllers, Twig, and LiveComponent.</p>
+            </div>
         </div>
-    </section>
 
-    <section class="border-t border-body-text/10 py-24 lg:py-32" data-pagination-feature="data" data-pagination-integration="data">
-        <div class="mx-auto max-w-[1400px] px-6 max-xs:px-4 md:px-12">
-            <div class="PaginationSectionHeading">
-                <h2 class="PaginationSectionTitle">
-                    Bring any <strong class="PaginationAccentPrimary font-bold">data source</strong>.
-                </h2>
-                <p>
-                    UX Pagination adapts what your application already returns. Your repositories and API clients
-                    stay focused on data; the paginator owns page state, limits, and navigation.
-                </p>
-            </div>
+        {% set data_docs = [
+            {title: 'Doctrine ORM & DBAL', url: pagination_docs_url ~ 'doctrine.rst'},
+            {title: 'APIs & search', url: pagination_docs_url ~ 'integrations.rst#external-apis-and-search-engines'},
+            {title: 'Custom adapters', url: pagination_docs_url ~ 'custom-adapters.rst'},
+        ] %}
+        <twig:DocumentationLinks
+            :links="data_docs"
+            label="Documentation for pagination data sources"
+        />
+    </twig:Package:Section>
 
-            <div class="PaginationDataFlow" aria-label="Data sources converge on the same pagination contract">
-                <ul class="PaginationDataSources" aria-label="Supported data sources">
-                    <li><twig:ux:icon name="lucide:database" class="Icon" /><span>Doctrine ORM</span></li>
-                    <li><twig:ux:icon name="lucide:table-properties" class="Icon" /><span>Doctrine DBAL</span></li>
-                    <li><twig:ux:icon name="lucide:list" class="Icon" /><span>Arrays</span></li>
-                    <li><twig:ux:icon name="lucide:cloud" class="Icon" /><span>APIs and search</span></li>
-                </ul>
-                <div class="PaginationDataArrow" aria-hidden="true">
-                    <span></span>
-                    <twig:ux:icon name="lucide:chevron-right" class="Icon" />
-                </div>
-                <div class="PaginationDataContract">
-                    <twig:ux:icon name="pagination-dots" class="Icon PaginationDataContractIcon" />
-                    <span>One contract</span>
-                    <code>PaginatorInterface</code>
-                    <p>One iterable result for controllers, Twig, and LiveComponent.</p>
-                </div>
-            </div>
+    <twig:Package:Section id="classic-pagination" tone="subtle" data-pagination-feature="strategies">
+        <twig:Package:SectionHeading centered title="Choose the right pagination <strong>strategy</strong>.">
+            <p>
+                The interface stays the same. Choose the navigation promise your screen actually needs.
+            </p>
+        </twig:Package:SectionHeading>
 
-            {% set data_docs = [
-                {title: 'Doctrine ORM & DBAL', url: pagination_docs_url ~ 'doctrine.rst'},
-                {title: 'APIs & search', url: pagination_docs_url ~ 'integrations.rst#external-apis-and-search-engines'},
-                {title: 'Custom adapters', url: pagination_docs_url ~ 'custom-adapters.rst'},
-            ] %}
-            <twig:DocumentationLinks
-                :links="data_docs"
-                label="Documentation for pagination data sources"
-            />
-        </div>
-    </section>
+        {% set pagination_strategies = [
+            {
+                key: 'numbered',
+                title: '<strong>Numbered</strong> pages',
+                description: 'Use page numbers when people need exact totals and direct access to any page.',
+                facts: [{label: 'Total', value: 'Known'}, {label: 'Jump to page', value: 'Yes'}, {label: 'Count query', value: 'Yes'}],
+                windows: [
+                    {label: 'Before', detail: 'Page 4', dots: ['past', 'past', 'past', 'past']},
+                    {label: 'Now', detail: 'Page 5', dots: ['active', 'active', 'active', 'active']},
+                    {label: 'After', detail: 'Page 6', dots: ['future', 'future', 'future', 'future']},
+                ],
+                ariaLabel: 'The previous numbered page, current page, and next numbered page',
+            },
+            {
+                key: 'lookahead',
+                title: '<strong>Lookahead</strong>',
+                description: 'Fetch one extra item to know whether a next page exists, without running a count.',
+                facts: [{label: 'Total', value: 'Unknown'}, {label: 'Next page', value: 'Known'}, {label: 'Count query', value: 'No'}],
+                windows: [
+                    {label: 'Before', detail: 'Already seen', dots: ['past', 'past', 'past', 'past']},
+                    {label: 'Now', detail: 'Current slice', dots: ['active', 'active', 'active', 'active']},
+                    {label: 'After', detail: 'One-item peek', dots: ['peek', 'empty', 'empty', 'empty']},
+                ],
+                ariaLabel: 'Previously seen records, the current slice, and one extra lookahead record',
+            },
+            {
+                key: 'cursor',
+                title: '<strong>Cursor</strong>',
+                description: 'Continue from a signed position when rows can change while someone is browsing.',
+                facts: [{label: 'Total', value: 'Unknown'}, {label: 'Position', value: 'Stable'}, {label: 'Changing data', value: 'Safe'}],
+                windows: [
+                    {label: 'Before', detail: 'Before cursor', dots: ['past', 'past', 'past', 'past']},
+                    {label: 'Now', detail: 'Current slice', dots: ['active', 'active', 'active', 'active'], cursor: true},
+                    {label: 'After', detail: 'Continues', dots: ['future', 'future', 'future', 'future']},
+                ],
+                ariaLabel: 'Records before the cursor, the current stable slice, and records after it',
+            },
+        ] %}
 
-    <section id="classic-pagination" class="border-t border-body-text/10 bg-subtle py-24 lg:py-32" data-pagination-feature="strategies">
-        <div class="mx-auto max-w-[1400px] px-6 max-xs:px-4 md:px-12">
-            <div class="PaginationSectionHeading PaginationSectionHeading--centered">
-                <h2 class="PaginationSectionTitle">
-                    Choose the right pagination <strong class="PaginationAccentPrimary font-bold">strategy</strong>.
-                </h2>
-                <p>
-                    The interface stays the same. Choose the navigation promise your screen actually needs.
-                </p>
-            </div>
+        <div class="PaginationStrategyGrid">
+            {% for strategy in pagination_strategies %}
+                <article class="PaginationStrategyCard" data-pagination-strategy="{{ strategy.key }}">
+                    <h3 class="PaginationStrategyTitle" data-pagination-subtitle>{{ strategy.title|raw }}</h3>
+                    <p class="PaginationStrategyDescription">{{ strategy.description }}</p>
 
-            {% set pagination_strategies = [
-                {
-                    key: 'numbered',
-                    title: '<strong>Numbered</strong> pages',
-                    description: 'Use page numbers when people need exact totals and direct access to any page.',
-                    facts: [{label: 'Total', value: 'Known'}, {label: 'Jump to page', value: 'Yes'}, {label: 'Count query', value: 'Yes'}],
-                    windows: [
-                        {label: 'Before', detail: 'Page 4', dots: ['past', 'past', 'past', 'past']},
-                        {label: 'Now', detail: 'Page 5', dots: ['active', 'active', 'active', 'active']},
-                        {label: 'After', detail: 'Page 6', dots: ['future', 'future', 'future', 'future']},
-                    ],
-                    ariaLabel: 'The previous numbered page, current page, and next numbered page',
-                },
-                {
-                    key: 'lookahead',
-                    title: '<strong>Lookahead</strong>',
-                    description: 'Fetch one extra item to know whether a next page exists, without running a count.',
-                    facts: [{label: 'Total', value: 'Unknown'}, {label: 'Next page', value: 'Known'}, {label: 'Count query', value: 'No'}],
-                    windows: [
-                        {label: 'Before', detail: 'Already seen', dots: ['past', 'past', 'past', 'past']},
-                        {label: 'Now', detail: 'Current slice', dots: ['active', 'active', 'active', 'active']},
-                        {label: 'After', detail: 'One-item peek', dots: ['peek', 'empty', 'empty', 'empty']},
-                    ],
-                    ariaLabel: 'Previously seen records, the current slice, and one extra lookahead record',
-                },
-                {
-                    key: 'cursor',
-                    title: '<strong>Cursor</strong>',
-                    description: 'Continue from a signed position when rows can change while someone is browsing.',
-                    facts: [{label: 'Total', value: 'Unknown'}, {label: 'Position', value: 'Stable'}, {label: 'Changing data', value: 'Safe'}],
-                    windows: [
-                        {label: 'Before', detail: 'Before cursor', dots: ['past', 'past', 'past', 'past']},
-                        {label: 'Now', detail: 'Current slice', dots: ['active', 'active', 'active', 'active'], cursor: true},
-                        {label: 'After', detail: 'Continues', dots: ['future', 'future', 'future', 'future']},
-                    ],
-                    ariaLabel: 'Records before the cursor, the current stable slice, and records after it',
-                },
-            ] %}
-
-            <div class="PaginationStrategyGrid">
-                {% for strategy in pagination_strategies %}
-                    <article class="PaginationStrategyCard" data-pagination-strategy="{{ strategy.key }}">
-                        <h3 class="PaginationStrategyTitle" data-pagination-subtitle>{{ strategy.title|raw }}</h3>
-                        <p class="PaginationStrategyDescription">{{ strategy.description }}</p>
-
-                        <div class="PaginationWindowDiagram" aria-label="{{ strategy.ariaLabel }}">
-                            {% for window in strategy.windows %}
-                                <div class="PaginationWindowGroup{{ window.cursor|default(false) ? ' PaginationWindowGroup--cursor' : '' }}">
-                                    <span class="PaginationWindowLabel">{{ window.label }}</span>
-                                    <span class="PaginationWindowDetail">{{ window.detail }}</span>
-                                    <div class="PaginationWindowDots" aria-hidden="true">
-                                        {% for dot in window.dots %}
-                                            <span class="PaginationWindowDot PaginationWindowDot--{{ dot }}"></span>
-                                        {% endfor %}
-                                    </div>
+                    <div class="PaginationWindowDiagram" aria-label="{{ strategy.ariaLabel }}">
+                        {% for window in strategy.windows %}
+                            <div class="PaginationWindowGroup{{ window.cursor|default(false) ? ' PaginationWindowGroup--cursor' : '' }}">
+                                <span class="PaginationWindowLabel">{{ window.label }}</span>
+                                <span class="PaginationWindowDetail">{{ window.detail }}</span>
+                                <div class="PaginationWindowDots" aria-hidden="true">
+                                    {% for dot in window.dots %}
+                                        <span class="PaginationWindowDot PaginationWindowDot--{{ dot }}"></span>
+                                    {% endfor %}
                                 </div>
-                            {% endfor %}
-                        </div>
-                        <dl class="PaginationStrategyFacts">
-                            {% for fact in strategy.facts %}
-                                <div>
-                                    <dt>{{ fact.label }}</dt>
-                                    <dd>{{ fact.value }}</dd>
-                                </div>
-                            {% endfor %}
-                        </dl>
-                    </article>
-                {% endfor %}
-            </div>
-
-            <div class="PaginationStrategyCall" aria-label="Strategy methods">
-                <span>Choose in PHP</span>
-                <code><strong>numbered</strong> ->paginate()</code>
-                <code><strong>lookahead</strong> ->lookahead()->paginate()</code>
-                <code><strong>cursor</strong> ->cursor($query)->paginate()</code>
-            </div>
-
-            {% set strategy_docs = [
-                {title: 'Numbered pages', url: pagination_docs_url ~ 'strategies.rst#offset'},
-                {title: 'Lookahead', url: pagination_docs_url ~ 'strategies.rst#lookahead'},
-                {title: 'Cursor pagination', url: pagination_docs_url ~ 'cursor.rst'},
-                {title: 'Choosing a strategy', url: pagination_docs_url ~ 'strategies.rst#decision-table'},
-            ] %}
-            <twig:DocumentationLinks
-                :links="strategy_docs"
-                label="Documentation for pagination strategies"
-                centered
-            />
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <dl class="PaginationStrategyFacts">
+                        {% for fact in strategy.facts %}
+                            <div>
+                                <dt>{{ fact.label }}</dt>
+                                <dd>{{ fact.value }}</dd>
+                            </div>
+                        {% endfor %}
+                    </dl>
+                </article>
+            {% endfor %}
         </div>
-    </section>
 
-    <section id="pagination-theming" class="scroll-mt-20 border-t border-body-text/10 py-24 lg:py-32" data-pagination-feature="customization">
-        <div class="mx-auto max-w-[1400px] px-6 max-xs:px-4 md:px-12">
-            <div class="PaginationSectionHeading PaginationSectionHeading--centered">
-                <p class="PaginationEyebrow">YOUR MARKUP, YOUR RULES.</p>
-                <h2 class="PaginationSectionTitle">
-                    Keep pagination <strong class="PaginationAccentPrimary font-bold">à la page</strong>.
-                </h2>
-                <p>
-                    Keep the default markup, choose Bootstrap or Tailwind, or replace the template.
-                    Pagination state and URLs stay outside the theme.
-                </p>
-            </div>
+        <div class="PaginationStrategyCall" aria-label="Strategy methods">
+            <span>Choose in PHP</span>
+            <code><strong>numbered</strong> ->paginate()</code>
+            <code><strong>lookahead</strong> ->lookahead()->paginate()</code>
+            <code><strong>cursor</strong> ->cursor($query)->paginate()</code>
+        </div>
 
-            {% set pagination_themes = [
-                {name: 'Default', description: 'Accessible markup, ready for your CSS.', modifier: 'default'},
-                {name: 'Bootstrap', description: 'Familiar Bootstrap pagination classes.', modifier: 'bootstrap'},
-                {name: 'Tailwind', description: 'Utility-ready markup for Tailwind.', modifier: 'tailwind'},
-            ] %}
+        {% set strategy_docs = [
+            {title: 'Numbered pages', url: pagination_docs_url ~ 'strategies.rst#offset'},
+            {title: 'Lookahead', url: pagination_docs_url ~ 'strategies.rst#lookahead'},
+            {title: 'Cursor pagination', url: pagination_docs_url ~ 'cursor.rst'},
+            {title: 'Choosing a strategy', url: pagination_docs_url ~ 'strategies.rst#decision-table'},
+        ] %}
+        <twig:DocumentationLinks
+            :links="strategy_docs"
+            label="Documentation for pagination strategies"
+            centered
+        />
+    </twig:Package:Section>
 
-            <div class="PaginationThemeGrid">
-                {% for theme in pagination_themes %}
-                    <article class="PaginationThemeOption" data-pagination-theme-option>
-                        <h3>{{ theme.name }}</h3>
-                        <p>{{ theme.description }}</p>
-                        <div class="PaginationThemePreview PaginationThemePreview--{{ theme.modifier }}" aria-hidden="true">
-                            <span class="PaginationThemeControl">Prev</span>
-                            <span class="PaginationThemeControl">1</span>
-                            <span class="PaginationThemeControl PaginationThemeControl--current">2</span>
-                            <span class="PaginationThemeControl">3</span>
-                            <span class="PaginationThemeControl">Next</span>
-                        </div>
-                    </article>
-                {% endfor %}
-            </div>
+    <twig:Package:Section id="pagination-theming" tone="default" data-pagination-feature="customization">
+        <twig:Package:SectionHeading centered eyebrow="Your markup, your rules." title="Keep pagination <strong>à la page</strong>.">
+            <p>
+                Keep the default markup, choose Bootstrap or Tailwind, or replace the template.
+                Pagination state and URLs stay outside the theme.
+            </p>
+        </twig:Package:SectionHeading>
 
-            {% set theme_example %}{% verbatim %}{{ ux_pagination(products) }}
+        {% set pagination_themes = [
+            {name: 'Default', description: 'Accessible markup, ready for your CSS.', modifier: 'default'},
+            {name: 'Bootstrap', description: 'Familiar Bootstrap pagination classes.', modifier: 'bootstrap'},
+            {name: 'Tailwind', description: 'Utility-ready markup for Tailwind.', modifier: 'tailwind'},
+        ] %}
+
+        <div class="PaginationThemeGrid">
+            {% for theme in pagination_themes %}
+                <article class="PaginationThemeOption" data-pagination-theme-option>
+                    <h3>{{ theme.name }}</h3>
+                    <p>{{ theme.description }}</p>
+                    <div class="PaginationThemePreview PaginationThemePreview--{{ theme.modifier }}" aria-hidden="true">
+                        <span class="PaginationThemeControl">Prev</span>
+                        <span class="PaginationThemeControl">1</span>
+                        <span class="PaginationThemeControl PaginationThemeControl--current">2</span>
+                        <span class="PaginationThemeControl">3</span>
+                        <span class="PaginationThemeControl">Next</span>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+
+        {% set theme_example %}{% verbatim %}{{ ux_pagination(products) }}
 
 {{ ux_pagination(products, theme: '@UXPagination/theme/tailwind.html.twig') }}{% endverbatim %}{% endset %}
-            <div class="PaginationThemeCode">
-                <p>Change the theme, not the pagination logic.</p>
-                <twig:CodeBlockInline
-                    :code="theme_example"
-                    language="twig"
-                />
-            </div>
-
-            {% set rendering_docs = [
-                {title: 'Built-in themes', url: pagination_docs_url ~ 'rendering.rst#built-in-themes'},
-                {title: 'Template overrides', url: pagination_docs_url ~ 'rendering.rst#override-the-default-theme'},
-                {title: 'Link attributes', url: pagination_docs_url ~ 'rendering.rst#attribute-options'},
-            ] %}
-            <twig:DocumentationLinks
-                :links="rendering_docs"
-                label="Documentation for rendering and theming pagination"
-                centered
+        <div class="PaginationThemeCode">
+            <p>Change the theme, not the pagination logic.</p>
+            <twig:CodeBlockInline
+                :code="theme_example"
+                language="twig"
             />
         </div>
-    </section>
 
-    <section class="PaginationIntegrationSection border-t border-body-text/10 py-24 lg:py-32" data-pagination-feature="live-component" data-pagination-integration="live-component">
-        <div class="mx-auto max-w-[1400px] px-6 max-xs:px-4 md:px-12">
-            <div class="PaginationLiveLayout">
-                <figure class="PaginationLivePreview">
-                    <img
-                        src="{{ asset('images/live_demo/pagination-1280x720.png') }}"
-                        alt="Live Pagination demo with jersey filters and pagination controls"
-                        loading="lazy"
-                        width="1280"
-                        height="720"
-                    >
-                    <figcaption>Live Pagination demo preview</figcaption>
-                </figure>
+        {% set rendering_docs = [
+            {title: 'Built-in themes', url: pagination_docs_url ~ 'rendering.rst#built-in-themes'},
+            {title: 'Template overrides', url: pagination_docs_url ~ 'rendering.rst#override-the-default-theme'},
+            {title: 'Link attributes', url: pagination_docs_url ~ 'rendering.rst#attribute-options'},
+        ] %}
+        <twig:DocumentationLinks
+            :links="rendering_docs"
+            label="Documentation for rendering and theming pagination"
+            centered
+        />
+    </twig:Package:Section>
 
-                <div class="PaginationLiveContent">
-                    <twig:ux:icon name="live-component" class="PaginationLiveIcon" aria-hidden="true" />
-                    <h2 class="PaginationSectionTitle">
-                        <strong class="PaginationAccentPrimary font-bold">Live</strong> updates. Keep the URL.
-                    </h2>
-                    <p>
-                        Add the trait when filters or page changes should update in place. Every control keeps
-                        a real <code>href</code>, so the same screen remains linkable and works without JavaScript.
-                    </p>
-                    {% set live_php_example %}#[AsLiveComponent]
+    <twig:Package:Section tone="deep" data-pagination-feature="live-component" data-pagination-integration="live-component">
+        <div class="PaginationLiveLayout">
+            <figure class="PaginationLivePreview">
+                <img
+                    src="{{ asset('images/live_demo/pagination.png') }}"
+                    alt="Live Pagination demo with jersey filters and pagination controls"
+                    loading="lazy"
+                    width="640"
+                    height="360"
+                >
+                <figcaption>Live Pagination demo preview</figcaption>
+            </figure>
+
+            <div class="PaginationLiveContent">
+                <twig:ux:icon name="live-component" class="PaginationLiveIcon" aria-hidden="true" />
+                <twig:Package:SectionTitle title="<strong>Live</strong> updates. Keep the URL." />
+                <p>
+                    Add the trait when filters or page changes should update in place. Every control keeps
+                    a real <code>href</code>, so the same screen remains linkable and works without JavaScript.
+                </p>
+                {% set live_php_example %}#[AsLiveComponent]
 final class ProductList
 {
-    use ComponentWithPaginationTrait;
+use ComponentWithPaginationTrait;
 
-    protected function createPagination(): PaginationBuilder
-    {
-        return $this->paginator->query(
-            $this->products->searchQuery(),
-        );
-    }
-}{% endset %}
-                    <twig:CodeBlockInline
-                        :code="live_php_example"
-                        language="php"
-                        filename="src/Twig/Components/ProductList.php"
-                    />
-                    <a class="PaginationCta PaginationCta--primary" href="#">
-                        See the live demo
-                        <twig:ux:icon name="lucide:chevron-right" class="Icon PaginationCtaIcon" />
-                    </a>
-                </div>
-            </div>
-
-            {% set live_component_docs = [
-                {title: 'LiveComponent integration', url: pagination_docs_url ~ 'live-component.rst'},
-                {title: 'Real links & live actions', url: pagination_docs_url ~ 'live-component.rst#render-real-links-with-live-actions'},
-                {title: 'Multiple lists', url: pagination_docs_url ~ 'integrations.rst#multiple-lists-on-one-page'},
-            ] %}
-            <twig:DocumentationLinks
-                :links="live_component_docs"
-                label="Documentation for LiveComponent pagination"
-            />
-        </div>
-    </section>
-
-    <section class="PaginationProductionSection border-t border-body-text/10 py-24 lg:py-32" data-pagination-feature="production" data-pagination-integration="production">
-        <div class="mx-auto max-w-[1400px] px-6 max-xs:px-4 md:px-12">
-            <div class="PaginationSectionHeading PaginationSectionHeading--centered">
-                <h2 class="PaginationSectionTitle">
-                    Built for a real <strong class="PaginationAccentPrimary font-bold">Symfony application</strong>.
-                </h2>
-                <p>
-                    Keep the convenient defaults, then make configuration, dependency injection, and tests explicit where your application needs control.
-                </p>
-            </div>
-
-            {% set configuration_example %}ux_pagination:
-    items_per_page: 20
-    paginators:
-        catalog:
-            items_per_page: 24
-            navigation: { size: 7 }{% endset %}
-            {% set injection_example %}final class CatalogController
+protected function createPagination(): PaginationBuilder
 {
-    public function __construct(
-        #[Target('catalog')]
-        private PaginatorInterface $paginator,
-    ) {}
+    return $this->paginator->query(
+        $this->products->searchQuery(),
+    );
+}
 }{% endset %}
-            {% set testing_example %}$paginator = PaginatorFactory::create(
-    defaultPerPage: 10,
+                <twig:CodeBlockInline
+                    :code="live_php_example"
+                    language="php"
+                    filename="src/Twig/Components/ProductList.php"
+                />
+                <a class="PaginationCta PaginationCta--primary" href="{{ path('app_demo_pagination_live') }}">
+                    See the live demo
+                    <twig:ux:icon name="lucide:chevron-right" class="Icon PaginationCtaIcon" />
+                </a>
+            </div>
+        </div>
+
+        {% set live_component_docs = [
+            {title: 'LiveComponent integration', url: pagination_docs_url ~ 'live-component.rst'},
+            {title: 'Real links & live actions', url: pagination_docs_url ~ 'live-component.rst#render-real-links-with-live-actions'},
+            {title: 'Multiple lists', url: pagination_docs_url ~ 'integrations.rst#multiple-lists-on-one-page'},
+        ] %}
+        <twig:DocumentationLinks
+            :links="live_component_docs"
+            label="Documentation for LiveComponent pagination"
+        />
+    </twig:Package:Section>
+
+    <twig:Package:Section tone="subtle" data-pagination-feature="production" data-pagination-integration="production">
+        <twig:Package:SectionHeading centered title="Built for a real <strong>Symfony application</strong>.">
+            <p>
+                Keep the convenient defaults, then make configuration, dependency injection, and tests explicit where your application needs control.
+            </p>
+        </twig:Package:SectionHeading>
+
+        {% set configuration_example %}ux_pagination:
+items_per_page: 20
+paginators:
+    catalog:
+        items_per_page: 24
+        navigation: { size: 7 }{% endset %}
+        {% set injection_example %}final class CatalogController
+{
+public function __construct(
+    #[Target('catalog')]
+    private PaginatorInterface $paginator,
+) {}
+}{% endset %}
+        {% set testing_example %}$paginator = PaginatorFactory::create(
+defaultPerPage: 10,
 );
 $page = $paginator->paginate(
-    range(1, 25), page: 2,
+range(1, 25), page: 2,
 );
 self::assertSame(
-    range(11, 20), $page->getItems(),
+range(11, 20), $page->getItems(),
 );{% endset %}
-            {% set production_features = [
-                {
-                    icon: 'pagination:configuration',
-                    title: 'Configure by context',
-                    description: 'Set shared defaults once, then add a named profile when one list needs a different pagination policy.',
-                    code: configuration_example,
-                    language: 'yaml',
-                },
-                {
-                    icon: 'pagination:injection',
-                    title: 'Inject with #[Target]',
-                    description: 'Select a named paginator explicitly while keeping the controller property focused on its application role.',
-                    code: injection_example,
-                    language: 'php',
-                },
-                {
-                    icon: 'pagination:testing',
-                    title: 'Test the real contract',
-                    description: 'Build the real paginator with deterministic request, URL, and cursor behavior without booting the application.',
-                    code: testing_example,
-                    language: 'php',
-                },
-            ] %}
+        {% set production_features = [
+            {
+                icon: 'pagination:configuration',
+                title: 'Configure by context',
+                description: 'Set shared defaults once, then add a named profile when one list needs a different pagination policy.',
+                code: configuration_example,
+                language: 'yaml',
+            },
+            {
+                icon: 'pagination:injection',
+                title: 'Inject with #[Target]',
+                description: 'Select a named paginator explicitly while keeping the controller property focused on its application role.',
+                code: injection_example,
+                language: 'php',
+            },
+            {
+                icon: 'pagination:testing',
+                title: 'Test the real contract',
+                description: 'Build the real paginator with deterministic request, URL, and cursor behavior without booting the application.',
+                code: testing_example,
+                language: 'php',
+            },
+        ] %}
 
-            <div class="PaginationProductionGrid">
-                {% for feature in production_features %}
-                    <article>
-                        <twig:ux:icon name="{{ feature.icon }}" class="Icon" aria-hidden="true" />
-                        <h3>{{ feature.title }}</h3>
-                        <p>{{ feature.description }}</p>
-                        <twig:CodeBlockInline
-                            :code="feature.code"
-                            language="{{ feature.language }}"
-                            class="PaginationProductionCode"
-                        />
-                    </article>
-                {% endfor %}
-            </div>
-
-            {% set production_docs = [
-                {title: 'Configuration', url: pagination_docs_url ~ 'configuration.rst'},
-                {title: 'Named paginators', url: pagination_docs_url ~ 'configuration.rst#named-paginators'},
-                {title: 'Test helpers', url: pagination_docs_url ~ 'testing.rst#test-helper'},
-                {title: 'Production checklist', url: pagination_docs_url ~ 'production.rst#operational-checklist'},
-            ] %}
-            <twig:DocumentationLinks
-                :links="production_docs"
-                label="Documentation for configuring, injecting, and testing pagination"
-                centered
-            />
+        <div class="PaginationProductionGrid">
+            {% for feature in production_features %}
+                <article>
+                    <twig:ux:icon name="{{ feature.icon }}" class="Icon" aria-hidden="true" />
+                    <h3>{{ feature.title }}</h3>
+                    <p>{{ feature.description }}</p>
+                    <twig:CodeBlockInline
+                        :code="feature.code"
+                        language="{{ feature.language }}"
+                        class="PaginationProductionCode"
+                    />
+                </article>
+            {% endfor %}
         </div>
-    </section>
+
+        {% set production_docs = [
+            {title: 'Configuration', url: pagination_docs_url ~ 'configuration.rst'},
+            {title: 'Named paginators', url: pagination_docs_url ~ 'configuration.rst#named-paginators'},
+            {title: 'Test helpers', url: pagination_docs_url ~ 'testing.rst#test-helper'},
+            {title: 'Production checklist', url: pagination_docs_url ~ 'production.rst#operational-checklist'},
+        ] %}
+        <twig:DocumentationLinks
+            :links="production_docs"
+            label="Documentation for configuring, injecting, and testing pagination"
+            centered
+        />
+    </twig:Package:Section>
 {% endblock %}
 
 {% block package_install %}
@@ -530,21 +496,17 @@ self::assertSame(
 {% endblock %}
 
 {% block package_links %}
-    <section id="pagination-demos" class="PaginationDemosSection scroll-mt-20 border-t border-body-text/10" data-pagination-feature="demos" data-pagination-demo-list>
-        <div class="mx-auto max-w-[1400px] px-6 py-20 max-xs:px-4 md:px-12 lg:py-24">
-            <div class="items-end justify-between gap-8 md:flex">
-                <h2 class="PaginationSectionTitle mb-0 max-w-2xl">
-                    See every <strong class="PaginationAccentPrimary font-bold">page</strong> in action.
-                </h2>
-                <a href="{{ path('app_demo_pagination') }}" class="PaginationCta PaginationCta--primary mt-7 md:mt-0">
-                    Browse pagination demos
-                    <twig:ux:icon name="lucide:chevron-right" class="Icon size-4 PaginationCtaIcon" />
-                </a>
-            </div>
-
-            {{ include('demos/pagination/_cards.html.twig', {show_tags: false, class: 'mt-12'}) }}
+    <twig:Package:Section id="pagination-demos" tone="accent" data-pagination-feature="demos" data-pagination-demo-list>
+        <div class="items-end justify-between gap-8 md:flex">
+            <twig:Package:SectionTitle class="max-w-2xl" title="See every <strong>page</strong> in action." />
+            <a href="{{ path('app_demo_pagination') }}" class="PaginationCta PaginationCta--primary mt-7 md:mt-0">
+                Browse pagination demos
+                <twig:ux:icon name="lucide:chevron-right" class="Icon size-4 PaginationCtaIcon" />
+            </a>
         </div>
-    </section>
+
+        {{ include('demos/pagination/_cards.html.twig', {show_tags: false, class: 'mt-12'}) }}
+    </twig:Package:Section>
 
     {{ parent() }}
 {% endblock %}

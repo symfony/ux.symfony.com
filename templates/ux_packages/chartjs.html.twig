@@ -18,6 +18,89 @@
     {% endcomponent %}
 {% endblock %}
 
+{% block package_features %}
+    {% set chartjs_features = [
+        {
+            icon: 'lucide:chart-column',
+            title: 'Charts from <strong>PHP</strong>',
+            description: 'Build the whole chart server-side in a class.',
+        },
+        {
+            icon: 'lucide:settings-2',
+            title: 'Full Chart.js <strong>options</strong>',
+            description: 'Every option the library exposes, set from PHP.',
+        },
+        {
+            icon: 'lucide:refresh-cw',
+            title: 'Updatable <strong>data</strong>',
+            description: 'Swap datasets without rebuilding the canvas.',
+        },
+        {
+            icon: 'lucide:puzzle',
+            title: 'Stimulus <strong>events</strong>',
+            description: 'Hook into the chart before it is drawn.',
+        },
+        {
+            icon: 'lucide:palette',
+            title: 'Any chart <strong>type</strong>',
+            description: 'Line, bar, radar, doughnut and the rest.',
+        },
+    ] %}
+    <twig:FeaturesCluster
+        :items="chartjs_features"
+        title="What Chart.js gives you"
+        titleId="chartjs-overview-title"
+    />
+{% endblock %}
+
+{% block package_highlights %}
+    {% set cj_build %}$chart = $chartBuilder
+    ->createChart(Chart::TYPE_LINE);
+
+$chart->setData([
+    'labels' => ['January', 'February'],
+    'datasets' => [[
+        'label' => 'Visitors',
+        'data' => [120, 240],
+    ]],
+]);{% endset %}
+    {% set cj_options %}$chart->setOptions([
+    'scales' => [
+        'y' => ['suggestedMin' => 0],
+    ],
+]);{% endset %}
+    {% set cj_render %}{% verbatim %}{{ render_chart(chart) }}{% endverbatim %}{% endset %}
+
+    <twig:Package:Highlights
+        eyebrow="Built in PHP, drawn by Chart.js"
+        title="A chart is a <strong>PHP object</strong>."
+        intro="You never write the JavaScript configuration by hand. A builder produces the chart, Twig renders the canvas, Chart.js draws it."
+        :items="[
+            {
+                icon: 'lucide:chart-column',
+                title: 'Data from your <strong>repository</strong>',
+                description: 'Line, bar, radar, pie, doughnut and the rest are all the same object with a different type.',
+                code: cj_build,
+                language: 'php',
+            },
+            {
+                icon: 'lucide:settings-2',
+                title: 'Every Chart.js <strong>option</strong>',
+                description: 'setOptions takes the library configuration untouched, so the documentation you read still applies.',
+                code: cj_options,
+                language: 'php',
+            },
+            {
+                icon: 'lucide:code',
+                title: 'One Twig <strong>function</strong>',
+                description: 'It prints the canvas and the Stimulus controller that boots the chart.',
+                code: cj_render,
+                language: 'twig',
+            },
+        ]"
+    />
+{% endblock %}
+
 {% block code_block_left %}
     <twig:CodeBlock filename="src/Controller/UxPackage/ChartjsController.php" height="250px"/>
 {% endblock %}

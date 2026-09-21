@@ -17,9 +17,91 @@
     {% endcomponent %}
 {% endblock %}
 
+{% block package_features %}
+    {% set native_features = [
+        {
+            icon: 'lucide:smartphone',
+            title: 'Your app, <strong>wrapped</strong>',
+            description: 'iOS and Android shells around your Symfony app.',
+        },
+        {
+            icon: 'lucide:radar',
+            title: 'Request <strong>detection</strong>',
+            description: 'Know when a native client asks for a page.',
+        },
+        {
+            icon: 'lucide:git-branch',
+            title: 'Conditional <strong>rendering</strong>',
+            description: 'Serve a different template to native clients.',
+        },
+        {
+            icon: 'lucide:file-json',
+            title: 'Path <strong>configuration</strong>',
+            description: 'Generate the JSON your mobile clients consume.',
+        },
+        {
+            icon: 'lucide:navigation',
+            title: 'Native <strong>navigation</strong>',
+            description: 'Modals, tabs and back stacks, driven from PHP.',
+        },
+    ] %}
+    <twig:FeaturesCluster
+        :items="native_features"
+        title="What Native gives you"
+        titleId="native-overview-title"
+    />
+{% endblock %}
+
+{% block package_highlights %}
+    {% set na_detect %}{% verbatim %}{% if ux_is_native() %}
+    {# the native shell draws its own bar #}
+{% else %}
+    {{ include('_navbar.html.twig') }}
+{% endif %}{% endverbatim %}{% endset %}
+    {% set na_config %}#[AsNativeConfiguration('/config/ios.json')]
+public function ios(): Configuration
+{
+    return new Configuration(rules: [
+        new Rule(
+            patterns: ['/new$'],
+            properties: ['presentation' => 'modal'],
+        ),
+    ]);
+}{% endset %}
+    {% set na_build %}php bin/console ux:native:build-configs{% endset %}
+
+    <twig:Package:Highlights
+        eyebrow="What the bundle hands your app"
+        title="The <strong>server</strong> drives the shell."
+        intro="Your Symfony application decides what the mobile client sees and how it navigates. The shell only follows."
+        :items="[
+            {
+                icon: 'lucide:radar',
+                title: 'Native requests, <strong>detected</strong>',
+                description: 'A listener flags requests coming from the shell, and Twig branches on it.',
+                code: na_detect,
+                language: 'twig',
+            },
+            {
+                icon: 'lucide:file-json',
+                title: 'Navigation written in <strong>PHP</strong>',
+                description: 'Describe which paths open as a modal or push a new screen. No JSON written by hand.',
+                code: na_config,
+                language: 'php',
+            },
+            {
+                icon: 'lucide:terminal',
+                title: 'Built on <strong>demand</strong>',
+                description: 'One command renders every configuration file your clients download at launch.',
+                code: na_build,
+                language: 'bash',
+            },
+        ]"
+    />
+{% endblock %}
+
 {% block package_content %}
-    <section class="max-w-[1400px] mx-auto px-6 pt-6 md:px-12 md:pt-12">
-        <div class="arrow mb-4 hidden md:block"></div>
+    <twig:Package:Section tone="subtle">
 
         <div class="grid grid-cols-12 gap-x-6 mb-12">
             <div class="col-span-12 md:col-span-6 text-center">
@@ -284,5 +366,5 @@
             </div>
         </div>
         {% endblock %}
-    </section>
+    </twig:Package:Section>
 {% endblock %}

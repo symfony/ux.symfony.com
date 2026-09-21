@@ -1,0 +1,25 @@
+{# @prop title string Heading HTML; wrap the accented words in `<strong>` #}
+{# @prop eyebrow string Small uppercase label above the heading #}
+{# @prop id string Heading id, to pair with the section `aria-labelledby` #}
+{# @prop centered bool Center the block instead of aligning it to the start #}
+{%- props title, eyebrow = null, id = null, centered = false -%}
+
+{%- set intro -%}
+    {%- block content %}{% endblock -%}
+{%- endset -%}
+
+<div class="mb-12 max-w-3xl md:mb-16 lg:mb-20 {{ centered ? 'mx-auto text-center' : '' }}">
+    {% if eyebrow %}
+        <p class="m-0 mb-5 font-title text-xs font-semibold font-stretch-semi-condensed uppercase leading-snug tracking-[.12em] text-(--package-primary-text)">
+            {{- eyebrow -}}
+        </p>
+    {% endif %}
+
+    <twig:Package:SectionTitle :title="title" :id="id" />
+
+    {% if intro|trim %}
+        <div class="mt-6 max-w-2xl text-base leading-[1.7] text-balance text-body-text/80 md:mt-8 md:text-lg md:leading-[1.75] [&>p]:m-0 [&>p+p]:mt-4 {{ centered ? 'mx-auto' : '' }}">
+            {{- intro -}}
+        </div>
+    {% endif %}
+</div>

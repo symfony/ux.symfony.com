@@ -1,0 +1,35 @@
+{# @prop items array Each entry takes `icon`, an HTML `title`, a `description`, and optional `code` + `language` #}
+{# @prop title string Section heading HTML; wrap the accented words in `<strong>` #}
+{# @prop eyebrow string Small uppercase label above the heading #}
+{# @prop intro string Sentence under the heading #}
+{# @prop id string Anchor target for the section #}
+{# @prop tone string Background tone passed to Package:Section #}
+{%- props items, title, eyebrow = null, intro = null, id = null, tone = 'default' -%}
+
+<twig:Package:Section id="{{ id }}" tone="{{ tone }}">
+    <twig:Package:SectionHeading eyebrow="{{ eyebrow }}" title="{{ title }}">
+        {%- if intro -%}
+            <p>{{ intro|raw }}</p>
+        {%- endif -%}
+    </twig:Package:SectionHeading>
+
+    <div class="grid gap-x-8 gap-y-14 lg:grid-cols-3">
+        {% for item in items %}
+            <article class="flex min-w-0 flex-col">
+                <twig:ux:icon name="{{ item.icon }}" class="size-8 fill-none stroke-[1.6] text-(--package-primary-text)" aria-hidden="true" />
+
+                <h3 class="m-0 mt-6 font-title text-2xl font-bold leading-tight tracking-[-.02em] text-balance [&_strong]:text-(--package-primary-text)">{{ item.title|raw }}</h3>
+
+                <p class="m-0 mt-4 leading-[1.7] text-body-text/80 text-balance">{{ item.description|raw }}</p>
+
+                {% if item.code|default %}
+                    <twig:CodeBlockInline
+                        :code="item.code"
+                        language="{{ item.language|default('php') }}"
+                        class="mt-8"
+                    />
+                {% endif %}
+            </article>
+        {% endfor %}
+    </div>
+</twig:Package:Section>

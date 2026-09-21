@@ -19,6 +19,82 @@
     {% endcomponent %}
 {% endblock %}
 
+{% block package_features %}
+    {% set vue_features = [
+        {
+            icon: 'lucide:component',
+            title: 'Vue in <strong>Twig</strong>',
+            description: 'Render a component with one Twig function.',
+        },
+        {
+            icon: 'lucide:arrow-right-left',
+            title: 'Props from <strong>PHP</strong>',
+            description: 'Pass arrays straight into the component.',
+        },
+        {
+            icon: 'lucide:radio',
+            title: 'Component <strong>events</strong>',
+            description: 'Listen to Vue events from a Stimulus controller.',
+        },
+        {
+            icon: 'lucide:package',
+            title: 'AssetMapper <strong>ready</strong>',
+            description: 'No bundler required to get started.',
+        },
+        {
+            icon: 'lucide:layers',
+            title: 'Island by <strong>island</strong>',
+            description: 'Add Vue only where the page needs it.',
+        },
+    ] %}
+    <twig:FeaturesCluster
+        :items="vue_features"
+        title="What Vue.js gives you"
+        titleId="vue-overview-title"
+    />
+{% endblock %}
+
+{% block package_highlights %}
+    {% set vc_register %}assets/vue/controllers/
+└── Hello.vue{% endset %}
+    {% set vc_render %}{% verbatim %}<div {{ vue_component('Hello', {
+    name: app.user.name,
+}) }}></div>{% endverbatim %}{% endset %}
+    {% set vc_events %}document.addEventListener(
+    'vue:before-mount',
+    (event) => event.detail.app.use(router),
+);{% endset %}
+
+    <twig:Package:Highlights
+        eyebrow="Islands inside your Twig"
+        title="How a component <strong>lands</strong> on the page."
+        intro="Symfony still renders the page. Vue takes over only the elements you hand it, with the props you built in PHP."
+        :items="[
+            {
+                icon: 'lucide:folder',
+                title: 'Registered by <strong>convention</strong>',
+                description: 'Anything under the controllers directory is registered by name. No manifest to maintain.',
+                code: vc_register,
+                language: 'bash',
+            },
+            {
+                icon: 'lucide:component',
+                title: 'Rendered from <strong>Twig</strong>',
+                description: 'The function writes the data attributes the Stimulus controller reads to mount the component.',
+                code: vc_render,
+                language: 'twig',
+            },
+            {
+                icon: 'lucide:radio',
+                title: 'Hooks around the <strong>mount</strong>',
+                description: 'Events fire before and after mounting, which is where you register plugins or a router.',
+                code: vc_events,
+                language: 'javascript',
+            },
+        ]"
+    />
+{% endblock %}
+
 {% block code_block_left %}
     <twig:CodeBlock filename="assets/vue/controllers/PackageSearch.js" height="300px" />
 {% endblock %}

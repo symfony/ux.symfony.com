@@ -15,6 +15,93 @@
     {% endcomponent %}
 {% endblock %}
 
+{% block package_features %}
+    {% set twig_component_features = [
+        {
+            icon: 'lucide:file-code-2',
+            title: 'Classes that <strong>render</strong>',
+            description: 'A PHP class backing every Twig template.',
+        },
+        {
+            icon: 'lucide:sliders-horizontal',
+            title: 'Typed <strong>props</strong>',
+            description: 'Declare inputs once, get defaults and validation.',
+        },
+        {
+            icon: 'lucide:layout-template',
+            title: 'Named <strong>blocks</strong>',
+            description: 'Override any part of a component from outside.',
+        },
+        {
+            icon: 'lucide:boxes',
+            title: 'Anonymous <strong>components</strong>',
+            description: 'Skip the class when a template is enough.',
+        },
+        {
+            icon: 'lucide:puzzle',
+            title: 'Composable by <strong>design</strong>',
+            description: 'Nest components and pass attributes through.',
+        },
+    ] %}
+    <twig:FeaturesCluster
+        :items="twig_component_features"
+        title="What Twig Components gives you"
+        titleId="twig-component-overview-title"
+    />
+{% endblock %}
+
+{% block package_highlights %}
+    {% set tc_class %}#[AsTwigComponent]
+final class Alert
+{
+    public string $variant = 'info';
+    public string $message;
+}{% endset %}
+    {% set tc_props %}{% verbatim %}{% props variant = 'info' %}
+
+<div {{ attributes.defaults({
+    class: 'Alert Alert--' ~ variant,
+}) }}>
+    {% block content %}{% endblock %}
+</div>{% endverbatim %}{% endset %}
+    {% set tc_mount %}#[PreMount]
+public function preMount(array $data): array
+{
+    $data['message'] = trim($data['message']);
+
+    return $data;
+}{% endset %}
+
+    <twig:Package:Highlights
+        eyebrow="A class, a template, some props"
+        title="How a component is <strong>put together</strong>."
+        intro="A Twig Component is a PHP class paired with a template. The class owns the data, the template owns the markup, and neither one knows about controllers."
+        :items="[
+            {
+                icon: 'lucide:file-code-2',
+                title: 'A class and a <strong>template</strong>',
+                description: 'Public properties become the inputs. The matching Twig file next to it renders them.',
+                code: tc_class,
+                language: 'php',
+            },
+            {
+                icon: 'lucide:sliders-horizontal',
+                title: 'Props and <strong>attributes</strong>',
+                description: 'Simple components skip the class entirely. Anything you pass beyond the declared props lands on the root element.',
+                code: tc_props,
+                language: 'twig',
+            },
+            {
+                icon: 'lucide:layout-template',
+                title: 'Hooks before <strong>rendering</strong>',
+                description: 'PreMount and PostMount let the class normalise or compute data once, before the template sees it.',
+                code: tc_mount,
+                language: 'php',
+            },
+        ]"
+    />
+{% endblock %}
+
 {% block code_block_left %}
     <twig:CodeBlock filename="src/Twig/Components/Alert.php" height="330px" />
 {% endblock %}

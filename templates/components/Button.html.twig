@@ -21,11 +21,11 @@
         },
     },
 ) -%}
-{%- set classes = style.apply({ variant: variant, size: size }, attributes.render('class'))|tailwind_merge -%}
+{%- set classes = style.apply({variant: variant, size: size}, attributes.render('class'))|tailwind_merge -%}
 {%- set tag = href ? 'a' : 'button' -%}
 
 <{{ tag }}
     class="{{ classes }}"
     {%- if href %} href="{{ href }}"{% endif %}
-    {{ attributes.defaults(href ? {} : { type: 'button' }).without('class') }}
+    {{ attributes.defaults(href ? {} : {type: 'button'}).without('class') }}
 >{% block content %}{% endblock %}</{{ tag }}>

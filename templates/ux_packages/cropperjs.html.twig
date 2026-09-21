@@ -16,6 +16,87 @@
     {% endcomponent %}
 {% endblock %}
 
+{% block package_features %}
+    {% set cropperjs_features = [
+        {
+            icon: 'lucide:crop',
+            title: 'A crop <strong>field</strong>',
+            description: 'A Symfony form type wrapping Cropper.js.',
+        },
+        {
+            icon: 'lucide:ratio',
+            title: 'Fixed <strong>ratios</strong>',
+            description: 'Constrain the selection to the shape you need.',
+        },
+        {
+            icon: 'lucide:image',
+            title: 'Preview <strong>included</strong>',
+            description: 'Users see the result before submitting.',
+        },
+        {
+            icon: 'lucide:settings-2',
+            title: 'Cropper.js <strong>options</strong>',
+            description: 'Every library option, set from PHP.',
+        },
+        {
+            icon: 'lucide:file-check',
+            title: 'Validated <strong>output</strong>',
+            description: 'Coordinates land in your form data.',
+        },
+    ] %}
+    <twig:FeaturesCluster
+        :items="cropperjs_features"
+        title="What Image Cropper gives you"
+        titleId="cropperjs-overview-title"
+    />
+{% endblock %}
+
+{% block package_highlights %}
+    {% set cr_field %}$builder->add('crop', CropperType::class, [
+    'public_url' => '/uploads/photo.jpg',
+    'cropper_options' => [
+        'aspectRatio' => 16 / 9,
+    ],
+]);{% endset %}
+    {% set cr_options %}'cropper_options' => [
+    'aspectRatio' => 1,
+    'viewMode' => 2,
+    'guides' => false,
+]{% endset %}
+    {% set cr_output %}$crop = $form->get('crop')->getData();
+
+$thumbnail = $crop->getCroppedThumbnail(400, 400);{% endset %}
+
+    <twig:Package:Highlights
+        eyebrow="A form type around Cropper.js"
+        title="What the field <strong>gives you</strong>."
+        intro="The visitor drags a selection, the form receives coordinates, and your code asks for the cropped file whenever it needs it."
+        :items="[
+            {
+                icon: 'lucide:crop',
+                title: 'A Symfony <strong>form type</strong>',
+                description: 'It behaves like any other field: validation, form themes and data mapping all still apply.',
+                code: cr_field,
+                language: 'php',
+            },
+            {
+                icon: 'lucide:ratio',
+                title: 'Cropper.js <strong>options</strong>',
+                description: 'Whatever the library accepts is passed through to the controller, so its documentation stays valid.',
+                code: cr_options,
+                language: 'php',
+            },
+            {
+                icon: 'lucide:file-check',
+                title: 'The cropped <strong>image</strong>',
+                description: 'The Crop object carries the selection and can produce the cropped file or a thumbnail on demand.',
+                code: cr_output,
+                language: 'php',
+            },
+        ]"
+    />
+{% endblock %}
+
 {% block code_block_left %}
     <twig:CodeBlock filename="src/Controller/UxPackage/CropperjsController.php" height="270px" />
 {% endblock %}

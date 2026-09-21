@@ -1,0 +1,19 @@
+{# @prop tone string `default`, `subtle`, `deep` or `accent`; alternate them going down a page #}
+{# @prop id string Anchor target for the section #}
+{%- props tone = 'default', id = null -%}
+
+{%- set tones = {
+    default: 'bg-body',
+    subtle: 'bg-subtle',
+    deep: 'bg-[color-mix(in_oklch,var(--color-body-bg)_96%,black)] dark:bg-[#1b1e21]',
+    accent: 'bg-[color-mix(in_oklch,var(--color-body-bg)_92%,var(--package-accent))] dark:bg-[color-mix(in_oklch,var(--color-body-bg)_88%,var(--color-accent))]',
+} -%}
+
+<section
+    {% if id %}id="{{ id }}"{% endif %}
+    {{ attributes.defaults({class: 'border-t border-body-text/10 py-20 lg:py-32 ' ~ tones[tone] ~ (id ? ' scroll-mt-20' : '')}) }}
+>
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12">
+        {% block content %}{% endblock %}
+    </div>
+</section>

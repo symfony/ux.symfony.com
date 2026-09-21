@@ -1,0 +1,20 @@
+{# @prop title string Heading HTML; wrap the accented words in `<strong>`. Omit it to pass the heading as content. #}
+{# @prop id string Heading id, to pair with the section `aria-labelledby` #}
+{# @prop size string `lg` for a section opener, `md` for a title sitting next to other content #}
+{%- props title = null, id = null, size = 'lg' -%}
+
+{%- set sizes = {
+    lg: 'text-[clamp(2.35rem,3.8vw,3.7rem)] leading-[.98] tracking-[-.04em]',
+    md: 'text-[clamp(1.85rem,2.6vw,2.2rem)] leading-[1.08] tracking-[-.025em]',
+} -%}
+
+<h2
+    {% if id %}id="{{ id }}"{% endif %}
+    {{ attributes.defaults({class: 'm-0 font-title font-bold text-balance [&_strong]:font-bold [&_strong]:text-(--package-primary-text) ' ~ sizes[size]}) }}
+>
+    {%- if title -%}
+        {{ title|raw }}
+    {%- else -%}
+        {%- block content %}{% endblock -%}
+    {%- endif -%}
+</h2>

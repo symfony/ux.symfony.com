@@ -5,11 +5,17 @@
 
         <h1 class="text-center text-balance font-medium
                    [&_em]:inline-flex [&_em]:font-normal [&_em]:not-italic [&_em]:-skew-x-16 [&_em]:scale-y-95
-                   [&_strong]:font-bold [&_strong]:underline [&_strong]:decoration-(--color-accent)/40 [&_strong]:decoration-[.09em] [&_strong]:underline-offset-[.09em]">{% block title_header %}{{ title|default }}{% endblock %}</h1>
+                   [&_strong]:font-bold [&_strong]:underline [&_strong]:decoration-(--color-accent)/40 [&_strong]:decoration-[.09em] [&_strong]:underline-offset-[.09em]">
+            {%- block title_header -%}
+                {{ title|default }}
+            {%- endblock -%}
+        </h1>
 
         <div class="flex justify-center">
             <p class="Wysiwyg text-center mt-4 pb-4 w-1/2 text-balance max-xl:w-3/5 max-md:w-4/5">
-                {% block sub_content %}{{ subtitle|default }}{% endblock %}
+                {%- block sub_content -%}
+                    {{ subtitle|default }}
+                {%- endblock -%}
             </p>
         </div>
 

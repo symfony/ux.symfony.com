@@ -1,12 +1,9 @@
-<div>
-    <h2 class="ubuntu text-center mt-12">Install It</h2>
-    <div class="grid grid-cols-12 justify-center mt-12">
-        <div class="col-span-12 md:col-span-6 md:col-start-4">
-            {% component Terminal with {bottomPadding: 20} %}
-                {% block content %}
-                    {{ package.composerRequireCommand }}
-                {% endblock %}
-            {% endcomponent %}
-        </div>
+<div class="grid grid-cols-12 justify-center">
+    <div class="col-span-12 md:col-span-6 md:col-start-4">
+        {% component Terminal with {bottomPadding: 20} %}
+            {% block content %}
+                {{ package.composerRequireCommand }}
+            {% endblock %}
+        {% endcomponent %}
     </div>
 </div>

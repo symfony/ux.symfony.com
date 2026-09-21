@@ -15,6 +15,84 @@
     {% endcomponent %}
 {% endblock %}
 
+{% block package_features %}
+    {% set translator_features = [
+        {
+            icon: 'lucide:languages',
+            title: 'The same <strong>catalogues</strong>',
+            description: 'Translations you already wrote, now in JavaScript.',
+        },
+        {
+            icon: 'lucide:file-down',
+            title: 'Dumped at <strong>build time</strong>',
+            description: 'Generated files, no runtime lookup.',
+        },
+        {
+            icon: 'lucide:scissors',
+            title: 'Only what you <strong>use</strong>',
+            description: 'Tree-shakeable domains keep the bundle small.',
+        },
+        {
+            icon: 'lucide:braces',
+            title: 'Typed <strong>parameters</strong>',
+            description: 'TypeScript types generated from your catalogues.',
+        },
+        {
+            icon: 'lucide:globe',
+            title: 'Intl <strong>ready</strong>',
+            description: 'Pluralisation and locale switching included.',
+        },
+    ] %}
+    <twig:FeaturesCluster
+        :items="translator_features"
+        title="What Translator gives you"
+        titleId="translator-overview-title"
+    />
+{% endblock %}
+
+{% block package_highlights %}
+    {% set tr_dump %}var/translations/
+├── index.js
+└── index.d.ts{% endset %}
+    {% set tr_trans %}import { trans } from '@symfony/ux-translator';
+import { HELLO } from '../translations/messages';
+
+trans(HELLO, { name: 'Hugo' });{% endset %}
+    {% set tr_shake %}import { TASK_CREATED } from '../translations';
+
+// the validators domain is never
+// imported, so it never ships{% endset %}
+
+    <twig:Package:Highlights
+        eyebrow="Dumped at build time"
+        title="How the catalogues <strong>get there</strong>."
+        intro="Nothing is fetched at runtime. A cache warmer writes your catalogues to disk, and your JavaScript imports them like any other module."
+        :items="[
+            {
+                icon: 'lucide:file-down',
+                title: 'Written to <strong>disk</strong>',
+                description: 'Every domain and every locale you configured ends up in one generated module, types included.',
+                code: tr_dump,
+                language: 'bash',
+            },
+            {
+                icon: 'lucide:languages',
+                title: 'The same <strong>trans()</strong>',
+                description: 'Placeholders, pluralisation and locale fallbacks behave the way they do in Twig.',
+                code: tr_trans,
+                language: 'javascript',
+            },
+            {
+                icon: 'lucide:scissors',
+                title: 'Only what you <strong>import</strong>',
+                description: 'Message ids are named exports, so a bundler drops the domains your code never touches.',
+                code: tr_shake,
+                language: 'javascript',
+            },
+        ]"
+    />
+{% endblock %}
+
 {% block code_block_left %}
     <twig:CodeBlock filename="translations/messages+intl-icu.en.yaml" height="300px"/>
 {% endblock %}

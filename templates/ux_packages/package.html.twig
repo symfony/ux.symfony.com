@@ -17,7 +17,7 @@
     },
 } %}
 
-{% block body_attributes %} style="--color-accent: {{ package.color }}; --package-accent: oklch(from {{ package.color }} 0.74 calc(c * 0.85) h); --package-accent-ink: oklch(from {{ package.color }} 0.28 calc(c * 0.5) h); --package-primary-text: oklch(from {{ package.color }} 0.5 calc(c * 0.9) h);"{% endblock %}
+{% block html_attributes %} style="{{ include('ux_packages/_package_tokens.html.twig')|trim }} background-color: var(--package-accent);"{% endblock %}
 
 {% block header %}
     {{ include('_header.html.twig', {theme: 'package'}) }}
@@ -28,41 +28,28 @@
 <article class="dark:[--package-primary-text:var(--package-accent)]">
     {% block package_header %}{% endblock %}
 
+    {% block package_features %}{% endblock %}
+
     {% block package_content %}
-        <section class="max-w-[1400px] mx-auto px-6 pt-6 md:px-12 md:pt-12">
-            <div class="arrow mb-4 hidden md:block"></div>
-            {% block package_code_blocks %}
-                <div class="grid grid-cols-12 gap-x-6 mb-12">
-                    <div class="col-span-12 md:col-span-6">
-                        {% block code_block_left %}{% endblock %}
-                    </div>
-                    <div class="col-span-12 md:col-span-6 mt-4 md:mt-0">
-                        {% block code_block_right %}{% endblock %}
-                    </div>
-                </div>
-            {% endblock %}
-            {% block package_demo %}
-                {% if block('demo_title') is defined %}
-                    {% set demo_title = block('demo_title') %}
-                    {% set demo_content = block('demo_content') %}
-                    <div id="demo" style="position: relative;">
-                        <div class="arrow-2 mb-4 sm:block" style="position:absolute; top:-55px; right: -25px;"></div>
-                        {% embed 'ux_packages/_package_demo.html.twig' %}
-                            {% block title %}{{ demo_title|raw }}{% endblock %}
-                            {% block content %}{{ demo_content|raw }}{% endblock %}
-                        {% endembed %}
-                    </div>
-                {% endif %}
-            {% endblock %}
-        </section>
+        {% set content_heading = block('package_content_heading') %}
+        {% set content_code_blocks = block('package_code_blocks') %}
+        {% set content_demo = block('package_demo') %}
+        <twig:Package:Section tone="subtle">{{ content_heading|raw }}{{ content_code_blocks|raw }}{{ content_demo|raw }}</twig:Package:Section>
     {% endblock %}
 
+    {% block package_highlights %}{% endblock %}
+
     {% block package_install %}
-        <section class="max-w-[1400px] mx-auto px-6 pt-6 md:px-12 md:pt-12">
+        <twig:Package:Section tone="deep">
+            <twig:Package:SectionHeading centered title="Install <strong>{{ package.humanName }}</strong>." />
             {{ include('ux_packages/_package_install.html.twig', {
                 package: package,
             }) }}
-        </section>
+        </twig:Package:Section>
+    {% endblock %}
+
+    {% block package_suggestions %}
+        <twig:PackageSuggestions package="{{ package }}" />
     {% endblock %}
 
     {% block package_links %}
@@ -74,3 +61,35 @@
 </article>
 
 {% endblock %}
+
+{% block package_content_heading %}
+    <twig:Package:SectionHeading
+        eyebrow="{{ package.tagLine }}"
+        title="Add <strong>{{ package.humanName }}</strong> to your app."
+    >{{ package.description|markdown_to_html }}</twig:Package:SectionHeading>
+{% endblock %}
+
+{% block package_code_blocks %}
+    {% set code_left = block('code_block_left') %}
+    {% set code_right = block('code_block_right') %}
+    <twig:Package:CodeFlow arrows>
+        <twig:block name="source">{{ code_left|raw }}</twig:block>
+        <twig:block name="result">{{ code_right|raw }}</twig:block>
+    </twig:Package:CodeFlow>
+{% endblock %}
+
+{% block package_demo %}
+    {% if block('demo_title') is defined %}
+        {% set demo_title = block('demo_title') %}
+        {% set demo_content = block('demo_content') %}
+        <div id="demo" class="mt-24 scroll-mt-20">
+            {% embed 'ux_packages/_package_demo.html.twig' %}
+                {% block title %}{{ demo_title|raw }}{% endblock %}
+                {% block content %}{{ demo_content|raw }}{% endblock %}
+            {% endembed %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block code_block_left %}{% endblock %}
+{% block code_block_right %}{% endblock %}

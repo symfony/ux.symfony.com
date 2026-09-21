@@ -43,7 +43,7 @@ final class PaginationPageTest extends KernelTestCase
         self::assertSame('Symfony UX Pagination', $page->crawler()->filter('meta[property="og:image:alt"]')->attr('content'));
         self::assertSame('Symfony UX Pagination', $page->crawler()->filter('meta[name="twitter:image:alt"]')->attr('content'));
         self::assertSame(1, $page->crawler()->filter('.PackageHeader a[href="/demos/pagination"]')->count());
-        self::assertSame(1, $page->crawler()->filter('[data-pagination-feature="live-component"] a[href="#"]')->count());
+        self::assertSame(1, $page->crawler()->filter('[data-pagination-feature="live-component"] a[href="/demos/pagination/live-pagination"]')->count());
         self::assertSame(3, $page->crawler()->filter('[data-pagination-demo-list] .Card')->count());
         self::assertSame(3, $page->crawler()->filter('[data-pagination-demo-list] .Card a')->count());
         self::assertSame(0, $page->crawler()->filter('[data-pagination-demo-list] .Tag')->count());

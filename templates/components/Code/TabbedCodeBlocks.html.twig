@@ -2,7 +2,7 @@
    Tabs component, not this one, so this.getItemId() must be called in this scope. #}
 {% set tabs = [] %}
 {% for filename in files %}
-    {% set tabs = tabs|merge([{ filename: filename, id: this.getItemId(filename) }]) %}
+    {% set tabs = tabs|merge([{filename: filename, id: this.getItemId(filename)}]) %}
 {% endfor %}
 
 <div {{ attributes.defaults({

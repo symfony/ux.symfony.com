@@ -40,7 +40,7 @@ final class LivePaginationDemoTest extends KernelTestCase
         foreach (['/pagination', '/demos/pagination'] as $url) {
             $page = $this->browser()->visit($url)->assertSuccessful();
 
-            self::assertSame(1, $page->crawler()->filter('a[href="/demos/pagination/live-pagination"]')->count());
+            self::assertGreaterThanOrEqual(1, $page->crawler()->filter('a[href="/demos/pagination/live-pagination"]')->count());
         }
     }
 

@@ -15,6 +15,80 @@
     {% endcomponent %}
 {% endblock %}
 
+{% block package_features %}
+    {% set notify_features = [
+        {
+            icon: 'lucide:bell',
+            title: 'Native <strong>notifications</strong>',
+            description: 'Trigger browser notifications from PHP.',
+        },
+        {
+            icon: 'lucide:radio',
+            title: 'Pushed by <strong>Mercure</strong>',
+            description: 'Server events reach the browser in real time.',
+        },
+        {
+            icon: 'lucide:users',
+            title: 'Targeted <strong>delivery</strong>',
+            description: 'Send to one visitor or to everyone.',
+        },
+        {
+            icon: 'lucide:settings-2',
+            title: 'Full <strong>payload</strong>',
+            description: 'Icon, body, tag and actions.',
+        },
+        {
+            icon: 'lucide:shield-check',
+            title: 'Permission <strong>aware</strong>',
+            description: 'Asks the visitor before notifying.',
+        },
+    ] %}
+    <twig:FeaturesCluster
+        :items="notify_features"
+        title="What Notify gives you"
+        titleId="notify-overview-title"
+    />
+{% endblock %}
+
+{% block package_highlights %}
+    {% set nt_send %}$message = new ChatMessage('Your export is ready');
+
+$message->transport('mercure_chatter');
+
+$chatter->send($message);{% endset %}
+    {% set nt_topic %}new MercureOptions(['/demo/notifier']){% endset %}
+    {% set nt_twig %}{% verbatim %}{{ stream_notifications(['/demo/notifier']) }}{% endverbatim %}{% endset %}
+
+    <twig:Package:Highlights
+        eyebrow="Notifier, Mercure, browser"
+        title="How a notification <strong>travels</strong>."
+        intro="The message leaves your PHP code through the Notifier component, crosses Mercure, and the browser displays it natively."
+        :items="[
+            {
+                icon: 'lucide:bell',
+                title: 'Sent with the <strong>Notifier</strong>',
+                description: 'It is an ordinary ChatMessage, so the rest of your notification code does not change.',
+                code: nt_send,
+                language: 'php',
+            },
+            {
+                icon: 'lucide:radio',
+                title: 'Routed by <strong>topic</strong>',
+                description: 'Mercure options decide who receives the message: one visitor, a group, or everybody on the page.',
+                code: nt_topic,
+                language: 'php',
+            },
+            {
+                icon: 'lucide:code',
+                title: 'One Twig <strong>function</strong>',
+                description: 'It subscribes the page to the topics and asks the visitor for permission on the first message.',
+                code: nt_twig,
+                language: 'twig',
+            },
+        ]"
+    />
+{% endblock %}
+
 {% block code_block_left %}
     <twig:CodeBlock filename="src/Controller/UxPackage/NotifyController.php" height="300px"/>
 {% endblock %}

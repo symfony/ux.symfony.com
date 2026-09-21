@@ -4,7 +4,7 @@
     field_* helpers. form_div_layout is only kept as a fallback for blocks we
     don't override (expanded choices, grouped options, ...).
 #}
-{% use "form_div_layout.html.twig" %}
+{% use 'form_div_layout.html.twig' %}
 
 {# `row_attr.class`, when given (even ''), replaces the default margin so callers keep full control. #}
 {%- block form_row -%}

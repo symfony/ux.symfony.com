@@ -17,6 +17,41 @@
     {% endcomponent %}
 {% endblock %}
 
+{% block package_features %}
+    {% set map_features = [
+        {
+            icon: 'lucide:map',
+            title: 'Two <strong>renderers</strong>',
+            description: 'Leaflet or Google Maps, the same PHP API.',
+        },
+        {
+            icon: 'lucide:map-pin',
+            title: 'Markers and <strong>popups</strong>',
+            description: 'Place markers, attach HTML popups and info windows.',
+        },
+        {
+            icon: 'lucide:shapes',
+            title: 'Shapes on <strong>top</strong>',
+            description: 'Polygons, polylines and circles over any tile layer.',
+        },
+        {
+            icon: 'lucide:server',
+            title: 'Built in <strong>PHP</strong>',
+            description: 'Compose the whole map server-side, render it in Twig.',
+        },
+        {
+            icon: 'lucide:puzzle',
+            title: 'Stimulus <strong>hooks</strong>',
+            description: 'Extend the map from your own controllers.',
+        },
+    ] %}
+    <twig:FeaturesCluster
+        :items="map_features"
+        title="What Map gives you"
+        titleId="map-overview-title"
+    />
+{% endblock %}
+
 {% block code_block_left %}
     <twig:CodeBlock filename="src/Controller/UxPackage/MapController.php" height="250px"/>
 {% endblock %}
@@ -29,6 +64,56 @@
     />
 {% endblock %}
 
+{% block package_highlights %}
+    {% set map_marker %}$map->addMarker(new Marker(
+    position: new Point(48.8566, 2.3522),
+    title: 'Paris',
+    infoWindow: new InfoWindow(
+        content: '<p>Come and visit!</p>',
+    ),
+));{% endset %}
+    {% set map_shapes %}$map
+    ->addPolyline(new Polyline(
+        points: [$lyon, $paris],
+    ))
+    ->addCircle(new Circle(
+        center: $lyon,
+        radius: 25_000,
+    ));{% endset %}
+    {% set map_renderer %}ux_map:
+    renderer: '%env(resolve:UX_MAP_DSN)%'
+
+# UX_MAP_DSN=leaflet://default
+# UX_MAP_DSN=google://GOOGLE_MAPS_API_KEY@default{% endset %}
+
+    <twig:Package:Highlights
+        eyebrow="Everything is a PHP object"
+        title="What you can put on a <strong>map</strong>."
+        intro="A <code>Map</code> is built the same way a form is: you describe it in PHP, the renderer turns it into JavaScript."
+        :items="[
+            {
+                icon: 'lucide:map-pin',
+                title: 'Markers and <strong>info windows</strong>',
+                description: 'Attach a title and an HTML popup to any point. You write the popup content in PHP, no template needed.',
+                code: map_marker,
+            },
+            {
+                icon: 'lucide:shapes',
+                title: 'Shapes over the <strong>tiles</strong>',
+                description: 'Polygons, polylines, circles and rectangles share the same builder, and each one can carry its own popup.',
+                code: map_shapes,
+            },
+            {
+                icon: 'lucide:replace',
+                title: 'Swap the <strong>renderer</strong>',
+                description: 'The same Map renders with Leaflet or Google Maps. Change the DSN, not your controller.',
+                code: map_renderer,
+                language: 'yaml',
+            },
+        ]"
+    />
+{% endblock %}
+
 {% block demo_title %}UX Map{% endblock %}
 
 {% block demo_content %}
@@ -37,8 +122,6 @@
         {{ ux_map(map, {style: 'height: 600px;'}) }}
     </div>
 {% endblock %}
-
-{% block package_install '' %}
 
 {% block package_links %}
     {{ include('ux_packages/map/_aside.html.twig', {

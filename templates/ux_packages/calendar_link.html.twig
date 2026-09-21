@@ -15,102 +15,156 @@
     {% endcomponent %}
 {% endblock %}
 
+{% block package_features %}
+    {% set calendar_link_features = [
+        {
+            icon: 'lucide:calendar-plus',
+            title: 'One-click <strong>add</strong>',
+            description: 'Visitors save your event without copying anything.',
+        },
+        {
+            icon: 'lucide:layout-grid',
+            title: 'Every <strong>provider</strong>',
+            description: 'Google, Outlook, Yahoo and iCalendar files.',
+        },
+        {
+            icon: 'lucide:repeat',
+            title: 'Recurring <strong>events</strong>',
+            description: 'Daily, weekly or custom repeat rules.',
+        },
+        {
+            icon: 'lucide:globe',
+            title: 'Timezone <strong>correct</strong>',
+            description: 'Dates land right wherever the visitor is.',
+        },
+        {
+            icon: 'lucide:code',
+            title: 'One Twig <strong>function</strong>',
+            description: 'ux_calendar_links() returns every link.',
+        },
+    ] %}
+    <twig:FeaturesCluster
+        :items="calendar_link_features"
+        title="What CalendarLink gives you"
+        titleId="calendar-link-overview-title"
+    />
+{% endblock %}
+
 {% block package_content %}
-    <section class="max-w-[1400px] mx-auto px-6 pt-6 md:px-12 md:pt-12">
-        <div class="arrow mb-4 hidden md:block"></div>
+    {% set examples = [
+        {
+            tone: 'subtle',
+            title: 'A simple event',
+            reversed: false,
+            event: symfonyCon,
+            prose: 'Create a `CalendarEvent` with a title, a start and an end date, and optionally a `location` and a `description`.
 
-        {# Example 1: simple event #}
-        <div class="grid grid-cols-12 gap-x-6 mb-12">
-            <div class="col-span-12 md:col-span-6 Wysiwyg">
-                {% apply markdown_to_html %}
-                    ## A simple event
+Then call `ux_calendar_links(event)` in your Twig template to get one link per registered provider.',
+            code: 'php_simple',
+        },
+        {
+            tone: 'default',
+            title: 'A recurring, all-day event',
+            reversed: true,
+            event: victoryDay,
+            prose: 'For events that repeat on a fixed schedule, birthdays, public holidays, weekly team meetings, you do not want people adding them by hand every time.
 
-                    Create a `CalendarEvent` with a title, a start and end date, and optionally a `location` and `description`.
+Set `allDay: true` when the event spans the whole day, and pass a `CalendarRecurrence` to let the calendar handle the repetition.
 
-                    Then call `ux_calendar_links(event)` in your Twig template to get a link for each registered calendar provider.
-                {% endapply %}
+> [!NOTE]
+> Recurrence is honored by Google Calendar and the `.ics` file only.',
+            code: 'php_recurring',
+        },
+        {
+            tone: 'subtle',
+            title: 'An event with a reminder',
+            reversed: false,
+            event: bloodDonation,
+            prose: 'Having the event in the calendar is a good start, but some appointments really need a heads-up.
+
+Pass one or more `CalendarReminder` instances to warn people ahead of time: a day before, an hour before, whatever the event deserves.
+
+> [!NOTE]
+> Reminders are honored by the `.ics` file only.',
+            code: 'php_reminder',
+        },
+    ] %}
+
+    {% set php_simple %}$event = new CalendarEvent(
+    title: 'SymfonyCon Warsaw 2026',
+    start: new \DateTimeImmutable(
+        '2026-11-26 09:00', $timezone,
+    ),
+    end: new \DateTimeImmutable(
+        '2026-11-27 18:00', $timezone,
+    ),
+    location: 'Hilton Warsaw Hotel',
+);{% endset %}
+
+    {% set php_recurring %}$event = new CalendarEvent(
+    title: 'Victory in Europe Day',
+    start: new \DateTimeImmutable(
+        '2025-05-08', $timezone,
+    ),
+    end: new \DateTimeImmutable(
+        '2025-05-09', $timezone,
+    ),
+    allDay: true,
+    recurrence: CalendarRecurrence::yearly(),
+);{% endset %}
+
+    {% set php_reminder %}$event = new CalendarEvent(
+    title: 'Blood donation',
+    start: new \DateTimeImmutable(
+        '2025-06-12 14:00', $timezone,
+    ),
+    end: new \DateTimeImmutable(
+        '2025-06-12 15:00', $timezone,
+    ),
+    reminders: [
+        CalendarReminder::before(
+            days: 1,
+            description: 'Eat and drink well.',
+        ),
+        CalendarReminder::before(
+            hours: 2,
+            description: 'Time to go!',
+        ),
+    ],
+);{% endset %}
+
+    {% set snippets = {
+        php_simple: php_simple,
+        php_recurring: php_recurring,
+        php_reminder: php_reminder,
+    } %}
+
+    {% for example in examples %}
+        {% set body %}
+            {% if loop.first %}
+                <twig:Package:SectionHeading
+                    eyebrow="One object, every calendar"
+                    title="Describe the event <strong>once</strong>."
+                >
+                    <p>A <code>CalendarEvent</code> carries the dates and everything optional around them. The Twig function turns it into one link per provider, and the buttons below are the real thing.</p>
+                </twig:Package:SectionHeading>
+            {% endif %}
+
+            <div class="grid items-center gap-x-16 gap-y-10 lg:grid-cols-2 [&_.Terminal]:max-h-[26rem]">
+                <div class="Wysiwyg min-w-0 {{ example.reversed ? 'lg:order-2' : '' }}">
+                    <twig:Package:SectionTitle size="md" title="{{ example.title }}" class="mb-6" />
+                    {{ example.prose|markdown_to_html }}
+                </div>
+
+                <div class="min-w-0">
+                    <twig:CodeBlockInline :code="snippets[example.code]" language="php" />
+
+                    <p class="mt-8 mb-3 font-title text-xs font-semibold font-stretch-semi-condensed uppercase tracking-[.12em] text-(--package-primary-text)">Try the links it produces</p>
+                    {{ include('ux_packages/calendar_link/_link_buttons.html.twig', {event: example.event}) }}
+                </div>
             </div>
-            <div class="col-span-12 md:col-span-6 mt-6 md:mt-0">
-                {% apply markdown_to_html %}
-                    ```php
-                    $timezone = new \DateTimeZone('Europe/Warsaw');
-                    $event = new CalendarEvent(
-                        title: 'SymfonyCon Warsaw 2026',
-                        start: new \DateTimeImmutable('2026-11-26 09:00', $timezone),
-                        end: new \DateTimeImmutable('2026-11-27 18:00', $timezone),
-                        description: 'Share your best practices, experience and knowledge with Symfony.',
-                        location: 'Hilton Warsaw Hotel and Convention Centre, Grzybowska 63, 00-844, Warszawa, Poland',
-                    );
-                    ```
-                {% endapply %}
-                {{ include('ux_packages/calendar_link/_link_buttons.html.twig', {event: symfonyCon}) }}
-            </div>
-        </div>
+        {% endset %}
 
-        {# Example 2: recurring all-day event #}
-        <div class="grid grid-cols-12 gap-x-6 mb-12 mt-6">
-            <div class="col-span-12 md:col-span-6 md:order-2 Wysiwyg">
-                {% apply markdown_to_html %}
-                    ## A recurring, all-day event
-
-                    For events that repeat on a fixed schedule, birthdays, public holidays, weekly team meetings, you don't want users to add them manually every time.
-
-                    Set `allDay: true` if the event spans the whole day, and pass a `CalendarRecurrence` to let the user's calendar handle the repetition automatically.
-
-                    > [!NOTE]
-                    > Recurrence is honored by Google Calendar and the `.ics` file only.
-                {% endapply %}
-            </div>
-            <div class="col-span-12 md:col-span-6 mt-6 md:mt-0 md:order-1">
-                {% apply markdown_to_html %}
-                    ```php
-                    $timezone = new \DateTimeZone('Europe/Paris');
-                    $event = new CalendarEvent(
-                        title: 'Victory in Europe Day',
-                        start: new \DateTimeImmutable('2025-05-08', $timezone),
-                        end: new \DateTimeImmutable('2025-05-09', $timezone),
-                        description: 'Public holiday in France marking the end of World War II in Europe (1945).',
-                        allDay: true,
-                        recurrence: CalendarRecurrence::yearly(),
-                    );
-                    ```
-                {% endapply %}
-                {{ include('ux_packages/calendar_link/_link_buttons.html.twig', {event: victoryDay}) }}
-            </div>
-        </div>
-
-        {# Example 3: event with a reminder #}
-        <div class="grid grid-cols-12 gap-x-6 mb-12 mt-6">
-            <div class="col-span-12 md:col-span-6 Wysiwyg">
-                {% apply markdown_to_html %}
-                    ## An event with a reminder
-
-                    Having the event in the calendar is a good start, but some appointments really need a heads-up.
-
-                    Pass one or more `CalendarReminder` instances to remind users ahead of time, a day before, an hour before, whatever makes sense for the event.
-
-                    > [!NOTE]
-                    > Reminders are honored by the `.ics` file only.
-                {% endapply %}
-            </div>
-            <div class="col-span-12 md:col-span-6 mt-6 md:mt-0">
-                {% apply markdown_to_html %}
-                    ```php
-                    $timezone = new \DateTimeZone('Europe/Paris');
-                    $event = new CalendarEvent(
-                        title: 'Blood donation',
-                        start: new \DateTimeImmutable('2025-06-12 14:00', $timezone),
-                        end: new \DateTimeImmutable('2025-06-12 15:00', $timezone),
-                        location: 'EFS Lyon Part-Dieu, 74 rue de la Villette, 69003 Lyon',
-                        reminders: [
-                            CalendarReminder::before(days: 1, description: 'Eat and drink well.'),
-                            CalendarReminder::before(hours: 2, description: 'Time to go!'),
-                        ],
-                    );
-                    ```
-                {% endapply %}
-                {{ include('ux_packages/calendar_link/_link_buttons.html.twig', {event: bloodDonation}) }}
-            </div>
-        </div>
-    </section>
+        <twig:Package:Section tone="{{ example.tone }}">{{ body }}</twig:Package:Section>
+    {% endfor %}
 {% endblock %}

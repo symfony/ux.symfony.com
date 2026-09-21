@@ -16,6 +16,80 @@
     {% endcomponent %}
 {% endblock %}
 
+{% block package_features %}
+    {% set dropzone_features = [
+        {
+            icon: 'lucide:upload',
+            title: 'A styled <strong>drop zone</strong>',
+            description: 'A file field that looks like your design.',
+        },
+        {
+            icon: 'lucide:mouse-pointer-2',
+            title: 'Drag and <strong>drop</strong>',
+            description: 'Drop a file anywhere on the zone.',
+        },
+        {
+            icon: 'lucide:image',
+            title: 'Instant <strong>preview</strong>',
+            description: 'Show the picked file before uploading.',
+        },
+        {
+            icon: 'lucide:paintbrush',
+            title: 'Fully <strong>themeable</strong>',
+            description: 'Override the markup and the styles.',
+        },
+        {
+            icon: 'lucide:shield-check',
+            title: 'Standard <strong>validation</strong>',
+            description: 'Symfony constraints still apply.',
+        },
+    ] %}
+    <twig:FeaturesCluster
+        :items="dropzone_features"
+        title="What Stylized Dropzone gives you"
+        titleId="dropzone-overview-title"
+    />
+{% endblock %}
+
+{% block package_highlights %}
+    {% set dz_field %}$builder->add('photo', DropzoneType::class, [
+    'label' => 'Drop a picture here',
+]);{% endset %}
+    {% set dz_preview %}<input type="file"
+    data-controller="symfony--ux-dropzone--dropzone"
+>{% endset %}
+    {% set dz_theme %}{% verbatim %}{% form_theme form '@Dropzone/form_theme.html.twig' %}{% endverbatim %}{% endset %}
+
+    <twig:Package:Highlights
+        eyebrow="A file input, dressed up"
+        title="What changes for your <strong>form</strong>."
+        intro="Underneath it is still a file input. The markup, the preview and the styles are what the package replaces."
+        :items="[
+            {
+                icon: 'lucide:upload',
+                title: 'Extends <strong>FileType</strong>',
+                description: 'Constraints, multiple uploads and mapping to your entity work exactly as before.',
+                code: dz_field,
+                language: 'php',
+            },
+            {
+                icon: 'lucide:image',
+                title: 'Preview before <strong>upload</strong>',
+                description: 'A Stimulus controller shows the picked file and lets the visitor drop a new one over it.',
+                code: dz_preview,
+                language: 'html',
+            },
+            {
+                icon: 'lucide:paintbrush',
+                title: 'Your markup, your <strong>styles</strong>',
+                description: 'The shipped form theme is a starting point. Override the block and the field is yours.',
+                code: dz_theme,
+                language: 'twig',
+            },
+        ]"
+    />
+{% endblock %}
+
 {% block code_block_left %}
     <twig:CodeBlock filename="src/Form/DropzoneForm.php" />
 {% endblock %}

@@ -16,12 +16,89 @@
     {% endcomponent %}
 {% endblock %}
 
+{% block package_features %}
+    {% set live_component_features = [
+        {
+            icon: 'lucide:refresh-cw',
+            title: 'Re-render on <strong>change</strong>',
+            description: 'Update the DOM from PHP, without writing JavaScript.',
+        },
+        {
+            icon: 'lucide:mouse-pointer-click',
+            title: 'Live <strong>actions</strong>',
+            description: 'Call a PHP method straight from a click.',
+        },
+        {
+            icon: 'lucide:link',
+            title: 'Bound <strong>models</strong>',
+            description: 'Keep form fields and properties in sync.',
+        },
+        {
+            icon: 'lucide:shield-check',
+            title: 'Server-side <strong>validation</strong>',
+            description: 'Reuse Symfony constraints as the user types.',
+        },
+        {
+            icon: 'lucide:zap',
+            title: 'Batched <strong>updates</strong>',
+            description: 'Debounced requests and loading states included.',
+        },
+    ] %}
+    <twig:FeaturesCluster
+        :items="live_component_features"
+        title="What Live Components gives you"
+        titleId="live-component-overview-title"
+    />
+{% endblock %}
+
 {% block code_block_left %}
     <twig:CodeBlock filename="src/Twig/Components/Package/SearchPackages.php" />
 {% endblock %}
 
 {% block code_block_right %}
     <twig:CodeBlock filename="templates/components/Package/SearchPackages.html.twig" />
+{% endblock %}
+
+{% block package_highlights %}
+    {% set live_prop %}#[LiveProp(writable: true, url: true)]
+public ?string $query = null;{% endset %}
+    {% set live_action %}#[LiveAction]
+public function addToCart(
+    #[LiveArg] int $productId,
+): void {
+    $this->cart->add($productId);
+}{% endset %}
+    {% set live_listener %}#[LiveListener('product:created')]
+public function onProductCreated(): void
+{
+    $this->page = 1;
+}{% endset %}
+
+    <twig:Package:Highlights
+        eyebrow="Three attributes, one component"
+        title="What makes a component <strong>live</strong>."
+        intro="A Live Component is a Twig Component that re-renders itself. Three attributes decide what travels between the browser and PHP."
+        :items="[
+            {
+                icon: 'lucide:link',
+                title: 'State that <strong>survives</strong>',
+                description: 'LiveProp marks the properties sent back on every render. Add url: true and the state lands in the address bar.',
+                code: live_prop,
+            },
+            {
+                icon: 'lucide:mouse-pointer-click',
+                title: 'Methods the template can <strong>call</strong>',
+                description: 'LiveAction exposes a method to your markup. LiveArg passes the arguments it needs, validated on the way in.',
+                code: live_action,
+            },
+            {
+                icon: 'lucide:radio',
+                title: 'Components that <strong>talk</strong>',
+                description: 'LiveListener reacts to an event another component emitted, so a list can refresh itself when a form saves.',
+                code: live_listener,
+            },
+        ]"
+    />
 {% endblock %}
 
 {% block demo_title %}
@@ -42,28 +119,24 @@
 {% block documentation_links %}{% endblock %}
 
 {% block package_links %}
-<section class="max-w-[1400px] mx-auto px-6 pt-6 md:px-12 md:pt-12">
-    <h2 class="eyebrows mt-12" id="demos">Live Component Demos</h2>
-    <div class="md:flex md:justify-between text-center items-center md:text-start">
-        <h2 class="ubuntu pt-2 component-headlines">Find out what else you can <span style="color: #AE5929;">build</span></h2>
-        <twig:LinkButton
-            outline
-            label="Read documentation"
-            url="https://symfony.com/bundles/ux-live-component/current/index.html"
-            arrow
-            class="my-4 md:my-0"
-        />
-    </div>
+    <twig:Package:Section id="demos" tone="accent">
+        <div class="items-end justify-between gap-8 md:flex">
+            <twig:Package:SectionTitle class="max-w-2xl" title="Find out what else you can <strong>build</strong>." />
+            <twig:LinkButton
+                outline
+                label="Read documentation"
+                url="https://symfony.com/bundles/ux-live-component/current/index.html"
+                arrow
+                class="my-4 md:my-0 shrink-0"
+            />
+        </div>
 
-    <div class="mt-12 pb-12">
-        <div style="display: grid; gap: 2rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));">
+        <div class="DemoCardGrid mt-12">
             {% for demo in demos %}
                 <twig:Demo:DemoCard demo="{{ demo }}" />
             {% endfor %}
         </div>
-    </div>
-</section>
+    </twig:Package:Section>
 
-{{ parent() }}
-
+    {{ parent() }}
 {% endblock %}

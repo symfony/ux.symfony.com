@@ -114,9 +114,9 @@
         />
     </div>
     <div class="mt-4 md:mt-12">
-        <div style="display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));">
+        <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {% for package in packages|slice(0, 12) %}
-                <twig:Package:PackageBox package="{{ package }}" titleTag="h3" />
+                <twig:PackageBox package="{{ package }}" titleTag="h3" />
             {% endfor %}
         </div>
     </div>

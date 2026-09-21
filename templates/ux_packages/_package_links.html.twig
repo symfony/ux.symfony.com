@@ -1,6 +1,9 @@
-<aside class="bg-subtle">
-    <div class="max-w-[1400px] mx-auto p-6 md:p-12">
-        <div style="display: grid; gap: 2rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));">
+<twig:Package:Section tone="subtle">
+    <twig:Package:SectionHeading centered title="Keep <strong>{{ package.humanName }}</strong> at hand.">
+        <p>Documentation, the people behind it, and where to ask when something does not behave.</p>
+    </twig:Package:SectionHeading>
+
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {% set docs_url = docs_url|default(null) %}
             {% set docs_text = docs_text|default('Symfony UX ' ~ package.humanName ~ ' Docs') %}
             {% if package.shouldShowDocsLink or docs_url %}
@@ -39,6 +42,5 @@
                 />
             {% endif %}
 
-        </div>
     </div>
-</aside>
+</twig:Package:Section>

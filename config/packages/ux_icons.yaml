@@ -1,10 +1,19 @@
+# Full configuration reference: https://symfony.com/bundles/ux-icons/current/index.html#configuration
 ux_icons:
+
     default_icon_attributes:
         class: 'Icon'
 
-    icon_sets:
+    # Throw an exception if an icon is not
+    ignore_not_found: false
 
-        # FeatureBox icons
-        feature:
-            alias: 'lucide'
-            # icon_attributes:
+when@dev:
+    ux_icons:
+        iconify:
+            # Persist each on-demand icon to disk on first render, so you don't forget to commit it before deploying (like `ux:icons:lock`)
+            auto_lock: true
+
+when@prod:
+    ux_icons:
+        # Suppress exceptions for missing icons in production
+        ignore_not_found: true

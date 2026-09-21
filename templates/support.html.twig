@@ -15,15 +15,15 @@
         </div>
     </div>
 
-    <section style="--padding:0;">
-        <div class="max-w-[1240px] mx-auto px-6 pt-6 md:px-12" style="max-width: 1200px;">
-            <div style="display: grid; gap: 3rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))">
+    <section>
+        <div class="max-w-[1200px] mx-auto px-6 pt-6 md:px-12">
+            <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                 <twig:SupportBox>
                     <twig:block name="logo">
                         <twig:ux:icon name="github" />
                     </twig:block>
                     <twig:block name="title">
-                        <a href="https://github.com/symfony/ux/discussions" rel="external me">Github Discussions</a>
+                        <a href="https://github.com/symfony/ux/discussions" rel="external me" class="stretched-link text-body-text no-underline">Github Discussions</a>
                     </twig:block>
                     <twig:block name="description">
                         Engage in our GitHub Discussions to find answers, ideas or ask the <code>community</code> for help.
@@ -35,7 +35,7 @@
                         <twig:ux:icon name="logos:slack-icon" />
                     </twig:block>
                     <twig:block name="title">
-                        <a href="https://symfony.com/slack" rel="external noopener">Symfony Slack</a>
+                        <a href="https://symfony.com/slack" rel="external noopener" class="stretched-link text-body-text no-underline">Symfony Slack</a>
                     </twig:block>
                     <twig:block name="description">
                         Join the Symfony Slack <code>#UX</code> channel to seek help or offer your expertise.
@@ -47,7 +47,7 @@
                         <twig:ux:icon name="bluesky" style="color: #0A7AFF;" />
                     </twig:block>
                     <twig:block name="title">
-                        <a href="https://bsky.app/profile/ux.symfony.com" rel="external me">BlueSky</a>
+                        <a href="https://bsky.app/profile/ux.symfony.com" rel="external me" class="stretched-link text-body-text no-underline">BlueSky</a>
                     </twig:block>
                     <twig:block name="description">
                         Join and follow <code>@ux.symfony.com</code> to get updates and interact with the <code>#SymfonyUX</code> team!
@@ -59,7 +59,7 @@
                         <twig:ux:icon name="github" />
                     </twig:block>
                     <twig:block name="title">
-                        <a href="https://github.com/symfony/ux/issues" rel="external me">Github Issues</a>
+                        <a href="https://github.com/symfony/ux/issues" rel="external me" class="stretched-link text-body-text no-underline">Github Issues</a>
                     </twig:block>
                     <twig:block name="description">
                         Submit <code>bug reports</code> or contribute to the documentation on our GitHub Issues tracker.
@@ -71,7 +71,7 @@
                         <twig:ux:icon name="symfony" />
                     </twig:block>
                     <twig:block name="title">
-                        <a href="https://symfony.com/bundles#symfony-ux-bundles" rel="external noopener">Symfony Docs</a>
+                        <a href="https://symfony.com/bundles#symfony-ux-bundles" rel="external noopener" class="stretched-link text-body-text no-underline">Symfony Docs</a>
                     </twig:block>
                     <twig:block name="description">
                         Explore the official Symfony docs on <code>UX bundles</code> and components.
@@ -83,7 +83,7 @@
                         <twig:ux:icon name="x-twitter" />
                     </twig:block>
                     <twig:block name="title">
-                        <a href="https://x.com/SymfonyUX" rel="external me"><s>Twitter</s> X</a>
+                        <a href="https://x.com/SymfonyUX" rel="external me" class="stretched-link text-body-text no-underline"><s>Twitter</s> X</a>
                     </twig:block>
                     <twig:block name="description">
                         Follow the conversation on X for the latest tips and updates about <code>#SymfonyUX</code>.

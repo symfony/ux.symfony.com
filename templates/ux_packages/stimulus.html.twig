@@ -1,8 +1,8 @@
 {% extends 'ux_packages/package.html.twig' %}
 
 {% block package_header %}
-    <twig:Package:PackageHeader
-        package="{{ 'stimulus'|ux_package }}"
+    <twig:PackageHeader
+        package="stimulus"
         eyebrowText="Symfony UX Central Piece"
         title="Stimulus Bundle"
         :command="false"
@@ -12,7 +12,7 @@
             UX packages, Asset Mapper, Webpack Encore...
             Making it easy to add JavaScript interactivity to <em>your</em> Symfony apps!
         </twig:block>
-    </twig:Package:PackageHeader>
+    </twig:PackageHeader>
 {% endblock %}
 
 {% block package_content %}

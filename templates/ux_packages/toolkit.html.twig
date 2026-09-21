@@ -17,12 +17,12 @@
             With Toolkit, you get a flexible starting point for your Design System.
         {% endblock %}
 
-        {% block header_actions %}
+        {% block header_primary_action %}
             <a
                 href="#kits"
-                class="bg-body flex border rounded gap-2 py-2 px-4 relative items-center transition-colors"
+                class="flex h-14 items-center justify-center gap-2 rounded-full border border-(--color-accent)/25 bg-body px-6 font-semibold whitespace-nowrap"
             >
-                <twig:ux:icon name="mdi:view-grid-outline" class="Icon size-6" />
+                <twig:ux:icon name="mdi:view-grid-outline" class="Icon size-5" />
                 See the Kits
             </a>
         {% endblock %}

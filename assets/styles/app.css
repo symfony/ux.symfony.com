@@ -112,6 +112,7 @@
     --breakpoint-sm: 576px;
     --breakpoint-md: 768px;
     --breakpoint-nav: 860px;
+    --breakpoint-nav-wide: 1240px;
     --breakpoint-lg: 980px;
     --breakpoint-xl: 1114px;
     --breakpoint-2xl: 1400px;
@@ -128,14 +129,11 @@
 /* ─── Components ─── */
 @import "./components/_container.css";
 @import "./components/_Card.css";
-@import "./components/_DocumentationLinks.css";
-@import "./components/_FeaturesCluster.css";
 @import "./components/_typography.css";
 @import "./components/_DemoContainer.css";
 @import "./components/_Icon.css";
 @import "./components/_ProductGrid.css";
 @import "./components/_Terminal.css";
-@import "./components/_PackageHeader.css";
 @import "./components/_PaginationLanding.css";
 @import "./components/_ToolkitPreview.css";
 @import "./components/_Wysiwyg.css";

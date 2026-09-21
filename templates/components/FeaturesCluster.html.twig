@@ -4,18 +4,23 @@
 {%- props items, title, titleId -%}
 
 <section
-    {{ attributes.defaults({class: 'FeaturesCluster'}) }}
+    {{ attributes.defaults({class: 'bg-body py-22'}) }}
     aria-labelledby="{{ titleId }}"
 >
-    <div class="FeaturesCluster_inner">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12">
         <h2 id="{{ titleId }}" class="sr-only">{{ title }}</h2>
-        <ul class="FeaturesCluster_grid">
+
+        <ul class="m-0 p-0 list-none grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-x-14 sm:gap-y-11 md:grid-cols-3 xl:grid-cols-5">
             {% for item in items %}
-                <li class="FeaturesCluster_item" data-feature-cluster-item>
-                    <twig:ux:icon name="{{ item.icon }}" class="FeaturesCluster_icon {{ item.iconClass|default('') }}" aria-hidden="true" />
+                <li class="grid grid-cols-[1.75rem_1fr] items-start gap-4 sm:grid-cols-1 sm:gap-3">
+                    <twig:ux:icon
+                        name="{{ item.icon }}"
+                        class="size-[1.65rem] text-(--package-primary-text) {{ item.iconClass|default('fill-none stroke-[1.8]') }}"
+                        aria-hidden="true"
+                    />
                     <div>
-                        <h3>{{ item.title|raw }}</h3>
-                        <p>{{ item.description }}</p>
+                        <h3 class="m-0 mb-2 font-title text-lg font-bold leading-tight text-balance">{{ item.title|raw }}</h3>
+                        <p class="m-0 text-sm leading-relaxed text-body-text/70 text-balance">{{ item.description }}</p>
                     </div>
                 </li>
             {% endfor %}

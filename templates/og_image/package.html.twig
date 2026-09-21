@@ -23,7 +23,7 @@
     <div class="absolute inset-0 flex items-center px-[90px] gap-[64px]">
         <div
             class="shrink-0 w-[200px] h-[200px] rounded-[44px] flex items-center justify-center shadow-[0_24px_50px_-22px_rgba(0,0,0,0.7)]"
-            style="background: {{ package.color }}; background-image: {{ package.gradient }};"
+            style="--color: {{ package.tileColor }}; background: var(--color); background-image: {{ package.gradient }};"
         >
             {% set image_filename = package.imageFilename %}
             <img

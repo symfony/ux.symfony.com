@@ -1,12 +1,12 @@
-<div class="bg-body border border-n-700 rounded-md flex flex-col gap-3 p-3 sm:gap-4 sm:p-4 relative place-self-stretch transition-transform duration-700 ease-in-out hover:duration-200 hover:-translate-y-1">
-    <div class="size-8 sm:size-12 flex items-center justify-center shrink-0 [&>svg]:w-full [&>svg]:h-auto">
+<div class="group relative flex flex-col gap-4 self-stretch rounded-xl border border-surface bg-body p-6 transition-all duration-250 ease-in-out hover:-translate-y-1 hover:shadow-lg">
+    <div class="flex size-10 shrink-0 items-center justify-center [&>svg]:h-auto [&>svg]:w-full">
         {% block logo %}{% endblock %}
     </div>
-    <div class="flex flex-col flex-1 gap-4">
-        <h2 class="font-medium text-sm m-0">
+    <div class="flex flex-1 flex-col gap-2">
+        <h2 class="m-0 font-title text-xl font-bold leading-normal">
             {% block title %}{% endblock %}
         </h2>
-        <p class="mb-0 leading-6">
+        <p class="m-0 text-sm leading-6 text-body-text/70">
             {% block description %}{% endblock %}
         </p>
     </div>

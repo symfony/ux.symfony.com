@@ -23,7 +23,6 @@ class UxPackage
         private string $humanName,
         private string $route,
         private string $color,
-        private string $gradient,
         private string $tagLine,
         private string $description,
         private ?string $createString = null,
@@ -32,6 +31,7 @@ class UxPackage
         private bool $isDevDependency = false,
         private bool $showDocsLink = true,
         private bool $isRemoved = false,
+        private ?string $gradient = null,
     ) {
     }
 
@@ -55,9 +55,22 @@ class UxPackage
         return $this->color;
     }
 
+    /**
+     * A neutral sheen over the flat tile color: a white highlight at the top-left,
+     * fading out mid-way, then a corner shaded from the color itself.
+     */
     public function getGradient(): string
     {
-        return $this->gradient;
+        return $this->gradient ?? 'linear-gradient(145deg, rgba(255,255,255,.1) 0%, transparent 45%, oklch(from var(--color) calc(l * 0.45) c h / .18) 100%)';
+    }
+
+    /**
+     * Lifts the darkest package colors to a common floor, so no tile sits far below the
+     * pastel of its landing page. Colors already above the floor are left untouched.
+     */
+    public function getTileColor(): string
+    {
+        return \sprintf('oklch(from %s max(l, 0.6) c h)', $this->color);
     }
 
     public function getImageFilename(?string $format = null): string
@@ -166,7 +179,7 @@ class UxPackage
 
     public function getGithubRepositoryUrl(): string
     {
-        return \sprintf('https://github.com/symfony/ux-%s', $this->name);
+        return 'https://github.com/'.$this->getComposerName();
     }
 
     public function getMigrationGuideUrl(): string

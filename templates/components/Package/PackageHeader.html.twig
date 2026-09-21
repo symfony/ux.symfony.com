@@ -1,44 +1,63 @@
-<div
-    class="PackageHeader {{ not (command ?? true) ? 'pb-12' }} pt-12"
-    style="background: {{ background ?? (package.gradient ~ ', ' ~ package.color) }}; --color-accent: {{ package.color }};"
->
+<div class="PackageHeader bg-(--package-accent) pt-12 text-(--package-accent-ink)">
     <div class="max-w-[1400px] mx-auto px-6 pt-6 md:px-12 md:pt-12 relative">
 
-        <p class="eyebrows text-center text-white mt-12 mb-4" style="opacity: 0.85;">{{ eyebrowText|raw }}</p>
+        <p class="eyebrows text-center mt-12 mb-4 opacity-85">{{ eyebrowText|raw }}</p>
 
-        <h1 class="text-center text-white text-balance text-shadow-lg [&_em]:inline-flex [&_em]:font-normal [&_em]:not-italic [&_em]:-skew-x-16 [&_em]:scale-y-95">{% block title_header %}{{ title|default }}{% endblock %}</h1>
+        <h1 class="text-center text-balance font-medium
+                   [&_em]:inline-flex [&_em]:font-normal [&_em]:not-italic [&_em]:-skew-x-16 [&_em]:scale-y-95
+                   [&_strong]:font-bold [&_strong]:underline [&_strong]:decoration-(--color-accent)/40 [&_strong]:decoration-[.09em] [&_strong]:underline-offset-[.09em]">{% block title_header %}{{ title|default }}{% endblock %}</h1>
 
         <div class="flex justify-center">
-            <p class="Wysiwyg text-center text-white mt-4 pb-4 w-1/2 text-balance max-xl:w-3/5 max-[734px]:w-4/5">
+            <p class="Wysiwyg text-center mt-4 pb-4 w-1/2 text-balance max-xl:w-3/5 max-md:w-4/5">
                 {% block sub_content %}{{ subtitle|default }}{% endblock %}
             </p>
         </div>
 
         {% block header_action_area %}
-        <div class="PackageHeaderActions flex flex-wrap items-stretch justify-center gap-4 translate-y-1/2">
-            {% if command is not defined or command %}
-                <twig:TerminalCommand
-                    aria-label="Composer command to install {{ package.humanName }}"
-                    class="PackageHeaderCommand"
-                    command="{{ package.composerRequireCommand }}"
-                    style="--color-accent: {{ package.color }};"
-                />
-            {% endif %}
+        <div class="relative translate-y-1/2">
+            <div class="flex flex-wrap items-center justify-center gap-4 max-sm:*:w-full">
+                {% if command %}
+                    <twig:TerminalCommand
+                        aria-label="Composer command to install {{ package.humanName }}"
+                        command="{{ package.composerRequireCommand }}"
+                        accent="{{ package.composerName|split('/')|last }}"
+                    />
+                {% endif %}
 
-            {% block header_primary_action %}{% endblock %}
+                {% block header_primary_action %}{% endblock %}
+            </div>
 
-            {% if package.shouldShowDocsLink %}
-                <a
-                    href="{{ package.officialDocsUrl }}"
-                    class="PackageHeaderAction PackageHeaderAction--docs relative flex items-center justify-center gap-2 border transition-colors"
-                >
-                    <twig:ux:icon name="book-text" class="Icon size-5" />
-                    Read the docs
-                </a>
-            {% endif %}
-
-            {% block header_actions %}{% endblock %}
+            <nav
+                class="absolute inset-x-0 top-[calc(100%+1.25rem)] flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm/6 text-(--package-primary-text) [&_a]:inline-flex [&_a]:items-center [&_a]:gap-1.5 [&_a:hover]:underline [&_a:hover]:underline-offset-[.2em]"
+                aria-label="{{ package.humanName }} resources"
+            >
+                {% block header_links %}
+                    {% if demosUrl %}
+                        <a href="{{ demosUrl }}">
+                            <twig:ux:icon name="browser" class="Icon size-4" />
+                            Live Demos
+                        </a>
+                    {% endif %}
+                    {% if package.shouldShowDocsLink %}
+                        <a href="{{ package.officialDocsUrl }}">
+                            <twig:ux:icon name="symfony" class="Icon size-4" />
+                            Documentation
+                        </a>
+                    {% endif %}
+                    <a href="{{ package.githubRepositoryUrl }}">
+                        <twig:ux:icon name="github" class="Icon size-4" />
+                        Repository
+                    </a>
+                    <a href="{{ path('app_support') }}">
+                        <twig:ux:icon name="support" class="Icon size-4" />
+                        Support
+                    </a>
+                {% endblock %}
+            </nav>
         </div>
         {% endblock %}
     </div>
 </div>
+
+{# Reserves the room the translated actions and their links take below the header. #}
+<div class="h-32 sm:h-18" aria-hidden="true"></div>

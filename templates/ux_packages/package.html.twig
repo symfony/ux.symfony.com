@@ -17,15 +17,15 @@
     },
 } %}
 
+{% block body_attributes %} style="--color-accent: {{ package.color }}; --package-accent: oklch(from {{ package.color }} 0.74 calc(c * 0.85) h); --package-accent-ink: oklch(from {{ package.color }} 0.28 calc(c * 0.5) h); --package-primary-text: oklch(from {{ package.color }} 0.5 calc(c * 0.9) h);"{% endblock %}
+
 {% block header %}
-    {{ include('_header.html.twig', {
-        theme: 'white',
-    }) }}
+    {{ include('_header.html.twig', {theme: 'package'}) }}
 {% endblock %}
 
 {% block content %}
 
-<article>
+<article class="dark:[--package-primary-text:var(--package-accent)]">
     {% block package_header %}{% endblock %}
 
     {% block package_content %}

@@ -23,7 +23,15 @@ final class PackageHeader
 
     public string $eyebrowText = '';
 
-    public ?string $background = null;
+    /**
+     * Render the "composer require" command?
+     */
+    public bool $command = true;
+
+    /**
+     * URL of the package live demos, shown as an extra header link.
+     */
+    public ?string $demosUrl = null;
 
     /**
      * Render with the chat bubble icon?
@@ -34,9 +42,9 @@ final class PackageHeader
     {
     }
 
-    public function mount(string $package): void
+    public function mount(UxPackage|string $package): void
     {
-        $this->package = $this->packageRepository->find($package);
+        $this->package = \is_string($package) ? $this->packageRepository->find($package) : $package;
     }
 
     /**

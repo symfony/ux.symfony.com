@@ -1,16 +1,19 @@
 {# @prop links array Documentation links with `title` and `url` keys #}
 {# @prop label string Accessible label for the navigation #}
 {# @prop intro string Visible introduction before the links #}
-{%- props links, label, intro = 'See documentation:' -%}
+{# @prop centered bool Center the whole list instead of aligning it to the start #}
+{%- props links, label, intro = 'See documentation:', centered = false -%}
 
 <nav
-    {{ attributes.defaults({class: 'DocumentationLinks'}) }}
+    {{ attributes.defaults({class: 'mt-10 flex flex-wrap items-baseline gap-x-2.5 gap-y-1 text-sm/loose text-body-text/65 ' ~ (centered ? 'justify-center text-center' : '')}) }}
     aria-label="{{ label }}"
 >
-    <span>{{ intro }}</span>
-    <ul>
+    <span class="whitespace-nowrap">{{ intro }}</span>
+    <ul class="m-0 p-0 list-none flex flex-wrap gap-x-2 gap-y-1">
         {% for link in links %}
-            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            <li>
+                <a href="{{ link.url }}" class="text-(--package-primary-text) underline decoration-current/35 underline-offset-[.2em] hover:decoration-current">{{ link.title }}</a>{{ loop.last ? '' : ',' }}
+            </li>
         {% endfor %}
     </ul>
 </nav>

@@ -24,7 +24,7 @@ final class PaginationPageTest extends KernelTestCase
             ->visit('/pagination')
             ->assertSuccessful()
             ->assertSeeIn('h1', 'Pagination for all.')
-            ->assertSeeIn('h1 .PaginationHeroWord', 'page ahead')
+            ->assertSeeIn('h1 strong', 'page ahead')
             ->assertSee('composer require symfony/ux-pagination')
             ->assertSee('Any source')
             ->assertSee('Pages or cursors')
@@ -42,7 +42,7 @@ final class PaginationPageTest extends KernelTestCase
         self::assertSame('website', $page->crawler()->filter('meta[property="og:type"]')->attr('content'));
         self::assertSame('Symfony UX Pagination', $page->crawler()->filter('meta[property="og:image:alt"]')->attr('content'));
         self::assertSame('Symfony UX Pagination', $page->crawler()->filter('meta[name="twitter:image:alt"]')->attr('content'));
-        self::assertSame(1, $page->crawler()->filter('[data-pagination-hero] a[href="/demos/pagination"]')->count());
+        self::assertSame(1, $page->crawler()->filter('.PackageHeader a[href="/demos/pagination"]')->count());
         self::assertSame(1, $page->crawler()->filter('[data-pagination-feature="live-component"] a[href="#"]')->count());
         self::assertSame(3, $page->crawler()->filter('[data-pagination-demo-list] .Card')->count());
         self::assertSame(3, $page->crawler()->filter('[data-pagination-demo-list] .Card a')->count());

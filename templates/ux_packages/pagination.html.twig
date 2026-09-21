@@ -18,54 +18,20 @@
 {% endblock %}
 
 {% block package_header %}
-    <div data-pagination-hero>
-        {% component PackageHeader with {
-            package: 'pagination',
-            eyebrowText: 'Symfony UX Pagination',
-            background: 'var(--pagination-accent)',
-        } %}
-            {% block title_header %}
-                Pagination for all.<br>One <strong class="PaginationHeroWord">page ahead</strong>.
-            {% endblock %}
+    {% component PackageHeader with {
+        package: 'pagination',
+        eyebrowText: 'Symfony UX Pagination',
+        demosUrl: path('app_demo_pagination'),
+    } %}
+        {% block title_header %}
+            Pagination for all.<br>One <strong>page ahead</strong>.
+        {% endblock %}
 
-            {% block sub_content %}
-                Paginate any data source. Choose pages, lookahead, or cursors, then render with Twig
-                and add LiveComponent without giving up real URLs.
-            {% endblock %}
-
-            {% block header_action_area %}
-                <div class="PaginationHeroActions">
-                    <div class="flex flex-wrap items-center justify-center gap-4">
-                        <twig:TerminalCommand
-                            aria-label="Composer command to install Pagination"
-                            class="PackageHeaderCommand PaginationHeroCommand"
-                            command="{{ package.composerRequireCommand }}"
-                            accent="ux-pagination"
-                            style="--color-accent: {{ package.color }};"
-                        />
-                    </div>
-                    <nav class="PaginationHeroLinks" aria-label="Pagination resources">
-                        <a href="{{ path('app_demo_pagination') }}">
-                            <twig:ux:icon name="browser" class="Icon size-4" />
-                            Live Demos
-                        </a>
-                        <a href="{{ package.officialDocsUrl }}">
-                            <twig:ux:icon name="symfony" class="Icon size-4" />
-                            Documentation
-                        </a>
-                        <a href="{{ package.githubRepositoryUrl }}">
-                            <twig:ux:icon name="github" class="Icon size-4" />
-                            Repository
-                        </a>
-                        <a href="{{ path('app_support') }}">
-                            <twig:ux:icon name="support" class="Icon size-4" />
-                            Support
-                        </a>
-                    </nav>
-                </div>
-            {% endblock %}
-        {% endcomponent %}
-    </div>
+        {% block sub_content %}
+            Paginate any data source. Choose pages, lookahead, or cursors, then render with Twig
+            and add LiveComponent without giving up real URLs.
+        {% endblock %}
+    {% endcomponent %}
 {% endblock %}
 
 {% block package_content %}
@@ -78,13 +44,13 @@
         },
         {
             icon: 'pagination-dots',
-            iconClass: 'FeaturesCluster_icon--fill',
+            iconClass: 'fill-current stroke-none',
             title: 'Pages or <strong>cursors</strong>',
             description: 'Numbered pages, count-free lookahead, or stable cursor navigation.',
         },
         {
             icon: 'symfony',
-            iconClass: 'FeaturesCluster_icon--fill',
+            iconClass: 'fill-current stroke-none',
             title: 'Symfony <strong>native</strong>',
             description: 'Request validation, Router links, DI, and named configuration.',
         },
@@ -103,13 +69,11 @@
         :items="pagination_features"
         title="What UX Pagination handles"
         titleId="pagination-overview-title"
-        class="FeaturesCluster--after-actions FeaturesCluster--quietTitles"
-        style="--features-cluster-accent: var(--pagination-primary-text);"
         data-pagination-feature="overview"
     />
 
     <section id="pagination-tour" class="scroll-mt-20 border-t border-body-text/10 bg-subtle py-24" data-pagination-code aria-labelledby="pagination-first-result">
-        <div class="mx-auto max-w-[1400px] px-6 max-[399px]:px-4 md:px-12">
+        <div class="mx-auto max-w-[1400px] px-6 max-xs:px-4 md:px-12">
             <div class="mb-16 max-w-4xl lg:mb-20">
                 <p class="PaginationEyebrow">ONE FLOW, END TO END.</p>
                 <h2 id="pagination-first-result" class="PaginationSectionTitle mt-5 mb-10">
@@ -171,7 +135,7 @@
                     <span class="size-2 rounded-full bg-body-text/20"></span>
                     <span class="ml-3 truncate">/products?page=5</span>
                 </div>
-                <div class="overflow-x-auto px-6 py-16 max-[399px]:px-4 sm:px-10 sm:py-20">
+                <div class="overflow-x-auto px-6 py-16 max-xs:px-4 sm:px-10 sm:py-20">
                     <nav class="PaginationPreview mx-auto max-w-5xl" aria-label="Pagination preview" data-pagination-preview>
                         <a class="PaginationPreviewLink" href="{{ path('app_pagination', {products: 4}) }}">
                             <span aria-hidden="true">&larr;</span> <span class="PaginationPreviewControlText">Previous</span>
@@ -202,14 +166,13 @@
             <twig:DocumentationLinks
                 :links="first_page_docs"
                 label="Documentation for getting started with pagination"
-                class="DocumentationLinks--centered"
-                style="--documentation-links-accent: var(--pagination-primary-text);"
+                centered
             />
         </div>
     </section>
 
     <section class="border-t border-body-text/10 py-24 lg:py-32" data-pagination-feature="data" data-pagination-integration="data">
-        <div class="mx-auto max-w-[1400px] px-6 max-[399px]:px-4 md:px-12">
+        <div class="mx-auto max-w-[1400px] px-6 max-xs:px-4 md:px-12">
             <div class="PaginationSectionHeading">
                 <h2 class="PaginationSectionTitle">
                     Bring any <strong class="PaginationAccentPrimary font-bold">data source</strong>.
@@ -247,13 +210,12 @@
             <twig:DocumentationLinks
                 :links="data_docs"
                 label="Documentation for pagination data sources"
-                style="--documentation-links-accent: var(--pagination-primary-text);"
             />
         </div>
     </section>
 
     <section id="classic-pagination" class="border-t border-body-text/10 bg-subtle py-24 lg:py-32" data-pagination-feature="strategies">
-        <div class="mx-auto max-w-[1400px] px-6 max-[399px]:px-4 md:px-12">
+        <div class="mx-auto max-w-[1400px] px-6 max-xs:px-4 md:px-12">
             <div class="PaginationSectionHeading PaginationSectionHeading--centered">
                 <h2 class="PaginationSectionTitle">
                     Choose the right pagination <strong class="PaginationAccentPrimary font-bold">strategy</strong>.
@@ -349,14 +311,13 @@
             <twig:DocumentationLinks
                 :links="strategy_docs"
                 label="Documentation for pagination strategies"
-                class="DocumentationLinks--centered"
-                style="--documentation-links-accent: var(--pagination-primary-text);"
+                centered
             />
         </div>
     </section>
 
     <section id="pagination-theming" class="scroll-mt-20 border-t border-body-text/10 py-24 lg:py-32" data-pagination-feature="customization">
-        <div class="mx-auto max-w-[1400px] px-6 max-[399px]:px-4 md:px-12">
+        <div class="mx-auto max-w-[1400px] px-6 max-xs:px-4 md:px-12">
             <div class="PaginationSectionHeading PaginationSectionHeading--centered">
                 <p class="PaginationEyebrow">YOUR MARKUP, YOUR RULES.</p>
                 <h2 class="PaginationSectionTitle">
@@ -409,14 +370,13 @@
             <twig:DocumentationLinks
                 :links="rendering_docs"
                 label="Documentation for rendering and theming pagination"
-                class="DocumentationLinks--centered"
-                style="--documentation-links-accent: var(--pagination-primary-text);"
+                centered
             />
         </div>
     </section>
 
     <section class="PaginationIntegrationSection border-t border-body-text/10 py-24 lg:py-32" data-pagination-feature="live-component" data-pagination-integration="live-component">
-        <div class="mx-auto max-w-[1400px] px-6 max-[399px]:px-4 md:px-12">
+        <div class="mx-auto max-w-[1400px] px-6 max-xs:px-4 md:px-12">
             <div class="PaginationLiveLayout">
                 <figure class="PaginationLivePreview">
                     <img
@@ -470,13 +430,12 @@ final class ProductList
             <twig:DocumentationLinks
                 :links="live_component_docs"
                 label="Documentation for LiveComponent pagination"
-                style="--documentation-links-accent: var(--pagination-primary-text);"
             />
         </div>
     </section>
 
     <section class="PaginationProductionSection border-t border-body-text/10 py-24 lg:py-32" data-pagination-feature="production" data-pagination-integration="production">
-        <div class="mx-auto max-w-[1400px] px-6 max-[399px]:px-4 md:px-12">
+        <div class="mx-auto max-w-[1400px] px-6 max-xs:px-4 md:px-12">
             <div class="PaginationSectionHeading PaginationSectionHeading--centered">
                 <h2 class="PaginationSectionTitle">
                     Built for a real <strong class="PaginationAccentPrimary font-bold">Symfony application</strong>.
@@ -556,15 +515,14 @@ self::assertSame(
             <twig:DocumentationLinks
                 :links="production_docs"
                 label="Documentation for configuring, injecting, and testing pagination"
-                class="DocumentationLinks--centered"
-                style="--documentation-links-accent: var(--pagination-primary-text);"
+                centered
             />
         </div>
     </section>
 {% endblock %}
 
 {% block package_install %}
-    <section class="mx-auto max-w-[1400px] px-6 pt-6 pb-20 max-[399px]:px-4 md:px-12 md:pt-12 md:pb-24" data-pagination-install>
+    <section class="mx-auto max-w-[1400px] px-6 pt-6 pb-20 max-xs:px-4 md:px-12 md:pt-12 md:pb-24" data-pagination-install>
         {{ include('ux_packages/_package_install.html.twig', {
             package: package,
         }) }}
@@ -573,7 +531,7 @@ self::assertSame(
 
 {% block package_links %}
     <section id="pagination-demos" class="PaginationDemosSection scroll-mt-20 border-t border-body-text/10" data-pagination-feature="demos" data-pagination-demo-list>
-        <div class="mx-auto max-w-[1400px] px-6 py-20 max-[399px]:px-4 md:px-12 lg:py-24">
+        <div class="mx-auto max-w-[1400px] px-6 py-20 max-xs:px-4 md:px-12 lg:py-24">
             <div class="items-end justify-between gap-8 md:flex">
                 <h2 class="PaginationSectionTitle mb-0 max-w-2xl">
                     See every <strong class="PaginationAccentPrimary font-bold">page</strong> in action.

@@ -9,7 +9,7 @@
         <div class="flex flex-col items-center relative" style="gap:.5rem;">
             <span class="eyebrows" style="font-size: 1rem;">Error</span>
             <h1 style="font-size: calc(6rem + 10vw); line-height: .75;letter-spacing: -.5rem;">{{ status_code }}</h1>
-            <p class="Wysiwyg w-1/2 text-balance max-xl:w-3/5 max-[734px]:w-4/5">{{ status_text }}</p>
+            <p class="Wysiwyg w-1/2 text-balance max-xl:w-3/5 max-md:w-4/5">{{ status_text }}</p>
             <twig:LinkButton outline label="Back to the homepage" url="{{ url('app_homepage') }}" class="after:absolute after:inset-0" />
         </div>
     </main>

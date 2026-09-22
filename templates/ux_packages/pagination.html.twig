@@ -128,7 +128,7 @@ return $this->render('product/index.html.twig', [
             </twig:block>
         </twig:Package:CodeFlow>
 
-        <twig:Package:CodeResult label="/products?page=5" data-pagination-result>
+        <twig:Package:CodeResult label="/products?page=5" class="mt-24" data-pagination-result>
                 <nav class="PaginationPreview mx-auto max-w-5xl" aria-label="Pagination preview" data-pagination-preview>
                     <a class="PaginationPreviewLink" href="{{ path('app_pagination', {products: 4}) }}">
                         <span aria-hidden="true">&larr;</span> <span class="PaginationPreviewControlText">Previous</span>

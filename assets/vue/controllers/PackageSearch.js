@@ -1,6 +1,6 @@
 /**
  |  Single-File Components - e.g. PackageSearch.vue -
- |  are supported when using Webpack Encore.
+ |  are supported when you build with a bundler, through Symfony Reprise.
  */
 import { ref, computed } from 'vue';
 import PackageList from "../components/PackageList.js";

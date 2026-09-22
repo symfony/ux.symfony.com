@@ -1,16 +1,21 @@
-{# @prop label string Address shown in the window chrome #}
-{%- props label = null -%}
+{# @prop label string Address or caption shown in the window chrome #}
+{# @prop compact bool Tighten the inner padding, for results that fill the panel on their own #}
+{%- props label = null, compact = false -%}
 
-<div {{ attributes.defaults({class: 'mt-24 overflow-hidden rounded-xl border border-body-text/15 bg-body'}) }}>
-    <div class="flex items-center gap-2 border-b border-body-text/10 bg-subtle px-4 py-3 font-mono text-[0.65rem] text-muted" aria-hidden="true">
-        <span class="size-2 rounded-full bg-body-text/20"></span>
-        <span class="size-2 rounded-full bg-body-text/20"></span>
-        <span class="size-2 rounded-full bg-body-text/20"></span>
+<div {{ attributes.defaults({class: 'overflow-hidden rounded-xl border border-body-text/15 bg-body'}) }}>
+    <div class="flex items-center gap-3 border-b border-body-text/10 bg-subtle px-4 py-3">
+        <span class="flex shrink-0 gap-1.5" aria-hidden="true">
+            <span class="size-2.5 rounded-full bg-body-text/25"></span>
+            <span class="size-2.5 rounded-full bg-body-text/25"></span>
+            <span class="size-2.5 rounded-full bg-body-text/25"></span>
+        </span>
+
         {%- if label -%}
-            <span class="ml-3 truncate">{{ label }}</span>
+            <span class="truncate font-mono text-sm text-body-text/75">{{ label }}</span>
         {%- endif -%}
     </div>
-    <div class="overflow-x-auto px-6 py-16 sm:px-10 sm:py-20">
+
+    <div class="overflow-x-auto {{ compact ? 'p-6 sm:p-8' : 'px-6 py-16 sm:px-10 sm:py-20' }}">
         {% block content %}{% endblock %}
     </div>
 </div>

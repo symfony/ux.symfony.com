@@ -1,3 +1,10 @@
-{#- Colour tokens every package page reads: a pastel for the hero, a deep ink for the text on it, and a mid tone readable on the body background. -#}
-{%- set color = color|default(package.color) -%}
---color-accent: {{ color }}; --package-accent: oklch(from {{ color }} 0.74 calc(c * 0.85) h); --package-accent-ink: oklch(from {{ color }} 0.28 calc(c * 0.5) h); --package-primary-text: oklch(from {{ color }} 0.5 calc(c * 0.9) h);
+{#- Colour tokens every page reads, all derived from --color-accent: a pastel for the hero,
+    a deep ink for the text on it, and a mid tone readable on the body background. -#}
+{%- set color = color ?? package.color -%}
+{%- set tokens = [
+    '--color-accent: ' ~ color,
+    '--package-accent: oklch(from var(--color-accent) 0.74 calc(c * 0.85) h)',
+    '--package-accent-ink: oklch(from var(--color-accent) 0.28 calc(c * 0.5) h)',
+    '--package-primary-text: oklch(from var(--color-accent) 0.5 calc(c * 0.9) h)',
+] -%}
+{{- tokens|join('; ') ~ ';' -}}

@@ -72,7 +72,7 @@
 {% block package_code_blocks %}
     {% set code_left = block('code_block_left') %}
     {% set code_right = block('code_block_right') %}
-    <twig:Package:CodeFlow arrows>
+    <twig:Package:CodeFlow arrows :trailingArrow="block('demo_title') is defined">
         <twig:block name="source">{{ code_left|raw }}</twig:block>
         <twig:block name="result">{{ code_right|raw }}</twig:block>
     </twig:Package:CodeFlow>

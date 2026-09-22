@@ -1,24 +1,24 @@
-{# @prop arrows bool Draw the decorative arrows that link the two columns #}
-{%- props arrows = false -%}
-
-{%- set arrow -%}
-    {%- if arrows -%}
-        <div class="pointer-events-none absolute right-6 -bottom-21 w-12 lg:-top-13 lg:-right-26 lg:bottom-auto lg:w-32" aria-hidden="true">
-            <div class="arrow-2 lg:hidden"></div>
-            <div class="arrow max-lg:hidden"></div>
-        </div>
-    {%- endif -%}
-{%- endset -%}
+{# @prop arrows bool Draw the decorative arrow linking the two columns #}
+{# @prop trailingArrow bool Draw the arrow pointing at what follows; defaults to `arrows`, turn it off when nothing does #}
+{%- props arrows = false, trailingArrow = null -%}
 
 <div {{ attributes.defaults({class: 'grid gap-x-20 gap-y-24 lg:grid-cols-2 lg:pt-8 [&_.Terminal]:max-h-[26rem]'}) }}>
     <div class="relative min-w-0">
         {% block source %}{% endblock %}
-        {{ arrow }}
+
+        {%- if arrows -%}
+            <div class="pointer-events-none absolute right-6 -bottom-21 w-12 lg:-top-13 lg:-right-26 lg:bottom-auto lg:w-32" aria-hidden="true">
+                <div class="arrow-2 lg:hidden"></div>
+                <div class="arrow max-lg:hidden"></div>
+            </div>
+        {%- endif -%}
     </div>
+
     <div class="relative min-w-0">
         {% block result %}{% endblock %}
-        {% if arrows %}
+
+        {%- if trailingArrow ?? arrows -%}
             <div class="arrow-2 pointer-events-none absolute right-6 -bottom-21 w-12" aria-hidden="true"></div>
-        {% endif %}
+        {%- endif -%}
     </div>
 </div>

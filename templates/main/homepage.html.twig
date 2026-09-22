@@ -7,153 +7,238 @@
     canonical: url('app_homepage'),
 } %}
 
-{% block content %}
-<div class="pt-16">
-    <div class="max-w-[1400px] mx-auto px-6 py-6 md:px-12 md:py-12">
+{% block body_attributes %} style="{{ include('ux_packages/_package_tokens.html.twig', {color: '#1C45CB'})|trim }}"{% endblock %}
 
-        <div class="grid sm:grid-cols-2 justify-center gap-12 pt-4 mt-2">
-          <div class="text-center lg:text-start mt-0 sm:mt-12">
-            <span class="eyebrows">curated by symfony</span>
-            <h1 class="my-4">JavaScript <em class="rainbow-emphasis">tools</em> you can't live without.</h1>
-            <p>A set of PHP &amp; JavaScript packages to solve every day frontend problems featuring Stimulus and Turbo.</p>
-          </div>
-          <div class="text-center lg:text-start mt-0 sm:mt-12">
-              <twig:HomepageTerminalSwapper class="shadow-blur shadow-blur--rainbow" style="--shadow-bottom: 2rem;" />
-          </div>
+{% block header %}
+    {{ include('_header.html.twig', {theme: 'package'}) }}
+{% endblock %}
+
+{% block content %}
+<article class="dark:[--package-primary-text:var(--package-accent)]">
+
+    <div class="PackageHeader bg-(--package-accent) pt-12 pb-20 text-(--package-accent-ink)">
+        <div class="max-w-[1400px] mx-auto px-6 pt-6 md:px-12 md:pt-12 relative">
+
+            <p class="eyebrows text-center mt-12 mb-4 opacity-85">Curated by Symfony</p>
+
+            <h1 class="text-center text-balance font-medium [&_strong]:font-bold [&_strong]:underline [&_strong]:decoration-(--color-accent)/40 [&_strong]:decoration-[.09em] [&_strong]:underline-offset-[.09em]">
+                JavaScript <strong>tools</strong> you can't live without.
+            </h1>
+
+            <div class="flex justify-center">
+                <p class="Wysiwyg text-center mt-4 pb-4 w-1/2 text-balance max-xl:w-3/5 max-md:w-4/5">
+                    PHP and JavaScript packages that solve everyday frontend problems, built on Stimulus and Turbo.
+                </p>
+            </div>
+
+            <div class="mt-10 flex justify-center">
+                <twig:HomepageTerminalSwapper class="w-[min(100%,42rem)]" />
+            </div>
+
+            <nav
+                class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm/6 text-(--package-accent-ink)/75 [&_a]:inline-flex [&_a]:items-center [&_a]:gap-1.5 [&_a:hover]:underline [&_a:hover]:underline-offset-[.2em]"
+                aria-label="Symfony UX resources"
+            >
+                    <a href="{{ path('app_packages') }}">
+                        <twig:ux:icon name="lucide:boxes" class="Icon size-4" />
+                        Packages
+                    </a>
+                    <a href="{{ path('app_demos') }}">
+                        <twig:ux:icon name="browser" class="Icon size-4" />
+                        Demos
+                    </a>
+                    <a href="{{ path('app_documentation') }}">
+                        <twig:ux:icon name="symfony" class="Icon size-4" />
+                        Documentation
+                    </a>
+                    <a href="https://github.com/symfony/ux">
+                        <twig:ux:icon name="github" class="Icon size-4" />
+                        Repository
+                    </a>
+            </nav>
         </div>
     </div>
-</div>
 
-<div class="max-w-[1400px] mx-auto px-6 py-6 md:px-12 md:py-12">
-    <h2 class="ubuntu">Install it</h2>
+    {% set homepage_features = [
+        {
+            icon: 'lucide:package',
+            title: 'Curated by <strong>Symfony</strong>',
+            description: 'One team, one release cadence, one set of conventions.',
+        },
+        {
+            icon: 'lucide:plug',
+            title: 'Stimulus at the <strong>core</strong>',
+            description: 'Controllers mount themselves on the markup you write.',
+        },
+        {
+            icon: 'lucide:file-code-2',
+            title: 'Driven from <strong>Twig</strong>',
+            description: 'You stay in your templates, the JavaScript follows.',
+        },
+        {
+            icon: 'lucide:package-open',
+            title: 'No bundler <strong>required</strong>',
+            description: 'AssetMapper serves them, Symfony Reprise bundles them.',
+        },
+        {
+            icon: 'lucide:boxes',
+            title: 'Take what you <strong>need</strong>',
+            description: 'Each package installs on its own, nothing comes bundled.',
+        },
+    ] %}
+    <twig:FeaturesCluster
+        :items="homepage_features"
+        title="What Symfony UX gives you"
+        titleId="homepage-overview-title"
+    />
 
-    <div class="arrow mb-4 hidden md:block"></div>
+    {% set install_flow %}
+        <twig:Package:CodeFlow arrows :trailingArrow="false">
+            <twig:block name="source">
+                <p class="m-0 mb-3 font-title text-xs font-semibold font-stretch-semi-condensed uppercase leading-snug tracking-[.12em] text-(--package-primary-text)">
+                    {{- 'Without a build step' -}}
+                </p>
+                <twig:Terminal bottomPadding="24">
+                    composer require symfony/asset-mapper symfony/stimulus-bundle
+                </twig:Terminal>
 
-    <div class="grid grid-cols-12 gap-x-6">
-        <div class="col-span-12 md:col-span-6">
-            <twig:Terminal bottomPadding="145">
-                composer require symfony/asset-mapper symfony/stimulus-bundle
-            </twig:Terminal>
-        </div>
+                <p class="m-0 mt-10 mb-3 font-title text-xs font-semibold font-stretch-semi-condensed uppercase leading-snug tracking-[.12em] text-(--package-primary-text)">
+                    {{- 'With Vite or Rsbuild' -}}
+                </p>
+                <twig:Terminal bottomPadding="24">
+                    composer require symfony/reprise
+                    npm install @symfony/reprise --save-dev
+                </twig:Terminal>
+            </twig:block>
+            <twig:block name="result">
+                <twig:Package:CodeResult label="What the recipe writes" compact>
+                    <div class="FileTree">
+                        <twig:FileTree files="{{ recipeFileTree.files }}" />
+                    </div>
+                </twig:Package:CodeResult>
+            </twig:block>
+        </twig:Package:CodeFlow>
+    {% endset %}
 
-        <div class="col-span-12 md:col-span-6 mt-4 md:mt-0">
-            <div class="ux-container FileTree grow ms-2 py-4">
-                <div style="height: 185px; overflow: auto;">
-                    <twig:FileTree files="{{ recipeFileTree.files }}" />
+    <twig:Package:Section tone="subtle">
+        <twig:Package:SectionHeading
+            eyebrow="One recipe, one command"
+            title="Start with <strong>two packages</strong>."
+        >
+            <p><a href="https://symfony.com/doc/current/frontend/asset_mapper.html">AssetMapper</a> serves your JavaScript straight from <code>assets/</code>, with no build step and no <code>node_modules</code>, and StimulusBundle wires every UX package that follows. The recipe writes the rest.</p>
+            <p>Already building with <a href="https://vite.dev">Vite</a> or <a href="https://rsbuild.rs">Rsbuild</a>? <a href="https://symfony.com/bundles/reprise/current/index.html">Symfony Reprise</a> gives them the Symfony integration Webpack Encore had, and UX packages work the same way.</p>
+        </twig:Package:SectionHeading>
+
+        {{ install_flow }}
+
+    </twig:Package:Section>
+
+    {% set markdown_demo %}
+        {% block markdown_example %}
+            <div class="grid grid-cols-12 gap-x-6 items-stretch" data-controller="markdown">
+                <div class="col-span-6 flex">
+                    <textarea
+                        rows="2" class="w-full bg-body border rounded-sm p-4"
+                        aria-label="Type markdown into this box"
+                        autocomplete="off"
+                        data-markdown-target="input"
+                        data-action="markdown#render"
+                    >Writing _JavaScript_ is... a **dream** with Stimulus 🤩</textarea>
+                </div>
+                <div class="col-span-6 flex">
+                    <div class="bg-body border rounded-sm w-full p-4" data-markdown-target="preview">
+                        <small>&lt;- Write something in the textarea!</small>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+        {% endblock %}
+    {% endset %}
 
-    <p class="eyebrows" style="margin: 70px 0 0;">Stimulus Controllers</p>
-    <div class="md:flex md:justify-between items-center text-center md:text-start">
-        <h2 class="ubuntu pt-2 component-headlines">Write custom JavaScript inside <em class="rainbow-emphasis">Stimulus Controllers</em></h2>
-        <twig:LinkButton
-            outline
-            label="Read documentation"
-            url="https://symfony.com/doc/current/frontend/ux.html"
-            arrow
-            class="my-4 md:my-0"
-        />
-    </div>
+    {% set stimulus_flow %}
+        <twig:Package:CodeFlow arrows>
+            <twig:block name="source">
+                <twig:CodeBlock
+                    filename="templates/main/homepage.html.twig"
+                    targetTwigBlock="markdown_example"
+                    :showTwigExtends="false"
+                    :stripExcessHtml="true"
+                />
+            </twig:block>
+            <twig:block name="result">
+                <twig:CodeBlock filename="assets/controllers/markdown-controller.js" />
+            </twig:block>
+        </twig:Package:CodeFlow>
 
-    <div class="arrow mb-4 hidden md:block"></div>
+        <twig:Package:CodeResult label="A Markdown live converter" class="mt-24" compact>
+            {{ markdown_demo }}
+        </twig:Package:CodeResult>
+    {% endset %}
 
-    <div class="grid grid-cols-12 gap-x-6">
-        <div class="col-span-12 md:col-span-6">
-            <twig:CodeBlock
-                filename="templates/main/homepage.html.twig"
-                targetTwigBlock="markdown_example"
-                :showTwigExtends="false"
-                :stripExcessHtml="true"
+    <twig:Package:Section tone="default">
+        <twig:Package:SectionHeading
+            eyebrow="Your own JavaScript"
+            title="A controller, and the markup that <strong>wakes it up</strong>."
+        >
+            <p>A Stimulus controller is a plain class reacting to the DOM. Reference it from a data attribute and it connects itself, on the first render and on every Turbo visit.</p>
+        </twig:Package:SectionHeading>
+
+        {{ stimulus_flow }}
+    </twig:Package:Section>
+
+    {% set packages_grid %}
+        <div class="items-end justify-between gap-8 md:flex">
+            <twig:Package:SectionTitle class="max-w-2xl" title="Install the <strong>packages</strong> you need." />
+            <twig:LinkButton
+                outline
+                label="Browse all packages"
+                url="{{ path('app_packages') }}"
+                arrow
+                class="my-4 md:my-0 shrink-0"
             />
         </div>
-        <div class="col-span-12 md:col-span-6 mt-4 md:mt-0">
-            <twig:CodeBlock
-                filename="assets/controllers/markdown-controller.js"
-            />
-        </div>
-    </div>
 
-    <div class="shadow-blur shadow-blur--rainbow mt-12" style="--shadow-bottom: 2rem;">
-        <div class="DemoContainer py-2 px-6 flex justify-center">
-            <small style="opacity: 80%;">And you have a Markdown live converter!</small>
-        </div>
-        <div class="DemoContainer-inner p-6">
-            {% block markdown_example %}
-                <div class="grid grid-cols-12 gap-x-6 items-stretch" data-controller="markdown">
-                    <div class="col-span-6 flex">
-                        <textarea
-                            rows="2" class="w-full bg-body border rounded-sm p-4"
-                            aria-label="Type markdown into this box"
-                            autocomplete="off"
-                            data-markdown-target="input"
-                            data-action="markdown#render"
-                        >Writing _JavaScript_ is... a **dream** with Stimulus 🤩</textarea>
-                    </div>
-                    <div class="col-span-6 flex">
-                        <div class="bg-body border rounded-sm w-full p-4" data-markdown-target="preview">
-                            <small>&lt;- Write something in the textarea!</small>
-                        </div>
-                    </div>
-                </div>
-            {% endblock %}
-        </div>
-            <div class="arrow" style="transform:scaleY(-1) translateY(20%);margin-bottom: -1rem;"></div>
-    </div>
-
-    <p class="eyebrows" style="margin: 111px 0 0;">Packages</p>
-    <div class="md:flex md:justify-between text-center items-center md:text-start">
-        <h2 class="ubuntu pt-2 component-headlines">Install UX <em class="rainbow-emphasis">Components</em></h2>
-        <twig:LinkButton
-            outline
-            label="Browse all Packages"
-            url="{{ path('app_packages') }}"
-            arrow
-            class="mt-4 md:mt-0"
-        />
-    </div>
-    <div class="mt-4 md:mt-12">
-        <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {% for package in packages|slice(0, 12) %}
                 <twig:PackageBox package="{{ package }}" titleTag="h3" />
             {% endfor %}
         </div>
-    </div>
+    {% endset %}
 
-    <section aria-labelledby="homepage-ui-kits-title">
-        <p class="eyebrows" style="margin: 111px 0 0;">UI Kits</p>
-        <div class="md:flex md:justify-between text-center items-center md:text-start">
-            <h2 id="homepage-ui-kits-title" class="ubuntu pt-2 component-headlines">Build with reusable <em class="rainbow-emphasis">UI Kits</em></h2>
+    <twig:Package:Section tone="subtle">{{ packages_grid }}</twig:Package:Section>
+
+    {% set kits_grid %}
+        <div class="items-end justify-between gap-8 md:flex">
+            <twig:Package:SectionTitle id="homepage-ui-kits-title" class="max-w-2xl" title="Or start from a whole <strong>UI kit</strong>." />
             <twig:LinkButton
                 outline
                 label="Browse all UI Kits"
                 url="{{ path('app_toolkit', {_fragment: 'kits'}) }}"
                 arrow
-                class="mt-4 md:mt-0"
+                class="my-4 md:my-0 shrink-0"
             />
         </div>
-        <div class="mt-4 md:mt-12">
-            <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
-                {% for kit_id in ['shadcn', 'common', 'bootstrap', 'flowbite-4'] %}
-                    {% set kit = kits[kit_id] %}
-                    <twig:Box color="{{ toolkit_color(kit_id) }}" radius="xl" titleTag="h3" :alignContentTop="true">
-                        <twig:block name="logo">
-                            <twig:ux:icon name="toolkit:{{ kit_id }}" alt="{{ kit.manifest.name }}" style="color: #fff; width: 50%; height: 50%;" />
-                        </twig:block>
-                        <twig:block name="title">
-                            <a href="{{ path('app_toolkit_kit', {kitId: kit_id}) }}" class="stretched-link text-body-text no-underline">{{ kit.manifest.name }}</a>
-                        </twig:block>
-                        <twig:block name="description">
-                            <p>{{ kit.manifest.description }}</p>
-                        </twig:block>
-                    </twig:Box>
-                {% endfor %}
-            </div>
+
+        <div class="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2">
+            {% for kit_id in ['shadcn', 'common', 'bootstrap', 'flowbite-4'] %}
+                {% set kit = kits[kit_id] %}
+                <twig:Box color="{{ toolkit_color(kit_id) }}" radius="xl" titleTag="h3" :alignContentTop="true">
+                    <twig:block name="logo">
+                        <twig:ux:icon name="toolkit:{{ kit_id }}" alt="{{ kit.manifest.name }}" style="color: #fff; width: 50%; height: 50%;" />
+                    </twig:block>
+                    <twig:block name="title">
+                        <a href="{{ path('app_toolkit_kit', {kitId: kit_id}) }}" class="stretched-link text-body-text no-underline">{{ kit.manifest.name }}</a>
+                    </twig:block>
+                    <twig:block name="description">
+                        <p>{{ kit.manifest.description }}</p>
+                    </twig:block>
+                </twig:Box>
+            {% endfor %}
         </div>
-    </section>
-</div>
+    {% endset %}
 
-{{ include('_aside.html.twig') }}
+    <twig:Package:Section id="kits" tone="accent" aria-labelledby="homepage-ui-kits-title">{{ kits_grid }}</twig:Package:Section>
 
+    {{ include('_aside.html.twig') }}
+
+</article>
 {% endblock %}

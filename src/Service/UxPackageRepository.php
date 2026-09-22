@@ -99,7 +99,7 @@ class UxPackageRepository
                 '#64748b',
                 'Build your Design System.',
                 'Collection of components and templates that you can use to build your pages.',
-                null,
+                'I need components to build my design system.',
                 null,
                 null,
                 true,

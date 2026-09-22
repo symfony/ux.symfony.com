@@ -18,7 +18,7 @@
     <twig:Package:SectionTitle :title="title" :id="id" />
 
     {% if intro|trim %}
-        <div class="mt-6 max-w-2xl text-base leading-[1.7] text-balance text-body-text/80 md:mt-8 md:text-lg md:leading-[1.75] [&>p]:m-0 [&>p+p]:mt-4 {{ centered ? 'mx-auto' : '' }}">
+        <div class="mt-6 max-w-2xl text-base leading-[1.7] text-balance text-body-text/80 md:mt-8 md:text-lg md:leading-[1.75] [&>p]:m-0 [&>p+p]:mt-4 [&_a]:text-(--package-primary-text) [&_a]:underline [&_a]:decoration-current/35 [&_a]:underline-offset-[.2em] [&_a:hover]:decoration-current {{ centered ? 'mx-auto' : '' }}">
             {{- intro -}}
         </div>
     {% endif %}

@@ -66,7 +66,7 @@ class SmokeTest extends KernelTestCase
             ->assertSee('Browse all UI Kits')
         ;
 
-        self::assertSame('Build with reusable UI Kits', $page->crawler()->filter('#homepage-ui-kits-title')->text());
+        self::assertSame('Or start from a whole UI kit.', $page->crawler()->filter('#homepage-ui-kits-title')->text());
         self::assertSame(
             ['Shadcn UI', 'Common', 'Bootstrap', 'Flowbite v4'],
             $page->crawler()->filter('[aria-labelledby="homepage-ui-kits-title"] h3 a[href*="/toolkit/kits/"]')->each(static fn ($node): string => $node->text()),

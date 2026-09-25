@@ -1,0 +1,22 @@
+<turbo-frame id="turbo-chat-count">
+    {{ include('ux_packages/turbo/_chat_message_count.html.twig') }}
+</turbo-frame>
+
+<turbo-frame id="turbo-chat">
+    {{ turbo_stream_from('chat') }}
+    {% embed 'ux_packages/_package_demo.html.twig' %}
+        {% block title %}
+            Turbo Streams Demo <small>(your username is <code> {{ myUsername }}</code>)</small>
+        {% endblock %}
+        {% block content %}
+            <div class="h-37.5 overflow-auto">
+                <ul class="list-unstyled" id="chat-box">
+                    {{ include('ux_packages/turbo/_chat_list.html.twig') }}
+                </ul>
+            </div>
+            <form id="chat-form" action="{{ path('app_turbo_chat') }}" method="POST" class="mt-6">
+                {{ include('ux_packages/turbo/_chat_form.html.twig') }}
+            </form>
+        {% endblock %}
+    {% endembed %}
+</turbo-frame>

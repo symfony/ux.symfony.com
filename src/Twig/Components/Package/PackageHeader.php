@@ -12,7 +12,6 @@
 namespace App\Twig\Components\Package;
 
 use App\Model\UxPackage;
-use App\Repository\ChatRepository;
 use App\Service\UxPackageRepository;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
@@ -33,25 +32,12 @@ final class PackageHeader
      */
     public ?string $demosUrl = null;
 
-    /**
-     * Render with the chat bubble icon?
-     */
-    public bool $withChatIcon = false;
-
-    public function __construct(private UxPackageRepository $packageRepository, private ChatRepository $chatRepository)
+    public function __construct(private UxPackageRepository $packageRepository)
     {
     }
 
     public function mount(UxPackage|string $package): void
     {
         $this->package = \is_string($package) ? $this->packageRepository->find($package) : $package;
-    }
-
-    /**
-     * Returns the chat count needed for the header.
-     */
-    public function getMessageCount(): int
-    {
-        return $this->chatRepository->count([]);
     }
 }

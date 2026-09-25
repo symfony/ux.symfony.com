@@ -29,7 +29,7 @@ class TurboController extends AbstractController
 {
     #[Route('/turbo', name: 'app_turbo')]
     #[Route('/turbo/{name}/the/{animal}', name: 'app_turbo_with_animal')]
-    public function __invoke(UxPackageRepository $packageRepository, ChatRepository $chatRepository, Request $request, ?string $name = null, ?string $animal = null): Response
+    public function __invoke(UxPackageRepository $packageRepository, Request $request, ?string $name = null, ?string $animal = null): Response
     {
         $package = $packageRepository->find('turbo');
 
@@ -47,8 +47,16 @@ class TurboController extends AbstractController
             'form' => $form,
             'name' => $name,
             'animal' => $animal,
+        ]);
+    }
+
+    #[Route('/turbo/chat', name: 'app_turbo_chat_frame', methods: ['GET'])]
+    public function turboChatFrame(Request $request, ChatRepository $chatRepository): Response
+    {
+        return $this->render('ux_packages/turbo/chat_frame.html.twig', [
             'messageChoices' => self::$messages,
             'messages' => $this->getChatMessages($chatRepository),
+            'messageCount' => $chatRepository->count([]),
             'myUsername' => $this->getMyUsername($request->getSession()),
         ]);
     }
@@ -59,31 +67,34 @@ class TurboController extends AbstractController
         // simple validation. In a real app, if validation fails, we would re-render
         // the page template (e.g. turbo.html.twig) that contains the form, and
         // allow it to render with errors. In other words, like any other form submit.
-        if (!$request->request->has('chat_message')) {
+        $message = self::$messages[$request->request->getString('chat_message')] ?? null;
+        if (null === $message) {
             return new Response(null, 204);
         }
-
-        $message = self::$messages[$request->request->get('chat_message')] ?? 'Unknown Message!';
 
         $chat = new Chat();
         $chat->setUsername($this->getMyUsername($request->getSession()));
         $chat->setMessage($message);
         $chatRepository->add($chat, true);
 
-        // send an update to ALL users viewing this page to add the new chat & update header count
+        $chatUpdate = [
+            'messages' => $this->getChatMessages($chatRepository),
+            'messageCount' => $chatRepository->count([]),
+        ];
+
+        // send an update to ALL users viewing this page to add the new chat & update the chat button badge
         $hub->publish(new Update(
             'chat',
-            $this->renderView('ux_packages/turbo/all_users_chat_success.stream.html.twig', [
-                'messages' => $this->getChatMessages($chatRepository),
-                'messageCount' => $chatRepository->count([]),
-            ])
+            $this->renderView('ux_packages/turbo/all_users_chat_success.stream.html.twig', $chatUpdate)
         ));
 
         // this stream update is ONLY for the user submitting the form: it "resets" the form
+        // and repeats the chat update, so the sender sees the message even without Mercure
         if (TurboBundle::STREAM_FORMAT === $request->getPreferredFormat()) {
             $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
 
             return $this->render('ux_packages/turbo/chat_success.stream.html.twig', [
+                ...$chatUpdate,
                 'messageChoices' => self::$messages,
             ]);
         }

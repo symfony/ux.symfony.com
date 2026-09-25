@@ -12,10 +12,6 @@
         {% block sub_content %}
             The speed of a single-page web app without writing any JavaScript,
             courtesy of <a href="https://turbo.hotwired.dev/" rel="external noopener noreferrer">Turbo</a>
-
-            <div style="position: absolute;  bottom: 3rem;  left: 50%;  transform: translateX(-50%);color: white;">
-                {{ include('ux_packages/turbo/_chat_message_count.html.twig', {messageCount: this.messageCount}) }}
-            </div>
         {% endblock %}
 
     {% endcomponent %}
@@ -57,21 +53,31 @@
 {% endblock %}
 
 {% block package_content %}
+    {% set turbo_docs_url = 'https://symfony.com/bundles/ux-turbo/current/index.html' %}
 
         {% set turbo_drive %}
         <div class="grid grid-cols-12 gap-x-6">
             <div class="col-span-12 md:col-span-6 md:order-2">
                 <div class="md:px-12">
-                    <twig:Package:SectionTitle size="md" title="Turbo <strong>Drive</strong>." />
-                    <p class="mt-2">Transform all link clicks and form submits into Ajax
-                    calls to get that single-page-application feel.</p>
-                    <div class="rounded-md border bg-surface p-4 flex justify-start col-span-12 mt-12">
-                        <twig:ux:icon name="bi:info-circle-fill" class="size-5 shrink-0" aria-label="Icon to indication information" />
-                        <p class="info-tooltips ms-2 mb-0">
-                            <twig:ux:icon name="arrow-left"/>
+                    <twig:Package:SectionHeading title="Turbo <strong>Drive</strong>.">
+                        Transform all link clicks and form submits into Ajax
+                        calls to get that single-page-application feel.
+                    </twig:Package:SectionHeading>
+                    <div class="rounded-md border bg-surface p-4">
+                        <p class="m-0 text-sm leading-6">
+                            <twig:ux:icon name="arrow-left" />
                             Click any links on this site or submit this form.
-                        Zero full page refreshes!</p>
+                            Zero full page refreshes!
+                        </p>
                     </div>
+                    {% set drive_docs = [
+                        {title: 'Getting started', url: turbo_docs_url ~ '#getting-started-with-turbo-drive'},
+                        {title: 'Meta tags', url: turbo_docs_url ~ '#meta-tags'},
+                    ] %}
+                    <twig:DocumentationLinks
+                        :links="drive_docs"
+                        label="Documentation for Turbo Drive"
+                    />
                 </div>
             </div>
             <div class="col-span-12 md:col-span-6 md:order-1">
@@ -110,16 +116,26 @@
         <div class="grid grid-cols-12 gap-x-6">
             <div class="col-span-12 md:col-span-6">
                 <div class="md:px-12">
-                    <twig:Package:SectionTitle size="md" title="Turbo <strong>Frames</strong>." />
-                    <div>Decompose complex pages into different parts that load and behave independently. Try it - it's smooth.</div>
-                    <div class="rounded-md border bg-surface p-4 flex col-span-12 justify-start mt-12">
-                        <twig:ux:icon name="bi:info-circle-fill" class="size-5 shrink-0" aria-label="Icon to indication information" />
-                        <p class="info-tooltips ms-2 mb-0">
-                        The frame displays just part of the full page from
-                        <a href="{{ path('app_turbo_todo_list') }}">{{ url('app_turbo_todo_list') }}</a>.
-                        All link clicks and form submits stay *inside* the frame.
-                        <twig:ux:icon name="arrow-right" /></p>
+                    <twig:Package:SectionHeading title="Turbo <strong>Frames</strong>.">
+                        Decompose complex pages into different parts that load and behave independently. Try it - it's smooth.
+                    </twig:Package:SectionHeading>
+                    <div class="rounded-md border bg-surface p-4">
+                        <p class="m-0 text-sm leading-6">
+                            The frame displays just part of the full page from
+                            <a href="{{ path('app_turbo_todo_list') }}">{{ url('app_turbo_todo_list') }}</a>.
+                            All link clicks and form submits stay <em>inside</em> the frame.
+                            <twig:ux:icon name="arrow-right" />
+                        </p>
                     </div>
+                    {% set frames_docs = [
+                        {title: 'Turbo Frames', url: turbo_docs_url ~ '#turbo-frames'},
+                        {title: 'Frame requests', url: turbo_docs_url ~ '#detecting-turbo-frame-requests'},
+                        {title: 'Minimal frame layout', url: turbo_docs_url ~ '#minimal-frame-layout'},
+                    ] %}
+                    <twig:DocumentationLinks
+                        :links="frames_docs"
+                        label="Documentation for Turbo Frames"
+                    />
                 </div>
             </div>
             <div class="col-span-12 md:col-span-6">
@@ -140,43 +156,53 @@
         <twig:Package:Section id="frames" tone="default">{{ turbo_frames }}</twig:Package:Section>
 
         {% set turbo_turbo_streams %}
-        <div {{ turbo_stream_listen('chat') }} class="grid grid-cols-12 gap-x-6">
+        <div class="grid grid-cols-12 gap-x-6">
             <div class="col-span-12 md:col-span-6 md:order-2">
                 <div class="md:px-12">
-                    <twig:Package:SectionTitle size="md" title="Turbo <strong>Streams</strong>." />
-                    <div>
-                        Deliver page updates - to *any* elements on your page -
-                        directly from Symfony. Add Mercure to do this for *any*
+                    <twig:Package:SectionHeading title="Turbo <strong>Streams</strong>.">
+                        Deliver page updates - to <em>any</em> elements on your page -
+                        directly from Symfony. Add Mercure to do this for <em>any</em>
                         users on your site, in real-time.
+                    </twig:Package:SectionHeading>
+                    <div class="rounded-md border bg-surface p-4">
+                        <p class="m-0 text-sm leading-6">
+                            <twig:ux:icon name="arrow-left" />
+                            Chat with someone else viewing this page (or open a
+                            2nd browser tab to talk to yourself)!
+                        </p>
                     </div>
-                    <div class="rounded-md border bg-surface p-4 flex justify-start col-span-12 mt-12">
-                        <twig:ux:icon name="bi:info-circle-fill" class="size-5 shrink-0" aria-label="Icon to indication information" />
-                        <p class="info-tooltips ms-2 mb-0"><twig:ux:icon name="arrow-left" />
-                        Chat with someone else viewing this page (or open a
-                        2nd browser tab to talk to yourself)! Submitting also
-                        updates the <a href="#message-count-header"><twig:ux:icon name="comment" /> icon</a> in the header.</p>
-                    </div>
+                    {% set streams_docs = [
+                        {title: 'Stream responses', url: turbo_docs_url ~ '#turbo-stream-responses'},
+                        {title: 'Stream actions', url: turbo_docs_url ~ '#stream-messages-and-actions'},
+                    ] %}
+                    <twig:DocumentationLinks
+                        :links="streams_docs"
+                        label="Documentation for Turbo Streams"
+                    />
                 </div>
             </div>
             <div class="col-span-12 md:col-span-6 demo-chat">
-                {% embed 'ux_packages/_package_demo.html.twig' %}
-                    {% block title %}
-                        Turbo Streams Demo <small>(your username is <code> {{ myUsername }}</code>)</small>
-                    {% endblock %}
-                    {% block content %}
-                        <div style="height: 150px; overflow: auto;">
-                            <ul class="list-unstyled" id="chat-box">
-                                {{ include('ux_packages/turbo/_chat_list.html.twig') }}
-                            </ul>
-                        </div>
-                        <form id="chat-form" action="{{ path('app_turbo_chat') }}" method="POST" class="mt-6">
-                            {{ include('ux_packages/turbo/_chat_form.html.twig') }}
-                        </form>
-                    {% endblock %}
-                {% endembed %}
+                <turbo-frame id="turbo-chat" src="{{ path('app_turbo_chat_frame') }}" loading="lazy">
+                    Loading the chat...
+                </turbo-frame>
             </div>
         </div>
         {% endset %}
         <twig:Package:Section id="turbo-streams" tone="subtle">{{ turbo_turbo_streams }}</twig:Package:Section>
+
+        <div class="fixed top-1/2 right-4 z-20 -translate-y-1/2">
+            <a
+                href="#turbo-streams"
+                class="grid size-12 place-items-center rounded-full bg-(--package-accent) text-(--package-accent-ink) shadow-lg transition-transform duration-200 hover:scale-105"
+                aria-label="Open the Turbo Streams chat demo"
+            >
+                <twig:ux:icon name="comment" class="size-5" />
+            </a>
+            <turbo-frame
+                id="turbo-chat-count"
+                src="{{ path('app_turbo_chat_frame') }}"
+                class="pointer-events-none absolute -top-1 -right-1"
+            ></turbo-frame>
+        </div>
 
 {% endblock %}

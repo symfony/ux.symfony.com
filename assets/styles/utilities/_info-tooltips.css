@@ -1,12 +1,4 @@
 @layer utilities {
-  .info-tooltips {
-    font-family: var(--font-sans);
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 19px;
-    letter-spacing: 0;
-  }
-
   .copied button svg {
     animation: copied 450ms linear alternate-reverse;
   }

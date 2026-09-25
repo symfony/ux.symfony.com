@@ -1,0 +1,130 @@
+{% extends 'ux_packages/package.html.twig' %}
+
+{% block header %}
+    {{ include('_header.html.twig') }}
+{% endblock %}
+
+{% block package_header %}
+    <div class="pt-20">
+        <div class="max-w-[1400px] mx-auto px-6 pt-6 md:px-12">
+            <p class="eyebrows text-center mt-12 mb-4">Developer Tools</p>
+            <h1 class="text-center text-balance font-medium">UX Inspector</h1>
+            <p class="mt-2 text-center font-title text-2xl font-normal italic text-body-text/70 md:text-3xl">
+                Debug in the browser.
+            </p>
+            <div class="flex justify-center">
+                <p class="Wysiwyg text-center mt-5 w-1/2 text-balance max-xl:w-3/5 max-md:w-4/5">
+                    Find every Stimulus controller, Live Component and Turbo frame. Inspect its state,
+                    follow its relationships and trace the events moving through the page.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    {{ include('ux_packages/inspector/_hero.html.twig') }}
+{% endblock %}
+
+{% block package_features %}
+    {% set inspector_features = [
+        {
+            icon: 'lucide:mouse-pointer-click',
+            iconColorClass: 'text-[#B4236A] dark:text-[#EB72AF]',
+            title: '<strong>Pick</strong> from the page',
+            description: 'Select a rendered element and jump straight to the component behind it.',
+        },
+        {
+            icon: 'lucide:refresh-cw',
+            iconColorClass: 'text-[#B4236A] dark:text-[#EB72AF]',
+            title: '<strong>Live</strong> state',
+            description: 'Watch values, props and attributes update while the application runs.',
+        },
+        {
+            icon: 'lucide:git-branch',
+            iconColorClass: 'text-[#B4236A] dark:text-[#EB72AF]',
+            title: 'See <strong>relations</strong>',
+            description: 'Follow parents, children, outlets and nested components in context.',
+        },
+        {
+            icon: 'lucide:radio',
+            iconColorClass: 'text-[#B4236A] dark:text-[#EB72AF]',
+            title: '<strong>Trace</strong> events',
+            description: 'Read dispatched and received events in the order they happen.',
+        },
+        {
+            icon: 'lucide:terminal',
+            iconColorClass: 'text-[#B4236A] dark:text-[#EB72AF]',
+            title: 'No <strong>build step</strong>',
+            description: 'Install the bundle and open the Inspector directly in your application.',
+        },
+    ] %}
+    <twig:FeaturesCluster
+        :items="inspector_features"
+        title="What UX Inspector reveals"
+        titleId="inspector-overview-title"
+        titleClass="font-normal"
+    />
+{% endblock %}
+
+{% block package_content %}
+    <twig:Package:Section tone="subtle">
+        <twig:Package:SectionHeading
+            eyebrow="The Symfony UX stack, together."
+            title="One inspector. <strong>Three runtimes</strong>."
+        >
+            <p>
+                Open one panel for the client-side behavior, server-rendered state and navigation
+                already present on the page.
+            </p>
+        </twig:Package:SectionHeading>
+
+        <div class="grid gap-8 lg:grid-cols-3">
+            <twig:Package:RuntimeCoverage :package="covered[0]" :items="[
+                'Values and defaults',
+                'Targets and CSS classes',
+                'Actions and parameters',
+                'Outlets and nesting',
+                'Connection status',
+                'Controller events',
+            ]" />
+            <twig:Package:RuntimeCoverage :package="covered[1]" :items="[
+                'Props and parent props',
+                'Models and modifiers',
+                'Actions and arguments',
+                'Event listeners',
+                'Loading and polling',
+                'Parents and children',
+            ]" />
+            <twig:Package:RuntimeCoverage :package="covered[2]" :items="[
+                'Frame attributes',
+                'Loading and state',
+                'Links and forms',
+                'Nested frames',
+                'Fetch and render events',
+                'Stream actions',
+            ]" />
+        </div>
+    </twig:Package:Section>
+{% endblock %}
+
+{% block package_highlights %}
+    <twig:Package:Section tone="default">
+        <div class="grid items-center gap-12 lg:grid-cols-[1fr_auto] lg:gap-24">
+            <twig:Package:SectionHeading
+                eyebrow="Always within reach."
+                title="Open it with <strong>U X</strong>."
+                class="mb-0"
+            >
+                <p>
+                    The shortcut toggles the Inspector over the current page. Close it when you are
+                    done and continue using the application without leaving its state behind.
+                </p>
+            </twig:Package:SectionHeading>
+
+            <div class="flex items-center justify-center gap-4 lg:pr-20" aria-label="Press U then X">
+                {% for key in ['u', 'x'] %}
+                    <kbd class="grid size-20 place-items-center rounded-xl border border-body-text/15 bg-body font-mono text-3xl font-bold uppercase text-body-text shadow-lg sm:size-24 sm:text-4xl">{{ key }}</kbd>
+                {% endfor %}
+            </div>
+        </div>
+    </twig:Package:Section>
+{% endblock %}

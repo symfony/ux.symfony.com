@@ -1,0 +1,13 @@
+{% import 'ux_packages/inspector/_shapes.html.twig' as shape %}
+{% set controller = grid|default(false) ? 'demo-product' : 'demo-cart-row' %}
+{% set card = grid|default(false) %}
+<article class="result {{ card ? 'result--card grid items-center gap-3 rounded-lg border border-[var(--line)] p-3' : 'flex items-center gap-[14px] border-b border-[var(--line)] py-1.5' }}" id="product-{{ product }}" aria-label="Example product {{ product }}"
+         data-controller="{{ controller }}" data-{{ controller }}-id-value="{{ product }}"
+         {% if not card %}data-demo-cart-row-demo-cart-outlet="[data-demo='cart']"{% endif %}>
+    <div class="fake-thumb shrink-0 rounded-[7px] {{ card ? 'h-20 w-full bg-[linear-gradient(135deg,#39444d,#2e353c)]' : 'h-[52px] w-11 bg-[#343d45]' }}" aria-hidden="true"></div>
+    <div class="lines grid min-w-0 flex-1 {{ card ? 'gap-2' : 'gap-[11px]' }}" aria-hidden="true">{{ shape.bar((90 - product * 5) ~ '%') }}{{ shape.bar('45%', 6) }}</div>
+    <div class="row-actions flex gap-0.5 {{ card ? 'justify-end' : '' }}">
+        <button type="button" class="favorite {{ shape.control() }} [--control-border-width:0px] [--control-px:7px] [--control-py:7px] aria-pressed:[&_svg]:fill-current" aria-label="Favorite product {{ product }}" aria-pressed="false" data-{{ controller }}-target="favorite" data-action="{{ controller }}#toggleFavorite">{{ shape.icon('heart') }}</button>
+        <a class="delete {{ shape.control() }} [--control-border-width:0px] [--control-px:7px] [--control-py:7px]" aria-label="Delete product {{ product }}" href="{{ path('app_demo_inspector_remove', {product}) }}" data-turbo-stream data-action="{{ controller }}#remove">{{ shape.icon('cross') }}</a>
+    </div>
+</article>

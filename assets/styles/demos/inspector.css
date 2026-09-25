@@ -1,0 +1,69 @@
+@import "tailwindcss" source(none);
+
+@source "../../../templates/ux_packages/inspector/_demo_page.html.twig";
+@source "../../../templates/ux_packages/inspector/_product.html.twig";
+@source "../../../templates/ux_packages/inspector/_results.html.twig";
+@source "../../../templates/ux_packages/inspector/_shapes.html.twig";
+@source "../../../templates/components/Demo/InspectorCart.html.twig";
+@source "../../../templates/components/Demo/InspectorDelivery.html.twig";
+@source "../../../templates/components/Demo/InspectorSearch.html.twig";
+@source "../../../templates/components/Demo/InspectorTotal.html.twig";
+
+:root {
+    --demo-panel-width: 380px;
+    --ux-inspector-width: var(--demo-panel-width);
+    --bg: #212529;
+    --ink: #a7b0b8;
+    --fill: #465059;
+    --line: #ffffff16;
+}
+
+html, body {
+    scrollbar-width: none;
+}
+
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+    display: none;
+}
+
+.search-field input::-webkit-search-cancel-button {
+    display: none;
+}
+
+.demo-pointer {
+    position: fixed;
+    inset: auto;
+    width: 40px;
+    height: 40px;
+    margin: -20px;
+    padding: 0;
+    border: 0;
+    overflow: visible;
+    background: transparent;
+    color: #ff65b2;
+    pointer-events: none;
+    animation: demo-ripple 950ms ease-out forwards;
+}
+
+.demo-pointer svg {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+}
+
+.demo-pointer::backdrop {
+    background: transparent;
+    pointer-events: none;
+}
+
+@keyframes demo-ripple {
+    0% { transform: scale(.35); opacity: 1; }
+    65% { opacity: .9; }
+    100% { transform: scale(1.3); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .demo-pointer { animation: none; }
+}

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1d2f375481c915c159ea14db55423187",
+    "content-hash": "57435148e56d93f12f7f1db1d07b40b8",
     "packages": [
         {
             "name": "composer/semver",
@@ -11213,16 +11213,16 @@
         },
         {
             "name": "playwright-php/playwright",
-            "version": "v1.4.0",
+            "version": "v1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/playwright-php/playwright.git",
-                "reference": "9162aa438cbd519a4498b493c0a9e047c7aec99e"
+                "reference": "8492788afdb920dcb04ec89bddeb3c4e93d3b5e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/playwright-php/playwright/zipball/9162aa438cbd519a4498b493c0a9e047c7aec99e",
-                "reference": "9162aa438cbd519a4498b493c0a9e047c7aec99e",
+                "url": "https://api.github.com/repos/playwright-php/playwright/zipball/8492788afdb920dcb04ec89bddeb3c4e93d3b5e2",
+                "reference": "8492788afdb920dcb04ec89bddeb3c4e93d3b5e2",
                 "shasum": ""
             },
             "require": {
@@ -11289,7 +11289,7 @@
             ],
             "support": {
                 "issues": "https://github.com/playwright-php/playwright/issues",
-                "source": "https://github.com/playwright-php/playwright/tree/v1.4.0"
+                "source": "https://github.com/playwright-php/playwright/tree/v1.5.0"
             },
             "funding": [
                 {
@@ -11297,7 +11297,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-08-10T19:39:55+00:00"
+            "time": "2026-09-20T12:54:18+00:00"
         },
         {
             "name": "sebastian/cli-parser",

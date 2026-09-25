@@ -26,6 +26,7 @@ return [
     'app' => ['path' => './assets/app.js', 'entrypoint' => true],
     'app-react' => ['path' => './assets/react/app-react.js', 'entrypoint' => true],
     'app-vue' => ['path' => './assets/vue/app-vue.js', 'entrypoint' => true],
+    'demos/inspector' => ['path' => './assets/demos/inspector-app.js', 'entrypoint' => true],
     'demos/live-memory' => ['path' => './assets/demos/live-memory.js', 'entrypoint' => true],
     'toolkit-common' => ['path' => './assets/toolkit-common.js', 'entrypoint' => true],
     'toolkit-shadcn' => ['path' => './assets/toolkit-shadcn.js', 'entrypoint' => true],

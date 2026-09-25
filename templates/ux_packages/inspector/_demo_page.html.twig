@@ -1,0 +1,37 @@
+{# Placeholder storefront: all text is confined to accessible names, never painted.
+   The Inspector is the real package build, copied here until its release. #}
+{% import 'ux_packages/inspector/_shapes.html.twig' as shape %}
+<!DOCTYPE html>
+<html lang="en" class="dark scheme-dark min-[42.5rem]:data-[ux-inspector-open]:pr-[var(--ux-inspector-width)]"{% if page != 'find' %} data-ux-inspector-open{% endif %}>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    {% if baseUrl|default %}<base href="{{ baseUrl }}">{% endif %}
+    <title>Inspector {{ page }} demo</title>
+    <link rel="stylesheet" href="{{ asset('styles/demos/inspector.css') }}">
+    <link rel="stylesheet" href="{{ asset('@symfony/ux-live-component/live.min.css') }}">
+</head>
+<body class="m-0 bg-[var(--bg)] text-[14px] leading-[1.5] text-[var(--ink)] [font-family:system-ui,sans-serif]">
+    <header class="store-header flex h-[82px] items-center justify-between border-b border-[var(--line)] px-12" aria-label="Example shop">{{ shape.bar('120px', 12) }}<div class="header-links flex items-center gap-6">{{ shape.bar('32px', 6) }}{{ shape.bar('44px', 6) }}</div></header>
+    <main class="store grid gap-[26px] px-12 py-8" data-page="{{ page }}">
+        {% if page == 'inspect' %}
+            <twig:Demo:InspectorSearch/>
+            {{ include('ux_packages/inspector/_results.html.twig', {query: ''}) }}
+        {% else %}
+            <div class="page-title grid gap-[14px] pb-2">{{ shape.bar('42%', 13) }}{{ shape.bar('23%', 6) }}</div>
+            <div class="checkout-layout grid grid-cols-[minmax(0,1fr)_190px] items-start gap-8">
+                <turbo-frame id="checkout-items" class="grid min-w-0 gap-[22px] p-5">
+                    <div class="list-heading flex items-center justify-between gap-[10px] border-0 p-0">{{ shape.bar('25%', 6) }}{{ shape.bar('15%', 6) }}</div>
+                    {% for product in 1..4 %}{{ include('ux_packages/inspector/_product.html.twig', {product}) }}{% endfor %}
+                    <turbo-frame id="product-updates" class="block min-w-0" hidden></turbo-frame>
+                </turbo-frame>
+                <twig:Demo:InspectorCart :items="[1, 2, 3, 4]"/>
+            </div>
+        {% endif %}
+    </main>
+    {{ importmap('demos/inspector') }}
+    <div hidden data-controller="inspector-demo" data-inspector-demo-scenario-value="{{ page }}"{% if run|default %} data-inspector-demo-run-value="{{ run }}"{% endif %}></div>
+    <ux-inspector class="[--panel-width:var(--demo-panel-width)]"{% if page != 'find' %} open{% endif %} id="ux-inspector" data-config='{"ignore_selectors":["[data-controller~=\"inspector-demo\"]"],"packages":{"stimulus":true,"livecomponent":true,"turbo":true}}'></ux-inspector>
+</body>
+</html>

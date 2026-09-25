@@ -141,6 +141,7 @@
 @import "./components/_ToolkitPreview.css";
 @import "./components/_Wysiwyg.css";
 @import "./components/_CodeDescription.css";
+@import "./components/_InspectorHero.css";
 
 /* ─── Utilities ─── */
 @import "./utilities/_animations.css";

@@ -1,0 +1,12 @@
+{% import 'ux_packages/inspector/_shapes.html.twig' as shape %}
+<form {{ attributes }} class="search grid gap-5" data-action="live#action:prevent" data-live-action-param="search">
+    <div class="search-controls flex gap-3">
+        <label class="search-field relative flex h-[46px] flex-1 items-center gap-[14px] rounded-[6px] border border-[var(--line)] bg-[#1c2125] px-[14px] py-3 [&_.ph]:pointer-events-none"><input class="absolute inset-0 w-full border-0 bg-transparent px-[42px] py-3 text-transparent caret-transparent [font:inherit] focus-visible:outline-2 focus-visible:outline-[var(--ink)] focus-visible:outline-offset-[3px]" id="catalog-search" type="search" aria-label="Search example products" data-model="norender|query">{{ shape.bar(query ? '45%' : '30%', 7) }}</label>
+        <button type="submit" class="{{ shape.control() }} w-[46px] [--control-bg:#3a444e]" aria-label="Search" data-demo="search" data-loading="action(search)|addAttribute(disabled)">{{ shape.bar('18px', 6) }}</button>
+    </div>
+    <div class="filters flex gap-[10px]" aria-label="Product filters">
+        <button type="button" class="{{ shape.control() }} [--control-radius:99px] [--control-px:16px] [--control-py:12px] aria-pressed:border-[#67747f] aria-pressed:bg-[#3e4851]" data-demo="filter-all" aria-label="All products" aria-pressed="{{ query == '' ? 'true' : 'false' }}" data-action="live#action" data-live-action-param="filter" data-live-query-param="">{{ shape.bar('42px', 6) }}</button>
+        <button type="button" class="{{ shape.control() }} [--control-radius:99px] [--control-px:16px] [--control-py:12px] aria-pressed:border-[#67747f] aria-pressed:bg-[#3e4851]" data-demo="filter-live" aria-label="Live products" aria-pressed="{{ query == 'live' ? 'true' : 'false' }}" data-action="live#action" data-live-action-param="filter" data-live-query-param="live">{{ shape.bar('58px', 6) }}</button>
+        <button type="button" class="{{ shape.control() }} [--control-radius:99px] [--control-px:16px] [--control-py:12px] aria-pressed:border-[#67747f] aria-pressed:bg-[#3e4851]" aria-label="Turbo products" aria-pressed="{{ query == 'turbo' ? 'true' : 'false' }}" data-action="live#action" data-live-action-param="filter" data-live-query-param="turbo">{{ shape.bar('36px', 6) }}</button>
+    </div>
+</form>

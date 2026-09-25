@@ -1,0 +1,20 @@
+.uxc[data-progress-reset] .uxc-chapters::before {
+    transition: none;
+}
+
+.uxc-shell:fullscreen {
+    display: grid;
+    align-content: center;
+    padding-block: 2vmin;
+    background: #e9ecef;
+}
+
+.dark .uxc-shell:fullscreen {
+    background: #0d1117;
+}
+
+.uxc-shell:fullscreen .uxc-top {
+    width: min(96vw, calc(78vh * var(--w) / var(--h)));
+    max-width: none;
+    padding-inline: 0;
+}

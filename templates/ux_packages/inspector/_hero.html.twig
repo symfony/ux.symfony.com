@@ -1,0 +1,69 @@
+{% macro chapter(mode, icon, title, line) %}
+    <button
+        type="button" role="tab" id="inspector-chapter-{{ mode }}" aria-controls="inspector-stage" aria-selected="{{ mode == 'find' ? 'true' : 'false' }}" tabindex="{{ mode == 'find' ? '0' : '-1' }}" class="uxc-chapter group m-0 grid min-h-[120px] content-center gap-0 border-0 border-l border-[#dee2e6] bg-transparent px-6 pt-[1.1rem] pb-5 text-left text-[#495057] transition-colors duration-150 first:border-l-0 aria-selected:bg-[#e4e7eb] aria-selected:text-[#1c2024] motion-reduce:transition-none dark:border-[#343a40] dark:text-[#adb5bd] dark:aria-selected:bg-[#121519] dark:aria-selected:text-[#f1f3f5]{{ mode == 'find' ? ' is-current' }}" data-mode="{{ mode }}"
+        data-url="{{ path('app_demo_inspector', {page: mode}) }}"
+        data-inspector-mockup-target="tab"
+        data-action="inspector-mockup#select"
+        data-inspector-mockup-mode-param="{{ mode }}"
+    >
+        <span class="uxc-chapter__head ubuntu flex items-center gap-[.6rem] text-[1.1rem] font-bold">
+            <twig:ux:icon name="lucide:{{ icon }}" class="uxc-chapter__icon size-[1.45rem] shrink-0 opacity-[.45] group-aria-selected:scale-[1.15] group-aria-selected:opacity-100 **:stroke-1"/>
+            {{ title }}
+        </span>
+        <span class="uxc-chapter__reveal hidden group-aria-selected:block"><span class="uxc-chapter__line block min-h-0 overflow-hidden pt-0 text-[.82rem] leading-[1.4] opacity-75 group-aria-selected:pt-2 text-balance">{{ line }}</span></span>
+    </button>
+{% endmacro %}
+
+{% import _self as ph %}
+{% set initial_demo_url = url('app_demo_inspector', {page: 'find', run: 'initial'}) %}
+{% set initial_demo_html = include('ux_packages/inspector/_demo_page.html.twig', {
+    page: 'find',
+    run: 'initial',
+    baseUrl: initial_demo_url,
+}, false) %}
+
+<div class="uxc mt-12 [--h:700] [--w:1150] md:mt-16"
+     data-controller="inspector-mockup"
+     data-inspector-mockup-mode-value="find">
+
+    <div class="uxc-shell">
+        <div class="uxc-top mx-auto max-w-[1400px] px-6 md:px-12">
+            <twig:Browser
+                class="uxc-frame shadow-blur shadow-blur--rainbow w-full [&>div]:rounded-b-none [&>div]:border-b-0 [&_.browser-chrome]:min-h-11 [&_.browser-chrome]:py-0 [&_.browser-chrome]:shadow-[0_6px_10px_-6px_rgb(0_0_0/.55)] [&_.browser-chrome>div:last-child]:justify-self-end"
+                frameClass=""
+                url="{{ null }}"
+                zoomAction="inspector-mockup#zoom"
+            >
+                <twig:block name="chrome_title">
+                    <span class="uxc-title block whitespace-nowrap text-center text-[.625rem] font-light tracking-[.24em] text-[#8b8e93] [font-stretch:semi-condensed] [text-shadow:0_1px_0_rgb(255_255_255/.1),0_-1px_1px_rgb(0_0_0/.9)]">UX INSPECTOR</span>
+                </twig:block>
+                <div class="uxc-stage relative aspect-[var(--w)/var(--h)] w-full overflow-hidden" id="inspector-stage" role="tabpanel" aria-labelledby="inspector-chapter-find" aria-busy="true" data-inspector-mockup-target="stage" data-mode="find">
+                    <iframe
+                        class="absolute top-0 left-0 h-[calc(var(--h)*1px)] w-[calc(var(--w)*1px)] origin-top-left border-0"
+                        title="The UX Inspector running on a page"
+                        srcdoc="{{ initial_demo_html|e('html_attr') }}"
+                        loading="eager"
+                        data-run="initial"
+                        data-inspector-mockup-target="frame"
+                    ></iframe>
+                    <div class="uxc-error absolute inset-0 z-3 flex flex-col items-center justify-center gap-4 bg-[#212529] text-[#f1f3f5] [&[hidden]]:hidden" data-inspector-mockup-target="error" role="alert" hidden>
+                        <p>The demo could not load.</p>
+                        <button type="button" class="cursor-pointer rounded-[.4rem] border border-[#eb72af] px-4 py-[.6rem] text-inherit" data-action="inspector-mockup#replay">Replay scenario</button>
+                    </div>
+                </div>
+            </twig:Browser>
+        </div>
+
+        <div class="uxc-cut relative z-1 bg-body">
+            <div class="uxc-top mx-auto max-w-[1400px] px-6 md:px-12">
+                <div class="uxc-chapters relative grid grid-cols-2 overflow-hidden rounded-b-xl border border-t-0 border-[#dee2e6] bg-[#f1f3f5] before:absolute before:inset-x-0 before:top-0 before:z-2 before:h-[3px] before:origin-left before:scale-x-[var(--progress,0)] before:bg-[#eb72af] before:transition-transform before:duration-[120ms] before:content-[''] md:grid-cols-4 dark:border-[#343a40] dark:bg-[#16191d]" role="tablist" aria-label="Inspector views"
+                     data-action="keydown->inspector-mockup#move">
+                    {{ ph.chapter('find', 'layers', 'Find', 'Every Stimulus, Live and Turbo element, outlined in the page.') }}
+                    {{ ph.chapter('inspect', 'mouse-pointer-click', 'Inspect', 'Values and props, read from the running instance.') }}
+                    {{ ph.chapter('connect', 'git-branch', 'Connect', 'Nested Live Components and Stimulus outlets, connected.') }}
+                    {{ ph.chapter('trace', 'radio', 'Trace', 'Events as they fire, in the order they fire.') }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

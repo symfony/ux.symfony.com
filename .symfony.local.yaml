@@ -8,6 +8,8 @@ workers:
         cmd: ['symfony', 'console', 'tailwind:build', '--watch', 'assets/styles/toolkit-common.css', '-vvv']
     tailwind_live_memory:
         cmd: ['symfony', 'console', 'tailwind:build', '--watch', 'assets/styles/demos/live-memory.css', '-vvv']
+    tailwind_inspector:
+        cmd: ['symfony', 'console', 'tailwind:build', '--watch', 'assets/styles/demos/inspector.css', '-vvv']
 
 http:
     port: 9044

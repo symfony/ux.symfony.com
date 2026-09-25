@@ -1,7 +1,8 @@
-{# @prop items array Feature items with `icon`, optional `iconClass`, HTML `title`, and plain-text `description` keys #}
+{# @prop items array Feature items with `icon`, optional `iconClass` and `iconColorClass`, HTML `title`, and plain-text `description` keys #}
 {# @prop title string Accessible heading for the feature group #}
 {# @prop titleId string Unique identifier for the accessible heading #}
-{%- props items, title, titleId -%}
+{# @prop titleClass string CSS classes applied to feature headings #}
+{%- props items, title, titleId, titleClass = 'font-bold' -%}
 
 <section
     {{ attributes.defaults({class: 'bg-body py-22'}) }}
@@ -12,14 +13,14 @@
 
         <ul class="m-0 p-0 list-none grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-x-14 sm:gap-y-11 md:grid-cols-3 xl:grid-cols-5">
             {% for item in items %}
-                <li class="grid grid-cols-[1.75rem_1fr] items-start gap-4 sm:grid-cols-1 sm:gap-3">
+                <li class="grid content-start grid-cols-[1.75rem_1fr] items-start gap-4 sm:grid-cols-1 sm:gap-3">
                     <twig:ux:icon
                         name="{{ item.icon }}"
-                        class="size-[1.65rem] text-(--package-primary-text) {{ item.iconClass|default('fill-none stroke-[1.8]') }}"
+                        class="size-[1.65rem] {{ item.iconColorClass|default('text-(--package-primary-text)') }} {{ item.iconClass|default('fill-none stroke-[1.8]') }}"
                         aria-hidden="true"
                     />
                     <div>
-                        <h3 class="m-0 mb-2 font-title text-lg font-bold leading-tight text-balance">{{ item.title|raw }}</h3>
+                        <h3 class="m-0 mb-2 font-title text-lg leading-tight text-balance {{ titleClass }}">{{ item.title|raw }}</h3>
                         <p class="m-0 text-sm leading-relaxed text-body-text/70 text-balance">{{ item.description }}</p>
                     </div>
                 </li>

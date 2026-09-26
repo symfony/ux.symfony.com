@@ -13,14 +13,14 @@ jobs:
             run:
                 shell: bash
         steps:
-            -   uses: actions/checkout@v4
+            -   uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-            -   uses: shivammathur/setup-php@v2
+            -   uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # 2.37.2
                 with:
                     php-version: '8.5'
 
             -   name: Install dependencies
-                uses: ramsey/composer-install@v3
+                uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
 
             -   name: Smoke Tests
                 run: vendor/bin/phpunit --testsuite "Smoke Tests"
@@ -30,7 +30,7 @@ jobs:
 
             -   name: Upload browser artifacts on failure
                 if: failure()
-                uses: actions/upload-artifact@v4
+                uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
                 with:
                     name: browser-output
                     path: var/browser/

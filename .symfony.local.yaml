@@ -2,10 +2,8 @@ workers:
     docker_compose: ~
     tailwind_app:
         cmd: ['symfony', 'console', 'tailwind:build', '--watch', 'assets/styles/app.css', '-vvv']
-    tailwind_toolkit_shadcn:
-        cmd: ['symfony', 'console', 'tailwind:build', '--watch', 'assets/styles/toolkit-shadcn.css', '-vvv']
-    tailwind_toolkit_common:
-        cmd: ['symfony', 'console', 'tailwind:build', '--watch', 'assets/styles/toolkit-common.css', '-vvv']
+    tailwind_toolkit:
+        cmd: ['sh', '-c', 'trap "kill 0" EXIT; for input in var/ux_toolkit/preview/ux-toolkit-*.css; do symfony console tailwind:build --watch "$input" -vvv & done; wait']
     tailwind_live_memory:
         cmd: ['symfony', 'console', 'tailwind:build', '--watch', 'assets/styles/demos/live-memory.css', '-vvv']
     tailwind_inspector:

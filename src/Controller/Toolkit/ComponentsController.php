@@ -23,6 +23,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\UX\Toolkit\Kit\KitContextRunner;
+use Symfony\UX\Toolkit\Preview\PreviewAssetsGenerator;
 use Symfony\UX\Toolkit\Recipe\RecipeType;
 use Symfony\UX\Toolkit\Registry\LocalRegistry;
 
@@ -110,6 +111,7 @@ class ComponentsController extends AbstractController
             ? 'display: block; margin: 0; width: 100%;'
             : 'display: flex; align-items: center; justify-content: center; margin: 0; width: 100%; padding: 48px;';
         $bodyStyle = $isBlock ? '' : 'min-height: 200px';
+        $entrypoint = PreviewAssetsGenerator::entrypointName($kitId);
 
         $template = $twig->createTemplate(<<<HTML
             <html lang="en">
@@ -135,7 +137,7 @@ class ComponentsController extends AbstractController
                             }
                         });
                     </script>
-                    {{ importmap('toolkit-{$kitId}') }}
+                    {{ importmap('{$entrypoint}') }}
                 </head>
                 <body style="{$bodyStyle}">{$code}</body>
             </html>

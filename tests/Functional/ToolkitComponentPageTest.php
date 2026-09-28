@@ -35,4 +35,16 @@ final class ToolkitComponentPageTest extends WebTestCase
         // ToC keeps inner HTML like <code> (e.g. for the `<twig:Accordion>` heading).
         self::assertSelectorExists('nav[data-controller="toolkit-recipe-toc"] code');
     }
+
+    public function testComponentPreviewLoadsTheEntrypointOfItsKit(): void
+    {
+        $client = static::createClient();
+        $crawler = $client->request('GET', '/toolkit/kits/flowbite-4/components/alert');
+        $previewUrl = $crawler->filter('[data-lazy-iframe-src-value]')->first()->attr('data-lazy-iframe-src-value');
+
+        $client->request('GET', $previewUrl);
+
+        self::assertResponseIsSuccessful();
+        self::assertStringContainsString("import 'ux-toolkit-flowbite-4'", $client->getResponse()->getContent());
+    }
 }

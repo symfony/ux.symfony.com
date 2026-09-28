@@ -1305,6 +1305,12 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         default_map_id?: scalar|Param|null, // Default: null
  *     },
  * }
+ * @psalm-type UxToolkitConfig = array{
+ *     preview?: bool|array{ // Wires the preview assets of kits into AssetMapper, Tailwind and the importmap.
+ *         enabled?: bool|Param, // Default: false
+ *         kits?: list<scalar|Param|null>,
+ *     },
+ * }
  * @psalm-type TalesFromADevTwigExtraTailwindConfig = array{
  *     tailwind_merge?: array{
  *         additional_configuration?: mixed, // Default: []
@@ -1368,6 +1374,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     stimulus?: StimulusConfig,
  *     ux_icons?: UxIconsConfig,
  *     ux_map?: UxMapConfig,
+ *     ux_toolkit?: UxToolkitConfig,
  *     tales_from_a_dev_twig_extra_tailwind?: TalesFromADevTwigExtraTailwindConfig,
  *     symfonycasts_tailwind?: SymfonycastsTailwindConfig,
  *     ux_native?: UxNativeConfig,
@@ -1398,6 +1405,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         zenstruck_foundry?: ZenstruckFoundryConfig,
  *         ux_icons?: UxIconsConfig,
  *         ux_map?: UxMapConfig,
+ *         ux_toolkit?: UxToolkitConfig,
  *         tales_from_a_dev_twig_extra_tailwind?: TalesFromADevTwigExtraTailwindConfig,
  *         symfonycasts_tailwind?: SymfonycastsTailwindConfig,
  *         ux_native?: UxNativeConfig,
@@ -1425,6 +1433,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         stimulus?: StimulusConfig,
  *         ux_icons?: UxIconsConfig,
  *         ux_map?: UxMapConfig,
+ *         ux_toolkit?: UxToolkitConfig,
  *         tales_from_a_dev_twig_extra_tailwind?: TalesFromADevTwigExtraTailwindConfig,
  *         symfonycasts_tailwind?: SymfonycastsTailwindConfig,
  *         ux_native?: UxNativeConfig,
@@ -1454,6 +1463,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         zenstruck_foundry?: ZenstruckFoundryConfig,
  *         ux_icons?: UxIconsConfig,
  *         ux_map?: UxMapConfig,
+ *         ux_toolkit?: UxToolkitConfig,
  *         tales_from_a_dev_twig_extra_tailwind?: TalesFromADevTwigExtraTailwindConfig,
  *         symfonycasts_tailwind?: SymfonycastsTailwindConfig,
  *         ux_native?: UxNativeConfig,

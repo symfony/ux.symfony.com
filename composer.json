@@ -148,9 +148,7 @@
             "@php bin/console tailwind:build --minify assets/styles/app.css",
             "@php bin/console tailwind:build --minify assets/styles/demos/live-memory.css",
             "@php bin/console tailwind:build --minify assets/styles/demos/inspector.css",
-            "@php bin/console tailwind:build --minify assets/styles/toolkit-common.css",
-            "@php bin/console tailwind:build --minify assets/styles/toolkit-shadcn.css",
-            "@php bin/console tailwind:build --minify assets/styles/toolkit-flowbite-4.css"
+            "for input in var/ux_toolkit/preview/ux-toolkit-*.css; do php bin/console tailwind:build --minify \"$input\" || exit 1; done"
         ]
     }
 }

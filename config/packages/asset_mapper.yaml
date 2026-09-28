@@ -3,7 +3,6 @@ framework:
         # The paths to make available to the asset mapper.
         paths:
             assets/: ''
-            vendor/symfony/ux-toolkit/kits/: '@symfony/ux-toolkit/kits'
             vendor/symfony/ux-toolkit/assets/: '@symfony/ux-toolkit/assets'
             vendor/symfony/ux-inspector/assets/dist/: '@symfony/ux-inspector'
         excluded_patterns:
@@ -12,9 +11,6 @@ framework:
             - '*/assets/icons/**'
             - '*/assets/react/build**'     # React build dir
             - '*/assets/react/src**'       # React sources
-            - '*/kits/**/*.html.twig'      # UX Toolkit kit Twig templates
-            - '*/kits/**/*.md'             # UX Toolkit kit documentation
-            - '*/kits/**/manifest.json'    # UX Toolkit kit manifest files
         importmap_polyfill: false
         missing_import_mode: strict
 

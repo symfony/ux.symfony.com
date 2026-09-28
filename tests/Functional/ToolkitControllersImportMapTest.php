@@ -14,10 +14,11 @@ namespace App\Tests\Functional;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\AssetMapper\AssetMapperInterface;
 use Symfony\Component\AssetMapper\ImportMap\ImportMapConfigReader;
+use Symfony\UX\Toolkit\Preview\PreviewAssetsGenerator;
 
 final class ToolkitControllersImportMapTest extends KernelTestCase
 {
-    public function testToolkitControllersAreAutoRegisteredFromTheVendoredKits(): void
+    public function testToolkitControllersAreRegisteredByTheKitPreviewEntrypoints(): void
     {
         self::bootKernel();
 
@@ -30,22 +31,23 @@ final class ToolkitControllersImportMapTest extends KernelTestCase
         self::assertTrue($entries->has('@symfony/ux-toolkit/assets/controllers/popover_controller.js'));
         self::assertTrue($entries->has('@symfony/ux-toolkit/assets/controllers/clipboard_controller.js'));
 
-        /** @var AssetMapperInterface $assetMapper */
-        $assetMapper = self::getContainer()->get('asset_mapper');
-        $loader = $assetMapper->getAsset('toolkit-controllers.loader.js');
-        self::assertNotNull($loader);
-
-        $implicitImports = [];
-        foreach ($loader->getJavaScriptImports() as $import) {
-            if ($import->addImplicitlyToImportMap) {
-                $implicitImports[] = $import->assetLogicalPath;
-            }
-        }
-
-        self::assertContains('@symfony/ux-toolkit/kits/shadcn/accordion/assets/controllers/accordion_controller.js', $implicitImports);
-        self::assertContains('@symfony/ux-toolkit/kits/flowbite-4/modal/assets/controllers/flowbite_modal_controller.js', $implicitImports);
+        self::assertContains('@symfony/ux-toolkit/kits/shadcn/accordion/assets/controllers/accordion_controller.js', $this->getKitPreviewImports($reader, 'shadcn'));
+        self::assertContains('@symfony/ux-toolkit/kits/flowbite-4/modal/assets/controllers/flowbite_modal_controller.js', $this->getKitPreviewImports($reader, 'flowbite-4'));
 
         // The base CSS stays an explicit entry.
         self::assertTrue($entries->has('@symfony/ux-toolkit/assets/styles/toolkit.css'));
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function getKitPreviewImports(ImportMapConfigReader $reader, string $kitId): array
+    {
+        /** @var AssetMapperInterface $assetMapper */
+        $assetMapper = self::getContainer()->get('asset_mapper');
+        $entrypoint = $reader->getEntries()->get(PreviewAssetsGenerator::entrypointName($kitId));
+        $asset = $assetMapper->getAssetFromSourcePath($entrypoint->path);
+
+        return array_map(static fn ($import) => $import->assetLogicalPath, $asset->getJavaScriptImports());
     }
 }

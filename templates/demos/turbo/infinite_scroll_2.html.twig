@@ -25,18 +25,8 @@
                     {% endfor %}
                 </div>
                 <div style="display: grid; place-content: center;padding-block: 2rem;">
-                    {% if has_more %}
-                        <twig:Turbo:Frame
-                            id="product-grid-pagination"
-                            src="{{ path('app_demo_turbo_infinite_scroll_2', {
-                                page: next_page,
-                                _format: 'turbo_stream',
-                            }) }}"
-                            loading="lazy"
-                        />
-                    {% else %}
-                        <span class="code">The End</span>
-                    {% endif %}
+                    {% from 'demos/turbo/infinite_scroll_2.html.twig' import pagination %}
+                    {{ pagination(has_more, next_page) }}
                 </div>
             </div>
         </twig:Browser>
@@ -46,8 +36,8 @@
         <div class="container container-xxl d-flex flex-column">
             <twig:Code:CodeWithExplanationRow
                 filename="templates/demos/turbo/infinite_scroll_2.html.twig"
-                lineStart="39"
-                lineEnd="46"
+                lineStart="98"
+                lineEnd="111"
                 reversed
             >
                 ## Lazy-Loading Trick
@@ -66,11 +56,11 @@
             </twig:Code:CodeWithExplanationRow>
             <twig:Code:CodeWithExplanationRow
                 filename="templates/demos/turbo/infinite_scroll_2.html.twig"
-                lineStart="109"
-                lineEnd="139"
+                lineStart="86"
+                lineEnd="96"
                 reversed
             >
-                Then, we do the same changes in the `stream_success` block...
+                Then, the `stream_success` block reuses the same macro to replace the frame...
             </twig:Code:CodeWithExplanationRow>
         </div>
     </section>
@@ -100,17 +90,22 @@
         {% endfor %}
     </twig:Turbo:Stream:Append>
     <twig:Turbo:Stream:Replace target="#product-grid-pagination">
-        {% if has_more %}
-            <twig:Turbo:Frame
-                id="product-grid-pagination"
-                src="{{ path('app_demo_turbo_infinite_scroll_2', {
-                    page: next_page,
-                    _format: 'turbo_stream',
-                }) }}"
-                loading="lazy"
-            />
-        {% else %}
-            <span class="code">The End</span>
-        {% endif %}
+        {% from 'demos/turbo/infinite_scroll_2.html.twig' import pagination %}
+        {{ pagination(has_more, next_page) }}
     </twig:Turbo:Stream:Replace>
 {% endblock %}
+
+{% macro pagination(has_more, next_page) %}
+    {% if has_more %}
+        <twig:Turbo:Frame
+            id="product-grid-pagination"
+            src="{{ path('app_demo_turbo_infinite_scroll_2', {
+                page: next_page,
+                _format: 'turbo_stream',
+            }) }}"
+            loading="lazy"
+        />
+    {% else %}
+        <span class="code">The End</span>
+    {% endif %}
+{% endmacro %}

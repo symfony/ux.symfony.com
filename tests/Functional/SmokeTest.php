@@ -104,7 +104,7 @@ class SmokeTest extends KernelTestCase
     }
 
     #[DataProvider('provideDemoUrls')]
-    public function testDemoPages(LiveDemo $demo): void
+    public function testDemoPages(LiveDemo|TurboDemo $demo): void
     {
         $router = self::bootKernel()->getContainer()->get('router');
         $url = $router->generate($demo->getRoute());
@@ -119,12 +119,12 @@ class SmokeTest extends KernelTestCase
     {
         $repository = new LiveDemoRepository();
         foreach ($repository->findAll() as $demo) {
-            yield $demo->getIdentifier() => [$demo];
+            yield 'live-'.$demo->getIdentifier() => [$demo];
         }
 
         $repository = new TurboDemoRepository();
         foreach ($repository->findAll() as $demo) {
-            yield $demo->getIdentifier() => [$demo];
+            yield 'turbo-'.$demo->getIdentifier() => [$demo];
         }
     }
 }

@@ -47,7 +47,7 @@ class TurboDemoController extends AbstractController
         $hasMore = \count($this->emojiCollection) > ($page * self::PER_PAGE);
         $nextPage = $hasMore ? $page + 1 : null;
 
-        if ($request->headers->has('Turbo-Frame')) {
+        if (TurboBundle::STREAM_FORMAT === $request->getPreferredFormat()) {
             $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
 
             return $this->renderBlock('demos/turbo/infinite_scroll.html.twig', 'stream_success', [

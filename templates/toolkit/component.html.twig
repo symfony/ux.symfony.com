@@ -1,11 +1,17 @@
 {% extends 'toolkit/kit_page.html.twig' %}
 
+{% set trail = [
+    {label: kit.manifest.name, href: path('app_toolkit_kit', {kitId: kit_id})},
+    {label: 'Components', href: path('app_toolkit_kit_components', {kitId: kit_id})},
+    {label: component.manifest.name},
+] %}
 {% set title = 'Component ' ~ component.manifest.name ~ ' - ' ~ kit.manifest.name ~ ' Kit' %}
 {% set description = "Documentation of component #{component.manifest.name}, from the UX Toolkit #{kit.manifest.name}, #{kit.manifest.description}." %}
 {% set meta = {
     title: title,
     description: description,
     canonical: url('app_toolkit_component', {kitId: kit_id, componentName: component.name}),
+    hierarchy: ['Kits']|merge(trail|column('label')),
     social: {
         title: title,
         description: description,
@@ -53,11 +59,7 @@
 {% endblock %}
 
 {% block kit_main %}
-    {{ include('toolkit/_kit_breadcrumb.html.twig', {trail: [
-        {label: kit.manifest.name, href: path('app_toolkit_kit', {kitId: kit_id})},
-        {label: 'Components', href: path('app_toolkit_kit_components', {kitId: kit_id})},
-        {label: component.manifest.name},
-    ]}) }}
+    {{ include('toolkit/_kit_breadcrumb.html.twig', {trail: trail}) }}
 
     <twig:Toolkit:ComponentDoc kitId="{{ kit_id }}" component="{{ component }}" tocItems="{{ toc_items }}" />
 {% endblock %}

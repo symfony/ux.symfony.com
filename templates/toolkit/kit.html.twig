@@ -1,9 +1,13 @@
 {% extends 'toolkit/kit_page.html.twig' %}
 
+{% set trail = [
+    {label: kit.manifest.name},
+] %}
 {% set meta = {
     title: 'UX Toolkit - Kits - ' ~ kit.manifest.name,
     description: kit.manifest.description,
     canonical: url('app_toolkit_kit', {kitId: kit_id}),
+    hierarchy: ['Kits']|merge(trail|column('label')),
     social: {
         title: 'UX Toolkit - Kits - ' ~ kit.manifest.name,
         description: kit.manifest.description,
@@ -18,9 +22,7 @@
 } %}
 
 {% block kit_main %}
-    {{ include('toolkit/_kit_breadcrumb.html.twig', {trail: [
-        {label: kit.manifest.name},
-    ]}) }}
+    {{ include('toolkit/_kit_breadcrumb.html.twig', {trail: trail}) }}
 
     <div class="Wysiwyg">
         {{- kit.installAsMarkdown|markdown_to_html -}}

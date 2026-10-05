@@ -1,11 +1,16 @@
 {% extends 'toolkit/kit_page.html.twig' %}
 
+{% set trail = [
+    {label: kit.manifest.name, href: path('app_toolkit_kit', {kitId: kit_id})},
+    {label: 'Components'},
+] %}
 {% set title = 'Components - ' ~ kit.manifest.name ~ ' Kit' %}
 {% set description = "All components from the UX Toolkit #{kit.manifest.name} kit." %}
 {% set meta = {
     title: title,
     description: description,
     canonical: url('app_toolkit_kit_components', {kitId: kit_id}),
+    hierarchy: ['Kits']|merge(trail|column('label')),
     social: {
         title: title,
         description: description,
@@ -20,10 +25,7 @@
 } %}
 
 {% block kit_main %}
-    {{ include('toolkit/_kit_breadcrumb.html.twig', {trail: [
-        {label: kit.manifest.name, href: path('app_toolkit_kit', {kitId: kit_id})},
-        {label: 'Components'},
-    ]}) }}
+    {{ include('toolkit/_kit_breadcrumb.html.twig', {trail: trail}) }}
 
     <div class="Wysiwyg">
         <h1>Components</h1>

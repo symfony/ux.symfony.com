@@ -1,10 +1,12 @@
 {% extends 'base.html.twig' %}
 
+{% set demo_package_name = demo_package_name|default('Live Components') %}
 {% set meta = {
     title: demo.name,
-    title_suffix: ' - ' ~ (demo_package_name|default('Live Component')) ~ ' - Symfony UX',
+    title_suffix: ' - ' ~ demo_package_name ~ ' - Symfony UX',
     description: demo.description|striptags,
     canonical: url(demo.route),
+    hierarchy: ['Demos', demo_package_name, demo.name],
     social: {
         title: demo.name ~ ' - Symfony UX',
         description: demo.longDescription|markdown_to_html|striptags,

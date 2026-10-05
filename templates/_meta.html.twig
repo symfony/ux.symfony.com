@@ -4,6 +4,11 @@
 
 <meta name="description" content="{% block description %}{{ meta.description|default|u.truncate(200, '...', false) }}{% endblock %}">
 
+{# Read by the Algolia crawler; not "docsearch:*", which DocSearch copies onto every record #}
+{% for level in meta.hierarchy ?? [] %}
+    <meta name="search:hierarchy" content="{{ level }}">
+{% endfor %}
+
 {# META < META.SOCIAL #}
 {% set social = {
     title: meta.title,

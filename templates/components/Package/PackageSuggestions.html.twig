@@ -1,7 +1,7 @@
 {% set suggestions = this.packages %}
 {% set human_name = package.humanName %}
 
-<twig:Package:Section tone="accent">
+<twig:Package:Section tone="accent" data-search-ignore>
     <twig:Package:SectionHeading centered title="More from <strong>Symfony UX</strong>.">
         <p>{{ human_name }} is one package among many. They share the same Stimulus foundation and install the same way.</p>
     </twig:Package:SectionHeading>

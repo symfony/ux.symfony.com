@@ -39,6 +39,15 @@ final class SearchHierarchyTest extends KernelTestCase
         self::assertSame($expectedHierarchy, $hierarchy);
     }
 
+    public function testPackageSuggestionsAreIgnoredBySearch(): void
+    {
+        $this->browser()
+            ->visit('/live-component')
+            ->assertSuccessful()
+            ->assertSeeIn('[data-search-ignore]', 'More from Symfony UX')
+        ;
+    }
+
     public static function providePages(): \Generator
     {
         foreach ((new UxPackageRepository())->findAll(removed: false) as $package) {

@@ -21,6 +21,8 @@ export default class extends Controller {
         this.timeout = setTimeout(() => {
             localStorage.setItem('user-theme', theme);
             document.documentElement.classList.toggle('dark', theme === 'dark');
+            // DocSearch reads its dark theme from html[data-theme="dark"], not from the .dark class
+            document.documentElement.dataset.theme = theme;
         }, 250);
     }
 }

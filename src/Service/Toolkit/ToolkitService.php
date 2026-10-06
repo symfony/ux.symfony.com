@@ -52,7 +52,10 @@ class ToolkitService
 
     public function renderRecipeHtml(string $kitId, Recipe $recipe): string
     {
-        return $this->renderRecipe($kitId, $recipe)->html;
+        $html = $this->renderRecipe($kitId, $recipe)->html;
+
+        // Every recipe repeats the same installation steps, they would flood the docs search
+        return preg_replace('#(<h2 id="content-installation">.*?</h2>\s*<\w+)#s', '$1 data-search-ignore', $html, 1) ?? $html;
     }
 
     /**

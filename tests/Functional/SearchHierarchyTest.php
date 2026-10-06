@@ -48,6 +48,16 @@ final class SearchHierarchyTest extends KernelTestCase
         ;
     }
 
+    public function testKitComponentInstallationIsIgnoredBySearch(): void
+    {
+        $this->browser()
+            ->visit('/toolkit/kits/shadcn/components/tooltip')
+            ->assertSuccessful()
+            ->assertSeeIn('#content-installation + [data-search-ignore]', 'Available since UX Toolkit')
+            ->assertNotSeeIn('[data-search-ignore]', 'Usage')
+        ;
+    }
+
     public static function providePages(): \Generator
     {
         foreach ((new UxPackageRepository())->findAll(removed: false) as $package) {

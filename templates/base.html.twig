@@ -24,6 +24,8 @@
               const applyTheme = (theme) => {
                 theme = theme === 'light' ? 'light' : 'dark';
                 document.documentElement.classList.toggle('dark', theme === 'dark');
+                // DocSearch reads its dark theme from html[data-theme="dark"], not from the .dark class
+                document.documentElement.dataset.theme = theme;
               };
 
               let theme = localStorage.getItem('user-theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');

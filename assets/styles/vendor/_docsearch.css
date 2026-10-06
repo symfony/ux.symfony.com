@@ -1,0 +1,55 @@
+/*
+ * DocSearch overrides.
+ *
+ * style.min.css is loaded unlayered, so these rules — living in
+ * `@layer components` — only win with `!important`.
+ */
+@layer components {
+    .DocSearch-Button {
+        @variant max-nav-wide {
+            justify-content: center !important;
+            width: --spacing(6) !important;
+            height: --spacing(6) !important;
+            padding: 0 !important;
+            border: 0 !important;
+            background: transparent !important;
+            color: inherit !important;
+            opacity: .9 !important;
+            transition: all 250ms !important;
+
+            &:hover {
+                opacity: 1 !important;
+                scale: 1.1 !important;
+            }
+        }
+    }
+
+    .DocSearch-Button:focus-visible {
+        outline: revert !important;
+    }
+
+    .DocSearch-Button .DocSearch-Search-Icon {
+        display: none;
+    }
+
+    .DocSearch-Button-Container::before {
+        content: '';
+        width: --spacing(5);
+        height: --spacing(5);
+        background-color: currentColor;
+        /* assets/icons/icon-search.svg thickened by a 1px stroke, inlined because AssetMapper excludes assets/icons/ */
+        mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-0.5 -0.5 17 17'%3E%3Cpath stroke='black' stroke-width='1' stroke-linejoin='round' d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0'/%3E%3C/svg%3E") center / contain no-repeat;
+    }
+
+    .DocSearch-Button-Keys {
+        @variant max-2xl {
+            display: none !important;
+        }
+    }
+
+    .DocSearch-Button-Placeholder {
+        @variant max-nav-wide {
+            display: none !important;
+        }
+    }
+}

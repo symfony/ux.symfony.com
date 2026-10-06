@@ -31,7 +31,7 @@ final class ChangelogItem
     public function getTitle(): string
     {
         if (!isset($this->item['name'])) {
-            return $this->item['version'];
+            return '';
         }
 
         $name = $this->item['name'];

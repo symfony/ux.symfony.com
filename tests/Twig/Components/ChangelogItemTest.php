@@ -31,6 +31,41 @@ class ChangelogItemTest extends TestCase
         $this->assertSame('foobar', $component->getContent());
     }
 
+    /**
+     * @param array{id: int, name?: string, version: string, date: string} $item
+     */
+    #[DataProvider('provideTitleValues')]
+    public function testGetTitle(array $item, string $expected): void
+    {
+        $component = new ChangelogItem();
+        $component->item = $item;
+
+        $this->assertSame($expected, $component->getTitle());
+    }
+
+    /**
+     * @return iterable<string, array{0: array{id: int, name?: string, version: string, date: string}, 1: string}>
+     */
+    public static function provideTitleValues(): iterable
+    {
+        yield 'name_after_version' => [
+            ['id' => 1, 'name' => 'v3.4.0: Toolkit!', 'version' => 'v3.4.0', 'date' => '2026-01-01'],
+            'Toolkit!',
+        ];
+        yield 'name_without_version' => [
+            ['id' => 1, 'name' => 'Symfony 8!', 'version' => 'v3.0.0', 'date' => '2026-01-01'],
+            'Symfony 8!',
+        ];
+        yield 'name_is_version' => [
+            ['id' => 1, 'name' => 'v3.5.1', 'version' => 'v3.5.1', 'date' => '2026-01-01'],
+            '',
+        ];
+        yield 'no_name' => [
+            ['id' => 1, 'version' => 'v3.5.1', 'date' => '2026-01-01'],
+            '',
+        ];
+    }
+
     #[DataProvider('provideContentValues')]
     public function testFormatContent(string $body, string $expected): void
     {

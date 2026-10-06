@@ -1,4 +1,4 @@
-<article {{ attributes.defaults({class: 'grid gap-16 grid-cols-[var(--left-pane)_1fr] max-lg:gap-0 max-lg:grid-cols-[auto_1fr]'}) }} id="{{ item.version }}">
+<article {{ attributes.defaults({class: 'grid gap-16 grid-cols-[var(--left-pane)_1fr] max-lg:gap-0 max-lg:grid-cols-1'}) }} id="{{ item.version }}">
 
     <div class="self-start sticky top-8 flex flex-col content-stretch justify-center text-center pt-4 after:content-[''] after:absolute after:-right-2 after:w-4 after:h-4 after:rounded-full after:bg-body-text max-lg:hidden">
         <a class="text-xl font-normal block text-code opacity-90 transition-all duration-150 ease-in-out hover:opacity-100" href="https://github.com/symfony/ux/releases/tag/{{ item.version }}"
@@ -13,8 +13,13 @@
     <div class="p-6 rounded-sm bg-[#eef0f91a] border border-surface dark:bg-[#1c2024]">
         <details class="group" {{ isOpen|default ? 'open' }}>
             <summary class="list-none [&::-webkit-details-marker]:hidden cursor-pointer flex flex-row items-center gap-4 justify-between">
+                {% set title = this.getTitle() %}
                 <h2 class="text-lg font-normal text-body-text mb-0 group-open:text-xl">
-                    {{- this.getTitle() -}}
+                    {%- if title -%}
+                        <span class="lg:sr-only">{{ this.getVersion() }}</span> {{ title }}
+                    {%- else -%}
+                        Release {{ this.getVersion() }}
+                    {%- endif -%}
                 </h2>
                 <twig:ux:icon name="chevron-down" class="Icon transition-all duration-150 ease-in-out rotate-0 opacity-50 group-open:rotate-180 group-open:opacity-75" />
             </summary>

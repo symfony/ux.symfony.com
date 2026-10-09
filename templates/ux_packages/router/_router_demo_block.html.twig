@@ -1,0 +1,25 @@
+{% set parameters = parameters ?? {} %}
+{% set query = query ?? {} %}
+
+<div class="flex flex-col sm:flex-row gap-3 py-3 sm:gap-6 sm:py-6 border-b border-n-200 first:pt-0 last:pb-0 last:border-b-0 sm:first:pt-0 sm:last:pb-0"
+     data-controller="router-demo-block"
+     data-router-demo-block-function-value="{{ function }}"
+     data-router-demo-block-route-value="{{ route }}"
+>
+    <div class="sm:flex-5 min-w-0 sm:self-start">
+        <div class="Terminal Terminal_body">
+            <div class="Terminal_content"><pre class="overflow-x-auto"><span class="hl-property function_">{{ function }}</span>(<span class="hl-value">'{{ route }}'</span>{% if parameters or query %}, {
+{% for name in parameters|keys %}    <span class="hl-property">{{ name }}</span>: <span class="hl-value" data-code-parameter="{{ name }}"></span>,
+{% endfor %}{% if query %}    <span class="hl-property">_query</span>: { {% for name in query|keys %}<span class="hl-property">{{ name }}</span>: <span class="hl-value" data-code-parameter="_query.{{ name }}"></span>{{ not loop.last ? ', ' }}{% endfor %} },
+{% endif %}}{% endif %})</pre></div>
+        </div>
+    </div>
+    <div class="sm:flex-3">
+        {% block parameters %}{% endblock %}
+    </div>
+    <div class="sm:flex-4 min-w-0 flex flex-col justify-center">
+        <div class="text-xs uppercase tracking-wide text-n-500 mb-1">{{ label }}</div>
+        <a href="#" class="font-mono text-sm break-all underline decoration-dotted underline-offset-4" data-router-demo-block-target="output"></a>
+        <p class="font-mono text-sm break-words text-red-700 dark:text-red-400" data-router-demo-block-target="error" hidden></p>
+    </div>
+</div>

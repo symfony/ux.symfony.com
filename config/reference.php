@@ -1231,6 +1231,11 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     },
  *     keys_patterns?: Param|string|list<scalar|Param|null>,
  * }
+ * @psalm-type UxRouterConfig = array{
+ *     dump_directory?: scalar|Param|null, // The directory where routes and TypeScript types are dumped. // Default: "%kernel.project_dir%/var/routes"
+ *     dump_typescript?: bool|Param, // Control whether TypeScript types are dumped alongside routes. Disable this if you do not use TypeScript (e.g. in production when using AssetMapper). // Default: true
+ *     routes?: Param|string|list<scalar|Param|null>,
+ * }
  * @psalm-type StimulusConfig = array{
  *     controller_paths?: list<scalar|Param|null>,
  *     controllers_json?: scalar|Param|null, // Default: "%kernel.project_dir%/assets/controllers.json"
@@ -1371,6 +1376,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     react?: ReactConfig,
  *     vue?: VueConfig,
  *     ux_translator?: UxTranslatorConfig,
+ *     ux_router?: UxRouterConfig,
  *     stimulus?: StimulusConfig,
  *     ux_icons?: UxIconsConfig,
  *     ux_map?: UxMapConfig,
@@ -1401,6 +1407,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         react?: ReactConfig,
  *         vue?: VueConfig,
  *         ux_translator?: UxTranslatorConfig,
+ *         ux_router?: UxRouterConfig,
  *         stimulus?: StimulusConfig,
  *         zenstruck_foundry?: ZenstruckFoundryConfig,
  *         ux_icons?: UxIconsConfig,
@@ -1430,6 +1437,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         react?: ReactConfig,
  *         vue?: VueConfig,
  *         ux_translator?: UxTranslatorConfig,
+ *         ux_router?: UxRouterConfig,
  *         stimulus?: StimulusConfig,
  *         ux_icons?: UxIconsConfig,
  *         ux_map?: UxMapConfig,
@@ -1459,6 +1467,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         react?: ReactConfig,
  *         vue?: VueConfig,
  *         ux_translator?: UxTranslatorConfig,
+ *         ux_router?: UxRouterConfig,
  *         stimulus?: StimulusConfig,
  *         zenstruck_foundry?: ZenstruckFoundryConfig,
  *         ux_icons?: UxIconsConfig,

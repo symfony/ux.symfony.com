@@ -36,6 +36,7 @@ return [
     '@symfony/ux-react' => ['path' => '@symfony/ux-react/loader.js'],
     '@symfony/ux-vue' => ['path' => '@symfony/ux-vue/loader.js'],
     '@symfony/ux-translator' => ['path' => '@symfony/ux-translator/translator_controller.js'],
+    '@symfony/ux-router' => ['path' => '@symfony/ux-router/router_controller.js'],
     '@symfony/ux-live-component' => ['path' => './vendor/symfony/ux-live-component/assets/dist/live_controller.js'],
     '@symfony/ux-inspector' => ['path' => './vendor/symfony/ux-inspector/assets/dist/inspector.js'],
     'stimulus-clipboard' => ['version' => '4.0.1'],

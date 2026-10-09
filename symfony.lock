@@ -629,6 +629,9 @@
     "symfony/ux-react": {
         "version": "2.x-dev"
     },
+    "symfony/ux-router": {
+        "version": "3.x-dev"
+    },
     "symfony/ux-toolkit": {
         "version": "2.x-dev"
     },

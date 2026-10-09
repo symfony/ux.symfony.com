@@ -164,6 +164,17 @@ class UxPackageRepository
                 'translator.svg',
             ),
 
+            new UxPackage(
+                'router',
+                'Router',
+                'app_router',
+                '#7C3AED',
+                'Symfony Routes in JavaScript',
+                "Generate your Symfony routes' URLs in JavaScript",
+                'I need to generate URLs in JavaScript',
+                'router.svg',
+            ),
+
             (new UxPackage(
                 'chartjs',
                 'Chart.js',

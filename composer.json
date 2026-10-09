@@ -47,6 +47,7 @@
         "symfony/ux-notify": "3.x-dev",
         "symfony/ux-pagination": "3.x-dev",
         "symfony/ux-react": "3.x-dev",
+        "symfony/ux-router": "3.x-dev",
         "symfony/ux-toolkit": "3.x-dev",
         "symfony/ux-translator": "3.x-dev",
         "symfony/ux-turbo": "3.x-dev",

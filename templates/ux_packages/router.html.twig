@@ -1,0 +1,188 @@
+{% extends 'ux_packages/package.html.twig' %}
+
+{% block package_header %}
+    {% component PackageHeader with {
+        package: 'router',
+        eyebrowText: 'JavaScript-enabled Routing',
+    } %}
+        {% block title_header %}
+            Your routes, directly in <em>JavaScript</em>
+        {% endblock %}
+
+        {% block sub_content %}
+            Generate the URLs of your Symfony routes in JavaScript, exactly like path() and url() do in Twig.
+        {% endblock %}
+    {% endcomponent %}
+{% endblock %}
+
+{% block package_features %}
+    {% set router_features = [
+        {
+            icon: 'lucide:link',
+            title: 'The same <strong>URLs</strong>',
+            description: 'Identical to what path() and url() return in Twig.',
+        },
+        {
+            icon: 'lucide:shield-check',
+            title: 'Only what you <strong>expose</strong>',
+            description: 'No route reaches JavaScript until you list it.',
+        },
+        {
+            icon: 'lucide:braces',
+            title: 'Typed <strong>parameters</strong>',
+            description: 'TypeScript checks route names and parameters.',
+        },
+        {
+            icon: 'lucide:globe',
+            title: 'Localized <strong>routes</strong>',
+            description: 'The current locale picks the right path.',
+        },
+        {
+            icon: 'lucide:refresh-cw',
+            title: 'Fresh in <strong>dev</strong>',
+            description: 'Change a route, the next request dumps it again.',
+        },
+    ] %}
+    <twig:FeaturesCluster
+        :items="router_features"
+        title="What Router gives you"
+        titleId="router-overview-title"
+    />
+{% endblock %}
+
+{% block package_highlights %}
+    {% set rt_expose %}ux_router:
+    routes:
+        - 'app_*'
+        - '!app_admin_*'{% endset %}
+    {% set rt_dump %}var/routes/
+├── index.js
+└── index.d.ts{% endset %}
+    {% set rt_path %}import { path, url } from './router.js';
+
+path('app_blog_show', { slug: 'hello', _query: { page: 2 } });
+// '/blog/hello?page=2'
+
+url('app_blog_show', { slug: 'hello' });
+// 'https://example.com/blog/hello'{% endset %}
+
+    <twig:Package:Highlights
+        eyebrow="Dumped at cache warmup"
+        title="How the routes <strong>get there</strong>."
+        intro="Nothing is fetched at runtime. A cache warmer writes the routes you expose to disk, and your JavaScript imports them like any other module."
+        :items="[
+            {
+                icon: 'lucide:shield-check',
+                title: 'Exposed on <strong>purpose</strong>',
+                description: 'Name patterns, or the expose option of a route, decide what JavaScript can see.',
+                code: rt_expose,
+                language: 'yaml',
+            },
+            {
+                icon: 'lucide:file-down',
+                title: 'Written to <strong>disk</strong>',
+                description: 'The exposed routes end up in one generated module, with TypeScript types next to it.',
+                code: rt_dump,
+                language: 'bash',
+            },
+            {
+                icon: 'lucide:link',
+                title: 'The same <strong>path()</strong> and <strong>url()</strong>',
+                description: 'Requirements, defaults, hosts, schemes and the query string behave the way they do in PHP.',
+                code: rt_path,
+                language: 'javascript',
+            },
+        ]"
+    />
+{% endblock %}
+
+{% block code_block_left %}
+    <twig:CodeBlock filename="config/packages/ux_router.yaml" height="300px"/>
+{% endblock %}
+
+{% block code_block_right %}
+    <twig:CodeBlock filename="assets/router.js" height="300px"/>
+{% endblock %}
+
+{% block demo_title %}UX Router{% endblock %}
+
+{% block demo_content %}
+    {% embed 'ux_packages/router/_router_demo_block.html.twig' with {
+        function: 'path',
+        route: 'demo_blog_post',
+        parameters: {slug: 'hello-world'},
+        query: {page: 2},
+        label: 'Path with a query string',
+    } %}
+        {% block parameters %}
+            <div class="mb-2">
+                <twig:Form:Label for="demo-path-slug">Slug</twig:Form:Label>
+                <twig:Form:Input id="demo-path-slug" type="text" value="hello-world"
+                    data-router-demo-block-target="parameter" data-parameter="slug"
+                    data-action="router-demo-block#render"
+                />
+            </div>
+            <div class="mb-2">
+                <twig:Form:Label for="demo-path-page">Page</twig:Form:Label>
+                <twig:Form:Input id="demo-path-page" type="number" min="1" value="2"
+                    data-router-demo-block-target="parameter" data-parameter="_query.page"
+                    data-action="router-demo-block#render"
+                />
+            </div>
+        {% endblock %}
+    {% endembed %}
+
+    {% embed 'ux_packages/router/_router_demo_block.html.twig' with {
+        function: 'url',
+        route: 'demo_blog_post',
+        parameters: {slug: 'hello-world'},
+        label: 'Absolute URL',
+    } %}
+        {% block parameters %}
+            <div class="mb-2">
+                <twig:Form:Label for="demo-url-slug">Slug</twig:Form:Label>
+                <twig:Form:Input id="demo-url-slug" type="text" value="hello-world"
+                    data-router-demo-block-target="parameter" data-parameter="slug"
+                    data-action="router-demo-block#render"
+                />
+            </div>
+        {% endblock %}
+    {% endembed %}
+
+    {% embed 'ux_packages/router/_router_demo_block.html.twig' with {
+        function: 'path',
+        route: 'demo_about',
+        parameters: {_locale: 'fr'},
+        label: 'Localized route',
+    } %}
+        {% block parameters %}
+            <div class="mb-2">
+                <twig:Form:Label for="demo-about-locale">Locale</twig:Form:Label>
+                <twig:Form:Select id="demo-about-locale"
+                    data-router-demo-block-target="parameter" data-parameter="_locale"
+                    data-action="router-demo-block#render"
+                >
+                    <option value="en">en</option>
+                    <option value="fr" selected>fr</option>
+                </twig:Form:Select>
+            </div>
+        {% endblock %}
+    {% endembed %}
+
+    {% embed 'ux_packages/router/_router_demo_block.html.twig' with {
+        function: 'path',
+        route: 'demo_blog_archive',
+        parameters: {year: '2026'},
+        label: 'Requirement check',
+    } %}
+        {% block parameters %}
+            <div class="mb-2">
+                <twig:Form:Label for="demo-archive-year">Year, must match <code>\d{4}</code></twig:Form:Label>
+                <twig:Form:Input id="demo-archive-year" type="text" value="2026"
+                    data-router-demo-block-target="parameter" data-parameter="year"
+                    data-action="router-demo-block#render"
+                />
+            </div>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

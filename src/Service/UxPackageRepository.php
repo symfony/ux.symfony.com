@@ -333,6 +333,17 @@ class UxPackageRepository
         return array_values($packages);
     }
 
+    /**
+     * @return list<UxPackage>
+     */
+    public function findLatestNew(int $limit): array
+    {
+        $packages = array_filter($this->findAll(removed: false), static fn (UxPackage $package) => $package->isNew());
+        usort($packages, static fn (UxPackage $a, UxPackage $b) => $b->getPublishedAt() <=> $a->getPublishedAt());
+
+        return \array_slice($packages, 0, $limit);
+    }
+
     public function find(string $name): UxPackage
     {
         $packages = $this->findAll();

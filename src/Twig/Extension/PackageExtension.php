@@ -14,6 +14,7 @@ namespace App\Twig\Extension;
 use App\Service\UxPackageRepository;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
+use Twig\TwigFunction;
 
 /**
  * @author Simon André
@@ -29,6 +30,13 @@ final class PackageExtension extends AbstractExtension
     {
         return [
             new TwigFilter('ux_package', $this->packageRepository->find(...)),
+        ];
+    }
+
+    public function getFunctions(): array
+    {
+        return [
+            new TwigFunction('ux_latest_new_packages', $this->packageRepository->findLatestNew(...)),
         ];
     }
 }

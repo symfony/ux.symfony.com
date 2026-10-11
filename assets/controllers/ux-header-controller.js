@@ -32,4 +32,10 @@ export default class extends Controller {
         clearTimeout(this.resizeTimeout);
         this.resizeTimeout = setTimeout(() => this.element.classList.remove('resizing'), 100);
     }
+
+    closeMenuOnDesktop() {
+        if (this.open && this.menuButtonTarget.offsetParent === null) {
+            this.toggleMenu();
+        }
+    }
 }

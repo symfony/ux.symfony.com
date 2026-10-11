@@ -28,6 +28,7 @@ class UxPackageRepository
                 '#7C5CD6',
                 'SVG icons made easy',
                 'Render SVG icons seamlessly from your Twig templates.',
+                new \DateTimeImmutable('2024-04-19'),
                 'I need to render SVG icons.',
                 'icons.svg',
                 gradient: 'linear-gradient(to bottom right, cyan, purple)',
@@ -42,6 +43,7 @@ class UxPackageRepository
                 '#1BA980',
                 'Interactive Maps',
                 'Render interactive Maps in PHP with Leaflet or Google Maps.',
+                new \DateTimeImmutable('2024-08-09'),
                 'I need to display markers on a Map.',
                 'map.svg',
             ),
@@ -53,6 +55,7 @@ class UxPackageRepository
                 '#7FA020',
                 'Render Reusable UI Elements',
                 'Create PHP classes that can render themselves',
+                new \DateTimeImmutable('2021-12-03'),
                 'I need to create PHP classes that render'
             ),
 
@@ -63,6 +66,7 @@ class UxPackageRepository
                 '#D98A11',
                 'Interactive UI in PHP & Twig',
                 'Build dynamic interfaces with zero JavaScript',
+                new \DateTimeImmutable('2021-12-09'),
                 'I need Twig templates that update in real-time!'
             ),
 
@@ -73,6 +77,7 @@ class UxPackageRepository
                 '#5920A0',
                 'Single-page Symfony app',
                 'Integration with Turbo for single-page-app and real-time experience',
+                new \DateTimeImmutable('2021-05-20'),
                 'I need to transform my app into an SPA!'
             ))
                 ->setDocsLink('https://turbo.hotwired.dev/handbook/introduction', 'Documentation specifically for the Turbo JavaScript library.')
@@ -85,6 +90,7 @@ class UxPackageRepository
                 '#2EB17B',
                 'Central Bridge of Symfony UX',
                 'Integration with Stimulus for HTML-powered controllers',
+                new \DateTimeImmutable('2023-05-26'),
                 null,
                 'stimulus.svg',
                 'symfony/stimulus-bundle',
@@ -99,6 +105,7 @@ class UxPackageRepository
                 '#0B0D10',
                 'Live debugging in the browser',
                 'Browser devtools for Stimulus controllers, Live Components and Turbo frames.',
+                new \DateTimeImmutable('2026-09-27'),
                 'I need to debug why my Stimulus controller is not connecting.',
                 'inspector.svg',
                 isDevDependency: true,
@@ -114,6 +121,7 @@ class UxPackageRepository
                 '#64748b',
                 'Build your Design System.',
                 'Collection of components and templates that you can use to build your pages.',
+                new \DateTimeImmutable('2026-01-01'),
                 'I need components to build my design system.',
                 null,
                 null,
@@ -127,6 +135,7 @@ class UxPackageRepository
                 '#c18bf4',
                 'Hotwire Native for Symfony',
                 'Build native mobile apps that wrap your Symfony web application',
+                new \DateTimeImmutable('2026-03-17'),
                 'I need to wrap my Symfony app in a native mobile shell',
                 'native.svg',
             ))
@@ -139,6 +148,7 @@ class UxPackageRepository
                 '#635AA6',
                 'Pagination for all. One page ahead.',
                 'Paginate any data with numbered pages, lookahead, or cursors.',
+                new \DateTimeImmutable('2026-09-18'),
                 'I need to paginate my results.',
                 imageFileName: 'pagination.png',
             ),
@@ -150,6 +160,7 @@ class UxPackageRepository
                 '#DF275E',
                 'Ajax-powered Form Select',
                 'Ajax-powered, auto-completable `select` elements',
+                new \DateTimeImmutable('2022-06-15'),
                 'I need an Ajax-autocomplete select field'
             ),
 
@@ -160,6 +171,7 @@ class UxPackageRepository
                 '#2248D0',
                 'Symfony Translations in JavaScript',
                 "Use Symfony's translations in JavaScript",
+                new \DateTimeImmutable('2023-05-02'),
                 'I need to translate strings in JavaScript',
                 'translator.svg',
             ),
@@ -171,6 +183,7 @@ class UxPackageRepository
                 '#21A81E',
                 'Interactive charts with Chart.js',
                 'Easy charts with Chart.js',
+                new \DateTimeImmutable('2020-12-03'),
                 'I need to build a chart'
             ))
                 ->setDocsLink('https://www.chartjs.org/', 'Chart.js documentation.'),
@@ -182,6 +195,7 @@ class UxPackageRepository
                 '#10A2CB',
                 'Render React components from Twig',
                 'Quickly render `<React />` components &amp; pass them props.',
+                new \DateTimeImmutable('2022-06-13'),
                 'I need to render React components from Twig'
             ))
                 ->setDocsLink('https://reactjs.org/', 'Go deeper with the React docs.'),
@@ -193,6 +207,7 @@ class UxPackageRepository
                 '#35b67c',
                 'Render Vue components from Twig',
                 'Quickly render `<Vue />` components &amp; pass them props.',
+                new \DateTimeImmutable('2022-08-22'),
                 null,
             ))
                 ->setDocsLink('https://vuejs.org/', 'Go deeper with the Vue.js docs.'),
@@ -204,6 +219,7 @@ class UxPackageRepository
                 '#FF3E00',
                 'Render Svelte components from Twig',
                 'Quickly render `<Svelte />` components &amp; pass them props.',
+                new \DateTimeImmutable('2023-04-14'),
                 null,
                 'svelte.svg',
                 isRemoved: true,
@@ -217,6 +233,7 @@ class UxPackageRepository
                 '#1E8FA8',
                 'Form Tools for cropping images',
                 'Form Type and tools for cropping images',
+                new \DateTimeImmutable('2020-12-03'),
                 null,
             ))
                 ->setDocsLink('https://github.com/fengyuanchen/cropperjs', 'Cropper.js documentation.'),
@@ -228,6 +245,7 @@ class UxPackageRepository
                 '#AC2777',
                 'Delay Loading with Blurhash',
                 'Optimize Image Loading with BlurHash',
+                new \DateTimeImmutable('2020-12-03'),
                 isRemoved: true,
             ),
 
@@ -238,6 +256,7 @@ class UxPackageRepository
                 '#AC9F27',
                 'Upload Files with Style',
                 'Form type for stylized "drop zone" for file uploads',
+                new \DateTimeImmutable('2020-12-03'),
                 'I need an upload field that looks great'
             ),
 
@@ -248,6 +267,7 @@ class UxPackageRepository
                 '#D87036',
                 'Stylized Page Transitions',
                 'Integration with the page transition library Swup',
+                new \DateTimeImmutable('2020-12-03'),
                 isRemoved: true,
             ))
                 ->setDocsLink('https://swup.js.org/', 'Swup documentation'),
@@ -259,6 +279,7 @@ class UxPackageRepository
                 '#204CA0',
                 'Native Browser Notifications',
                 'Trigger native browser notifications from inside PHP',
+                new \DateTimeImmutable('2022-06-16'),
             ),
 
             new UxPackage(
@@ -268,6 +289,7 @@ class UxPackageRepository
                 '#7F1D1D',
                 'Save the date, anywhere',
                 'Let users add your events to their calendar of choice in one click.',
+                new \DateTimeImmutable('2026-05-22'),
                 'I want users to save my events in one click.',
                 imageFileName: 'calendar-link.svg',
             ),
@@ -279,6 +301,7 @@ class UxPackageRepository
                 '#BE0404',
                 'Password Visibility Switch',
                 'Switch the visibility of a password field',
+                new \DateTimeImmutable('2023-08-24'),
                 isRemoved: true,
             ),
 
@@ -289,6 +312,7 @@ class UxPackageRepository
                 '#20A091',
                 'Animated Typing with Typed.js',
                 'Animated typing with Typed.js',
+                new \DateTimeImmutable('2022-06-16'),
                 isRemoved: true
             ))
                 ->setDocsLink('https://github.com/mattboldt/typed.js/', 'Typed.js documentation'),

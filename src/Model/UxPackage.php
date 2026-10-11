@@ -25,6 +25,7 @@ class UxPackage
         private string $color,
         private string $tagLine,
         private string $description,
+        private \DateTimeImmutable $publishedAt,
         private ?string $createString = null,
         private ?string $imageFileName = null,
         private ?string $composerName = null,
@@ -189,6 +190,16 @@ class UxPackage
     public function isRemoved(): bool
     {
         return $this->isRemoved;
+    }
+
+    public function getPublishedAt(): \DateTimeImmutable
+    {
+        return $this->publishedAt;
+    }
+
+    public function isNew(): bool
+    {
+        return $this->publishedAt > new \DateTimeImmutable('-6 months');
     }
 
     public function getGithubRepositoryUrl(): string

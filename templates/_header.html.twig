@@ -2,7 +2,7 @@
 {% set white = theme == 'white' %}
 {% set package_hero = theme == 'package' %}
 <header
-    class="group absolute inset-x-0 top-0 z-10 py-6 nav:pt-8 {{ white ? 'text-white' : (package_hero ? 'text-(--package-accent-ink) [&.open]:text-body-text' : 'text-body-text') }} before:content-[''] before:fixed before:inset-0 before:hidden before:opacity-0 before:backdrop-blur-[5px] before:transition-all before:duration-250 before:ease-in-out before:transition-discrete {{ white ? 'before:bg-[#505050]/85' : 'before:bg-white/85 dark:before:bg-[#141414]/85' }} [&.open]:before:block [&.open]:before:opacity-100 starting:[&.open]:before:opacity-0"
+    class="group absolute inset-x-0 top-0 z-10 py-6 nav:pt-8 [&.open]:max-nav:fixed [&.open]:max-nav:inset-0 [&.open]:max-nav:overflow-y-auto {{ white ? 'text-white' : (package_hero ? 'text-(--package-accent-ink) [&.open]:text-body-text' : 'text-body-text') }} before:content-[''] before:fixed before:inset-0 before:hidden before:opacity-0 before:backdrop-blur-[5px] before:transition-all before:duration-250 before:ease-in-out before:transition-discrete {{ white ? 'before:bg-[#505050]/85' : 'before:bg-white/85 dark:before:bg-[#141414]/85' }} [&.open]:before:block [&.open]:before:opacity-100 starting:[&.open]:before:opacity-0"
     data-controller="ux-header"
 >
     <div class="max-w-[1400px] mx-auto px-6 md:px-12">
@@ -28,7 +28,7 @@
 
                 <twig:ThemeSwitcher class="opacity-90 hover:opacity-100 hover:scale-110 transition-all duration-250 text-xl" aria-label="Switch dark/light mode"/>
 
-                <div class="flex items-center justify-center gap-3 max-sm:absolute max-sm:top-[80vh] max-sm:w-full max-sm:hidden group-[.open]:max-sm:flex group-[.open]:max-sm:gap-8 group-[.open]:max-sm:[&_.Icon]:text-[2rem]">
+                <div class="flex items-center justify-center gap-3 max-sm:absolute max-sm:top-full max-sm:w-full max-sm:pb-6 max-sm:hidden group-[.open]:max-sm:flex group-[.open]:max-sm:gap-8 group-[.open]:max-sm:[&_.Icon]:text-[2rem]">
                     <twig:AppNav:IconLink href="https://github.com/symfony/ux" title="Symfony UX on GitHub">
                         <twig:ux:icon name="github" />
                     </twig:AppNav:IconLink>

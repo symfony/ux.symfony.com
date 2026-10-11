@@ -37,7 +37,7 @@
                 <div data-controller="docsearch"></div>
             </div>
 
-            <div class="flex flex-col justify-end gap-4 nav:flex-row nav:items-center nav:gap-6 nav:ml-auto max-nav:hidden max-nav:w-full max-nav:p-4 max-nav:opacity-0 max-nav:-z-[1] max-nav:transition-all max-nav:transition-discrete max-nav:duration-250 max-nav:ease-in-out group-[.open]:max-nav:flex group-[.open]:max-nav:opacity-100 group-[.open]:max-nav:z-[1] starting:group-[.open]:max-nav:opacity-0 [&_a]:max-nav:text-2xl [&_a]:max-nav:p-2 [&_a]:max-nav:opacity-100">
+            <div class="flex flex-col justify-end gap-4 nav:flex-row nav:items-center nav:gap-5 nav:ml-auto max-nav:hidden max-nav:w-full max-nav:p-4 max-nav:opacity-0 max-nav:-z-[1] max-nav:transition-all max-nav:transition-discrete max-nav:duration-250 max-nav:ease-in-out group-[.open]:max-nav:flex group-[.open]:max-nav:opacity-100 group-[.open]:max-nav:z-[1] starting:group-[.open]:max-nav:opacity-0 [&_a]:max-nav:text-2xl [&_a]:max-nav:p-2 [&_a]:max-nav:opacity-100">
                 {% for package in ux_latest_new_packages(3) %}
                     <twig:AppNav:Item href="{{ path(package.route) }}" badge="New" hideOnCramped>{{ package.humanName }}</twig:AppNav:Item>
                 {% endfor %}

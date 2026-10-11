@@ -2,8 +2,9 @@
 {% set white = theme == 'white' %}
 {% set package_hero = theme == 'package' %}
 <header
-    class="group absolute inset-x-0 top-0 z-10 py-6 nav:pt-8 [&.open]:max-nav:fixed [&.open]:max-nav:inset-0 [&.open]:max-nav:overflow-y-auto {{ white ? 'text-white' : (package_hero ? 'text-(--package-accent-ink) [&.open]:text-body-text' : 'text-body-text') }} before:content-[''] before:fixed before:inset-0 before:hidden before:opacity-0 before:backdrop-blur-[5px] before:transition-all before:duration-250 before:ease-in-out before:transition-discrete {{ white ? 'before:bg-[#505050]/85' : 'before:bg-white/85 dark:before:bg-[#141414]/85' }} [&.open]:before:block [&.open]:before:opacity-100 starting:[&.open]:before:opacity-0"
+    class="group absolute inset-x-0 top-0 z-10 py-6 nav:pt-8 [&.open]:max-nav:fixed [&.open]:max-nav:inset-0 [&.open]:max-nav:overflow-y-auto [&.resizing]:**:transition-none [&.resizing]:before:transition-none {{ white ? 'text-white' : (package_hero ? 'text-(--package-accent-ink) [&.open]:text-body-text' : 'text-body-text') }} before:content-[''] before:fixed before:inset-0 before:hidden before:opacity-0 before:backdrop-blur-[5px] before:transition-all before:duration-250 before:ease-in-out before:transition-discrete {{ white ? 'before:bg-[#505050]/85' : 'before:bg-white/85 dark:before:bg-[#141414]/85' }} [&.open]:before:block [&.open]:before:opacity-100 starting:[&.open]:before:opacity-0"
     data-controller="ux-header"
+    data-action="resize@window->ux-header#suspendTransitions"
 >
     <div class="max-w-[1400px] mx-auto px-6 md:px-12">
 

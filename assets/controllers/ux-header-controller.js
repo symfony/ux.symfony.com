@@ -12,6 +12,7 @@ export default class extends Controller {
     }
 
     disconnect() {
+        clearTimeout(this.resizeTimeout);
         document.body.classList.remove('overflow-y-hidden');
     }
 
@@ -23,5 +24,12 @@ export default class extends Controller {
         this.open = !this.open;
         this.element.classList.toggle('open', this.open);
         document.body.classList.toggle('overflow-y-hidden', this.open);
+    }
+
+    // Crossing a breakpoint would otherwise play the open/close transitions of the mobile menu
+    suspendTransitions() {
+        this.element.classList.add('resizing');
+        clearTimeout(this.resizeTimeout);
+        this.resizeTimeout = setTimeout(() => this.element.classList.remove('resizing'), 100);
     }
 }

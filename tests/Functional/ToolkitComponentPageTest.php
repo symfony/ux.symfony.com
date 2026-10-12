@@ -47,4 +47,16 @@ final class ToolkitComponentPageTest extends WebTestCase
         self::assertResponseIsSuccessful();
         self::assertStringContainsString("import 'ux-toolkit-flowbite-4'", $client->getResponse()->getContent());
     }
+
+    public function testComponentPreviewRendersInStandardsMode(): void
+    {
+        $client = static::createClient();
+        $crawler = $client->request('GET', '/toolkit/kits/shadcn/components/accordion');
+        $previewUrl = $crawler->filter('[data-lazy-iframe-src-value]')->first()->attr('data-lazy-iframe-src-value');
+
+        $client->request('GET', $previewUrl);
+
+        self::assertResponseIsSuccessful();
+        self::assertStringStartsWith('<!DOCTYPE html>', ltrim($client->getResponse()->getContent()));
+    }
 }

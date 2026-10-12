@@ -114,6 +114,7 @@ class ComponentsController extends AbstractController
         $entrypoint = PreviewAssetsGenerator::entrypointName($kitId);
 
         $template = $twig->createTemplate(<<<HTML
+            <!DOCTYPE html>
             <html lang="en">
                 <head>
                     <meta charset="utf-8">

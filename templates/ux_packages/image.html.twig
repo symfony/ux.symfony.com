@@ -1,0 +1,163 @@
+{% extends 'ux_packages/package.html.twig' %}
+
+{% block package_header %}
+    {% component PackageHeader with {
+        package: 'image',
+        eyebrowText: 'Responsive Images',
+    } %}
+        {% block title_header %}
+            Responsive images, <em>transformed by your CDN</em>
+        {% endblock %}
+
+        {% block sub_content %}
+            Write one tag, get a srcset, sizes and modern formats from Cloudflare, Cloudinary, imgix or KeyCDN.
+        {% endblock %}
+    {% endcomponent %}
+{% endblock %}
+
+{% block package_features %}
+    {% set image_features = [
+        {
+            icon: 'lucide:layers',
+            title: '<strong>srcset</strong> and sizes',
+            description: 'Every width the browser may need, from a single tag.',
+        },
+        {
+            icon: 'lucide:zap',
+            title: 'Modern <strong>formats</strong>',
+            description: 'AVIF or WebP when the browser accepts them, JPEG otherwise.',
+        },
+        {
+            icon: 'lucide:frame',
+            title: 'No layout <strong>shift</strong>',
+            description: 'Width, height and aspect ratio reserve the space before the image loads.',
+        },
+        {
+            icon: 'lucide:replace',
+            title: 'Any <strong>provider</strong>',
+            description: 'Change the DSN, keep your templates.',
+        },
+        {
+            icon: 'lucide:wand-sparkles',
+            title: 'Presets and <strong>operations</strong>',
+            description: 'Name a set of transformations, or pass provider-specific effects.',
+        },
+    ] %}
+    <twig:FeaturesCluster
+        :items="image_features"
+        title="What Image gives you"
+        titleId="image-overview-title"
+    />
+{% endblock %}
+
+{% block package_highlights %}
+    {% set img_dsn %}# Cloudflare, on a proxied zone
+UX_IMAGE_DSN=cloudflare://cdn.example.com
+
+# Cloudinary, fetching from your origin, signed URLs
+UX_IMAGE_DSN=cloudinary://my-cloud?origin=https://example.com&api_secret=${CLOUDINARY_SECRET}
+
+# imgix, from a Web Folder source, signed URLs
+UX_IMAGE_DSN=imgix://my-source.imgix.net?sign_key=${IMGIX_TOKEN}
+
+# KeyCDN, through a pull zone, signed URLs
+UX_IMAGE_DSN=keycdn://myzone.kxcdn.com?secure_token=${KEYCDN_TOKEN}{% endset %}
+    {% set img_layouts %}{% verbatim %}<twig:ux:image src="/uploads/hero.jpg" alt="Hero"
+    layout="full-width" width="1600" height="600" priority />
+
+<twig:ux:image src="/uploads/avatar.jpg" alt="Avatar"
+    layout="fixed" width="64" height="64" />{% endverbatim %}{% endset %}
+    {% set img_picture %}{% verbatim %}<twig:ux:image src="/uploads/hero.jpg" alt="Hero"
+    width="800" height="450" />
+
+<twig:ux:picture src="/uploads/hero.jpg" alt="Hero"
+    width="800" height="450" />{% endverbatim %}{% endset %}
+    {% set img_operations %}{% verbatim %}<twig:ux:image src="/uploads/hero.jpg" alt="Hero" width="800"
+    :operations="{
+        cloudflare: {sharpen: 1},
+        cloudinary: {e: 'sharpen:100'},
+        imgix: {sharp: 20},
+        keycdn: {sharpen: 10},
+    }" />{% endverbatim %}{% endset %}
+    {% set img_url %}{% verbatim %}{% set og_image = ux_image_url('/uploads/hero.jpg', {
+    width: 1200,
+    height: 630,
+}) %}
+
+<meta property="og:image" content="{{ absolute_url(og_image) }}">{% endverbatim %}{% endset %}
+
+    <twig:Package:Highlights
+        eyebrow="Rendered on the server"
+        title="Your CDN does the <strong>heavy lifting</strong>."
+        intro="UX Image never resizes an image itself. It writes the URLs your provider understands, and the provider transforms, encodes and caches every variant."
+        :columns="2"
+        :items="[
+            {
+                icon: 'lucide:cloud',
+                title: 'One <strong>DSN</strong>, any provider',
+                description: 'Pick the provider with a DSN, and sign its URLs when it supports it. Switching providers never touches your templates.',
+                code: img_dsn,
+                language: 'bash',
+                wide: true,
+            },
+            {
+                icon: 'lucide:layout-grid',
+                title: 'Three <strong>layouts</strong>',
+                description: 'Constrained shrinks with its container, fixed keeps its size, full-width spans the viewport.',
+                code: img_layouts,
+                language: 'twig',
+            },
+            {
+                icon: 'lucide:layers-2',
+                title: 'Image or <strong>picture</strong>',
+                description: '<code>&lt;twig:ux:image&gt;</code> renders one <code>img</code> and lets the provider pick the format. <code>&lt;twig:ux:picture&gt;</code> adds one source per format, for providers that cannot, like KeyCDN.',
+                code: img_picture,
+                language: 'twig',
+            },
+            {
+                icon: 'lucide:settings-2',
+                title: 'Operations per <strong>provider</strong>',
+                description: 'Each provider has its own effects. Only the active one is applied, and a misspelled provider name fails at render time.',
+                code: img_operations,
+                language: 'twig',
+            },
+            {
+                icon: 'lucide:crop',
+                title: 'A single <strong>URL</strong>',
+                description: 'For an <code>og:image</code>, an email or a CSS background, <code>ux_image_url()</code> returns one transformed URL.',
+                code: img_url,
+                language: 'twig',
+            },
+        ]"
+    />
+{% endblock %}
+
+{% block code_block_left %}
+    <twig:CodeBlock filename="config/packages/ux_image.yaml" height="300px"/>
+{% endblock %}
+
+{% block code_block_right %}
+    <twig:CodeBlock filename="templates/ux_packages/image/_thumbnail.html.twig" height="300px"/>
+{% endblock %}
+
+{% block demo_title %}UX Image{% endblock %}
+
+{% block demo_content %}
+    {{ include('ux_packages/image/_demo_card.html.twig', {
+        label: 'Landscape, cropped to 16:9',
+        template: 'ux_packages/image/_landscape.html.twig',
+        original_size: original_sizes['/uploads/col-de-saint-bonnet.jpg'],
+    }) }}
+
+    {{ include('ux_packages/image/_demo_card.html.twig', {
+        label: 'Portrait, cropped to a square',
+        template: 'ux_packages/image/_portrait.html.twig',
+        original_size: original_sizes['/uploads/gros-caillou.jpg'],
+    }) }}
+
+    {{ include('ux_packages/image/_demo_card.html.twig', {
+        label: 'The thumbnail preset: 200 × 200, quality 60',
+        template: 'ux_packages/image/_thumbnail.html.twig',
+        original_size: original_sizes['/uploads/col-de-saint-bonnet.jpg'],
+    }) }}
+{% endblock %}

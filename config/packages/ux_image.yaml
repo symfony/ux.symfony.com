@@ -1,0 +1,8 @@
+ux_image:
+    provider: '%env(resolve:UX_IMAGE_DSN)%'
+
+    presets:
+        thumbnail:
+            width: 200
+            height: 200
+            quality: 60

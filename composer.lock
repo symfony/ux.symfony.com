@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5861d9f0493636433ac6b2ee9a5ed166",
+    "content-hash": "6c6451b4acf2d970964c803766851762",
     "packages": [
         {
             "name": "composer/semver",
@@ -7544,6 +7544,82 @@
             "time": "2026-09-19T11:40:16+00:00"
         },
         {
+            "name": "symfony/ux-cloudinary-image",
+            "version": "3.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/ux-cloudinary-image.git",
+                "reference": "5f733d76c561185f71d81bdf543edca29fccc183"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/ux-cloudinary-image/zipball/5f733d76c561185f71d81bdf543edca29fccc183",
+                "reference": "5f733d76c561185f71d81bdf543edca29fccc183",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.4",
+                "symfony/ux-image": "^3.6"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^12.0",
+                "spatie/phpunit-snapshot-assertions": "^5.2.3"
+            },
+            "default-branch": true,
+            "type": "symfony-ux-image-bridge",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\UX\\Image\\Bridge\\Cloudinary\\": "src/"
+                },
+                "exclude-from-classmap": []
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kevin Bond",
+                    "email": "kevinbond@gmail.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony UX Image Cloudinary Bridge",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "cdn",
+                "cloudinary",
+                "image",
+                "responsive",
+                "symfony-ux"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/ux-cloudinary-image/tree/3.x"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2026-10-11T15:06:21+00:00"
+        },
+        {
             "name": "symfony/ux-cropperjs",
             "version": "3.x-dev",
             "source": {
@@ -7815,6 +7891,95 @@
                 }
             ],
             "time": "2026-09-18T12:02:28+00:00"
+        },
+        {
+            "name": "symfony/ux-image",
+            "version": "3.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/ux-image.git",
+                "reference": "2045b25e29fde18e12a0e14a35ff02736ef3042e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/ux-image/zipball/2045b25e29fde18e12a0e14a35ff02736ef3042e",
+                "reference": "2045b25e29fde18e12a0e14a35ff02736ef3042e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.4",
+                "symfony/config": "^7.4|^8.0",
+                "symfony/dependency-injection": "^7.4|^8.0",
+                "symfony/http-kernel": "^7.4|^8.0",
+                "symfony/options-resolver": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^12.0",
+                "spatie/phpunit-snapshot-assertions": "^5.2.3",
+                "symfony/error-handler": "^7.4.17|^8.1.5",
+                "symfony/framework-bundle": "^7.4|^8.0",
+                "symfony/twig-bundle": "^7.4|^8.0",
+                "symfony/ux-twig-component": "^3.5",
+                "twig/html-extra": "^3.29"
+            },
+            "default-branch": true,
+            "type": "symfony-bundle",
+            "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/ux",
+                    "name": "symfony/ux"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\UX\\Image\\": "src/"
+                },
+                "exclude-from-classmap": []
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Hugo Alliaume",
+                    "email": "hugo@alliau.me"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Responsive images for Symfony, delivered through URL-based image providers",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "cdn",
+                "image",
+                "responsive",
+                "symfony-ux"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/ux-image/tree/3.x"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2026-10-12T05:01:53+00:00"
         },
         {
             "name": "symfony/ux-inspector",
@@ -13629,9 +13794,11 @@
         "symfony/ux-autocomplete": 20,
         "symfony/ux-calendar-link": 20,
         "symfony/ux-chartjs": 20,
+        "symfony/ux-cloudinary-image": 20,
         "symfony/ux-cropperjs": 20,
         "symfony/ux-dropzone": 20,
         "symfony/ux-icons": 20,
+        "symfony/ux-image": 20,
         "symfony/ux-inspector": 20,
         "symfony/ux-leaflet-map": 20,
         "symfony/ux-live-component": 20,

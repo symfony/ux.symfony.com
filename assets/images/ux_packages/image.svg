@@ -1,0 +1,5 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="18" y="4" width="26" height="20" rx="3" fill="white" fill-opacity="0.4"/>
+<rect x="12" y="9" width="29" height="23" rx="3" fill="white" fill-opacity="0.7"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M9 16H35C36.6569 16 38 17.3431 38 19V41C38 42.6569 36.6569 44 35 44H9C7.34315 44 6 42.6569 6 41V19C6 17.3431 7.34315 16 9 16ZM10 39L17.5 29L23 36L27 31.5L33 39H10ZM28 21C26.3431 21 25 22.3431 25 24C25 25.6569 26.3431 27 28 27C29.6569 27 31 25.6569 31 24C31 22.3431 29.6569 21 28 21Z" fill="white"/>
+</svg>

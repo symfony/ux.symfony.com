@@ -188,6 +188,18 @@ class UxPackageRepository
                 'router.svg',
             ),
 
+            new UxPackage(
+                'image',
+                'Image',
+                'app_image',
+                '#4F46E5',
+                'Responsive Images, Delivered by your CDN',
+                'Responsive `img` tags, transformed by your CDN',
+                new \DateTimeImmutable('2026-09-28'),
+                'I need responsive images',
+                'image.svg',
+            ),
+
             (new UxPackage(
                 'chartjs',
                 'Chart.js',

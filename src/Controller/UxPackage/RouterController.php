@@ -28,10 +28,23 @@ class RouterController extends AbstractController
         ]);
     }
 
-    #[Route('/router/demo/blog/{slug}', name: 'demo_blog_post')]
-    #[Route('/router/demo/archive/{year}', name: 'demo_blog_archive', requirements: ['year' => '\d{4}'])]
-    #[Route(['en' => '/router/demo/about', 'fr' => '/router/demo/a-propos'], name: 'demo_about')]
-    public function demo(): Response
+    #[Route(
+        '/router/demo/blog/{year}/{slug}',
+        name: 'demo_blog_post',
+        requirements: ['year' => '\d{4}'],
+        options: ['expose' => true],
+    )]
+    public function blogPost(int $year, string $slug): Response
+    {
+        return $this->redirectToRoute('app_router', ['_fragment' => 'demo']);
+    }
+
+    #[Route(
+        ['en' => '/router/demo/about', 'fr' => '/router/demo/a-propos'],
+        name: 'demo_about',
+        options: ['expose' => true],
+    )]
+    public function about(): Response
     {
         return $this->redirectToRoute('app_router', ['_fragment' => 'demo']);
     }

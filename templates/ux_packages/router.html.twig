@@ -97,7 +97,27 @@ url('app_blog_show', { slug: 'hello' });
 {% endblock %}
 
 {% block code_block_left %}
-    <twig:CodeBlock filename="config/packages/ux_router.yaml" height="300px"/>
+    {% set rt_routes %}#[Route(
+    '/router/demo/blog/{year}/{slug}',
+    name: 'demo_blog_post',
+    requirements: ['year' => '\d{4}'],
+    options: ['expose' => true],
+)]
+public function blogPost(int $year, string $slug): Response
+{
+    // ...
+}
+
+#[Route(
+    ['en' => '/router/demo/about', 'fr' => '/router/demo/a-propos'],
+    name: 'demo_about',
+    options: ['expose' => true],
+)]
+public function about(): Response
+{
+    // ...
+}{% endset %}
+    <twig:CodeBlockInline :code="rt_routes" language="php" filename="src/Controller/UxPackage/RouterController.php"/>
 {% endblock %}
 
 {% block code_block_right %}
@@ -110,11 +130,18 @@ url('app_blog_show', { slug: 'hello' });
     {% embed 'ux_packages/router/_router_demo_block.html.twig' with {
         function: 'path',
         route: 'demo_blog_post',
-        parameters: {slug: 'hello-world'},
+        parameters: {year: 2026, slug: 'hello-world'},
         query: {page: 2},
         label: 'Path with a query string',
     } %}
         {% block parameters %}
+            <div class="mb-2">
+                <twig:Form:Label for="demo-path-year">Year</twig:Form:Label>
+                <twig:Form:Input id="demo-path-year" type="number" value="2026"
+                    data-router-demo-block-target="parameter" data-parameter="year"
+                    data-action="router-demo-block#render"
+                />
+            </div>
             <div class="mb-2">
                 <twig:Form:Label for="demo-path-slug">Slug</twig:Form:Label>
                 <twig:Form:Input id="demo-path-slug" type="text" value="hello-world"
@@ -135,10 +162,17 @@ url('app_blog_show', { slug: 'hello' });
     {% embed 'ux_packages/router/_router_demo_block.html.twig' with {
         function: 'url',
         route: 'demo_blog_post',
-        parameters: {slug: 'hello-world'},
+        parameters: {year: 2026, slug: 'hello-world'},
         label: 'Absolute URL',
     } %}
         {% block parameters %}
+            <div class="mb-2">
+                <twig:Form:Label for="demo-url-year">Year</twig:Form:Label>
+                <twig:Form:Input id="demo-url-year" type="number" value="2026"
+                    data-router-demo-block-target="parameter" data-parameter="year"
+                    data-action="router-demo-block#render"
+                />
+            </div>
             <div class="mb-2">
                 <twig:Form:Label for="demo-url-slug">Slug</twig:Form:Label>
                 <twig:Form:Input id="demo-url-slug" type="text" value="hello-world"
@@ -171,15 +205,22 @@ url('app_blog_show', { slug: 'hello' });
 
     {% embed 'ux_packages/router/_router_demo_block.html.twig' with {
         function: 'path',
-        route: 'demo_blog_archive',
-        parameters: {year: '2026'},
+        route: 'demo_blog_post',
+        parameters: {year: '2026', slug: 'hello-world'},
         label: 'Requirement check',
     } %}
         {% block parameters %}
             <div class="mb-2">
-                <twig:Form:Label for="demo-archive-year">Year, must match <code>\d{4}</code></twig:Form:Label>
-                <twig:Form:Input id="demo-archive-year" type="text" value="2026"
+                <twig:Form:Label for="demo-check-year">Year, must match <code>\d{4}</code></twig:Form:Label>
+                <twig:Form:Input id="demo-check-year" type="text" value="2026"
                     data-router-demo-block-target="parameter" data-parameter="year"
+                    data-action="router-demo-block#render"
+                />
+            </div>
+            <div class="mb-2">
+                <twig:Form:Label for="demo-check-slug">Slug</twig:Form:Label>
+                <twig:Form:Input id="demo-check-slug" type="text" value="hello-world"
+                    data-router-demo-block-target="parameter" data-parameter="slug"
                     data-action="router-demo-block#render"
                 />
             </div>

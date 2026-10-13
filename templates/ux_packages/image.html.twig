@@ -133,11 +133,11 @@ UX_IMAGE_DSN=keycdn://myzone.kxcdn.com?secure_token=${KEYCDN_TOKEN}{% endset %}
 {% endblock %}
 
 {% block code_block_left %}
-    <twig:CodeBlock filename="config/packages/ux_image.yaml" height="300px"/>
+    <twig:CodeBlock filename=".env.prod" language="bash" height="300px"/>
 {% endblock %}
 
 {% block code_block_right %}
-    <twig:CodeBlock filename="templates/ux_packages/image/_thumbnail.html.twig" height="300px"/>
+    <twig:CodeBlock filename="config/packages/ux_image.yaml" :lineStart="1" :lineEnd="2" height="300px"/>
 {% endblock %}
 
 {% block demo_title %}UX Image{% endblock %}

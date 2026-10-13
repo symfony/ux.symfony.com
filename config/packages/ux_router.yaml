@@ -1,4 +1,3 @@
 ux_router:
     # Route name patterns exposed to JavaScript
-    routes:
-        - 'demo_*'
+    routes: []

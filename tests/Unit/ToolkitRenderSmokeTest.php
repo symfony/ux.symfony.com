@@ -27,8 +27,7 @@ final class ToolkitRenderSmokeTest extends KernelTestCase
 
         self::assertStringContainsString('Badge', $html);        // title from README.md
         self::assertStringContainsString('<iframe', $html);      // live preview via PreviewUrlGenerator
-        self::assertStringContainsString('toolkit/component_preview', $html); // signed preview URL path
-        self::assertMatchesRegularExpression('/_hash=|_signature=/', $html);  // UriSigner signature
+        self::assertStringContainsString('/toolkit/kits/shadcn/components/badge?preview=1', $html);
         self::assertStringContainsString('Installation', $html);
     }
 

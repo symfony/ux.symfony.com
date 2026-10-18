@@ -11,19 +11,15 @@
 
 namespace App\Controller\Toolkit;
 
+use App\Service\Toolkit\PreviewRenderer;
 use App\Service\Toolkit\ToolkitService;
 use App\Service\UxPackageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\UriSigner;
 use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\UX\Toolkit\Kit\KitContextRunner;
-use Symfony\UX\Toolkit\Preview\PreviewAssetsGenerator;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\UX\Toolkit\Recipe\RecipeType;
 use Symfony\UX\Toolkit\Registry\LocalRegistry;
 
@@ -53,8 +49,13 @@ class ComponentsController extends AbstractController
     }
 
     #[Route('/toolkit/kits/{kitId}/components/{componentName}', name: 'app_toolkit_component')]
-    public function showComponent(string $kitId, string $componentName): Response
-    {
+    public function showComponent(
+        Request $request,
+        string $kitId,
+        string $componentName,
+        PreviewRenderer $previewRenderer,
+        #[MapQueryParameter] ?int $preview = null,
+    ): Response {
         if (!LocalRegistry::exists($kitId)) {
             throw $this->createNotFoundException(\sprintf('Kit "%s" not found', $kitId));
         }
@@ -64,10 +65,15 @@ class ComponentsController extends AbstractController
             throw $this->createNotFoundException(\sprintf('Component "%s" not found', $componentName));
         }
 
-        $package = $this->uxPackageRepository->find('toolkit');
+        if (null !== $preview) {
+            $canonicalUrl = $this->generateUrl('app_toolkit_component', ['kitId' => $kitId, 'componentName' => $componentName], UrlGeneratorInterface::ABSOLUTE_URL);
+
+            return $previewRenderer->respondWithExample($request, $kitId, $component, $preview, $canonicalUrl)
+                ?? throw $this->createNotFoundException(\sprintf('Preview %d of "%s" not found', $preview, $componentName));
+        }
 
         return $this->render('toolkit/component.html.twig', [
-            'package' => $package,
+            'package' => $this->uxPackageRepository->find('toolkit'),
             'kit' => $kit,
             'kit_id' => $kitId,
             'component' => $component,
@@ -75,79 +81,12 @@ class ComponentsController extends AbstractController
         ]);
     }
 
-    #[Route('/toolkit/component_preview', name: 'app_toolkit_component_preview')]
-    public function previewComponent(
-        Request $request,
-        #[MapQueryParameter] string $kitId,
-        #[MapQueryParameter] string $code,
-        #[MapQueryParameter] ?string $recipe,
-        UriSigner $uriSigner,
-        \Twig\Environment $twig,
-        #[Autowire(service: 'ux_toolkit.kit.kit_context_runner')]
-        KitContextRunner $kitContextRunner,
-        #[Autowire(service: 'profiler')]
-        ?Profiler $profiler,
-    ): Response {
-        if (!$uriSigner->checkRequest($request)) {
-            throw new BadRequestHttpException('Request is invalid.');
-        }
-
-        if (!LocalRegistry::exists($kitId)) {
-            throw $this->createNotFoundException(\sprintf('Kit "%s" not found', $kitId));
-        }
-
-        $profiler?->disable();
-
-        $kit = $this->toolkitService->getKit($kitId);
-
-        // A prioritized recipe lets a block's own templates win when several recipes ship a component
-        // of the same name (e.g. login-01 and login-02 both define a LoginForm).
-        $prioritizedRecipe = null !== $recipe ? $kit->getRecipe($recipe) : null;
-        $isBlock = null !== $prioritizedRecipe && RecipeType::Block === $prioritizedRecipe->manifest->type;
-
-        // Blocks ship their own full-page layout, so render them edge-to-edge instead of the padded,
-        // centered frame used for standalone components.
-        $bodyCss = $isBlock
-            ? 'display: block; margin: 0; width: 100%;'
-            : 'display: flex; align-items: center; justify-content: center; margin: 0; width: 100%; padding: 48px;';
-        $bodyStyle = $isBlock ? '' : 'min-height: 200px';
-        $entrypoint = PreviewAssetsGenerator::entrypointName($kitId);
-
-        $template = $twig->createTemplate(<<<HTML
-            <!DOCTYPE html>
-            <html lang="en">
-                <head>
-                    <meta charset="utf-8">
-                    <title>Preview</title>
-                    <meta name="viewport" content="width=device-width, initial-scale=1">
-                    <style>
-                        body {
-                            {$bodyCss}
-                        }
-                    </style>
-                    <script>
-                        const applyTheme = (theme) => {
-                            theme = theme === 'light' ? 'light' : 'dark';
-                            document.documentElement.classList.toggle('dark', theme === 'dark');
-                            document.documentElement.setAttribute('data-bs-theme', theme);
-                        };
-                        applyTheme(localStorage.getItem('user-theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
-                        window.addEventListener('storage', (event) => {
-                            if (event.key === 'user-theme' && event.newValue) {
-                                applyTheme(event.newValue);
-                            }
-                        });
-                    </script>
-                    {{ importmap('{$entrypoint}') }}
-                </head>
-                <body style="{$bodyStyle}">{$code}</body>
-            </html>
-            HTML);
-
-        return new Response(
-            $kitContextRunner->runForKit($kit, static fn () => $twig->render($template), $prioritizedRecipe),
-            Response::HTTP_OK,
-            ['X-Robots-Tag' => 'noindex, nofollow']
-        );
+    /**
+     * Previews used to be served here from a signed URL carrying their code.
+     */
+    #[Route('/toolkit/component_preview', name: 'app_toolkit_component_preview_gone')]
+    public function previewGone(): Response
+    {
+        return new Response(status: Response::HTTP_GONE);
     }
 }

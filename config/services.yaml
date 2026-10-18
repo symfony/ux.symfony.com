@@ -29,3 +29,14 @@ services:
 
     ux_toolkit.registry.registry_factory:
         alias: '.ux_toolkit.registry.registry_factory'
+
+    # Kits only change on deploy; dev and test read them again to follow kit edits
+    app.toolkit_kits_cache:
+        alias: cache.system
+
+when@dev: &toolkit_kits_uncached
+    services:
+        app.toolkit_kits_cache:
+            class: Symfony\Component\Cache\Adapter\NullAdapter
+
+when@test: *toolkit_kits_uncached

@@ -12,34 +12,31 @@
 namespace App\Service\Toolkit;
 
 use App\Service\CommonMark\ConverterFactory;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\UX\Toolkit\Doc\RecipeDocRenderer;
 use Symfony\UX\Toolkit\Doc\RenderedRecipeDoc;
 use Symfony\UX\Toolkit\Kit\Kit;
+use Symfony\UX\Toolkit\Markdown\CodeOptions;
+use Symfony\UX\Toolkit\Markdown\PreviewUrlGenerator;
 use Symfony\UX\Toolkit\Recipe\Recipe;
-use Symfony\UX\Toolkit\Registry\LocalRegistry;
 use Twig\Environment;
 
 class ToolkitService
 {
-    /** @var array<string, Kit> */
-    private array $kits = [];
-
     /** @var array<string, RenderedRecipeDoc> */
     private array $renderedRecipes = [];
 
     public function __construct(
         private Environment $twig,
-        #[Autowire(service: '.ux_toolkit.registry.local')]
-        private LocalRegistry $localRegistry,
-        private ComponentPreviewUrlGeneratorFactory $previewUrlGeneratorFactory,
+        private KitRepository $kitRepository,
+        private UrlGeneratorInterface $urlGenerator,
         private ConverterFactory $converterFactory,
     ) {
     }
 
     public function getKit(string $kitId): Kit
     {
-        return $this->kits[$kitId] ??= $this->localRegistry->getKit($kitId);
+        return $this->kitRepository->get($kitId);
     }
 
     /**
@@ -47,7 +44,7 @@ class ToolkitService
      */
     public function getKits(): array
     {
-        return $this->kits = $this->localRegistry->getAvailableKits();
+        return $this->kitRepository->all();
     }
 
     public function renderRecipeHtml(string $kitId, Recipe $recipe): string
@@ -105,10 +102,31 @@ class ToolkitService
     {
         $cacheKey = $kitId.'/'.$recipe->name;
 
+        // The Nth preview of the doc is served by the component page itself, with `?preview=N`.
+        $previewUrlGenerator = new class($this->urlGenerator, $kitId, $recipe->name) implements PreviewUrlGenerator {
+            private int $count = 0;
+
+            public function __construct(
+                private readonly UrlGeneratorInterface $urlGenerator,
+                private readonly string $kitId,
+                private readonly string $componentName,
+            ) {
+            }
+
+            public function generate(string $code, CodeOptions $options): string
+            {
+                return $this->urlGenerator->generate('app_toolkit_component', [
+                    'kitId' => $this->kitId,
+                    'componentName' => $this->componentName,
+                    'preview' => ++$this->count,
+                ], UrlGeneratorInterface::ABSOLUTE_URL);
+            }
+        };
+
         return $this->renderedRecipes[$cacheKey] ??= (new RecipeDocRenderer($this->twig))->renderAsHtml(
             $this->getKit($kitId),
             $recipe,
-            $this->previewUrlGeneratorFactory->forRecipe($kitId, $recipe->name),
+            $previewUrlGenerator,
             ($this->converterFactory)()->getEnvironment(),
         );
     }

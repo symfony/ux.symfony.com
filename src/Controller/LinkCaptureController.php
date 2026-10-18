@@ -22,18 +22,27 @@ use Symfony\Component\Routing\Attribute\Route;
  * The `PostLink` / `LogoutLink` components submit real forms; pointing them at
  * `/link/...` lets us render back the request details (method, spoofed method,
  * CSRF token, body) so the previews are interactive instead of hitting a 404.
+ *
+ * The `sortable` previews save each move with a `fetch()` request instead,
+ * which gets an empty response: there is no page to render it in.
  */
 class LinkCaptureController extends AbstractController
 {
     #[Route('/link/{path}', name: 'app_link_capture', requirements: ['path' => '.+'])]
     public function capture(Request $request, string $path): Response
     {
-        // Only serve same-origin iframe navigations (i.e. the Toolkit previews).
+        // Only serve same-origin iframe navigations and fetch() requests (i.e. the Toolkit previews).
         // These Fetch Metadata headers are set by the browser and cannot be
         // forged by page scripts, so a direct visit or cross-site embed 404s.
-        if ('iframe' !== $request->headers->get('Sec-Fetch-Dest')
-            || 'same-origin' !== $request->headers->get('Sec-Fetch-Site')
-        ) {
+        if ('same-origin' !== $request->headers->get('Sec-Fetch-Site')) {
+            throw $this->createNotFoundException();
+        }
+
+        if ('empty' === $request->headers->get('Sec-Fetch-Dest')) {
+            return new Response(null, Response::HTTP_NO_CONTENT);
+        }
+
+        if ('iframe' !== $request->headers->get('Sec-Fetch-Dest')) {
             throw $this->createNotFoundException();
         }
 

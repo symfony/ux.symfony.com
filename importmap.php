@@ -101,4 +101,6 @@ return [
     'embla-carousel-autoplay' => ['version' => '8.6.0'],
     '@docsearch/js' => ['version' => '5.1.1'],
     '@docsearch/css/dist/style.min.css' => ['version' => '5.1.1', 'type' => 'css'],
+    'sortablejs' => ['version' => '1.15.7'],
+    '@rails/request.js' => ['version' => '0.0.13'],
 ];

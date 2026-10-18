@@ -12,9 +12,12 @@
 namespace App\Service\Toolkit;
 
 use App\Service\CommonMark\ConverterFactory;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\UX\Toolkit\Doc\RecipeDocRenderer;
 use Symfony\UX\Toolkit\Doc\RenderedRecipeDoc;
 use Symfony\UX\Toolkit\Kit\Kit;
+use Symfony\UX\Toolkit\Markdown\CodeOptions;
+use Symfony\UX\Toolkit\Markdown\PreviewUrlGenerator;
 use Symfony\UX\Toolkit\Recipe\Recipe;
 use Twig\Environment;
 
@@ -26,7 +29,7 @@ class ToolkitService
     public function __construct(
         private Environment $twig,
         private KitRepository $kitRepository,
-        private ComponentPreviewUrlGeneratorFactory $previewUrlGeneratorFactory,
+        private UrlGeneratorInterface $urlGenerator,
         private ConverterFactory $converterFactory,
     ) {
     }
@@ -99,10 +102,31 @@ class ToolkitService
     {
         $cacheKey = $kitId.'/'.$recipe->name;
 
+        // The Nth preview of the doc is served by the component page itself, with `?preview=N`.
+        $previewUrlGenerator = new class($this->urlGenerator, $kitId, $recipe->name) implements PreviewUrlGenerator {
+            private int $count = 0;
+
+            public function __construct(
+                private readonly UrlGeneratorInterface $urlGenerator,
+                private readonly string $kitId,
+                private readonly string $componentName,
+            ) {
+            }
+
+            public function generate(string $code, CodeOptions $options): string
+            {
+                return $this->urlGenerator->generate('app_toolkit_component', [
+                    'kitId' => $this->kitId,
+                    'componentName' => $this->componentName,
+                    'preview' => ++$this->count,
+                ], UrlGeneratorInterface::ABSOLUTE_URL);
+            }
+        };
+
         return $this->renderedRecipes[$cacheKey] ??= (new RecipeDocRenderer($this->twig))->renderAsHtml(
             $this->getKit($kitId),
             $recipe,
-            $this->previewUrlGeneratorFactory->forRecipe($kitId, $recipe->name),
+            $previewUrlGenerator,
             ($this->converterFactory)()->getEnvironment(),
         );
     }

@@ -95,11 +95,7 @@ tree templates/components
 
 {% block package_demo %}
     <div id="demo" class="mt-24 scroll-mt-20">
-{% apply markdown_to_html %}
-[toolkit-preview {"kit":"shadcn","height":"300px"}]
-{{ source('toolkit/_code_block_right.html.twig') }}
-[/toolkit-preview]
-{% endapply %}
+        {{ include('toolkit/docs/_preview.html.twig', {previewUrl: url('app_toolkit', {preview: 'demo'})}) }}
     </div>
 {% endblock %}
 

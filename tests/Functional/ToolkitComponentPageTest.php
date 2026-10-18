@@ -11,6 +11,7 @@
 
 namespace App\Tests\Functional;
 
+use App\Service\Toolkit\PreviewVersion;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 final class ToolkitComponentPageTest extends WebTestCase
@@ -60,17 +61,19 @@ final class ToolkitComponentPageTest extends WebTestCase
         self::assertStringStartsWith('<!DOCTYPE html>', ltrim($client->getResponse()->getContent()));
     }
 
-    public function testComponentPreviewIsRevalidatedOnEveryLoad(): void
+    public function testComponentPreviewOfTheCurrentBuildIsImmutable(): void
     {
         $client = static::createClient();
-        $client->request('GET', '/toolkit/kits/shadcn/components/button?preview=2');
+        $crawler = $client->request('GET', '/toolkit/kits/shadcn/components/button');
+        $previewUrl = $crawler->filter('[data-lazy-iframe-src-value]')->eq(1)->attr('data-lazy-iframe-src-value');
+
+        self::assertSame('http://localhost/toolkit/kits/shadcn/components/button?preview=2&v='.self::getContainer()->get(PreviewVersion::class)->id, $previewUrl);
+
+        $client->request('GET', $previewUrl);
 
         self::assertResponseIsSuccessful();
-        self::assertResponseHeaderSame('Cache-Control', 'no-cache, public');
+        self::assertResponseHeaderSame('Cache-Control', 'immutable, max-age=31536000, public, s-maxage=31536000');
         self::assertResponseHasHeader('ETag');
-
-        $client->request('GET', '/toolkit/kits/shadcn/components/button?preview=2', server: ['HTTP_IF_NONE_MATCH' => $client->getResponse()->headers->get('ETag')]);
-        self::assertResponseStatusCodeSame(304);
     }
 
     public function testComponentPreviewIsOnlyIndexedThroughItsPage(): void
@@ -81,6 +84,22 @@ final class ToolkitComponentPageTest extends WebTestCase
         self::assertResponseIsSuccessful();
         self::assertResponseHeaderSame('X-Robots-Tag', 'noindex, indexifembedded');
         self::assertStringNotContainsString('rel="canonical"', implode(', ', $client->getResponse()->headers->all('link')));
+    }
+
+    public function testComponentPreviewOfAnotherBuildIsRevalidatedOnEveryLoad(): void
+    {
+        $client = static::createClient();
+
+        foreach (['/toolkit/kits/shadcn/components/button?preview=2', '/toolkit/kits/shadcn/components/button?preview=2&v=0'] as $url) {
+            $client->request('GET', $url);
+
+            self::assertResponseIsSuccessful();
+            self::assertResponseHeaderSame('Cache-Control', 'no-cache, public');
+            self::assertResponseHasHeader('ETag');
+
+            $client->request('GET', $url, server: ['HTTP_IF_NONE_MATCH' => $client->getResponse()->headers->get('ETag')]);
+            self::assertResponseStatusCodeSame(304);
+        }
     }
 
     public function testComponentPreviewBeyondTheExamplesIsNotFound(): void
@@ -97,7 +116,7 @@ final class ToolkitComponentPageTest extends WebTestCase
         $crawler = $client->request('GET', '/toolkit/kits/shadcn/blocks/login');
 
         self::assertContains(
-            'http://localhost/toolkit/kits/shadcn/blocks/login?preview=login-02',
+            'http://localhost/toolkit/kits/shadcn/blocks/login?preview=login-02&v='.self::getContainer()->get(PreviewVersion::class)->id,
             $crawler->filter('[data-lazy-iframe-src-value]')->each(static fn ($node) => $node->attr('data-lazy-iframe-src-value')),
         );
 
@@ -111,7 +130,12 @@ final class ToolkitComponentPageTest extends WebTestCase
     public function testToolkitDemoPreviewRendersWithTheKit(): void
     {
         $client = static::createClient();
-        $client->request('GET', '/toolkit?preview=demo');
+        $crawler = $client->request('GET', '/toolkit');
+        $previewUrl = $crawler->filter('[data-lazy-iframe-src-value]')->first()->attr('data-lazy-iframe-src-value');
+
+        self::assertSame('http://localhost/toolkit?preview=demo&v='.self::getContainer()->get(PreviewVersion::class)->id, $previewUrl);
+
+        $client->request('GET', $previewUrl);
 
         self::assertResponseIsSuccessful();
         self::assertStringContainsString("import 'ux-toolkit-shadcn'", $client->getResponse()->getContent());

@@ -12,6 +12,7 @@
 namespace App\Controller\UxPackage;
 
 use App\Service\Toolkit\PreviewRenderer;
+use App\Service\Toolkit\PreviewVersion;
 use App\Service\Toolkit\ToolkitService;
 use App\Service\UxPackageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,6 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ToolkitController extends AbstractController
 {
@@ -28,6 +30,7 @@ class ToolkitController extends AbstractController
         UxPackageRepository $packageRepository,
         ToolkitService $toolkitService,
         PreviewRenderer $previewRenderer,
+        PreviewVersion $previewVersion,
         #[MapQueryParameter] ?string $preview = null,
     ): Response {
         if ('demo' === $preview) {
@@ -39,6 +42,7 @@ class ToolkitController extends AbstractController
         return $this->render('ux_packages/toolkit.html.twig', [
             'package' => $package,
             'kits' => $toolkitService->getKits(),
+            'demo_preview_url' => $this->generateUrl('app_toolkit', ['preview' => 'demo', PreviewVersion::QUERY_PARAMETER => $previewVersion->id], UrlGeneratorInterface::ABSOLUTE_URL),
         ]);
     }
 }

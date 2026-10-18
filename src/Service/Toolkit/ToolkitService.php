@@ -31,6 +31,7 @@ class ToolkitService
         private KitRepository $kitRepository,
         private UrlGeneratorInterface $urlGenerator,
         private ConverterFactory $converterFactory,
+        private PreviewVersion $previewVersion,
     ) {
     }
 
@@ -103,13 +104,14 @@ class ToolkitService
         $cacheKey = $kitId.'/'.$recipe->name;
 
         // The Nth preview of the doc is served by the component page itself, with `?preview=N`.
-        $previewUrlGenerator = new class($this->urlGenerator, $kitId, $recipe->name) implements PreviewUrlGenerator {
+        $previewUrlGenerator = new class($this->urlGenerator, $kitId, $recipe->name, $this->previewVersion->id) implements PreviewUrlGenerator {
             private int $count = 0;
 
             public function __construct(
                 private readonly UrlGeneratorInterface $urlGenerator,
                 private readonly string $kitId,
                 private readonly string $componentName,
+                private readonly string $version,
             ) {
             }
 
@@ -119,6 +121,7 @@ class ToolkitService
                     'kitId' => $this->kitId,
                     'componentName' => $this->componentName,
                     'preview' => ++$this->count,
+                    PreviewVersion::QUERY_PARAMETER => $this->version,
                 ], UrlGeneratorInterface::ABSOLUTE_URL);
             }
         };

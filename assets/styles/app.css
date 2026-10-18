@@ -103,7 +103,7 @@
     --color-calendar-ics: #1F2937;
 
     /* Font families */
-    --font-title: "Ubuntu Sans", "Ubuntu", system-ui, sans-serif;
+    --font-title: "Ubuntu Sans", system-ui, sans-serif;
     --font-sans: system-ui, sans-serif;
     --font-mono: ui-monospace, "SF Mono", SFMono-Regular, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace;
 

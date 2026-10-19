@@ -1,0 +1,13 @@
+{% props item %}
+
+<article class="ProductGrid_item" style="--color: {{ item.color }};">
+    <div class="ProductGrid_media">
+        <svg>
+            <use href="#svg-tshirt"/>
+        </svg>
+        <span>{{ item.emoji }}</span>
+    </div>
+    <data class="ProductGrid_price" value="{{ item.id }}" data-currency="$">
+        {{ item.id + 1 }}<small>.99</small>
+    </data>
+</article>

@@ -8789,12 +8789,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-toolkit.git",
-                "reference": "de44c3dffe98488e5d6daf26398687cf5327eeb5"
+                "reference": "85e09d0f87c4f1d3ba0a03e8fcb3ae3ec0b553b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-toolkit/zipball/de44c3dffe98488e5d6daf26398687cf5327eeb5",
-                "reference": "de44c3dffe98488e5d6daf26398687cf5327eeb5",
+                "url": "https://api.github.com/repos/symfony/ux-toolkit/zipball/85e09d0f87c4f1d3ba0a03e8fcb3ae3ec0b553b7",
+                "reference": "85e09d0f87c4f1d3ba0a03e8fcb3ae3ec0b553b7",
                 "shasum": ""
             },
             "require": {
@@ -8898,7 +8898,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-10-24T16:48:17+00:00"
+            "time": "2026-10-26T06:30:02+00:00"
         },
         {
             "name": "symfony/ux-translator",
@@ -8989,12 +8989,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-turbo.git",
-                "reference": "bbf2bf0a47423fbdca3940481c6ccd5e3a6c86b7"
+                "reference": "d4ce7acf8a392e3f52666058d0736cf506e9e60d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-turbo/zipball/bbf2bf0a47423fbdca3940481c6ccd5e3a6c86b7",
-                "reference": "bbf2bf0a47423fbdca3940481c6ccd5e3a6c86b7",
+                "url": "https://api.github.com/repos/symfony/ux-turbo/zipball/d4ce7acf8a392e3f52666058d0736cf506e9e60d",
+                "reference": "d4ce7acf8a392e3f52666058d0736cf506e9e60d",
                 "shasum": ""
             },
             "require": {
@@ -9083,7 +9083,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-10-19T16:29:08+00:00"
+            "time": "2026-10-25T12:58:57+00:00"
         },
         {
             "name": "symfony/ux-twig-component",

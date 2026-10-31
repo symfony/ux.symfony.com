@@ -34,4 +34,5 @@ return [
     Symfony\UX\CalendarLink\UXCalendarLinkBundle::class => ['all' => true],
     Symfony\UX\Pagination\UXPaginationBundle::class => ['all' => true],
     Symfony\UX\Image\UXImageBundle::class => ['all' => true],
+    Symfony\UX\Css\UXCssBundle::class => ['all' => true],
 ];

@@ -1,0 +1,10 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="6" y="6" width="16" height="16" rx="3" fill="white" fill-opacity="0.4"/>
+<rect x="26" y="6" width="16" height="16" rx="3" fill="white" fill-opacity="0.7"/>
+<rect x="6" y="26" width="16" height="16" rx="3" fill="white" fill-opacity="0.7"/>
+<mask id="ux-css-check" maskUnits="userSpaceOnUse" x="26" y="26" width="16" height="16">
+<rect x="26" y="26" width="16" height="16" rx="3" fill="white"/>
+<path d="M29.5 34.5L32.5 37.5L38.5 30.5" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+</mask>
+<rect x="26" y="26" width="16" height="16" rx="3" fill="white" mask="url(#ux-css-check)"/>
+</svg>

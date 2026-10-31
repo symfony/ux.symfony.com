@@ -1,5 +1,5 @@
 <twig:Package:Section tone="subtle">
-    <twig:Package:SectionHeading centered title="Keep <strong>{{ package.humanName }}</strong> at hand.">
+    <twig:Package:SectionHeading centered title="Keep <strong>{{ heading_name|default(package.humanName) }}</strong> at hand.">
         <p>Documentation, the people behind it, and where to ask when something does not behave.</p>
     </twig:Package:SectionHeading>
 

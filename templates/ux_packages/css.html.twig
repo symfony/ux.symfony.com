@@ -1,0 +1,230 @@
+{% extends 'ux_packages/package.html.twig' %}
+
+{% set heading_name = 'UX CSS' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('ux_css/styles.css') }}">
+{% endblock %}
+
+{% block package_header %}
+    {% component PackageHeader with {
+        package: 'css',
+        eyebrowText: 'Typed Atomic CSS · Experimental',
+    } %}
+        {% block title_header %}
+            Atomic CSS, <em>checked when Twig compiles</em>
+        {% endblock %}
+
+        {% block sub_content %}
+            Style your templates with <code>css()</code> and your design tokens. A misspelled token is a Twig error, not a missing style.
+        {% endblock %}
+    {% endcomponent %}
+{% endblock %}
+
+{% block package_features %}
+    {% set css_features = [
+        {
+            icon: 'lucide:palette',
+            title: 'Design <strong>tokens</strong>',
+            description: 'Colors, spacing and radii, declared once and used by name.',
+        },
+        {
+            icon: 'lucide:shield-check',
+            title: 'Checked at <strong>compile time</strong>',
+            description: 'A typo is a Twig syntax error, with the template and the line.',
+        },
+        {
+            icon: 'lucide:text-cursor-input',
+            title: 'Completion in your <strong>editor</strong>',
+            description: 'PhpStorm and VS Code complete properties and tokens.',
+        },
+        {
+            icon: 'lucide:file-code',
+            title: 'No <strong>Node.js</strong>',
+            description: 'PHP writes one CSS file. No binary, no watcher.',
+        },
+        {
+            icon: 'lucide:moon',
+            title: 'Dark mode in the <strong>tokens</strong>',
+            description: 'Semantic tokens switch value, templates stay the same.',
+        },
+    ] %}
+    <twig:FeaturesCluster
+        :items="css_features"
+        title="What UX CSS gives you"
+        titleId="css-overview-title"
+    />
+{% endblock %}
+
+{% block package_highlights %}
+    {% set css_tailwind %}{% verbatim %}{# Tailwind CSS: no rule for this class, and no error #}
+<div class="bg-surfac">
+
+{# css(): a Twig syntax error, on this line #}
+<div class="{{ css({ bg: 'surfac' }) }}">
+{# Unknown colors token "surfac". Did you mean "surface"? #}{% endverbatim %}{% endset %}
+    {% set css_variables %}/* assets/styles/app.css */
+.prose a {
+    color: var(--colors-blue-600);
+    text-underline-offset: var(--spacing-sm);
+}{% endset %}
+    {% set css_conditions %}{% verbatim %}<a class="{{ css({
+    bg: 'blue.600',
+    _hover: { bg: 'blue.700' },
+    p: {
+        base: 'sm',
+        md: 'md',
+    },
+}) }}">
+
+{# class="bg_blue.600 hover:bg_blue.700 p_sm md:p_md" #}{% endverbatim %}{% endset %}
+    {% set css_props %}{% verbatim %}{# templates/components/Button.html.twig #}
+{% props tone = 'blue.600' %}
+
+<button class="{{ css({
+    px: 'md',
+    py: 'sm',
+    rounded: 'md',
+    bg: tone,
+    color: 'white',
+}) }}">
+    {% block content %}{% endblock %}
+</button>
+
+{# <twig:Button tone="gray.800">Cancel</twig:Button> #}
+{# class="px_md py_sm bdr_md c_white bg_gray.800" #}{% endverbatim %}{% endset %}
+    {% set css_assets %}/* assets/styles/app.css */
+{+@layer reset, base, tokens, components, utilities;+}
+
+{+@import '../../var/ux_css/styles.css';+}
+
+/* ... your own styles */{% endset %}
+
+    <twig:Package:Highlights
+        eyebrow="Tokens, styles, output"
+        title="From tokens to <strong>one stylesheet</strong>."
+        :columns="2"
+        :items="[
+            {
+                icon: 'lucide:palette',
+                title: 'Tokens as CSS <strong>variables</strong>',
+                description: 'Every token is written as a CSS variable, so hand-written CSS uses the same values.',
+                code: css_variables,
+                language: 'css',
+                colorSwatches: true,
+            },
+            {
+                icon: 'lucide:monitor-smartphone',
+                title: 'Conditions and <strong>breakpoints</strong>',
+                description: 'Hover, focus, dark mode or a breakpoint, on any property.',
+                code: css_conditions,
+                language: 'twig',
+                colorSwatches: true,
+            },
+            {
+                icon: 'lucide:variable',
+                title: 'Values from <strong>props</strong>',
+                description: 'A <code>css()</code> value can come from a variable, such as a component prop. The keys and literal values are still checked when Twig compiles, but a value from a variable is only checked when the template renders in debug mode. Its CSS must exist elsewhere: the same style in another template, or listed in <code>static_css</code>.',
+                code: css_props,
+                language: 'twig',
+                colorSwatches: true,
+            },
+            {
+                icon: 'lucide:file-code',
+                title: 'One <strong>stylesheet</strong>, written by PHP',
+                description: 'The bundle reads your templates and writes the rules they use. Import the generated file at the top of your main stylesheet, right after the statement that orders the cascade layers. It works the same way with <a href=\'https://symfony.com/doc/current/frontend/asset_mapper.html\'>AssetMapper</a>, <a href=\'https://symfony.com/bundles/reprise/current/index.html\'>Symfony Reprise</a> and <a href=\'https://symfony.com/doc/current/frontend/encore/index.html\'>Webpack Encore</a>.',
+                code: css_assets,
+                language: 'css',
+            },
+        ]"
+    />
+
+    <twig:Package:Highlights
+        eyebrow="From the editor to the deploy"
+        title="Mistakes never reach <strong>production</strong>."
+        tone="subtle"
+        intro="<code>css()</code> is resolved when Twig compiles the template, against the tokens you declared. A wrong property, token or keyword stops the compilation: on the error page in dev, in <code>lint:twig</code> in CI, and in <code>cache:warmup</code> at deploy."
+        :columns="2"
+        :items="[
+            {
+                icon: 'lucide:shield-check',
+                title: 'A typo is not a <strong>missing style</strong>',
+                description: 'Tailwind CSS reads templates as plain text, so a misspelled class gets no CSS and nothing reports it. <code>css()</code> takes a hash that Twig parses, and every key and value is checked.',
+                code: css_tailwind,
+                language: 'twig',
+                wide: true,
+            },
+            {
+                icon: 'lucide:text-cursor-input',
+                title: 'Typed for your <strong>editor</strong>',
+                description: 'In debug mode, the bundle writes the types of the <code>css()</code> hash from your tokens. The <a href=\'https://plugins.jetbrains.com/plugin/7219-symfony-plugin\'>Symfony plugin</a> for PhpStorm and <a href=\'https://marketplace.visualstudio.com/items?itemName=symfony.language-tools\'>Symfony Language Tools</a> for VS Code complete keys and values from them.',
+                screenshots: [
+                    {
+                        src: asset('images/ux_packages/css/phpstorm-completion-keys.webp'),
+                        width: 890,
+                        height: 910,
+                        alt: 'PhpStorm completion list in a Twig template, offering textAlign, textAlignLast, textAnchor and textSizeAdjust after typing textA in a css() call.',
+                        caption: 'Completion for the keys of <code>css()</code>.',
+                    },
+                    {
+                        src: asset('images/ux_packages/css/phpstorm-completion-values.webp'),
+                        width: 890,
+                        height: 910,
+                        alt: 'PhpStorm completion list in a Twig template, offering values for textAlign such as center, end, justify, left and right.',
+                        caption: 'Completion for the values each key accepts.',
+                    },
+                    {
+                        src: asset('images/ux_packages/css/phpstorm-colors-config.webp'),
+                        width: 890,
+                        height: 553,
+                        alt: 'PhpStorm editing config/packages/ux_css.yaml, with a color square in the gutter on each line that declares a hex color token.',
+                        caption: 'Each color token shows its color in the gutter.',
+                    },
+                    {
+                        src: asset('images/ux_packages/css/phpstorm-go-to-definition.webp'),
+                        width: 890,
+                        height: 553,
+                        alt: 'PhpStorm showing a tooltip for the fg token in a Twig template, opened by hovering it with Ctrl held.',
+                        caption: 'Ctrl+click a token to jump to its declaration.',
+                    },
+                ],
+                wide: true,
+            },
+        ]"
+    />
+{% endblock %}
+
+{% block code_block_left %}
+    <twig:CodeBlock filename="config/packages/ux_css.yaml" height="300px" colorSwatches/>
+{% endblock %}
+
+{% block code_block_right %}
+    <twig:CodeBlock filename="templates/ux_packages/css/_card.html.twig" height="300px" colorSwatches/>
+{% endblock %}
+
+{% block demo_title %}UX CSS{% endblock %}
+
+{% block demo_content %}
+    <div class="flex flex-col gap-6 md:flex-row" data-controller="css-demo">
+        <div class="shrink-0 md:w-[360px]">
+            <div class="text-xs uppercase tracking-wide text-muted mb-2">Rendered with css()</div>
+            <div data-css-demo-target="preview">{{ include('ux_packages/css/_card.html.twig') }}</div>
+            <p class="mt-3 text-sm text-muted">Switch the site theme: the card follows, through its semantic tokens.</p>
+        </div>
+        <div class="Terminal min-w-0 flex-1">
+            <div class="Terminal_header py-1.5 px-3 mb-0 flex justify-between items-center">
+                <span class="Terminal_title font-mono">Generated CSS</span>
+            </div>
+            <div class="Terminal_body">
+                <div class="Terminal_content">
+                    <pre><code class="language-css" data-css-demo-target="rules"></code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-6" data-css-mistakes>
+        <twig:CodeBlockInline :code="mistakes" language="twig" filename="Compiled on this request" />
+    </div>
+{% endblock %}

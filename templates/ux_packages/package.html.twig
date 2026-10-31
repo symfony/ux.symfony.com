@@ -42,7 +42,7 @@
 
     {% block package_install %}
         <twig:Package:Section tone="deep">
-            <twig:Package:SectionHeading centered title="Install <strong>{{ package.humanName }}</strong>." />
+            <twig:Package:SectionHeading centered title="Install <strong>{{ heading_name|default(package.humanName) }}</strong>." />
             {{ include('ux_packages/_package_install.html.twig', {
                 package: package,
             }) }}
@@ -66,7 +66,7 @@
 {% block package_content_heading %}
     <twig:Package:SectionHeading
         eyebrow="{{ package.tagLine }}"
-        title="Add <strong>{{ package.humanName }}</strong> to your app."
+        title="Add <strong>{{ heading_name|default(package.humanName) }}</strong> to your app."
     >{{ package.description|markdown_to_html }}</twig:Package:SectionHeading>
 {% endblock %}
 

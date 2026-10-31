@@ -1,0 +1,25 @@
+ux_css:
+    tokens:
+        colors:
+            blue:
+                600: '#1572b6'
+                700: '#105a90'
+            gray:
+                50: '#f9fafb'
+                800: '#1f2937'
+                900: '#111827'
+            white: '#ffffff'
+        spacing:
+            sm: '0.5rem'
+            md: '1rem'
+            lg: '1.5rem'
+        radii:
+            md: '0.5rem'
+    semantic_tokens:
+        colors:
+            fg:
+                base: '{colors.gray.900}'
+                _dark: '{colors.gray.50}'
+            surface:
+                base: '{colors.white}'
+                _dark: '{colors.gray.800}'

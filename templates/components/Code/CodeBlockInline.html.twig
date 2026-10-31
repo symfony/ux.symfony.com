@@ -2,7 +2,7 @@
     <div class="Terminal_actions">
         <div
             data-controller="clipboarder"
-            data-clipboarder-source-value="{{ code }}"
+            data-clipboarder-source-value="{{ code|replace({'{+': '', '+}': ''}) }}"
             class="code-buttons"
         >
             {%- set _copy_id = 'tt-' ~ random(1000000000) -%}
@@ -41,7 +41,11 @@
         {% endif %}
         <div class="Terminal_content">
             <pre><code class="language-{{ language }}">
-                {{- code|highlight(language, collapse_classes: collapseClass) -}}
+                {%- if colorSwatches -%}
+                    {{- code|highlight(language, collapse_classes: collapseClass)|color_swatches -}}
+                {%- else -%}
+                    {{- code|highlight(language, collapse_classes: collapseClass) -}}
+                {%- endif -%}
             </code></pre>
         </div>
     </div>

@@ -43,6 +43,8 @@ final class CodeBlock
 
     public bool $copyButton = true;
 
+    public bool $colorSwatches = false;
+
     public function __construct(
         #[Autowire('%kernel.project_dir%')] private string $rootDir,
     ) {

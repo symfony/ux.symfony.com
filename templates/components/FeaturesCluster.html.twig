@@ -1,8 +1,13 @@
-{# @prop items array Feature items with `icon`, optional `iconClass` and `iconColorClass`, HTML `title`, and plain-text `description` keys #}
-{# @prop title string Accessible heading for the feature group #}
-{# @prop titleId string Unique identifier for the accessible heading #}
-{# @prop titleClass string CSS classes applied to feature headings #}
-{%- props items, title, titleId, titleClass = 'font-bold' -%}
+{%- props
+    ## array Feature items with `icon`, optional `iconClass` and `iconColorClass`, HTML `title`, and plain-text `description` keys.
+    items,
+    ## string Accessible heading for the feature group.
+    title,
+    ## string Unique identifier for the accessible heading.
+    titleId,
+    ## string CSS classes applied to feature headings.
+    titleClass = 'font-bold'
+-%}
 
 <section
     {{ attributes.defaults({class: 'bg-body py-22'}) }}

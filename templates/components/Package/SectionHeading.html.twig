@@ -1,8 +1,13 @@
-{# @prop title string Heading HTML; wrap the accented words in `<strong>` #}
-{# @prop eyebrow string Small uppercase label above the heading #}
-{# @prop id string Heading id, to pair with the section `aria-labelledby` #}
-{# @prop centered bool Center the block instead of aligning it to the start #}
-{%- props title, eyebrow = null, id = null, centered = false -%}
+{%- props
+    ## string Heading HTML; wrap the accented words in `<strong>`.
+    title,
+    ## string Small uppercase label above the heading.
+    eyebrow = null,
+    ## string Heading id, to pair with the section `aria-labelledby`.
+    id = null,
+    ## bool Center the block instead of aligning it to the start.
+    centered = false
+-%}
 
 {%- set intro -%}
     {%- block content %}{% endblock -%}

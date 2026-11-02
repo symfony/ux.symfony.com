@@ -1,6 +1,9 @@
-{# @prop label string Address or caption shown in the window chrome #}
-{# @prop compact bool Tighten the inner padding, for results that fill the panel on their own #}
-{%- props label = null, compact = false -%}
+{%- props
+    ## string Address or caption shown in the window chrome.
+    label = null,
+    ## bool Tighten the inner padding, for results that fill the panel on their own.
+    compact = false
+-%}
 
 <div {{ attributes.defaults({class: 'overflow-hidden rounded-xl border border-body-text/15 bg-body'}) }}>
     <div class="flex items-center gap-3 border-b border-body-text/10 bg-subtle px-4 py-3">

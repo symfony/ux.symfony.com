@@ -1,8 +1,13 @@
-{# @prop links array Documentation links with `title` and `url` keys #}
-{# @prop label string Accessible label for the navigation #}
-{# @prop intro string Visible introduction before the links #}
-{# @prop centered bool Center the whole list instead of aligning it to the start #}
-{%- props links, label, intro = 'See documentation:', centered = false -%}
+{%- props
+    ## array Documentation links with `title` and `url` keys.
+    links,
+    ## string Accessible label for the navigation.
+    label,
+    ## string Visible introduction before the links.
+    intro = 'See documentation:',
+    ## bool Center the whole list instead of aligning it to the start.
+    centered = false
+-%}
 
 <nav
     {{ attributes.defaults({class: 'mt-10 flex flex-wrap items-baseline gap-x-2.5 gap-y-1 text-sm/loose text-body-text/65 ' ~ (centered ? 'justify-center text-center' : '')}) }}

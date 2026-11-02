@@ -1,6 +1,9 @@
-{# @prop tone string `default`, `subtle`, `deep` or `accent`; alternate them going down a page #}
-{# @prop id string Anchor target for the section #}
-{%- props tone = 'default', id = null -%}
+{%- props
+    ## string `default`, `subtle`, `deep` or `accent`; alternate them going down a page.
+    tone = 'default',
+    ## string Anchor target for the section.
+    id = null
+-%}
 
 {%- set tones = {
     default: 'bg-body',

@@ -1,11 +1,19 @@
-{# @prop items array Each entry takes `icon`, an HTML `title`, a `description`, optional `code` + `language` + `colorSwatches`, optional `screenshots` (each with `src`, `width`, `height`, `alt`, HTML `caption`), and `wide` to span the whole row #}
-{# @prop title string Section heading HTML; wrap the accented words in `<strong>` #}
-{# @prop eyebrow string Small uppercase label above the heading #}
-{# @prop intro string Sentence under the heading #}
-{# @prop id string Anchor target for the section #}
-{# @prop tone string Background tone passed to Package:Section #}
-{# @prop columns int Items per row on large screens, 2 or 3 #}
-{%- props items, title, eyebrow = null, intro = null, id = null, tone = 'default', columns = 3 -%}
+{%- props
+    ## array Each entry takes `icon`, an HTML `title`, a `description`, optional `code` + `language` + `colorSwatches`, optional `screenshots` (each with `src`, `width`, `height`, `alt`, HTML `caption`), and `wide` to span the whole row.
+    items,
+    ## string Section heading HTML; wrap the accented words in `<strong>`.
+    title,
+    ## string Small uppercase label above the heading.
+    eyebrow = null,
+    ## string Sentence under the heading.
+    intro = null,
+    ## string Anchor target for the section.
+    id = null,
+    ## string Background tone passed to Package:Section.
+    tone = 'default',
+    ## int Items per row on large screens, 2 or 3.
+    columns = 3
+-%}
 
 <twig:Package:Section id="{{ id }}" tone="{{ tone }}">
     <twig:Package:SectionHeading eyebrow="{{ eyebrow }}" title="{{ title }}">

@@ -1,7 +1,11 @@
-{# @prop title string Heading HTML; wrap the accented words in `<strong>`. Omit it to pass the heading as content. #}
-{# @prop id string Heading id, to pair with the section `aria-labelledby` #}
-{# @prop size string `lg` for a section opener, `md` for a title sitting next to other content #}
-{%- props title = null, id = null, size = 'lg' -%}
+{%- props
+    ## string Heading HTML; wrap the accented words in `<strong>`. Omit it to pass the heading as content.
+    title = null,
+    ## string Heading id, to pair with the section `aria-labelledby`.
+    id = null,
+    ## string `lg` for a section opener, `md` for a title sitting next to other content.
+    size = 'lg'
+-%}
 
 {%- set sizes = {
     lg: 'text-[clamp(2.35rem,3.8vw,3.7rem)] leading-[.98] tracking-[-.04em]',

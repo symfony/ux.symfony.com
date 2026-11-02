@@ -1,4 +1,4 @@
-{# @prop items array Each entry takes `icon`, an HTML `title`, a `description`, optional `code` + `language`, and `wide` to span the whole row #}
+{# @prop items array Each entry takes `icon`, an HTML `title`, a `description`, optional `code` + `language` + `colorSwatches`, optional `screenshots` (each with `src`, `width`, `height`, `alt`, HTML `caption`), and `wide` to span the whole row #}
 {# @prop title string Section heading HTML; wrap the accented words in `<strong>` #}
 {# @prop eyebrow string Small uppercase label above the heading #}
 {# @prop intro string Sentence under the heading #}
@@ -21,14 +21,28 @@
 
                 <h3 class="m-0 mt-6 font-title text-2xl font-bold leading-tight tracking-[-.02em] text-balance [&_strong]:text-(--package-primary-text)">{{ item.title|raw }}</h3>
 
-                <p class="m-0 mt-4 leading-[1.7] text-body-text/80 text-balance">{{ item.description|raw }}</p>
+                <p class="m-0 mt-4 leading-[1.7] text-body-text/80 text-balance [&_a]:text-(--package-primary-text) [&_a]:underline [&_a]:decoration-current/35 [&_a]:underline-offset-[.2em] [&_a:hover]:decoration-current">{{ item.description|raw }}</p>
 
                 {% if item.code|default %}
                     <twig:CodeBlockInline
                         :code="item.code"
                         language="{{ item.language|default('php') }}"
+                        :colorSwatches="item.colorSwatches|default(false)"
                         class="mt-8"
                     />
+                {% endif %}
+
+                {% if item.screenshots|default %}
+                    <div class="mt-8 grid gap-x-6 gap-y-8 sm:grid-cols-2">
+                        {% for screenshot in item.screenshots %}
+                            <figure class="m-0">
+                                <a href="{{ screenshot.src }}" target="_blank" class="block overflow-hidden rounded-xl border border-white/10 shadow-lg">
+                                    <img src="{{ screenshot.src }}" alt="{{ screenshot.alt }}" width="{{ screenshot.width }}" height="{{ screenshot.height }}" class="block h-auto w-full" loading="lazy">
+                                </a>
+                                <figcaption class="mt-3 text-sm leading-[1.6] text-body-text/70">{{ screenshot.caption|raw }}</figcaption>
+                            </figure>
+                        {% endfor %}
+                    </div>
                 {% endif %}
             </article>
         {% endfor %}

@@ -25,4 +25,6 @@ final class CodeBlockInline
      * `…` in the rendered snippet (used to hide presentation-only classes).
      */
     public bool $collapseClass = false;
+
+    public bool $colorSwatches = false;
 }

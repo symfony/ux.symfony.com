@@ -46,9 +46,19 @@
     }
 
     .hl-addition {
+        position: relative;
         display: inline-block;
-        min-width: 100%;
+        min-width: calc(100% + 1em);
+        margin-left: -1em;
+        padding-left: 1em;
         background-color: #00FF0022;
+    }
+
+    .hl-addition::before {
+        content: "+";
+        position: absolute;
+        left: 0.25em;
+        user-select: none;
     }
 
     .hl-deletion {
@@ -73,6 +83,21 @@
     .hl-gutter-deletion {
         background-color: #EA4334;
         color: #fff;
+    }
+
+    .hl-swatch {
+        display: inline-block;
+        width: --spacing(3);
+        height: --spacing(3);
+        margin-right: --spacing(3);
+        vertical-align: -0.1em;
+        border-radius: var(--radius-xs);
+        user-select: none;
+    }
+
+    .hl-swatch[style] {
+        background: var(--swatch);
+        box-shadow: 0 0 0 1px rgb(255 255 255 / 0.25);
     }
 
     /* Collapsible `class="..."` values (see HighlightExtension::collapseClasses). */

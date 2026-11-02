@@ -201,6 +201,20 @@ class UxPackageRepository
             ),
 
             (new UxPackage(
+                'css',
+                'CSS',
+                'app_css',
+                '#1572B6',
+                'Typed Atomic CSS for Twig',
+                'Atomic CSS from your design tokens, checked when Twig compiles',
+                new \DateTimeImmutable('2026-10-31'),
+                'I want my styles checked before production',
+                'css.svg',
+                seoTitle: 'UX CSS - Typed Atomic CSS for Twig',
+            ))
+                ->setOfficialDocsUrl('https://github.com/symfony/ux/blob/3.x/src/Css/doc/index.rst'),
+
+            (new UxPackage(
                 'chartjs',
                 'Chart.js',
                 'app_chartjs',

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f4750b371bda10e52ccd9b806d0b4a5b",
+    "content-hash": "8bffaec6ac22eb1b94a27c0ccd2d6aad",
     "packages": [
         {
             "name": "composer/semver",
@@ -7711,6 +7711,99 @@
             "time": "2026-10-19T16:29:08+00:00"
         },
         {
+            "name": "symfony/ux-css",
+            "version": "3.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/ux-css.git",
+                "reference": "9e719a197fff4ae9d4ed4b1749ead5a26227dbd1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/ux-css/zipball/9e719a197fff4ae9d4ed4b1749ead5a26227dbd1",
+                "reference": "9e719a197fff4ae9d4ed4b1749ead5a26227dbd1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.4",
+                "symfony/config": "^7.4|^8.0",
+                "symfony/dependency-injection": "^7.4|^8.0",
+                "symfony/http-kernel": "^7.4|^8.0",
+                "twig/twig": "^3.24|^4.0"
+            },
+            "require-dev": {
+                "phpbench/phpbench": "^1.7",
+                "phpstan/phpstan": "^2.1.39",
+                "phpunit/phpunit": "^11.1|^12.0",
+                "symfony/asset-mapper": "^7.4|^8.0",
+                "symfony/console": "^7.4|^8.0",
+                "symfony/error-handler": "^7.4.17|^8.1.5",
+                "symfony/framework-bundle": "^7.4|^8.0",
+                "symfony/process": "^7.4|^8.0",
+                "symfony/twig-bundle": "^7.4|^8.0",
+                "symfony/yaml": "^7.4|^8.0"
+            },
+            "default-branch": true,
+            "type": "symfony-bundle",
+            "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/ux",
+                    "name": "symfony/ux"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\UX\\Css\\": "src/"
+                },
+                "exclude-from-classmap": []
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Hugo Alliaume",
+                    "email": "hugo@alliau.me"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Typed atomic CSS for Twig, driven by design tokens and validated at compile time",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "atomic-css",
+                "css",
+                "design-tokens",
+                "symfony-ux",
+                "twig"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/ux-css/tree/3.x"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2026-11-02T14:55:58+00:00"
+        },
+        {
             "name": "symfony/ux-dropzone",
             "version": "3.x-dev",
             "source": {
@@ -13802,6 +13895,7 @@
         "symfony/ux-chartjs": 20,
         "symfony/ux-cloudinary-image": 20,
         "symfony/ux-cropperjs": 20,
+        "symfony/ux-css": 20,
         "symfony/ux-dropzone": 20,
         "symfony/ux-icons": 20,
         "symfony/ux-image": 20,

@@ -27,6 +27,8 @@
                         {%- if this.lineStart -%}
                             {%- set content = piece.content|u.prepend(this.lineStart > 1 ? '⇥|') -%}
                             {{- content|highlight(this.language, this.lineStart)|u.replace('⇥|', '')|raw -}}
+                        {%- elseif colorSwatches -%}
+                            {{- piece.content|highlight(this.language)|color_swatches -}}
                         {%- else -%}
                             {{- piece.content|highlight(this.language) -}}
                         {%- endif -%}

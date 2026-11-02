@@ -5,7 +5,7 @@
 {% set attr_style = [
     '--color: ' ~ color,
     '--gradient: ' ~ (gradient ?: 'none'),
-    '--logo-size: ' ~ logoSize ?? '6rem',
+    '--logo-size: ' ~ (logoSize ?? '6rem'),
 ]|join(' ;') %}
 
 <div

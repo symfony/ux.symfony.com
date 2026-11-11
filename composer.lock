@@ -7716,12 +7716,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-css.git",
-                "reference": "9e719a197fff4ae9d4ed4b1749ead5a26227dbd1"
+                "reference": "6682faf407bc2727e5520ae4b75c8962ac92647e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-css/zipball/9e719a197fff4ae9d4ed4b1749ead5a26227dbd1",
-                "reference": "9e719a197fff4ae9d4ed4b1749ead5a26227dbd1",
+                "url": "https://api.github.com/repos/symfony/ux-css/zipball/6682faf407bc2727e5520ae4b75c8962ac92647e",
+                "reference": "6682faf407bc2727e5520ae4b75c8962ac92647e",
                 "shasum": ""
             },
             "require": {
@@ -7729,11 +7729,15 @@
                 "symfony/config": "^7.4|^8.0",
                 "symfony/dependency-injection": "^7.4|^8.0",
                 "symfony/http-kernel": "^7.4|^8.0",
+                "twig/html-extra": "^3.29|^4.0",
                 "twig/twig": "^3.24|^4.0"
+            },
+            "conflict": {
+                "symfony/ux-twig-component": ">=2.16,<3.0"
             },
             "require-dev": {
                 "phpbench/phpbench": "^1.7",
-                "phpstan/phpstan": "^2.1.39",
+                "phpstan/phpstan": "^2.3",
                 "phpunit/phpunit": "^11.1|^12.0",
                 "symfony/asset-mapper": "^7.4|^8.0",
                 "symfony/console": "^7.4|^8.0",
@@ -7741,6 +7745,7 @@
                 "symfony/framework-bundle": "^7.4|^8.0",
                 "symfony/process": "^7.4|^8.0",
                 "symfony/twig-bundle": "^7.4|^8.0",
+                "symfony/ux-twig-component": "^3.5",
                 "symfony/yaml": "^7.4|^8.0"
             },
             "default-branch": true,
@@ -7801,7 +7806,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-11-02T14:55:58+00:00"
+            "time": "2026-11-11T09:48:37+00:00"
         },
         {
             "name": "symfony/ux-dropzone",
@@ -9184,12 +9189,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-twig-component.git",
-                "reference": "91ae88f4b5a3a4564df28fe5c5ce5bfb396ea070"
+                "reference": "2efc983b37fee968b04c3122e7b93c48620bb497"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-twig-component/zipball/91ae88f4b5a3a4564df28fe5c5ce5bfb396ea070",
-                "reference": "91ae88f4b5a3a4564df28fe5c5ce5bfb396ea070",
+                "url": "https://api.github.com/repos/symfony/ux-twig-component/zipball/2efc983b37fee968b04c3122e7b93c48620bb497",
+                "reference": "2efc983b37fee968b04c3122e7b93c48620bb497",
                 "shasum": ""
             },
             "require": {
@@ -9266,7 +9271,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-10-23T20:55:37+00:00"
+            "time": "2026-11-10T07:56:02+00:00"
         },
         {
             "name": "symfony/ux-vue",

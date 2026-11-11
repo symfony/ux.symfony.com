@@ -1,0 +1,30 @@
+{%- props
+    ## 'solid'|'outline' The visual style.
+    visual = 'solid',
+    ## 'sm'|'md' The button size.
+    size = 'md',
+-%}
+{%- set button = cva(
+    base: {
+        display: 'inline-flex',
+        alignItems: 'center',
+        rounded: 'md',
+        borderWidth: '1px',
+        borderStyle: 'solid',
+        borderColor: 'blue.600',
+    },
+    variants: {
+        visual: {
+            solid: {bg: 'blue.600', color: 'white', _hover: {bg: 'blue.700'}},
+            outline: {bg: 'surface', color: 'fg', _hover: {borderColor: 'blue.700'}},
+        },
+        size: {
+            sm: {px: 'sm', fontSize: 'sm'},
+            md: {px: 'md', py: 'sm', fontSize: 'md'},
+        },
+    },
+    default_variants: {visual: 'solid', size: 'md'},
+) -%}
+<button {{ attributes.defaults({class: button.apply({visual: visual, size: size})}) }}>
+    {%- block content %}{% endblock -%}
+</button>

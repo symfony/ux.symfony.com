@@ -1,5 +1,5 @@
 {%- props
-    ## array Each entry takes `icon`, an HTML `title`, a `description`, optional `code` + `language` + `colorSwatches`, optional `screenshots` (each with `src`, `width`, `height`, `alt`, HTML `caption`), and `wide` to span the whole row.
+    ## array Each entry takes `icon`, an HTML `title`, a `description`, optional `code` + `language` + `colorSwatches`, an optional `table` (HTML `headers` and `rows`), optional `screenshots` (each with `src`, `width`, `height`, `alt`, HTML `caption`), and `wide` to span the whole row.
     items,
     ## string Section heading HTML; wrap the accented words in `<strong>`.
     title,
@@ -38,6 +38,27 @@
                         :colorSwatches="item.colorSwatches|default(false)"
                         class="mt-8"
                     />
+                {% endif %}
+
+                {% if item.table|default %}
+                    <table class="mt-8 w-full text-left tabular-nums text-body-text/80 [&_:is(th,td)]:px-3 [&_:is(th,td)]:py-2 [&_:is(th,td)]:border-b [&_:is(th,td)]:border-border [&_th]:font-semibold [&_th]:text-body-text">
+                        <thead>
+                            <tr>
+                                {% for header in item.table.headers %}
+                                    <th scope="col">{{ header|raw }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in item.table.rows %}
+                                <tr>
+                                    {% for cell in row %}
+                                        <td>{{ cell|raw }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 {% endif %}
 
                 {% if item.screenshots|default %}

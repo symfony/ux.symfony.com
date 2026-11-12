@@ -12,6 +12,7 @@
 namespace App\Tests\Functional;
 
 use App\Service\LiveDemoRepository;
+use App\Service\TurboDemoRepository;
 use App\Service\UxPackageRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -41,8 +42,13 @@ class SitemapTest extends KernelTestCase
 
         yield 'pagination_demos' => $router->generate('app_demo_pagination', [], UrlGeneratorInterface::ABSOLUTE_URL);
 
-        $demoRepository = new LiveDemoRepository();
-        foreach ($demoRepository->findAll() as $demo) {
+        $liveDemoRepository = new LiveDemoRepository();
+        foreach ($liveDemoRepository->findAll() as $demo) {
+            yield $demo->getRoute() => $router->generate($demo->getRoute(), [], UrlGeneratorInterface::ABSOLUTE_URL);
+        }
+
+        $turboDemoRepository = new TurboDemoRepository();
+        foreach ($turboDemoRepository->findAll() as $demo) {
             yield $demo->getRoute() => $router->generate($demo->getRoute(), [], UrlGeneratorInterface::ABSOLUTE_URL);
         }
 

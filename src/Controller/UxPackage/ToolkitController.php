@@ -19,7 +19,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ToolkitController extends AbstractController
 {
@@ -32,7 +31,7 @@ class ToolkitController extends AbstractController
         #[MapQueryParameter] ?string $preview = null,
     ): Response {
         if ('demo' === $preview) {
-            return $previewRenderer->respondWithTemplate($request, 'shadcn', 'toolkit/_code_block_right.html.twig', $this->generateUrl('app_toolkit', referenceType: UrlGeneratorInterface::ABSOLUTE_URL));
+            return $previewRenderer->respondWithTemplate($request, 'shadcn', 'toolkit/_code_block_right.html.twig');
         }
 
         $package = $packageRepository->find('toolkit');

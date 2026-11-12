@@ -22,8 +22,7 @@ use Symfony\UX\Toolkit\Recipe\RecipeType;
 use Twig\Environment;
 
 /**
- * Renders a Toolkit preview as a standalone page, in the context of its kit, served from the page that embeds
- * it (its canonical URL).
+ * Renders a Toolkit preview as a standalone page, in the context of its kit, served from the page that embeds it.
  */
 final class PreviewRenderer
 {
@@ -42,7 +41,7 @@ final class PreviewRenderer
      *
      * @param int $number 1-based, in reading order
      */
-    public function respondWithExample(Request $request, string $kitId, Recipe $recipe, int $number, string $canonicalUrl): ?Response
+    public function respondWithExample(Request $request, string $kitId, Recipe $recipe, int $number): ?Response
     {
         $template = \sprintf('@ToolkitPreview/%s/%s', $kitId, $recipe->name);
         $block = 'preview_'.$number;
@@ -51,18 +50,18 @@ final class PreviewRenderer
             return null;
         }
 
-        return $this->respond($request, $kitId, $template, $block, $recipe, $canonicalUrl);
+        return $this->respond($request, $kitId, $template, $block, $recipe);
     }
 
     /**
      * A whole template of the site, rendered with the kit components.
      */
-    public function respondWithTemplate(Request $request, string $kitId, string $template, string $canonicalUrl): Response
+    public function respondWithTemplate(Request $request, string $kitId, string $template): Response
     {
-        return $this->respond($request, $kitId, $template, null, null, $canonicalUrl);
+        return $this->respond($request, $kitId, $template, null, null);
     }
 
-    private function respond(Request $request, string $kitId, string $template, ?string $block, ?Recipe $recipe, string $canonicalUrl): Response
+    private function respond(Request $request, string $kitId, string $template, ?string $block, ?Recipe $recipe): Response
     {
         $this->profiler?->disable();
 
@@ -77,8 +76,9 @@ final class PreviewRenderer
             $recipe,
         );
 
-        $response = new Response($html, headers: ['Link' => \sprintf('<%s>; rel="canonical"', $canonicalUrl)]);
-        $response->setPublic()->setMaxAge(86400)->setEtag(hash('xxh128', $html));
+        $response = new Response($html, headers: ['X-Robots-Tag' => 'noindex, indexifembedded']);
+        // The HTML points to hashed assets that a deploy removes, so it is revalidated on every load
+        $response->setCache(['public' => true, 'no_cache' => true, 'etag' => hash('xxh128', $html)]);
         $response->isNotModified($request);
 
         return $response;

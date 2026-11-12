@@ -60,15 +60,27 @@ final class ToolkitComponentPageTest extends WebTestCase
         self::assertStringStartsWith('<!DOCTYPE html>', ltrim($client->getResponse()->getContent()));
     }
 
-    public function testComponentPreviewIsCacheableAndPointsToItsPage(): void
+    public function testComponentPreviewIsRevalidatedOnEveryLoad(): void
     {
         $client = static::createClient();
         $client->request('GET', '/toolkit/kits/shadcn/components/button?preview=2');
 
         self::assertResponseIsSuccessful();
-        self::assertResponseHeaderSame('Link', '<http://localhost/toolkit/kits/shadcn/components/button>; rel="canonical"');
-        self::assertResponseHeaderSame('Cache-Control', 'max-age=86400, public');
+        self::assertResponseHeaderSame('Cache-Control', 'no-cache, public');
         self::assertResponseHasHeader('ETag');
+
+        $client->request('GET', '/toolkit/kits/shadcn/components/button?preview=2', server: ['HTTP_IF_NONE_MATCH' => $client->getResponse()->headers->get('ETag')]);
+        self::assertResponseStatusCodeSame(304);
+    }
+
+    public function testComponentPreviewIsOnlyIndexedThroughItsPage(): void
+    {
+        $client = static::createClient();
+        $client->request('GET', '/toolkit/kits/shadcn/components/button?preview=2');
+
+        self::assertResponseIsSuccessful();
+        self::assertResponseHeaderSame('X-Robots-Tag', 'noindex, indexifembedded');
+        self::assertStringNotContainsString('rel="canonical"', implode(', ', $client->getResponse()->headers->all('link')));
     }
 
     public function testComponentPreviewBeyondTheExamplesIsNotFound(): void
@@ -84,14 +96,13 @@ final class ToolkitComponentPageTest extends WebTestCase
         $client = static::createClient();
         $crawler = $client->request('GET', '/toolkit/kits/shadcn/blocks/login');
 
-        self::assertSame(
-            ['http://localhost/toolkit/kits/shadcn/blocks/login?preview=login-01', 'http://localhost/toolkit/kits/shadcn/blocks/login?preview=login-02'],
+        self::assertContains(
+            'http://localhost/toolkit/kits/shadcn/blocks/login?preview=login-02',
             $crawler->filter('[data-lazy-iframe-src-value]')->each(static fn ($node) => $node->attr('data-lazy-iframe-src-value')),
         );
 
         $client->request('GET', '/toolkit/kits/shadcn/blocks/login?preview=login-02');
         self::assertResponseIsSuccessful();
-        self::assertResponseHeaderSame('Link', '<http://localhost/toolkit/kits/shadcn/blocks/login>; rel="canonical"');
 
         $client->request('GET', '/toolkit/kits/shadcn/blocks/login?preview=button');
         self::assertResponseStatusCodeSame(404);

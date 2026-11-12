@@ -70,9 +70,8 @@ class BlocksController extends AbstractController
 
         if (null !== $preview) {
             $recipe = array_find($blockSection->recipes, static fn (Recipe $recipe) => $recipe->name === $preview);
-            $canonicalUrl = $this->generateUrl('app_toolkit_block_section', ['kitId' => $kitId, 'section' => $section], UrlGeneratorInterface::ABSOLUTE_URL);
 
-            return (null !== $recipe ? $previewRenderer->respondWithExample($request, $kitId, $recipe, 1, $canonicalUrl) : null)
+            return (null !== $recipe ? $previewRenderer->respondWithExample($request, $kitId, $recipe, 1) : null)
                 ?? throw $this->createNotFoundException(\sprintf('Block "%s" not found in section "%s"', $preview, $section));
         }
 

@@ -19,7 +19,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\UX\Toolkit\Recipe\RecipeType;
 use Symfony\UX\Toolkit\Registry\LocalRegistry;
 
@@ -66,9 +65,7 @@ class ComponentsController extends AbstractController
         }
 
         if (null !== $preview) {
-            $canonicalUrl = $this->generateUrl('app_toolkit_component', ['kitId' => $kitId, 'componentName' => $componentName], UrlGeneratorInterface::ABSOLUTE_URL);
-
-            return $previewRenderer->respondWithExample($request, $kitId, $component, $preview, $canonicalUrl)
+            return $previewRenderer->respondWithExample($request, $kitId, $component, $preview)
                 ?? throw $this->createNotFoundException(\sprintf('Preview %d of "%s" not found', $preview, $componentName));
         }
 

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Preview</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            body {
+                {# Blocks ship their own full-page layout, components are centered #}
+                {{ full_page ? 'display: block; margin: 0; width: 100%;' : 'display: flex; align-items: center; justify-content: center; margin: 0; width: 100%; padding: 48px; min-height: 200px;' }}
+            }
+        </style>
+        <script>
+            const applyTheme = (theme) => {
+                theme = theme === 'light' ? 'light' : 'dark';
+                document.documentElement.classList.toggle('dark', theme === 'dark');
+                document.documentElement.setAttribute('data-bs-theme', theme);
+            };
+            applyTheme(localStorage.getItem('user-theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
+            window.addEventListener('storage', (event) => {
+                if (event.key === 'user-theme' && event.newValue) {
+                    applyTheme(event.newValue);
+                }
+            });
+        </script>
+        {{ importmap(entrypoint) }}
+    </head>
+    <body>{{ block ? block(block, template) : include(template) }}</body>
+</html>

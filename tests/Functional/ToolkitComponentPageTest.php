@@ -59,4 +59,69 @@ final class ToolkitComponentPageTest extends WebTestCase
         self::assertResponseIsSuccessful();
         self::assertStringStartsWith('<!DOCTYPE html>', ltrim($client->getResponse()->getContent()));
     }
+
+    public function testComponentPreviewIsRevalidatedOnEveryLoad(): void
+    {
+        $client = static::createClient();
+        $client->request('GET', '/toolkit/kits/shadcn/components/button?preview=2');
+
+        self::assertResponseIsSuccessful();
+        self::assertResponseHeaderSame('Cache-Control', 'no-cache, public');
+        self::assertResponseHasHeader('ETag');
+
+        $client->request('GET', '/toolkit/kits/shadcn/components/button?preview=2', server: ['HTTP_IF_NONE_MATCH' => $client->getResponse()->headers->get('ETag')]);
+        self::assertResponseStatusCodeSame(304);
+    }
+
+    public function testComponentPreviewIsOnlyIndexedThroughItsPage(): void
+    {
+        $client = static::createClient();
+        $client->request('GET', '/toolkit/kits/shadcn/components/button?preview=2');
+
+        self::assertResponseIsSuccessful();
+        self::assertResponseHeaderSame('X-Robots-Tag', 'noindex, indexifembedded');
+        self::assertStringNotContainsString('rel="canonical"', implode(', ', $client->getResponse()->headers->all('link')));
+    }
+
+    public function testComponentPreviewBeyondTheExamplesIsNotFound(): void
+    {
+        $client = static::createClient();
+        $client->request('GET', '/toolkit/kits/shadcn/components/button?preview=999');
+
+        self::assertResponseStatusCodeSame(404);
+    }
+
+    public function testBlockPreviewIsServedByItsSection(): void
+    {
+        $client = static::createClient();
+        $crawler = $client->request('GET', '/toolkit/kits/shadcn/blocks/login');
+
+        self::assertContains(
+            'http://localhost/toolkit/kits/shadcn/blocks/login?preview=login-02',
+            $crawler->filter('[data-lazy-iframe-src-value]')->each(static fn ($node) => $node->attr('data-lazy-iframe-src-value')),
+        );
+
+        $client->request('GET', '/toolkit/kits/shadcn/blocks/login?preview=login-02');
+        self::assertResponseIsSuccessful();
+
+        $client->request('GET', '/toolkit/kits/shadcn/blocks/login?preview=button');
+        self::assertResponseStatusCodeSame(404);
+    }
+
+    public function testToolkitDemoPreviewRendersWithTheKit(): void
+    {
+        $client = static::createClient();
+        $client->request('GET', '/toolkit?preview=demo');
+
+        self::assertResponseIsSuccessful();
+        self::assertStringContainsString("import 'ux-toolkit-shadcn'", $client->getResponse()->getContent());
+    }
+
+    public function testFormerSignedPreviewUrlIsGone(): void
+    {
+        $client = static::createClient();
+        $client->request('GET', '/toolkit/component_preview?kitId=shadcn&code=%3Cp%3E&_hash=x');
+
+        self::assertResponseStatusCodeSame(410);
+    }
 }

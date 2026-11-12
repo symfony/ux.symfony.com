@@ -41,8 +41,59 @@ final class CssPageTest extends KernelTestCase
 
         $card = $crawler->filter('#demo [data-css-demo-target="preview"] article');
         self::assertCount(1, $card);
-        self::assertSame('p_lg bdr_md bg_surface c_fg', $card->attr('class'));
+        self::assertSame('p_lg bdr_md bg_surface c_fg bx-sh_sm', $card->attr('class'));
+        self::assertSame('c_fg fs_lg', $card->filter('h3')->attr('class'));
         self::assertSame('d_inline-block mt_md px_md py_sm bdr_md bg_blue.600 c_white hover:bg_blue.700', $card->filter('a')->attr('class'));
+    }
+
+    public function testDemoButtonsAreStyledWithCva(): void
+    {
+        $crawler = $this->browser()
+            ->visit('/css')
+            ->assertSuccessful()
+            ->crawler();
+
+        $classes = $crawler->filter('#demo [data-css-demo-target="preview"] button')->each(static fn (Crawler $button): string => $button->attr('class'));
+
+        self::assertSame([
+            'd_inline-flex ai_center bdr_md bd-w_1px border-style_solid bd-c_blue.600 bg_blue.600 c_white hover:bg_blue.700 px_md py_sm fs_md',
+            'd_inline-flex ai_center bdr_md bd-w_1px border-style_solid bd-c_blue.600 bg_surface c_fg hover:bd-c_blue.700 py_sm fs_md px_lg',
+        ], $classes);
+    }
+
+    public function testCvaHighlightShowsTheComponentOfTheDemo(): void
+    {
+        $code = $this->highlight('Variants with cva()')->filter('.Terminal pre')->text(null, false);
+
+        self::assertStringStartsWith("{# templates/components/Css/Button.html.twig #}\n{%- props", $code);
+        self::assertStringContainsString('{%- set button = cva(', $code);
+        self::assertStringContainsString("default_variants: {visual: 'solid', size: 'md'},", $code);
+        self::assertStringContainsString('button.apply({visual: visual, size: size})', $code);
+    }
+
+    public function testOverrideHighlightShowsTheRenderedClasses(): void
+    {
+        $code = $this->highlight('Overridden by the caller')->filter('.Terminal pre')->text();
+        $buttons = $this->browser()
+            ->visit('/css')
+            ->assertSuccessful()
+            ->crawler()
+            ->filter('#demo [data-css-demo-target="preview"] button');
+
+        self::assertStringContainsString("<twig:Css:Button visual=\"outline\" class=\"{{ css({px: 'lg'}) }}\">", $code);
+        self::assertSame(2, preg_match_all('/\{# class="\.\.\. ([^"]+)" #\}/', $code, $matches));
+        foreach ($matches[1] as $index => $end) {
+            self::assertStringEndsWith(' '.$end, $buttons->eq($index)->attr('class'));
+        }
+        self::assertStringNotContainsString('px_md', $buttons->eq(1)->attr('class'));
+    }
+
+    public function testConditionsHighlightWritesAPseudoElementWithACssString(): void
+    {
+        $code = $this->highlight('Conditions and breakpoints')->filter('.Terminal pre')->text();
+
+        self::assertStringContainsString("_after: { content: '\"→\"', ms: 'sm' },", $code);
+        self::assertStringContainsString('after:content_"→" after:ms_sm', $code);
     }
 
     #[DataProvider('provideColoredCodeBlocks')]
@@ -80,14 +131,14 @@ final class CssPageTest extends KernelTestCase
             ->crawler();
 
         $screenshots = $crawler->filter('figure img[src*="/images/ux_packages/css/phpstorm-"]');
-        self::assertCount(4, $screenshots);
+        self::assertCount(6, $screenshots);
 
         $screenshots->each(static function (Crawler $screenshot): void {
             self::assertNotEmpty($screenshot->attr('alt'));
             self::assertSame($screenshot->attr('src'), $screenshot->closest('a')?->attr('href'));
-            self::assertSame('890', $screenshot->attr('width'));
-            self::assertContains($screenshot->attr('height'), ['553', '910']);
+            self::assertContains($screenshot->attr('width').'x'.$screenshot->attr('height'), ['800x316', '890x553', '890x910', '1468x1222']);
         });
+        self::assertCount(2, $crawler->filter('figure img[src*="/images/ux_packages/css/phpstorm-cva-"]'));
     }
 
     public function testEditorHighlightLinksToTheEditorPlugins(): void
@@ -121,10 +172,12 @@ final class CssPageTest extends KernelTestCase
             ->filter('h2')
             ->each(static fn (Crawler $heading): string => $heading->text());
 
-        self::assertLessThan(
-            array_search('Mistakes never reach production.', $headings, true),
-            array_search('From tokens to one stylesheet.', $headings, true),
-        );
+        $writing = array_search('From tokens to one stylesheet.', $headings, true);
+        $components = array_search('Built for Twig components.', $headings, true);
+        $tooling = array_search('Mistakes never reach production.', $headings, true);
+
+        self::assertLessThan($components, $writing);
+        self::assertLessThan($tooling, $components);
     }
 
     /**
@@ -159,6 +212,27 @@ final class CssPageTest extends KernelTestCase
             'Values from props',
             'One stylesheet, written by PHP',
         ]];
+        yield 'components' => ['Built for Twig components.', [
+            'Variants with cva()',
+            'Overridden by the caller',
+            'As fast as Tailwind CSS',
+        ]];
+    }
+
+    public function testBenchmarkHighlightComparesRequestsPerSecond(): void
+    {
+        $highlight = $this->highlight('As fast as Tailwind CSS');
+        $cells = static fn (Crawler $row): array => $row->filter('th, td')->each(static fn (Crawler $cell): string => $cell->text());
+
+        self::assertSame([
+            'https://github.com/symfony/ux/tree/3.x/apps/css-benchmark',
+            'https://github.com/tales-from-a-dev/twig-tailwind-extra',
+        ], $highlight->filter('p a')->each(static fn (Crawler $link): string => $link->attr('href')));
+        self::assertSame([
+            ['FrankenPHP mode', 'Tailwind CSS', 'css() and cva()'],
+            ['Classic', '467', '465'],
+            ['Worker', '535', '546'],
+        ], $highlight->filter('table tr')->each($cells));
     }
 
     #[DataProvider('provideCodeInProse')]
@@ -184,6 +258,7 @@ final class CssPageTest extends KernelTestCase
     public static function provideCodeInProse(): iterable
     {
         yield 'twig function' => ['css()'];
+        yield 'variants function' => ['cva()'];
         yield 'lint command' => ['lint:twig'];
         yield 'warmup command' => ['cache:warmup'];
     }
@@ -245,6 +320,7 @@ final class CssPageTest extends KernelTestCase
             '{# Invalid value "flexx" for "display". Did you mean "flex"? #}',
             '{# Unknown condition "_hovr". Did you mean "_hover"? #}',
             '{# Unknown sizes token "37ch". Write a raw value between brackets, like "[37ch]". #}',
+            '{# The value "xl" of the cva() default variant "size" is not declared, declared values are "sm". #}',
         ] as $message) {
             self::assertStringContainsString($message, $code);
         }

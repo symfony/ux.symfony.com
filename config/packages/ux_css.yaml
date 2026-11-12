@@ -15,6 +15,12 @@ ux_css:
             lg: '1.5rem'
         radii:
             md: '0.5rem'
+        fontSizes:
+            sm: '0.875rem'
+            md: '1rem'
+            lg: '1.25rem'
+        shadows:
+            sm: '0 1px 3px rgb(0 0 0 / 0.12)'
     semantic_tokens:
         colors:
             fg:

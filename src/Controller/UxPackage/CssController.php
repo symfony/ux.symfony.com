@@ -26,6 +26,7 @@ class CssController extends AbstractController
         "<div class=\"{{ css({ display: 'flexx' }) }}\">",
         "<a class=\"{{ css({ _hovr: { bg: 'blue.700' } }) }}\">",
         "<p class=\"{{ css({ maxW: '37ch' }) }}\">",
+        "{% set button = cva(variants: { size: { sm: { p: 'sm' } } }, defaultVariants: { size: 'xl' }) %}",
     ];
 
     #[Route('/css', name: 'app_css')]

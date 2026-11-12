@@ -17,7 +17,7 @@
         {% endblock %}
 
         {% block sub_content %}
-            Style your templates with <code>css()</code> and your design tokens. A misspelled token is a Twig error, not a missing style.
+            Style your templates with <code>css()</code> and your components with <code>cva()</code>, from your design tokens. A misspelled token is a Twig error, not a missing style.
         {% endblock %}
     {% endcomponent %}
 {% endblock %}
@@ -27,7 +27,7 @@
         {
             icon: 'lucide:palette',
             title: 'Design <strong>tokens</strong>',
-            description: 'Colors, spacing and radii, declared once and used by name.',
+            description: 'Colors, spacing, fonts, shadows: every token category of Panda CSS, used by name.',
         },
         {
             icon: 'lucide:shield-check',
@@ -72,13 +72,14 @@
     {% set css_conditions %}{% verbatim %}<a class="{{ css({
     bg: 'blue.600',
     _hover: { bg: 'blue.700' },
+    _after: { content: '"→"', ms: 'sm' },
     p: {
         base: 'sm',
         md: 'md',
     },
 }) }}">
 
-{# class="bg_blue.600 hover:bg_blue.700 p_sm md:p_md" #}{% endverbatim %}{% endset %}
+{# class="bg_blue.600 hover:bg_blue.700 after:content_"→" after:ms_sm p_sm md:p_md" #}{% endverbatim %}{% endset %}
     {% set css_props %}{% verbatim %}{# templates/components/Button.html.twig #}
 {% props tone = 'blue.600' %}
 
@@ -100,6 +101,8 @@
 {+@import '../../var/ux_css/styles.css';+}
 
 /* ... your own styles */{% endset %}
+    {% set css_cva = '{# templates/components/Css/Button.html.twig #}\n' ~ source('components/Css/Button.html.twig')|trim %}
+    {% set css_override = source('ux_packages/css/_buttons.html.twig')|trim %}
 
     <twig:Package:Highlights
         eyebrow="Tokens, styles, output"
@@ -117,7 +120,7 @@
             {
                 icon: 'lucide:monitor-smartphone',
                 title: 'Conditions and <strong>breakpoints</strong>',
-                description: 'Hover, focus, dark mode or a breakpoint, on any property.',
+                description: 'Hover, focus, dark mode or a breakpoint, on any property. A pseudo-element takes a CSS string as its <code>content</code>.',
                 code: css_conditions,
                 language: 'twig',
                 colorSwatches: true,
@@ -125,7 +128,7 @@
             {
                 icon: 'lucide:variable',
                 title: 'Values from <strong>props</strong>',
-                description: 'A <code>css()</code> value can come from a variable, such as a component prop. The keys and literal values are still checked when Twig compiles, but a value from a variable is only checked when the template renders in debug mode. Its CSS must exist elsewhere: the same style in another template, or listed in <code>static_css</code>.',
+                description: 'A <code>css()</code> value can come from a variable, such as a component prop. The keys and literal values are still checked when Twig compiles, but a value from a variable is only checked when the template renders in debug mode. Its CSS must exist elsewhere: the same style in another template, or listed in <code>static_css</code>. A <code>cva()</code> variant needs neither.',
                 code: css_props,
                 language: 'twig',
                 colorSwatches: true,
@@ -133,9 +136,45 @@
             {
                 icon: 'lucide:file-code',
                 title: 'One <strong>stylesheet</strong>, written by PHP',
-                description: 'The bundle reads your templates and writes the rules they use. Import the generated file at the top of your main stylesheet, right after the statement that orders the cascade layers. It works the same way with <a href=\'https://symfony.com/doc/current/frontend/asset_mapper.html\'>AssetMapper</a>, <a href=\'https://symfony.com/bundles/reprise/current/index.html\'>Symfony Reprise</a> and <a href=\'https://symfony.com/doc/current/frontend/encore/index.html\'>Webpack Encore</a>.',
+                description: 'The bundle reads your templates and writes the rules they use. Import the generated file at the top of your main stylesheet, right after the statement that orders the cascade layers. It works the same way with <a href=\'https://symfony.com/doc/current/frontend/asset_mapper.html\'>AssetMapper</a>, <a href=\'https://symfony.com/bundles/reprise/current/index.html\'>Symfony Reprise</a> and <a href=\'https://symfony.com/doc/current/frontend/encore/index.html\'>Webpack Encore</a>. Turn on the <code>preflight</code> option, and the file also starts with the CSS reset of Panda CSS, in the <code>reset</code> layer.',
                 code: css_assets,
                 language: 'css',
+            },
+        ]"
+    />
+
+    <twig:Package:Highlights
+        eyebrow="Variants, overrides, speed"
+        title="Built for <strong>Twig components</strong>."
+        :columns="2"
+        :items="[
+            {
+                icon: 'lucide:layers',
+                title: 'Variants with <strong>cva()</strong>',
+                description: '<code>cva()</code> describes the variants of a component with style hashes, like the <code>cva()</code> of Panda CSS. Every hash is checked when Twig compiles and written to the stylesheet, so a variant chosen when the template renders always has its CSS. This is the button of the demo below.',
+                code: css_cva,
+                language: 'twig',
+                colorSwatches: true,
+                wide: true,
+            },
+            {
+                icon: 'lucide:replace',
+                title: 'Overridden by the <strong>caller</strong>',
+                description: 'A component sets its classes as the default of its <code>class</code> attribute. When the caller passes <code>css()</code> as <code>class</code>, its classes replace the ones of the same property. The other classes stay.',
+                code: css_override,
+                language: 'twig',
+            },
+            {
+                icon: 'lucide:gauge',
+                title: 'As fast as <strong>Tailwind CSS</strong>',
+                description: 'The <a href=\'https://github.com/symfony/ux/tree/3.x/apps/css-benchmark\'>benchmark app</a> of Symfony UX renders a dashboard of 364 components twice: with the shadcn recipes of the UX Toolkit, built on <code>html_cva()</code> and the <code>tailwind_classes</code> filter of <a href=\'https://github.com/tales-from-a-dev/twig-tailwind-extra\'>twig-tailwind-extra</a>, and with their twins written with <code>css()</code> and <code>cva()</code>. Requests per second served by FrankenPHP, median of 5 rounds on an Apple M1 Pro:',
+                table: {
+                    headers: ['FrankenPHP mode', 'Tailwind CSS', '<code>css()</code> and <code>cva()</code>'],
+                    rows: [
+                        ['Classic', '467', '465'],
+                        ['Worker', '535', '546'],
+                    ],
+                },
             },
         ]"
     />
@@ -188,6 +227,20 @@
                         alt: 'PhpStorm showing a tooltip for the fg token in a Twig template, opened by hovering it with Ctrl held.',
                         caption: 'Ctrl+click a token to jump to its declaration.',
                     },
+                    {
+                        src: asset('images/ux_packages/css/phpstorm-cva-variant-keys.webp'),
+                        width: 1468,
+                        height: 1222,
+                        alt: 'PhpStorm completion list inside the primary variant of a cva() call, offering CSS properties such as color, shadow, margin and textAlign.',
+                        caption: 'Completion inside the variants of <code>cva()</code>.',
+                    },
+                    {
+                        src: asset('images/ux_packages/css/phpstorm-cva-compound-values.webp'),
+                        width: 800,
+                        height: 316,
+                        alt: 'PhpStorm completion list in a compound variant of cva(), offering the declared values primary, danger, ghost and secondary.',
+                        caption: 'A compound variant completes the values declared in <code>variants</code>.',
+                    },
                 ],
                 wide: true,
             },
@@ -208,9 +261,12 @@
 {% block demo_content %}
     <div class="flex flex-col gap-6 md:flex-row" data-controller="css-demo">
         <div class="shrink-0 md:w-[360px]">
-            <div class="text-xs uppercase tracking-wide text-muted mb-2">Rendered with css()</div>
-            <div data-css-demo-target="preview">{{ include('ux_packages/css/_card.html.twig') }}</div>
-            <p class="mt-3 text-sm text-muted">Switch the site theme: the card follows, through its semantic tokens.</p>
+            <div class="text-xs uppercase tracking-wide text-muted mb-2">Rendered with css() and cva()</div>
+            <div data-css-demo-target="preview">
+                {{ include('ux_packages/css/_card.html.twig') }}
+                <div class="mt-4 flex gap-2">{{ include('ux_packages/css/_buttons.html.twig') }}</div>
+            </div>
+            <p class="mt-3 text-sm text-muted">Switch the site theme: the card and the buttons follow, through their semantic tokens.</p>
         </div>
         <div class="Terminal min-w-0 flex-1">
             <div class="Terminal_header py-1.5 px-3 mb-0 flex justify-between items-center">

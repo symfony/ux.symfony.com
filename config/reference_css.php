@@ -91,7 +91,6 @@ namespace Symfony\UX\Css;
  * @psalm-type BoxOrdinalGroupValue = '-moz-initial'|'inherit'|'initial'|'revert'|'revert-layer'|'unset'|int|float|string
  * @psalm-type BoxOrientValue = '-moz-initial'|'block-axis'|'horizontal'|'inherit'|'initial'|'inline-axis'|'revert'|'revert-layer'|'unset'|'vertical'|string
  * @psalm-type BoxPackValue = '-moz-initial'|'center'|'end'|'inherit'|'initial'|'justify'|'revert'|'revert-layer'|'start'|'unset'|string
- * @psalm-type BoxShadowValue = '-moz-initial'|'inherit'|'initial'|'none'|'revert'|'revert-layer'|'unset'|string
  * @psalm-type BoxSizingValue = '-moz-initial'|'border-box'|'content-box'|'inherit'|'initial'|'revert'|'revert-layer'|'unset'|string
  * @psalm-type BreakAfterValue = '-moz-initial'|'all'|'always'|'auto'|'avoid'|'avoid-column'|'avoid-page'|'avoid-region'|'column'|'inherit'|'initial'|'left'|'page'|'recto'|'region'|'revert'|'revert-layer'|'right'|'unset'|'verso'|string
  * @psalm-type BreakBeforeValue = '-moz-initial'|'all'|'always'|'auto'|'avoid'|'avoid-column'|'avoid-page'|'avoid-region'|'column'|'inherit'|'initial'|'left'|'page'|'recto'|'region'|'revert'|'revert-layer'|'right'|'unset'|'verso'|string
@@ -163,7 +162,7 @@ namespace Symfony\UX\Css;
  * @psalm-type FontOpticalSizingValue = '-moz-initial'|'auto'|'inherit'|'initial'|'none'|'revert'|'revert-layer'|'unset'|string
  * @psalm-type FontPaletteValue = '-moz-initial'|'dark'|'inherit'|'initial'|'light'|'normal'|'revert'|'revert-layer'|'unset'|string
  * @psalm-type FontSizeAdjustValue = '-moz-initial'|'from-font'|'inherit'|'initial'|'none'|'revert'|'revert-layer'|'unset'|int|float|string
- * @psalm-type FontSizeValue = '-moz-initial'|'inherit'|'initial'|'large'|'larger'|'math'|'medium'|'revert'|'revert-layer'|'small'|'smaller'|'unset'|'x-large'|'x-small'|'xx-large'|'xx-small'|'xxx-large'|int|float|string
+ * @psalm-type FontSizesToken = 'lg'|'md'|'sm'|string
  * @psalm-type FontSmoothValue = '-moz-initial'|'always'|'auto'|'inherit'|'initial'|'large'|'medium'|'never'|'revert'|'revert-layer'|'small'|'unset'|'x-large'|'x-small'|'xx-large'|'xx-small'|'xxx-large'|int|float|string
  * @psalm-type FontSmoothingValue = 'antialiased'|'subpixel-antialiased'|string
  * @psalm-type FontStretchValue = '-moz-initial'|'condensed'|'expanded'|'extra-condensed'|'extra-expanded'|'inherit'|'initial'|'normal'|'revert'|'revert-layer'|'semi-condensed'|'semi-expanded'|'ultra-condensed'|'ultra-expanded'|'unset'|string
@@ -331,6 +330,7 @@ namespace Symfony\UX\Css;
  * @psalm-type ScrollTimelineValue = '-moz-initial'|'inherit'|'initial'|'none'|'revert'|'revert-layer'|'unset'|string
  * @psalm-type ScrollbarGutterValue = '-moz-initial'|'auto'|'inherit'|'initial'|'revert'|'revert-layer'|'stable'|'unset'|string
  * @psalm-type ScrollbarValue = 'hidden'|'visible'|string
+ * @psalm-type ShadowsToken = 'sm'|string
  * @psalm-type ShapeImageThresholdValue = '-moz-initial'|'inherit'|'initial'|'revert'|'revert-layer'|'unset'|int|float|string
  * @psalm-type ShapeMarginValue = '-moz-initial'|'inherit'|'initial'|'revert'|'revert-layer'|'unset'|int|float|string
  * @psalm-type ShapeOutsideValue = '-moz-initial'|'border-box'|'content-box'|'inherit'|'initial'|'margin-box'|'none'|'padding-box'|'revert'|'revert-layer'|'unset'|string
@@ -373,7 +373,6 @@ namespace Symfony\UX\Css;
  * @psalm-type TextOrientationValue = '-moz-initial'|'inherit'|'initial'|'mixed'|'revert'|'revert-layer'|'sideways'|'sideways-right'|'unset'|'upright'|string
  * @psalm-type TextOverflowValue = '-moz-initial'|'clip'|'ellipsis'|'inherit'|'initial'|'revert'|'revert-layer'|'unset'|string
  * @psalm-type TextRenderingValue = '-moz-initial'|'auto'|'geometricPrecision'|'inherit'|'initial'|'optimizeLegibility'|'optimizeSpeed'|'revert'|'revert-layer'|'unset'|string
- * @psalm-type TextShadowValue = '-moz-initial'|'inherit'|'initial'|'none'|'revert'|'revert-layer'|'unset'|string
  * @psalm-type TextSizeAdjustValue = '-moz-initial'|'auto'|'inherit'|'initial'|'none'|'revert'|'revert-layer'|'unset'|string
  * @psalm-type TextSpacingTrimValue = '-moz-initial'|'inherit'|'initial'|'normal'|'revert'|'revert-layer'|'space-all'|'space-first'|'trim-start'|'unset'|string
  * @psalm-type TextTransformValue = '-moz-initial'|'capitalize'|'full-size-kana'|'full-width'|'inherit'|'initial'|'lowercase'|'math-auto'|'none'|'revert'|'revert-layer'|'unset'|'uppercase'|string
@@ -636,7 +635,7 @@ namespace Symfony\UX\Css;
  *     boxOrdinalGroup?: BoxOrdinalGroupValue|array<BoxOrdinalGroupValue|array<array-key, mixed>>,
  *     boxOrient?: BoxOrientValue|array<BoxOrientValue|array<array-key, mixed>>,
  *     boxPack?: BoxPackValue|array<BoxPackValue|array<array-key, mixed>>,
- *     boxShadow?: BoxShadowValue|array<BoxShadowValue|array<array-key, mixed>>,
+ *     boxShadow?: ShadowsToken|array<ShadowsToken|array<array-key, mixed>>,
  *     boxShadowColor?: ColorsToken|array<ColorsToken|array<array-key, mixed>>,
  *     boxSize?: SizesToken2|array<SizesToken2|array<array-key, mixed>>,
  *     boxSizing?: BoxSizingValue|array<BoxSizingValue|array<array-key, mixed>>,
@@ -728,7 +727,7 @@ namespace Symfony\UX\Css;
  *     fontLanguageOverride?: FontLanguageOverrideValue|array<FontLanguageOverrideValue|array<array-key, mixed>>,
  *     fontOpticalSizing?: FontOpticalSizingValue|array<FontOpticalSizingValue|array<array-key, mixed>>,
  *     fontPalette?: FontPaletteValue|array<FontPaletteValue|array<array-key, mixed>>,
- *     fontSize?: FontSizeValue|array<FontSizeValue|array<array-key, mixed>>,
+ *     fontSize?: FontSizesToken|array<FontSizesToken|array<array-key, mixed>>,
  *     fontSizeAdjust?: FontSizeAdjustValue|array<FontSizeAdjustValue|array<array-key, mixed>>,
  *     fontSmooth?: FontSmoothValue|array<FontSmoothValue|array<array-key, mixed>>,
  *     fontSmoothing?: FontSmoothingValue|array<FontSmoothingValue|array<array-key, mixed>>,
@@ -1048,7 +1047,7 @@ namespace Symfony\UX\Css;
  *     scrollbarGutter?: ScrollbarGutterValue|array<ScrollbarGutterValue|array<array-key, mixed>>,
  *     scrollbarWidth?: SizesToken4|array<SizesToken4|array<array-key, mixed>>,
  *     sepia?: int|float|string|array<int|float|string|array<array-key, mixed>>,
- *     shadow?: BoxShadowValue|array<BoxShadowValue|array<array-key, mixed>>,
+ *     shadow?: ShadowsToken|array<ShadowsToken|array<array-key, mixed>>,
  *     shadowColor?: ColorsToken|array<ColorsToken|array<array-key, mixed>>,
  *     shapeImageThreshold?: ShapeImageThresholdValue|array<ShapeImageThresholdValue|array<array-key, mixed>>,
  *     shapeMargin?: ShapeMarginValue|array<ShapeMarginValue|array<array-key, mixed>>,
@@ -1094,7 +1093,7 @@ namespace Symfony\UX\Css;
  *     textOrientation?: TextOrientationValue|array<TextOrientationValue|array<array-key, mixed>>,
  *     textOverflow?: TextOverflowValue|array<TextOverflowValue|array<array-key, mixed>>,
  *     textRendering?: TextRenderingValue|array<TextRenderingValue|array<array-key, mixed>>,
- *     textShadow?: TextShadowValue|array<TextShadowValue|array<array-key, mixed>>,
+ *     textShadow?: ShadowsToken|array<ShadowsToken|array<array-key, mixed>>,
  *     textShadowColor?: ColorsToken|array<ColorsToken|array<array-key, mixed>>,
  *     textSizeAdjust?: TextSizeAdjustValue|array<TextSizeAdjustValue|array<array-key, mixed>>,
  *     textSpacingTrim?: TextSpacingTrimValue|array<TextSpacingTrimValue|array<array-key, mixed>>,
@@ -1485,7 +1484,7 @@ namespace Symfony\UX\Css;
  *     boxOrdinalGroup?: BoxOrdinalGroupValue|array<BoxOrdinalGroupValue|array<array-key, mixed>>,
  *     boxOrient?: BoxOrientValue|array<BoxOrientValue|array<array-key, mixed>>,
  *     boxPack?: BoxPackValue|array<BoxPackValue|array<array-key, mixed>>,
- *     boxShadow?: BoxShadowValue|array<BoxShadowValue|array<array-key, mixed>>,
+ *     boxShadow?: ShadowsToken|array<ShadowsToken|array<array-key, mixed>>,
  *     boxShadowColor?: ColorsToken|array<ColorsToken|array<array-key, mixed>>,
  *     boxSize?: SizesToken2|array<SizesToken2|array<array-key, mixed>>,
  *     boxSizing?: BoxSizingValue|array<BoxSizingValue|array<array-key, mixed>>,
@@ -1577,7 +1576,7 @@ namespace Symfony\UX\Css;
  *     fontLanguageOverride?: FontLanguageOverrideValue|array<FontLanguageOverrideValue|array<array-key, mixed>>,
  *     fontOpticalSizing?: FontOpticalSizingValue|array<FontOpticalSizingValue|array<array-key, mixed>>,
  *     fontPalette?: FontPaletteValue|array<FontPaletteValue|array<array-key, mixed>>,
- *     fontSize?: FontSizeValue|array<FontSizeValue|array<array-key, mixed>>,
+ *     fontSize?: FontSizesToken|array<FontSizesToken|array<array-key, mixed>>,
  *     fontSizeAdjust?: FontSizeAdjustValue|array<FontSizeAdjustValue|array<array-key, mixed>>,
  *     fontSmooth?: FontSmoothValue|array<FontSmoothValue|array<array-key, mixed>>,
  *     fontSmoothing?: FontSmoothingValue|array<FontSmoothingValue|array<array-key, mixed>>,
@@ -1897,7 +1896,7 @@ namespace Symfony\UX\Css;
  *     scrollbarGutter?: ScrollbarGutterValue|array<ScrollbarGutterValue|array<array-key, mixed>>,
  *     scrollbarWidth?: SizesToken4|array<SizesToken4|array<array-key, mixed>>,
  *     sepia?: int|float|string|array<int|float|string|array<array-key, mixed>>,
- *     shadow?: BoxShadowValue|array<BoxShadowValue|array<array-key, mixed>>,
+ *     shadow?: ShadowsToken|array<ShadowsToken|array<array-key, mixed>>,
  *     shadowColor?: ColorsToken|array<ColorsToken|array<array-key, mixed>>,
  *     shapeImageThreshold?: ShapeImageThresholdValue|array<ShapeImageThresholdValue|array<array-key, mixed>>,
  *     shapeMargin?: ShapeMarginValue|array<ShapeMarginValue|array<array-key, mixed>>,
@@ -1943,7 +1942,7 @@ namespace Symfony\UX\Css;
  *     textOrientation?: TextOrientationValue|array<TextOrientationValue|array<array-key, mixed>>,
  *     textOverflow?: TextOverflowValue|array<TextOverflowValue|array<array-key, mixed>>,
  *     textRendering?: TextRenderingValue|array<TextRenderingValue|array<array-key, mixed>>,
- *     textShadow?: TextShadowValue|array<TextShadowValue|array<array-key, mixed>>,
+ *     textShadow?: ShadowsToken|array<ShadowsToken|array<array-key, mixed>>,
  *     textShadowColor?: ColorsToken|array<ColorsToken|array<array-key, mixed>>,
  *     textSizeAdjust?: TextSizeAdjustValue|array<TextSizeAdjustValue|array<array-key, mixed>>,
  *     textSpacingTrim?: TextSpacingTrimValue|array<TextSpacingTrimValue|array<array-key, mixed>>,
@@ -2165,6 +2164,14 @@ final class CssReference
         ],
         'radii' => [
             'md' => '0.5rem',
+        ],
+        'fontSizes' => [
+            'sm' => '0.875rem',
+            'md' => '1rem',
+            'lg' => '1.25rem',
+        ],
+        'shadows' => [
+            'sm' => '0 1px 3px rgb(0 0 0 / 0.12)',
         ],
         'breakpoints' => [
             'sm' => '640px',

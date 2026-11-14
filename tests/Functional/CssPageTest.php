@@ -230,8 +230,8 @@ final class CssPageTest extends KernelTestCase
         ], $highlight->filter('p a')->each(static fn (Crawler $link): string => $link->attr('href')));
         self::assertSame([
             ['FrankenPHP mode', 'Tailwind CSS', 'css() and cva()'],
-            ['Classic', '467', '465'],
-            ['Worker', '535', '546'],
+            ['Classic', '487', '509'],
+            ['Worker', '545', '572'],
         ], $highlight->filter('table tr')->each($cells));
     }
 

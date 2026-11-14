@@ -215,13 +215,13 @@ final class CssPageTest extends KernelTestCase
         yield 'components' => ['Built for Twig components.', [
             'Variants with cva()',
             'Overridden by the caller',
-            'As fast as Tailwind CSS',
+            'Slightly faster than Tailwind CSS',
         ]];
     }
 
     public function testBenchmarkHighlightComparesRequestsPerSecond(): void
     {
-        $highlight = $this->highlight('As fast as Tailwind CSS');
+        $highlight = $this->highlight('Slightly faster than Tailwind CSS');
         $cells = static fn (Crawler $row): array => $row->filter('th, td')->each(static fn (Crawler $cell): string => $cell->text());
 
         self::assertSame([

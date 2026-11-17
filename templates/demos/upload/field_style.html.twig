@@ -1,0 +1,139 @@
+{% extends 'demos/upload/demo.html.twig' %}
+
+{% if variants.simple is defined %}
+    {% form_theme variants.simple.view 'form/upload_simple_theme.html.twig' %}
+{% endif %}
+
+{% set explanations = {
+    simple: '## Simple: the browser input
+
+`layout: compact` renders the browser file input. The file uploads as soon as
+it is selected, and the form only submits its signed reference.
+
+Here a small form theme removes the thumbnail, the progress bar and the buttons.',
+    enhanced: '## Enhanced: previews and controls
+
+The same compact input, with `multiple` and `show_preview`. Each file gets a
+thumbnail, a progress bar, and buttons to cancel, retry, or remove it.
+
+`max_files` caps the list; the server checks it again on submit.',
+    list: '## A large drop target
+
+`layout: dropzone` turns the field into a target for dropped or pasted files.
+Clicking it still opens the file picker.
+
+With `multiple`, each file transfers on its own and shows its status under the
+target.',
+    grid: '## Cards, not rows
+
+Add `show_preview` and the dropzone lays images out as a responsive grid of
+cards. Once a file is there, the drop target becomes the last card.
+
+The grid ships with the dropzone styles. This page restyles it with CSS only: the
+custom properties below, and a few site rules for the spacing and the round
+remove button.',
+} %}
+
+{% block demo_container %}
+    {# Inputs compare well side by side; the card grid needs the full width. #}
+    {% set side_by_side = style == 'input' %}
+    {% set grid_theme = block('grid_theme') %}
+
+    <div class="UploadDemoShell max-w-[1140px] mx-auto mb-12">
+        <twig:Browser id="demo" class="shadow-blur shadow-blur--rainbow w-full" frameClass="">
+            <div class="UploadStage">
+                {% if variants.grid is defined %}<style>{{ grid_theme|raw }}</style>{% endif %}
+
+                <div class="UploadStage_container UploadStage_container--wide">
+                    {% for message in app.flashes('upload_demo_success') %}
+                        <p class="UploadStage_note" data-turbo-cache="false">{{ message }}</p>
+                    {% endfor %}
+
+                    <div class="UploadStage_variants{{ side_by_side ? ' UploadStage_variants--columns' }}">
+                        {% for key, variant in variants %}
+                            <div class="UploadStage_variant FieldStyle FieldStyle--{{ key }}">
+                                {{ form_start(variant.view) }}
+                                    {# Each variant form holds one upload field: its label names the variant. #}
+                                    {% set field = variant.view.children|first %}
+                                    <div class="min-w-0">
+                                        <twig:Form:Label for="{{ field_id(field) }}">{{ variant.title }}</twig:Form:Label>
+                                        {{ form_widget(field) }}
+                                        {{ form_errors(field) }}
+                                    </div>
+                                    <div class="UploadStage_actions">
+                                        <button
+                                            type="button"
+                                            class="UploadStage_sample"
+                                            data-controller="upload-samples"
+                                            data-upload-samples-kind-value="{{ variant.sample }}"
+                                            data-upload-samples-count-value="{{ key == 'grid' ? 6 : 3 }}"
+                                            {% if variant.names is defined %}data-upload-samples-names-value="{{ variant.names|json_encode }}"{% endif %}
+                                            data-upload-samples-for-value=".FieldStyle--{{ key }} input[type=file]"
+                                            data-action="upload-samples#fill"
+                                        >{{ variant.sample == 'pdf' ? (variant.names|length > 1 ? 'Use sample PDFs' : 'Use a sample PDF') : 'Use sample photos' }}</button>
+                                        <button type="submit" class="UploadStage_submit">Save</button>
+                                    </div>
+                                {{ form_end(variant.view) }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </twig:Browser>
+    </div>
+
+    <section class="UploadDemoStory">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-12">
+            {% for key, variant in variants %}
+                <twig:Code:CodeWithExplanationRow
+                    :filename="variant.file"
+                    :lineStart="variant.lines[0]"
+                    :lineEnd="variant.lines[1]"
+                    :reversed="key in ['simple', 'enhanced', 'list']"
+                    sticky
+                >{{ explanations[key] }}</twig:Code:CodeWithExplanationRow>
+
+                {% if key == 'grid' %}
+                    <twig:Code:CodeWithExplanationRow
+                        filename="templates/demos/upload/field_style.html.twig"
+                        targetTwigBlock="grid_theme"
+                        reversed
+                        sticky
+                    >
+## Make it yours with CSS variables
+
+Every color, radius, and spacing of the field reads from a `--ux-upload-*`
+custom property. Set them on a container: no markup change, no form theme.
+
+For deeper changes, override the `ux_upload_item` or `ux_upload_picker` form
+theme blocks, as the Simple variant does on the input demo.
+                    </twig:Code:CodeWithExplanationRow>
+                {% endif %}
+
+                {% if key == 'simple' %}
+                    <twig:Code:CodeWithExplanationRow
+                        filename="templates/form/upload_simple_theme.html.twig"
+                        sticky
+                    >
+## Remove what you do not need
+
+The theme empties the thumbnail, progress, and action blocks. The upload still
+runs: the field only shows the file name and its status.
+
+Apply it to one form with `form_theme`, or to the whole application in
+`twig.yaml`.
+                    </twig:Code:CodeWithExplanationRow>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}
+
+{% block grid_theme %}
+.FieldStyle--grid .ux-upload {
+    --ux-upload-accent: #7c3aed;
+    --ux-upload-accent-strong: #6d28d9;
+    --ux-upload-radius: 1rem;
+    --ux-upload-gap: 1rem;
+}
+{% endblock %}

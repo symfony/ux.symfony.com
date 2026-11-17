@@ -76,6 +76,19 @@
                 "fetch": "lazy"
             }
         },
+        "@symfony/ux-upload": {
+            "upload": {
+                "enabled": true,
+                "fetch": "eager",
+                "autoimport": {
+                    "@symfony/ux-upload/dist/style.min.css": false
+                }
+            },
+            "live-upload": {
+                "enabled": true,
+                "fetch": "lazy"
+            }
+        },
         "@symfony/ux-vue": {
             "vue": {
                 "enabled": true,

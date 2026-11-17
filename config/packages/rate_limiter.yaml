@@ -1,0 +1,12 @@
+framework:
+    rate_limiter:
+        upload_demo:
+            policy: sliding_window
+            limit: 20
+            interval: '1 minute'
+        # Bytes one network may send to the upload demos: 16 MB, about four tours of the six demos.
+        # Past it, App\EventListener\UploadDemoQuotaListener blocks the network for 15 minutes.
+        upload_demo_bytes:
+            policy: sliding_window
+            limit: 16777216
+            interval: '10 minutes'

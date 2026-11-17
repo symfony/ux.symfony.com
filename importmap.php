@@ -102,4 +102,5 @@ return [
     '@docsearch/js' => ['version' => '5.1.1'],
     '@docsearch/css/dist/style.min.css' => ['version' => '5.1.1', 'type' => 'css'],
     'sortablejs' => ['version' => '1.15.7'],
+    '@symfony/ux-upload' => ['path' => '@symfony/ux-upload/upload_controller.js'],
 ];

@@ -21,6 +21,11 @@ runtime:
         - xsl
 
 crons:
+    cleanup_uploads:
+        spec: '*/5 * * * *'
+        commands:
+            start: 'php bin/console ux:upload:cleanup --age=10m'
+
     reload_database:
         spec: '*/20 * * * *'
         commands:

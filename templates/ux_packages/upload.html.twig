@@ -1,0 +1,508 @@
+{% extends 'ux_packages/package.html.twig' %}
+
+{% block title %}Symfony UX Upload - File Uploads That Survive Form Errors{% endblock %}
+
+{% block meta %}
+    {% set upload_meta = meta|merge({
+        title: 'Symfony UX Upload - File Uploads That Survive Form Errors',
+        description: 'Replace FileType with UploadType in a Symfony form. Files upload in the background, stay attached when validation fails, and resume after an interruption.',
+        social: meta.social|merge({
+            title: 'Symfony UX Upload - File Uploads That Survive Form Errors',
+            description: 'Replace FileType with UploadType: files upload in the background and stay attached when validation fails.',
+            image: meta.social.image|merge({alt: 'Symfony UX Upload'}),
+        }),
+    }) %}
+    {{ include('_meta.html.twig', {meta: upload_meta}) }}
+{% endblock %}
+
+{% block package_header %}
+    {% component PackageHeader with {
+        package: 'upload',
+        eyebrowText: 'Symfony UX Upload',
+        demosUrl: path('app_demo_upload'),
+    } %}
+        {# The header underlines every <strong>: here the bold and the underline go to different words #}
+        {% block title_header %}<b>File uploads</b>,<br>as you'd <span class="underline decoration-(--color-accent)/40 decoration-[.09em] underline-offset-[.09em]">expect</span>.{% endblock %}
+        {% block sub_content %}
+            Change <code>FileType</code> to <code>UploadType</code>. Files upload in the background,
+            show their progress, and stay attached when validation fails.
+        {% endblock %}
+    {% endcomponent %}
+{% endblock %}
+
+{% block package_features %}
+    {% set upload_features = [
+        {
+            icon: 'lucide:folder-input',
+            title: 'A <strong>modern</strong> input',
+            description: 'Drag and drop, paste, previews and a progress bar, for one file or many.',
+        },
+        {
+            icon: 'lucide:circle-pause',
+            title: 'Pause and <strong>resume</strong>',
+            description: 'Large files travel in chunks. An interrupted transfer picks up where it stopped.',
+        },
+        {
+            icon: 'lucide:arrow-right-left',
+            title: 'In place of <strong>FileType</strong>',
+            description: 'Change the field type. Form, controller and constraints stay as they are.',
+        },
+        {
+            icon: 'lucide:file-check',
+            title: '<strong>Validated</strong> front and back',
+            description: 'Refused in the browser before sending, then checked again on the server.',
+        },
+        {
+            icon: 'lucide:server',
+            title: 'Your <strong>storage</strong>',
+            description: 'Temporary files on the local disk, or through Flysystem on S3, Azure or GCS.',
+        },
+    ] %}
+    <twig:FeaturesCluster
+        :items="upload_features"
+        titleClass="font-bold dark:font-medium dark:[&_strong]:font-medium"
+        title="What UX Upload handles"
+        titleId="features"
+    />
+{% endblock %}
+
+{% block package_content %}
+    {% set upload_docs_url = package.officialDocsUrl|replace({'index.rst': ''}) %}
+
+    <twig:Package:Section id="try" tone="subtle" aria-labelledby="try-title">
+        <div class="grid items-center gap-x-20 gap-y-12 lg:grid-cols-2">
+            <twig:Package:SectionHeading
+                :spaced="false"
+                eyebrow="One line in the form type."
+                id="try-title"
+                title="Change the type.<br><strong>Keep the rest.</strong>"
+            >
+                <p>
+                    <code>UploadType</code> returns an <code>UploadedFile</code> that extends the HttpFoundation
+                    class. <code>handleRequest()</code>, <code>isValid()</code>, typed properties and
+                    <code>move()</code> work as they do with <code>FileType</code>.
+                </p>
+            </twig:Package:SectionHeading>
+            {{ include('ux_packages/upload/_field_figure.html.twig') }}
+        </div>
+
+        {% set form_example %}$builder
+    ->add('title', TextType::class)
+{-    ->add('document', FileType::class, [-}
+{+    ->add('document', UploadType::class, [+}
+        'constraints' => [new File(maxSize: '5M')],
+    ])
+;{% endset %}
+        {% set form_copy = form_example|replace({"{-    ->add('document', FileType::class, [-}\n": '', '{+': '', '+}': ''}) %}
+        {% set controller_example %}$form->handleRequest($request);
+
+if ($form->isSubmitted() && $form->isValid()) {
+    /** @var UploadedFile $document */
+    $document = $form->get('document')->getData();
+
+    $document->move($directory, $document->getClientOriginalName());
+}{% endset %}
+
+        <twig:Package:CodeFlow arrows class="mt-16 lg:mt-24">
+            <twig:block name="source">
+                <twig:CodeBlockInline
+                    :code="form_example"
+                    :copyCode="form_copy"
+                    language="php"
+                    filename="src/Form/DocumentType.php"
+                />
+            </twig:block>
+            <twig:block name="result">
+                <twig:CodeBlockInline
+                    :code="controller_example"
+                    language="php"
+                    filename="src/Controller/DocumentController.php"
+                />
+            </twig:block>
+        </twig:Package:CodeFlow>
+
+        <twig:Package:CodeResult label="/documents/new" class="mt-24">
+            <div class="UploadExample mx-auto max-w-xl">
+                {% for message in app.flashes('upload_success') %}
+                    <twig:Alert variant="success" class="mb-6" data-turbo-cache="false">{{ message }}</twig:Alert>
+                {% endfor %}
+                <p class="m-0 mb-8 leading-[1.7] text-body-text/80 text-balance">
+                    Choose a PDF, then save with an empty title. The title needs correcting.
+                    The document is still there.
+                </p>
+                {{ form_start(form, {attr: {novalidate: true}}) }}
+                    {{ form_row(form.document) }}
+                    {{ form_row(form.title) }}
+                    <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
+                        <button
+                            type="button"
+                            class="cursor-pointer border-0 bg-transparent p-0 text-sm text-muted underline decoration-current/35 underline-offset-[.3em] hover:text-body-text"
+                            data-controller="upload-samples"
+                            data-upload-samples-kind-value="pdf"
+                            data-upload-samples-for-value="#try input[type=file]"
+                            data-action="upload-samples#fill"
+                        >Use an 800 KB sample PDF</button>
+                        <twig:Button type="submit" variant="primary" class="rounded-full border-[#0d0e0f] bg-[#0d0e0f] px-6 py-2.5 text-sm font-medium shadow-[inset_0_0_0_1px_rgb(255_255_255/.07)]">Save document</twig:Button>
+                    </div>
+                {{ form_end(form) }}
+                <p class="m-0 mt-6 text-sm text-muted">PDF only, up to 1 MB. This public server destroys the file as soon as it arrives: the form keeps its reference.</p>
+            </div>
+        </twig:Package:CodeResult>
+    </twig:Package:Section>
+
+    <twig:Package:Section id="flow" aria-labelledby="flow-title">
+        <twig:Package:SectionHeading
+            eyebrow="The file travels first."
+            id="flow-title"
+            title="A reference in the form.<br><strong>The file on the server.</strong>"
+        >
+            <p>
+                Uploading and submitting are two steps. A validation error renders the signed
+                reference again, so the browser does not send the file a second time.
+            </p>
+        </twig:Package:SectionHeading>
+
+        {% set flow_steps = [
+            {title: 'Select a file', text: 'The field sends it at once, in one request or in chunks, and shows its progress.'},
+            {title: 'Get a reference', text: 'The server checks the file, keeps it in temporary storage and answers with a signed reference.'},
+            {title: 'Submit the form', text: 'The form carries the reference, not the file. A validation error renders the same reference again.'},
+            {title: 'Store the file', text: 'Once the form is valid, the controller receives an <code>UploadedFile</code>. Move it, or read its stream into your own storage.'},
+        ] %}
+        <ol class="UploadFlow">
+            {% for step in flow_steps %}
+                <li>
+                    <h3>{{ step.title }}</h3>
+                    <p>{{ step.text|raw }}</p>
+                    {% if not loop.last %}<twig:ux:icon name="lucide:arrow-right" class="UploadFlow_arrow" aria-hidden="true" />{% endif %}
+                </li>
+            {% endfor %}
+        </ol>
+
+        {% set flow_docs = [
+            {title: 'Upload lifecycle', url: upload_docs_url ~ 'lifecycle.rst'},
+            {title: 'Persisting uploaded files', url: upload_docs_url ~ 'persistence.rst'},
+            {title: 'Security', url: upload_docs_url ~ 'security.rst'},
+        ] %}
+        <twig:DocumentationLinks :links="flow_docs" label="Documentation for the upload lifecycle and storing files" />
+    </twig:Package:Section>
+
+    <twig:Package:Section id="compare" tone="deep" aria-labelledby="compare-title">
+        <twig:Package:SectionHeading
+            id="compare-title"
+            title="What changes<br><strong>from FileType.</strong>"
+        >
+            <p>
+                <code>UploadType</code> keeps what <code>FileType</code> does: multiple files, Symfony
+                constraints, a form that works without JavaScript. The other lines are what the swap adds.
+            </p>
+        </twig:Package:SectionHeading>
+
+        {% set compare_groups = [
+            {title: 'Form', rows: [
+                {behavior: 'Files kept after a validation error', file: false, upload: true},
+                {behavior: 'Symfony constraints', file: true, upload: true},
+                {behavior: 'Multiple files', file: true, fileNote: '<code>multiple</code>', upload: true, uploadNote: '<code>multiple</code>, <code>max_files</code>'},
+                {behavior: 'Works without JavaScript', file: true, upload: true},
+            ]},
+            {title: 'Transfer', rows: [
+                {behavior: 'Background upload, with progress', file: false, upload: true},
+                {behavior: 'Cancel, retry, pause and resume', file: false, upload: true},
+                {behavior: 'Files larger than the PHP limits', file: false, fileNote: '<code>upload_max_filesize</code>, <code>post_max_size</code>', upload: true, uploadNote: 'in chunks: <code>chunk_size</code>'},
+            ]},
+            {title: 'Validation', rows: [
+                {behavior: 'In the browser, before sending', file: false, upload: true, uploadNote: '<code>max_size</code>, <code>allowed_types</code>'},
+                {behavior: 'On the server', file: true, fileNote: 'on submit', upload: true, uploadNote: 'on arrival, then on submit'},
+            ]},
+            {title: 'Field', rows: [
+                {behavior: 'Image previews', file: false, upload: true, uploadNote: '<code>show_preview</code>'},
+                {behavior: 'Drop zone and paste', file: false, upload: true, uploadNote: '<code>layout</code>'},
+            ]},
+        ] %}
+        <table class="UploadCompare">
+            <caption class="sr-only">FileType and UploadType, feature by feature</caption>
+            <thead>
+                <tr>
+                    <td></td>
+                    <th scope="col"><code>FileType</code></th>
+                    <th scope="col"><code>UploadType</code></th>
+                </tr>
+            </thead>
+            {% for group in compare_groups %}
+                <tbody>
+                    <tr>
+                        <th scope="rowgroup" colspan="3">{{ group.title }}</th>
+                    </tr>
+                    {% for row in group.rows %}
+                        <tr>
+                            <th scope="row">{{ row.behavior }}</th>
+                            {% for column, key in {FileType: 'file', UploadType: 'upload'} %}
+                                <td data-column="{{ column }}" data-mark="{{ row[key] ? 'yes' : 'no' }}">
+                                    <span class="UploadCompare_answer">
+                                        <twig:ux:icon name="{{ row[key] ? 'lucide:check' : 'lucide:x' }}" class="Icon" />
+                                        <span class="sr-only">{{ row[key] ? 'Yes' : 'No' }}</span>
+                                        {% if row[key ~ 'Note'] is defined %}
+                                            <span class="UploadCompare_note">{{ row[key ~ 'Note']|raw }}</span>
+                                        {% endif %}
+                                    </span>
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            {% endfor %}
+        </table>
+
+        {% set compare_docs = [
+            {title: 'Replacing FileType', url: upload_docs_url ~ 'adopting.rst'},
+        ] %}
+        <twig:DocumentationLinks :links="compare_docs" label="Documentation for replacing FileType" />
+    </twig:Package:Section>
+
+    <twig:Package:Section id="field" tone="subtle" aria-labelledby="field-title">
+        {% set field_intro %}
+        <twig:Package:SectionHeading
+            :spaced="false"
+            eyebrow="Options, not templates."
+            id="field-title"
+            title="From a file input<br>to a <strong>photo grid</strong>."
+        >
+            <p>
+                The same field renders a native input, a list of files or a grid of image cards.
+                Each look is one or two options.
+            </p>
+        </twig:Package:SectionHeading>
+        {% endset %}
+
+        {% set multiple_example %}{:hl-context:$builder->add('documents', UploadType::class, [
+:}    'multiple' => true,
+    'max_files' => 8,
+{:hl-context:]);:}{% endset %}
+        {% set dropzone_example %}{:hl-context:$builder->add('document', UploadType::class, [
+:}    'layout' => 'dropzone',
+{:hl-context:]);:}{% endset %}
+        {% set preview_example %}{:hl-context:$builder->add('photos', UploadType::class, [
+    'multiple' => true,
+    'layout' => 'dropzone',
+:}    'show_preview' => true,
+{:hl-context:]);:}{% endset %}
+        {{ include('ux_packages/upload/_options.html.twig', {intro: field_intro, items: [
+            {
+                icon: 'lucide:layers',
+                title: '<strong>Multiple</strong> files',
+                description: 'The field returns a list of <code>UploadedFile</code>. Files transfer on their own: one that fails does not stop the others.',
+                code: multiple_example,
+                copyCode: multiple_example|replace({'{:hl-context:': '', ':}': ''}),
+            },
+            {
+                icon: 'lucide:mouse-pointer-2',
+                title: 'Drag, <strong>drop</strong> and paste',
+                description: 'The dropzone layout is a target for dropped and pasted files. Clicking it still opens the file picker.',
+                code: dropzone_example,
+                copyCode: dropzone_example|replace({'{:hl-context:': '', ':}': ''}),
+            },
+            {
+                icon: 'lucide:image',
+                title: '<strong>Previews</strong> and progress',
+                description: 'Images get a thumbnail. Every file shows its progress, with buttons to cancel, retry or remove it. Chunked transfers add pause and resume.',
+                code: preview_example,
+                copyCode: preview_example|replace({'{:hl-context:': '', ':}': ''}),
+            },
+        ]}) }}
+
+        <twig:Package:CodeResult label="/albums/new" compact class="mt-16 lg:mt-20">
+            <div class="UploadExample mx-auto max-w-4xl">
+                {{ form_widget(gallery.photos) }}
+                <button
+                    type="button"
+                    class="mt-6 cursor-pointer border-0 bg-transparent p-0 text-sm text-muted underline decoration-current/35 underline-offset-[.3em] hover:text-body-text"
+                    data-controller="upload-samples"
+                    data-upload-samples-kind-value="images"
+                    data-upload-samples-count-value="4"
+                    data-upload-samples-for-value="#field input[type=file]"
+                    data-action="upload-samples#fill"
+                >Use sample photos</button>
+            </div>
+        </twig:Package:CodeResult>
+
+        {% set field_docs = [
+            {title: 'Form options', url: upload_docs_url ~ 'form.rst#options'},
+            {title: 'Customizing the field', url: upload_docs_url ~ 'customization.rst'},
+            {title: 'JavaScript events', url: upload_docs_url ~ 'javascript.rst'},
+        ] %}
+        <twig:DocumentationLinks :links="field_docs" label="Documentation for the field options and its markup" />
+    </twig:Package:Section>
+
+    <twig:Package:Section id="large" tone="deep" aria-labelledby="large-title">
+        <div class="grid items-center gap-x-20 gap-y-12 lg:grid-cols-2">
+            <figure class="m-0">
+                <a href="{{ path('app_demo_upload_resumable') }}" class="block overflow-hidden rounded-xl border border-body-text/15">
+                    <img
+                        src="{{ asset('images/live_demo/upload-resumable-1280x720.png') }}"
+                        alt="A large file halfway through its upload, with Pause and Cancel buttons"
+                        loading="lazy"
+                        width="1280"
+                        height="720"
+                        class="block h-auto w-full"
+                    >
+                </a>
+            </figure>
+            <div class="min-w-0">
+                <twig:Package:SectionTitle id="large-title" title="Pause. Reload.<br><strong>Resume.</strong>" />
+                <p class="m-0 mt-6 max-w-2xl text-base leading-[1.7] text-body-text/80 md:mt-8 md:text-lg md:leading-[1.75]">
+                    Files above <code>chunk_size</code> travel in chunks, a few at a time. A failed chunk
+                    is retried up to three times. Pause the transfer, lose the connection, or reload the
+                    page and select the same file: it continues from the chunks the server already holds.
+                </p>
+                {% set chunks_example %}ux_upload:
+    uploaders:
+        large:
+            max_size: 64M
+            chunk_size: 1M
+            parallel_chunks: 2{% endset %}
+                <twig:CodeBlockInline
+                    :code="chunks_example"
+                    language="yaml"
+                    filename="config/packages/ux_upload.yaml"
+                    class="mt-8"
+                />
+                <twig:LinkButton url="{{ path('app_demo_upload_resumable') }}" label="Try it on a slowed-down transfer" outline arrow class="mt-8" />
+            </div>
+        </div>
+
+        {% set large_docs = [
+            {title: 'Retry and resume', url: upload_docs_url ~ 'resume.rst'},
+            {title: 'Named uploaders', url: upload_docs_url ~ 'uploaders.rst'},
+            {title: 'Temporary storage', url: upload_docs_url ~ 'storage.rst'},
+        ] %}
+        <twig:DocumentationLinks :links="large_docs" label="Documentation for chunked and resumable uploads" />
+    </twig:Package:Section>
+
+    <twig:Package:Section id="validation" aria-labelledby="validation-title">
+        {% set validation_intro %}
+        <twig:Package:SectionHeading
+            :spaced="false"
+            eyebrow="The browser is not trusted."
+            id="validation-title"
+            title="Checked early.<br><strong>Enforced on the server.</strong>"
+        >
+            <p>
+                The field refuses a file that is too large or of the wrong type before sending it.
+                The server applies the same limits again, on the bytes it received.
+            </p>
+        </twig:Package:SectionHeading>
+        {% endset %}
+
+        {% set policy_example %}ux_upload:
+    uploaders:
+        documents:
+            max_size: 5M
+            allowed_types: ['application/pdf']{% endset %}
+        {% set inspect_example %}#[AsEventListener(priority: 200)]
+public function inspect(
+    UploadAssembledEvent $event,
+): void {
+    $stream = $event->getUpload()
+        ->openStream();
+    // Throw ValidationException
+    // to refuse the file.
+}{% endset %}
+        {% set constraint_example %}->add('document', UploadType::class, [
+    'uploader' => 'documents',
+    'constraints' => [
+        new File(maxSize: '5M'),
+    ],
+]){% endset %}
+        {{ include('ux_packages/upload/_options.html.twig', {intro: validation_intro, items: [
+            {
+                icon: 'lucide:sliders-horizontal',
+                title: 'A policy per <strong>uploader</strong>',
+                description: 'A named uploader sets the maximum size and the accepted types. A field can narrow them, never widen them.',
+                code: policy_example,
+                language: 'yaml',
+            },
+            {
+                icon: 'lucide:file-check',
+                title: 'Detected, not <strong>declared</strong>',
+                description: 'The type is read from the bytes the server received, not from what the browser announced. A listener can inspect the file before it is accepted.',
+                code: inspect_example,
+            },
+            {
+                icon: 'lucide:badge-check',
+                title: 'Symfony <strong>constraints</strong>',
+                description: 'The submitted value is an HttpFoundation <code>UploadedFile</code>. The <code>File</code> constraint validates it on submit, with the other fields.',
+                code: constraint_example,
+            },
+        ]}) }}
+
+        {% set validation_docs = [
+            {title: 'File validation', url: upload_docs_url ~ 'validation.rst'},
+            {title: 'Server events', url: upload_docs_url ~ 'events.rst'},
+            {title: 'Security', url: upload_docs_url ~ 'security.rst'},
+        ] %}
+        <twig:DocumentationLinks :links="validation_docs" label="Documentation for validating uploaded files" />
+    </twig:Package:Section>
+
+    <twig:Package:Section id="production" tone="subtle" aria-labelledby="production-title">
+        <twig:Package:SectionHeading
+            id="production-title"
+            title="Beyond<br>the <strong>form field</strong>."
+        >
+            <p>
+                An uploaded file waits in temporary storage until your code moves it. Choose where it
+                waits, schedule the cleanup, and use an upload without a form.
+            </p>
+        </twig:Package:SectionHeading>
+
+        {% set storage_example %}ux_upload:
+    storage: flysystem
+    flysystem_service: uploads.storage{% endset %}
+        {% set cleanup_example %}php bin/console ux:upload:cleanup{% endset %}
+        {% set live_example %}#[LiveProp]
+#[UploadTarget(uploader: 'avatars')]
+public ?string $photo = null;{% endset %}
+        {{ include('ux_packages/upload/_options.html.twig', {items: [
+            {
+                icon: 'lucide:server',
+                title: 'Your <strong>storage</strong>',
+                description: 'Temporary files stay on the local disk by default. One option sends them through Flysystem, to S3, Azure, GCS or any other adapter.',
+                code: storage_example,
+                language: 'yaml',
+            },
+            {
+                icon: 'lucide:trash-2',
+                title: 'A scheduled <strong>cleanup</strong>',
+                description: 'One command removes interrupted transfers and expired files. Run it on a schedule, with cron or any scheduler.',
+                code: cleanup_example,
+                language: 'bash',
+            },
+            {
+                icon: 'live-component',
+                title: '<strong>Live</strong> components',
+                description: 'A completed upload can land on a LiveComponent prop, without a form submission. The attribute lists the props that accept one.',
+                code: live_example,
+            },
+        ]}) }}
+
+        {% set production_docs = [
+            {title: 'Temporary storage', url: upload_docs_url ~ 'storage.rst'},
+            {title: 'Production', url: upload_docs_url ~ 'production.rst'},
+            {title: 'Live Components', url: upload_docs_url ~ 'live-component.rst'},
+        ] %}
+        <twig:DocumentationLinks :links="production_docs" label="Documentation for storage, production and Live Components" />
+    </twig:Package:Section>
+
+    <twig:Package:Section id="demos" tone="accent" aria-labelledby="demos-title">
+        <div class="items-end justify-between gap-8 md:flex">
+            <div class="max-w-2xl">
+                <twig:Package:SectionTitle id="demos-title" title="Small examples.<br><strong>Real uploads.</strong>" />
+                <p class="m-0 mt-6 text-base leading-[1.7] text-body-text/80 md:text-lg md:leading-[1.75]">
+                    A plain form, a Turbo Frame, a LiveComponent, a transfer in chunks: each page runs the
+                    field and shows the code behind it.
+                </p>
+            </div>
+            <twig:LinkButton url="{{ path('app_demo_upload') }}" label="Browse the Upload demos" outline arrow class="mt-7 shrink-0 md:mt-0" />
+        </div>
+
+        {{ include('demos/upload/_cards.html.twig', {show_tags: false, class: 'mt-12'}) }}
+    </twig:Package:Section>
+{% endblock %}

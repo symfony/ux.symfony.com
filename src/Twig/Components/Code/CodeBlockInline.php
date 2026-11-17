@@ -17,6 +17,8 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 final class CodeBlockInline
 {
     public string $code;
+    /** Plain code to copy when the displayed version contains highlighting markers. */
+    public ?string $copyCode = null;
     public string $language;
     public ?string $filename = null;
 

@@ -67,6 +67,7 @@ final class SearchHierarchyTest extends KernelTestCase
         yield 'live component demo' => ['/demos/live-component/voting', ['Demos', 'Live Components', 'Up & Down Voting']];
         yield 'live memory demo' => ['/demos/live-memory/', ['Demos', 'Live Components', 'Live Memory Card Game']];
         yield 'pagination demo' => ['/demos/pagination/themes', ['Demos', 'Pagination', 'Pagination Themes']];
+        yield 'upload demo' => ['/demos/upload/keep-files', ['Demos', 'Upload', 'Keep Files on Errors']];
 
         yield 'kit' => ['/toolkit/kits/shadcn', ['Kits', 'Shadcn UI']];
         yield 'kit component list' => ['/toolkit/kits/shadcn/components', ['Kits', 'Shadcn UI', 'Components']];
@@ -84,5 +85,6 @@ final class SearchHierarchyTest extends KernelTestCase
         yield 'package list' => ['/packages', []];
         yield 'demo list' => ['/demos', []];
         yield 'pagination demo list' => ['/demos/pagination', []];
+        yield 'upload demo list' => ['/demos/upload', []];
     }
 }

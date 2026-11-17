@@ -1,0 +1,77 @@
+{% extends 'demos/upload/demo.html.twig' %}
+
+{% block demo_container %}
+    <div class="UploadDemoShell max-w-[1140px] mx-auto mb-12">
+        <twig:Browser id="demo" class="shadow-blur shadow-blur--rainbow w-full" frameClass="">
+            <div class="UploadStage LiveAvatar">
+                <div class="UploadStage_container">
+                    <twig:UploadAvatar />
+                    <button
+                        type="button"
+                        class="UploadStage_sample"
+                        data-controller="upload-samples"
+                        data-upload-samples-kind-value="images"
+                        data-upload-samples-names-value="{{ ['profile-pic-final-v2.jpg']|json_encode }}"
+                        data-upload-samples-for-value=".LiveAvatar input[type=file]"
+                        data-action="upload-samples#fill"
+                    >Use a sample photo</button>
+                </div>
+            </div>
+        </twig:Browser>
+    </div>
+
+    <section class="UploadDemoStory">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-12">
+            <twig:Code:CodeWithExplanationRow
+                filename="src/Twig/Components/UploadAvatar.php"
+                :lineStart="24"
+                :lineEnd="49"
+                reversed
+                sticky
+            >
+## A prop that accepts an upload
+
+Only a nullable string prop carrying `#[UploadTarget]` can receive an upload:
+the attribute is the allow-list. The prop stores the same signed reference a
+form field sends.
+
+`getUpload('photo')` resolves it into an `UploadedFile`, or `null`.
+            </twig:Code:CodeWithExplanationRow>
+
+            <twig:Code:CodeWithExplanationRow
+                filename="templates/components/UploadAvatar.html.twig"
+                sticky
+            >
+## The bridge applies it
+
+The `live-upload` controller wraps the field. When the upload completes, it
+reads the signed reference from the field event and calls the `applyUpload`
+live action.
+
+The component renders again with the name and the size it received: no form
+submission, no page reload. `data-live-ignore` keeps the field, and the picture
+the browser drew, out of that render.
+
+The other way round, the `remove` event of the field calls `clearUpload`: taking
+the file out empties the prop.
+            </twig:Code:CodeWithExplanationRow>
+
+            <twig:Code:CodeWithExplanationRow
+                filename="src/Form/AvatarUploadForm.php"
+                :lineStart="26"
+                :lineEnd="32"
+                reversed
+                sticky
+            >
+## The picture stays in the browser
+
+The field is a plain `UploadType`. `show_preview` draws the picture from the
+file the visitor selected. The avatar is that preview, enlarged in CSS: this
+public server keeps no file and sends none back.
+
+To keep the photo in your application, resolve the prop in your own live action
+and pass the upload to the service that stores it.
+            </twig:Code:CodeWithExplanationRow>
+        </div>
+    </section>
+{% endblock %}

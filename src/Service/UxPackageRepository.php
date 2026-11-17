@@ -174,6 +174,21 @@ class UxPackageRepository
                 related: ['router', 'autocomplete', 'chartjs'],
             ),
 
+            (new UxPackage(
+                'upload',
+                'Upload',
+                'app_upload',
+                '#3730A3',
+                'Upload once. Keep your files.',
+                "File uploads as you'd expect: previews, progress, chunks, and files kept on submit.",
+                new \DateTimeImmutable('2026-11-15'),
+                'I need uploads that survive form validation errors.',
+                imageFileName: 'upload.svg',
+                gradient: 'none',
+                groups: [PackageGroup::Forms, PackageGroup::Media],
+                related: ['dropzone', 'image', 'cropperjs'],
+            ))->setOfficialDocsUrl('https://github.com/symfony/ux/blob/3.x/src/Upload/doc/index.rst'),
+
             new UxPackage(
                 'autocomplete',
                 'Autocomplete',

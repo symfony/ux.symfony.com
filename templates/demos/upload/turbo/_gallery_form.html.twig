@@ -1,0 +1,7 @@
+<turbo-frame id="upload-gallery-form">
+    {{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+        {{ form_row(form.photos) }}
+        {{ form_row(form.album) }}
+        <button type="submit" class="UploadStage_submit">Save album</button>
+    {{ form_end(form) }}
+</turbo-frame>

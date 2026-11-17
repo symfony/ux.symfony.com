@@ -1,0 +1,13 @@
+<turbo-stream action="prepend" target="upload-albums">
+    <template>
+        {{ include('demos/upload/turbo/_album.html.twig') }}
+    </template>
+</turbo-stream>
+
+<turbo-stream action="remove" target="upload-albums-empty"></turbo-stream>
+
+<turbo-stream action="replace" target="upload-gallery-form">
+    <template>
+        {{ include('demos/upload/turbo/_gallery_form.html.twig') }}
+    </template>
+</turbo-stream>

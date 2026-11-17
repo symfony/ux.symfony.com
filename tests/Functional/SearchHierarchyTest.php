@@ -48,6 +48,35 @@ final class SearchHierarchyTest extends KernelTestCase
         ;
     }
 
+    #[DataProvider('providePackages')]
+    public function testAPackagePageSuggestsItsRelatedPackages(string $name): void
+    {
+        $repository = new UxPackageRepository();
+        $package = $repository->find($name);
+        $expected = array_map(static fn ($related) => $related->getHumanName(), $repository->findRelated($package));
+
+        $suggestions = $this->browser()
+            ->visit(self::getContainer()->get('router')->generate($package->getRoute()))
+            ->assertSuccessful()
+            ->crawler()
+            ->filter('[data-search-ignore] h3 a')
+            ->each(static fn ($link) => $link->text())
+        ;
+
+        self::assertCount(3, $expected);
+        self::assertSame($expected, $suggestions);
+    }
+
+    /**
+     * @return iterable<string, array{string}>
+     */
+    public static function providePackages(): iterable
+    {
+        foreach (new UxPackageRepository()->findAll(removed: false) as $package) {
+            yield $package->getName() => [$package->getName()];
+        }
+    }
+
     public function testKitComponentInstallationIsIgnoredBySearch(): void
     {
         $this->browser()

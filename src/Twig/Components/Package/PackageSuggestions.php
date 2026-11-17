@@ -27,19 +27,10 @@ final class PackageSuggestions
     }
 
     /**
-     * Neighbours of the current package, always the same ones for a given page.
-     *
      * @return list<UxPackage>
      */
     public function getPackages(): array
     {
-        $packages = array_values(array_filter(
-            $this->packageRepository->findAll(removed: false),
-            fn (UxPackage $package) => $package->getName() !== $this->package->getName(),
-        ));
-
-        $offset = crc32($this->package->getName()) % \count($packages);
-
-        return \array_slice([...\array_slice($packages, $offset), ...\array_slice($packages, 0, $offset)], 0, $this->limit);
+        return \array_slice($this->packageRepository->findRelated($this->package), 0, $this->limit);
     }
 }

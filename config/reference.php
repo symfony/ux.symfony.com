@@ -419,7 +419,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         enabled?: bool|Param, // Default: true
  *     },
  *     lock?: Param|bool|string|array{ // Lock configuration
- *         enabled?: bool|Param, // Default: false
+ *         enabled?: bool|Param, // Default: true
  *         resources?: Param|string|array<string, Param|string|list<scalar|Param|null>>,
  *     },
  *     semaphore?: Param|bool|string|array{ // Semaphore configuration
@@ -629,7 +629,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         }>,
  *     },
  *     rate_limiter?: bool|array{ // Rate limiter configuration
- *         enabled?: bool|Param, // Default: false
+ *         enabled?: bool|Param, // Default: true
  *         limiters?: array<string, array{ // Default: []
  *             lock_factory?: scalar|Param|null, // The service ID of the lock factory used by this limiter (or null to disable locking). // Default: "auto"
  *             cache_pool?: scalar|Param|null, // The cache pool to use for storing the current limiter state. // Default: "cache.rate_limiter"
@@ -1400,6 +1400,39 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         }>,
  *     },
  * }
+ * @psalm-type UxUploadConfig = array{
+ *     storage?: "local"|"flysystem"|Param, // Storage backend to use (local, flysystem) // Default: "local"
+ *     deployment?: "single_node"|"distributed"|Param, // Default: "single_node"
+ *     shared_lock?: bool|Param, // Assert that framework.lock uses a store shared by every application node // Default: false
+ *     flysystem_service?: scalar|Param|null, // Flysystem filesystem service ID to use when "storage: flysystem" (e.g. a service from league/flysystem-bundle). Required for the flysystem backend; never autowired by type. // Default: null
+ *     temp_dir?: scalar|Param|null, // Temporary directory for chunk assembly // Default: "%kernel.project_dir%/var/uploads/tmp"
+ *     completed_prefix?: scalar|Param|null, // Single storage prefix for assembled temporary uploads // Default: ".tmp/completed"
+ *     chunk_size?: scalar|Param|null, // Size of each chunk (e.g. 5M, 10M) // Default: "5M"
+ *     parallel_chunks?: int|Param, // Default: 3
+ *     signature_expiry?: int|Param, // Time in seconds before signed URLs expire // Default: 3600
+ *     form_token_ttl?: int|Param, // Maximum lifetime in seconds of the signed token stored in a submitted form; also capped by completed_ttl // Default: 86400
+ *     completed_ttl?: int|Param, // Time in seconds before an assembled temporary upload expires // Default: 86400
+ *     max_pending_per_owner?: int|Param, // Default: 1000
+ *     compression?: bool|Param, // Enable gzip compression for chunks // Default: false
+ *     integrity_algorithm?: "sha256"|"sha384"|"sha512"|Param, // Hash algorithm used for optional end-to-end file integrity verification // Default: "sha256"
+ *     max_size?: scalar|Param|null, // Maximum file size enforced server-side (0 = no limit, e.g. "100M") // Default: 104857600
+ *     allowed_types?: list<scalar|Param|null>,
+ *     allow_anonymous?: bool|Param, // Accept uploads from visitors that Security cannot identify. Leave disabled unless the endpoints are meant to be public, and pair it with a rate_limiter and an UploadContextResolverInterface // Default: false
+ *     rate_limiter?: scalar|Param|null, // Service ID of a named framework.rate_limiter factory used to throttle upload initialization (for example "limiter.ux_upload_init") // Default: null
+ *     local_storage?: array{
+ *         directory?: scalar|Param|null, // Default: "%kernel.project_dir%/var/uploads"
+ *     },
+ *     uploaders?: array<string, array{ // Default: []
+ *         max_size?: scalar|Param|null, // Maximum file size for this uploader (inherits global if null) // Default: null
+ *         allowed_types?: null|list<scalar|Param|null>,
+ *         chunk_size?: scalar|Param|null, // Chunk size for this uploader (inherits global if null) // Default: null
+ *         parallel_chunks?: int|Param, // Number of parallel chunks for this uploader (inherits global if null) // Default: null
+ *         compression?: bool|Param|null, // Enable compression for this uploader (inherits global if null) // Default: null
+ *         integrity_algorithm?: "sha256"|"sha384"|"sha512"|Param, // Integrity algorithm for this uploader (inherits global if null) // Default: null
+ *         completed_ttl?: int|Param, // Completed temporary upload TTL for this uploader (inherits global if null) // Default: null
+ *         max_pending_per_owner?: int|Param, // Default: null
+ *     }>,
+ * }
  * @psalm-type ConfigType = array{
  *     imports?: ImportsConfig,
  *     parameters?: ParametersConfig,
@@ -1430,6 +1463,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     ux_pagination?: UxPaginationConfig,
  *     ux_image?: UxImageConfig,
  *     ux_css?: UxCssConfig,
+ *     ux_upload?: UxUploadConfig,
  *     "when@dev"?: array{
  *         imports?: ImportsConfig,
  *         parameters?: ParametersConfig,
@@ -1464,6 +1498,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         ux_pagination?: UxPaginationConfig,
  *         ux_image?: UxImageConfig,
  *         ux_css?: UxCssConfig,
+ *         ux_upload?: UxUploadConfig,
  *     },
  *     "when@prod"?: array{
  *         imports?: ImportsConfig,
@@ -1495,6 +1530,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         ux_pagination?: UxPaginationConfig,
  *         ux_image?: UxImageConfig,
  *         ux_css?: UxCssConfig,
+ *         ux_upload?: UxUploadConfig,
  *     },
  *     "when@test"?: array{
  *         imports?: ImportsConfig,
@@ -1528,6 +1564,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         ux_pagination?: UxPaginationConfig,
  *         ux_image?: UxImageConfig,
  *         ux_css?: UxCssConfig,
+ *         ux_upload?: UxUploadConfig,
  *     },
  *     ...<string, ExtensionType|array{ // extra keys must follow the when@%env% pattern or match an extension alias
  *         imports?: ImportsConfig,

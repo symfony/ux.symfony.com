@@ -32,6 +32,7 @@
                 :tags="['Stimulus', 'LiveComponent', 'Turbo']"
             />
             {{ include('demos/pagination/_cards.html.twig', {grid: false}) }}
+            {{ include('demos/upload/_cards.html.twig', {grid: false}) }}
             {% for demo in turboDemos|reverse %}
                 <twig:Demo:DemoCard :demo="demo" :showTags="true" />
             {% endfor %}

@@ -1,0 +1,108 @@
+{% extends 'demos/upload/demo.html.twig' %}
+
+{% block demo_container %}
+    <div class="UploadDemoShell max-w-[1140px] mx-auto mb-12">
+        <twig:Browser id="demo" class="shadow-blur shadow-blur--rainbow w-full" frameClass="">
+            <div
+                class="UploadStage Resumable"
+                data-controller="upload-chunks"
+                data-action="symfony--ux-upload--upload:chunk->upload-chunks#chunk symfony--ux-upload--upload:complete->upload-chunks#complete"
+            >
+                <div class="UploadStage_container">
+                    {% for message in app.flashes('resumable_success') %}
+                        <p class="UploadStage_note" data-turbo-cache="false">{{ message }}</p>
+                    {% endfor %}
+
+                    {{ form_start(form) }}
+                        <div class="UploadStage_field">
+                            {{ form_widget(form) }}
+                            <p class="UploadStage_outcome" data-upload-chunks-target="sent">No chunk sent yet.</p>
+                            <p class="UploadStage_outcome" data-upload-chunks-target="summary" hidden></p>
+                        </div>
+                        <div class="UploadStage_actions">
+                            <button
+                                type="button"
+                                class="UploadStage_sample"
+                                data-controller="upload-samples"
+                                data-upload-samples-kind-value="large"
+                                data-upload-samples-size-value="{{ 1024 * 1024 }}"
+                                data-upload-samples-names-value="{{ [sample_name]|json_encode }}"
+                                data-upload-samples-for-value=".Resumable input[type=file]"
+                                data-action="upload-samples#fill"
+                            >Generate a 1 MB archive</button>
+                            <button type="submit" class="UploadStage_submit">Save</button>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </twig:Browser>
+    </div>
+
+    <section class="UploadDemoStory">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-12">
+            <twig:Code:CodeWithExplanationRow
+                filename="config/packages/ux_upload.yaml"
+                :lineStart="20"
+                :lineEnd="24"
+                reversed
+                sticky
+            >
+## Chunks per uploader
+
+Files above `chunk_size` travel in chunks, `parallel_chunks` at a time. A failed
+chunk is retried up to three times before the file is marked as failed.
+
+The defaults are 5 MB and 3. This public server accepts 1 MB at most and keeps
+no file, so this uploader cuts the archive into 16 chunks of 64 KB.
+            </twig:Code:CodeWithExplanationRow>
+
+            <twig:Code:CodeWithExplanationRow
+                filename="src/Form/UploadLargeFileForm.php"
+                :lineStart="27"
+                :lineEnd="31"
+                sticky
+            >
+## Nothing to add in the form
+
+The field picks the transport from the file size: one request for a small file,
+chunks for a large one. Pause and resume buttons appear on chunked transfers.
+
+Each chunk is stored as soon as it arrives. The browser keeps a signed resume
+token in IndexedDB: after a reload, select the same file, the server lists the
+chunks it already holds, and only the missing ones are sent.
+            </twig:Code:CodeWithExplanationRow>
+
+            <twig:Code:CodeWithExplanationRow
+                filename="assets/controllers/upload-chunks-controller.js"
+                :lineStart="18"
+                :lineEnd="33"
+                reversed
+                sticky
+            >
+## Listen to the field
+
+The field emits browser events while it works: `chunk` each time the server
+stores one, `complete` when it holds the whole file.
+
+The counter under the field is this Stimulus controller, bound to both events
+with `data-action`. The upload does not need it: the field shows its own
+progress. See the [JavaScript API](https://github.com/symfony/ux/blob/3.x/src/Upload/doc/javascript.rst).
+            </twig:Code:CodeWithExplanationRow>
+
+            <twig:Code:CodeWithExplanationRow
+                filename="src/EventListener/SlowDemoUploadListener.php"
+                :lineStart="54"
+                :lineEnd="78"
+                sticky
+            >
+## Slowed down on purpose
+
+A server stores 16 small chunks in well under a second: too fast to pause. This
+listener holds each chunk of the generated archive for 700 ms.
+
+Two chunks wait at most, for the whole site. Your own files are never slowed
+down.
+            </twig:Code:CodeWithExplanationRow>
+        </div>
+    </section>
+{% endblock %}

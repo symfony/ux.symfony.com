@@ -11,6 +11,7 @@
 
 namespace App\Controller;
 
+use App\Enum\PackageGroup;
 use App\Service\LiveDemoRepository;
 use App\Service\Toolkit\BlockSectionResolver;
 use App\Service\Toolkit\ToolkitService;
@@ -51,6 +52,9 @@ final class SitemapController extends AbstractController
         // Static pages
         yield $this->generateAbsoluteUrl('app_homepage');
         yield $this->generateAbsoluteUrl('app_packages');
+        foreach (PackageGroup::cases() as $group) {
+            yield $this->generateAbsoluteUrl('app_packages_group', ['group' => $group->value]);
+        }
         yield $this->generateAbsoluteUrl('app_icons');
         yield $this->generateAbsoluteUrl('app_demos');
         yield $this->generateAbsoluteUrl('app_demo_pagination');

@@ -11,6 +11,7 @@
 
 namespace App\Tests\Functional;
 
+use App\Enum\PackageGroup;
 use App\Service\LiveDemoRepository;
 use App\Service\UxPackageRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -44,6 +45,10 @@ class SitemapTest extends KernelTestCase
         $demoRepository = new LiveDemoRepository();
         foreach ($demoRepository->findAll() as $demo) {
             yield $demo->getRoute() => $router->generate($demo->getRoute(), [], UrlGeneratorInterface::ABSOLUTE_URL);
+        }
+
+        foreach (PackageGroup::cases() as $group) {
+            yield 'packages '.$group->value => $router->generate('app_packages_group', ['group' => $group->value], UrlGeneratorInterface::ABSOLUTE_URL);
         }
 
         $packageRepository = new UxPackageRepository();

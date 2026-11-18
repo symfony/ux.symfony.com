@@ -11,6 +11,7 @@
 
 namespace App\Tests\Functional;
 
+use App\Enum\PackageGroup;
 use App\Model\UxPackage;
 use App\Service\UxPackageRepository;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -29,6 +30,50 @@ class UxPackagesTest extends KernelTestCase
             ->assertSeeIn('title', 'Packages')
             ->assertSee('All Packages')
         ;
+    }
+
+    public function testThePackagesPageOffersEveryGroup(): void
+    {
+        $pills = $this->browser()->visit('/packages')->assertSuccessful()->crawler()->filter('nav[aria-label="Package groups"] a');
+
+        self::assertSame(
+            ['All', ...array_map(static fn (PackageGroup $group): string => $group->label(), PackageGroup::cases())],
+            $pills->each(static fn ($pill) => $pill->text()),
+        );
+        self::assertSame(['/packages'], $pills->filter('[aria-current="page"]')->each(static fn ($pill) => $pill->attr('href')));
+    }
+
+    #[DataProvider('provideGroups')]
+    public function testAGroupPageListsItsPackages(PackageGroup $group): void
+    {
+        $crawler = $this->browser()
+            ->visit('/packages/'.$group->value)
+            ->assertSuccessful()
+            ->assertSeeIn('title', $group->label())
+            ->assertSeeIn('h1', $group->label())
+            ->crawler()
+        ;
+
+        $expected = array_map(static fn (UxPackage $package): string => $package->getHumanName(), new UxPackageRepository()->findByGroup($group));
+        self::assertNotEmpty($expected);
+        self::assertSame($expected, $crawler->filter('#packages h2 a')->each(static fn ($link) => $link->text()));
+        self::assertSame(['/packages/'.$group->value], $crawler->filter('nav[aria-label="Package groups"] [aria-current="page"]')->each(static fn ($pill) => $pill->attr('href')));
+        self::assertStringEndsWith('/packages/'.$group->value, (string) $crawler->filter('link[rel="canonical"]')->attr('href'));
+    }
+
+    /**
+     * @return iterable<string, array{PackageGroup}>
+     */
+    public static function provideGroups(): iterable
+    {
+        foreach (PackageGroup::cases() as $group) {
+            yield $group->value => [$group];
+        }
+    }
+
+    public function testAnUnknownGroupIsNotFound(): void
+    {
+        $this->browser()->visit('/packages/no-such-group')->assertStatus(404);
     }
 
     #[DataProvider('getSmokeTests')]

@@ -18,6 +18,9 @@ class UxPackage
     private ?string $screencastLink = null;
     private ?string $screencastLinkText = null;
 
+    /**
+     * @param list<string> $related Names of the packages suggested at the end of the package page
+     */
     public function __construct(
         private string $name,
         private string $humanName,
@@ -35,7 +38,16 @@ class UxPackage
         private ?string $gradient = null,
         private ?string $seoTitle = null,
         private ?string $socialTitle = null,
+        private array $related = [],
     ) {
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function getRelated(): array
+    {
+        return $this->related;
     }
 
     public function getName(): string

@@ -34,6 +34,7 @@ class UxPackageRepository
                 gradient: 'linear-gradient(to bottom right, cyan, purple)',
                 seoTitle: 'UX Icons - SVG icons made easy',
                 socialTitle: 'Symfony UX Icons - SVG icons made easy',
+                related: ['image', 'toolkit', 'cropperjs'],
             ),
 
             new UxPackage(
@@ -46,6 +47,7 @@ class UxPackageRepository
                 new \DateTimeImmutable('2024-08-09'),
                 'I need to display markers on a Map.',
                 'map.svg',
+                related: ['chartjs', 'calendar-link', 'notify'],
             ),
 
             new UxPackage(
@@ -56,7 +58,8 @@ class UxPackageRepository
                 'Render Reusable UI Elements',
                 'Create PHP classes that can render themselves',
                 new \DateTimeImmutable('2021-12-03'),
-                'I need to create PHP classes that render'
+                'I need to create PHP classes that render',
+                related: ['live-component', 'toolkit', 'css'],
             ),
 
             new UxPackage(
@@ -67,7 +70,8 @@ class UxPackageRepository
                 'Interactive UI in PHP & Twig',
                 'Build dynamic interfaces with zero JavaScript',
                 new \DateTimeImmutable('2021-12-09'),
-                'I need Twig templates that update in real-time!'
+                'I need Twig templates that update in real-time!',
+                related: ['twig-component', 'stimulus', 'inspector'],
             ),
 
             (new UxPackage(
@@ -78,7 +82,8 @@ class UxPackageRepository
                 'Single-page Symfony app',
                 'Integration with Turbo for single-page-app and real-time experience',
                 new \DateTimeImmutable('2021-05-20'),
-                'I need to transform my app into an SPA!'
+                'I need to transform my app into an SPA!',
+                related: ['live-component', 'stimulus', 'inspector'],
             ))
                 ->setDocsLink('https://turbo.hotwired.dev/handbook/introduction', 'Documentation specifically for the Turbo JavaScript library.')
                 ->setScreencastLink('https://symfonycasts.com/screencast/turbo', 'Go deep into all 3 parts of Turbo.'),
@@ -94,6 +99,7 @@ class UxPackageRepository
                 null,
                 'stimulus.svg',
                 'symfony/stimulus-bundle',
+                related: ['turbo', 'live-component', 'inspector'],
             ))
             ->setOfficialDocsUrl('https://symfony.com/bundles/StimulusBundle')
             ->setScreencastLink('https://symfonycasts.com/screencast/stimulus', 'More than 40 videos to master Stimulus.'),
@@ -112,6 +118,7 @@ class UxPackageRepository
                 gradient: 'linear-gradient(145deg, oklch(25% .006 270) 0%, oklch(19% .006 270) 100%)',
                 seoTitle: 'UX Inspector - Live debugging in the browser',
                 socialTitle: 'UX Inspector - Live debugging in the browser',
+                related: ['stimulus', 'live-component', 'turbo'],
             ),
 
             new UxPackage(
@@ -126,6 +133,7 @@ class UxPackageRepository
                 null,
                 null,
                 true,
+                related: ['icons', 'inspector', 'css'],
             ),
 
             (new UxPackage(
@@ -138,6 +146,7 @@ class UxPackageRepository
                 new \DateTimeImmutable('2026-03-17'),
                 'I need to wrap my Symfony app in a native mobile shell',
                 'native.svg',
+                related: ['stimulus', 'turbo', 'pagination'],
             ))
                 ->setDocsLink('https://native.hotwired.dev/', 'Hotwire Native documentation.'),
 
@@ -151,6 +160,7 @@ class UxPackageRepository
                 new \DateTimeImmutable('2026-09-18'),
                 'I need to paginate my results.',
                 imageFileName: 'pagination.png',
+                related: ['router', 'autocomplete', 'chartjs'],
             ),
 
             new UxPackage(
@@ -161,7 +171,8 @@ class UxPackageRepository
                 'Ajax-powered Form Select',
                 'Ajax-powered, auto-completable `select` elements',
                 new \DateTimeImmutable('2022-06-15'),
-                'I need an Ajax-autocomplete select field'
+                'I need an Ajax-autocomplete select field',
+                related: ['pagination', 'chartjs', 'dropzone'],
             ),
 
             new UxPackage(
@@ -174,6 +185,7 @@ class UxPackageRepository
                 new \DateTimeImmutable('2023-05-02'),
                 'I need to translate strings in JavaScript',
                 'translator.svg',
+                related: ['router', 'notify', 'pagination'],
             ),
 
             new UxPackage(
@@ -186,6 +198,7 @@ class UxPackageRepository
                 new \DateTimeImmutable('2026-10-11'),
                 'I need to generate URLs in JavaScript',
                 'router.svg',
+                related: ['pagination', 'translator', 'native'],
             ),
 
             new UxPackage(
@@ -198,6 +211,7 @@ class UxPackageRepository
                 new \DateTimeImmutable('2026-09-28'),
                 'I need responsive images',
                 'image.svg',
+                related: ['icons', 'cropperjs', 'calendar-link'],
             ),
 
             (new UxPackage(
@@ -211,6 +225,7 @@ class UxPackageRepository
                 'I want my styles checked before production',
                 'css.svg',
                 seoTitle: 'UX CSS - Typed Atomic CSS for Twig',
+                related: ['toolkit', 'twig-component', 'icons'],
             ))
                 ->setOfficialDocsUrl('https://github.com/symfony/ux/blob/3.x/src/Css/doc/index.rst'),
 
@@ -222,7 +237,8 @@ class UxPackageRepository
                 'Interactive charts with Chart.js',
                 'Easy charts with Chart.js',
                 new \DateTimeImmutable('2020-12-03'),
-                'I need to build a chart'
+                'I need to build a chart',
+                related: ['map', 'pagination', 'autocomplete'],
             ))
                 ->setDocsLink('https://www.chartjs.org/', 'Chart.js documentation.'),
 
@@ -234,7 +250,8 @@ class UxPackageRepository
                 'Render React components from Twig',
                 'Quickly render `<React />` components &amp; pass them props.',
                 new \DateTimeImmutable('2022-06-13'),
-                'I need to render React components from Twig'
+                'I need to render React components from Twig',
+                related: ['vue', 'native', 'twig-component'],
             ))
                 ->setDocsLink('https://reactjs.org/', 'Go deeper with the React docs.'),
 
@@ -247,6 +264,7 @@ class UxPackageRepository
                 'Quickly render `<Vue />` components &amp; pass them props.',
                 new \DateTimeImmutable('2022-08-22'),
                 null,
+                related: ['react', 'native', 'twig-component'],
             ))
                 ->setDocsLink('https://vuejs.org/', 'Go deeper with the Vue.js docs.'),
 
@@ -273,6 +291,7 @@ class UxPackageRepository
                 'Form Type and tools for cropping images',
                 new \DateTimeImmutable('2020-12-03'),
                 null,
+                related: ['image', 'icons', 'dropzone'],
             ))
                 ->setDocsLink('https://github.com/fengyuanchen/cropperjs', 'Cropper.js documentation.'),
 
@@ -295,7 +314,8 @@ class UxPackageRepository
                 'Upload Files with Style',
                 'Form type for stylized "drop zone" for file uploads',
                 new \DateTimeImmutable('2020-12-03'),
-                'I need an upload field that looks great'
+                'I need an upload field that looks great',
+                related: ['cropperjs', 'autocomplete', 'image'],
             ),
 
             (new UxPackage(
@@ -318,6 +338,7 @@ class UxPackageRepository
                 'Native Browser Notifications',
                 'Trigger native browser notifications from inside PHP',
                 new \DateTimeImmutable('2022-06-16'),
+                related: ['calendar-link', 'map', 'translator'],
             ),
 
             new UxPackage(
@@ -330,6 +351,7 @@ class UxPackageRepository
                 new \DateTimeImmutable('2026-05-22'),
                 'I want users to save my events in one click.',
                 imageFileName: 'calendar-link.svg',
+                related: ['map', 'notify', 'image'],
             ),
 
             new UxPackage(
@@ -380,6 +402,14 @@ class UxPackageRepository
         usort($packages, static fn (UxPackage $a, UxPackage $b) => $b->getPublishedAt() <=> $a->getPublishedAt());
 
         return \array_slice($packages, 0, $limit);
+    }
+
+    /**
+     * @return list<UxPackage>
+     */
+    public function findRelated(UxPackage $package): array
+    {
+        return array_map($this->find(...), $package->getRelated());
     }
 
     public function find(string $name): UxPackage

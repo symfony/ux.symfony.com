@@ -1,0 +1,83 @@
+{% extends 'demos/turbo_demo.html.twig' %}
+
+{% block demo_container %}
+    {% from _self import pagination %}
+    {{ include('demos/turbo/_scroll_stage.html.twig', {pagination: pagination(has_more, next_page), explanationHint: 'Keep scrolling inside the demo. Each batch moves the next loading point farther down the grid.'}) }}
+
+    <section class="bg-subtle border-t py-12">
+        <div class="mx-auto max-w-[1400px] px-6 md:px-12">
+            <twig:Code:CodeWithExplanationRow
+                filename="templates/demos/turbo/infinite_scroll_2.html.twig"
+                lineStart="70"
+                lineEnd="83"
+                reversed
+            >
+                ## Load when the frame comes into view
+
+                In Part One, you click a link to load another batch. Here, an empty **Turbo Frame** sits just after the grid and points to the next page through `src`.
+
+                With `loading="lazy"`, Turbo waits until the frame comes into view inside the scrollable catalog before requesting that page.
+            </twig:Code:CodeWithExplanationRow>
+        </div>
+    </section>
+
+    <section class="py-8 lg:py-12">
+        <div class="mx-auto max-w-[1400px] px-6 md:px-12">
+            <twig:Code:CodeWithExplanationRow
+                filename="templates/demos/turbo/infinite_scroll_2.html.twig"
+                lineStart="58"
+                lineEnd="68"
+            >
+                ## Append cards and replace the frame
+
+                The response appends the cards to `#product-grid`, then replaces `#product-grid-pagination` with a frame whose `src` points to the following page.
+
+                The **new frame moves down as the grid grows** and triggers the next request when it comes into view. On the last batch, **The End** replaces the frame, so there’s no next request.
+            </twig:Code:CodeWithExplanationRow>
+        </div>
+    </section>
+
+    <section class="py-8 lg:py-12">
+        <div class="mx-auto max-w-[1400px] px-6 md:px-12">
+            <twig:Code:CodeWithExplanationRow
+                filename="src/Controller/Demo/TurboDemoController.php"
+                lineStart="71"
+                lineEnd="98"
+                sticky
+            >
+                ## Return the stream response
+
+                The route defaults to HTML for a normal visit. The frame’s `src` explicitly requests the **`.turbo_stream` format**, so both behaviors can share one controller action.
+
+                The response uses `text/vnd.turbo-stream.html`. Turbo applies its actions to the grid and the pagination frame by selector.
+            </twig:Code:CodeWithExplanationRow>
+        </div>
+    </section>
+{% endblock %}
+
+{% block stream_success %}
+    <twig:Turbo:Stream:Append target="#product-grid">
+        {% for item in items %}
+            <twig:ProductGridItem :item="item" />
+        {% endfor %}
+    </twig:Turbo:Stream:Append>
+    <twig:Turbo:Stream:Replace target="#product-grid-pagination">
+        {% from 'demos/turbo/infinite_scroll_2.html.twig' import pagination %}
+        {{ pagination(has_more, next_page) }}
+    </twig:Turbo:Stream:Replace>
+{% endblock %}
+
+{% macro pagination(has_more, next_page) %}
+    {% if has_more %}
+        <twig:Turbo:Frame
+            id="product-grid-pagination"
+            src="{{ path('app_demo_turbo_infinite_scroll_2', {
+                page: next_page,
+                _format: 'turbo_stream',
+            }) }}"
+            loading="lazy"
+        />
+    {% else %}
+        <span class="code">The End</span>
+    {% endif %}
+{% endmacro %}

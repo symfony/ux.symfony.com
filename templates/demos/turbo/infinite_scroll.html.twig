@@ -1,0 +1,91 @@
+{% extends 'demos/turbo_demo.html.twig' %}
+
+{% block demo_container %}
+    {% from _self import load_more %}
+    {{ include('demos/turbo/_scroll_stage.html.twig', {pagination: load_more(has_more, next_page), explanationHint: 'Try loading two batches. Watch how the link stays at the end of the grid as new cards appear.'}) }}
+
+    <section class="bg-subtle border-t py-12">
+        <div class="mx-auto max-w-[1400px] px-6 md:px-12">
+            <twig:Code:CodeWithExplanationRow
+                filename="src/Controller/Demo/TurboDemoController.php"
+                lineStart="42"
+                lineEnd="69"
+                reversed
+                sticky
+            >
+                ## Serve the next batch
+
+                The `page` query parameter defaults to 1. The controller fetches **12 cards at a time** and works out whether to offer a link to the next page.
+
+                The first visit renders the full page. A **Turbo Stream request** uses the same route, but `renderBlock()` returns only the actions that update the existing page.
+            </twig:Code:CodeWithExplanationRow>
+        </div>
+    </section>
+
+    <section class="py-8 lg:py-12">
+        <div class="mx-auto max-w-[1400px] px-6 md:px-12">
+            <twig:Code:CodeWithExplanationRow
+                filename="templates/demos/turbo/infinite_scroll.html.twig"
+                lineStart="74"
+                lineEnd="91"
+                sticky
+            >
+                ## Request a stream from the link
+
+                **Load more** is a link to the same route with the next `page` value. The `data-turbo-stream` attribute tells Turbo to add the stream media type to the request’s `Accept` header.
+
+                Setting `data-turbo-prefetch` to `false` keeps Turbo from sending that request when you hover over the link.
+            </twig:Code:CodeWithExplanationRow>
+        </div>
+    </section>
+
+    <section class="py-8 lg:py-12">
+        <div class="mx-auto max-w-[1400px] px-6 md:px-12">
+            <twig:Code:CodeWithExplanationRow
+                filename="templates/demos/turbo/infinite_scroll.html.twig"
+                lineStart="62"
+                lineEnd="72"
+                reversed
+                sticky
+            >
+                ## Append the cards and update the link
+
+                `Turbo:Stream:Append` targets `#product-grid`, so the new cards appear **after the existing ones**.
+
+                A separate `Turbo:Stream:Replace` targets `#product-grid-load-more`. The same macro renders the next link inside that wrapper or displays **The End** when there are no more results.
+            </twig:Code:CodeWithExplanationRow>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block stream_success %}
+    <twig:Turbo:Stream:Append target="#product-grid">
+        {% for item in items %}
+            <twig:ProductGridItem :item="item" />
+        {% endfor %}
+    </twig:Turbo:Stream:Append>
+    <twig:Turbo:Stream:Replace target="#product-grid-load-more">
+        {% from 'demos/turbo/infinite_scroll.html.twig' import load_more %}
+        {{ load_more(has_more, next_page) }}
+    </twig:Turbo:Stream:Replace>
+{% endblock %}
+
+{% macro load_more(has_more, next_page) %}
+    <div id="product-grid-load-more">
+        {% if has_more %}
+            <a
+                class="ProductGrid_more"
+                href="{{ path('app_demo_turbo_infinite_scroll', {
+                    page: next_page,
+                }) }}"
+                data-turbo-stream="true"
+                data-turbo-prefetch="false"
+            >
+                Load More
+            </a>
+        {% else %}
+            <span class="code">The End</span>
+        {% endif %}
+    </div>
+{% endmacro %}

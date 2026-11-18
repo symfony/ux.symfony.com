@@ -2,7 +2,7 @@
 
 {% block demo_container %}
 
-    <div class="max-w-[1140px] mx-auto mb-12">
+    <div class="max-w-[1140px] mx-auto mb-12 px-6">
         <twig:Browser class="shadow-blur shadow-blur--rainbow w-full" id="browser">
 
             {# Retro Tshirt SVG code #}
@@ -31,20 +31,16 @@
     </div>
 
     <section class="py-12">
-        <div class="max-w-[1400px] mx-auto">
-            <div class="code-description text-center">
-                <h2>So... how does it work?</h2>
-                <p>
-                    Let's focus on two aspects. But first, <code>did you scroll</code> all the way to the end?
-                    <br>
-                    You might have missed some important details about performance... 🍿
-                </p>
-            </div>
+        <div class="code-description mx-auto max-w-2xl px-6 text-center text-balance">
+            <h2>So... how does it work?</h2>
+            <p class="leading-7">
+                Scroll through the demo to see how it keeps existing cards in place while each new batch is added automatically.
+            </p>
         </div>
     </section>
 
     <section class="bg-subtle border-t py-12">
-        <div class="max-w-[1400px] mx-auto flex flex-col">
+        <div class="max-w-[1400px] mx-auto flex flex-col px-6 md:px-12">
             <twig:Code:CodeWithExplanationRow
                 filename="templates/components/ProductGrid2.html.twig"
                 lineStart="1"
@@ -99,8 +95,8 @@
         </div>
     </section>
 
-    <section class="py-12">
-        <div class="max-w-[1400px] mx-auto">
+    <section class="py-8 lg:py-12">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-12">
             <twig:Code:CodeWithExplanationRow
                 filename="assets/controllers/appear-controller.js"
                 codeCols="7"

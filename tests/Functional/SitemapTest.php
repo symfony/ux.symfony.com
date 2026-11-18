@@ -41,6 +41,7 @@ class SitemapTest extends KernelTestCase
         $router = self::bootKernel()->getContainer()->get('router');
 
         yield 'pagination_demos' => $router->generate('app_demo_pagination', [], UrlGeneratorInterface::ABSOLUTE_URL);
+        yield 'kits' => $router->generate('app_kits', [], UrlGeneratorInterface::ABSOLUTE_URL);
 
         $demoRepository = new LiveDemoRepository();
         foreach ($demoRepository->findAll() as $demo) {

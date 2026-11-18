@@ -98,6 +98,7 @@ final class SearchHierarchyTest extends KernelTestCase
         yield 'live memory demo' => ['/demos/live-memory/', ['Demos', 'Live Components', 'Live Memory Card Game']];
         yield 'pagination demo' => ['/demos/pagination/themes', ['Demos', 'Pagination', 'Pagination Themes']];
 
+        yield 'kit list' => ['/kits', ['Kits', 'UI Kits']];
         yield 'kit' => ['/toolkit/kits/shadcn', ['Kits', 'Shadcn UI']];
         yield 'kit component list' => ['/toolkit/kits/shadcn/components', ['Kits', 'Shadcn UI', 'Components']];
         yield 'kit component' => ['/toolkit/kits/shadcn/components/button', ['Kits', 'Shadcn UI', 'Components', 'Button']];

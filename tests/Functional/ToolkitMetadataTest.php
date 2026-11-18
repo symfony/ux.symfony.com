@@ -36,6 +36,7 @@ final class ToolkitMetadataTest extends KernelTestCase
 
     public static function provideToolkitPages(): \Generator
     {
+        yield 'kit list' => ['/kits'];
         yield 'kit' => ['/toolkit/kits/shadcn'];
         yield 'component list' => ['/toolkit/kits/shadcn/components'];
         yield 'component' => ['/toolkit/kits/shadcn/components/accordion'];

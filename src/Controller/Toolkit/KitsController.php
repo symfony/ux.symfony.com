@@ -20,10 +20,19 @@ use Symfony\UX\Toolkit\Registry\LocalRegistry;
 
 class KitsController extends AbstractController
 {
-    #[Route('/toolkit/kits')]
-    public function listKits(): Response
+    #[Route('/kits', name: 'app_kits')]
+    public function listKits(ToolkitService $toolkitService, UxPackageRepository $uxPackageRepository): Response
     {
-        return $this->redirectToRoute('app_toolkit', ['_fragment' => 'kits']);
+        return $this->render('toolkit/kits.html.twig', [
+            'package' => $uxPackageRepository->find('toolkit'),
+            'kits' => $toolkitService->getKits(),
+        ]);
+    }
+
+    #[Route('/toolkit/kits')]
+    public function redirectToKits(): Response
+    {
+        return $this->redirectToRoute('app_kits', status: Response::HTTP_MOVED_PERMANENTLY);
     }
 
     #[Route('/toolkit/kits/{kitId}', name: 'app_toolkit_kit')]

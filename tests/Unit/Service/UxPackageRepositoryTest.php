@@ -11,6 +11,7 @@
 
 namespace App\Tests\Unit\Service;
 
+use App\Enum\PackageGroup;
 use App\Model\UxPackage;
 use App\Service\UxPackageRepository;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -59,5 +60,25 @@ final class UxPackageRepositoryTest extends TestCase
         $related = $repository->findRelated($repository->find('turbo'));
 
         self::assertSame(['live-component', 'stimulus', 'inspector'], array_map(static fn (UxPackage $package): string => $package->getName(), $related));
+    }
+
+    public function testEveryPackageBelongsToAGroup(): void
+    {
+        foreach (new UxPackageRepository()->findAll() as $package) {
+            self::assertNotEmpty($package->getGroups(), \sprintf('Package "%s" has no group.', $package->getName()));
+        }
+    }
+
+    public function testFindByGroupReturnsTheListedPackagesOfAGroup(): void
+    {
+        $repository = new UxPackageRepository();
+        $names = static fn (array $packages): array => array_map(static fn (UxPackage $package): string => $package->getName(), $packages);
+
+        self::assertSame(['native', 'react', 'vue'], $names($repository->findByGroup(PackageGroup::Bridges)));
+        self::assertSame(['native', 'react', 'vue', 'svelte'], $names($repository->findByGroup(PackageGroup::Bridges, removed: null)));
+
+        foreach (PackageGroup::cases() as $group) {
+            self::assertNotEmpty($repository->findByGroup($group), \sprintf('Group "%s" lists no package.', $group->value));
+        }
     }
 }

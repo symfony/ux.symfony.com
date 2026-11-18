@@ -1,20 +1,29 @@
 {% extends 'base.html.twig' %}
 
 {% set meta = {
-    title: 'All Packages',
-    description: 'Symfony UX: a treasure chest of packages to solve your frontend problems',
-    canonical: url('app_packages'),
+    title: group ? group.label ~ ' Packages' : 'All Packages',
+    description: group ? group.description : 'Symfony UX: a treasure chest of packages to solve your frontend problems',
+    canonical: group ? url('app_packages_group', {group: group.value}) : url('app_packages'),
+    hierarchy: group ? ['Packages', group.label] : [],
 } %}
 
 {% block content %}
 <div class="pt-20">
     <div class="max-w-[1400px] mx-auto px-6 pt-6 md:px-12">
-        <h1 class="text-center mt-12">UX Packages</h1>
-        <p class="text-center mt-2 mb-12">A treasure chest of bundles, components and packages</p>
+        <h1 class="text-center mt-12">{{ group ? group.label ~ ' Packages' : 'UX Packages' }}</h1>
+        <p class="text-center mt-2 mb-8">{{ group ? group.description : 'A treasure chest of bundles, components and packages' }}</p>
+
+        {% set pill = 'inline-flex items-center rounded-full border border-body-text/20 px-4 py-1.5 text-[.9375rem] text-body-text/80 no-underline transition-colors hover:border-body-text/60 hover:text-body-text aria-[current=page]:border-body-text aria-[current=page]:bg-body-text aria-[current=page]:text-body' %}
+        <nav class="mb-12 flex flex-wrap justify-center gap-2" aria-label="Package groups">
+            <a href="{{ path('app_packages') }}" class="{{ pill }}"{{ group ? '' : ' aria-current="page"' }}>All</a>
+            {% for item in groups %}
+                <a href="{{ path('app_packages_group', {group: item.value}) }}" class="{{ pill }}"{{ item == group ? ' aria-current="page"' }}>{{ item.label }}</a>
+            {% endfor %}
+        </nav>
     </div>
 </div>
 
-<div class="max-w-[1400px] mx-auto px-6 pt-6 md:px-12">
+<div id="packages" class="max-w-[1400px] mx-auto px-6 pt-6 md:px-12">
     {% block list %}
         <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {% for package in packages %}
@@ -24,15 +33,17 @@
     {% endblock %}
 </div>
 
-<h2 class="text-center mt-12">Deprecated and removed packages</h2>
-<p class="text-center mt-2 mb-12">Packages that are still available, but not maintained anymore...</p>
-<div class="max-w-[1400px] mx-auto px-6 pt-6 md:px-12">
+{% if removed_packages %}
+    <h2 class="text-center mt-12">Deprecated and removed packages</h2>
+    <p class="text-center mt-2 mb-12">Packages that are still available, but not maintained anymore...</p>
+    <div class="max-w-[1400px] mx-auto px-6 pt-6 md:px-12">
         <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {% for package in removed_packages %}
                 <twig:PackageBox package="{{ package }}" titleTag="h2" />
             {% endfor %}
         </div>
-</div>
+    </div>
+{% endif %}
 {% endblock %}
 
 {% block aside %}

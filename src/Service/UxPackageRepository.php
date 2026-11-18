@@ -11,6 +11,7 @@
 
 namespace App\Service;
 
+use App\Enum\PackageGroup;
 use App\Model\UxPackage;
 
 class UxPackageRepository
@@ -34,6 +35,7 @@ class UxPackageRepository
                 gradient: 'linear-gradient(to bottom right, cyan, purple)',
                 seoTitle: 'UX Icons - SVG icons made easy',
                 socialTitle: 'Symfony UX Icons - SVG icons made easy',
+                groups: [PackageGroup::Media],
                 related: ['image', 'toolkit', 'cropperjs'],
             ),
 
@@ -47,6 +49,7 @@ class UxPackageRepository
                 new \DateTimeImmutable('2024-08-09'),
                 'I need to display markers on a Map.',
                 'map.svg',
+                groups: [PackageGroup::Media],
                 related: ['chartjs', 'calendar-link', 'notify'],
             ),
 
@@ -59,6 +62,7 @@ class UxPackageRepository
                 'Create PHP classes that can render themselves',
                 new \DateTimeImmutable('2021-12-03'),
                 'I need to create PHP classes that render',
+                groups: [PackageGroup::Foundation, PackageGroup::DesignSystem],
                 related: ['live-component', 'toolkit', 'css'],
             ),
 
@@ -71,6 +75,7 @@ class UxPackageRepository
                 'Build dynamic interfaces with zero JavaScript',
                 new \DateTimeImmutable('2021-12-09'),
                 'I need Twig templates that update in real-time!',
+                groups: [PackageGroup::Foundation, PackageGroup::Forms],
                 related: ['twig-component', 'stimulus', 'inspector'],
             ),
 
@@ -83,6 +88,7 @@ class UxPackageRepository
                 'Integration with Turbo for single-page-app and real-time experience',
                 new \DateTimeImmutable('2021-05-20'),
                 'I need to transform my app into an SPA!',
+                groups: [PackageGroup::Foundation, PackageGroup::Navigation],
                 related: ['live-component', 'stimulus', 'inspector'],
             ))
                 ->setDocsLink('https://turbo.hotwired.dev/handbook/introduction', 'Documentation specifically for the Turbo JavaScript library.')
@@ -99,6 +105,7 @@ class UxPackageRepository
                 null,
                 'stimulus.svg',
                 'symfony/stimulus-bundle',
+                groups: [PackageGroup::Foundation],
                 related: ['turbo', 'live-component', 'inspector'],
             ))
             ->setOfficialDocsUrl('https://symfony.com/bundles/StimulusBundle')
@@ -118,6 +125,7 @@ class UxPackageRepository
                 gradient: 'linear-gradient(145deg, oklch(25% .006 270) 0%, oklch(19% .006 270) 100%)',
                 seoTitle: 'UX Inspector - Live debugging in the browser',
                 socialTitle: 'UX Inspector - Live debugging in the browser',
+                groups: [PackageGroup::DevTools],
                 related: ['stimulus', 'live-component', 'turbo'],
             ),
 
@@ -133,6 +141,7 @@ class UxPackageRepository
                 null,
                 null,
                 true,
+                groups: [PackageGroup::DesignSystem],
                 related: ['icons', 'inspector', 'css'],
             ),
 
@@ -146,6 +155,7 @@ class UxPackageRepository
                 new \DateTimeImmutable('2026-03-17'),
                 'I need to wrap my Symfony app in a native mobile shell',
                 'native.svg',
+                groups: [PackageGroup::Bridges],
                 related: ['stimulus', 'turbo', 'pagination'],
             ))
                 ->setDocsLink('https://native.hotwired.dev/', 'Hotwire Native documentation.'),
@@ -160,6 +170,7 @@ class UxPackageRepository
                 new \DateTimeImmutable('2026-09-18'),
                 'I need to paginate my results.',
                 imageFileName: 'pagination.png',
+                groups: [PackageGroup::Navigation],
                 related: ['router', 'autocomplete', 'chartjs'],
             ),
 
@@ -172,6 +183,7 @@ class UxPackageRepository
                 'Ajax-powered, auto-completable `select` elements',
                 new \DateTimeImmutable('2022-06-15'),
                 'I need an Ajax-autocomplete select field',
+                groups: [PackageGroup::Forms],
                 related: ['pagination', 'chartjs', 'dropzone'],
             ),
 
@@ -185,6 +197,7 @@ class UxPackageRepository
                 new \DateTimeImmutable('2023-05-02'),
                 'I need to translate strings in JavaScript',
                 'translator.svg',
+                groups: [PackageGroup::Navigation],
                 related: ['router', 'notify', 'pagination'],
             ),
 
@@ -198,6 +211,7 @@ class UxPackageRepository
                 new \DateTimeImmutable('2026-10-11'),
                 'I need to generate URLs in JavaScript',
                 'router.svg',
+                groups: [PackageGroup::Navigation],
                 related: ['pagination', 'translator', 'native'],
             ),
 
@@ -211,6 +225,7 @@ class UxPackageRepository
                 new \DateTimeImmutable('2026-09-28'),
                 'I need responsive images',
                 'image.svg',
+                groups: [PackageGroup::Media],
                 related: ['icons', 'cropperjs', 'calendar-link'],
             ),
 
@@ -225,6 +240,7 @@ class UxPackageRepository
                 'I want my styles checked before production',
                 'css.svg',
                 seoTitle: 'UX CSS - Typed Atomic CSS for Twig',
+                groups: [PackageGroup::DesignSystem],
                 related: ['toolkit', 'twig-component', 'icons'],
             ))
                 ->setOfficialDocsUrl('https://github.com/symfony/ux/blob/3.x/src/Css/doc/index.rst'),
@@ -238,6 +254,7 @@ class UxPackageRepository
                 'Easy charts with Chart.js',
                 new \DateTimeImmutable('2020-12-03'),
                 'I need to build a chart',
+                groups: [PackageGroup::Media],
                 related: ['map', 'pagination', 'autocomplete'],
             ))
                 ->setDocsLink('https://www.chartjs.org/', 'Chart.js documentation.'),
@@ -251,6 +268,7 @@ class UxPackageRepository
                 'Quickly render `<React />` components &amp; pass them props.',
                 new \DateTimeImmutable('2022-06-13'),
                 'I need to render React components from Twig',
+                groups: [PackageGroup::Bridges],
                 related: ['vue', 'native', 'twig-component'],
             ))
                 ->setDocsLink('https://reactjs.org/', 'Go deeper with the React docs.'),
@@ -264,6 +282,7 @@ class UxPackageRepository
                 'Quickly render `<Vue />` components &amp; pass them props.',
                 new \DateTimeImmutable('2022-08-22'),
                 null,
+                groups: [PackageGroup::Bridges],
                 related: ['react', 'native', 'twig-component'],
             ))
                 ->setDocsLink('https://vuejs.org/', 'Go deeper with the Vue.js docs.'),
@@ -279,6 +298,7 @@ class UxPackageRepository
                 null,
                 'svelte.svg',
                 isRemoved: true,
+                groups: [PackageGroup::Bridges],
             ))
                 ->setDocsLink('https://svelte.dev/', 'Go deeper with the Svelte docs.'),
 
@@ -291,6 +311,7 @@ class UxPackageRepository
                 'Form Type and tools for cropping images',
                 new \DateTimeImmutable('2020-12-03'),
                 null,
+                groups: [PackageGroup::Forms],
                 related: ['image', 'icons', 'dropzone'],
             ))
                 ->setDocsLink('https://github.com/fengyuanchen/cropperjs', 'Cropper.js documentation.'),
@@ -304,6 +325,7 @@ class UxPackageRepository
                 'Optimize Image Loading with BlurHash',
                 new \DateTimeImmutable('2020-12-03'),
                 isRemoved: true,
+                groups: [PackageGroup::Media],
             ),
 
             new UxPackage(
@@ -315,6 +337,7 @@ class UxPackageRepository
                 'Form type for stylized "drop zone" for file uploads',
                 new \DateTimeImmutable('2020-12-03'),
                 'I need an upload field that looks great',
+                groups: [PackageGroup::Forms],
                 related: ['cropperjs', 'autocomplete', 'image'],
             ),
 
@@ -327,6 +350,7 @@ class UxPackageRepository
                 'Integration with the page transition library Swup',
                 new \DateTimeImmutable('2020-12-03'),
                 isRemoved: true,
+                groups: [PackageGroup::Navigation],
             ))
                 ->setDocsLink('https://swup.js.org/', 'Swup documentation'),
 
@@ -338,6 +362,7 @@ class UxPackageRepository
                 'Native Browser Notifications',
                 'Trigger native browser notifications from inside PHP',
                 new \DateTimeImmutable('2022-06-16'),
+                groups: [PackageGroup::Navigation],
                 related: ['calendar-link', 'map', 'translator'],
             ),
 
@@ -351,6 +376,7 @@ class UxPackageRepository
                 new \DateTimeImmutable('2026-05-22'),
                 'I want users to save my events in one click.',
                 imageFileName: 'calendar-link.svg',
+                groups: [PackageGroup::Navigation],
                 related: ['map', 'notify', 'image'],
             ),
 
@@ -363,6 +389,7 @@ class UxPackageRepository
                 'Switch the visibility of a password field',
                 new \DateTimeImmutable('2023-08-24'),
                 isRemoved: true,
+                groups: [PackageGroup::Forms],
             ),
 
             (new UxPackage(
@@ -373,7 +400,8 @@ class UxPackageRepository
                 'Animated Typing with Typed.js',
                 'Animated typing with Typed.js',
                 new \DateTimeImmutable('2022-06-16'),
-                isRemoved: true
+                isRemoved: true,
+                groups: [PackageGroup::Media],
             ))
                 ->setDocsLink('https://github.com/mattboldt/typed.js/', 'Typed.js documentation'),
         ];
@@ -402,6 +430,14 @@ class UxPackageRepository
         usort($packages, static fn (UxPackage $a, UxPackage $b) => $b->getPublishedAt() <=> $a->getPublishedAt());
 
         return \array_slice($packages, 0, $limit);
+    }
+
+    /**
+     * @return list<UxPackage>
+     */
+    public function findByGroup(PackageGroup $group, ?bool $removed = false): array
+    {
+        return array_values(array_filter($this->findAll(removed: $removed), static fn (UxPackage $package) => \in_array($group, $package->getGroups(), true)));
     }
 
     /**

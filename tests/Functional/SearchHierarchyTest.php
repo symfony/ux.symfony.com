@@ -11,6 +11,7 @@
 
 namespace App\Tests\Functional;
 
+use App\Enum\PackageGroup;
 use App\Service\UxPackageRepository;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -111,6 +112,9 @@ final class SearchHierarchyTest extends KernelTestCase
         yield 'cookbook recipe' => ['/cookbook/component-architecture', ['Resources', 'Cookbook', 'Component Architecture']];
 
         yield 'package list' => ['/packages', []];
+        foreach (PackageGroup::cases() as $group) {
+            yield 'package group '.$group->value => ['/packages/'.$group->value, ['Packages', $group->label()]];
+        }
         yield 'demo list' => ['/demos', []];
         yield 'pagination demo list' => ['/demos/pagination', []];
     }

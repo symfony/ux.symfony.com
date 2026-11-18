@@ -11,6 +11,8 @@
 
 namespace App\Model;
 
+use App\Enum\PackageGroup;
+
 class UxPackage
 {
     private ?string $docsLink = null;
@@ -19,7 +21,8 @@ class UxPackage
     private ?string $screencastLinkText = null;
 
     /**
-     * @param list<string> $related Names of the packages suggested at the end of the package page
+     * @param list<string>       $related Names of the packages suggested at the end of the package page
+     * @param list<PackageGroup> $groups  The groups of the catalogue the package is listed in
      */
     public function __construct(
         private string $name,
@@ -39,7 +42,16 @@ class UxPackage
         private ?string $seoTitle = null,
         private ?string $socialTitle = null,
         private array $related = [],
+        private array $groups = [],
     ) {
+    }
+
+    /**
+     * @return list<PackageGroup>
+     */
+    public function getGroups(): array
+    {
+        return $this->groups;
     }
 
     /**

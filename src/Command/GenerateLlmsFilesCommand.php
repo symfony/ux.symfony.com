@@ -149,10 +149,7 @@ class GenerateLlmsFilesCommand
         $io->section('Generating demos Markdown file');
 
         $md = $this->twig->render('llms/demos.md.twig', [
-            'demos' => array_merge(
-                $this->demoRepository->findByPackage('live-component'),
-                $this->demoRepository->findByPackage('turbo'),
-            ),
+            'demos' => $this->demoRepository->findAll(),
         ]);
         $path = $this->generateMdPath('app_demos');
         $this->fs->dumpFile($this->outputDir.'/'.$path, $md);

@@ -63,6 +63,21 @@ final class DemoRepositoryTest extends TestCase
         new DemoRepository()->find('turbo', 'voting');
     }
 
+    public function testNextIsTheFollowingDemoInTheListAndPreviousTheOneBefore(): void
+    {
+        $repository = new DemoRepository();
+        $first = $repository->find('pagination', 'pagination');
+        $last = $repository->find('pagination', 'pagination-themes');
+
+        self::assertSame('cursor-pagination', $repository->getNext($first)?->getIdentifier());
+        self::assertNull($repository->getPrevious($first));
+        self::assertSame('pagination-themes', $repository->getPrevious($first, loop: true)?->getIdentifier());
+
+        self::assertSame('cursor-pagination', $repository->getPrevious($last)?->getIdentifier());
+        self::assertNull($repository->getNext($last));
+        self::assertSame('pagination', $repository->getNext($last, loop: true)?->getIdentifier());
+    }
+
     public function testPreviousAndNextStayInThePackageOfTheDemo(): void
     {
         $repository = new DemoRepository();

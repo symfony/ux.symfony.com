@@ -305,7 +305,7 @@ class DemoRepository
         $demos = $this->findByPackage($current->getPackage());
         while ($demo = current($demos)) {
             if ($demo->getIdentifier() === $current->getIdentifier()) {
-                return prev($demos) ?: ($loop ? end($demos) : null);
+                return next($demos) ?: ($loop ? reset($demos) : null);
             }
             next($demos);
         }
@@ -321,7 +321,7 @@ class DemoRepository
         $demos = $this->findByPackage($current->getPackage());
         while ($demo = current($demos)) {
             if ($demo->getIdentifier() === $current->getIdentifier()) {
-                return next($demos) ?: ($loop ? reset($demos) : null);
+                return prev($demos) ?: ($loop ? end($demos) : null);
             }
             next($demos);
         }

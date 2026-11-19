@@ -12,6 +12,7 @@
 namespace App\Tests\Functional;
 
 use App\Service\CookbookRepository;
+use App\Service\DemoRepository;
 use App\Service\Toolkit\ToolkitService;
 use App\Service\UxPackageRepository;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -54,6 +55,16 @@ class GenerateLlmsFilesCommandTest extends KernelTestCase
 
         self::assertFileExists($projectDir.'/public/llms.txt');
         self::assertFileExists($projectDir.'/public/llms-full.txt');
+    }
+
+    public function testDemosFileLinksToEveryDemoPage(): void
+    {
+        $demos = file_get_contents(self::getContainer()->getParameter('app.llms_dir').'/demos.md');
+        $router = self::getContainer()->get('router');
+
+        foreach (new DemoRepository()->findAll() as $demo) {
+            self::assertStringContainsString(\sprintf('[View demo](https://ux.symfony.com%s)', $router->generate($demo->getRoute())), $demos);
+        }
     }
 
     public function testCommandGeneratesMarkdownFilesInLlmsDir(): void

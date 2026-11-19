@@ -1,6 +1,11 @@
 @layer components {
     .DemoCardGrid {
         display: grid;
+        gap: 3rem;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
+    }
+
+    .DemoCardGrid--compact {
         gap: 2rem;
         grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
     }

@@ -17,7 +17,7 @@ use App\Entity\TodoList;
 use App\Form\TodoListFormType;
 use App\Repository\FoodRepository;
 use App\Repository\TodoListRepository;
-use App\Service\LiveDemoRepository;
+use App\Service\DemoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,7 +33,7 @@ class LiveDemoController extends AbstractController
     }
 
     #[Route('/form-collection-type/{id}', name: 'app_demo_live_component_form_collection_type', defaults: ['id' => null])]
-    public function demoFormCollectionType(LiveDemoRepository $liveDemoRepository, Request $request, TodoListRepository $todoListRepository, ?TodoList $todoList = null): Response
+    public function demoFormCollectionType(DemoRepository $demoRepository, Request $request, TodoListRepository $todoListRepository, ?TodoList $todoList = null): Response
     {
         if (!$todoList) {
             $todoList = new TodoList();
@@ -54,21 +54,21 @@ class LiveDemoController extends AbstractController
         return $this->render('demos/live_component/form_collection_type.html.twig', [
             'form' => $form,
             'todoList' => $todoList,
-            'demo' => $liveDemoRepository->find('form-collection-type'),
+            'demo' => $demoRepository->find('live-component', 'form-collection-type'),
         ]);
     }
 
     #[Route('/voting', name: 'app_demo_live_component_voting')]
-    public function demoVoting(LiveDemoRepository $liveDemoRepository, FoodRepository $foodRepository): Response
+    public function demoVoting(DemoRepository $demoRepository, FoodRepository $foodRepository): Response
     {
         return $this->render('demos/live_component/voting.html.twig', [
-            'demo' => $liveDemoRepository->find('voting'),
+            'demo' => $demoRepository->find('live-component', 'voting'),
             'foods' => $foodRepository->findAll(),
         ]);
     }
 
     #[Route('/inline-edit', name: 'app_demo_live_component_inline_edit')]
-    public function inlineEdit(LiveDemoRepository $liveDemoRepository, FoodRepository $foodRepository): Response
+    public function inlineEdit(DemoRepository $demoRepository, FoodRepository $foodRepository): Response
     {
         $food = $foodRepository->findOneBy([]);
         if (!$food) {
@@ -76,18 +76,18 @@ class LiveDemoController extends AbstractController
         }
 
         return $this->render('demos/live_component/inline_edit.html.twig', parameters: [
-            'demo' => $liveDemoRepository->find('inline-edit'),
+            'demo' => $demoRepository->find('live-component', 'inline-edit'),
             'food' => $foodRepository->findOneBy([]),
         ]);
     }
 
     #[Route('/invoice/{id}', name: 'app_demo_live_component_invoice', defaults: ['id' => null])]
-    public function invoice(LiveDemoRepository $liveDemoRepository, ?Invoice $invoice = null): Response
+    public function invoice(DemoRepository $demoRepository, ?Invoice $invoice = null): Response
     {
         $invoice ??= new Invoice();
 
         return $this->render('demos/live_component/invoice.html.twig', parameters: [
-            'demo' => $liveDemoRepository->find('invoice'),
+            'demo' => $demoRepository->find('live-component', 'invoice'),
             'invoice' => $invoice,
         ]);
     }
@@ -103,10 +103,10 @@ class LiveDemoController extends AbstractController
     #[Route('/product-form', name: 'app_demo_live_component_product_form')]
     #[Route('/upload', name: 'app_demo_live_component_upload')]
     public function demo(
-        LiveDemoRepository $liveDemoRepository,
+        DemoRepository $demoRepository,
         string $demo,
     ): Response {
-        $demo = $liveDemoRepository->find($demo);
+        $demo = $demoRepository->find('live-component', $demo);
 
         return $this->render($demo->getTemplate(), ['demo' => $demo]);
     }

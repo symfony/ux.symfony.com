@@ -1,0 +1,8 @@
+{#- A compact grid fits a section of a package page: smaller cards, no tags -#}
+{% props demos, compact = false %}
+
+<div {{ attributes.defaults({class: 'DemoCardGrid' ~ (compact ? ' DemoCardGrid--compact')}) }}>
+    {% for demo in demos %}
+        <twig:Demo:DemoCard :demo="demo" :showTags="not compact" />
+    {% endfor %}
+</div>

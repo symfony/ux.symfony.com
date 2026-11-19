@@ -128,6 +128,7 @@ final class SearchHierarchyTest extends KernelTestCase
         yield 'turbo infinite scroll 2/2' => ['/demos/turbo/infinite-scroll-2', ['Demos', 'Turbo', 'Turbo Infinite Scroll - 2/2']];
         yield 'pagination demo' => ['/demos/pagination/themes', ['Demos', 'Pagination', 'Pagination Themes']];
 
+        yield 'kit list' => ['/kits', ['Kits', 'UI Kits']];
         yield 'kit' => ['/toolkit/kits/shadcn', ['Kits', 'Shadcn UI']];
         yield 'kit component list' => ['/toolkit/kits/shadcn/components', ['Kits', 'Shadcn UI', 'Components']];
         yield 'kit component' => ['/toolkit/kits/shadcn/components/button', ['Kits', 'Shadcn UI', 'Components', 'Button']];

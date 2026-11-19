@@ -43,7 +43,7 @@
                 {% for package in ux_latest_new_packages(3) %}
                     <twig:AppNav:Item href="{{ path(package.route) }}" badge="New" hideOnCramped>{{ package.humanName }}</twig:AppNav:Item>
                 {% endfor %}
-                <twig:AppNav:Item href="{{ path('app_toolkit') }}" hideOnCramped>Toolkit</twig:AppNav:Item>
+                <twig:AppNav:Item href="{{ path('app_kits') }}" hideOnCramped>UI kits</twig:AppNav:Item>
                 <twig:AppNav:Item href="{{ path('app_turbo') }}">Turbo</twig:AppNav:Item>
                 <twig:AppNav:Item href="{{ path('app_live_component') }}">Live <span>Components</span></twig:AppNav:Item>
                 <twig:AppNav:Item href="{{ path('app_icons') }}">Icons</twig:AppNav:Item>

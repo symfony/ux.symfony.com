@@ -1,0 +1,126 @@
+{% extends 'base.html.twig' %}
+
+{% set title = 'UI Kits' %}
+{% set description = 'UI kits for Symfony: Twig components for Shadcn UI, Bootstrap and Flowbite, installed one by one with UX Toolkit.' %}
+{% set meta = {
+    title: title,
+    description: description,
+    canonical: url('app_kits'),
+    hierarchy: ['Kits', title],
+    social: {
+        title: 'UI Kits: Shadcn UI, Bootstrap, Flowbite - Symfony UX',
+        description: description,
+        image: {
+            url: absolute_url(asset(package.getSocialImage('1200x675'))),
+            type: 'image/png',
+            width: 1200,
+            height: 675,
+            alt: package.humanName ~ ' - UI Kits',
+        },
+    },
+} %}
+
+{% block body_attributes %} style="{{ include('ux_packages/_package_tokens.html.twig')|trim }}"{% endblock %}
+
+{% block content %}
+<article class="dark:[--package-primary-text:var(--package-accent)]">
+    <div class="pt-20">
+        <div class="max-w-[1400px] mx-auto px-6 pt-6 md:px-12">
+            <h1 class="text-center mt-12">UI Kits</h1>
+            <p class="text-center mt-2 mb-12">
+                Each kit is a set of reusable Twig components you install one by one with
+                <a href="{{ path('app_toolkit') }}" class="underline decoration-current/35 underline-offset-[.2em] hover:decoration-current">UX Toolkit</a>.
+            </p>
+        </div>
+    </div>
+
+    <div class="max-w-[1400px] mx-auto px-6 pt-6 pb-20 md:px-12 lg:pb-32">
+        <div class="grid gap-8 md:grid-cols-2">
+            {% for kit_id, kit in kits %}
+                <twig:Box color="{{ toolkit_color(kit_id) }}" radius="xl" titleTag="h2" :alignContentTop="true">
+                    <twig:block name="logo">
+                        <twig:ux:icon name="toolkit:{{ kit_id }}" alt="{{ kit.manifest.name }}" style="color: #fff; width: 50%; height: 50%;" />
+                    </twig:block>
+                    <twig:block name="title">
+                        <a href="{{ path('app_toolkit_kit', {kitId: kit_id}) }}" class="stretched-link text-body-text no-underline">{{ kit.manifest.name }}</a>
+                    </twig:block>
+                    <twig:block name="description">
+                        <p>{{ kit.manifest.description }}</p>
+                    </twig:block>
+                </twig:Box>
+            {% endfor %}
+        </div>
+    </div>
+
+    <twig:Package:Section tone="subtle" aria-labelledby="kits-toolkit-title">
+        <div class="grid items-center gap-12 xl:grid-cols-2 xl:gap-16">
+            <div>
+                <twig:Package:SectionTitle id="kits-toolkit-title" title="Installed with <strong>UX Toolkit</strong>." />
+                <div class="mt-6 max-w-2xl text-base leading-[1.7] text-body-text/80 md:text-lg [&>p]:m-0 [&>p+p]:mt-4">
+                    <p>UX Toolkit adds one command to your application. <code>ux:install</code> copies a component of a kit into your project, with its Twig templates and its Stimulus controllers, and lists the packages it needs.</p>
+                    <p>Nothing stays in <code>vendor/</code>. The files are yours to read, edit and commit.</p>
+                </div>
+                <twig:LinkButton outline arrow label="Discover UX Toolkit" url="{{ path('app_toolkit') }}" class="mt-8" />
+            </div>
+            <twig:Terminal bottomPadding="20">
+# Add UX Toolkit to your project
+composer require --dev symfony/ux-toolkit
+
+# Install a component from a kit
+php bin/console ux:install button --kit=shadcn
+
+# Or let the command ask for the kit and the component
+php bin/console ux:install
+            </twig:Terminal>
+        </div>
+    </twig:Package:Section>
+
+    <twig:Package:Section aria-labelledby="kits-community-title">
+        <div class="grid items-center gap-12 xl:grid-cols-2 xl:gap-16">
+            <div>
+                <twig:Package:SectionTitle id="kits-community-title" title="Kits from the <strong>community</strong>." />
+                <div class="mt-6 max-w-2xl text-base leading-[1.7] text-body-text/80 md:text-lg [&>p]:m-0 [&>p+p]:mt-4">
+                    <p>A kit can live in any GitHub repository. Pass its address to <code>--kit</code> and <code>ux:install</code> takes the component from there.</p>
+                    <p>Community kits carry the <code>symfony-ux-toolkit</code> topic on GitHub.</p>
+                </div>
+                <twig:LinkButton outline arrow label="Browse community kits" url="https://github.com/topics/symfony-ux-toolkit" rel="external" class="mt-8" />
+            </div>
+            <twig:Terminal bottomPadding="20">
+# Install a component from a kit hosted on GitHub
+php bin/console ux:install button --kit=github.com/user/kit
+
+# Start your own kit
+php bin/console ux:toolkit:create-kit
+            </twig:Terminal>
+        </div>
+    </twig:Package:Section>
+</article>
+{% endblock %}
+
+{% block aside %}
+    <aside class="border-t border-body-text/10 bg-subtle py-12" aria-labelledby="toolkit-resources">
+        <div class="mx-auto max-w-[1400px] px-6 md:px-12">
+            <twig:Package:SectionTitle id="toolkit-resources" title="Symfony UX Toolkit" size="md" />
+            <div class="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                <twig:DocsLink
+                    title="Documentation"
+                    text="Install Toolkit, choose a kit, and configure where recipes are copied."
+                    :url="package.officialDocsUrl"
+                    icon="mdi:book-open-variant-outline"
+                />
+                <twig:DocsLink
+                    title="Toolkit overview"
+                    text="See how Toolkit installs recipes and how to customize them in your project."
+                    url="{{ path('app_toolkit') }}"
+                    icon="symfony"
+                />
+                <twig:DocsLink
+                    title="GitHub"
+                    text="Browse the Toolkit source and the kits it ships."
+                    :url="package.githubRepositoryUrl"
+                    icon="github"
+                />
+            </div>
+        </div>
+    </aside>
+{% endblock %}

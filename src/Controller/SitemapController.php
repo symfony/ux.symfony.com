@@ -84,6 +84,7 @@ final class SitemapController extends AbstractController
         }
 
         // Toolkit kits
+        yield $this->generateAbsoluteUrl('app_kits');
         foreach ($this->toolkitService->getKits() as $kitId => $kit) {
             yield $this->generateAbsoluteUrl('app_toolkit_kit', ['kitId' => $kitId]);
             yield $this->generateAbsoluteUrl('app_toolkit_kit_components', ['kitId' => $kitId]);

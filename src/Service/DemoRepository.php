@@ -25,6 +25,17 @@ class DemoRepository
     {
         return [
             new Demo(
+                'inspector',
+                'inspector',
+                name: 'UX Inspector',
+                description: 'Inspect live components, follow their relationships and trace events directly in the browser.',
+                author: 'smnandre',
+                publishedAt: '2026-09-27',
+                tags: ['Stimulus', 'LiveComponent', 'Turbo'],
+                longDescription: 'Find a component on the page, inspect its props, follow its relationships and trace its events.',
+                route: 'app_inspector',
+            ),
+            new Demo(
                 'pagination',
                 'pagination',
                 name: 'Live Pagination',

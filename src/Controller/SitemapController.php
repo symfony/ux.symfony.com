@@ -37,7 +37,7 @@ final class SitemapController extends AbstractController
     public function __invoke(Request $request): Response
     {
         $response = $this->render('sitemap.xml.twig', [
-            'urls' => $this->getSitemapUrls(),
+            'urls' => array_unique(iterator_to_array($this->getSitemapUrls(), false)),
         ]);
         $response->headers->set('Content-Type', 'application/xml');
 

@@ -21,7 +21,7 @@ class DemosController extends AbstractController
     #[Route('/demos', name: 'app_demos')]
     public function __invoke(DemoRepository $demoRepository): Response
     {
-        return $this->render('main/demos.html.twig', [
+        return $this->render('demos/index.html.twig', [
             'demos' => $demoRepository->findAll(),
         ]);
     }

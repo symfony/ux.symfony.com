@@ -7,11 +7,3 @@
 {% block demo_breadcrumb %}
     <a href="{{ url('app_demo_upload') }}">Upload</a>
 {% endblock %}
-
-{% block aside %}
-    <aside class="bg-subtle mt-12">
-        <nav class="mx-auto flex max-w-[1400px] flex-wrap justify-center gap-12 p-6 md:p-12 lg:justify-between" aria-label="More Upload demos">
-            {{ include('demos/upload/_cards.html.twig', {around: demo.route, grid: false, show_tags: false}) }}
-        </nav>
-    </aside>
-{% endblock %}

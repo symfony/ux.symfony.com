@@ -131,11 +131,7 @@ public function onProductCreated(): void
             />
         </div>
 
-        <div class="DemoCardGrid mt-12">
-            {% for demo in demos %}
-                <twig:Demo:DemoCard demo="{{ demo }}" />
-            {% endfor %}
-        </div>
+        <twig:Demo:DemoGrid :demos="demos" compact class="mt-12" />
     </twig:Package:Section>
 
     {{ parent() }}

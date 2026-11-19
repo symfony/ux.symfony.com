@@ -11,6 +11,7 @@
 
 namespace App\Controller\Demo\Upload;
 
+use App\Service\DemoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -18,8 +19,10 @@ use Symfony\Component\Routing\Attribute\Route;
 final class UploadDemosController extends AbstractController
 {
     #[Route('/demos/upload', name: 'app_demo_upload')]
-    public function __invoke(): Response
+    public function __invoke(DemoRepository $demoRepository): Response
     {
-        return $this->render('demos/upload/index.html.twig');
+        return $this->render('demos/upload/index.html.twig', [
+            'demos' => $demoRepository->findByPackage('upload'),
+        ]);
     }
 }

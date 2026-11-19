@@ -11,8 +11,8 @@
 
 namespace App\Controller\Demo;
 
-use App\Model\LiveDemo;
 use App\Service\CursorPayloadPreview;
+use App\Service\DemoRepository;
 use App\Service\UxReleaseFeed;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,6 +28,7 @@ final class CursorPaginationDemoController extends AbstractController
         CursorPayloadPreview $cursorPayloadPreview,
         PaginatorInterface $paginator,
         UxReleaseFeed $releases,
+        DemoRepository $demoRepository,
     ): Response {
         $withDeletedItem = $request->query->getBoolean('deleted');
         $pagination = $paginator
@@ -38,18 +39,7 @@ final class CursorPaginationDemoController extends AbstractController
             ->queryParameters(array_filter(['deleted' => $withDeletedItem ? 1 : null]))
             ->paginate();
 
-        $demo = new LiveDemo(
-            'cursor-pagination',
-            name: 'Cursor Pagination',
-            description: 'Move through ordered values without letting earlier changes shift the current slice.',
-            author: 'smnandre',
-            publishedAt: '2026-09-21',
-            tags: ['pagination', 'cursor', 'no-js'],
-            longDescription: 'Move through an ordered feed without a count query. The signed cursor records
-                a stable boundary, so an earlier deletion does not shift the current slice.',
-            route: 'app_demo_pagination_cursor',
-            template: 'demos/pagination/cursor.html.twig',
-        );
+        $demo = $demoRepository->find('pagination', 'cursor-pagination');
 
         return $this->render($demo->getTemplate(), [
             'demo' => $demo,

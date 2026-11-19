@@ -12,11 +12,9 @@
 namespace App\Tests\Functional;
 
 use App\Entity\Food;
-use App\Model\LiveDemo;
-use App\Model\TurboDemo;
+use App\Model\Demo;
 use App\Model\UxPackage;
-use App\Service\LiveDemoRepository;
-use App\Service\TurboDemoRepository;
+use App\Service\DemoRepository;
 use App\Service\UxPackageRepository;
 use PHPUnit\Framework\Attributes\Before;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -105,7 +103,7 @@ class SmokeTest extends KernelTestCase
     }
 
     #[DataProvider('provideDemoUrls')]
-    public function testDemoPages(LiveDemo|TurboDemo $demo): void
+    public function testDemoPages(Demo $demo): void
     {
         $router = self::bootKernel()->getContainer()->get('router');
         $url = $router->generate($demo->getRoute());
@@ -118,14 +116,9 @@ class SmokeTest extends KernelTestCase
 
     public static function provideDemoUrls(): \Generator
     {
-        $repository = new LiveDemoRepository();
+        $repository = new DemoRepository();
         foreach ($repository->findAll() as $demo) {
-            yield 'live-'.$demo->getIdentifier() => [$demo];
-        }
-
-        $repository = new TurboDemoRepository();
-        foreach ($repository->findAll() as $demo) {
-            yield 'turbo-'.$demo->getIdentifier() => [$demo];
+            yield $demo->getPackage().'-'.$demo->getIdentifier() => [$demo];
         }
     }
 

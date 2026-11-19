@@ -13,7 +13,7 @@ namespace App\Controller\Demo\Upload;
 
 use App\EventListener\SlowDemoUploadListener;
 use App\Form\UploadLargeFileForm;
-use App\Model\LiveDemo;
+use App\Service\DemoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +22,7 @@ use Symfony\Component\Routing\Attribute\Route;
 final class ResumableUploadDemoController extends AbstractController
 {
     #[Route('/demos/upload/resumable', name: 'app_demo_upload_resumable')]
-    public function __invoke(Request $request): Response
+    public function __invoke(Request $request, DemoRepository $demoRepository): Response
     {
         $form = $this->createForm(UploadLargeFileForm::class);
         $form->handleRequest($request);
@@ -37,18 +37,7 @@ final class ResumableUploadDemoController extends AbstractController
             return $this->redirectToRoute('app_demo_upload_resumable');
         }
 
-        $demo = new LiveDemo(
-            'upload-resumable',
-            name: 'Resumable Large Files',
-            description: 'Pause a transfer, reload the page, and pick up where it stopped.',
-            author: 'smnandre',
-            publishedAt: '2026-11-15',
-            tags: ['upload', 'chunks', 'resume'],
-            longDescription: 'With [`UploadType`](/upload), large files travel in chunks, two at a time. Pause the transfer, or reload the
-                page halfway: selecting the same file again sends only the missing chunks.',
-            route: 'app_demo_upload_resumable',
-            template: 'demos/upload/resumable.html.twig',
-        );
+        $demo = $demoRepository->find('upload', 'resumable');
 
         return $this->render($demo->getTemplate(), [
             'demo' => $demo,

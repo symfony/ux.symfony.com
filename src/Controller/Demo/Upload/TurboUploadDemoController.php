@@ -12,7 +12,7 @@
 namespace App\Controller\Demo\Upload;
 
 use App\Form\UploadGalleryForm;
-use App\Model\LiveDemo;
+use App\Service\DemoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,7 +23,7 @@ use Symfony\UX\Upload\Upload\UploadedFile;
 final class TurboUploadDemoController extends AbstractController
 {
     #[Route('/demos/upload/turbo', name: 'app_demo_upload_turbo')]
-    public function __invoke(Request $request): Response
+    public function __invoke(Request $request, DemoRepository $demoRepository): Response
     {
         $form = $this->createForm(UploadGalleryForm::class);
         $form->handleRequest($request);
@@ -51,19 +51,7 @@ final class TurboUploadDemoController extends AbstractController
             ]);
         }
 
-        $demo = new LiveDemo(
-            'upload-turbo',
-            name: 'Upload with Turbo',
-            description: 'Save an album from a Turbo Frame. A Turbo Stream adds it to the page.',
-            author: 'smnandre',
-            publishedAt: '2026-11-15',
-            tags: ['upload', 'Turbo', 'gallery'],
-            longDescription: 'An [`UploadType`](/upload) form lives in a Turbo Frame. A validation error swaps only the frame, and the
-                photos stay. A valid album comes back as a Turbo Stream: added to the list, form reset,
-                no page reload.',
-            route: 'app_demo_upload_turbo',
-            template: 'demos/upload/turbo.html.twig',
-        );
+        $demo = $demoRepository->find('upload', 'turbo');
 
         return $this->render($demo->getTemplate(), [
             'demo' => $demo,

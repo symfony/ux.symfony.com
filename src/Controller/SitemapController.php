@@ -12,10 +12,9 @@
 namespace App\Controller;
 
 use App\Enum\PackageGroup;
-use App\Service\LiveDemoRepository;
+use App\Service\DemoRepository;
 use App\Service\Toolkit\BlockSectionResolver;
 use App\Service\Toolkit\ToolkitService;
-use App\Service\TurboDemoRepository;
 use App\Service\UxPackageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,8 +27,7 @@ final class SitemapController extends AbstractController
 {
     public function __construct(
         private readonly UxPackageRepository $uxPackageRepository,
-        private readonly LiveDemoRepository $liveDemoRepository,
-        private readonly TurboDemoRepository $turboDemoRepository,
+        private readonly DemoRepository $demoRepository,
         private readonly ToolkitService $toolkitService,
         private readonly BlockSectionResolver $blockSectionResolver,
     ) {
@@ -39,7 +37,7 @@ final class SitemapController extends AbstractController
     public function __invoke(Request $request): Response
     {
         $response = $this->render('sitemap.xml.twig', [
-            'urls' => $this->getSitemapUrls(),
+            'urls' => array_unique(iterator_to_array($this->getSitemapUrls(), false)),
         ]);
         $response->headers->set('Content-Type', 'application/xml');
 
@@ -59,17 +57,9 @@ final class SitemapController extends AbstractController
         }
         yield $this->generateAbsoluteUrl('app_icons');
         yield $this->generateAbsoluteUrl('app_demos');
+        yield $this->generateAbsoluteUrl('app_demo_live_component');
         yield $this->generateAbsoluteUrl('app_demo_pagination');
-        yield $this->generateAbsoluteUrl('app_demo_pagination_live');
-        yield $this->generateAbsoluteUrl('app_demo_pagination_cursor');
-        yield $this->generateAbsoluteUrl('app_demo_pagination_themes');
         yield $this->generateAbsoluteUrl('app_demo_upload');
-        yield $this->generateAbsoluteUrl('app_demo_upload_keep_files');
-        yield $this->generateAbsoluteUrl('app_demo_upload_turbo');
-        yield $this->generateAbsoluteUrl('app_demo_upload_live_avatar');
-        yield $this->generateAbsoluteUrl('app_demo_upload_input');
-        yield $this->generateAbsoluteUrl('app_demo_upload_dropzone');
-        yield $this->generateAbsoluteUrl('app_demo_upload_resumable');
         yield $this->generateAbsoluteUrl('app_cookbook');
         yield $this->generateAbsoluteUrl('app_documentation');
         yield $this->generateAbsoluteUrl('app_changelog');
@@ -80,13 +70,8 @@ final class SitemapController extends AbstractController
             yield $this->generateAbsoluteUrl($package->getRoute());
         }
 
-        // Live Demos
-        foreach ($this->liveDemoRepository->findAll() as $demo) {
-            yield $this->generateAbsoluteUrl($demo->getRoute());
-        }
-
-        // Turbo Demos
-        foreach ($this->turboDemoRepository->findAll() as $demo) {
+        // Demos
+        foreach ($this->demoRepository->findAll() as $demo) {
             yield $this->generateAbsoluteUrl($demo->getRoute());
         }
 

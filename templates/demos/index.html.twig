@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{#- A page that lists demos extends this template and sets these values: the hero and the grid stay the same everywhere -#}
+{% set demos_heading = demos_heading|default('All Demos') %}
+{% set demos_breadcrumb = demos_breadcrumb|default(null) %}
+{% set meta = {
+    title: demos_title|default('Interactive Demos'),
+    description: demos_description|default('Discover all that Symfony UX offers through our collection of demos, each provided with commented source code (PHP & JS)'),
+    canonical: demos_canonical|default(url('app_demos')),
+} %}
+
+{% block content %}
+
+    <div class="pt-20">
+        <div class="max-w-[1400px] mx-auto px-6 pt-6 md:px-12">
+            {% if demos_breadcrumb %}
+                <p class="eyebrows mt-12 mb-4 text-center"><a href="{{ path('app_demos') }}">Demos</a> / {{ demos_breadcrumb }}</p>
+            {% endif %}
+            <h1 class="text-center {{ demos_breadcrumb ? '' : 'mt-12' }}">{{ demos_heading }}</h1>
+            <div style="font-size: 1rem; line-height: 1.75rem;" class="mt-6 mb-12 text-center demo-introduction">
+                <p>
+                    {% block demos_intro %}
+                        Discover all that <code>Symfony UX</code> offers through our collection of demos!<br/>
+                        Source code is provided for each demo: PHP, Twig, JS, and CSS.
+                    {% endblock %}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-[1400px] mx-auto px-6 pt-6 md:px-12">
+        <twig:Demo:DemoGrid :demos="demos" />
+    </div>
+
+{% endblock %}
+
+{% block aside %}
+    {{ include('_aside.html.twig') }}
+{% endblock %}

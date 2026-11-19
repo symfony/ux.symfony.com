@@ -11,7 +11,7 @@
 
 namespace App\Model;
 
-class Demo
+abstract class Demo
 {
     /**
      * @param list<string> $tags
@@ -58,4 +58,17 @@ class Demo
     {
         return $this->publishedAt;
     }
+
+    /**
+     * The UX package the demo showcases, as named in UxPackageRepository.
+     */
+    abstract public function getPackage(): string;
+
+    abstract public function getRoute(): string;
+
+    abstract public function getScreenshotFilename(?string $format = null): string;
+
+    abstract public function getTemplate(): string;
+
+    abstract public function getLongDescription(): string;
 }

@@ -31,12 +31,8 @@
                 url="{{ path('app_inspector') }}#demo"
                 :tags="['Stimulus', 'LiveComponent', 'Turbo']"
             />
-            {{ include('demos/pagination/_cards.html.twig', {grid: false}) }}
-            {% for demo in turboDemos|reverse %}
+            {% for demo in demos %}
                 <twig:Demo:DemoCard :demo="demo" :showTags="true" />
-            {% endfor %}
-            {% for demo in liveComponentDemos %}
-                <twig:Demo:DemoCard demo="{{ demo }}" :showTags="true" />
             {% endfor %}
         </div>
     </div>

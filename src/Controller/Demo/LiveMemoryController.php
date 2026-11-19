@@ -12,7 +12,7 @@
 namespace App\Controller\Demo;
 
 use App\LiveMemory\GameStorageInterface;
-use App\Service\LiveDemoRepository;
+use App\Service\DemoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -22,10 +22,10 @@ class LiveMemoryController extends AbstractController
 {
     #[Route('/', name: 'app_demo_live_memory')]
     #[Route('/', name: 'app_demo_live_component_live_memory')]
-    public function __invoke(LiveDemoRepository $liveDemoRepository): Response
+    public function __invoke(DemoRepository $demoRepository): Response
     {
         return $this->render('demos/live_memory/index.html.twig', [
-            'demo' => $liveDemoRepository->find('live-memory'),
+            'demo' => $demoRepository->find('live-component', 'live-memory'),
         ]);
     }
 

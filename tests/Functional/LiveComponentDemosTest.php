@@ -12,8 +12,8 @@
 namespace App\Tests\Functional;
 
 use App\Entity\Food;
-use App\Model\LiveDemo;
-use App\Service\LiveDemoRepository;
+use App\Model\Demo;
+use App\Service\DemoRepository;
 use PHPUnit\Framework\Attributes\Before;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -36,7 +36,7 @@ class LiveComponentDemosTest extends KernelTestCase
     }
 
     #[DataProvider('getSmokeTests')]
-    public function testDemoPagesAllLoad(LiveDemo $liveDemo): void
+    public function testDemoPagesAllLoad(Demo $liveDemo): void
     {
         $router = self::bootKernel()->getContainer()->get('router');
         $url = $router->generate($liveDemo->getRoute());
@@ -50,8 +50,8 @@ class LiveComponentDemosTest extends KernelTestCase
 
     public static function getSmokeTests(): \Generator
     {
-        $demoRepository = new LiveDemoRepository();
-        foreach ($demoRepository->findAll() as $demo) {
+        $demoRepository = new DemoRepository();
+        foreach ($demoRepository->findByPackage('live-component') as $demo) {
             yield $demo->getIdentifier() => [$demo];
         }
     }

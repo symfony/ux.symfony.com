@@ -11,8 +11,7 @@
 
 namespace App\Controller;
 
-use App\Service\LiveDemoRepository;
-use App\Service\TurboDemoRepository;
+use App\Service\DemoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -20,11 +19,10 @@ use Symfony\Component\Routing\Attribute\Route;
 class DemosController extends AbstractController
 {
     #[Route('/demos', name: 'app_demos')]
-    public function __invoke(LiveDemoRepository $liveDemoRepository, TurboDemoRepository $turboDemoRepository): Response
+    public function __invoke(DemoRepository $demoRepository): Response
     {
         return $this->render('main/demos.html.twig', [
-            'liveComponentDemos' => $liveDemoRepository->findAll(),
-            'turboDemos' => $turboDemoRepository->findAll(),
+            'demos' => $demoRepository->findAll(),
         ]);
     }
 }

@@ -26,8 +26,14 @@ final class LiveDemo extends Demo
         private string $longDescription,
         private ?string $route = null,
         private ?string $template = null,
+        private string $package = 'live-component',
     ) {
         parent::__construct($identifier, $name, $description, $author, $publishedAt, $tags);
+    }
+
+    public function getPackage(): string
+    {
+        return $this->package;
     }
 
     public function getRoute(): string

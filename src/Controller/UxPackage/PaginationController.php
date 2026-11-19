@@ -11,6 +11,7 @@
 
 namespace App\Controller\UxPackage;
 
+use App\Service\DemoRepository;
 use App\Service\UxPackageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,10 +20,11 @@ use Symfony\Component\Routing\Attribute\Route;
 class PaginationController extends AbstractController
 {
     #[Route('/pagination', name: 'app_pagination')]
-    public function __invoke(UxPackageRepository $packageRepository): Response
+    public function __invoke(UxPackageRepository $packageRepository, DemoRepository $demoRepository): Response
     {
         return $this->render('ux_packages/pagination.html.twig', [
             'package' => $packageRepository->find('pagination'),
+            'demos' => $demoRepository->findByPackage('pagination'),
         ]);
     }
 }

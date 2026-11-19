@@ -28,6 +28,11 @@ final class TurboDemo extends Demo
         parent::__construct($identifier, $name, $description, $author, $publishedAt, $tags);
     }
 
+    public function getPackage(): string
+    {
+        return 'turbo';
+    }
+
     public function getRoute(): string
     {
         return 'app_demo_turbo_'.str_replace('-', '_', parent::getIdentifier());

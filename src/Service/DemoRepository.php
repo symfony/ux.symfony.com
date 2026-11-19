@@ -11,16 +11,83 @@
 
 namespace App\Service;
 
+use App\Model\Demo;
 use App\Model\LiveDemo;
+use App\Model\TurboDemo;
 
-class LiveDemoRepository
+/**
+ * The demos of the website, in the order of the demos page.
+ */
+class DemoRepository
 {
     /**
-     * @return array<LiveDemo>
+     * @return list<Demo>
      */
     public function findAll(): array
     {
         return [
+            new LiveDemo(
+                'pagination',
+                name: 'Live Pagination',
+                description: 'Add reactive filters and page changes to ordinary pagination links.',
+                author: 'smnandre',
+                publishedAt: '2026-08-04',
+                tags: ['pagination', 'LiveComponent', 'filters', 'trait'],
+                longDescription: 'Combine [`Pagination`](/pagination) with [`LiveComponent`](/live-component)
+                    for reactive filters and page changes. Each control remains an ordinary link,
+                    and changing a filter returns you to the first page.',
+                route: 'app_demo_pagination_live',
+                template: 'demos/pagination/live.html.twig',
+                package: 'pagination',
+            ),
+            new LiveDemo(
+                'cursor-pagination',
+                name: 'Cursor Pagination',
+                description: 'Move through ordered values without letting earlier changes shift the current slice.',
+                author: 'smnandre',
+                publishedAt: '2026-09-21',
+                tags: ['pagination', 'cursor', 'no-js'],
+                longDescription: 'Move through an ordered feed without a count query. The signed cursor records
+                    a stable boundary, so an earlier deletion does not shift the current slice.',
+                route: 'app_demo_pagination_cursor',
+                template: 'demos/pagination/cursor.html.twig',
+                package: 'pagination',
+            ),
+            new LiveDemo(
+                'pagination-themes',
+                name: 'Pagination Themes',
+                description: 'Render the same pages with a built-in theme or a focused Twig block override.',
+                author: 'smnandre',
+                publishedAt: '2026-09-21',
+                tags: ['pagination', 'Twig', 'themes', 'blocks'],
+                longDescription: 'Render the same pagination result with the default bundle CSS,
+                    Tailwind utility classes, or a focused application theme override.',
+                route: 'app_demo_pagination_themes',
+                template: 'demos/pagination/themes.html.twig',
+                package: 'pagination',
+            ),
+            new TurboDemo(
+                'infinite-scroll-2',
+                name: 'Turbo Infinite Scroll - 2/2',
+                description: 'Load the next batch automatically with a lazy Turbo Frame.',
+                author: 'ker0x',
+                publishedAt: '2026-04-20',
+                tags: ['grid', 'pagination', 'loading', 'scroll'],
+                longDescription: <<<EOF
+                    Building on [Part One](/demos/turbo/infinite-scroll), this version loads the next batch when a `lazy Turbo Frame` enters the scrollable catalog; compare it with the [Live Component version](/demos/live-component/infinite-scroll-2), which uses a Live Component to load on scroll.
+                    EOF,
+            ),
+            new TurboDemo(
+                'infinite-scroll',
+                name: 'Turbo Infinite Scroll - 1/2',
+                description: 'Append a batch of cards with a link and two Turbo Streams.',
+                author: 'ker0x',
+                publishedAt: '2026-04-20',
+                tags: ['grid', 'pagination', 'navigation'],
+                longDescription: <<<EOF
+                    This demo explores the same product grid as the [Live Component version](/demos/live-component/infinite-scroll), using `Turbo Streams`: click `Load More` to append a batch of cards and replace the link with the next page.
+                    EOF,
+            ),
             new LiveDemo(
                 'live-remove',
                 name: 'Removing a Component',
@@ -191,11 +258,39 @@ class LiveDemoRepository
         ];
     }
 
-    public function getNext(string $identifier, bool $loop = false): ?LiveDemo
+    /**
+     * @return list<Demo>
+     */
+    public function findByPackage(string $package): array
     {
-        $demos = $this->findAll();
-        while ($demo = current($demos)) {
+        return array_values(array_filter(
+            $this->findAll(),
+            static fn (Demo $demo): bool => $demo->getPackage() === $package,
+        ));
+    }
+
+    /**
+     * @throws \InvalidArgumentException if the demo is not found
+     */
+    public function find(string $package, string $identifier): Demo
+    {
+        foreach ($this->findByPackage($package) as $demo) {
             if ($demo->getIdentifier() === $identifier) {
+                return $demo;
+            }
+        }
+
+        throw new \InvalidArgumentException(\sprintf('Unknown %s demo "%s".', $package, $identifier));
+    }
+
+    /**
+     * The demo after the given one, among the demos of the same package.
+     */
+    public function getNext(Demo $current, bool $loop = false): ?Demo
+    {
+        $demos = $this->findByPackage($current->getPackage());
+        while ($demo = current($demos)) {
+            if ($demo->getIdentifier() === $current->getIdentifier()) {
                 return prev($demos) ?: ($loop ? end($demos) : null);
             }
             next($demos);
@@ -204,38 +299,19 @@ class LiveDemoRepository
         return null;
     }
 
-    public function getPrevious(string $identifier, bool $loop = false): ?LiveDemo
+    /**
+     * The demo before the given one, among the demos of the same package.
+     */
+    public function getPrevious(Demo $current, bool $loop = false): ?Demo
     {
-        $demos = $this->findAll();
+        $demos = $this->findByPackage($current->getPackage());
         while ($demo = current($demos)) {
-            if ($demo->getIdentifier() === $identifier) {
+            if ($demo->getIdentifier() === $current->getIdentifier()) {
                 return next($demos) ?: ($loop ? reset($demos) : null);
             }
             next($demos);
         }
 
         return null;
-    }
-
-    public function getMostRecent(): LiveDemo
-    {
-        $demos = $this->findAll();
-
-        return current($demos);
-    }
-
-    /**
-     * @throws \InvalidArgumentException if the demo is not found
-     */
-    public function find(string $identifier): LiveDemo
-    {
-        $demos = $this->findAll();
-        foreach ($demos as $demo) {
-            if ($demo->getIdentifier() === $identifier) {
-                return $demo;
-            }
-        }
-
-        throw new \InvalidArgumentException(\sprintf('Unknown demo "%s"', $identifier));
     }
 }

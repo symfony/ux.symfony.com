@@ -13,10 +13,9 @@ namespace App\Command;
 
 use App\Service\Changelog\ChangelogProvider;
 use App\Service\CookbookRepository;
-use App\Service\LiveDemoRepository;
+use App\Service\DemoRepository;
 use App\Service\Toolkit\BlockSectionResolver;
 use App\Service\Toolkit\ToolkitService;
-use App\Service\TurboDemoRepository;
 use App\Service\UxPackageRepository;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -38,8 +37,7 @@ class GenerateLlmsFilesCommand
     public function __construct(
         private readonly Environment $twig,
         private readonly UxPackageRepository $packageRepository,
-        private readonly LiveDemoRepository $liveDemoRepository,
-        private readonly TurboDemoRepository $turboDemoRepository,
+        private readonly DemoRepository $demoRepository,
         private readonly CookbookRepository $cookbookRepository,
         private readonly ChangelogProvider $changelogProvider,
         private readonly ToolkitService $toolkitService,
@@ -152,8 +150,8 @@ class GenerateLlmsFilesCommand
 
         $md = $this->twig->render('llms/demos.md.twig', [
             'demos' => array_merge(
-                $this->liveDemoRepository->findAll(),
-                $this->turboDemoRepository->findAll(),
+                $this->demoRepository->findByPackage('live-component'),
+                $this->demoRepository->findByPackage('turbo'),
             ),
         ]);
         $path = $this->generateMdPath('app_demos');

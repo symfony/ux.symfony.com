@@ -11,7 +11,7 @@
 
 namespace App\Controller\Demo;
 
-use App\Model\LiveDemo;
+use App\Service\DemoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -19,21 +19,9 @@ use Symfony\Component\Routing\Attribute\Route;
 final class LivePaginationDemoController extends AbstractController
 {
     #[Route('/demos/pagination/live-pagination', name: 'app_demo_pagination_live')]
-    public function __invoke(): Response
+    public function __invoke(DemoRepository $demoRepository): Response
     {
-        $demo = new LiveDemo(
-            'pagination',
-            name: 'Live Pagination',
-            description: 'Add reactive filters and page changes to ordinary pagination links.',
-            author: 'smnandre',
-            publishedAt: '2026-08-04',
-            tags: ['pagination', 'LiveComponent', 'filters', 'trait'],
-            longDescription: 'Combine [`Pagination`](/pagination) with [`LiveComponent`](/live-component)
-                for reactive filters and page changes. Each control remains an ordinary link,
-                and changing a filter returns you to the first page.',
-            route: 'app_demo_pagination_live',
-            template: 'demos/pagination/live.html.twig',
-        );
+        $demo = $demoRepository->find('pagination', 'pagination');
 
         return $this->render($demo->getTemplate(), ['demo' => $demo]);
     }

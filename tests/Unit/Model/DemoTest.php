@@ -26,6 +26,14 @@ final class DemoTest extends TestCase
         self::assertSame('demos/live_component/infinite_scroll_2.html.twig', $demo->getTemplate());
     }
 
+    public function testScreenshotsAreStoredByPackage(): void
+    {
+        $demo = new Demo('turbo', 'infinite-scroll', 'Infinite Scroll', 'Lorem ipsum.', 'ker0x', '2026-01-01', [], 'Lorem ipsum dolor sit amet.');
+
+        self::assertSame('images/demos/turbo/infinite-scroll.png', $demo->getScreenshotFilename());
+        self::assertSame('images/demos/turbo/infinite-scroll-1280x720.png', $demo->getScreenshotFilename('1280x720'));
+    }
+
     public function testRouteAndTemplateCanBeOverridden(): void
     {
         $demo = new Demo(

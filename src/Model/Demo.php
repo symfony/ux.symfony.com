@@ -88,8 +88,6 @@ final class Demo
 
     public function getScreenshotFilename(?string $format = null): string
     {
-        $directory = 'turbo' === $this->package ? 'turbo_demo' : 'live_demo';
-
-        return 'images/'.$directory.'/'.$this->identifier.($format ? ('-'.$format) : '').'.png';
+        return 'images/demos/'.$this->package.'/'.$this->identifier.($format ? ('-'.$format) : '').'.png';
     }
 }

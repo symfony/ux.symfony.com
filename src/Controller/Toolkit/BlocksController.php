@@ -14,6 +14,7 @@ namespace App\Controller\Toolkit;
 use App\Service\Toolkit\BlockSection;
 use App\Service\Toolkit\BlockSectionResolver;
 use App\Service\Toolkit\PreviewRenderer;
+use App\Service\Toolkit\PreviewVersion;
 use App\Service\Toolkit\ToolkitService;
 use App\Service\UxPackageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -31,6 +32,7 @@ class BlocksController extends AbstractController
         private ToolkitService $toolkitService,
         private UxPackageRepository $uxPackageRepository,
         private BlockSectionResolver $blockSectionResolver,
+        private PreviewVersion $previewVersion,
     ) {
     }
 
@@ -98,7 +100,7 @@ class BlocksController extends AbstractController
                 'recipe' => $recipe,
                 'code' => $example['code'],
                 'language' => $example['language'],
-                'preview_url' => $this->generateUrl('app_toolkit_block_section', ['kitId' => $kitId, 'section' => $section->slug, 'preview' => $recipe->name], UrlGeneratorInterface::ABSOLUTE_URL),
+                'preview_url' => $this->generateUrl('app_toolkit_block_section', ['kitId' => $kitId, 'section' => $section->slug, 'preview' => $recipe->name, PreviewVersion::QUERY_PARAMETER => $this->previewVersion->id], UrlGeneratorInterface::ABSOLUTE_URL),
             ];
         }, $section->recipes);
     }

@@ -1,0 +1,144 @@
+/* Bind the upload field to the site's theme toggle rather than the OS theme. */
+.ux-upload {
+    --ux-upload-accent: #3730a3;
+    --ux-upload-accent-strong: #312e81;
+    --ux-upload-bg: var(--color-body-bg);
+    --ux-upload-bg-muted: var(--color-secondary-bg-subtle);
+    --ux-upload-text: var(--color-body-text);
+    --ux-upload-muted: var(--color-secondary-text);
+    --ux-upload-border: var(--color-border);
+    --ux-upload-danger: #b91c1c;
+    --ux-upload-success: #047857;
+}
+
+.dark .ux-upload {
+    --ux-upload-accent: #4f46e5;
+    --ux-upload-border: var(--color-border-translucent);
+    --ux-upload-accent-strong: #4338ca;
+    --ux-upload-danger: #fca5a5;
+    --ux-upload-success: #6ee7b7;
+}
+
+/* A form theme without a thumbnail also removes its reserved grid column. */
+.ux-upload__item:not(:has(.ux-upload__visual)) {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+        'metadata status'
+        'progress actions';
+}
+
+.ux-upload__item[data-status='completed']:not(:has(.ux-upload__visual)) {
+    grid-template-areas: 'metadata actions';
+}
+
+/* The form of the package page: its text field stays visible against the dark surface. A field in error keeps its red edge. */
+.dark .UploadExample input[type='text']:not(.border-red-500) {
+    border-color: var(--color-border-translucent);
+}
+
+/* Drop target: a hairline frame, a quiet icon, one line of text. */
+.ux-upload--dropzone .ux-upload__dropzone {
+    min-height: 9rem;
+    gap: .25rem;
+    padding: 1.5rem;
+    border: 1px dashed color-mix(in oklch, var(--ux-upload-text) 26%, transparent);
+    background: transparent;
+}
+
+.ux-upload--dropzone .ux-upload__dropzone:hover {
+    border-color: color-mix(in oklch, var(--ux-upload-text) 52%, transparent);
+    background: color-mix(in oklch, var(--ux-upload-text) 4%, transparent);
+}
+
+.ux-upload--dropzone .ux-upload__dropzone.is-active {
+    border-color: var(--ux-upload-accent);
+    background: color-mix(in oklch, var(--ux-upload-accent) 8%, transparent);
+}
+
+.ux-upload--dropzone .ux-upload__dropzone-icon {
+    width: 1.375rem;
+    height: 1.375rem;
+    margin-block-end: .375rem;
+    color: var(--ux-upload-muted);
+}
+
+.ux-upload--dropzone .ux-upload__instruction {
+    font-size: .875rem;
+    font-weight: 500;
+    line-height: 1.35;
+    text-wrap: balance;
+}
+
+.ux-upload--dropzone .ux-upload__help {
+    font-size: .75rem;
+}
+
+/* Card grid: room between the cards, and one round cross on the picture to drop a card. */
+.ux-upload--dropzone.ux-upload--previews .ux-upload__list {
+    gap: 1.25rem;
+}
+
+.ux-upload--dropzone.ux-upload--previews .ux-upload__item {
+    position: relative;
+}
+
+.ux-upload--dropzone.ux-upload--previews :is(.ux-upload__remove, .ux-upload__cancel) {
+    position: absolute;
+    inset-block-start: 1.25rem;
+    inset-inline-end: 1.25rem;
+    display: flex;
+    inline-size: 1.75rem;
+    block-size: 1.75rem;
+    min-height: 0;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    color: white;
+    background: rgb(13 14 15 / 72%);
+    font-size: 0;
+    transition: background-color 150ms ease, scale 150ms ease;
+}
+
+.ux-upload--dropzone.ux-upload--previews :is(.ux-upload__remove, .ux-upload__cancel):hover {
+    background: rgb(13 14 15 / 92%);
+}
+
+.ux-upload--dropzone.ux-upload--previews :is(.ux-upload__remove, .ux-upload__cancel):active {
+    scale: .96;
+}
+
+.ux-upload--dropzone.ux-upload--previews :is(.ux-upload__remove, .ux-upload__cancel)::before {
+    inline-size: .75rem;
+    block-size: .75rem;
+    background: currentColor;
+    content: '';
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 2.5l7 7m0-7l-7 7' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* The visible disc is 28px: the pointer target is 40px */
+.ux-upload--dropzone.ux-upload--previews :is(.ux-upload__remove, .ux-upload__cancel)::after {
+    position: absolute;
+    inset: -.375rem;
+    content: '';
+}
+
+/* A sent card keeps its picture and its name: no empty rows under them */
+.ux-upload--dropzone.ux-upload--previews .ux-upload__item[data-status='completed'] {
+    row-gap: 0;
+}
+
+.ux-upload--dropzone.ux-upload--previews .ux-upload__item[data-status='completed'] .ux-upload__metadata {
+    margin-block-start: .5rem;
+}
+
+/* Next to cards, the drop target is one more tile of the same height */
+.ux-upload--dropzone.ux-upload--previews .ux-upload__list:has(.ux-upload__item) > .ux-upload__dropzone {
+    min-height: 8rem;
+    aspect-ratio: auto;
+}
+
+.ux-upload--dropzone.ux-upload--previews .ux-upload__list:has(.ux-upload__item) > .ux-upload__dropzone .ux-upload__help {
+    display: none;
+}

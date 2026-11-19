@@ -1,0 +1,17 @@
+{% extends 'demos/live_demo.html.twig' %}
+
+{% set demo_package_name = 'Upload' %}
+{# A social card cuts its text at 120 characters: the one-sentence description fits whole #}
+{% set demo_social_description = demo.description %}
+
+{% block demo_breadcrumb %}
+    <a href="{{ url('app_demo_upload') }}">Upload</a>
+{% endblock %}
+
+{% block aside %}
+    <aside class="bg-subtle mt-12">
+        <nav class="mx-auto flex max-w-[1400px] flex-wrap justify-center gap-12 p-6 md:p-12 lg:justify-between" aria-label="More Upload demos">
+            {{ include('demos/upload/_cards.html.twig', {around: demo.route, grid: false, show_tags: false}) }}
+        </nav>
+    </aside>
+{% endblock %}

@@ -6,14 +6,16 @@
     ## string Heading id, to pair with the section `aria-labelledby`.
     id = null,
     ## bool Center the block instead of aligning it to the start.
-    centered = false
+    centered = false,
+    ## bool Leave space below a heading that sits above the section content.
+    spaced = true
 -%}
 
 {%- set intro -%}
     {%- block content %}{% endblock -%}
 {%- endset -%}
 
-<div class="mb-12 max-w-3xl md:mb-16 lg:mb-20 {{ centered ? 'mx-auto text-center' : '' }}">
+<div class="max-w-3xl {{ spaced ? 'mb-12 md:mb-16 lg:mb-20' : '' }} {{ centered ? 'mx-auto text-center' : '' }}">
     {% if eyebrow %}
         <p class="m-0 mb-5 font-title text-xs font-semibold font-stretch-semi-condensed uppercase leading-snug tracking-[.12em] text-(--package-primary-text)">
             {{- eyebrow -}}

@@ -1,0 +1,123 @@
+{% extends 'demos/upload/demo.html.twig' %}
+
+{% block demo_container %}
+    {% set submitted = form.vars.submitted %}
+    {% set saved = app.flashes('keep_files_success')|first %}
+
+    <div class="UploadDemoShell max-w-[1140px] mx-auto mb-12">
+        <twig:Browser id="demo" class="shadow-blur shadow-blur--rainbow w-full" frameClass="">
+            <div class="UploadStage KeepFiles" data-controller="upload-payload" data-action="submit->upload-payload#measure">
+                <div class="UploadStage_container">
+                    {{ form_start(form, {attr: {novalidate: 'novalidate', 'data-turbo': 'false'}}) }}
+                        <div class="UploadStage_field">
+                            <div class="min-w-0">
+                                <twig:Form:Label for="{{ field_id(form.classic) }}">FileType, sent with the form</twig:Form:Label>
+                                {{ form_widget(form.classic) }}
+                                {{ form_errors(form.classic) }}
+                            </div>
+                            <p id="keep-files-classic-outcome" class="UploadStage_outcome"{{ submitted or saved ? '' : ' hidden' }}>
+                                <span data-upload-payload-target="size" data-field="{{ form.classic.vars.full_name }}"></span><span> sent.</span>
+                                {% if saved %}
+                                    Received {{ saved.classic ?? 'nothing' }}.
+                                {% elseif submitted %}
+                                    <strong>Empty again.</strong>
+                                {% endif %}
+                            </p>
+                        </div>
+
+                        <div class="UploadStage_field">
+                            <div class="min-w-0">
+                                <twig:Form:Label for="{{ field_id(form.upload) }}">UploadType, sent before the form</twig:Form:Label>
+                                {{ form_widget(form.upload) }}
+                                {{ form_errors(form.upload) }}
+                            </div>
+                            <p id="keep-files-upload-outcome" class="UploadStage_outcome"{{ submitted or saved ? '' : ' hidden' }}>
+                                <span data-upload-payload-target="size" data-field="{{ form.upload.vars.full_name }}"></span><span> sent.</span>
+                                {% if saved %}
+                                    Received {{ saved.upload ?? 'nothing' }}.
+                                {% elseif submitted %}
+                                    <strong>{{ kept ? 'File kept.' : 'No file.' }}</strong>
+                                {% endif %}
+                            </p>
+                        </div>
+
+                        {{ form_row(form.title) }}
+
+                        <div class="UploadStage_actions">
+                            <button
+                                type="button"
+                                class="UploadStage_sample"
+                                data-controller="upload-samples"
+                                data-upload-samples-kind-value="pdf"
+                                data-upload-samples-for-value=".KeepFiles input[type=file]"
+                                data-action="upload-samples#fill"
+                            >Use an 800 KB sample PDF</button>
+                            <button type="submit" class="UploadStage_submit">Save document</button>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </twig:Browser>
+    </div>
+
+    <section class="UploadDemoStory">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-12">
+            <twig:Code:CodeWithExplanationRow
+                filename="src/Form/KeepFilesForm.php"
+                :lineStart="31"
+                :lineEnd="54"
+                reversed
+                sticky
+            >
+## A file input cannot be filled back
+
+Both fields sit in the same form. Browsers never pre-fill `<input type="file">`:
+when the title fails validation, the `FileType` field comes back empty.
+
+The visitor picks the file again, and the next submit sends the whole file a
+second time.
+            </twig:Code:CodeWithExplanationRow>
+
+            <twig:Code:CodeWithExplanationRow
+                filename="templates/demos/upload/keep_files.html.twig"
+                targetTwigBlock="reference_example"
+                :copyButton="false"
+                sticky
+            >
+## Upload first, submit a reference
+
+`UploadType` sends the file as soon as it is selected. The form then holds
+a __signed reference__ in a hidden input. A failed validation renders that
+reference again, like any other value.
+
+The `token` carries the upload id, uploader, field, temporary path, name, MIME
+type, size, checksum, and expiry, signed with Symfony's `UriSigner`. `meta`
+only feeds the display. Tampered or expired tokens are rejected.
+            </twig:Code:CodeWithExplanationRow>
+
+            <twig:Code:CodeWithExplanationRow
+                filename="src/Controller/Demo/Upload/KeepFilesDemoController.php"
+                :lineStart="26"
+                :lineEnd="37"
+                reversed
+                sticky
+            >
+## The controller does not change
+
+Both fields go through the same `handleRequest()` and `isValid()`. For each one,
+`getData()` returns an `UploadedFile`: read its name and size, then `move()` it
+or read its stream into your own storage.
+            </twig:Code:CodeWithExplanationRow>
+        </div>
+    </section>
+{% endblock %}
+
+{% block reference_example %}
+<input type="file">
+{# empty after upload: the file is already on the server #}
+
+<input type="hidden" name="keep_files_form[upload]" value='{
+    "token": "_expiration=1790281692&_hash=FolvRLV4…&f=world-domination-plan.pdf&i=e54f3ad8…&m=application/pdf&s=819218&u=documents&…",
+    "meta": {"filename": "world-domination-plan.pdf", "mimeType": "application/pdf", "size": 819218}
+}'>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'demos/upload/demo.html.twig' %}
+
+{% block demo_container %}
+    <div class="UploadDemoShell max-w-[1140px] mx-auto mb-12">
+        <twig:Browser id="demo" class="shadow-blur shadow-blur--rainbow w-full" frameClass="">
+            <div class="UploadStage TurboUpload">
+                <div class="UploadStage_container">
+                    {% for message in app.flashes('turbo_upload_success') %}
+                        <p class="UploadStage_note" data-turbo-cache="false">{{ message }}</p>
+                    {% endfor %}
+
+                    {{ include('demos/upload/turbo/_gallery_form.html.twig') }}
+                    <button
+                        type="button"
+                        class="UploadStage_sample UploadStage_sample--beside-submit"
+                        data-controller="upload-samples"
+                        data-upload-samples-kind-value="images"
+                        data-upload-samples-for-value=".TurboUpload input[type=file]"
+                        data-action="upload-samples#fill"
+                    >Use 3 sample photos</button>
+
+                    <section class="UploadStage_list" aria-labelledby="upload-albums-title">
+                        <h3 id="upload-albums-title" class="UploadStage_label">Albums</h3>
+                        <p id="upload-albums-empty">Save an album without a name first: only the frame changes, and the photos stay.</p>
+                        <ul id="upload-albums"></ul>
+                    </section>
+                </div>
+            </div>
+        </twig:Browser>
+    </div>
+
+    <section class="UploadDemoStory">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-12">
+            <twig:Code:CodeWithExplanationRow
+                filename="templates/demos/upload/turbo/_gallery_form.html.twig"
+                reversed
+                sticky
+            >
+## A form in a Turbo Frame
+
+The form sits in a `<turbo-frame>`. Turbo submits it with `fetch`, and the rest
+of the page stays in place.
+
+Save without an album name: the server answers `422`, Turbo swaps the frame, and
+the photos are still attached. Each one is a signed reference, so nothing is
+sent again.
+            </twig:Code:CodeWithExplanationRow>
+
+            <twig:Code:CodeWithExplanationRow
+                filename="src/Controller/Demo/Upload/TurboUploadDemoController.php"
+                :lineStart="31"
+                :lineEnd="52"
+                sticky
+            >
+## One action, two answers
+
+A valid album answers with a Turbo Stream when Turbo sent the form, and with a
+redirect otherwise. The same action works with and without JavaScript.
+            </twig:Code:CodeWithExplanationRow>
+
+            <twig:Code:CodeWithExplanationRow
+                filename="templates/demos/upload/turbo/success.stream.html.twig"
+                reversed
+                sticky
+            >
+## Add the album, reset the form
+
+The stream prepends the album to the list and replaces the frame with an empty
+form, ready for the next photos.
+            </twig:Code:CodeWithExplanationRow>
+        </div>
+    </section>
+{% endblock %}

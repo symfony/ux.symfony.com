@@ -1,0 +1,273 @@
+@layer components {
+    /* An upload in four steps: one card per step, an arrow from each to the next. */
+    .UploadFlow {
+        --flow-gap: 3.5rem;
+
+        display: grid;
+        gap: var(--flow-gap);
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        > li {
+            position: relative;
+            padding: 1.75rem;
+            border-radius: .875rem;
+            background: var(--color-secondary-bg-subtle);
+        }
+
+        h3 {
+            margin: 0 0 .6rem;
+            font-family: var(--font-title);
+            font-size: 1.25rem;
+            font-weight: var(--font-weight-bold);
+        }
+
+        p {
+            margin: 0;
+            color: color-mix(in oklch, var(--color-body-text) 76%, transparent);
+            font-size: .95rem;
+            line-height: 1.65;
+        }
+
+        @media (min-width: 1024px) {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+    }
+
+    /* In the gap after its card: under it while the cards stack, beside it once they sit in a row */
+    .UploadFlow_arrow {
+        position: absolute;
+        inset-block-start: calc(100% + (var(--flow-gap) - 1.75rem) / 2);
+        inset-inline-start: calc(50% - .875rem);
+        inline-size: 1.75rem;
+        block-size: 1.75rem;
+        color: var(--package-primary-text);
+        stroke-width: 2.25;
+        rotate: 90deg;
+
+        @media (min-width: 1024px) {
+            inset-block-start: calc(50% - .875rem);
+            inset-inline-start: calc(100% + (var(--flow-gap) - 1.75rem) / 2);
+            rotate: none;
+        }
+    }
+
+    /* FileType next to UploadType, a tick or a cross per feature: a table on wide screens, one block per feature on narrow ones. */
+    .UploadCompare {
+        --compare-line: color-mix(in oklch, var(--color-body-text) 14%, transparent);
+
+        inline-size: 100%;
+        max-inline-size: 62rem;
+        border-collapse: collapse;
+        text-align: start;
+        table-layout: fixed;
+
+        :is(th, td) {
+            padding: .95rem 1.5rem .95rem 0;
+            text-align: start;
+            vertical-align: top;
+        }
+
+        thead :is(th, td) {
+            padding-block: 0 .9rem;
+            font-size: .875rem;
+            font-weight: 600;
+        }
+
+        thead code {
+            padding: 0;
+            color: color-mix(in oklch, var(--color-body-text) 62%, transparent);
+            font-size: inherit;
+            background: none;
+        }
+
+        thead th:last-child code {
+            color: var(--package-primary-text);
+        }
+
+        tbody :is(th, td) {
+            border-block-start: 1px solid var(--compare-line);
+        }
+
+        tbody th {
+            color: var(--color-body-text);
+            font-weight: 500;
+        }
+
+        /* The name of a group of rows: the line under it belongs to its first row */
+        tbody th[scope='rowgroup'] {
+            padding-block: 2.5rem .7rem;
+            border: 0;
+            color: var(--package-primary-text);
+            font-size: .6875rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            line-height: 1;
+            text-transform: uppercase;
+        }
+
+        tbody:first-of-type th[scope='rowgroup'] {
+            padding-block-start: .5rem;
+        }
+
+        .Icon {
+            flex: none;
+            inline-size: 1.15rem;
+            block-size: 1.15rem;
+            margin-block-start: .15rem;
+            stroke-width: 2.2;
+        }
+
+        [data-mark='yes'] .Icon {
+            color: var(--package-primary-text);
+        }
+
+        [data-mark='no'] .Icon {
+            color: color-mix(in oklch, var(--color-body-text) 34%, transparent);
+        }
+
+        @media (min-width: 768px) {
+            :is(th, td):first-child {
+                inline-size: 44%;
+            }
+        }
+
+        @media (max-width: 767px) {
+            &,
+            tbody {
+                display: block;
+            }
+
+            thead {
+                display: none;
+            }
+
+            tr {
+                display: grid;
+                grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+                gap: .6rem 1rem;
+                padding-block: 1.1rem;
+                border-block-start: 1px solid var(--compare-line);
+            }
+
+            tr:has(th[scope='rowgroup']) {
+                padding-block: 2rem 0;
+                border: 0;
+            }
+
+            tbody th[scope='rowgroup'] {
+                padding-block: 0 .7rem;
+            }
+
+            tbody th {
+                grid-column: 1 / -1;
+            }
+
+            :is(th, td) {
+                padding: 0;
+            }
+
+            tbody :is(th, td) {
+                border: 0;
+            }
+
+            /* The column headings are hidden here: each cell names its own column */
+            td::before {
+                display: block;
+                margin-block-end: .3rem;
+                color: color-mix(in oklch, var(--color-body-text) 62%, transparent);
+                font-family: var(--font-mono);
+                font-size: .75rem;
+                content: attr(data-column);
+            }
+        }
+    }
+
+    /* A tick or a cross, then what it stands on: a long note wraps beside the mark, not under it */
+    .UploadCompare_answer {
+        display: flex;
+        align-items: flex-start;
+        gap: .55rem;
+    }
+
+    /* The option or the limit behind a tick or a cross */
+    .UploadCompare_note {
+        min-inline-size: 0;
+        padding-block-start: .1rem;
+        color: color-mix(in oklch, var(--color-body-text) 66%, transparent);
+        font-size: .8125rem;
+
+        @media (max-width: 767px) {
+            font-size: .75rem;
+        }
+
+        /* upload_max_filesize does not break: on the narrowest phones it has to shrink */
+        @media (max-width: 379px) {
+            font-size: .6875rem;
+        }
+
+        code {
+            padding: 0;
+            color: inherit;
+            font-size: inherit;
+            background: none;
+        }
+    }
+
+    /* A long line of code runs under the copy button: the button stands on the colour of the block,
+       and the line can be scrolled clear of it */
+    .UploadOptions .Terminal_body .Terminal_actions {
+        border-radius: .375rem;
+        background: var(--bg-color);
+        box-shadow: -.5rem 0 .4rem var(--bg-color);
+    }
+
+    .UploadOptions .Terminal_content {
+        padding-inline-end: 2.75rem;
+    }
+
+    @media (max-width: 479px) {
+        .UploadOptions .Terminal_body {
+            font-size: .8125rem;
+        }
+    }
+
+    /* The field UploadType renders, drawn in strokes only: a drop zone, then a file on its way. */
+    .UploadFigure {
+        inline-size: 100%;
+        max-inline-size: 34rem;
+        margin: 0;
+        justify-self: center;
+
+        svg {
+            display: block;
+            inline-size: 100%;
+            block-size: auto;
+            overflow: visible;
+        }
+
+        :is(path, rect, line) {
+            fill: none;
+            stroke: color-mix(in oklch, var(--color-body-text) 72%, transparent);
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            /* The drawing scales with its column: the strokes do not */
+            vector-effect: non-scaling-stroke;
+        }
+
+        [data-ink='muted'] {
+            stroke: color-mix(in oklch, var(--color-body-text) 42%, transparent);
+        }
+
+        [data-ink='fine'] {
+            stroke: color-mix(in oklch, var(--color-body-text) 22%, transparent);
+        }
+
+        [data-ink='accent'] {
+            stroke: var(--package-primary-text);
+            stroke-width: 2.5;
+        }
+    }
+}

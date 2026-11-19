@@ -1,5 +1,5 @@
 <div {{ attributes.defaults({
-    class: 'grid grid-cols-12 gap-x-16 mb-12 py-6 relative ' ~ (this.sticky|default ? 'items-start' : 'items-center'),
+    class: 'grid grid-cols-12 gap-y-6 md:gap-x-8 lg:gap-x-16 mb-12 py-6 relative ' ~ (this.sticky|default ? 'items-start' : 'items-center'),
 }) }}>
     <div class="col-span-12 md:col-span-{{ 12 - this.codeCols }} code-description {{ not reversed ? 'md:order-2' }}"
          style="{% if reversed %}padding-inline-end: 0;{% endif %} {{ this.sticky|default ? 'position: sticky; top: 4rem;' }}">

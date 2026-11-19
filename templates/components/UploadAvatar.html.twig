@@ -1,0 +1,22 @@
+<div {{ attributes.defaults(stimulus_controller('symfony/ux-upload/live-upload', {property: 'photo'})) }} class="UploadAvatar">
+    {{ form_label(this.uploadForm.photo) }}
+    {# Shown while the field is empty: its own preview is the avatar #}
+    <span class="UploadAvatar_picture"><twig:ux:icon name="lucide:user" /></span>
+    {# The field stays out of the render: its Remove button tells the component to clear the prop #}
+    <div
+        data-live-ignore
+        data-action="symfony--ux-upload--upload:remove->live#action"
+        data-live-action-param="clearUpload"
+        data-live-property-param="photo"
+    >
+        {{ form_widget(this.uploadForm.photo) }}
+    </div>
+    <div class="UploadAvatar_status">
+        {% set upload = this.getUpload('photo') %}
+        {% if upload %}
+            <p class="UploadStage_outcome">Received by the component: <strong>{{ upload.clientOriginalName }}</strong>, {{ (upload.size / 1024)|round(1) }} KB</p>
+        {% else %}
+            <p>No avatar yet</p>
+        {% endif %}
+    </div>
+</div>

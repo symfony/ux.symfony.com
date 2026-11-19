@@ -13,11 +13,14 @@ namespace App\Tests\Functional;
 
 use App\Entity\Food;
 use App\Model\LiveDemo;
+use App\Model\TurboDemo;
 use App\Model\UxPackage;
 use App\Service\LiveDemoRepository;
+use App\Service\TurboDemoRepository;
 use App\Service\UxPackageRepository;
 use PHPUnit\Framework\Attributes\Before;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\TestWith;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Browser\Test\HasBrowser;
 use Zenstruck\Foundry\Test\Factories;
@@ -102,7 +105,7 @@ class SmokeTest extends KernelTestCase
     }
 
     #[DataProvider('provideDemoUrls')]
-    public function testDemoPages(LiveDemo $demo): void
+    public function testDemoPages(LiveDemo|TurboDemo $demo): void
     {
         $router = self::bootKernel()->getContainer()->get('router');
         $url = $router->generate($demo->getRoute());
@@ -117,7 +120,57 @@ class SmokeTest extends KernelTestCase
     {
         $repository = new LiveDemoRepository();
         foreach ($repository->findAll() as $demo) {
-            yield $demo->getIdentifier() => [$demo];
+            yield 'live-'.$demo->getIdentifier() => [$demo];
         }
+
+        $repository = new TurboDemoRepository();
+        foreach ($repository->findAll() as $demo) {
+            yield 'turbo-'.$demo->getIdentifier() => [$demo];
+        }
+    }
+
+    #[TestWith(['Turbo Infinite Scroll - 1/2', '/demos/turbo/infinite-scroll', '/demos/turbo/infinite-scroll-2', '/demos/live-component/infinite-scroll'])]
+    #[TestWith(['Turbo Infinite Scroll - 2/2', '/demos/turbo/infinite-scroll-2', '/demos/turbo/infinite-scroll', '/demos/live-component/infinite-scroll-2'])]
+    public function testTurboScrollLinksToItsRelatedDemos(string $title, string $url, string $otherPart, string $liveDemo): void
+    {
+        $this->browser()
+            ->visit($url)
+            ->assertSuccessful()
+            ->assertSeeIn('h1', $title)
+            ->assertElementCount(\sprintf('.demo-introduction a[href="%s"]', $liveDemo), 1)
+            ->assertElementCount('aside[aria-label="Related demos"] .Card', 2)
+            ->assertElementCount(\sprintf('aside[aria-label="Related demos"] .Card a[href="%s"]', $otherPart), 1)
+            ->assertElementCount(\sprintf('aside[aria-label="Related demos"] .Card a[href="%s"]', $liveDemo), 1)
+        ;
+    }
+
+    public function testTurboInfiniteScrollPartTwoLinksToPartOneInItsIntro(): void
+    {
+        $this->browser()
+            ->visit('/demos/turbo/infinite-scroll-2')
+            ->assertSuccessful()
+            ->assertSeeIn('.demo-introduction a[href="/demos/turbo/infinite-scroll"]', 'Part One')
+        ;
+    }
+
+    public function testLiveInfiniteScrollPartOneHasStructuredExplanationSections(): void
+    {
+        $this->browser()
+            ->visit('/demos/live-component/infinite-scroll')
+            ->assertSuccessful()
+            ->assertSee('So... how does it work?')
+            ->assertSee('Request the next batch')
+            ->assertSee('Keep earlier cards in place')
+            ->assertElementCount('main section.bg-subtle.border-t', 1)
+        ;
+    }
+
+    public function testLiveInfiniteScrollPartTwoLinksToPartOneInItsIntro(): void
+    {
+        $this->browser()
+            ->visit('/demos/live-component/infinite-scroll-2')
+            ->assertSuccessful()
+            ->assertSeeIn('.demo-introduction a[href="/demos/live-component/infinite-scroll"]', 'Part One')
+        ;
     }
 }

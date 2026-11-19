@@ -1,15 +1,20 @@
 
 <div class="max-w-[1400px] mx-auto p-6 md:p-12">
     <div style="display: flex; gap: 3rem; flex-wrap: wrap;" class="justify-center lg:justify-between align-stretch">
-        {% set previous = this.previous(true) %}
+        {% set previous = this.previous(loop) %}
         {% if previous %}
-            <div class="max-w-[380px] flex">
+            <div class="max-w-[380px] flex only:mx-auto">
                 <twig:Demo:DemoCard demo="{{ previous }}" />
             </div>
         {% endif %}
-        {% set next = this.next(true) %}
-        {% if next %}
+        {% if relatedLiveDemo %}
             <div class="max-w-[380px] flex">
+                <twig:Demo:DemoCard :demo="relatedLiveDemo" />
+            </div>
+        {% endif %}
+        {% set next = this.next(loop) %}
+        {% if next %}
+            <div class="max-w-[380px] flex only:mx-auto">
                 <twig:Demo:DemoCard demo="{{ next }}" />
             </div>
         {% endif %}

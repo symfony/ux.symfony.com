@@ -14,6 +14,7 @@ namespace App\Tests\Functional;
 use App\Enum\PackageGroup;
 use App\Service\UxPackageRepository;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\TestWith;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Browser\Test\HasBrowser;
 
@@ -38,6 +39,31 @@ final class SearchHierarchyTest extends KernelTestCase
         ;
 
         self::assertSame($expectedHierarchy, $hierarchy);
+    }
+
+    #[TestWith(['/demos/live-component/infinite-scroll', 'Infinite Scroll - 1/2 - Live Components - Symfony UX'])]
+    #[TestWith(['/demos/live-component/infinite-scroll-2', 'Infinite Scroll - 2/2 - Live Components - Symfony UX'])]
+    #[TestWith(['/demos/turbo/infinite-scroll', 'Turbo Infinite Scroll - 1/2 - Turbo - Symfony UX'])]
+    #[TestWith(['/demos/turbo/infinite-scroll-2', 'Turbo Infinite Scroll - 2/2 - Turbo - Symfony UX'])]
+    public function testInfiniteScrollDemoSeoMetadata(string $path, string $expectedTitle): void
+    {
+        $page = $this->browser()
+            ->visit($path)
+            ->assertSuccessful()
+        ;
+        $crawler = $page->crawler();
+        $canonical = $crawler->filter('link[rel="canonical"]')->attr('href');
+        $description = $crawler->filter('meta[name="description"]')->attr('content');
+        $socialDescription = $crawler->filter('meta[property="og:description"]')->attr('content');
+
+        self::assertSame($expectedTitle, $crawler->filter('title')->text());
+        self::assertSame($path, parse_url($canonical, \PHP_URL_PATH));
+        self::assertNotSame('', $description);
+        self::assertNotSame('', $socialDescription);
+        self::assertSame($canonical, $crawler->filter('meta[property="og:url"]')->attr('content'));
+        self::assertSame($canonical, $crawler->filter('meta[name="twitter:url"]')->attr('content'));
+        self::assertSame($crawler->filter('meta[property="og:image"]')->attr('content'), $crawler->filter('meta[name="twitter:image"]')->attr('content'));
+        self::assertSame('summary_large_image', $crawler->filter('meta[name="twitter:card"]')->attr('content'));
     }
 
     public function testPackageSuggestionsAreIgnoredBySearch(): void
@@ -96,6 +122,10 @@ final class SearchHierarchyTest extends KernelTestCase
 
         yield 'live component demo' => ['/demos/live-component/voting', ['Demos', 'Live Components', 'Up & Down Voting']];
         yield 'live memory demo' => ['/demos/live-memory/', ['Demos', 'Live Components', 'Live Memory Card Game']];
+        yield 'live infinite scroll 1/2' => ['/demos/live-component/infinite-scroll', ['Demos', 'Live Components', 'Infinite Scroll - 1/2']];
+        yield 'live infinite scroll 2/2' => ['/demos/live-component/infinite-scroll-2', ['Demos', 'Live Components', 'Infinite Scroll - 2/2']];
+        yield 'turbo infinite scroll 1/2' => ['/demos/turbo/infinite-scroll', ['Demos', 'Turbo', 'Turbo Infinite Scroll - 1/2']];
+        yield 'turbo infinite scroll 2/2' => ['/demos/turbo/infinite-scroll-2', ['Demos', 'Turbo', 'Turbo Infinite Scroll - 2/2']];
         yield 'pagination demo' => ['/demos/pagination/themes', ['Demos', 'Pagination', 'Pagination Themes']];
 
         yield 'kit' => ['/toolkit/kits/shadcn', ['Kits', 'Shadcn UI']];

@@ -48,19 +48,18 @@ class LiveDemoRepository
             new LiveDemo(
                 'infinite-scroll-2',
                 name: 'Infinite Scroll - 2/2',
-                description: 'Loading on-scroll, flexible layout grid, colorfull loading animations and... more T-Shirts!',
+                description: 'Automatically load more products on scroll with a Live Component and IntersectionObserver.',
                 author: 'smnandre',
                 publishedAt: '2024-06-07',
                 tags: ['grid', 'pagination', 'loading', 'scroll'],
                 longDescription: <<<EOF
-                    The second and final part of the **Infinite Scroll Series**, with a new range of (lovely) T-Shirts!
-                    Now with `automatic loading on scroll`, a new trick and amazing `loading animations`!
+                    Building on [Part One](/demos/live-component/infinite-scroll), this version uses a Stimulus `IntersectionObserver` to call a Live Component action when the next item approaches the viewport, loading more products without a button.
                     EOF,
             ),
             new LiveDemo(
                 'infinite-scroll',
                 name: 'Infinite Scroll - 1/2',
-                description: 'Load more items as you scroll down the page.',
+                description: 'Append product batches on demand with a Live Component while keeping existing cards in place.',
                 author: 'smnandre',
                 publishedAt: '2024-06-07',
                 tags: ['grid', 'pagination', 'navigation'],

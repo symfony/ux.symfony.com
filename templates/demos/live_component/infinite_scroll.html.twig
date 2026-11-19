@@ -15,38 +15,41 @@
         </symbol>
     </svg>
 
-    <div class="max-w-[1140px] mx-auto mb-12">
+    <div class="max-w-[1140px] mx-auto mb-12 px-6">
         <twig:Browser class="shadow-blur shadow-blur--rainbow w-full">
             <twig:ProductGrid />
         </twig:Browser>
     </div>
 
-    <section class="py-12" style="padding-top: 6rem;">
-        <div class="max-w-[1400px] mx-auto">
+    <section class="py-12">
+        <div class="code-description mx-auto max-w-2xl px-6 text-center text-balance">
+            <h2>So... how does it work?</h2>
+            <p class="leading-7">
+                Click <strong>Load More</strong> to see another batch appear while the cards already on the page stay in place.
+            </p>
+        </div>
+    </section>
+
+    <section class="bg-subtle border-t py-12">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-12">
             <twig:Code:CodeWithExplanationRow filename="src/Twig/Components/ProductGrid.php" reversed sticky>
-This component is quite standard: the page number as a `LiveProp`, a `LiveAction`
-to load the next page, and a `getItems` method to retrieve the page results.
+                ## Request the next batch
 
-When called, the `LiveAction` simply increments the page number and renders again,
-displaying the next page of results.
+                The current page is a **LiveProp**. `getItems()` returns its 12 products, while `hasMore()` decides whether another batch is available.
 
-But... how can we `keep` the previous results instead of `replacing` them?
+                Clicking **Load More** calls the `more` LiveAction, increments the page number, and renders the component again.
             </twig:Code:CodeWithExplanationRow>
         </div>
     </section>
 
-    <section class="py-12">
-        <div class="max-w-[1400px] mx-auto">
+    <section class="py-8 lg:py-12">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-12">
             <twig:Code:CodeWithExplanationRow filename="templates/components/ProductGrid.html.twig" sticky>
-The solution involves the use of `data-live-ignore` attributes, and just a little
-bit of trickery in the `ProductGrid` component.
+                ## Keep earlier cards in place
 
-You just need to simulate the presence of the previous results in the HTML. The
-empty `div` with the `data-live-ignore` attribute and previous page id (under the  🦊)
-is enough to trick the `LiveComponent` into thinking that the previous results
-are still there, and cannot be modified.
+                Each batch is wrapped in a `ProductGrid_page` element marked `data-live-ignore`. When the page number advances, Twig renders an empty placeholder with the previous page's ID.
 
-Then, instead of replacing the results, the `LiveComponent` will add the new ones in continuation!
+                LiveComponent matches that placeholder to the existing page element and leaves its cards untouched, so the new batch follows them in the grid.
             </twig:Code:CodeWithExplanationRow>
         </div>
     </section>

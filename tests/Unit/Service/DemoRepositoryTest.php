@@ -60,7 +60,7 @@ final class DemoRepositoryTest extends TestCase
     public function testFindThrowsForAnUnknownDemo(): void
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessageIs('Unknown turbo demo "voting".');
+        $this->expectExceptionMessageIs('Unknown "turbo" demo "voting".');
 
         new DemoRepository()->find('turbo', 'voting');
     }

@@ -280,7 +280,7 @@ class DemoRepository
             }
         }
 
-        throw new \InvalidArgumentException(\sprintf('Unknown %s demo "%s".', $package, $identifier));
+        throw new \InvalidArgumentException(\sprintf('Unknown "%s" demo "%s".', $package, $identifier));
     }
 
     /**

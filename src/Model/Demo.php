@@ -11,19 +11,31 @@
 
 namespace App\Model;
 
-abstract class Demo
+final class Demo
 {
     /**
+     * @param string       $package  The UX package the demo showcases, as named in UxPackageRepository
      * @param list<string> $tags
+     * @param string|null  $route    Defaults to "app_demo_{package}_{identifier}"
+     * @param string|null  $template Defaults to "demos/{package}/{identifier}.html.twig"
      */
     public function __construct(
+        private string $package,
         private string $identifier,
         private string $name,
         private string $description,
         private Person|string $author,
         private \DateTimeImmutable|string $publishedAt,
         private array $tags,
+        private string $longDescription,
+        private ?string $route = null,
+        private ?string $template = null,
     ) {
+    }
+
+    public function getPackage(): string
+    {
+        return $this->package;
     }
 
     public function getIdentifier(): string
@@ -59,16 +71,25 @@ abstract class Demo
         return $this->publishedAt;
     }
 
-    /**
-     * The UX package the demo showcases, as named in UxPackageRepository.
-     */
-    abstract public function getPackage(): string;
+    public function getLongDescription(): string
+    {
+        return $this->longDescription;
+    }
 
-    abstract public function getRoute(): string;
+    public function getRoute(): string
+    {
+        return $this->route ?? \sprintf('app_demo_%s_%s', str_replace('-', '_', $this->package), str_replace('-', '_', $this->identifier));
+    }
 
-    abstract public function getScreenshotFilename(?string $format = null): string;
+    public function getTemplate(): string
+    {
+        return $this->template ?? \sprintf('demos/%s/%s.html.twig', str_replace('-', '_', $this->package), str_replace('-', '_', $this->identifier));
+    }
 
-    abstract public function getTemplate(): string;
+    public function getScreenshotFilename(?string $format = null): string
+    {
+        $directory = 'turbo' === $this->package ? 'turbo_demo' : 'live_demo';
 
-    abstract public function getLongDescription(): string;
+        return 'images/'.$directory.'/'.$this->identifier.($format ? ('-'.$format) : '').'.png';
+    }
 }

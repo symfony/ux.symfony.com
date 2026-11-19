@@ -12,8 +12,6 @@
 namespace App\Service;
 
 use App\Model\Demo;
-use App\Model\LiveDemo;
-use App\Model\TurboDemo;
 
 /**
  * The demos of the website, in the order of the demos page.
@@ -26,7 +24,8 @@ class DemoRepository
     public function findAll(): array
     {
         return [
-            new LiveDemo(
+            new Demo(
+                'pagination',
                 'pagination',
                 name: 'Live Pagination',
                 description: 'Add reactive filters and page changes to ordinary pagination links.',
@@ -38,9 +37,9 @@ class DemoRepository
                     and changing a filter returns you to the first page.',
                 route: 'app_demo_pagination_live',
                 template: 'demos/pagination/live.html.twig',
-                package: 'pagination',
             ),
-            new LiveDemo(
+            new Demo(
+                'pagination',
                 'cursor-pagination',
                 name: 'Cursor Pagination',
                 description: 'Move through ordered values without letting earlier changes shift the current slice.',
@@ -51,9 +50,9 @@ class DemoRepository
                     a stable boundary, so an earlier deletion does not shift the current slice.',
                 route: 'app_demo_pagination_cursor',
                 template: 'demos/pagination/cursor.html.twig',
-                package: 'pagination',
             ),
-            new LiveDemo(
+            new Demo(
+                'pagination',
                 'pagination-themes',
                 name: 'Pagination Themes',
                 description: 'Render the same pages with a built-in theme or a focused Twig block override.',
@@ -64,9 +63,9 @@ class DemoRepository
                     Tailwind utility classes, or a focused application theme override.',
                 route: 'app_demo_pagination_themes',
                 template: 'demos/pagination/themes.html.twig',
-                package: 'pagination',
             ),
-            new TurboDemo(
+            new Demo(
+                'turbo',
                 'infinite-scroll-2',
                 name: 'Turbo Infinite Scroll - 2/2',
                 description: 'Load the next batch automatically with a lazy Turbo Frame.',
@@ -77,7 +76,8 @@ class DemoRepository
                     Building on [Part One](/demos/turbo/infinite-scroll), this version loads the next batch when a `lazy Turbo Frame` enters the scrollable catalog; compare it with the [Live Component version](/demos/live-component/infinite-scroll-2), which uses a Live Component to load on scroll.
                     EOF,
             ),
-            new TurboDemo(
+            new Demo(
+                'turbo',
                 'infinite-scroll',
                 name: 'Turbo Infinite Scroll - 1/2',
                 description: 'Append a batch of cards with a link and two Turbo Streams.',
@@ -88,7 +88,8 @@ class DemoRepository
                     This demo explores the same product grid as the [Live Component version](/demos/live-component/infinite-scroll), using `Turbo Streams`: click `Load More` to append a batch of cards and replace the link with the next page.
                     EOF,
             ),
-            new LiveDemo(
+            new Demo(
+                'live-component',
                 'live-remove',
                 name: 'Removing a Component',
                 description: 'Remove a LiveComponent after its final render, with an optional CSS exit animation.',
@@ -100,7 +101,8 @@ class DemoRepository
                     Style `[data-live-removing]` to animate the exit.
                     EOF,
             ),
-            new LiveDemo(
+            new Demo(
+                'live-component',
                 'live-download',
                 name: 'Downloading Files',
                 description: 'Download from a route or send generated content while preserving state and events.',
@@ -112,7 +114,8 @@ class DemoRepository
                     LiveComponent renders state changes and delivers queued events before starting the download.
                     EOF,
             ),
-            new LiveDemo(
+            new Demo(
+                'live-component',
                 'infinite-scroll-2',
                 name: 'Infinite Scroll - 2/2',
                 description: 'Automatically load more products on scroll with a Live Component and IntersectionObserver.',
@@ -123,7 +126,8 @@ class DemoRepository
                     Building on [Part One](/demos/live-component/infinite-scroll), this version uses a Stimulus `IntersectionObserver` to call a Live Component action when the next item approaches the viewport, loading more products without a button.
                     EOF,
             ),
-            new LiveDemo(
+            new Demo(
+                'live-component',
                 'infinite-scroll',
                 name: 'Infinite Scroll - 1/2',
                 description: 'Append product batches on demand with a Live Component while keeping existing cards in place.',
@@ -135,7 +139,8 @@ class DemoRepository
                     `Part One` of this demo shows how to `append new items` to the page with a [`LiveComponent`](/live-component).
                     EOF,
             ),
-            new LiveDemo(
+            new Demo(
+                'live-component',
                 'live-memory',
                 name: 'Live Memory Card Game',
                 description: 'A Memorable Game UX with Live Components!',
@@ -148,7 +153,8 @@ class DemoRepository
                       learn how to use them to create a fun and engaging game.
                     EOF,
             ),
-            new LiveDemo(
+            new Demo(
+                'live-component',
                 'auto-validating-form',
                 name: 'Auto-Validating Form',
                 description: 'Create a form that validates each field in-real-time as the user enters data!',
@@ -163,7 +169,8 @@ class DemoRepository
                     all generated from Symfony & Twig.
                     EOF,
             ),
-            new LiveDemo(
+            new Demo(
+                'live-component',
                 'form-collection-type',
                 name: 'Embedded CollectionType Form',
                 description: 'Create embedded forms with functional "add" and "remove" buttons all in Twig.',
@@ -175,7 +182,8 @@ class DemoRepository
                     This demo shows off adding and removing items entirely in PHP & Twig.
                     EOF,
             ),
-            new LiveDemo(
+            new Demo(
+                'live-component',
                 'dependent-form-fields',
                 name: 'Dependent Form Fields',
                 description: 'After selecting the first field, automatically reload the options for a second field.',
@@ -186,7 +194,8 @@ class DemoRepository
                     Unleash the power of form events, thanks to [`LiveComponent`](/live-component) and [`DynamicForms`](https://github.com/SymfonyCasts/dynamic-forms).
                     EOF,
             ),
-            new LiveDemo(
+            new Demo(
+                'live-component',
                 'voting',
                 name: 'Up & Down Voting',
                 description: 'Save up & down votes live in pure Twig & PHP.',
@@ -198,7 +207,8 @@ class DemoRepository
                     This uses a [LiveAction](https://symfony.com/bundles/ux-live-component/current/index.html#actions) to save everything with Ajax.
                     EOF,
             ),
-            new LiveDemo(
+            new Demo(
+                'live-component',
                 'inline-edit',
                 name: 'Inline Editing',
                 description: 'Activate an inline editing form with real-time validation.',
@@ -210,7 +220,8 @@ class DemoRepository
                     the user update any fields on your entity, and save through a `LiveAction`.
                     EOF,
             ),
-            new LiveDemo(
+            new Demo(
+                'live-component',
                 'chartjs',
                 name: 'Auto-Updating Chart',
                 description: 'Render & Update a Chart.js chart in real-time.',
@@ -223,7 +234,8 @@ class DemoRepository
                     An auto-updating chart that you will ❤️.
                     EOF,
             ),
-            new LiveDemo(
+            new Demo(
+                'live-component',
                 'invoice',
                 name: 'Invoice Creator',
                 description: 'Create an invoice + line items that updates as you type.',
@@ -236,7 +248,8 @@ class DemoRepository
                     Children components emit events to communicate to the parent and everything is saved in a `saveInvoice` LiveAction method.
                     EOF,
             ),
-            new LiveDemo(
+            new Demo(
+                'live-component',
                 'product-form',
                 name: 'Product Form + Category Modal',
                 description: 'Create a Category on the fly - from inside a product form - via a modal.',
@@ -245,7 +258,8 @@ class DemoRepository
                 tags: ['form', 'entity', 'events', 'modal'],
                 longDescription: 'Open a child modal component to create a new Category.',
             ),
-            new LiveDemo(
+            new Demo(
+                'live-component',
                 'upload',
                 name: 'Uploading files',
                 description: 'Upload file from your live component through a LiveAction.',

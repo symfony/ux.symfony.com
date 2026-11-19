@@ -12,8 +12,6 @@
 namespace App\Tests\Unit\Service;
 
 use App\Model\Demo;
-use App\Model\LiveDemo;
-use App\Model\TurboDemo;
 use App\Model\UxPackage;
 use App\Service\DemoRepository;
 use App\Service\UxPackageRepository;
@@ -53,8 +51,8 @@ final class DemoRepositoryTest extends TestCase
     {
         $repository = new DemoRepository();
 
-        self::assertInstanceOf(TurboDemo::class, $repository->find('turbo', 'infinite-scroll'));
-        self::assertInstanceOf(LiveDemo::class, $repository->find('live-component', 'infinite-scroll'));
+        self::assertSame('app_demo_turbo_infinite_scroll', $repository->find('turbo', 'infinite-scroll')->getRoute());
+        self::assertSame('app_demo_live_component_infinite_scroll', $repository->find('live-component', 'infinite-scroll')->getRoute());
     }
 
     public function testFindThrowsForAnUnknownDemo(): void

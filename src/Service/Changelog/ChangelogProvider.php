@@ -13,6 +13,7 @@ namespace App\Service\Changelog;
 
 use Psr\Cache\CacheItemInterface;
 use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\HttpClient\Exception\ExceptionInterface as HttpClientExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
@@ -48,7 +49,14 @@ final class ChangelogProvider
         return $this->cache->get('releases-symfony-ux-'.$page, function (CacheItemInterface $item) use ($page) {
             $item->expiresAfter(604800); // 1 week
 
-            return $this->fetchReleases('symfony', 'ux', $page);
+            try {
+                return $this->fetchReleases('symfony', 'ux', $page);
+            } catch (HttpClientExceptionInterface) {
+                // GitHub rate limit or outage: render an empty changelog and retry soon
+                $item->expiresAfter(300);
+
+                return [];
+            }
         });
     }
 

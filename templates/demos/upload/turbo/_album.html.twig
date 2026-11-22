@@ -1,0 +1,10 @@
+<li>
+    <strong>{{ album }}</strong>
+    <ul>
+        {% for photo in photos %}
+            <li>{{ photo.clientOriginalName }} <span>{{ (photo.size / 1024)|round }} KB</span></li>
+        {% else %}
+            <li>No photo</li>
+        {% endfor %}
+    </ul>
+</li>

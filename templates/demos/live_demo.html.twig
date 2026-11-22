@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% set demo_package_name = demo_package_name|default('Live Components') %}
+{% set demo_social_description = demo_social_description|default(demo.longDescription|markdown_to_html|striptags) %}
 {% set meta = {
     title: demo.name,
     title_suffix: ' - ' ~ demo_package_name ~ ' - Symfony UX',
@@ -9,7 +10,7 @@
     hierarchy: ['Demos', demo_package_name, demo.name],
     social: {
         title: demo.name ~ ' - Symfony UX',
-        description: demo.longDescription|markdown_to_html|striptags,
+        description: demo_social_description,
         image: {
             url: absolute_url(asset(demo.screenshotFilename('1280x720'))),
             type: 'image/png',

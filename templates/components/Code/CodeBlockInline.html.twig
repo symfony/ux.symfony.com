@@ -2,7 +2,7 @@
     <div class="Terminal_actions">
         <div
             data-controller="clipboarder"
-            data-clipboarder-source-value="{{ code|replace({'{+': '', '+}': ''}) }}"
+            data-clipboarder-source-value="{{ (copyCode ?? code)|replace({'{+': '', '+}': ''}) }}"
             class="code-buttons"
         >
             {%- set _copy_id = 'tt-' ~ random(1000000000) -%}

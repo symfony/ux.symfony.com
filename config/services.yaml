@@ -5,6 +5,9 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     app.llms_dir: '%kernel.project_dir%/var/llms'
+    app.upload_demo_dir: '%kernel.project_dir%/var/uploads'
+    # Bytes the upload demos may hold at once: the production disk is 256 MB, shared with the cache
+    app.upload_demo_disk_budget: 100663296
 
 services:
     # default configuration for services in *this* file
@@ -29,6 +32,9 @@ services:
 
     ux_toolkit.registry.registry_factory:
         alias: '.ux_toolkit.registry.registry_factory'
+
+    Symfony\UX\Upload\Security\UploadContextResolverInterface:
+        alias: App\Service\UploadDemoContextResolver
 
     # Kits only change on deploy; dev and test read them again to follow kit edits
     app.toolkit_kits_cache:

@@ -1,0 +1,337 @@
+@layer components {
+    /* Under the demo: each code and text pair stands alone, far from the next one */
+    .UploadDemoStory {
+        padding-block: clamp(3.5rem, 8vw, 7rem) 1rem;
+
+        > div > * + * {
+            margin-block-start: clamp(3rem, 9vw, 9rem);
+        }
+    }
+
+    .UploadDemoShell {
+        padding-inline: clamp(.75rem, 3vw, 2rem);
+    }
+
+    /* One centered column in the browser: the field, then one large action on the right. */
+    .UploadStage {
+        --stage-accent: #4338ca;
+        --stage-gap: 1.5rem;
+        --stage-action: 2.75rem;
+
+        display: grid;
+        min-block-size: clamp(24rem, 44vw, 33rem);
+        place-items: center;
+        padding: clamp(2rem, 6vw, 4.5rem) clamp(1rem, 4vw, 3rem);
+
+        .UploadStage_container {
+            display: grid;
+            inline-size: min(100%, 34rem);
+            gap: var(--stage-gap);
+
+            &.UploadStage_container--wide {
+                inline-size: min(100%, 48rem);
+            }
+        }
+
+        form,
+        form > div:not([class]) {
+            display: grid;
+            min-inline-size: 0;
+            gap: var(--stage-gap);
+            margin: 0;
+        }
+
+        /* A heading that is not a label takes the look of the form labels */
+        .UploadStage_label {
+            margin: 0;
+            color: var(--color-secondary-text);
+            font-family: inherit;
+            font-size: .875rem;
+            font-weight: 400;
+            line-height: 1.25rem;
+            letter-spacing: normal;
+        }
+
+        .UploadStage_field {
+            display: grid;
+            min-inline-size: 0;
+            gap: .5rem;
+        }
+
+        .UploadStage_outcome {
+            margin: 0;
+            color: var(--color-secondary-text);
+            font-family: var(--font-mono);
+            font-size: .75rem;
+            font-variant-numeric: tabular-nums;
+            line-height: 1.35;
+
+            strong {
+                color: var(--color-body-text);
+                font-weight: 600;
+            }
+
+            /* A size that could not be measured says nothing */
+            [data-upload-payload-target]:not([data-state='measured']),
+            [data-upload-payload-target]:not([data-state='measured']) + span {
+                display: none;
+            }
+        }
+
+        .UploadStage_note {
+            margin: 0;
+            padding: .85rem 1rem;
+            border-radius: .65rem;
+            background: color-mix(in oklch, var(--stage-accent) 9%, transparent);
+            font-size: .9rem;
+            line-height: 1.5;
+        }
+
+        .UploadStage_actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .UploadStage_sample {
+            padding: 0;
+            border: 0;
+            color: var(--color-secondary-text);
+            background: none;
+            font-size: .8125rem;
+            text-decoration: underline;
+            text-decoration-color: color-mix(in oklch, currentColor 35%, transparent);
+            text-underline-offset: .3em;
+            cursor: pointer;
+            transition: color 150ms ease;
+
+            &:hover {
+                color: var(--color-body-text);
+            }
+
+            &[aria-busy='true'] {
+                opacity: .6;
+            }
+
+            /* Sits on the row of a submit button that belongs to another template */
+            &.UploadStage_sample--beside-submit {
+                block-size: var(--stage-action);
+                margin-block-start: calc(-1 * (var(--stage-action) + var(--stage-gap)));
+                justify-self: start;
+            }
+        }
+
+        /* The black pill of the Pagination demos: present, never the subject */
+        .UploadStage_submit {
+            display: flex;
+            inline-size: fit-content;
+            min-block-size: var(--stage-action);
+            align-items: center;
+            margin-inline-start: auto;
+            padding-inline: 1.5rem;
+            border: 1px solid #0d0e0f;
+            border-radius: 999px;
+            color: #f4f1f5;
+            background: #0d0e0f;
+            box-shadow: inset 0 0 0 1px rgb(255 255 255 / 7%);
+            font-size: .8125rem;
+            font-weight: 500;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: background-color 150ms ease, scale 150ms ease;
+
+            &:hover {
+                background: #24282c;
+            }
+
+            &:active {
+                scale: .96;
+            }
+
+            &:focus-visible {
+                outline: 2px solid var(--stage-accent);
+                outline-offset: 3px;
+            }
+        }
+
+        .UploadStage_variants {
+            display: grid;
+            gap: clamp(2.5rem, 6vw, 4rem);
+
+            .UploadStage_variant {
+                display: grid;
+                min-inline-size: 0;
+                align-content: start;
+                gap: .75rem;
+            }
+
+            &:not(.UploadStage_variants--columns) .UploadStage_variant + .UploadStage_variant {
+                padding-block-start: clamp(2.5rem, 6vw, 4rem);
+                border-block-start: 1px solid var(--color-border-translucent);
+            }
+        }
+
+        .UploadStage_list {
+            display: grid;
+            gap: .9rem;
+            padding-block-start: var(--stage-gap);
+            border-block-start: 1px solid var(--color-border-translucent);
+
+            p {
+                margin: 0;
+                color: var(--color-secondary-text);
+                font-size: .875rem;
+                line-height: 1.5;
+            }
+
+            > ul {
+                display: grid;
+                gap: .9rem;
+                margin: 0;
+                padding: 0;
+                list-style: none;
+
+                &:empty {
+                    display: none;
+                }
+
+                ul {
+                    margin: .35rem 0 0;
+                    padding: 0;
+                    color: var(--color-secondary-text);
+                    font-size: .875rem;
+                    list-style: none;
+
+                    span {
+                        opacity: .65;
+                    }
+                }
+            }
+        }
+    }
+
+    /* Dark stage: below the page, as in the Pagination demos, with a near-white ink and clearer edges than the page. */
+    .dark .UploadStage {
+        --stage-accent: #a5b4fc;
+        --color-body-text: #f7f5fb;
+        --color-secondary-text: #c3c7cd;
+        --color-border-translucent: rgb(255 255 255 / 18%);
+
+        color: var(--color-body-text);
+        background: #17191b;
+
+        /* Black on a dark stage: a hairline of light keeps the pill readable */
+        .UploadStage_submit {
+            box-shadow: inset 0 0 0 1px rgb(255 255 255 / 14%);
+        }
+    }
+
+    @media (min-width: 900px) {
+        .UploadStage .UploadStage_variants--columns {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    .UploadAvatar {
+        display: grid;
+        gap: 1rem;
+
+        /* The empty avatar. Once the field holds a file, its own preview takes this place. */
+        .UploadAvatar_picture {
+            display: grid;
+            inline-size: 8rem;
+            aspect-ratio: 1;
+            border: 1px solid var(--color-border-translucent);
+            border-radius: 50%;
+            color: var(--color-secondary-text);
+            justify-self: center;
+            place-items: center;
+
+            svg {
+                inline-size: 2.25rem;
+                block-size: 2.25rem;
+            }
+        }
+
+        &:has([data-ux-upload-item]) .UploadAvatar_picture {
+            display: none;
+        }
+
+        .UploadAvatar_status p {
+            margin: 0;
+            color: var(--color-secondary-text);
+            font-size: .8rem;
+            text-align: center;
+        }
+    }
+}
+
+/* Outside any layer, to win over the utilities of the site form theme: the stage sets the rhythm between rows. */
+.UploadStage form .mb-4 {
+    margin-block-end: 0;
+}
+
+/* Same reason, dark stage: labels close to the ink, inputs with a visible edge, a progress bar that reads on the field. */
+.dark .UploadStage :is(label:not(.ux-upload *), .UploadStage_label) {
+    color: color-mix(in oklch, var(--color-body-text) 88%, transparent);
+}
+
+.dark .UploadStage input:is([type='text'], [type='file']):not(.ux-upload *, .border-red-500) {
+    border-color: var(--color-border-translucent);
+}
+
+.dark .UploadStage :is(.ux-upload__progress-bar, .ux-upload__summary-progress-bar) {
+    background: #818cf8;
+}
+
+/* Near-white text looks heavier on a dark stage: bold drops one step. */
+.dark .UploadStage :is(.ux-upload__name, .UploadStage_outcome strong) {
+    font-weight: 500;
+}
+
+.dark .UploadStage .ux-upload--compact .ux-upload__input::file-selector-button {
+    font-weight: 500;
+}
+
+.dark .UploadStage .ux-upload--dropzone .ux-upload__dropzone:not(:hover, .is-active) {
+    border-color: color-mix(in oklch, var(--ux-upload-text) 40%, transparent);
+}
+
+.dark .UploadStage .ux-upload--dropzone .ux-upload__dropzone-icon {
+    color: var(--ux-upload-text);
+}
+
+/*
+ * The avatar is the preview the field draws from the selected file: the server sends none back.
+ * The rules follow the documented data attributes of the field, not its class names.
+ */
+.LiveAvatar [data-controller~='symfony--ux-upload--upload'] {
+    display: grid;
+    gap: 1rem;
+}
+
+/* The picture first, where the empty avatar was: the file input goes under it */
+.LiveAvatar [data-symfony--ux-upload--upload-target='list'] {
+    order: -1;
+}
+
+.LiveAvatar [data-ux-upload-item][data-status] {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'visual' 'metadata' 'progress' 'status' 'actions';
+    padding: 0;
+    border: 0;
+    background: none;
+    text-align: center;
+}
+
+/* The frame around the preview image */
+.LiveAvatar [data-ux-upload-item] > :has(> [data-ux-upload-preview]) {
+    width: 8rem;
+    border-radius: 50%;
+    justify-self: center;
+}
+
+.LiveAvatar [data-ux-upload-item] > :has(> [data-ux-upload-action]) {
+    justify-content: center;
+}

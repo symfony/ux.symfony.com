@@ -33,6 +33,14 @@
         color: #a3af87;
     }
 
+    .hl-context {
+        color: #8c93a5;
+
+        span {
+            color: inherit;
+        }
+    }
+
     .hl-blur {
         filter: blur(2px);
     }
@@ -62,9 +70,19 @@
     }
 
     .hl-deletion {
+        position: relative;
         display: inline-block;
-        min-width: 100%;
+        min-width: calc(100% + 1em);
+        margin-left: -1em;
+        padding-left: 1em;
         background-color: #FF000011;
+    }
+
+    .hl-deletion::before {
+        content: "-";
+        position: absolute;
+        left: 0.25em;
+        user-select: none;
     }
 
     .hl-gutter {

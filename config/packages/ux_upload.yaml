@@ -1,0 +1,24 @@
+ux_upload:
+    storage: local
+    temp_dir: '%app.upload_demo_dir%/tmp'
+    local_storage:
+        directory: '%app.upload_demo_dir%'
+    completed_ttl: 300
+    max_pending_per_owner: 10
+    rate_limiter: limiter.upload_demo
+
+    uploaders:
+        documents:
+            max_size: 1M
+            allowed_types: ['application/pdf']
+        gallery:
+            max_size: 1M
+            allowed_types: ['image/png', 'image/jpeg', 'image/webp']
+        avatars:
+            max_size: 1M
+            allowed_types: ['image/png', 'image/jpeg', 'image/webp']
+        large:
+            max_size: 1M
+            allowed_types: ['application/zip']
+            chunk_size: 64K
+            parallel_chunks: 2

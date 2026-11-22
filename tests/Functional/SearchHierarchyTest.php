@@ -127,6 +127,7 @@ final class SearchHierarchyTest extends KernelTestCase
         yield 'turbo infinite scroll 1/2' => ['/demos/turbo/infinite-scroll', ['Demos', 'Turbo', 'Turbo Infinite Scroll - 1/2']];
         yield 'turbo infinite scroll 2/2' => ['/demos/turbo/infinite-scroll-2', ['Demos', 'Turbo', 'Turbo Infinite Scroll - 2/2']];
         yield 'pagination demo' => ['/demos/pagination/themes', ['Demos', 'Pagination', 'Pagination Themes']];
+        yield 'upload demo' => ['/demos/upload/keep-files', ['Demos', 'Upload', 'Keep Files on Errors']];
 
         yield 'kit list' => ['/kits', ['Kits', 'UI Kits']];
         yield 'kit' => ['/toolkit/kits/shadcn', ['Kits', 'Shadcn UI']];
@@ -148,5 +149,6 @@ final class SearchHierarchyTest extends KernelTestCase
         }
         yield 'demo list' => ['/demos', []];
         yield 'pagination demo list' => ['/demos/pagination', []];
+        yield 'upload demo list' => ['/demos/upload', []];
     }
 }

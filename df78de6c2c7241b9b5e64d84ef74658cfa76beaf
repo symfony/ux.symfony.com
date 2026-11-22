@@ -1,0 +1,16 @@
+---------------------------------------------------------------------------
+
+by smnandre at 2026-11-22T00:05:41Z
+
+Tested on the PR environment
+*the old screenshot URLs return a 301
+* all targets in images/demos/{package}/ returns a 200
+* same AssetMapper hashes (they are based on file content)
+
+✅
+
+---------------------------------------------------------------------------
+
+by smnandre at 2026-11-22T10:11:26Z
+
+Rebased to migrate the upload demos on top of these changes

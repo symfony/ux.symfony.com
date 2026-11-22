@@ -11,7 +11,7 @@
 
 namespace App\Controller\Demo\Upload;
 
-use App\Model\LiveDemo;
+use App\Service\DemoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -20,22 +20,9 @@ use Symfony\Component\Routing\Attribute\Route;
 final class LiveAvatarDemoController extends AbstractController
 {
     #[Route('/live-avatar', name: 'app_demo_upload_live_avatar')]
-    public function liveAvatar(): Response
+    public function liveAvatar(DemoRepository $demoRepository): Response
     {
-        $demo = new LiveDemo(
-            'upload-live-avatar',
-            name: 'Live Avatar',
-            description: 'Update a LiveComponent when the upload completes.',
-            author: 'smnandre',
-            publishedAt: '2026-11-15',
-            tags: ['upload', 'LiveComponent', 'avatar'],
-            longDescription: 'When an [`UploadType`](/upload) field completes its upload, the signed reference lands on an
-                `#[UploadTarget]` prop and the component renders again with the name and size
-                it received. No form submission, no page reload. The picture is the preview
-                of your browser: this public server keeps no file and sends none back.',
-            route: 'app_demo_upload_live_avatar',
-            template: 'demos/upload/live_avatar.html.twig',
-        );
+        $demo = $demoRepository->find('upload', 'live-avatar');
 
         return $this->render($demo->getTemplate(), [
             'demo' => $demo,

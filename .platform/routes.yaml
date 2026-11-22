@@ -1,6 +1,28 @@
 "https://{all}/":
     type: upstream
     upstream: "app:http"
+    redirects:
+        paths:
+            # Demo screenshots moved to images/demos/{package}/
+            '/assets/images/turbo_demo':
+                to: '/assets/images/demos/turbo'
+                code: 301
+            '^/assets/images/live_demo/((?:pagination|cursor-pagination|pagination-themes)-.*)$':
+                regexp: true
+                to: '/assets/images/demos/pagination/$1'
+                code: 301
+            '^/assets/images/live_demo/upload-((?:keep-files|turbo|live-avatar|input|dropzone|resumable)-.*)$':
+                regexp: true
+                to: '/assets/images/demos/upload/$1'
+                code: 301
+            '^/assets/images/live_demo/(inspector-.*)$':
+                regexp: true
+                to: '/assets/images/demos/inspector/$1'
+                code: 301
+            '^/assets/images/live_demo/((?!pagination-|cursor-pagination-|inspector-|upload-(?:keep-files|turbo|live-avatar|input|dropzone|resumable)-).*)$':
+                regexp: true
+                to: '/assets/images/demos/live-component/$1'
+                code: 301
 
 "http://{all}/":
     type: redirect

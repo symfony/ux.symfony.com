@@ -130,7 +130,7 @@ final class UploadDemosTest extends KernelTestCase
         $count = \count($urls);
 
         $links = $this->browser()->visit($url)->assertSuccessful()->crawler()
-            ->filter('aside nav[aria-label="More Upload demos"] .Card a')
+            ->filter('aside nav[aria-label="More demos"] .Card a')
             ->each(static fn (Crawler $link): string => (string) $link->attr('href'));
 
         self::assertSame([$urls[($position - 1 + $count) % $count], $urls[($position + 1) % $count]], $links);

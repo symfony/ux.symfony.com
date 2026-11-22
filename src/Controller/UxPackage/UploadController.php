@@ -13,6 +13,7 @@ namespace App\Controller\UxPackage;
 
 use App\Form\UploadCardGridForm;
 use App\Form\UploadDocumentForm;
+use App\Service\DemoRepository;
 use App\Service\UxPackageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +23,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class UploadController extends AbstractController
 {
     #[Route('/upload', name: 'app_upload')]
-    public function __invoke(UxPackageRepository $packageRepository, Request $request): Response
+    public function __invoke(UxPackageRepository $packageRepository, DemoRepository $demoRepository, Request $request): Response
     {
         $form = $this->createForm(UploadDocumentForm::class, options: [
             'action' => $this->generateUrl('app_upload', ['_fragment' => 'try']),
@@ -40,6 +41,7 @@ class UploadController extends AbstractController
             'form' => $form,
             // Shown as a running example: the field uploads on its own, the form is never submitted
             'gallery' => $this->createForm(UploadCardGridForm::class),
+            'demos' => $demoRepository->findByPackage('upload'),
         ], new Response(status: $form->isSubmitted() ? Response::HTTP_UNPROCESSABLE_ENTITY : Response::HTTP_OK));
     }
 }

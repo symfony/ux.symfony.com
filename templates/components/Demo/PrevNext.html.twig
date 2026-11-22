@@ -1,6 +1,6 @@
 
 <div class="max-w-[1400px] mx-auto p-6 md:p-12">
-    <div style="display: flex; gap: 3rem; flex-wrap: wrap;" class="justify-center lg:justify-between align-stretch">
+    <nav aria-label="More demos" style="display: flex; gap: 3rem; flex-wrap: wrap;" class="justify-center lg:justify-between align-stretch">
         {% set previous = this.previous(loop) %}
         {% if previous %}
             <div class="max-w-[380px] flex only:mx-auto">
@@ -18,5 +18,5 @@
                 <twig:Demo:DemoCard demo="{{ next }}" />
             </div>
         {% endif %}
-    </div>
+    </nav>
 </div>

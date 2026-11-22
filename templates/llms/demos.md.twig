@@ -16,7 +16,7 @@
 Tags: {{ demo.tags|join(', ') }}
 
 {% endif -%}
-- [View demo](https://ux.symfony.com/demos/live-component/{{ demo.identifier }})
+- [View demo](https://ux.symfony.com{{ path(demo.route) }})
 
 {% endfor %}
 {% endautoescape %}

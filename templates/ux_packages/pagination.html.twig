@@ -354,7 +354,7 @@ return $this->render('product/index.html.twig', [
         <div class="PaginationLiveLayout">
             <figure class="PaginationLivePreview">
                 <img
-                    src="{{ asset('images/live_demo/pagination.png') }}"
+                    src="{{ asset('images/demos/pagination/pagination.png') }}"
                     alt="Live Pagination demo with jersey filters and pagination controls"
                     loading="lazy"
                     width="640"
@@ -505,7 +505,7 @@ range(11, 20), $page->getItems(),
             </a>
         </div>
 
-        {{ include('demos/pagination/_cards.html.twig', {show_tags: false, class: 'mt-12'}) }}
+        <twig:Demo:DemoGrid :demos="demos" compact class="mt-12" />
     </twig:Package:Section>
 
     {{ parent() }}

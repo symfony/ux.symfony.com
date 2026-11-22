@@ -337,7 +337,7 @@ if ($form->isSubmitted() && $form->isValid()) {
             <figure class="m-0">
                 <a href="{{ path('app_demo_upload_resumable') }}" class="block overflow-hidden rounded-xl border border-body-text/15">
                     <img
-                        src="{{ asset('images/live_demo/upload-resumable-1280x720.png') }}"
+                        src="{{ asset('images/demos/upload/resumable-1280x720.png') }}"
                         alt="A large file halfway through its upload, with Pause and Cancel buttons"
                         loading="lazy"
                         width="1280"
@@ -503,6 +503,6 @@ public ?string $photo = null;{% endset %}
             <twig:LinkButton url="{{ path('app_demo_upload') }}" label="Browse the Upload demos" outline arrow class="mt-7 shrink-0 md:mt-0" />
         </div>
 
-        {{ include('demos/upload/_cards.html.twig', {show_tags: false, class: 'mt-12'}) }}
+        <twig:Demo:DemoGrid :demos="demos" compact class="mt-12" />
     </twig:Package:Section>
 {% endblock %}

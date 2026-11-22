@@ -11,9 +11,8 @@
 
 namespace App\Controller\Demo;
 
+use App\Service\DemoRepository;
 use App\Service\EmojiCollection;
-use App\Service\LiveDemoRepository;
-use App\Service\TurboDemoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,9 +26,8 @@ class TurboDemoController extends AbstractController
     private const int PER_PAGE = 12;
 
     public function __construct(
-        private readonly TurboDemoRepository $turboDemoRepository,
+        private readonly DemoRepository $demoRepository,
         private readonly EmojiCollection $emojiCollection,
-        private readonly LiveDemoRepository $liveDemoRepository,
     ) {
     }
 
@@ -60,8 +58,8 @@ class TurboDemoController extends AbstractController
         }
 
         return $this->render('demos/turbo/infinite_scroll.html.twig', [
-            'demo' => $this->turboDemoRepository->find('infinite-scroll'),
-            'relatedLiveDemo' => $this->liveDemoRepository->find('infinite-scroll'),
+            'demo' => $this->demoRepository->find('turbo', 'infinite-scroll'),
+            'relatedLiveDemo' => $this->demoRepository->find('live-component', 'infinite-scroll'),
             'items' => $items,
             'has_more' => $hasMore,
             'next_page' => $nextPage,
@@ -89,8 +87,8 @@ class TurboDemoController extends AbstractController
         }
 
         return $this->render('demos/turbo/infinite_scroll_2.html.twig', [
-            'demo' => $this->turboDemoRepository->find('infinite-scroll-2'),
-            'relatedLiveDemo' => $this->liveDemoRepository->find('infinite-scroll-2'),
+            'demo' => $this->demoRepository->find('turbo', 'infinite-scroll-2'),
+            'relatedLiveDemo' => $this->demoRepository->find('live-component', 'infinite-scroll-2'),
             'items' => $items,
             'has_more' => $hasMore,
             'next_page' => $nextPage,

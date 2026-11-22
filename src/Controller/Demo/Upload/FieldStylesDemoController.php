@@ -15,7 +15,7 @@ use App\Form\UploadCardGridForm;
 use App\Form\UploadDropzoneForm;
 use App\Form\UploadEnhancedInputForm;
 use App\Form\UploadSimpleInputForm;
-use App\Model\LiveDemo;
+use App\Service\DemoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,44 +26,29 @@ use Symfony\UX\Upload\Upload\UploadedFile;
 final class FieldStylesDemoController extends AbstractController
 {
     /**
-     * Each field style demo compares two variants of the same layout, one form each.
+     * The variants each field style demo compares: two takes on the same layout, one form each.
      */
     private const FIELD_STYLES = [
         'input' => [
-            'name' => 'Simple & Enhanced Input',
-            'description' => 'The compact field: a native input, or a list with previews and progress.',
-            'longDescription' => 'The compact layout of [`UploadType`](/upload), twice. On the left, the browser file input,
-                which uploads in the background. On the right, a list of files with thumbnails, progress,
-                and buttons to cancel, retry, or remove each transfer.',
-            'tags' => ['upload', 'compact', 'preview'],
-            'variants' => [
-                'simple' => ['form' => UploadSimpleInputForm::class, 'title' => 'Simple', 'lines' => [26, 29], 'sample' => 'pdf', 'names' => ['dinosaurs-are-alive.pdf']],
-                'enhanced' => ['form' => UploadEnhancedInputForm::class, 'title' => 'Enhanced', 'lines' => [26, 32], 'sample' => 'images'],
-            ],
+            'simple' => ['form' => UploadSimpleInputForm::class, 'title' => 'Simple', 'lines' => [26, 29], 'sample' => 'pdf', 'names' => ['dinosaurs-are-alive.pdf']],
+            'enhanced' => ['form' => UploadEnhancedInputForm::class, 'title' => 'Enhanced', 'lines' => [26, 32], 'sample' => 'images'],
         ],
         'dropzone' => [
-            'name' => 'Dropzone & Card Grid',
-            'description' => 'A large drop target, with a file list or a grid of image cards.',
-            'longDescription' => 'The dropzone layout of [`UploadType`](/upload): drop, paste, or click to browse. Without previews, files line up under
-                the target. With `show_preview`, each image becomes a card in a responsive grid.',
-            'tags' => ['upload', 'dropzone', 'gallery'],
-            'variants' => [
-                'list' => ['form' => UploadDropzoneForm::class, 'title' => 'File list', 'lines' => [26, 31], 'sample' => 'pdf', 'names' => ['world-domination-plan.pdf', 'secret-ux-roadmap.pdf']],
-                'grid' => ['form' => UploadCardGridForm::class, 'title' => 'Card grid', 'lines' => [26, 32], 'sample' => 'images'],
-            ],
+            'list' => ['form' => UploadDropzoneForm::class, 'title' => 'File list', 'lines' => [26, 31], 'sample' => 'pdf', 'names' => ['world-domination-plan.pdf', 'secret-ux-roadmap.pdf']],
+            'grid' => ['form' => UploadCardGridForm::class, 'title' => 'Card grid', 'lines' => [26, 32], 'sample' => 'images'],
         ],
     ];
 
     #[Route('/input', name: 'app_demo_upload_input', defaults: ['style' => 'input'])]
     #[Route('/dropzone', name: 'app_demo_upload_dropzone', defaults: ['style' => 'dropzone'])]
-    public function fieldStyle(Request $request, string $style): Response
+    public function fieldStyle(Request $request, string $style, DemoRepository $demoRepository): Response
     {
-        $definition = self::FIELD_STYLES[$style];
-        $route = 'app_demo_upload_'.$style;
+        $demo = $demoRepository->find('upload', $style);
+        $route = $demo->getRoute();
 
         $forms = [];
         $submitted = false;
-        foreach ($definition['variants'] as $key => $variant) {
+        foreach (self::FIELD_STYLES[$style] as $key => $variant) {
             $form = $this->createForm($variant['form']);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
@@ -85,18 +70,6 @@ final class FieldStylesDemoController extends AbstractController
                 'file' => 'src/Form/'.(new \ReflectionClass($variant['form']))->getShortName().'.php',
             ];
         }
-
-        $demo = new LiveDemo(
-            'upload-'.$style,
-            name: $definition['name'],
-            description: $definition['description'],
-            author: 'smnandre',
-            publishedAt: '2026-11-15',
-            tags: $definition['tags'],
-            longDescription: $definition['longDescription'],
-            route: $route,
-            template: 'demos/upload/field_style.html.twig',
-        );
 
         return $this->render($demo->getTemplate(), [
             'demo' => $demo,

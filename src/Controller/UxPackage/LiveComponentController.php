@@ -11,7 +11,7 @@
 
 namespace App\Controller\UxPackage;
 
-use App\Service\LiveDemoRepository;
+use App\Service\DemoRepository;
 use App\Service\UxPackageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,18 +20,18 @@ use Symfony\Component\Routing\Attribute\Route;
 class LiveComponentController extends AbstractController
 {
     #[Route('/live-component', name: 'app_live_component')]
-    public function __invoke(UxPackageRepository $packageRepository, LiveDemoRepository $liveDemoRepository): Response
+    public function __invoke(UxPackageRepository $packageRepository, DemoRepository $demoRepository): Response
     {
         $package = $packageRepository->find('live-component');
 
         return $this->render('ux_packages/live_component.html.twig', [
             'package' => $package,
-            'demos' => $liveDemoRepository->findAll(),
+            'demos' => $demoRepository->findByPackage('live-component'),
         ]);
     }
 
     #[Route('/live-component/demos/{demo}', name: 'app_live_component_demo_redirect')]
-    public function redirectDemo(LiveDemoRepository $liveDemoRepository, ?string $demo = null): Response
+    public function redirectDemo(DemoRepository $demoRepository, ?string $demo = null): Response
     {
         if (null === $demo || '' === $demo) {
             return $this->redirectToRoute('app_demos');
@@ -39,7 +39,7 @@ class LiveComponentController extends AbstractController
 
         try {
             // Permanent Redirect old URL
-            $liveDemo = $liveDemoRepository->find($demo);
+            $liveDemo = $demoRepository->find('live-component', $demo);
 
             return $this->redirectToRoute($liveDemo->getRoute(), [], 301);
         } catch (\InvalidArgumentException $e) {

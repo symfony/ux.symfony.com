@@ -95,7 +95,7 @@ tree templates/components
 
 {% block package_demo %}
     <div id="demo" class="mt-24 scroll-mt-20">
-        {{ include('toolkit/docs/_preview.html.twig', {previewUrl: url('app_toolkit', {preview: 'demo'})}) }}
+        {{ include('toolkit/docs/_preview.html.twig', {previewUrl: demo_preview_url}) }}
     </div>
 {% endblock %}
 

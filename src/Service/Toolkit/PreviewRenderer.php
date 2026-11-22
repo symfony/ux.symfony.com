@@ -31,6 +31,7 @@ final class PreviewRenderer
         private readonly Environment $twig,
         #[Autowire(service: 'ux_toolkit.kit.kit_context_runner')]
         private readonly KitContextRunner $kitContextRunner,
+        private readonly PreviewVersion $previewVersion,
         #[Autowire(service: 'profiler')]
         private readonly ?Profiler $profiler = null,
     ) {
@@ -77,8 +78,14 @@ final class PreviewRenderer
         );
 
         $response = new Response($html, headers: ['X-Robots-Tag' => 'noindex, indexifembedded']);
-        // The HTML points to hashed assets that a deploy removes, so it is revalidated on every load
-        $response->setCache(['public' => true, 'no_cache' => true, 'etag' => hash('xxh128', $html)]);
+
+        if ($this->previewVersion->isRequested($request)) {
+            $response->setCache(['public' => true, 'max_age' => 31536000, 's_maxage' => 31536000, 'immutable' => true, 'etag' => hash('xxh128', $html)]);
+        } else {
+            // Another build, or no build at all: the HTML points to hashed assets that a deploy removes, so it is revalidated on every load
+            $response->setCache(['public' => true, 'no_cache' => true, 'etag' => hash('xxh128', $html)]);
+        }
+
         $response->isNotModified($request);
 
         return $response;

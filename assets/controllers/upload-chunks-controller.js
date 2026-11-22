@@ -1,4 +1,5 @@
 import { Controller } from '@hotwired/stimulus';
+import { ChunkCounter } from '../demos/upload/chunk_counter.js';
 
 /*
  * Counts the chunks this page sends, from the upload field events. When a
@@ -11,24 +12,25 @@ export default class extends Controller {
     static targets = ['sent', 'summary'];
 
     connect() {
-        this.sent = 0;
-        this.total = 0;
+        this.counter = new ChunkCounter();
+    }
+
+    start() {
+        this.counter.reset();
+        this.sentTarget.textContent = 'No chunk sent yet.';
+        this.summaryTarget.hidden = true;
     }
 
     chunk(event) {
-        this.sent++;
-        this.total = event.detail.totalChunks;
-        this.sentTarget.textContent = `${this.sent} of ${this.total} chunks sent from this page`;
+        this.counter.record(event.detail.totalChunks);
+        this.sentTarget.textContent = this.counter.progressLabel();
     }
 
     complete() {
-        if (0 === this.total) return;
+        const label = this.counter.summaryLabel();
+        if (null === label) return;
 
-        const reused = this.total - this.sent;
         this.summaryTarget.hidden = false;
-        this.summaryTarget.textContent =
-            reused > 0
-                ? `Resumed: ${reused} of ${this.total} chunks were already on the server.`
-                : `All ${this.total} chunks sent. Reload during the next transfer to see a resume.`;
+        this.summaryTarget.textContent = label;
     }
 }

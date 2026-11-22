@@ -61,7 +61,7 @@ final class UploadDemosTest extends KernelTestCase
         '/demos/upload/resumable' => [
             'config/packages/ux_upload.yaml' => ['large:', 'parallel_chunks: 2'],
             'src/Form/UploadLargeFileForm.php' => ["\$builder->add('file', UploadType::class, [", ']);'],
-            'assets/controllers/upload-chunks-controller.js' => ['chunk(event) {', '}'],
+            'assets/controllers/upload-chunks-controller.js' => ['start() {', '}'],
             'src/EventListener/SlowDemoUploadListener.php' => ['#[AsEventListener(event: KernelEvents::REQUEST)]', '}'],
         ],
     ];

@@ -6,7 +6,7 @@
             <div
                 class="UploadStage Resumable"
                 data-controller="upload-chunks"
-                data-action="symfony--ux-upload--upload:chunk->upload-chunks#chunk symfony--ux-upload--upload:complete->upload-chunks#complete"
+                data-action="symfony--ux-upload--upload:start->upload-chunks#start symfony--ux-upload--upload:chunk->upload-chunks#chunk symfony--ux-upload--upload:complete->upload-chunks#complete"
             >
                 <div class="UploadStage_container">
                     {% for message in app.flashes('resumable_success') %}
@@ -75,16 +75,16 @@ chunks it already holds, and only the missing ones are sent.
             <twig:Code:CodeWithExplanationRow
                 filename="assets/controllers/upload-chunks-controller.js"
                 :lineStart="18"
-                :lineEnd="33"
+                :lineEnd="35"
                 reversed
                 sticky
             >
 ## Listen to the field
 
-The field emits browser events while it works: `chunk` each time the server
-stores one, `complete` when it holds the whole file.
+The field emits browser events while it works: `start` when a transfer begins,
+`chunk` each time the server stores one, `complete` when it holds the whole file.
 
-The counter under the field is this Stimulus controller, bound to both events
+The counter under the field is this Stimulus controller, bound to these events
 with `data-action`. The upload does not need it: the field shows its own
 progress. See the [JavaScript API](https://github.com/symfony/ux/blob/3.x/src/Upload/doc/javascript.rst).
             </twig:Code:CodeWithExplanationRow>

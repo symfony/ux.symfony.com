@@ -100,10 +100,14 @@ final class InspectorDemoTest extends WebTestCase
     {
         $cart = $this->createLiveComponent('Demo:InspectorCart', ['items' => [1, 2, 3, 4]]);
         $cart->call('remove', ['product' => 4]);
-        self::assertSame([1, 2, 3], $cart->component()->items);
-        self::assertSame(78, $cart->component()->getSubtotal());
+        $component = $cart->component();
+        self::assertSame([1, 2, 3], $component->items);
+        self::assertSame(78, $component->getSubtotal());
+
         $cart->call('remove', ['product' => 4]);
-        self::assertSame(78, $cart->component()->getSubtotal());
+        $component = $cart->component();
+        self::assertSame([1, 2, 3], $component->items);
+        self::assertSame(78, $component->getSubtotal());
     }
 
     public function testDeliveryEventUpdatesTheNestedTotal(): void

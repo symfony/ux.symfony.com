@@ -747,9 +747,6 @@
             "ref": "7243ab070ed66198eb82c026684e9b9773e7b64a"
         }
     },
-    "theseer/tokenizer": {
-        "version": "1.2.1"
-    },
     "twig/extra-bundle": {
         "version": "v3.3.8"
     },

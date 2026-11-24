@@ -72,7 +72,7 @@ class UxPackageRepository
                 'live-component',
                 'Live Components',
                 'app_live_component',
-                '#D98A11',
+                '#EE9812',
                 'Interactive UI in PHP & Twig',
                 'Build dynamic interfaces with zero JavaScript',
                 new \DateTimeImmutable('2021-12-09'),

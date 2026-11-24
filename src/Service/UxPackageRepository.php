@@ -62,8 +62,10 @@ class UxPackageRepository
                 'Create PHP classes that can render themselves',
                 new \DateTimeImmutable('2021-12-03'),
                 'I need to create PHP classes that render',
+                'twig-component.svg',
                 groups: [PackageGroup::Foundation, PackageGroup::DesignSystem],
                 related: ['live-component', 'toolkit', 'css'],
+                imageScale: 0.595,
             ),
 
             new UxPackage(
@@ -75,8 +77,10 @@ class UxPackageRepository
                 'Build dynamic interfaces with zero JavaScript',
                 new \DateTimeImmutable('2021-12-09'),
                 'I need Twig templates that update in real-time!',
+                'live-component.svg',
                 groups: [PackageGroup::Foundation, PackageGroup::Forms],
                 related: ['twig-component', 'stimulus', 'inspector'],
+                imageScale: 0.595,
             ),
 
             (new UxPackage(

@@ -21,8 +21,9 @@ class UxPackage
     private ?string $screencastLinkText = null;
 
     /**
-     * @param list<string>       $related Names of the packages suggested at the end of the package page
-     * @param list<PackageGroup> $groups  The groups of the catalogue the package is listed in
+     * @param list<string>       $related    Names of the packages suggested at the end of the package page
+     * @param list<PackageGroup> $groups     The groups of the catalogue the package is listed in
+     * @param float|null         $imageScale Width of the image as a share of its tile, for an image drawn without padding
      */
     public function __construct(
         private string $name,
@@ -43,6 +44,7 @@ class UxPackage
         private ?string $socialTitle = null,
         private array $related = [],
         private array $groups = [],
+        private ?float $imageScale = null,
     ) {
     }
 
@@ -103,6 +105,11 @@ class UxPackage
     public function getImageFilename(?string $format = null): string
     {
         return $this->imageFileName ?? $this->name.($format ? '-'.$format : '').'.png';
+    }
+
+    public function getImageScale(): ?float
+    {
+        return $this->imageScale;
     }
 
     public function getTagLine(): string

@@ -9,7 +9,7 @@
         titleClass="text-xl!"
     >
         <twig:block name="logo">
-            <img width="36" height="36" src="{{ asset('images/ux_packages/' ~ package.imageFilename) }}"
+            <img width="36" height="36" src="{{ asset('images/ux_packages/' ~ package.imageFilename) }}"{% if package.imageScale %} style="width: calc({{ package.imageScale }} * var(--logo-size))"{% endif %}
                  alt="Image for the {{ package.humanName }} UX package">
         </twig:block>
         <twig:block name="title">

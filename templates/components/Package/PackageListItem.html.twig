@@ -5,7 +5,7 @@
     style="{{ box_style }}"
 >
     <div class="flex items-center justify-center shrink-0 rounded-[14%] [background-image:var(--gradient)] bg-(--color) w-(--logo-size) h-(--logo-size) [&_img]:w-[calc(0.4*var(--logo-size))] [&_img]:h-auto [&_img]:filter-[drop-shadow(4px_4px_4px_rgba(0,0,0,0))]">
-        <img width="36" height="36" src="{{ asset('images/ux_packages/' ~ package.imageFilename) }}"
+        <img width="36" height="36" src="{{ asset('images/ux_packages/' ~ package.imageFilename) }}"{% if package.imageScale %} style="width: calc({{ package.imageScale }} * var(--logo-size))"{% endif %}
              alt="Image for the {{ package.humanName }} UX package">
     </div>
 

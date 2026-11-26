@@ -13,7 +13,7 @@
         <img
             width="36"
             height="36"
-            src="{{ asset('images/ux_packages/' ~ package.imageFilename) }}"
+            src="{{ asset('images/ux_packages/' ~ package.imageFilename) }}"{% if package.imageScale %} style="width: calc({{ package.imageScale }} * var(--logo-size))"{% endif %}
             alt=""
         >
     </twig:block>

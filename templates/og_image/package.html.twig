@@ -30,6 +30,7 @@
                 src="{{ asset('images/ux_packages/' ~ image_filename) }}"
                 alt=""
                 class="w-[100px] h-[100px] object-contain"
+                {% if package.imageScale %}style="width: {{ package.imageScale * 200 }}px; height: {{ package.imageScale * 200 }}px"{% endif %}
             >
         </div>
 

@@ -12,6 +12,7 @@
 namespace App\Tests\Functional;
 
 use App\Entity\Food;
+use App\Enum\PackageGroup;
 use App\Model\Demo;
 use App\Model\UxPackage;
 use App\Service\DemoRepository;
@@ -73,6 +74,48 @@ class SmokeTest extends KernelTestCase
             $page->crawler()->filter('[aria-labelledby="homepage-ui-kits-title"] h3 a[href*="/toolkit/kits/"]')->each(static fn ($node): string => $node->text()),
         );
         self::assertSame(1, $page->crawler()->filter('[aria-labelledby="homepage-ui-kits-title"] a[href="/kits"]')->count());
+    }
+
+    public function testHomepageListsEveryNewPackage(): void
+    {
+        $expected = array_map(static fn (UxPackage $package): string => $package->getHumanName(), new UxPackageRepository()->findLatestNew());
+
+        $page = $this->browser()
+            ->visit('/')
+            ->assertSuccessful()
+        ;
+        $listed = $page->crawler()->filter('[aria-labelledby="homepage-new-packages-title"] h3 a')->each(static fn ($node): string => $node->text());
+
+        self::assertSame($expected, $listed);
+    }
+
+    #[DataProvider('providePackageGroups')]
+    public function testHomepageAnswersAGroupQuestionWithItsFirstPackages(PackageGroup $group): void
+    {
+        $packages = array_map(static fn (UxPackage $package): string => $package->getHumanName(), new UxPackageRepository()->findByGroup($group));
+        $expected = \count($packages) > 4 ? \array_slice($packages, 0, 3) : $packages;
+
+        $page = $this->browser()
+            ->visit('/')
+            ->assertSuccessful()
+        ;
+        $row = $page->crawler()->filter('#homepage-packages-'.$group->value);
+        $listed = $row->filter('li p a')->each(static fn ($node): string => $node->text());
+
+        self::assertSame($group->question(), $row->filter('h3')->text());
+        self::assertSame('/packages/'.$group->value, $row->filter('h3 a')->attr('href'));
+        self::assertSame($expected, $listed);
+        self::assertSame(\count($packages) > 4 ? 1 : 0, $row->filter('li > a[href="/packages/'.$group->value.'"]')->count());
+    }
+
+    /**
+     * @return iterable<string, array{PackageGroup}>
+     */
+    public static function providePackageGroups(): iterable
+    {
+        foreach (PackageGroup::cases() as $group) {
+            yield $group->value => [$group];
+        }
     }
 
     public function testHomepageFeaturesPagination(): void

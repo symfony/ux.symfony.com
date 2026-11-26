@@ -37,6 +37,19 @@ enum PackageGroup: string
         };
     }
 
+    public function question(): string
+    {
+        return match ($this) {
+            self::Foundation => 'Starting out?',
+            self::Media => 'Dealing with images, maps or charts?',
+            self::Forms => 'Building forms?',
+            self::Navigation => 'Wiring your app to the browser?',
+            self::DesignSystem => 'Creating a design system?',
+            self::Bridges => 'Using another frontend framework?',
+            self::DevTools => 'Debugging?',
+        };
+    }
+
     public function description(): string
     {
         return match ($this) {

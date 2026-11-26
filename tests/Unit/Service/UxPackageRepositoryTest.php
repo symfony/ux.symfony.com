@@ -38,6 +38,16 @@ final class UxPackageRepositoryTest extends TestCase
         }
     }
 
+    public function testFindLatestNewWithoutLimitReturnsEveryNewPackage(): void
+    {
+        $repository = new UxPackageRepository();
+        $expected = array_filter($repository->findAll(removed: false), static fn (UxPackage $package): bool => $package->isNew());
+
+        $packages = $repository->findLatestNew();
+
+        self::assertCount(\count($expected), $packages);
+    }
+
     public function testEveryListedPackageNamesThreeOtherListedPackages(): void
     {
         $repository = new UxPackageRepository();

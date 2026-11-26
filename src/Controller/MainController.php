@@ -11,6 +11,7 @@
 
 namespace App\Controller;
 
+use App\Enum\PackageGroup;
 use App\Model\RecipeFileTree;
 use App\Service\Toolkit\ToolkitService;
 use App\Service\UxPackageRepository;
@@ -30,10 +31,13 @@ class MainController extends AbstractController
     ): Response {
         $this->addLink($request, new Link('describedby', '/llms.txt'));
 
-        $packages = $packageRepository->findAll(removed: false);
+        $packageGroups = array_map(
+            static fn (PackageGroup $group): array => ['group' => $group, 'packages' => $packageRepository->findByGroup($group)],
+            PackageGroup::cases(),
+        );
 
         return $this->render('main/homepage.html.twig', [
-            'packages' => $packages,
+            'package_groups' => $packageGroups,
             'kits' => $toolkitService->getKits(),
             'recipeFileTree' => new RecipeFileTree(),
         ]);

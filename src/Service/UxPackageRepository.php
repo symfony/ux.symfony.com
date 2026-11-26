@@ -39,6 +39,35 @@ class UxPackageRepository
                 related: ['image', 'toolkit', 'cropperjs'],
             ),
 
+            (new UxPackage(
+                'upload',
+                'Upload',
+                'app_upload',
+                '#3730A3',
+                'Upload once. Keep your files.',
+                "File uploads as you'd expect: previews, progress, chunks, and files kept on submit.",
+                new \DateTimeImmutable('2026-11-15'),
+                'I need uploads that survive form validation errors.',
+                imageFileName: 'upload.svg',
+                gradient: 'none',
+                groups: [PackageGroup::Forms, PackageGroup::Media],
+                related: ['dropzone', 'image', 'cropperjs'],
+            ))->setOfficialDocsUrl('https://github.com/symfony/ux/blob/3.x/src/Upload/doc/index.rst'),
+
+            new UxPackage(
+                'image',
+                'Image',
+                'app_image',
+                '#4F46E5',
+                'Responsive Images, Delivered by your CDN',
+                'Responsive `img` tags, transformed by your CDN',
+                new \DateTimeImmutable('2026-09-28'),
+                'I need responsive images',
+                'image.svg',
+                groups: [PackageGroup::Media],
+                related: ['icons', 'cropperjs', 'calendar-link'],
+            ),
+
             new UxPackage(
                 'map',
                 'Map',
@@ -174,21 +203,6 @@ class UxPackageRepository
                 related: ['router', 'autocomplete', 'chartjs'],
             ),
 
-            (new UxPackage(
-                'upload',
-                'Upload',
-                'app_upload',
-                '#3730A3',
-                'Upload once. Keep your files.',
-                "File uploads as you'd expect: previews, progress, chunks, and files kept on submit.",
-                new \DateTimeImmutable('2026-11-15'),
-                'I need uploads that survive form validation errors.',
-                imageFileName: 'upload.svg',
-                gradient: 'none',
-                groups: [PackageGroup::Forms, PackageGroup::Media],
-                related: ['dropzone', 'image', 'cropperjs'],
-            ))->setOfficialDocsUrl('https://github.com/symfony/ux/blob/3.x/src/Upload/doc/index.rst'),
-
             new UxPackage(
                 'autocomplete',
                 'Autocomplete',
@@ -228,20 +242,6 @@ class UxPackageRepository
                 'router.svg',
                 groups: [PackageGroup::Navigation],
                 related: ['pagination', 'translator', 'native'],
-            ),
-
-            new UxPackage(
-                'image',
-                'Image',
-                'app_image',
-                '#4F46E5',
-                'Responsive Images, Delivered by your CDN',
-                'Responsive `img` tags, transformed by your CDN',
-                new \DateTimeImmutable('2026-09-28'),
-                'I need responsive images',
-                'image.svg',
-                groups: [PackageGroup::Media],
-                related: ['icons', 'cropperjs', 'calendar-link'],
             ),
 
             (new UxPackage(
@@ -439,7 +439,7 @@ class UxPackageRepository
     /**
      * @return list<UxPackage>
      */
-    public function findLatestNew(int $limit): array
+    public function findLatestNew(?int $limit = null): array
     {
         $packages = array_filter($this->findAll(removed: false), static fn (UxPackage $package) => $package->isNew());
         usort($packages, static fn (UxPackage $a, UxPackage $b) => $b->getPublishedAt() <=> $a->getPublishedAt());

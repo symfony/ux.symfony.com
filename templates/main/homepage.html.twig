@@ -186,9 +186,34 @@
         {{ stimulus_flow }}
     </twig:Package:Section>
 
+    {% set new_packages = ux_latest_new_packages() %}
+
+    {% if new_packages %}
+        {% set new_packages_grid %}
+            <div class="items-end justify-between gap-8 md:flex">
+                <twig:Package:SectionTitle id="homepage-new-packages-title" class="max-w-2xl" title="Fresh out of the oven: the <strong>newest</strong> packages." />
+                <twig:LinkButton
+                    outline
+                    label="Browse all packages"
+                    url="{{ path('app_packages') }}"
+                    arrow
+                    class="my-4 md:my-0 shrink-0"
+                />
+            </div>
+
+            <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                {% for package in new_packages %}
+                    <twig:PackageBox package="{{ package }}" titleTag="h3" />
+                {% endfor %}
+            </div>
+        {% endset %}
+
+        <twig:Package:Section tone="subtle" aria-labelledby="homepage-new-packages-title">{{ new_packages_grid }}</twig:Package:Section>
+    {% endif %}
+
     {% set packages_grid %}
         <div class="items-end justify-between gap-8 md:flex">
-            <twig:Package:SectionTitle class="max-w-2xl" title="Install the <strong>packages</strong> you need." />
+            <twig:Package:SectionTitle id="homepage-packages-title" class="max-w-2xl" title="Install the <strong>packages</strong> you need." />
             <twig:LinkButton
                 outline
                 label="Browse all packages"
@@ -198,14 +223,41 @@
             />
         </div>
 
-        <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {% for package in packages|slice(0, 12) %}
-                <twig:PackageBox package="{{ package }}" titleTag="h3" />
+        <div class="mt-12 divide-y divide-body-text/10 border-y border-body-text/10">
+            {% for package_group in package_groups %}
+                {% set group = package_group.group %}
+                {% set group_packages = package_group.packages %}
+                {% set group_url = path('app_packages_group', {group: group.value}) %}
+                {% set shown_packages = group_packages|length > 4 ? group_packages|slice(0, 3) : group_packages %}
+                {% set hidden_count = group_packages|length - shown_packages|length %}
+
+                <div id="homepage-packages-{{ group.value }}" class="grid gap-6 py-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-12 lg:py-10">
+                    <div>
+                        <h3 class="m-0 font-title text-2xl font-semibold leading-tight">
+                            <a href="{{ group_url }}" class="text-body-text no-underline hover:underline">{{ group.question }}</a>
+                        </h3>
+                        <p class="m-0 mt-2 text-body-text/70">{{ group.description }}</p>
+                    </div>
+
+                    <ul class="m-0 grid list-none gap-4 p-0 sm:grid-cols-2">
+                        {% for package in shown_packages %}
+                            <li class="flex *:flex-1"><twig:PackageListItem package="{{ package }}" titleTag="p" /></li>
+                        {% endfor %}
+                        {% if hidden_count > 0 %}
+                            <li class="flex">
+                                <a href="{{ group_url }}" class="flex flex-1 items-center justify-center gap-2 rounded-lg border border-dashed border-body-text/25 p-2 text-body-text/80 no-underline transition-colors hover:border-body-text/60 hover:text-body-text">
+                                    +{{ hidden_count }} more <span class="sr-only">{{ group.label }} packages</span>
+                                    <twig:ux:icon name="arrow-right" class="Icon" />
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
             {% endfor %}
         </div>
     {% endset %}
 
-    <twig:Package:Section tone="subtle">{{ packages_grid }}</twig:Package:Section>
+    <twig:Package:Section tone="{{ new_packages ? 'default' : 'subtle' }}" aria-labelledby="homepage-packages-title">{{ packages_grid }}</twig:Package:Section>
 
     {% set kits_grid %}
         <div class="items-end justify-between gap-8 md:flex">

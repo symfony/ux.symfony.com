@@ -5,7 +5,39 @@
  * rules — living in `@layer components` — only win with `!important`
  * (unlayered declarations beat layered ones in the cascade).
  */
+
+/*
+ * The bootstrap5 theme draws everything with Bootstrap's `--bs-*` variables,
+ * which the site no longer defines: map them to our design tokens. Custom
+ * properties are not subject to the layer fight, so no `!important` needed.
+ */
+.ts-wrapper,
+.ts-dropdown {
+    --bs-body-bg: var(--color-body-bg);
+    --bs-body-color: var(--color-body-text);
+    --bs-secondary-color: var(--color-secondary-text);
+    --bs-secondary-bg: var(--color-secondary-bg-subtle);
+    --bs-tertiary-bg: var(--color-tertiary-bg);
+    --bs-border-color: var(--color-border);
+    --bs-border-color-translucent: var(--color-border-translucent);
+    --bs-border-radius: var(--radius-md);
+    --bs-border-width: 1px;
+    --bs-form-invalid-color: var(--color-signal-red);
+    --bs-form-valid-color: var(--color-signal-green);
+}
+
 @layer components {
+    /*
+     * Tom Select copies the <select> classes (the Form:Select box: border,
+     * padding, background) onto its wrapper; the inner .ts-control already
+     * draws the box, so drop the duplicate one.
+     */
+    .ts-wrapper {
+        border: 0 !important;
+        padding: 0 !important;
+        background: none !important;
+    }
+
     .ts-dropdown,
     .ts-control,
     .ts-control input {
@@ -19,18 +51,36 @@
         border: 1px solid var(--color-border-translucent) !important;
     }
 
-    .disabled .ts-control {
-        opacity: 0.5 !important;
-        background: var(--color-body-bg) !important;
-    }
-
     .ts-control,
     .ts-wrapper.single.input-active .ts-control {
         background: var(--color-body-bg) !important;
     }
 
+    /* Chevron, like a native select. */
+    .ts-wrapper.single {
+        --ts-pr-caret: 2.25rem;
+    }
+
+    .ts-wrapper.single .ts-control {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23737373' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
+        background-repeat: no-repeat !important;
+        background-position: right 0.75rem center !important;
+        background-size: 16px 12px !important;
+    }
+
+    /* Focus ring matching the site inputs (neutral, not Bootstrap blue). */
+    .focus .ts-control {
+        border-color: var(--n-500) !important;
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--n-500) 20%, transparent) !important;
+    }
+
+    .disabled .ts-control {
+        opacity: 0.6 !important;
+        background-color: var(--color-secondary-bg-subtle) !important;
+    }
+
     .ts-dropdown .active {
-        background-color: var(--color-body-bg) !important;
+        background-color: var(--color-secondary-bg-subtle) !important;
         color: var(--color-body-text) !important;
     }
 }

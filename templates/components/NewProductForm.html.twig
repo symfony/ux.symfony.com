@@ -1,61 +1,57 @@
 <div {{ attributes }}>
+    {#
+        The fields point at this form with `form="new-product"` instead of
+        being nested inside it: the dialog below holds NewCategoryForm's own
+        <form>, and HTML forbids nested forms.
+    #}
     <form
+        id="new-product"
         data-action="live#action:prevent"
         data-live-action-param="saveProduct"
-    >
-        <div class="grid grid-cols-12 gap-x-6 items-center">
-            <div class="col-span-2">
-                <twig:Form:Label for="product-name">Product name:</twig:Form:Label>
-            </div>
-            <div class="col-span-3">
-                <twig:Form:Input type="text" id="product-name" data-model="name" hasError="{{ _errors.has('name') }}" />
-                <twig:Form:Errors errors="{{ _errors.get('name') }}" />
-            </div>
+    ></form>
+
+    <div class="grid gap-x-6 gap-y-4 sm:grid-cols-[9rem_minmax(0,22rem)_auto] sm:items-start">
+        <twig:Form:Label for="product-name" class="mb-0 sm:pt-2">Product name</twig:Form:Label>
+        <div class="sm:col-span-2">
+            <twig:Form:Input type="text" id="product-name" form="new-product" data-model="name" class="sm:max-w-[22rem]" hasError="{{ _errors.has('name') }}" />
+            <twig:Form:Errors errors="{{ _errors.get('name') }}" />
         </div>
 
-        <div class="grid grid-cols-12 gap-x-6 items-center mt-4">
-            <div class="col-span-2">
-                <twig:Form:Label for="product-price">Price:</twig:Form:Label>
-            </div>
-            <div class="col-span-3">
-                <twig:Form:Input type="text" id="product-price" data-model="price" hasError="{{ _errors.has('price') }}" />
-                <twig:Form:Errors errors="{{ _errors.get('price') }}" />
-            </div>
+        <twig:Form:Label for="product-price" class="mb-0 sm:pt-2">Price</twig:Form:Label>
+        <div class="sm:col-span-2">
+            <twig:Form:Input type="number" id="product-price" form="new-product" data-model="price" min="0" class="sm:max-w-[22rem]" hasError="{{ _errors.has('price') }}" />
+            <twig:Form:Errors errors="{{ _errors.get('price') }}" />
         </div>
 
-        <div class="grid grid-cols-12 gap-x-6 items-center mt-4">
-            <div class="col-span-2">
-                <twig:Form:Label for="product-category">Category:</twig:Form:Label>
-            </div>
-            <div class="col-span-3">
-                {# resolved here: inside <twig:Form:Select>'s slot `this` is the Select component, not this form #}
-                {% set current_category = this.category %}
-                <twig:Form:Select id="product-category" data-model="category" hasError="{{ _errors.has('category') }}">
-                    <option value="">Choose a category</option>
-                    {% for category_option in categories %}
-                        <option value="{{ category_option.id }}" {{ category_option is same as(current_category) ? 'selected' }}>{{ category_option.name }}</option>
-                    {% endfor %}
-                </twig:Form:Select>
-                <twig:Form:Errors errors="{{ _errors.get('category') }}" />
-            </div>
-            <div class="col-auto">
-                {# `modal:close` is dispatched by NewCategoryForm after a successful save (bubbles up to this controller). #}
-                <twig:Dialog id="new-category" data-action="modal:close->dialog#close">
-                    <twig:Dialog:Trigger>
-                        <twig:Button {{ ...dialog_trigger_attrs }} class="text-sm">+ Add Category</twig:Button>
-                    </twig:Dialog:Trigger>
-                    <twig:Dialog:Content>
-                        <twig:Dialog:Header>
-                            <twig:Dialog:Title>Add a Category</twig:Dialog:Title>
-                        </twig:Dialog:Header>
-                        <twig:NewCategoryForm />
-                    </twig:Dialog:Content>
-                </twig:Dialog>
-            </div>
+        <twig:Form:Label for="product-category" class="mb-0 sm:pt-2">Category</twig:Form:Label>
+        <div>
+            {# resolved here: inside <twig:Form:Select>'s slot `this` is the Select component, not this form #}
+            {% set current_category = this.category %}
+            <twig:Form:Select id="product-category" form="new-product" data-model="category" hasError="{{ _errors.has('category') }}">
+                <option value="">Choose a category</option>
+                {% for category_option in categories %}
+                    <option value="{{ category_option.id }}" {{ category_option is same as(current_category) ? 'selected' }}>{{ category_option.name }}</option>
+                {% endfor %}
+            </twig:Form:Select>
+            <twig:Form:Errors errors="{{ _errors.get('category') }}" />
         </div>
+        {# `modal:close` is dispatched by NewCategoryForm after a successful save (bubbles up to this controller). #}
+        <twig:Dialog id="new-category" data-action="modal:close->dialog#close">
+            <twig:Dialog:Trigger>
+                <twig:Button {{ ...dialog_trigger_attrs }} class="whitespace-nowrap">
+                    <twig:ux:icon name="plus" class="size-4" /> Add category
+                </twig:Button>
+            </twig:Dialog:Trigger>
+            <twig:Dialog:Content>
+                <twig:Dialog:Header>
+                    <twig:Dialog:Title>Add a category</twig:Dialog:Title>
+                </twig:Dialog:Header>
+                <twig:NewCategoryForm />
+            </twig:Dialog:Content>
+        </twig:Dialog>
 
-        <div class="mt-4">
-            <twig:Button variant="primary" type="submit">Save Product</twig:Button>
+        <div class="sm:col-start-2 sm:col-span-2 pt-2">
+            <twig:Button variant="primary" type="submit" form="new-product">Save product</twig:Button>
         </div>
-    </form>
+    </div>
 </div>

@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block demo_content %}
-    <table class="table">
+    <table class="w-full text-left [&_:is(th,td)]:px-2 [&_:is(th,td)]:py-2 [&_:is(th,td)]:border-b [&_:is(th,td)]:border-border">
         {% for food in foods %}
             <twig:FoodVote food="{{ food }}" />
         {% endfor %}

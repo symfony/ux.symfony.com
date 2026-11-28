@@ -1,9 +1,9 @@
 <tr {{ attributes }}>
     <th>{{ food.name }}</th>
-    <td>
+    <td class="whitespace-nowrap">
         Votes: {{ food.votes }}
     </td>
-    <td style="width: 250px;">
+    <td class="w-[250px] text-right">
         {% if hasVoted %}
             <twig:Alert variant="success">Thanks for voting!</twig:Alert>
         {% else %}

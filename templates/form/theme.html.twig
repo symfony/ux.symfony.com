@@ -80,6 +80,11 @@
 {%- block choice_widget_collapsed -%}
     {%- set select_attr = attr -%}
     {%- if required %}{% set select_attr = select_attr|merge({required: true}) %}{% endif -%}
+    {%- if disabled %}{% set select_attr = select_attr|merge({disabled: true}) %}{% endif -%}
+    {# Copied before the component: inside its `content` block, `value` and
+       `multiple` resolve to Form:Select's own props, not the field's. #}
+    {%- set selected_value = value -%}
+    {%- set is_multiple = multiple -%}
     {# field_name() already carries the trailing [] for multiple selects (ChoiceType::buildView). #}
     {% component 'Form:Select' with {
         name: field_name(form),
@@ -89,10 +94,10 @@
     }|merge(select_attr) %}
         {%- block content -%}
             {%- if placeholder is not none -%}
-                <option value=""{{ value is empty ? ' selected' }}>{{ placeholder }}</option>
+                <option value=""{{ selected_value is empty ? ' selected' }}>{{ placeholder }}</option>
             {%- endif -%}
             {%- for label, choice in field_choices(form) -%}
-                <option value="{{ choice }}"{{ (multiple ? choice in value : choice == value) ? ' selected' }}>{{ label }}</option>
+                <option value="{{ choice }}"{{ (is_multiple ? choice in selected_value : choice == selected_value) ? ' selected' }}>{{ label }}</option>
             {%- endfor -%}
         {%- endblock -%}
     {% endcomponent %}
